@@ -15,12 +15,22 @@
 
 Code Connect должен лежать рядом с компонентом и повторять текущую структуру проекта.
 
+Для нового mapping сначала использовать шаблон `docs/templates/code-connect.template.md`, затем создать реальный файл `<Component>.figma.js` рядом с runtime file.
+
+Для каждого компонента, который связывается с Figma, рядом с runtime file должна быть пара:
+
+- `<Component>.docs.md` - человекочитаемая и AI-readable документация по шаблону `docs/templates/component-docs.template.md`;
+- `<Component>.figma.js` - Code Connect mapping по шаблону `docs/templates/code-connect.template.md`.
+
+Если Figma component не опубликован или Figma properties недоступны, создать/обновить `<Component>.docs.md` и зафиксировать blocker. Не создавать пустой или фиктивный `.figma.js`.
+
 Правильная структура:
 
 ```text
 src/components/<Component>/
   <Component>.tsx
   <Component>.types.ts
+  <Component>.docs.md
   <Component>.figma.js
   index.ts
   styles/
@@ -32,6 +42,7 @@ src/components/<Component>/
 src/components/Button/
   Button.tsx
   Button.types.ts
+  Button.docs.md
   Button.figma.js
   index.ts
   styles/
@@ -46,8 +57,9 @@ src/components/Button/
 3. export в `src/components/<Component>/index.ts`;
 4. public export в `src/index.ts`;
 5. story в `src/stories/<Component>.stories.tsx`;
-6. существующие `.figma.js` рядом с похожими компонентами, если они есть;
-7. Figma component properties из задачи или через Figma MCP.
+6. документацию компонента в `src/components/<Component>/<Component>.docs.md`, если она есть;
+7. существующие `.figma.js` рядом с похожими компонентами, если они есть;
+8. Figma component properties из задачи или через Figma MCP.
 
 ## Имя и расположение файла
 
@@ -165,6 +177,7 @@ if (icon && icon.type === "INSTANCE" && icon.hasCodeConnect()) {
 Перед завершением проверить:
 
 - файл лежит в `src/components/<Component>/<Component>.figma.js`;
+- рядом есть актуальный `src/components/<Component>/<Component>.docs.md`;
 - `source` указывает на реальный runtime file;
 - `component` совпадает с экспортируемым компонентом;
 - `imports` используют публичный package import;

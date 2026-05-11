@@ -22,6 +22,10 @@
 
 ## Что делать со ссылкой
 
+Если ссылка в Figma ведет на документацию компонента, сначала читать этот документ. Хорошая документация должна лежать рядом с runtime file как `src/components/<Component>/<Component>.docs.md`, быть создана по шаблону `docs/templates/component-docs.template.md` и содержать machine-readable summary, public import, source files и mapping Figma properties -> props.
+
+Если ссылка в Figma ведет на Code Connect, она должна вести на `src/components/<Component>/<Component>.figma.js`. Рядом должен быть `src/components/<Component>/<Component>.docs.md` с тем же design-to-code mapping в человекочитаемом виде.
+
 Если Figma указывает ссылку на папку компонента:
 
 ```text
@@ -32,6 +36,8 @@ src/components/Button/
 
 - `src/components/Button/Button.tsx`;
 - `src/components/Button/Button.types.ts`;
+- `src/components/Button/Button.docs.md`, если есть;
+- `src/components/Button/Button.figma.js`, если есть;
 - `src/components/Button/index.ts`;
 - `src/components/Button/styles`;
 - `src/stories/Button.stories.tsx`;

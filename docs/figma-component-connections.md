@@ -1,0 +1,87 @@
+# Статус связки компонентов с Figma
+
+Этот файл показывает, у каких компонентов уже есть оба Figma-facing артефакта:
+
+- `<Component>.docs.md` для документации и design-to-code mapping;
+- `<Component>.figma.js` для Code Connect в Figma Dev Mode.
+
+Обновить файл можно командой:
+
+```bash
+yarn figma:status:write
+```
+
+Итого: 0/70 готово, 0 только docs, 0 только figma.js, 70 не начато.
+
+| Компонент | Публичный export | Runtime | Story | Docs | figma.js | Статус | Что не хватает |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Accordion | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| AccountMenu | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Alert | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| AppLayout | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Avatar | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Banner | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| BarMenu | да | да | нет | нет | нет | не начато | нет docs, нет figma.js |
+| Bubble | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Button | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| ButtonDrop | да | да | нет | нет | нет | не начато | нет docs, нет figma.js |
+| Calendar | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| CalendarFilter | да | нет | нет | нет | нет | не начато | нет docs, нет figma.js, нет root runtime |
+| Card | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Cascader | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| CheckBox | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Chips | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| CloseBtn | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Counter | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| DataTable | нет | да | нет | нет | нет | не начато | нет docs, нет figma.js |
+| DatePicker | нет | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| DateRange | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Field | да | нет | нет | нет | нет | не начато | нет docs, нет figma.js, нет root runtime |
+| Filter | да | нет | нет | нет | нет | не начато | нет docs, нет figma.js, нет root runtime |
+| FilterList | да | да | нет | нет | нет | не начато | нет docs, нет figma.js |
+| Header | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| HeaderInside | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| IconAvatar | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| IconButton | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Input | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| InputFiles | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| InputImg | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| InputMessage | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| InputNumber | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| InputPassword | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| InputPhone | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| InputTag | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| InsideSidebar | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Label | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Line | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| ListItem | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| MinusCheckBox | да | да | нет | нет | нет | не начато | нет docs, нет figma.js |
+| Modal | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| MultiSelect | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| MultiTag | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Pagination | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| PinInput | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Plug | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Popover | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| ProgressBar | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| ProgressPie | нет | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Radio | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Segmented | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Select | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Sidebar | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Skeleton | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Slider | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Space | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| StepBar | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Switcher | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Tab | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Table | да | нет | нет | нет | нет | не начато | нет docs, нет figma.js, нет root runtime |
+| TableColumnsModal | да | да | нет | нет | нет | не начато | нет docs, нет figma.js |
+| TabsOverflow | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Tag | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Text | нет | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| TextArea | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| TimeBar | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| TimePicker | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Tooltip | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| UserItem | да | да | да | нет | нет | не начато | нет docs, нет figma.js |

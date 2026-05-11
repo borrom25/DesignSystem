@@ -185,6 +185,12 @@
   },
   "active": "fe221f43ce1bccf2",
   "lastOpenFiles": [
+    "docs/figma-component-connections.md",
+    "scripts/figma-connection-status.js",
+    "docs/templates/component-docs.template.md",
+    "docs/templates/code-connect.template.md",
+    "docs/templates",
+    "docs",
     "dist/index.cjs",
     "dist/index.js",
     "dist/borrom-ds-test.css",

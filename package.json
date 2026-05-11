@@ -40,6 +40,8 @@
     "format:check": "prettier --check .",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "figma:status": "node scripts/figma-connection-status.js",
+    "figma:status:write": "node scripts/figma-connection-status.js --write",
     "prepare": "husky",
     "bump": "node scripts/bump-version.js",
     "precommit": "lint-staged",

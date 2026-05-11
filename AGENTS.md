@@ -23,6 +23,8 @@
 - `src/components` - основной каталог компонентов библиотеки.
 - `src/components/<Component>/<Component>.tsx` - runtime React-компонент.
 - `src/components/<Component>/<Component>.types.ts` - публичные props и типы компонента.
+- `src/components/<Component>/<Component>.docs.md` - документация компонента для ссылки из Figma и сверки design-to-code mapping.
+- `src/components/<Component>/<Component>.figma.js` - Code Connect mapping для Figma Dev Mode, если компонент связан с опубликованным Figma component.
 - `src/components/<Component>/index.ts` - локальный export компонента.
 - `src/components/<Component>/styles` - стили, variants, sizes, states и style helpers компонента.
 - `src/components/index.ts` - общий export компонентов, если используется в текущей структуре.
@@ -34,6 +36,9 @@
 - `Правила создания компонента.md` - подробный workflow создания/обновления компонента по Figma или вручную.
 - `Правила работы с Git-ссылкой из Figma.md` - workflow для макетов, где Figma-компонент ссылается на исходники в Git.
 - `Правила создания Code Connect.md` - подробный workflow создания/обновления `.figma.js`.
+- `docs/templates/code-connect.template.md` - шаблон для будущего `<Component>.figma.js`.
+- `docs/templates/component-docs.template.md` - шаблон документа, который можно прикреплять к Figma-компоненту вместо Code Connect.
+- `docs/figma-component-connections.md` - трекер компонентов: где уже есть docs и Code Connect, а где не хватает артефактов.
 
 ## Что читать в разных задачах
 
@@ -69,6 +74,7 @@
 Читать:
 
 - `Правила создания Code Connect.md`;
+- `docs/templates/code-connect.template.md`;
 - существующие `src/**/*.figma.js`, если они есть;
 - компонент в `src/components/<Component>`;
 - story компонента в `src/stories`;
@@ -105,6 +111,7 @@
 
 - `AGENTS.md`;
 - документ, который пользователь просит обновить;
+- `docs/templates/component-docs.template.md`, если нужно создать документацию для ссылки из Figma;
 - связанные workflow-файлы, если документация описывает процесс.
 
 ## Workflow нового компонента
@@ -117,9 +124,13 @@
 6. Добавить `<Component>.tsx`, `<Component>.types.ts`, `index.ts` и при необходимости `styles/`.
 7. Обновить exports в `src/index.ts` и других index-файлах, если компонент публичный.
 8. Добавить или обновить story в `src/stories/<Component>.stories.tsx`.
-9. Если нужен Code Connect, читать `Правила создания Code Connect.md` и добавить `<Component>.figma.js` рядом с runtime file.
-10. Запустить релевантную проверку.
-11. Проверить компонент в Storybook.
+9. Для публичного компонента, связанного с Figma, добавить или обновить рядом с runtime file пару артефактов:
+   - `src/components/<Component>/<Component>.docs.md` по `docs/templates/component-docs.template.md`;
+   - `src/components/<Component>/<Component>.figma.js` по `docs/templates/code-connect.template.md`, если доступны реальные Figma properties и опубликованный Figma component.
+10. Если `.figma.js` нельзя заполнить без догадок, не создавать фиктивный mapping: зафиксировать blocker в `<Component>.docs.md` в `Temporary mappings / assumptions`.
+11. Обновить трекер командой `yarn figma:status:write`.
+12. Запустить релевантную проверку.
+13. Проверить компонент в Storybook.
 
 ## Команды
 
@@ -128,6 +139,8 @@
 - `yarn build:types` - проверка и сборка типов.
 - `yarn lint` - проверка lint.
 - `yarn format:check` - проверка форматирования.
+- `yarn figma:status` - вывести статус docs/Code Connect по компонентам.
+- `yarn figma:status:write` - обновить `docs/figma-component-connections.md`.
 
 ## Запреты и осторожность
 
