@@ -1,0 +1,45 @@
+import {
+  actionsClasses,
+  actionSectionClasses,
+  backButtonClasses,
+  contentClasses,
+  iconClasses,
+  imageSlotClasses,
+  imageSlotImageClasses,
+  insideRootClasses,
+  insideTitleClasses,
+  notificationButtonClasses,
+  separatorClasses,
+  subtitleClasses,
+  titleWrapperClasses,
+} from "./base";
+
+export {
+  actionsClasses,
+  backButtonClasses,
+  iconClasses,
+  imageSlotClasses,
+  imageSlotImageClasses,
+  insideRootClasses,
+  insideTitleClasses,
+  notificationButtonClasses,
+  separatorClasses,
+  subtitleClasses,
+  titleWrapperClasses,
+};
+
+export const headerInsideStyles = {
+  root: insideRootClasses,
+  content: contentClasses,
+  actionSection: actionSectionClasses,
+  backButton: backButtonClasses,
+  icon: iconClasses,
+  imageSlot: imageSlotClasses,
+  imageSlotImage: imageSlotImageClasses,
+  titleWrapper: titleWrapperClasses,
+  insideTitle: insideTitleClasses,
+  subtitle: subtitleClasses,
+  separator: separatorClasses,
+  notificationButton: notificationButtonClasses,
+  actions: actionsClasses,
+} as const;
