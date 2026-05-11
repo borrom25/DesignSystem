@@ -13,6 +13,7 @@ export default defineConfig({
       entry: path.resolve(__dirname, "./src/index.ts"),
       formats: ["es", "cjs"],
       fileName: (format) => (format === "es" ? "index.js" : "index.cjs"),
+      cssFileName: "borrom-ds-test",
     },
     rollupOptions: {
       external: [

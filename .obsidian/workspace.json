@@ -185,6 +185,9 @@
   },
   "active": "fe221f43ce1bccf2",
   "lastOpenFiles": [
+    "dist/index.cjs",
+    "dist/index.js",
+    "dist/borrom-ds-test.css",
     "Правила создания Code Connect.md",
     "Правила работы с Git-ссылкой из Figma.md",
     "AGENTS.md"

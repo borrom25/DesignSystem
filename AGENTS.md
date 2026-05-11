@@ -14,6 +14,7 @@
 - новые публичные компоненты добавляй в `src/components`, а не в `dist`;
 - raw-значения из Figma не переносить напрямую в runtime components, если есть токен или локальный style helper;
 - если точного токена нет, фиксируй `temporary mapping` или `assumption`;
+- публичное имя npm-пакета библиотеки: `borrom-ds-test`;
 - после кодовых изменений запускай релевантную проверку: обычно `yarn lint`, `yarn build:types` или `yarn build`;
 - для визуальной проверки используй Storybook: `yarn storybook` или `yarn dev`.
 

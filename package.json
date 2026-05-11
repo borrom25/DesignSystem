@@ -1,19 +1,19 @@
 {
-  "name": "kit",
+  "name": "borrom-ds-test",
   "private": false,
   "version": "0.0.70",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "style": "./dist/kit.css",
+  "style": "./dist/borrom-ds-test.css",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./styles.css": "./dist/kit.css",
+    "./styles.css": "./dist/borrom-ds-test.css",
     "./package.json": "./package.json"
   },
   "files": [

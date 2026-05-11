@@ -82,7 +82,7 @@ const instance = figma.selectedInstance;
 
 export default {
   example: figma.tsx`<Component />`,
-  imports: ['import { Component } from "kit"'],
+  imports: ['import { Component } from "borrom-ds-test"'],
   id: "component",
   metadata: { nestable: true },
 };
@@ -97,7 +97,7 @@ export default {
 Для текущего пакета имя в `package.json`:
 
 ```js
-imports: ['import { Button } from "kit"']
+imports: ['import { Button } from "borrom-ds-test"']
 ```
 
 Если имя пакета будет изменено, использовать актуальное `name` из `package.json`.
@@ -108,7 +108,7 @@ imports: ['import { Button } from "kit"']
 
 ```js
 imports: [
-  'import { Button } from "kit"',
+  'import { Button } from "borrom-ds-test"',
   'import { Check, X } from "lucide-react"',
 ]
 ```

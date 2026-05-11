@@ -55,7 +55,7 @@ src/components/Button/
 Для внешнего usage/snippet предпочитать:
 
 ```ts
-import { Button } from "kit";
+import { Button } from "borrom-ds-test";
 ```
 
 Для внутренней реализации внутри библиотеки ориентироваться на существующие импорты соседних компонентов.
