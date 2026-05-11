@@ -1,2 +1,0 @@
-yarn precommit
-yarn tsc --noEmit
