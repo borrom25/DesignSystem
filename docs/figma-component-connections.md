@@ -11,7 +11,7 @@
 yarn figma:status:write
 ```
 
-Итого: 11/70 готово, 0 только docs, 0 только figma.js, 59 не начато.
+Итого: 12/70 готово, 0 только docs, 0 только figma.js, 58 не начато.
 
 | Компонент | Публичный export | Runtime | Story | Docs | figma.js | Статус | Что не хватает |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -30,7 +30,7 @@ yarn figma:status:write
 | Card | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Cascader | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | CheckBox | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
-| Chips | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Chips | да | да | да | да | да | готово | ok |
 | CloseBtn | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Counter | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | DataTable | нет | да | нет | нет | нет | не начато | нет docs, нет figma.js |
