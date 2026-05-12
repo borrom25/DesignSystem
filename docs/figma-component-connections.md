@@ -11,7 +11,7 @@
 yarn figma:status:write
 ```
 
-Итого: 14/70 готово, 1 только docs, 0 только figma.js, 55 не начато.
+Итого: 15/70 готово, 0 только docs, 0 только figma.js, 55 не начато.
 
 | Компонент | Публичный export | Runtime | Story | Docs | figma.js | Статус | Что не хватает |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -21,7 +21,7 @@ yarn figma:status:write
 | AppLayout | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Avatar | да | да | да | да | да | готово | ok |
 | Banner | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
-| BarMenu | да | да | нет | да | нет | только docs | нет figma.js |
+| BarMenu | да | да | нет | да | да | готово | ok |
 | Bubble | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Button | да | да | да | да | да | готово | ok |
 | ButtonDrop | да | да | нет | нет | нет | не начато | нет docs, нет figma.js |

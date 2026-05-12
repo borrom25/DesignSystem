@@ -2,7 +2,7 @@
 
 Документация для связи Figma node `bottombar` с runtime-компонентом `BarMenu`.
 
-Ссылку из Figma можно вести на этот файл как на reference-документацию до восстановления автоматического Code Connect mapping.
+Ссылку из Figma можно вести на этот файл, если нужна документация, или на `BarMenu.figma.js`, если нужен Code Connect.
 
 ## Machine-readable summary
 
@@ -19,7 +19,7 @@ storybook: missing
 figmaComponent: bottombar
 figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=4423-5773
 figmaNodeId: 4423:5773
-codeConnect: blocked
+codeConnect: src/components/BarMenu/BarMenu.figma.js
 ```
 
 ## Public usage
@@ -57,7 +57,7 @@ export function Example() {
 | Local export      | `src/components/BarMenu/index.ts`         |
 | Styles entry      | `src/components/BarMenu/styles/index.ts`  |
 | Storybook         | `missing`                                 |
-| Code Connect      | `blocked`                                 |
+| Code Connect      | `src/components/BarMenu/BarMenu.figma.js` |
 
 ## Figma to props mapping
 
@@ -87,12 +87,8 @@ export function Example() {
 
 ## Temporary mappings / assumptions
 
-| Item             | Current mapping              | Reason                                                                                                                              | Follow-up                                                                                        |
-| ---------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| Figma properties | inferred by runtime API only | Figma MCP is unavailable in current session (`Transport channel closed` on `get_context_for_code_connect` and `get_design_context`) | Re-run Figma extraction and create `src/components/BarMenu/BarMenu.figma.js` once MCP is healthy |
-| Storybook        | `missing`                    | `src/stories/BarMenu.stories.tsx` does not exist                                                                                    | Add Storybook story before finalizing full design-to-code coverage                               |
-| `codeConnect`    | blocked                      | Cannot read Figma properties safely now                                                                                             | Create parserless Code Connect mapping after successful Figma sync                               |
-
-## Blocker
-
-`BarMenu.figma.js` intentionally not created in this pass because Figma properties for node `4423:5773` were unavailable due MCP transport error. This follows the repository rule: do not create Code Connect when Figma properties are unavailable.
+| Item             | Current mapping              | Reason                                                                                                                              | Follow-up                                                                         |
+| ---------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Figma properties | inferred by runtime API only | Figma MCP is unavailable in current session (`Transport channel closed` on `get_context_for_code_connect` and `get_design_context`) | Re-run Figma extraction and refine `BarMenu.figma.js` after successful Figma sync |
+| Storybook        | `missing`                    | `src/stories/BarMenu.stories.tsx` does not exist                                                                                    | Add Storybook story before finalizing full design-to-code coverage                |
+| `codeConnect`    | parserless temporary mapping | Cannot read Figma properties safely now                                                                                             | Replace temporary mapping with property-level mapping after successful Figma sync |
