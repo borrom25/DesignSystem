@@ -22,7 +22,9 @@ Code Connect должен лежать рядом с компонентом и �
 - `<Component>.docs.md` - человекочитаемая и AI-readable документация по шаблону `docs/templates/component-docs.template.md`;
 - `<Component>.figma.js` - Code Connect mapping по шаблону `docs/templates/code-connect.template.md`.
 
-Если Figma component не опубликован или Figma properties недоступны, создать/обновить `<Component>.docs.md` и зафиксировать blocker. Не создавать пустой или фиктивный `.figma.js`.
+Эти два файла создаются или обновляются за один проход. Нельзя оставлять публичный Figma-связанный компонент только с docs, если по реальным Figma properties можно сформировать корректный parserless template.
+
+Если часть Figma properties не имеет точного соответствия в публичном API компонента, всё равно создать `.figma.js` с ближайшим безопасным mapping и явными комментариями `Temporary mapping`. Не создавать `.figma.js` только если Figma component не опубликован, Figma properties недоступны или корректный snippet невозможен без несуществующих props. В этом случае создать/обновить `<Component>.docs.md` и зафиксировать blocker.
 
 Правильная структура:
 

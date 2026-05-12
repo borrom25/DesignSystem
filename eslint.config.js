@@ -54,6 +54,17 @@ export default tseslint.config(
       "no-empty": "off",
     },
   },
+  {
+    files: ["src/components/**/*.figma.js"],
+    languageOptions: {
+      globals: {
+        require: "readonly",
+      },
+    },
+    rules: {
+      "@typescript-eslint/no-require-imports": "off",
+    },
+  },
   eslintConfigPrettier,
   storybook.configs["flat/recommended"]
 );

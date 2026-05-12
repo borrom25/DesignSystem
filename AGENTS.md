@@ -15,6 +15,7 @@
 - raw-значения из Figma не переносить напрямую в runtime components, если есть токен или локальный style helper;
 - если точного токена нет, фиксируй `temporary mapping` или `assumption`;
 - публичное имя npm-пакета библиотеки: `borrom-ds-test`;
+- для публичного компонента, связанного с Figma, формируй сразу оба Figma-facing артефакта: `<Component>.docs.md` и `<Component>.figma.js`;
 - после кодовых изменений запускай релевантную проверку: обычно `yarn lint`, `yarn build:types` или `yarn build`;
 - для визуальной проверки используй Storybook: `yarn storybook` или `yarn dev`.
 
@@ -124,10 +125,10 @@
 6. Добавить `<Component>.tsx`, `<Component>.types.ts`, `index.ts` и при необходимости `styles/`.
 7. Обновить exports в `src/index.ts` и других index-файлах, если компонент публичный.
 8. Добавить или обновить story в `src/stories/<Component>.stories.tsx`.
-9. Для публичного компонента, связанного с Figma, добавить или обновить рядом с runtime file пару артефактов:
+9. Для публичного компонента, связанного с Figma, обязательно добавить или обновить рядом с runtime file пару артефактов за один проход:
    - `src/components/<Component>/<Component>.docs.md` по `docs/templates/component-docs.template.md`;
-   - `src/components/<Component>/<Component>.figma.js` по `docs/templates/code-connect.template.md`, если доступны реальные Figma properties и опубликованный Figma component.
-10. Если `.figma.js` нельзя заполнить без догадок, не создавать фиктивный mapping: зафиксировать blocker в `<Component>.docs.md` в `Temporary mappings / assumptions`.
+   - `src/components/<Component>/<Component>.figma.js` по `docs/templates/code-connect.template.md`.
+10. Если часть Figma properties шире текущего runtime API, всё равно создать `.figma.js` с безопасными ближайшими mapping и явными `Temporary mapping` комментариями. Не создавать `.figma.js` только если Figma component не опубликован, Figma properties недоступны или невозможно выдать корректный snippet без несуществующих props; blocker зафиксировать в `<Component>.docs.md` в `Temporary mappings / assumptions`.
 11. Обновить трекер командой `yarn figma:status:write`.
 12. Запустить релевантную проверку.
 13. Проверить компонент в Storybook.
