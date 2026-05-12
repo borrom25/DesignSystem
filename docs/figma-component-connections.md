@@ -11,7 +11,7 @@
 yarn figma:status:write
 ```
 
-Итого: 13/70 готово, 0 только docs, 0 только figma.js, 57 не начато.
+Итого: 14/70 готово, 0 только docs, 0 только figma.js, 56 не начато.
 
 | Компонент | Публичный export | Runtime | Story | Docs | figma.js | Статус | Что не хватает |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -45,7 +45,7 @@ yarn figma:status:write
 | IconButton | да | да | да | да | да | готово | ok |
 | Input | да | да | да | да | да | готово | ok |
 | InputFiles | да | да | да | да | да | готово | ok |
-| InputImg | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| InputImg | да | да | да | да | да | готово | ok |
 | InputMessage | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | InputNumber | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | InputPassword | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
