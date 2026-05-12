@@ -16,6 +16,7 @@
 - если точного токена нет, фиксируй `temporary mapping` или `assumption`;
 - публичное имя npm-пакета библиотеки: `borrom-ds-test`;
 - для публичного компонента, связанного с Figma, формируй сразу оба Figma-facing артефакта: `<Component>.docs.md` и `<Component>.figma.js`;
+- Figma-документацию (`<Component>.docs.md` и `<Component>.figma.js`) создавай только для компонента, который уже реализован в `src/components`; если компонента нет, явно сообщай об этом и фиксируй blocker;
 - после кодовых изменений запускай релевантную проверку: обычно `yarn lint`, `yarn build:types` или `yarn build`;
 - для визуальной проверки используй Storybook: `yarn storybook` или `yarn dev`.
 
