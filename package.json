@@ -29,6 +29,8 @@
   },
   "scripts": {
     "dev": "storybook dev -p 6006",
+    "server:start": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/start-dev-server.ps1",
+    "server:stop": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/stop-dev-server.ps1",
     "dev:vite": "vite",
     "build": "yarn build:lib && yarn build:types",
     "build:types": "tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json",
