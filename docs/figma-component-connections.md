@@ -11,7 +11,7 @@
 yarn figma:status:write
 ```
 
-Итого: 15/70 готово, 0 только docs, 0 только figma.js, 55 не начато.
+Итого: 16/70 готово, 0 только docs, 0 только figma.js, 54 не начато.
 
 | Компонент | Публичный export | Runtime | Story | Docs | figma.js | Статус | Что не хватает |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -40,7 +40,7 @@ yarn figma:status:write
 | Filter | да | нет | нет | нет | нет | не начато | нет docs, нет figma.js, нет root runtime |
 | FilterList | да | да | нет | нет | нет | не начато | нет docs, нет figma.js |
 | Header | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
-| HeaderInside | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| HeaderInside | да | да | да | да | да | готово | ok |
 | IconAvatar | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | IconButton | да | да | да | да | да | готово | ok |
 | Input | да | да | да | да | да | готово | ok |
