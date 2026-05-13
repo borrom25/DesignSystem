@@ -11,7 +11,7 @@
 yarn figma:status:write
 ```
 
-Итого: 18/70 готово, 0 только docs, 0 только figma.js, 52 не начато.
+Итого: 19/70 готово, 0 только docs, 0 только figma.js, 51 не начато.
 
 | Компонент | Публичный export | Runtime | Story | Docs | figma.js | Статус | Что не хватает |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -59,7 +59,7 @@ yarn figma:status:write
 | Modal | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | MultiSelect | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | MultiTag | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
-| Pagination | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Pagination | да | да | да | да | да | готово | ok |
 | PinInput | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Plug | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Popover | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
