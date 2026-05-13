@@ -11,7 +11,7 @@
 yarn figma:status:write
 ```
 
-Итого: 33/70 готово, 0 только docs, 0 только figma.js, 37 не начато.
+Итого: 34/70 готово, 0 только docs, 0 только figma.js, 36 не начато.
 
 | Компонент | Публичный export | Runtime | Story | Docs | figma.js | Статус | Что не хватает |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -84,4 +84,4 @@ yarn figma:status:write
 | TimeBar | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | TimePicker | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Tooltip | да | да | да | да | да | готово | ok |
-| UserItem | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| UserItem | да | да | да | да | да | готово | ok |
