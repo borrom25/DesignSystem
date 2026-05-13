@@ -11,7 +11,7 @@
 yarn figma:status:write
 ```
 
-Итого: 20/70 готово, 0 только docs, 0 только figma.js, 50 не начато.
+Итого: 21/70 готово, 0 только docs, 0 только figma.js, 49 не начато.
 
 | Компонент | Публичный export | Runtime | Story | Docs | figma.js | Статус | Что не хватает |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -73,7 +73,7 @@ yarn figma:status:write
 | Slider | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Space | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | StepBar | да | да | да | да | да | готово | ok |
-| Switcher | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Switcher | да | да | да | да | да | готово | ok |
 | Tab | да | да | да | да | да | готово | ok |
 | Table | да | нет | нет | нет | нет | не начато | нет docs, нет figma.js, нет root runtime |
 | TableColumnsModal | да | да | нет | нет | нет | не начато | нет docs, нет figma.js |
