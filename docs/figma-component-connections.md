@@ -11,7 +11,7 @@
 yarn figma:status:write
 ```
 
-Итого: 26/70 готово, 0 только docs, 0 только figma.js, 44 не начато.
+Итого: 27/70 готово, 0 только docs, 0 только figma.js, 43 не начато.
 
 | Компонент | Публичный export | Runtime | Story | Docs | figma.js | Статус | Что не хватает |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -78,7 +78,7 @@ yarn figma:status:write
 | Table | да | нет | нет | нет | нет | не начато | нет docs, нет figma.js, нет root runtime |
 | TableColumnsModal | да | да | нет | нет | нет | не начато | нет docs, нет figma.js |
 | TabsOverflow | да | да | да | да | да | готово | ok |
-| Tag | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Tag | да | да | да | да | да | готово | ok |
 | Text | нет | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | TextArea | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | TimeBar | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
