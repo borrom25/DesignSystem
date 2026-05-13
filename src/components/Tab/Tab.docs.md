@@ -1,8 +1,9 @@
 # Tab
 
-Документация для связи Figma component `tabsOverflow.item` с runtime-компонентом `Tab`.
+Документация для связи Figma-компонента `Tab` с runtime-компонентом `Tab`.
 
-Ссылку из Figma можно вести на этот файл, если нужна документация, или на `Tab.figma.js`, если нужен Code Connect.
+Важно: это документ только про одиночный `Tab` (узел `19446:1451`).  
+Для группы табов с кнопкой `Ещё` используется отдельный компонент `TabsOverflow` и отдельная документация.
 
 ## Machine-readable summary
 
@@ -16,10 +17,9 @@ types: src/components/Tab/Tab.types.ts
 localExport: src/components/Tab/index.ts
 publicExport: src/index.ts
 storybook: src/stories/Tab.stories.tsx
-figmaComponent: tabsOverflow.item
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=19494-1683
-figmaNodeId: 19494:1683
-sourceFigmaSelection: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=621-3442
+figmaComponent: Tab
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=19446-1451
+figmaNodeId: 19446:1451
 codeConnect: src/components/Tab/Tab.figma.js
 ```
 
@@ -31,7 +31,7 @@ import "borrom-ds-test/styles.css";
 
 export function Example() {
   return (
-    <Tab size="sm" selected>
+    <Tab type="fill" size="sm" selected>
       Tab
     </Tab>
   );
@@ -40,79 +40,74 @@ export function Example() {
 
 ## Source files
 
-| Purpose           | Path                                 |
-| ----------------- | ------------------------------------ |
-| Runtime component | `src/components/Tab/Tab.tsx`         |
-| Public props      | `src/components/Tab/Tab.types.ts`    |
-| Local export      | `src/components/Tab/index.ts`        |
-| Styles entry      | `src/components/Tab/styles/index.ts` |
-| Storybook         | `src/stories/Tab.stories.tsx`        |
-| Code Connect      | `src/components/Tab/Tab.figma.js`    |
+| Purpose | Path |
+| --- | --- |
+| Runtime component | `src/components/Tab/Tab.tsx` |
+| Public props | `src/components/Tab/Tab.types.ts` |
+| Local export | `src/components/Tab/index.ts` |
+| Styles entry | `src/components/Tab/styles/index.ts` |
+| Storybook | `src/stories/Tab.stories.tsx` |
+| Code Connect | `src/components/Tab/Tab.figma.js` |
 
 ## Figma to props mapping
 
-| Figma property / variant | Figma values     | Code prop  | Code values       | Default | Notes                                                                        |
-| ------------------------ | ---------------- | ---------- | ----------------- | ------- | ---------------------------------------------------------------------------- |
-| `↳ Text`                 | text             | `children` | `ReactNode`       | `Tab`   | Direct text content                                                          |
-| `Size`                   | `Xs`, `Sm`, `Md` | `size`     | `xs`, `sm`, `md`  | `md`    | Direct enum mapping                                                          |
-| `Selected`               | `Off`, `On`      | `selected` | `false`, `true`   | `false` | `On` maps to `selected`                                                      |
-| `State`                  | `Selected`       | `selected` | `true`            | `false` | Duplicates `Selected=On`; Code Connect treats either as selected             |
-| `State`                  | `Disable`        | `disabled` | `true`            | `false` | Uses native button `disabled` prop from `ButtonHTMLAttributes`               |
-| `State`                  | `Default`        | -          | runtime default   | -       | No extra prop                                                                |
-| `State`                  | `Hover`          | -          | CSS runtime state | -       | Not exposed as a public prop                                                 |
-| `Icon left`              | boolean          | `iconLeft` | `LucideIcon`      | -       | Requires nested icon Code Connect to output an icon prop                     |
-| `↳ Icon-left`            | instance swap    | `iconLeft` | `LucideIcon`      | -       | Uses `executeTemplate()` only when swapped icon has Code Connect             |
-| `Counter`                | boolean          | `count`    | `number`          | -       | Temporary mapping: Figma exposes visibility only, code needs a numeric value |
-| `iconOnly`               | `Off`            | -          | -                 | `Off`   | Figma exposes only `Off`; `Tab` has no icon-only mode                        |
+| Figma property / variant | Figma values | Code prop | Code values | Default | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `↳ Text` | text | `children` | `ReactNode` | `Tab` | Текст таба |
+| `Type` | `Fill`, `Ghost`, `Outline` | `type` | `fill`, `ghost`, `outline` | `fill` | Полный one-to-one mapping |
+| `Size` | `Xs`, `Sm`, `Md` | `size` | `xs`, `sm`, `md` | `md` | Полный one-to-one mapping |
+| `Selected` | `Off`, `On` | `selected` | `false`, `true` | `false` | Явный флаг выбранности |
+| `State` | `Selected` | `selected` | `true` | `false` | Поддерживается как дублирующий сигнал selected |
+| `State` | `Disable` | `disabled` | `true` | `false` | Нативный disabled |
+| `State` | `Default`, `Hover` | - | runtime/CSS state | - | Hover не отдельный prop |
+| `Icon-left` | boolean | `iconLeft` | `LucideIcon` | - | Берется из `↳ Icon-left` instance swap |
+| `↳ Icon-left` | instance swap | `iconLeft` | `LucideIcon` | - | Через `executeTemplate()` если у вложенной иконки есть Code Connect |
+| `Counter` | boolean | `count` | `number` | - | Temporary mapping: `true -> count={1}` |
+| `iconOnly` | `Off`, `On` | `iconLeft`, `children` | icon + empty text | `Off` | Temporary mapping: у runtime нет отдельного `iconOnly` prop |
+| `↳ iconOnly` | instance swap | `iconLeft` | `LucideIcon` | - | Используется для `iconOnly=On` |
 
 ## Supported states
 
-| State     | Supported in code | How to use                                                      |
-| --------- | ----------------- | --------------------------------------------------------------- |
-| Default   | Yes               | omit state props                                                |
-| Hover     | Yes               | runtime CSS hover styles, no prop                               |
-| Selected  | Yes               | `<Tab selected>Tab</Tab>`                                       |
-| Disable   | Yes               | `<Tab disabled>Tab</Tab>`                                       |
-| Icon left | Yes               | `<Tab iconLeft={Icon}>Tab</Tab>`                                |
-| Counter   | Partial           | `<Tab count={3}>Tab</Tab>`; Figma property has no numeric count |
-| Icon only | No                | Current Figma component has only `iconOnly=Off`                 |
+| State | Supported in code | How to use |
+| --- | --- | --- |
+| Default | Yes | omit state props |
+| Hover | Yes | runtime CSS hover behavior |
+| Selected | Yes | `<Tab selected />` |
+| Disable | Yes | `<Tab disabled />` |
+| Type Fill/Ghost/Outline | Yes | `type="fill" \| "ghost" \| "outline"` |
+| Icon left | Yes | `iconLeft={Icon}` |
+| Counter | Partial | `count={number}`; Figma дает только boolean |
+| Icon only | Partial | mapping через `iconLeft` и пустой label |
 
 ## Design matching notes
 
-- Figma `tabsOverflow.item` maps to the public `Tab` export from `borrom-ds-test`.
-- Runtime visual values come from tokenized styles in `src/components/Tab/styles`.
-- `Tab` also supports `type="fill" | "ghost" | "outline"`, but this Figma component does not expose a `Type` variant. Code Connect relies on the runtime default `type="fill"`.
-- `State=Hover` is intentionally not a prop. It should be represented by CSS hover behavior in runtime.
-- Nested lucide icons are separate Figma components. Code Connect will output `iconLeft` only after those icon components receive their own Code Connect mapping.
+- Этот документ относится только к Figma-узлу `Tab` (`19446:1451`) с матрицей вариантов `Type/State/Size/iconOnly/Selected`.
+- `tabsOverflow` (узел `19497:1623`) — отдельный компонент и отдельный слой API (`TabsOverflow`).
+- Runtime `Tab` уже поддерживает все три типа (`fill`, `ghost`, `outline`) и все размеры (`xs`, `sm`, `md`).
+- `State=Hover` не должен становиться публичным prop — это визуальное CSS-состояние.
 
 ## Temporary mappings / assumptions
 
-| Item                   | Current mapping                             | Reason                                                                                       | Follow-up                                                                            |
-| ---------------------- | ------------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| `Counter=true`         | `count={1}` in Code Connect                 | Figma exposes only visibility, but code requires a numeric `count`                           | Add numeric Figma text/property for counter value or document fixed default          |
-| Nested lucide icon     | omitted unless nested icon has Code Connect | `Tab.iconLeft` requires `LucideIcon`, but current icon Figma components may not be connected | Add Code Connect for lucide icon components or define a stable icon mapping strategy |
-| Missing `Type` variant | runtime default `type="fill"`               | Figma component has no `Type` property, while `Tab` supports `fill`, `ghost`, `outline`      | Add `Type` variant in Figma if non-fill tabs should generate code                    |
+| Item | Current mapping | Reason | Follow-up |
+| --- | --- | --- | --- |
+| `Counter=true` | `count={1}` | Figma хранит только видимость, а runtime требует число | Добавить в Figma numeric property для счетчика |
+| `iconOnly=On` | `iconLeft` + empty `children` | В runtime нет отдельного `iconOnly` prop | Если нужен явный API, добавить `iconOnly` в `TabProps` |
+| Nested icon swap | only if nested icon has Code Connect | `iconLeft` ждет `LucideIcon` | Привязать lucide-иконки через Code Connect consistently |
 
 ## Examples
 
 ### Basic
 
 ```tsx
-<Tab size="sm">Tab</Tab>
-```
-
-### Selected
-
-```tsx
-<Tab size="sm" selected>
+<Tab type="fill" size="sm">
   Tab
 </Tab>
 ```
 
-### Disabled
+### Selected outline
 
 ```tsx
-<Tab size="sm" disabled>
+<Tab type="outline" size="md" selected>
   Tab
 </Tab>
 ```
@@ -120,17 +115,7 @@ export function Example() {
 ### With counter
 
 ```tsx
-<Tab size="sm" count={3}>
+<Tab type="ghost" size="sm" count={3}>
   Tab
 </Tab>
-```
-
-### With icon
-
-```tsx
-import { EyeOff } from "lucide-react";
-
-<Tab size="sm" iconLeft={EyeOff}>
-  Tab
-</Tab>;
 ```
