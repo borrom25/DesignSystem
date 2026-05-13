@@ -11,7 +11,7 @@
 yarn figma:status:write
 ```
 
-Итого: 24/70 готово, 0 только docs, 0 только figma.js, 46 не начато.
+Итого: 25/70 готово, 0 только docs, 0 только figma.js, 45 не начато.
 
 | Компонент | Публичный export | Runtime | Story | Docs | figma.js | Статус | Что не хватает |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -47,7 +47,7 @@ yarn figma:status:write
 | InputFiles | да | да | да | да | да | готово | ok |
 | InputImg | да | да | да | да | да | готово | ok |
 | InputMessage | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
-| InputNumber | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| InputNumber | да | да | да | да | да | готово | ok |
 | InputPassword | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | InputPhone | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | InputTag | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
