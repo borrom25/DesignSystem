@@ -11,7 +11,7 @@
 yarn figma:status:write
 ```
 
-Итого: 31/70 готово, 0 только docs, 0 только figma.js, 39 не начато.
+Итого: 32/70 готово, 0 только docs, 0 только figma.js, 38 не начато.
 
 | Компонент | Публичный export | Runtime | Story | Docs | figma.js | Статус | Что не хватает |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -62,7 +62,7 @@ yarn figma:status:write
 | Pagination | да | да | да | да | да | готово | ok |
 | PinInput | да | да | да | да | да | готово | ok |
 | Plug | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
-| Popover | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Popover | да | да | да | да | да | готово | ok |
 | ProgressBar | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | ProgressPie | нет | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Radio | да | да | да | да | да | готово | ok |
