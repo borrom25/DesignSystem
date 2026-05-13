@@ -1,8 +1,6 @@
 # Input
 
-Документация для связи Figma component `Search/Autocomplete` с runtime-компонентом `Input`.
-
-Ссылку из Figma можно вести на этот файл, если нужна документация, или на `Input.figma.js`, если нужен Code Connect.
+Документация для связи Figma-компонента `🚧 Input` с runtime-компонентом `Input`.
 
 ## Machine-readable summary
 
@@ -16,130 +14,119 @@ types: src/components/Input/Input.types.ts
 localExport: src/components/Input/index.ts
 publicExport: src/index.ts
 storybook: src/stories/Input.stories.tsx
-figmaComponent: Search/Autocomplete
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=18-2407
-figmaNodeId: 18:2407
+figmaComponent: 🚧 Input
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=4296-4114
+figmaNodeId: 4296:4114
 codeConnect: src/components/Input/Input.figma.js
 ```
 
 ## Public usage
 
 ```tsx
-import { Search } from "lucide-react";
 import { Input } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
   return (
-    <Input type="search" size="sm" placeholder="Search" iconLeft={Search} />
+    <Input
+      size="md"
+      label="Label"
+      placeholder="Placeholder"
+      hint="Hint"
+      required
+    />
   );
 }
 ```
 
 ## Source files
 
-| Purpose                 | Path                                   |
-| ----------------------- | -------------------------------------- |
-| Runtime component       | `src/components/Input/Input.tsx`       |
-| Public props            | `src/components/Input/Input.types.ts`  |
-| Local export            | `src/components/Input/index.ts`        |
-| Styles entry            | `src/components/Input/styles/index.ts` |
-| Shared input primitives | `src/shared/Input`                     |
-| Storybook               | `src/stories/Input.stories.tsx`        |
-| Code Connect            | `src/components/Input/Input.figma.js`  |
+| Purpose | Path |
+| --- | --- |
+| Runtime component | `src/components/Input/Input.tsx` |
+| Public props | `src/components/Input/Input.types.ts` |
+| Local export | `src/components/Input/index.ts` |
+| Styles entry | `src/components/Input/styles/index.ts` |
+| Storybook | `src/stories/Input.stories.tsx` |
+| Code Connect | `src/components/Input/Input.figma.js` |
 
 ## Figma to props mapping
 
-| Figma property / variant | Figma values                   | Code prop      | Code values                  | Default | Notes                                                                |
-| ------------------------ | ------------------------------ | -------------- | ---------------------------- | ------- | -------------------------------------------------------------------- |
-| `Size`                   | `Xs`, `Sm`, `Md`               | `size`         | `xs`, `sm`, `md`             | `md`    | Direct enum mapping                                                  |
-| `State`                  | `Default`                      | -              | runtime default              | -       | No extra prop                                                        |
-| `State`                  | `Hover`                        | -              | CSS runtime state            | -       | Not exposed as a public prop                                         |
-| `State`                  | `Selected`                     | `autoFocus`    | `true`                       | `false` | Temporary mapping: Figma selected state means focused visual state   |
-| `State`                  | `Filled`                       | `defaultValue` | `string`                     | -       | Temporary mapping: Figma text is not exposed as a component property |
-| `State`                  | `Disable`                      | `disabled`     | `true`                       | `false` | Direct state mapping                                                 |
-| `Hint`                   | boolean                        | `hint`         | `string`                     | -       | Temporary mapping: Figma hint text is nested inside `HintComponent`  |
-| Search icon              | nested `lucide/general/search` | `iconLeft`     | `Search` from `lucide-react` | -       | Direct semantic mapping                                              |
-| Clear icon               | nested `Icon-button`           | `clearable`    | `true`                       | `true`  | Runtime shows clear button automatically when value exists           |
+| Figma property / variant | Code prop | Code values | Default | Notes |
+| --- | --- | --- | --- | --- |
+| `Size` | `size` | `xs`, `sm`, `md` | `md` | `Xs -> xs`, `Sm -> sm`, `Md -> md` |
+| `Error` | `error` | `boolean` | `false` | `Off -> false`, `On -> true` |
+| `Disable` | `disabled` | `boolean` | `false` | `Off -> false`, `On -> true` |
+| `Label` + `textLabel` | `label` | `string` | - | При `Label=On` используется `textLabel` |
+| `requiredMark` | `required` | `boolean` | `false` | Показывает required-mark через API поля |
+| `Hint` + `textHint`/`textError` | `hint` / `hintError` | `string` | - | При `Error=On` используется `hintError=textError`, иначе `hint=textHint` |
+| `Placeholder` + `textPlaceholder` | `placeholder` | `string` | - | При `Placeholder=On` используется `textPlaceholder` |
+| `Filled` + `textFilled` | `defaultValue` | `string` | - | При `Filled=On` используется `textFilled` |
+| `Counter` | `count`, `maxCount` | `number` | - | Temporary mapping: демо-значения `count=4`, `maxCount=10` |
+| `icon-left`, `↳ Icon-left` | `iconLeft` | `LucideIcon` | - | Temporary mapping на `Check` |
+| `Icon-right`, `↳ Icon-right` | `iconRight` | `LucideIcon` | - | Temporary mapping на `Check` |
+| `slotLeft`, `<slotLeft>` | `prefix` | `ReactNode` | - | Temporary mapping: демо-узел `<span>Slot left</span>` |
+| `slotRight`, `<slotRight>` | `suffix` | `ReactNode` | - | Temporary mapping: демо-узел `<span>Slot right</span>` |
+| `State` | partial | - | `Default` | `Selected -> autoFocus`; `Hover/Input text/Filled in Hover` — runtime CSS/interaction |
 
 ## Supported states
 
-| State                 | Supported in code | How to use                                                    |
-| --------------------- | ----------------- | ------------------------------------------------------------- |
-| Default               | Yes               | `<Input type="search" iconLeft={Search} />`                   |
-| Hover                 | Yes               | runtime CSS hover styles, no prop                             |
-| Selected / focused    | Partial           | `autoFocus` for initial focus only                            |
-| Filled                | Yes               | set `value` or `defaultValue`                                 |
-| Disabled              | Yes               | `<Input disabled />`                                          |
-| Hint                  | Yes               | `<Input hint="..." />`                                        |
-| Clear button          | Yes               | shown automatically when `clearable` and value exists         |
-| Autocomplete dropdown | No                | compose behavior outside `Input` or add a dedicated component |
+| State | Supported in code | How to use |
+| --- | --- | --- |
+| Default | Yes | без специальных props |
+| Hover | Runtime CSS | отдельный prop не нужен |
+| Selected | Partial | `autoFocus` только для стартового фокуса |
+| Input text | Yes | `defaultValue`/`value` |
+| Filled in | Yes | `defaultValue`/`value` |
+| Filled in Hover | Runtime CSS + value | `defaultValue`/`value` |
+| Disabled | Yes | `disabled` |
+| Error | Yes | `error` + `hintError` |
 
-## Design matching notes
+## Search preset
 
-- Figma `Search/Autocomplete` maps to the public `Input` export from `borrom-ds-test`.
-- Runtime visual values come from `src/components/Input/styles`, `src/shared/Input`, and `src/components/Field/styles`.
-- The search icon is represented by `iconLeft={Search}` from `lucide-react`.
-- `InputField` currently sets `autoComplete="off"` internally, so browser autocomplete is not configurable through the public API.
-- The Figma component name includes `Autocomplete`, but the current runtime API only covers the search input shell. It does not provide dropdown suggestions, filtering, highlighted options, or keyboard listbox behavior.
+`Input` можно использовать как search:
+
+```tsx
+import { Search } from "lucide-react";
+import { Input } from "borrom-ds-test";
+
+<Input type="search" iconLeft={Search} placeholder="Поиск" />;
+```
+
+Это не отдельный runtime-компонент `Search`, а пресет на базе `Input`.
 
 ## Temporary mappings / assumptions
 
-| Item                     | Current mapping                 | Reason                                                                           | Follow-up                                                                     |
-| ------------------------ | ------------------------------- | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `State=Selected`         | `autoFocus`                     | Runtime has focus behavior, not a persistent selected-state prop                 | Use controlled focus in consuming app if needed                               |
-| `State=Filled`           | `defaultValue="Search query"`   | Figma text layer is not exposed as a top-level text property                     | Add a Figma text property for the field value or edit snippet manually        |
-| `Hint=true`              | `hint="Start typing to search"` | Hint text is nested inside `HintComponent`, not exposed on `Search/Autocomplete` | Add a top-level hint text property in Figma                                   |
-| Autocomplete suggestions | not generated                   | No public autocomplete/listbox component exists for this Figma node              | Add a dedicated Autocomplete component or compose Input with Popover/ListItem |
+| Item | Current mapping | Reason | Follow-up |
+| --- | --- | --- | --- |
+| `↳ Icon-left`, `↳ Icon-right` | `Check` из `lucide-react` | API ожидает `LucideIcon`, а Figma swap не дает прямой code-value для импорта | При появлении стабильного icon mapping обновить на точный импорт |
+| `slotLeft`, `slotRight` | демо `prefix/suffix` | SLOT-поля в Figma не дают прямой runtime-snippet | При необходимости заменить вручную на проектный узел |
+| `Counter` | `count=4`, `maxCount=10` | В Figma нет отдельных числовых properties | Добавить numeric properties в Figma для точного mapping |
+| `State=Selected` | `autoFocus` | В API нет персистентного selected-state prop | Управлять фокусом на уровне интеграции |
 
 ## Examples
 
-### Basic Search
+### Basic
 
 ```tsx
-import { Search } from "lucide-react";
-
-<Input type="search" size="sm" placeholder="Search" iconLeft={Search} />;
+<Input size="sm" label="Label" placeholder="Placeholder" />
 ```
 
-### Filled
+### Error
 
 ```tsx
-import { Search } from "lucide-react";
-
-<Input
-  type="search"
-  size="sm"
-  placeholder="Search"
-  iconLeft={Search}
-  defaultValue="Search query"
-/>;
+<Input error hintError="Ошибка валидации" />
 ```
 
-### Disabled
+### With adornments
 
 ```tsx
-import { Search } from "lucide-react";
+import { Check } from "lucide-react";
 
 <Input
-  type="search"
-  size="sm"
-  placeholder="Search"
-  iconLeft={Search}
-  disabled
-/>;
-```
-
-### With Hint
-
-```tsx
-import { Search } from "lucide-react";
-
-<Input
-  type="search"
-  size="sm"
-  placeholder="Search"
-  iconLeft={Search}
-  hint="Start typing to search"
+  iconLeft={Check}
+  iconRight={Check}
+  prefix={<span>Before</span>}
+  suffix={<span>After</span>}
 />;
 ```
