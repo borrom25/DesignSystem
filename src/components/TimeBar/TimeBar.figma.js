@@ -3,34 +3,27 @@
 // component=TimeBar
 const figma = require("figma");
 const instance = figma.selectedInstance;
-void instance;
+
+const property1 = instance.getEnum("Property 1", {
+  Default: "default",
+});
 
 // Temporary mapping:
-// Figma MCP is currently unavailable, so exact component property keys
-// for node 1670:1000 could not be read safely.
-// This snippet is intentionally static and should be upgraded to
-// instance.getBoolean/getString/getEnum mapping after MCP recovery.
+// Figma exposes the three time columns as slots, while the runtime TimeBar
+// owns those columns internally and generates their values from utility
+// functions. The selected Figma example shows 04:04:04, so Code Connect uses
+// defaultValue to reproduce that state without adding non-existent slot props.
 export default {
   example: figma.tsx`
-    <TimeBar
-      value={{ hours: 9, minutes: 30, seconds: 0 }}
-      showSeconds
-      use24Hour
-      showNowButton
-      showConfirmButton
-      nowButtonText="Сейчас"
-      confirmButtonText="Ок"
-      onChange={() => {}}
-      onConfirm={() => {}}
-    />
+    <TimeBar defaultValue={{ hours: 4, minutes: 4, seconds: 4 }} />
   `,
   imports: ['import { TimeBar } from "borrom-ds-test"'],
   id: "timebar",
   metadata: {
     nestable: true,
     props: {
-      hasTemporaryStaticMapping: true,
-      figmaPropertiesReadBlocked: true,
+      property1,
+      runtimeOwnsColumns: true,
     },
   },
 };

@@ -11,7 +11,7 @@
 yarn figma:status:write
 ```
 
-Итого: 36/70 готово, 0 только docs, 0 только figma.js, 34 не начато.
+Итого: 37/70 готово, 0 только docs, 0 только figma.js, 33 не начато.
 
 | Компонент | Публичный export | Runtime | Story | Docs | figma.js | Статус | Что не хватает |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -25,7 +25,7 @@ yarn figma:status:write
 | Bubble | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Button | да | да | да | да | да | готово | ok |
 | ButtonDrop | да | да | нет | нет | нет | не начато | нет docs, нет figma.js |
-| Calendar | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Calendar | да | да | да | да | да | готово | ok |
 | CalendarFilter | да | нет | нет | нет | нет | не начато | нет docs, нет figma.js, нет root runtime |
 | Card | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Cascader | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
