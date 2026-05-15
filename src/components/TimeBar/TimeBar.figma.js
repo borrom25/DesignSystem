@@ -9,10 +9,9 @@ const property1 = instance.getEnum("Property 1", {
 });
 
 // Temporary mapping:
-// Figma exposes the three time columns as slots, while the runtime TimeBar
-// owns those columns internally and generates their values from utility
-// functions. The selected Figma example shows 04:04:04, so Code Connect uses
-// defaultValue to reproduce that state without adding non-existent slot props.
+// Figma exposes three column slots (<slottimeСolumn>*), while public
+// TimeBar API intentionally owns these columns internally.
+// To reproduce the current design sample, we provide defaultValue 04:04:04.
 export default {
   example: figma.tsx`
     <TimeBar defaultValue={{ hours: 4, minutes: 4, seconds: 4 }} />
@@ -24,6 +23,7 @@ export default {
     props: {
       property1,
       runtimeOwnsColumns: true,
+      figmaSlotsMappedInternally: true,
     },
   },
 };
