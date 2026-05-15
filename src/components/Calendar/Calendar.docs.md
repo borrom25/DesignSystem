@@ -41,60 +41,71 @@ export function Example() {
 
 ## Source files
 
-| Purpose             | Path                                                |
-| ------------------- | --------------------------------------------------- |
-| Runtime component   | `src/components/Calendar/Calendar.tsx`              |
-| Public props        | `src/components/Calendar/Calendar.types.ts`         |
-| State hook          | `src/components/Calendar/hooks/useCalendarState.ts` |
-| Header / grid views | `src/components/Calendar/ui/*`                      |
-| Local export        | `src/components/Calendar/index.ts`                  |
-| Styles entry        | `src/components/Calendar/styles/index.ts`           |
-| Storybook           | `src/stories/Calendar.stories.tsx`                  |
-| Code Connect        | `src/components/Calendar/Calendar.figma.js`         |
+| Purpose | Path |
+| --- | --- |
+| Runtime component | `src/components/Calendar/Calendar.tsx` |
+| Public props | `src/components/Calendar/Calendar.types.ts` |
+| State hook | `src/components/Calendar/hooks/useCalendarState.ts` |
+| Header / grid views | `src/components/Calendar/ui/*` |
+| Local export | `src/components/Calendar/index.ts` |
+| Styles entry | `src/components/Calendar/styles/index.ts` |
+| Storybook | `src/stories/Calendar.stories.tsx` |
+| Code Connect | `src/components/Calendar/Calendar.figma.js` |
 
 ## Figma to props mapping
 
-| Figma property / variant | Figma values                              | Code prop                        | Code values                          | Default                    | Notes                                                                           |
-| ------------------------ | ----------------------------------------- | -------------------------------- | ------------------------------------ | -------------------------- | ------------------------------------------------------------------------------- |
-| `State`                  | `Standard`                                | `mode`, `pickerType`             | `mode="single"`, `pickerType="full"` | `single`, `full`           | Основной календарь дней                                                         |
-| `State`                  | `Range`                                   | `mode`, `defaultValue`           | `mode="range"`, `{ from, to }`       | `single`                   | Runtime range state строится через `mode="range"` и range value                 |
-| `State`                  | `Month`                                   | `pickerType`                     | `pickerType="month"`                 | `full`                     | Отображает выбор месяца                                                         |
-| `State`                  | `Year`                                    | `pickerType`                     | `pickerType="year"`                  | `full`                     | Отображает выбор года                                                           |
-| Heading date             | `Пятница, 20 февраля`                     | `defaultValue`                   | `new Date(2026, 1, 20)`              | today                      | Assumption: 20 февраля 2026 - пятница и попадает в Figma year range `2020–2031` |
-| Current visible month    | February 2026                             | `displayMonth`                   | `new Date(2026, 1, 1)`               | derived from value / today | Фиксирует месяц в snippet, чтобы Dev Mode не зависел от текущей даты            |
-| Disabled days            | nested `Day State=Disabled`               | `disabled`, `minDate`, `maxDate` | boolean, Date[], predicate           | `false`                    | В Figma это состояние отдельных day-items, не property всего calendar set       |
-| Current day              | nested `Day State=Current`                | CSS today state                  | runtime date comparison              | today                      | Не отдельный public prop                                                        |
-| Selected day / range     | nested `Day State=Selected`, `Range Type` | `defaultValue` / `value`         | Date / DateRange                     | -                          | Контролируется значением календаря                                              |
+По MCP для node `643:5569` верхнеуровневый Figma API содержит только один variant:
+
+| Figma property / variant | Figma values | Code prop | Code values | Default | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `State` | `Standard` | `mode`, `pickerType` | `mode="single"`, `pickerType="full"` | `single`, `full` | Обычный календарь выбора дня |
+| `State` | `Range` | `mode`, `defaultValue` | `mode="range"`, `{ from, to }` | `single` | Диапазон задается значением календаря, не отдельными слотами |
+| `State` | `Month` | `mode`, `pickerType` | `mode="single"`, `pickerType="month"` | `full` | Режим выбора месяца |
+| `State` | `Year` | `mode`, `pickerType` | `mode="single"`, `pickerType="year"` | `full` | Режим выбора года |
+| Header text | `Пятница, 20 февраля` | `defaultValue` | `new Date(2026, 1, 20)` | today | Assumption: 20 февраля 2026 - пятница и попадает в диапазон `2020-2031` |
+| Visible month | February 2026 | `displayMonth` | `new Date(2026, 1, 1)` | derived | Фиксируется в snippet, чтобы Dev Mode не зависел от текущей даты |
+
+## Internal Figma layers
+
+Эти Figma-слои не маппятся на публичные props напрямую:
+
+| Figma layer | Runtime equivalent | Notes |
+| --- | --- | --- |
+| `Headings` | `CalendarHeader` | Внутренний header, управляется `displayMonth`, `pickerType`, view state |
+| `Item` | `MonthsView` / `YearsView` items | Генерируется runtime-компонентом |
+| `Day` | `CalendarGrid` day cell | Генерируется по календарной сетке |
+| `Range` | range classes in `CalendarGrid` | Управляется `mode="range"` и `defaultValue/value` |
+| `Icon-button` | navigation buttons in `CalendarHeader` | Внутренние кнопки навигации |
 
 ## Supported states
 
-| State                       | Supported in code | How to use                                                                       |
-| --------------------------- | ----------------- | -------------------------------------------------------------------------------- |
-| Single date                 | Yes               | `<Calendar mode="single" />`                                                     |
-| Date range                  | Yes               | `<Calendar mode="range" />`                                                      |
-| Multiple dates              | Yes               | `<Calendar mode="multiple" />`; Figma state is not exposed in this component set |
-| Month picker                | Yes               | `<Calendar pickerType="month" />`                                                |
-| Year picker                 | Yes               | `<Calendar pickerType="year" />`                                                 |
-| Disabled dates              | Yes               | `disabled`, `minDate`, `maxDate`                                                 |
-| Several visible months      | Yes               | `numberOfMonths`                                                                 |
-| Hidden selected date header | Yes               | `showSelectedDate={false}`                                                       |
+| State | Supported in code | How to use |
+| --- | --- | --- |
+| Single date | Yes | `<Calendar mode="single" />` |
+| Date range | Yes | `<Calendar mode="range" />` |
+| Multiple dates | Yes | `<Calendar mode="multiple" />`; отдельного Figma state нет |
+| Month picker | Yes | `<Calendar pickerType="month" />` |
+| Year picker | Yes | `<Calendar pickerType="year" />` |
+| Disabled dates | Yes | `disabled`, `minDate`, `maxDate` |
+| Several visible months | Yes | `numberOfMonths` |
+| Hidden selected date header | Yes | `showSelectedDate={false}` |
 
 ## Design matching notes
 
-- Figma node `643:5569` is a calendar component set with variants `State=Standard`, `State=Range`, `State=Month`, `State=Year`.
-- The selected Figma node is not `DatePicker` or `DateRange`: it has no input field or popover trigger, only the calendar surface.
-- Runtime dimensions match the Figma surface: `324px` width and `374px` height from `src/components/Calendar/styles/base.ts`.
-- Figma includes nested atoms (`Headings`, `Item`, `Day`, `Range`, icon buttons). Runtime keeps these as internal UI pieces in `src/components/Calendar/ui`.
-- Figma component name is `Calendar`. The stable connection point is node `643:5569` plus `State` variants.
+- Figma node `643:5569` - опубликованный component set `Calendar` с variant `State`.
+- Это не `DatePicker` и не `DateRange`: здесь нет input field и popover trigger, только календарная поверхность.
+- Runtime `Calendar` date-driven: публичный API принимает даты и режимы, а не отдельные слоты для `Headings`, `Day`, `Range` и `Item`.
+- Размер поверхности сейчас задан в `src/components/Calendar/styles/base.ts`: `w-[324px] h-[374px]`.
+- Визуальные состояния вложенных day/range/month/year cells строятся внутри `CalendarGrid`, `MonthsView` и `YearsView`.
 
 ## Temporary mappings / assumptions
 
-| Item                                       | Current mapping                         | Reason                                                                                         | Follow-up                                                                           |
-| ------------------------------------------ | --------------------------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `State=Standard`                           | `mode="single"`, `pickerType="full"`    | Runtime has no `state="standard"` prop; standard is default full single-date calendar          | Keep mapping unless Figma adds a clearer variant name                               |
-| `State=Range`                              | `mode="range"` with example range value | Figma range visuals are generated from nested `Range` items; runtime uses selected range value | Add explicit Figma date/range properties if designers need exact generated snippets |
-| Heading `Пятница, 20 февраля`              | `new Date(2026, 1, 20)`                 | Figma exposes text but not a year; 20 Feb 2026 is Friday and matches year range `2020–2031`    | Clarify target year in Figma if this should be static                               |
-| Nested `Day` / `Range` / `Item` components | internal runtime UI                     | Public API is date-driven, not slot-driven                                                     | Do not expose nested slots unless product needs custom day rendering                |
+| Item | Current mapping | Reason | Follow-up |
+| --- | --- | --- | --- |
+| `State=Standard` | `mode="single"`, `pickerType="full"` | Runtime не имеет prop `state="standard"` | Оставить как основной mapping |
+| `State=Range` | `mode="range"` + example range value | Figma range visuals задаются вложенными `Range` слоями, runtime управляется датами | Добавить Figma text/date props, если нужны точные даты из макета |
+| Header `Пятница, 20 февраля` | `new Date(2026, 1, 20)` | В тексте нет года; 20.02.2026 совпадает с пятницей и диапазоном `2020-2031` | Уточнить год в Figma, если это должно быть не demo-состояние |
+| Nested `Day` / `Range` / `Item` | internal runtime UI | Public API намеренно не slot-driven | Не расширять API без продуктового запроса |
 
 ## Examples
 

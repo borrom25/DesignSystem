@@ -5,10 +5,10 @@ const figma = require("figma");
 const instance = figma.selectedInstance;
 
 const state = instance.getEnum("State", {
-  Standard: "standard",
   Range: "range",
   Month: "month",
   Year: "year",
+  Standard: "standard",
 });
 
 const standardExample = figma.tsx`
@@ -63,6 +63,14 @@ export default {
     nestable: true,
     props: {
       state,
+      figmaNodeId: "643:5569",
+      mapsNestedLayersInternally: true,
+      stateMapping: {
+        standard: 'mode="single", pickerType="full"',
+        range: 'mode="range"',
+        month: 'mode="single", pickerType="month"',
+        year: 'mode="single", pickerType="year"',
+      },
     },
   },
 };
