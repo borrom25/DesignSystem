@@ -42,3 +42,6 @@ storybook-static
 
 # husky
 .husky/_
+
+# local template workspace (do not commit)
+project-template-local/

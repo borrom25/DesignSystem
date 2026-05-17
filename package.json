@@ -19,6 +19,10 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "sideEffects": [
     "**/*.css"
   ],
@@ -44,6 +48,8 @@
     "build-storybook": "storybook build",
     "figma:status": "node scripts/figma-connection-status.js",
     "figma:status:write": "node scripts/figma-connection-status.js --write",
+    "publish:check": "yarn build && npm pack --dry-run",
+    "publish:npm": "yarn publish:check && npm publish --access public",
     "prepare": "husky",
     "bump": "node scripts/bump-version.js",
     "precommit": "lint-staged",
