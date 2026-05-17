@@ -56,7 +56,7 @@ export function Example() {
 | `Type` | `Fill`, `Outline`, `Flat`, `Text` | `type` | `fill`, `outline`, `flat`, `text` | `fill` | Direct enum mapping. |
 | `Color` | `Brand`, `Danger`, `Positive`, `Action`, `Warning`, `Info`, `Inverse` | `color` | `brand`, `danger`, `positive`, `action`, `warning`, `info`, `inverse` | `brand` | Direct enum mapping. |
 | `Color` | `Disable` | `disabled` | `true` | `false` | Temporary mapping: current API has `disabled`, not `color="disable"`. |
-| `Color` | `contrastDark`, `contrastLight` | `color` | `inverse` | - | Temporary mapping: `LabelColor` excludes `contrastDark` and `contrastLight`. |
+| `Color` | `contrastDark`, `contrastLight` | `color` | `inverse` | - | Temporary mapping: `LabelColor` excludes `contrastDark`, `contrastLight`, and `generic`. |
 | `Size` | `Xs`, `Sm`, `Md` | `size` | `xs`, `sm`, `md` | `md` | Direct enum mapping. |
 | `iconOnly` | `Off`, `On` | `iconOnly` | `LucideIcon` | - | When `On`, Code Connect emits icon-only label only if nested icon has Code Connect. |
 | `Icon-left` | boolean | `iconLeft` | `LucideIcon` | - | Used only when `iconOnly=Off`. |
@@ -86,7 +86,7 @@ export function Example() {
 - Figma `Label` maps to the public `Label` export from `borrom-ds-test`.
 - Runtime visual values come from tokenized styles in `src/components/Label/styles`.
 - `Color=Disable` should map to the runtime `disabled` prop, not to a new color value.
-- `Color=contrastDark` and `Color=contrastLight` are present in common `Color`, but intentionally excluded from `LabelColor`; Code Connect maps them to `inverse` until the public API decision is made.
+- `Color=contrastDark`, `Color=contrastLight`, and `generic` are present in common `Color`, but intentionally excluded from `LabelColor`; Code Connect maps contrast values to `inverse` until the public API decision is made.
 - Figma nested lucide icons need their own Code Connect mappings before icon props can be generated automatically.
 
 ## Temporary mappings / assumptions
@@ -96,6 +96,7 @@ export function Example() {
 | `Color=Disable` | `disabled` with `color="brand"` fallback internally | `LabelColor` does not include `disable`; disabled styling is controlled by `aria-disabled` classes | Keep as state or add explicit disabled color token/API |
 | `Color=contrastDark` | `color="inverse"` | `LabelColor` excludes `contrastDark` | Decide whether label should support contrast colors |
 | `Color=contrastLight` | `color="inverse"` | `LabelColor` excludes `contrastLight` | Decide whether label should support contrast colors |
+| `Color=generic` | not mapped | `LabelColor` excludes `generic`, and this Figma component does not expose a `Generic` value | Add an explicit Figma value and mapping only if product usage requires it |
 | Nested icons | omitted unless nested icon has Code Connect | `Label` props require `LucideIcon` values | Add Code Connect or a stable mapping strategy for lucide icons |
 | `rounded` | not mapped | Figma component does not expose a rounded property | Add Figma property if rounded labels must be generated |
 

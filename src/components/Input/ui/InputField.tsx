@@ -5,6 +5,7 @@ import { inputStyles } from "../styles";
 import type { InputFieldProps } from "./InputField.types";
 import { InputRightSlot } from "./InputRightSlot";
 import { CloseBtn } from "@/components/CloseBtn";
+import { FloatingLabel, FloatingLabelRequiredMark } from "@/shared/Input";
 
 export function InputField({
   wrapperClassName,
@@ -55,12 +56,8 @@ export function InputField({
   const isFloatingLabelActive = hasFloatingLabel && (isFocused || hasValue);
 
   return (
-    <div className={wrapperClassName} onMouseDown={handleWrapperMouseDown}>
-      {hasFloatingLabel && required && (
-        <span aria-hidden className={inputStyles.floatingLabelRequiredMark}>
-          *
-        </span>
-      )}
+    <label className={wrapperClassName} onMouseDown={handleWrapperMouseDown}>
+      {hasFloatingLabel && required && <FloatingLabelRequiredMark />}
 
       {IconLeft && (
         <IconLeft
@@ -74,19 +71,13 @@ export function InputField({
 
       <span className={inputStyles.body}>
         {hasFloatingLabel && (
-          <label
+          <FloatingLabel
             htmlFor={inputProps.id}
-            className={cn(
-              inputStyles.floatingLabel,
-              inputStyles.floatingLabelSize[size],
-              isFloatingLabelActive && inputStyles.floatingLabelActive,
-              isFloatingLabelActive &&
-                inputStyles.floatingLabelActiveSize[size],
-              disabled && inputStyles.floatingLabelDisabled
-            )}
-          >
-            {label}
-          </label>
+            label={label}
+            size={size}
+            active={isFloatingLabelActive}
+            disabled={disabled}
+          />
         )}
 
         <input
@@ -141,6 +132,6 @@ export function InputField({
           {countDisplay}
         </span>
       )}
-    </div>
+    </label>
   );
 }

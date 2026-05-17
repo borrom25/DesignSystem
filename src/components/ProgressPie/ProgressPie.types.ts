@@ -4,7 +4,7 @@ import type { Color, Size } from "@/types";
 
 export type ProgressPieColors = Exclude<
   Color,
-  "inverse" | "contrastDark" | "contrastLight"
+  "inverse" | "contrastDark" | "contrastLight" | "generic"
 >;
 
 export type ProgressPieSize = Size | "lg";

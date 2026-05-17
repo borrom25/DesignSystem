@@ -10,7 +10,7 @@ export const alignmentClasses: Record<BubbleSide, string> = {
 } as const;
 
 export const shellBaseClasses =
-  "min-w-0 overflow-hidden font-roboto-flex shadow-sm text-primary";
+  "min-w-0 overflow-hidden font-roboto-flex shadow-sm text-primary flex flex-col gap-2";
 
 export const shellRadiusClasses: Record<BubbleSide, string> = {
   incoming: "rounded-[10px] rounded-bl-none",

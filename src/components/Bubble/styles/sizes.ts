@@ -30,7 +30,7 @@ export const mediaBleedClasses: Record<Size, string> = {
   md: "-mx-6 -my-5",
 } as const;
 
-export const imageStandaloneSizeClasses: Record<Size, string> = {
+export const imageSizeClasses: Record<Size, string> = {
   xs: "w-[214px] h-[198px]",
   sm: "w-[258px] h-[238px]",
   md: "w-[258px] h-[238px]",

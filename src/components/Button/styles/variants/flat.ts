@@ -11,4 +11,5 @@ export const flatClasses: Record<Color, string> = {
   inverse: flatVariants.inverse,
   contrastDark: flatVariants.contrastDark,
   contrastLight: flatVariants.contrastLight,
+  generic: flatVariants.generic,
 };

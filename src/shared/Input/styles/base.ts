@@ -60,7 +60,7 @@ export const inputFloatingLabelActiveClasses =
 export const inputFloatingLabelDisabledClasses = "text-hint";
 
 export const inputFloatingLabelRequiredMarkClasses =
-  "pointer-events-none absolute left-0 top-1 z-20 -translate-y-1/2 text-danger-text-heavy";
+  "pointer-events-none absolute -left-2 top-0 z-20 inline-flex size-[21px] -translate-y-1/3 items-center justify-center text-[21px] font-bold leading-[21px] tracking-md text-danger-text-heavy";
 
 export const inputClearButtonClasses =
   "shrink-0 p-0 border-0 bg-transparent text-complementary cursor-pointer opacity-0 scale-95 pointer-events-none transition-[opacity,scale,color] duration-200 ease-out group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:scale-100 group-focus-within:pointer-events-auto disabled:text-hint disabled:cursor-not-allowed disabled:pointer-events-none";

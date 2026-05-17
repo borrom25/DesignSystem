@@ -1,6 +1,6 @@
 import { cn } from "@/utils";
 import { Size } from "@/types";
-import { FieldLabel, FieldHint } from "@/components/Field";
+import { FieldHint } from "@/components/Field";
 import { wrapperClasses } from "@/components/Field/styles";
 import { useInputIds } from "@/components/Input/hooks/useInputIds";
 import type { InputTagProps } from "./InputTag.types";
@@ -54,22 +54,13 @@ export function InputTag({
 
   return (
     <div className={cn(wrapperClasses, className)}>
-      {label && (
-        <FieldLabel
-          size={size}
-          required={required}
-          disabled={disabled}
-          htmlFor={inputId}
-        >
-          {label}
-        </FieldLabel>
-      )}
-
       <InputTagField
         wrapperClassName={wrapperClassName}
         tags={tags}
         inputValue={inputValue}
         hasValue={hasValue}
+        label={label}
+        required={required}
         size={size}
         disabled={disabled}
         inputClassName={inputClassName}

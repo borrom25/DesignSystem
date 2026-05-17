@@ -2,7 +2,6 @@ import { useMemo } from "react";
 import { Size } from "@/types";
 import { cn } from "@/utils";
 import { Counter, CounterVariant } from "@/components/Counter";
-import { Tag } from "@/components/Tag";
 import { triggerStyles } from "@/shared/Select";
 import { useMultiSelectContext } from "../MultiSelect.context";
 import type { MultiSelectValueProps } from "../MultiSelect.types.ts";
@@ -12,8 +11,8 @@ export function MultiSelectValue<T extends string | number = string>({
   placeholder = "Select items...",
   selectedOptions,
   renderValue,
+  selectedLabel = "Выбрано строк:",
   size = Size.Sm,
-  error = false,
   className,
 }: MultiSelectValueProps<T>) {
   const { label, open, value } = useMultiSelectContext();
@@ -39,21 +38,9 @@ export function MultiSelectValue<T extends string | number = string>({
       );
     }
 
-    if (hasLabel) {
-      return (
-        <>
-          {selectedOptions.map((option) => (
-            <Tag key={String(option.value)} size={size} error={error}>
-              {option.label}
-            </Tag>
-          ))}
-        </>
-      );
-    }
-
     return (
       <span className={counterClasses}>
-        <span>Выбрано:</span>
+        <span>{selectedLabel}</span>
         <Counter
           count={selectedOptions.length}
           size={size}
@@ -67,19 +54,19 @@ export function MultiSelectValue<T extends string | number = string>({
     placeholder,
     renderValue,
     selectedOptions,
+    selectedLabel,
     size,
-    error,
   ]);
 
-  if (hasLabel) {
-    return (
-      <span className={cn("flex flex-wrap gap-1 min-w-0 w-full", className)}>
-        {displayValue}
-      </span>
-    );
-  }
-
   return (
-    <span className={cn(triggerStyles.value, className)}>{displayValue}</span>
+    <span
+      className={cn(
+        triggerStyles.value,
+        hasLabel && isLabelActive && triggerStyles.valueWithFloatingLabel,
+        className
+      )}
+    >
+      {displayValue}
+    </span>
   );
 }

@@ -2,13 +2,20 @@ import * as PopoverPrimitive from "@radix-ui/react-popover";
 import type { PopoverProps } from "./Popover.types";
 import { PopoverTrigger, PopoverContent, PopoverScrollArea } from "./ui";
 import { PopoverContext } from "./Popover.context";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
-function PopoverRoot({ open = false, onOpenChange, children }: PopoverProps) {
+function PopoverRoot({ open, onOpenChange, children }: PopoverProps) {
   const [internalOpen, setInternalOpen] = useState(false);
+  const isControlled = open !== undefined;
+  const isOpen = isControlled ? open : internalOpen;
 
-  const isOpen = open || internalOpen;
-  const setIsOpen = onOpenChange || setInternalOpen;
+  const setIsOpen = useCallback(
+    (next: boolean) => {
+      onOpenChange?.(next);
+      if (!isControlled) setInternalOpen(next);
+    },
+    [isControlled, onOpenChange]
+  );
 
   return (
     <PopoverContext.Provider value={{ isOpen, setIsOpen }}>

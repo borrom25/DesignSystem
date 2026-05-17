@@ -79,6 +79,7 @@ export function Example() {
 | `Filled` + `textFilled` | `defaultValue` | `string[]` | `[]` | Temporary mapping на массив выбранных значений |
 | `State=Selected` | `defaultOpen` | `boolean` | `false` | Открытое состояние триггера |
 | `State=Filled in Hover` | `clearable` | `boolean` | `false` | Temporary mapping по наличию кнопки очистки |
+| runtime-only selected counter label | `selectedLabel` | `string` | - | Новый runtime prop; Figma property для этого текста пока не выделен |
 
 ## Supported states
 
@@ -106,3 +107,4 @@ export function Example() {
 | `textFilled` | первый выбранный label в generated options | В Figma нет структурного списка выбранных values | Если добавятся properties для списка, заменить на точный mapping |
 | Filled-state value | `defaultValue={["selected", "option-2"]}` | Для MultiSelect нужно `string[]`, а Figma даёт только текстовый маркер | Уточнить формат данных selected items |
 | Counter/clear icon | `clearable` только для `Filled in Hover` | В Figma это визуальные инстансы без явных boolean-свойств | Добавить явные boolean properties в Figma при необходимости |
+| `selectedLabel` | not mapped in Code Connect | В Figma нет отдельного property для prefix счетчика выбранных | Добавить Figma property, если prefix должен генерироваться из Dev Mode |

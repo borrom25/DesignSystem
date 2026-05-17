@@ -1,4 +1,10 @@
-import { Children, isValidElement, ReactNode } from "react";
+import {
+  Children,
+  isValidElement,
+  ReactNode,
+  useEffect,
+  useState,
+} from "react";
 import { BubbleFile, BubbleImage, BubbleMeta, BubbleText } from "../ui";
 
 interface UseBubbleStateProps {
@@ -6,6 +12,7 @@ interface UseBubbleStateProps {
 }
 
 export const useBubbleState = ({ children }: UseBubbleStateProps) => {
+  const [standaloneImage, setStandaloneImage] = useState<boolean>(false);
   const normalizedChildren = Children.toArray(children);
   const hasImage = normalizedChildren.some(
     (child) => isValidElement(child) && child.type === BubbleImage
@@ -17,7 +24,6 @@ export const useBubbleState = ({ children }: UseBubbleStateProps) => {
     (child) => isValidElement(child) && child.type === BubbleText
   );
   const fileOnly = hasFile && !hasText && !hasImage;
-  const standaloneImage = hasImage && !hasText && !hasFile;
   const metaOutside = !hasText && (hasImage || hasFile);
   const metaChildren = normalizedChildren.filter(
     (child) => isValidElement(child) && child.type === BubbleMeta
@@ -26,11 +32,16 @@ export const useBubbleState = ({ children }: UseBubbleStateProps) => {
     (child) => !(isValidElement(child) && child.type === BubbleMeta)
   );
 
+  useEffect(() => {
+    setStandaloneImage(hasImage && !hasText && !hasFile);
+  }, [hasImage, hasText, hasFile]);
+
   return {
     fileOnly,
     standaloneImage,
     metaChildren,
     metaOutside,
     contentChildren,
+    setStandaloneImage,
   };
 };

@@ -208,10 +208,10 @@ export const LazyLoad: Story = {
   },
 };
 
-// ─── Label inside with tags ─────────────────────────────────────────────────
+// ─── Label inside with counter ───────────────────────────────────────────────
 
-export const LabelWithTags: Story = {
-  name: "Label inside + Tags",
+export const LabelWithCounter: Story = {
+  name: "Label inside + Counter",
   render: () => {
     const [size, setSize] = useState<(typeof sizes)[number]>(Size.Md);
     const [error, setError] = useState(false);
@@ -277,7 +277,7 @@ export const LabelWithTags: Story = {
           clearable
         />
 
-        <p className={mutedTextClasses}>Single tag:</p>
+        <p className={mutedTextClasses}>Single selected item:</p>
         <MultiSelect
           options={iconOptions}
           value={single}
@@ -290,7 +290,7 @@ export const LabelWithTags: Story = {
           clearable
         />
 
-        <p className={mutedTextClasses}>Many tags (wrap):</p>
+        <p className={mutedTextClasses}>Many selected items:</p>
         <MultiSelect
           options={iconOptions}
           value={multi}
@@ -300,6 +300,7 @@ export const LabelWithTags: Story = {
           error={error}
           disabled={disabled}
           label="Characteristics"
+          selectedLabel="Выбрано полос:"
           selectAll
           clearable
         />
@@ -310,7 +311,7 @@ export const LabelWithTags: Story = {
     docs: {
       description: {
         story:
-          "Label расположен внутри триггера. Выбранные элементы рендерятся тегами под label без наложения.",
+          "Label расположен внутри триггера. Выбранные элементы отображаются одной строкой со счётчиком.",
       },
     },
   },

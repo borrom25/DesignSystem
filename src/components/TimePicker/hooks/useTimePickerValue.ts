@@ -198,6 +198,11 @@ export function useTimePickerValue({
       if (!isTimeControlled) setTimeState(nextTime);
 
       onChangeTime?.(nextTime);
+
+      const nextFormattedValue = formatTimeByPattern(nextTime, format);
+      if (!isValueControlled) setValueState(nextFormattedValue);
+
+      onChangeValue?.(nextFormattedValue);
     },
     [
       disabled,
@@ -208,15 +213,6 @@ export function useTimePickerValue({
       onChangeValue,
     ]
   );
-
-  const handleValueChange = useCallback(() => {
-    if (disabled) return;
-
-    const nextFormattedValue = formatTimeByPattern(time, format);
-    if (!isValueControlled) setValueState(nextFormattedValue);
-
-    onChangeValue?.(nextFormattedValue);
-  }, [disabled, format, isValueControlled, onChangeValue]);
 
   const handleClear = useCallback(() => {
     if (disabled) return;
@@ -246,7 +242,6 @@ export function useTimePickerValue({
     formattedValue,
     hasValue,
     handleInputChange,
-    handleValueChange,
     handleTimeChange,
     handleClear,
   };

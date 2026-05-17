@@ -65,7 +65,7 @@ export function Example() {
 | `Filled` + `textFilled` | `value` | `number` | - | При Filled/Input text берется число из `textFilled` |
 | `State=Input text` / `Filled in` | `value` | `number` | - | Отражает заполненное поле |
 | `textPlaceholder` | `placeholder` | `string` | - | Placeholder текст поля |
-| `InputNumberButton` block | internal stepper | - | - | Уже встроен в runtime `InputNumber` |
+| `InputNumberButton` block | internal stepper | - | - | Уже встроен в runtime `InputNumber` через `Input` suffix + `StepperButtons` |
 
 ## Supported states
 
@@ -83,7 +83,7 @@ export function Example() {
 ## Design matching notes
 
 - Это отдельный компонент `InputNumber`, а не режим `Input`.
-- Кнопки increment/decrement (`StepperButtons`) встроены внутри `InputNumberField`.
+- Кнопки increment/decrement (`StepperButtons`) встроены в suffix базового `Input`; отдельный `InputNumberField` больше не используется.
 
 ## Temporary mappings / assumptions
 

@@ -42,8 +42,9 @@ const showIconRight = instance.getBoolean("Icon-right");
 const isIconOnly = iconOnly === "on";
 const disabled = figmaColor === "disable";
 
-// Temporary mapping: LabelColor does not include Disable, contrastDark, or
-// contrastLight. Disabled is a state prop; contrast colors map to inverse.
+// Temporary mapping: LabelColor does not include Disable, contrastDark,
+// contrastLight, or generic. Disabled is a state prop; contrast colors map
+// to inverse. Generic is not exposed by this Figma component.
 const color =
   figmaColor === "disable" ||
   figmaColor === "contrastDark" ||

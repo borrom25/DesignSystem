@@ -7,8 +7,10 @@ import { Calendar } from "../Calendar";
 import { datePickerStyles } from "./styles";
 import { cn } from "@/utils";
 import { useDatePickerValue } from "./hooks/useDatePickerValue";
-import { IconButton } from "../IconButton";
 import { pointerEventsNone } from "@/styles/shared";
+import { useInputAnchoredPopover } from "@/shared/hooks";
+import { CloseBtn } from "../CloseBtn";
+import { inputStyles } from "../Input/styles";
 
 export function DatePicker({
   label = "Дата",
@@ -31,6 +33,16 @@ export function DatePicker({
   variant,
 }: DatePickerProps) {
   const Icon = IconProp ?? CalendarIcon;
+
+  const {
+    containerRef,
+    open: popoverOpen,
+    setOpen: setPopoverOpen,
+    openPopover,
+    handleRetainFieldInteraction,
+    handleFocusOutside,
+  } = useInputAnchoredPopover(!!disabled);
+
   const {
     date,
     formattedValue,
@@ -47,49 +59,67 @@ export function DatePicker({
   });
 
   return (
-    <Input
-      variant={variant}
-      className={className}
-      size={size}
-      defaultValue={defaultValue}
-      onChange={handleInputChange}
-      value={formattedValue}
-      required={required}
-      label={label}
-      placeholder={placeholder}
-      suffix={
-        (!hasValue || rightSlot) && (
-          <div
-            className={cn(
-              datePickerStyles.rightSlot,
-              disabled && pointerEventsNone
-            )}
-          >
-            {!hasValue && (
-              <Popover>
+    <div ref={containerRef} className={datePickerStyles.containerStyles}>
+      <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
+        <Input
+          variant={variant}
+          className={className}
+          size={size}
+          defaultValue={defaultValue}
+          onChange={handleInputChange}
+          value={formattedValue}
+          required={required}
+          label={label}
+          placeholder={placeholder}
+          onFocus={openPopover}
+          onClick={openPopover}
+          clearable={false}
+          suffix={
+            (!hasValue || rightSlot) && (
+              <div
+                className={cn(
+                  datePickerStyles.rightSlot,
+                  disabled && pointerEventsNone
+                )}
+              >
                 <Popover.Trigger>
-                  <IconButton
-                    icon={Icon}
-                    type="icon"
-                    color="inverse"
-                    className={datePickerStyles.size[size]}
-                  />
+                  {hasValue ? (
+                    <CloseBtn
+                      size={size}
+                      onClick={handleClear}
+                      className={inputStyles.clearButton}
+                    />
+                  ) : (
+                    <div className={datePickerStyles.iconWrapper}>
+                      <Icon
+                        className={cn(
+                          datePickerStyles.iconStyles,
+                          datePickerStyles.size[size]
+                        )}
+                      />
+                    </div>
+                  )}
                 </Popover.Trigger>
-                <Popover.Content>
-                  <Calendar value={date} onChange={handleCalendarChange} />
-                </Popover.Content>
-              </Popover>
-            )}
-            {rightSlot}
-          </div>
-        )
-      }
-      disabled={disabled}
-      aria-required={required}
-      onClear={handleClear}
-      hintError={hintError}
-      error={error}
-      hint={hint}
-    />
+                {rightSlot}
+              </div>
+            )
+          }
+          disabled={disabled}
+          aria-required={required}
+          hintError={hintError}
+          error={error}
+          hint={hint}
+        />
+        <Popover.Content
+          onOpenAutoFocus={(event) => event.preventDefault()}
+          onInteractOutside={(event) =>
+            handleRetainFieldInteraction(event, event.target)
+          }
+          onFocusOutside={handleFocusOutside}
+        >
+          <Calendar value={date} onChange={handleCalendarChange} />
+        </Popover.Content>
+      </Popover>
+    </div>
   );
 }

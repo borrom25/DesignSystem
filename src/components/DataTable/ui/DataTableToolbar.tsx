@@ -28,8 +28,9 @@ export function DataTableToolbar({
       <div className={tableStyles.toolbarMainRow}>
         <div className={tableStyles.toolbarSearch}>
           <Input
-            size={Size.Sm}
+            size={Size.Xs}
             value={searchValue}
+            label="Привет"
             onChange={(e) => onSearchChange?.(e.target.value)}
             placeholder={searchPlaceholder}
             iconLeft={Search}

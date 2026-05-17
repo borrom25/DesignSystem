@@ -33,24 +33,6 @@ export interface InputNumberProps
   onClear?: () => void;
   ref?: Ref<HTMLInputElement>;
 }
-
-export interface InputNumberFieldProps extends Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  "size"
-> {
-  wrapperClassName: string;
-  adornmentClassName: string;
-  isError?: boolean;
-  inputClassName?: string;
-  onIncrement: () => void;
-  onDecrement: () => void;
-  clearable?: boolean;
-  hasValue?: boolean;
-  size: Size;
-  onClear?: () => void;
-  setInputRef: (node: HTMLInputElement | null) => void;
-}
-
 export interface UseInputNumberValueProps {
   value?: number;
   onChange?: InputNumberChangeHandler;

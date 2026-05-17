@@ -7,3 +7,7 @@ export {
 
 export { useOpenState, type UseOpenStateProps } from "./useOpenState";
 export { useClearField } from "./useClearField";
+export {
+  useInputAnchoredPopover,
+  type UseInputAnchoredPopoverReturn,
+} from "./useInputAnchoredPopover";

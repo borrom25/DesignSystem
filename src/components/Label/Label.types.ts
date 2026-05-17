@@ -2,7 +2,10 @@ import type { HTMLAttributes, ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import type { Color, Size, Type } from "@/types";
 
-export type LabelColor = Exclude<Color, "contrastDark" | "contrastLight">;
+export type LabelColor = Exclude<
+  Color,
+  "contrastDark" | "contrastLight" | "generic"
+>;
 export type LabelType = Extract<Type, "fill" | "outline" | "flat"> | "text";
 
 type BaseLabelProps = Omit<HTMLAttributes<HTMLSpanElement>, "color"> & {

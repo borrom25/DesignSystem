@@ -3,6 +3,7 @@
 // component=BarMenu
 const figma = require("figma");
 const instance = figma.selectedInstance;
+void instance;
 
 // Temporary mapping: Figma MCP metadata for this node is unavailable in the
 // current environment, so the snippet uses safe runtime defaults inferred

@@ -1,7 +1,8 @@
 export interface ImageModalProps {
-  file: File;
+  file?: File;
+  src?: string | null;
   isOpen: boolean;
   onClose: () => void;
-  onRemove: () => void;
+  onRemove?: () => void;
   disabled?: boolean;
 }

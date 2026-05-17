@@ -29,11 +29,14 @@ export {
 } from "./styles";
 
 export {
+  FloatingLabel,
+  FloatingLabelRequiredMark,
   InputAdornment,
   InputAdornmentButton,
   InputSeparator,
 } from "./components";
 export type {
+  FloatingLabelProps,
   InputAdornmentProps,
   InputAdornmentButtonProps,
   InputSeparatorProps,

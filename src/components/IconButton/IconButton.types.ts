@@ -8,7 +8,10 @@ import type {
   AsChildFalseProps,
 } from "@/types";
 
-export type IconButtonColor = Exclude<Color, "contrastDark" | "contrastLight">;
+export type IconButtonColor = Exclude<
+  Color,
+  "contrastDark" | "contrastLight" | "generic"
+>;
 
 export const IconButtonType = {
   flat: "flat",

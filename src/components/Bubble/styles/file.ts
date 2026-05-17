@@ -1,5 +1,7 @@
 export const fileRootClasses = "flex min-w-0 items-center gap-3";
 
+export const fileClasses = "bg-generic-medium px-4 py-3 rounded-lg";
+
 export const fileIconWrapperClasses =
   "flex shrink-0 items-center gap-1 rounded-(--br-component-sm) bg-generic-medium p-3 text-primary";
 

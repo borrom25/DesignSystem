@@ -13,4 +13,4 @@ export const modalActionButtonClasses =
 export const modalIconClasses = "text-inverse-text-heavy";
 
 export const modalImageClasses =
-  "max-w-full max-h-[calc(90vh-80px)] object-contain";
+  "w-[100%] max-w-full max-h-[calc(90vh-80px)] object-contain";

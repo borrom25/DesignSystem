@@ -29,8 +29,31 @@ export type BubbleMetaProps = HTMLAttributes<HTMLDivElement> & {
   userName: string;
 };
 
-export type BubbleImageProps = ImgHTMLAttributes<HTMLImageElement> & {
+export type BubbleImageProps = Omit<
+  ImgHTMLAttributes<HTMLImageElement>,
+  "src"
+> & {
   wrapperClassName?: string;
+  imageUrls: string[];
+};
+
+export type CalculateLayoutResult = {
+  colSpan: number;
+  aspect: string;
+  img: string;
+};
+
+export type BubbleImageItemProps = Omit<
+  ImgHTMLAttributes<HTMLImageElement>,
+  "src"
+> & {
+  wrapperClassName?: string;
+  gridCols: string;
+  layout: CalculateLayoutResult[];
+  displayed: string[];
+  total: number;
+  setOpenImage: (value: string) => void;
+  size: Size;
 };
 
 export type BubbleFileIcon = ComponentType<SVGProps<SVGSVGElement>>;
@@ -47,6 +70,8 @@ export type BubbleFileProps = HTMLAttributes<HTMLDivElement> & {
 export type BubbleContextValue = {
   side: BubbleSide;
   size: Size;
+  fileOnly: boolean;
   standaloneImage: boolean;
+  setStandaloneImage: (value: boolean) => void;
   metaOutside: boolean;
 };

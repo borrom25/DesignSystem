@@ -10,6 +10,7 @@ export function ImageModal({
   onClose,
   onRemove,
   disabled,
+  src,
 }: ImageModalProps) {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
@@ -19,7 +20,10 @@ export function ImageModal({
       setPreviewUrl(url);
       return () => URL.revokeObjectURL(url);
     }
-  }, [file]);
+    if (src) setPreviewUrl(src);
+  }, [file, src]);
+
+  const imageName = file?.name ?? "Фото";
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -43,7 +47,7 @@ export function ImageModal({
     if (previewUrl) {
       const link = document.createElement("a");
       link.href = previewUrl;
-      link.download = file.name;
+      link.download = imageName;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -51,7 +55,7 @@ export function ImageModal({
   };
 
   const handleRemove = () => {
-    onRemove();
+    onRemove?.();
     onClose();
   };
 
@@ -94,7 +98,7 @@ export function ImageModal({
         {previewUrl && (
           <img
             src={previewUrl}
-            alt={file.name}
+            alt={imageName}
             className={inputImgStyles.image}
           />
         )}

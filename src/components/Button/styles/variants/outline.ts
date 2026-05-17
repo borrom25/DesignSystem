@@ -11,4 +11,5 @@ export const outlineClasses: Record<Color, string> = {
   inverse: outlineVariants.inverse,
   contrastDark: outlineVariants.contrastDark,
   contrastLight: outlineVariants.contrastLight,
+  generic: outlineVariants.generic,
 };

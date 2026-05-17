@@ -1,12 +1,12 @@
-import { cn } from "@/utils";
 import { Size } from "@/types";
-import { FieldLabel, FieldHint } from "@/components/Field";
-import { wrapperClasses } from "@/components/Field/styles";
 import { useInputIds } from "@/components/Input/hooks/useInputIds";
 import type { InputNumberProps } from "./InputNumber.types";
 import { useInputNumberClassNames } from "./hooks/useInputNumberClassNames";
 import { useInputNumberValue } from "./hooks/useInputNumberValue";
-import { InputNumberField } from "./ui/InputNumberField";
+import { Input } from "../Input/Input";
+import { StepperButtons } from "./ui/StepperButtons";
+import { InputAdornment } from "@/shared/Input";
+import { inputNumberStyles } from "./styles";
 
 export function InputNumber({
   size = Size.Md,
@@ -32,7 +32,7 @@ export function InputNumber({
   const { inputId, hintId } = useInputIds({ id: idProp, hint, hintError });
   const isError = error || !!hintError;
 
-  const { adornmentClassName, wrapperClassName } = useInputNumberClassNames({
+  const { adornmentClassName } = useInputNumberClassNames({
     size,
     disabled,
     isError,
@@ -56,47 +56,47 @@ export function InputNumber({
   });
 
   return (
-    <div className={cn(wrapperClasses, className)}>
-      {label && (
-        <FieldLabel
-          size={size}
-          required={required}
-          disabled={disabled}
-          htmlFor={inputId}
-        >
-          {label}
-        </FieldLabel>
-      )}
-
-      <InputNumberField
-        size={size}
-        clearable={clearable}
-        hasValue={typeof value === "number"}
-        wrapperClassName={wrapperClassName}
-        adornmentClassName={adornmentClassName}
-        disabled={disabled}
-        isError={isError}
-        inputClassName={inputClassName}
-        id={inputId}
-        value={value ?? ""}
-        onChange={handleChange}
-        onIncrement={handleIncrement}
-        onDecrement={handleDecrement}
-        min={min}
-        max={max}
-        step={step}
-        aria-required={required || undefined}
-        aria-describedby={hintId}
-        onClear={handleClearClick}
-        setInputRef={setInputRef}
-        {...restProps}
-      />
-
-      {(hintError || hint) && (
-        <FieldHint size={size} error={isError} id={hintId}>
-          {hintError || hint}
-        </FieldHint>
-      )}
-    </div>
+    <Input
+      ref={setInputRef}
+      className={className}
+      hint={hint}
+      hintError={hintError}
+      required={required}
+      label={label}
+      size={size}
+      clearable={clearable}
+      disabled={disabled}
+      error={isError}
+      inputClassName={inputClassName}
+      id={inputId}
+      value={value ?? ""}
+      onChange={handleChange}
+      min={min}
+      max={max}
+      step={step}
+      aria-required={required || undefined}
+      aria-describedby={hintId}
+      onClear={handleClearClick}
+      suffix={
+        <>
+          <div className={inputNumberStyles.closeBtnRightPadding} />
+          <InputAdornment
+            disabled={disabled}
+            containerClassName={inputNumberStyles.stepperContainer}
+            containerDisabledClassName={
+              inputNumberStyles.stepperContainerDisabled
+            }
+          >
+            <StepperButtons
+              disabled={disabled}
+              adornmentClassName={adornmentClassName}
+              onIncrement={handleIncrement}
+              onDecrement={handleDecrement}
+            />
+          </InputAdornment>
+        </>
+      }
+      {...restProps}
+    />
   );
 }

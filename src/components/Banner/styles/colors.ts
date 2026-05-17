@@ -11,4 +11,5 @@ export const colorClasses: Record<Color, string> = {
   inverse: colorVariants.inverse,
   contrastDark: colorVariants.contrastDark,
   contrastLight: colorVariants.contrastLight,
+  generic: colorVariants.generic,
 };

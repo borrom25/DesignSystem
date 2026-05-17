@@ -79,7 +79,7 @@ export function Example() {
 | Badge    | Yes               | `<IconButton showBadge />`                                        |
 | Size     | Yes               | `size="xs"`, `size="sm"`, `size="md"`                             |
 | Type     | Yes               | `type="flat"`, `type="ghost"`, `type="icon"`                      |
-| Color    | Yes               | semantic `Color` values except `contrastDark` and `contrastLight` |
+| Color    | Yes               | semantic `Color` values except `contrastDark`, `contrastLight`, and `generic` |
 | Rounded  | Runtime only      | `<IconButton rounded />`; not exposed in this Figma component     |
 | asChild  | Runtime only      | Use when styling a custom child element such as a link            |
 

@@ -25,7 +25,7 @@ const storySurfaceClasses =
   "w-[560px] rounded-scale-3xl bg-page p-(--spacing-6)";
 
 const messageImageSrc = `data:image/svg+xml;utf8,${encodeURIComponent(`
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
     <defs>
       <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#8ec5ff"/>
@@ -36,17 +36,16 @@ const messageImageSrc = `data:image/svg+xml;utf8,${encodeURIComponent(`
         <stop offset="100%" stop-color="#17321d"/>
       </linearGradient>
     </defs>
-    <rect width="640" height="420" fill="url(#sky)"/>
-    <circle cx="456" cy="96" r="42" fill="#ffd27a"/>
-    <path d="M0 270 L120 150 L220 250 L330 118 L470 260 L640 124 L640 420 L0 420 Z" fill="#1f2f4d"/>
-    <path d="M0 308 L100 238 L208 296 L310 214 L418 324 L524 246 L640 318 L640 420 L0 420 Z" fill="#2e4c6d"/>
-    <path d="M0 350 C82 320, 148 334, 214 310 S350 286, 430 320 S550 370, 640 340 L640 420 L0 420 Z" fill="url(#meadow)"/>
-    <path d="M292 208 C348 236, 356 278, 382 302 C402 320, 438 328, 470 336" stroke="#d9f0ff" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <rect width="640" height="640" fill="url(#sky)"/>
+    <circle cx="480" cy="140" r="56" fill="#ffd27a"/>
+    <path d="M0 420 L120 300 L240 380 L360 240 L500 400 L640 280 L640 640 L0 640 Z" fill="#1f2f4d"/>
+    <path d="M0 480 L100 410 L208 460 L320 360 L432 490 L544 420 L640 470 L640 640 L0 640 Z" fill="#2e4c6d"/>
+    <path d="M0 540 C108 500, 196 520, 284 490 S468 440, 576 490 S640 560, 640 540 L640 640 L0 640 Z" fill="url(#meadow)"/>
     <g fill="#d86fb6">
-      <circle cx="92" cy="356" r="8"/>
-      <circle cx="116" cy="370" r="7"/>
-      <circle cx="536" cy="362" r="8"/>
-      <circle cx="560" cy="374" r="7"/>
+      <circle cx="96" cy="560" r="10"/>
+      <circle cx="124" cy="580" r="9"/>
+      <circle cx="516" cy="564" r="10"/>
+      <circle cx="544" cy="584" r="9"/>
     </g>
   </svg>
 `)}`;
@@ -82,7 +81,10 @@ export const ImageBubble: Story = {
   render: () => (
     <div className={storySurfaceClasses}>
       <Bubble side={BubbleSide.Outgoing} size={Size.Sm} className="w-[320px]">
-        <Bubble.Image src={messageImageSrc} alt="Пример изображения в bubble" />
+        <Bubble.Image
+          imageUrls={[messageImageSrc]}
+          alt="Пример изображения в bubble"
+        />
         <Bubble.Meta time="13:29" userName="Вы" />
       </Bubble>
     </div>
@@ -111,8 +113,14 @@ export const MixedThread: Story = {
           <Bubble.Meta time="13:29" userName="Вы" />
         </Bubble>
 
-        <Bubble side={BubbleSide.Outgoing} size={Size.Sm}>
-          <Bubble.Image src={messageImageSrc} alt="Изображение в переписке" />
+        <Bubble side={BubbleSide.Outgoing}>
+          <Bubble.Text>
+            Здравствуйте, не приходит письмо после регистрации.
+          </Bubble.Text>
+          <Bubble.Image
+            imageUrls={[messageImageSrc]}
+            alt="Изображение в переписке"
+          />
           <Bubble.Meta time="13:29" userName="Вы" />
         </Bubble>
 
@@ -120,17 +128,21 @@ export const MixedThread: Story = {
           <Bubble.Text>
             Здравствуйте, не приходит письмо после регистрации.
           </Bubble.Text>
+          <Bubble.File fileName="fileName.pdf" fileSize="720 MB" icon={File} />
           <Bubble.Meta time="13:29" userName="ИИ-бот" />
         </Bubble>
 
         <Bubble side={BubbleSide.Outgoing} size={Size.Sm} className="w-[320px]">
+          <Bubble.Text>
+            Здравствуйте, не приходит письмо после регистрации.
+          </Bubble.Text>
           <Bubble.File fileName="fileName.pdf" fileSize="720 MB" icon={File} />
           <Bubble.Meta time="13:29" userName="Вы" />
         </Bubble>
 
         <Bubble side={BubbleSide.Incoming} size={Size.Sm} className="w-[320px]">
           <Bubble.Image
-            src={messageImageSrc}
+            imageUrls={Array.from({ length: 12 }, () => messageImageSrc)}
             alt="Отдельное сообщение с изображением"
           />
           <Bubble.Meta time="13:30" userName="ИИ-бот" />

@@ -18,4 +18,6 @@ export const outlineVariants: Record<Color, string> = {
     "border border-contrast-dark-line-light bg-transparent text-contrast-dark-text-heavy hover:bg-contrast-dark-light",
   contrastLight:
     "border border-contrast-light-line-light bg-contrast-light-light text-contrast-light-text-heavy hover:bg-contrast-light-light",
+  generic:
+    "bg-generic hover:bg-generic-medium text-primary disabled:bg-generic-disabled disabled:text-hint",
 };

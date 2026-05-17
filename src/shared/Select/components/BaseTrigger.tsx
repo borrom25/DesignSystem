@@ -3,6 +3,7 @@ import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn, getIconSize } from "@/utils";
 import { Size } from "@/types";
+import { FloatingLabel, FloatingLabelRequiredMark } from "@/shared/Input";
 import { triggerStyles } from "../styles";
 
 export type BaseTriggerProps = Omit<
@@ -62,28 +63,17 @@ export const BaseTrigger = forwardRef<HTMLButtonElement, BaseTriggerProps>(
           )}
           {...props}
         >
-          {hasFloatingLabel && required && (
-            <span
-              aria-hidden
-              className={triggerStyles.floatingLabelRequiredMark}
-            >
-              *
-            </span>
-          )}
+          {hasFloatingLabel && required && <FloatingLabelRequiredMark />}
 
           <span className={triggerStyles.stackedBody}>
             {hasFloatingLabel && (
-              <span
-                className={cn(
-                  triggerStyles.floatingLabel,
-                  triggerStyles.floatingLabelSize[size],
-                  isLabelActive && triggerStyles.floatingLabelActive,
-                  isLabelActive && triggerStyles.floatingLabelActiveSize[size],
-                  disabled && triggerStyles.floatingLabelDisabled
-                )}
-              >
-                {label}
-              </span>
+              <FloatingLabel
+                as="span"
+                label={label}
+                size={size}
+                active={isLabelActive}
+                disabled={disabled}
+              />
             )}
 
             <span
@@ -130,25 +120,17 @@ export const BaseTrigger = forwardRef<HTMLButtonElement, BaseTriggerProps>(
         )}
         {...props}
       >
-        {hasFloatingLabel && required && (
-          <span aria-hidden className={triggerStyles.floatingLabelRequiredMark}>
-            *
-          </span>
-        )}
+        {hasFloatingLabel && required && <FloatingLabelRequiredMark />}
 
         <span className={triggerStyles.body}>
           {hasFloatingLabel && (
-            <span
-              className={cn(
-                triggerStyles.floatingLabel,
-                triggerStyles.floatingLabelSize[size],
-                isLabelActive && triggerStyles.floatingLabelActive,
-                isLabelActive && triggerStyles.floatingLabelActiveSize[size],
-                disabled && triggerStyles.floatingLabelDisabled
-              )}
-            >
-              {label}
-            </span>
+            <FloatingLabel
+              as="span"
+              label={label}
+              size={size}
+              active={isLabelActive}
+              disabled={disabled}
+            />
           )}
 
           {children}

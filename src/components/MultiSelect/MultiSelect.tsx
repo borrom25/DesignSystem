@@ -47,6 +47,7 @@ export function MultiSelect<T extends string | number = string>({
   children,
   renderValue,
   renderItem,
+  selectedLabel,
   selectAll = false,
   selectAllLabel,
   returnAll = false,
@@ -115,6 +116,7 @@ export function MultiSelect<T extends string | number = string>({
           placeholder={placeholder}
           selectedOptions={selectedOptions}
           renderValue={renderValue}
+          selectedLabel={selectedLabel}
           error={error}
         />
       </MultiSelectTrigger>

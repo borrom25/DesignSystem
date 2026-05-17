@@ -13,4 +13,6 @@ export const fillVariants: Record<Color, string> = {
     "bg-contrast-dark-heavy hover:bg-contrast-dark-heavy-hover text-on-brand",
   contrastLight:
     "bg-contrast-light-heavy hover:bg-contrast-light-heavy-hover text-contrast-dark-heavy",
+  generic:
+    "bg-generic hover:bg-generic-medium text-primary disabled:bg-generic-disabled disabled:text-hint",
 };

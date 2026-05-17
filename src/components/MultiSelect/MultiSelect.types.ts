@@ -64,6 +64,7 @@ type BaseMultiSelectProps<T extends string | number = string> =
     children?: ReactNode;
     renderValue?: MultiSelectRenderValue<T>;
     renderItem?: MultiSelectRenderItem<T>;
+    selectedLabel?: string;
     selectAll?: boolean;
     selectAllLabel?: string;
     clearable?: boolean;
@@ -116,6 +117,7 @@ export type MultiSelectValueProps<T extends string | number = string> = Omit<
 > & {
   selectedOptions: MultiSelectOption<T>[];
   renderValue?: (selected: MultiSelectOption<T>[]) => ReactNode;
+  selectedLabel?: string;
   size?: Size;
   error?: boolean;
 };

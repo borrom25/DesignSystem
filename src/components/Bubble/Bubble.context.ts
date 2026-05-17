@@ -6,7 +6,9 @@ import { Size } from "@/types";
 export const BubbleContext = createContext<BubbleContextValue>({
   side: BubbleSide.Incoming,
   size: Size.Md,
+  fileOnly: false,
   standaloneImage: false,
+  setStandaloneImage: (value: boolean) => value,
   metaOutside: false,
 });
 

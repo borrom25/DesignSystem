@@ -8,6 +8,7 @@ export const Color = {
   Inverse: "inverse",
   ContrastDark: "contrastDark",
   ContrastLight: "contrastLight",
+  Generic: "generic",
 } as const;
 
 export type Color = (typeof Color)[keyof typeof Color];

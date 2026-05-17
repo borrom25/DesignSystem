@@ -1,11 +1,11 @@
 import { type MouseEvent } from "react";
 import { X } from "lucide-react";
-import { IconButton } from "@/components/IconButton";
 import { cn } from "@/utils";
-import { Color, Size } from "@/types";
+import { Color, Size, Type } from "@/types";
 import { ModalType, type ModalContentProps } from "../Modal.types";
 import { modalStyles } from "../styles";
 import { useScreenSize } from "@/providers";
+import { Button } from "@/components/Button";
 
 export function ModalContent({
   type = ModalType.modal,
@@ -64,11 +64,10 @@ export function ModalContent({
           {children}
         </div>
         {(!isMobile || sideMenu) && showCloseButton && (
-          <IconButton
-            icon={X}
-            type="flat"
-            color={Color.Inverse}
-            rounded
+          <Button
+            iconOnly={X}
+            type={Type.Fill}
+            color={Color.Generic}
             size={Size.Sm}
             onClick={onClose}
             aria-label="Закрыть"

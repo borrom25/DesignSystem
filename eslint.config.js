@@ -10,7 +10,15 @@ import tseslint from "typescript-eslint";
 import eslintConfigPrettier from "eslint-config-prettier";
 
 export default tseslint.config(
-  { ignores: ["dist", "node_modules", "tokens"] },
+  {
+    ignores: [
+      "dist",
+      "node_modules",
+      "tokens",
+      "components_ver",
+      "project-template-local",
+    ],
+  },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {

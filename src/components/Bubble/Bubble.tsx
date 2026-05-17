@@ -20,6 +20,7 @@ function BubbleRoot({
     metaChildren,
     metaOutside,
     standaloneImage,
+    setStandaloneImage,
     fileOnly,
   } = useBubbleState({ children });
   const contextValue = useMemo(
@@ -36,6 +37,8 @@ function BubbleRoot({
         ...contextValue,
         standaloneImage,
         metaOutside,
+        fileOnly,
+        setStandaloneImage,
       }}
     >
       <div
@@ -63,7 +66,9 @@ function BubbleRoot({
             {!metaOutside && metaChildren}
           </div>
         )}
-        {metaOutside && metaChildren}
+        {metaOutside && (
+          <div className={bubbleStyles.shell.metaOutside}>{metaChildren}</div>
+        )}
       </div>
     </BubbleContext.Provider>
   );

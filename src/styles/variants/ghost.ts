@@ -13,4 +13,6 @@ export const ghostVariants: Record<Color, string> = {
     "bg-transparent text-contrast-dark-text-heavy hover:bg-contrast-dark-light",
   contrastLight:
     "bg-transparent text-contrast-light-text-heavy hover:bg-contrast-light-light",
+  generic:
+    "bg-generic hover:bg-generic-medium text-primary disabled:bg-generic-disabled disabled:text-hint",
 };

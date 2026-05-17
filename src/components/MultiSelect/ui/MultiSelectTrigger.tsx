@@ -73,7 +73,6 @@ export const MultiSelectTrigger = forwardRef<
         required={required}
         isLabelActive={isLabelActive}
         disabled={disabled}
-        multiline={!!label}
         className={className}
         hideChevron={hideChevron}
         aria-haspopup="listbox"

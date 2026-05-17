@@ -11,4 +11,5 @@ export const fillClasses: Record<Color, string> = {
   inverse: fillVariants.inverse,
   contrastDark: fillVariants.contrastDark,
   contrastLight: fillVariants.contrastLight,
+  generic: fillVariants.generic,
 };

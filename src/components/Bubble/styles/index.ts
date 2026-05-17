@@ -12,15 +12,19 @@ export {
   textSizeClasses,
   metaSizeClasses,
   mediaBleedClasses,
-  imageStandaloneSizeClasses,
 } from "./sizes";
-export { metaBaseClasses, metaCircleClasses } from "./meta";
+export {
+  metaBaseClasses,
+  metaCircleClasses,
+  metaOutsideShellClasses,
+} from "./meta";
 export {
   imageWrapperClasses,
-  imageStandaloneWrapperClasses,
   imageBaseClasses,
-  imageStandaloneClasses,
-  imageInlineClasses,
+  imageGridClasses,
+  imageClasses,
+  imageContainerClasses,
+  imageButtonAllClasses,
 } from "./image";
 export {
   fileRootClasses,
@@ -45,16 +49,20 @@ import {
   fileShellSizeClasses,
   textSizeClasses,
   metaSizeClasses,
-  mediaBleedClasses,
-  imageStandaloneSizeClasses,
+  imageSizeClasses,
 } from "./sizes";
-import { metaBaseClasses, metaCircleClasses } from "./meta";
+import {
+  metaBaseClasses,
+  metaCircleClasses,
+  metaOutsideShellClasses,
+} from "./meta";
 import {
   imageWrapperClasses,
-  imageStandaloneWrapperClasses,
   imageBaseClasses,
-  imageStandaloneClasses,
-  imageInlineClasses,
+  imageClasses,
+  imageGridClasses,
+  imageContainerClasses,
+  imageButtonAllClasses,
 } from "./image";
 import {
   fileRootClasses,
@@ -64,6 +72,7 @@ import {
   fileTitleClasses,
   fileSizeClasses,
   fileActionClasses,
+  fileClasses,
 } from "./file";
 
 export const bubbleStyles = {
@@ -75,6 +84,7 @@ export const bubbleStyles = {
     side: shellSideClasses,
     size: shellSizeClasses,
     fileSize: fileShellSizeClasses,
+    metaOutside: metaOutsideShellClasses,
   },
   text: {
     base: textClasses,
@@ -87,15 +97,16 @@ export const bubbleStyles = {
   },
   image: {
     wrapper: imageWrapperClasses,
-    bleed: mediaBleedClasses,
-    standaloneWrapper: imageStandaloneWrapperClasses,
-    standaloneSize: imageStandaloneSizeClasses,
-    image: imageBaseClasses,
-    standaloneImage: imageStandaloneClasses,
-    inlineImage: imageInlineClasses,
+    size: imageSizeClasses,
+    base: imageBaseClasses,
+    image: imageClasses,
+    grid: imageGridClasses,
+    container: imageContainerClasses,
+    buttonAll: imageButtonAllClasses,
   },
   file: {
     root: fileRootClasses,
+    file: fileClasses,
     iconWrapper: fileIconWrapperClasses,
     icon: fileIconClasses,
     body: fileBodyClasses,

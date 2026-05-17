@@ -10,4 +10,5 @@ export const colorVariants: Record<Color, string> = {
   inverse: "bg-inverse-heavy text-inverse-additional-heavy",
   contrastDark: "bg-contrast-dark-heavy text-on-brand",
   contrastLight: "bg-contrast-light-heavy text-contrast-dark-heavy",
+  generic: "bg-generic-heavy text-on-brand",
 };

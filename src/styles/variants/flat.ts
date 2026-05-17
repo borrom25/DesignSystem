@@ -18,4 +18,6 @@ export const flatVariants: Record<Color, string> = {
     "bg-contrast-dark-light hover:bg-contrast-dark-light-hover text-contrast-dark-text-heavy border-transparent",
   contrastLight:
     "bg-contrast-light-light hover:bg-contrast-light-light-hover text-contrast-light-text-heavy border-transparent",
+  generic:
+    "bg-generic hover:bg-generic-medium text-primary disabled:bg-generic-disabled disabled:text-hint border-transparent",
 };
