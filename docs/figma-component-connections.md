@@ -11,7 +11,7 @@
 yarn figma:status:write
 ```
 
-Итого: 40/70 готово, 0 только docs, 0 только figma.js, 30 не начато.
+Итого: 41/70 готово, 0 только docs, 0 только figma.js, 29 не начато.
 
 | Компонент | Публичный export | Runtime | Story | Docs | figma.js | Статус | Что не хватает |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -35,7 +35,7 @@ yarn figma:status:write
 | Counter | да | да | да | да | да | готово | ok |
 | DataTable | нет | да | нет | нет | нет | не начато | нет docs, нет figma.js |
 | DatePicker | нет | да | да | нет | нет | не начато | нет docs, нет figma.js |
-| DateRange | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| DateRange | да | да | да | да | да | готово | ok |
 | Field | да | нет | нет | нет | нет | не начато | нет docs, нет figma.js, нет root runtime |
 | Filter | да | нет | нет | нет | нет | не начато | нет docs, нет figma.js, нет root runtime |
 | FilterList | да | да | нет | нет | нет | не начато | нет docs, нет figma.js |
