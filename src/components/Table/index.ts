@@ -1,4 +1,4 @@
-export { Table } from "../DataTable";
+export { Table } from "./Table";
 export { createDataTableColumnHelper, dataTableFilter } from "../DataTable";
 export type {
   DataTableColumnHelper,
