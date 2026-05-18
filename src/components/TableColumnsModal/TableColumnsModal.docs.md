@@ -44,11 +44,11 @@ codeConnect: src/components/TableColumnsModal/TableColumnsModal.figma.js
 | --- | --- | --- |
 | `Default` | `<TableColumnsModal ... />` | Пользователь выбирает видимые колонки, `onApply` возвращает `columnId[]`, родитель обновляет `visibleColumnIds` |
 | `Variant2` | `<Table ... filters={tableController.filters} />` with list filter column config | Пользователь выбирает значения конкретного столбца, `DataTableListFilter` обновляет column filter state |
-| `Variant3` | not emitted yet | Text column filter; documented as follow-up |
-| `Variant4` | not emitted yet | Number range column filter; documented as follow-up |
-| `Variant5` | not emitted yet | Date range column filter; documented as follow-up |
+| `Variant3` | `<Table ... filters={tableController.filters} />` with text column filter config | Пользователь вводит текст для поиска совпадений в конкретном столбце, `DataTableColumnFilter` обновляет column filter state |
+| `Variant4` | `<Table ... filters={tableController.filters} />` with number range column config | Пользователь задает `min/max` для числового столбца, `DataTableNumberRangeFilter` обновляет column filter state |
+| `Variant5` | `<Table ... filters={tableController.filters} />` with date range column config | Пользователь задает дату `start/end`, `DataTableDateRangeFilter` обновляет column filter state |
 
-Не нужно создавать отдельный `.figma.js` для `Variant2`: это вариант того же Figma component set, поэтому routing остается внутри `TableColumnsModal.figma.js`.
+Не нужно создавать отдельный `.figma.js` для `Variant2`, `Variant3`, `Variant4` или `Variant5`: это варианты того же Figma component set, поэтому routing остается внутри `TableColumnsModal.figma.js`.
 
 ## Public usage
 
@@ -146,15 +146,60 @@ export function Example() {
 8. `useTable` передает `columnFilters` в TanStack Table и подключает `getFilteredRowModel()`.
 9. `dataTableList` filter function оставляет только строки, где значение столбца входит в выбранный список.
 
+`Property 1=Variant3` - это текстовый фильтр конкретного столбца. Он не управляет видимостью колонок. Он меняет filter value на строку поиска, после чего таблица показывает только строки, где значение столбца содержит введенный текст.
+
+Функциональный контракт `Variant3`:
+
+1. Колонка создается с `filter: dataTableFilter.columnFilter(...)` или через `createDataTableColumnHelper().columnFilter(...)`.
+2. У колонки должен быть `filterFn: "dataTableColumnFilter"`; helper `.columnFilter(...)` ставит его автоматически.
+3. `useDataTableController({ columns })` создает default value `undefined` или `filter.defaultValue`.
+4. `Table` получает `filters={tableController.filters}`.
+5. Header видит `column.filter` и рисует filter icon.
+6. По клику открывается popover с `DataTableColumnFilter`.
+7. Пользователь вводит текст.
+8. `Применить` вызывает `filters.setValue(filterId, value)`.
+9. `useTable` передает `columnFilters` в TanStack Table и подключает `getFilteredRowModel()`.
+10. `dataTableColumnFilter` filter function оставляет только строки, где строковое значение столбца содержит введенный текст без учета регистра.
+
+`Property 1=Variant4` - это фильтр диапазона для числового столбца. Он не управляет видимостью колонок. Он меняет filter value вида `{ min, max }`, после чего таблица показывает только строки, где значение столбца попадает в диапазон.
+
+Функциональный контракт `Variant4`:
+
+1. Колонка создается с `filter: dataTableFilter.numberRange(...)` или через `createDataTableColumnHelper().numberRange(...)`.
+2. У колонки должен быть `filterFn: "dataTableNumberRange"`; helper `.numberRange(...)` ставит его автоматически.
+3. `useDataTableController({ columns })` создает default value `{ min: undefined, max: undefined }`.
+4. `Table` получает `filters={tableController.filters}`.
+5. Header видит `column.filter` и рисует filter icon.
+6. По клику открывается popover с `DataTableNumberRangeFilter`.
+7. Пользователь вводит `min` и/или `max`.
+8. `Применить` вызывает `filters.setValue(filterId, { min, max })`.
+9. `useTable` передает `columnFilters` в TanStack Table и подключает `getFilteredRowModel()`.
+10. `dataTableNumberRange` filter function оставляет только строки, где числовое значение столбца больше или равно `min` и меньше или равно `max`.
+
+`Property 1=Variant5` - это фильтр диапазона дат для одного столбца. Он не управляет видимостью колонок. Он меняет filter value вида `{ start, end }`, после чего таблица показывает только строки, где дата столбца попадает в выбранный диапазон.
+
+Функциональный контракт `Variant5`:
+
+1. Колонка создается с `filter: dataTableFilter.dateRange(...)` или через `createDataTableColumnHelper().dateRange(...)`.
+2. У колонки должен быть `filterFn: "dataTableDateRange"`; helper `.dateRange(...)` ставит его автоматически.
+3. `useDataTableController({ columns })` создает default value `{ start: undefined, end: undefined }`.
+4. `Table` получает `filters={tableController.filters}`.
+5. Header видит `column.filter` и рисует filter icon.
+6. По клику открывается popover с `DataTableDateRangeFilter`.
+7. Пользователь выбирает `start` и/или `end`.
+8. `Применить` вызывает `filters.setValue(filterId, { start, end })`.
+9. `useTable` передает `columnFilters` в TanStack Table и подключает `getFilteredRowModel()`.
+10. `dataTableDateRange` filter function оставляет только строки, где дата столбца находится между `start` и `end` включительно.
+
 ## Figma to props mapping
 
 | Figma property / variant | Figma values | Code prop | Code values | Default | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `Property 1` | `Default` | - | - | `Default` | Variant для настройки видимости колонок, маппится на `TableColumnsModal` |
 | `Property 1` | `Variant2` | `columns[].filter`, `filters` | list filter config + state | - | Variant фильтра конкретного столбца, ближе всего к `DataTableListFilter` |
-| `Property 1` | `Variant3` | `columns[].filter`, `filters` | text filter config + state | - | Похоже на текстовый фильтр столбца; не маппится на `TableColumnsModal` |
-| `Property 1` | `Variant4` | `columns[].filter`, `filters` | number range filter config + state | - | Похоже на numeric range filter; не маппится на `TableColumnsModal` |
-| `Property 1` | `Variant5` | `columns[].filter`, `filters` | date range filter config + state | - | Похоже на date range filter; не маппится на `TableColumnsModal` |
+| `Property 1` | `Variant3` | `columns[].filter`, `filters` | text filter config + state | - | Variant текстового фильтра конкретного столбца, ближе всего к `DataTableColumnFilter` |
+| `Property 1` | `Variant4` | `columns[].filter`, `filters` | number range filter config + state | - | Variant фильтра диапазона для числового столбца, ближе всего к `DataTableNumberRangeFilter` |
+| `Property 1` | `Variant5` | `columns[].filter`, `filters` | date range filter config + state | - | Variant фильтра диапазона дат, ближе всего к `DataTableDateRangeFilter` |
 | `<slotHead>` | search slot | - | - | - | Temporary mapping: текущий runtime `TableColumnsModal` не поддерживает поиск по списку колонок |
 | `<slotBody>` | checkbox list | `options` or `columns` | `TableColumnsModalOption[]` or `ColumnDef[]` | required | Runtime строит список из `options`; если их нет, получает id/label из `columns` |
 | `Выбрать всё` checkbox | checked / indeterminate / off | internal draft state | computed from `value` | - | `data-indeterminate` выставляется, когда выбрана только часть колонок |
@@ -182,6 +227,9 @@ export function Example() {
 | Column list filter | Yes | configure `columns[].filter` and pass `filters` from `useDataTableController` |
 | Column filter search | Yes | `filter.searchable`, `filter.searchPlaceholder`, `getSearchText` in list filter config |
 | Column filter apply/reset | Yes | built into `DataTableListFilter` through `FilterPanel` |
+| Text column filter | Yes | configure `dataTableFilter.columnFilter(...)` or `helper.columnFilter(...)` and pass `filters` from `useDataTableController` |
+| Number range column filter | Yes | configure `dataTableFilter.numberRange(...)` or `helper.numberRange(...)` and pass `filters` from `useDataTableController` |
+| Date range column filter | Yes | configure `dataTableFilter.dateRange(...)` or `helper.dateRange(...)` and pass `filters` from `useDataTableController` |
 
 ## Variant2 Column Filter Usage
 
@@ -218,12 +266,110 @@ const tableController = useDataTableController({
 
 `DataTableListFilter` хранит draft selection внутри popover до нажатия `Применить`. После apply значение попадает в `filters`, а `Table` использует его как column filter state.
 
+## Variant3 Text Column Filter Usage
+
+`Variant3` describes a text filter popover for one table column. It is usually not rendered by app code directly. Instead, it appears when a column has a `columnFilter` config and the user clicks the filter icon in the table header.
+
+```tsx
+const columns = [
+  helper.columnFilter("priority", {
+    header: "Приоритет",
+    size: 140,
+    filter: {
+      searchPlaceholder: "Поиск по приоритету",
+    },
+  }),
+];
+
+const tableController = useDataTableController({
+  columns,
+});
+
+<Table
+  data={data}
+  columns={columns}
+  filters={tableController.filters}
+/>;
+```
+
+`DataTableColumnFilter` хранит draft search string внутри popover до нажатия `Применить`. После apply значение попадает в `filters`, а `Table` использует его как column filter state.
+
+## Variant4 Number Range Filter Usage
+
+`Variant4` describes a number range filter popover for one table column. It is usually not rendered by app code directly. Instead, it appears when a numeric column has a `numberRange` filter config and the user clicks the filter icon in the table header.
+
+```tsx
+const columns = [
+  helper.numberRange("members", {
+    header: "Команда, чел",
+    size: 140,
+    filter: {
+      minPlaceholder: "От, чел.",
+      maxPlaceholder: "До, чел.",
+      minInputProps: {
+        min: 0,
+        step: 1,
+      },
+      maxInputProps: {
+        min: 0,
+        step: 1,
+      },
+    },
+  }),
+];
+
+const tableController = useDataTableController({
+  columns,
+});
+
+<Table
+  data={data}
+  columns={columns}
+  filters={tableController.filters}
+/>;
+```
+
+`DataTableNumberRangeFilter` хранит draft `{ min, max }` внутри popover до нажатия `Применить`. После apply значение попадает в `filters`, а `Table` использует его как column filter state.
+
+## Variant5 Date Range Filter Usage
+
+`Variant5` describes a date range filter popover for one table column. It is usually not rendered by app code directly. Instead, it appears when a date column has a `dateRange` filter config and the user clicks the filter icon in the table header.
+
+```tsx
+const columns = [
+  helper.dateRange("updatedAtDate", {
+    id: "updatedAt",
+    header: "Обновлено",
+    size: 160,
+    cell: ({ row }) => row.original.updatedAt,
+    filter: {
+      placeholderStart: "Дата от",
+      placeholderEnd: "Дата до",
+    },
+  }),
+];
+
+const tableController = useDataTableController({
+  columns,
+});
+
+<Table
+  data={data}
+  columns={columns}
+  filters={tableController.filters}
+/>;
+```
+
+`DataTableDateRangeFilter` хранит draft `{ start, end }` внутри popover до нажатия `Применить`. После apply значение попадает в `filters`, а `Table` использует его как column filter state.
+
 ## Design matching notes
 
 - Figma node `3456:25084` is a published component set named `modalContainer`.
 - `Property 1=Default` is documented here as `TableColumnsModal`.
 - `Property 1=Variant2` is documented here as the list filter popover for a single table column.
-- The other variants in the same Figma component set include controls such as `InputNumber` and `DateRange`; those match table column filter UI more than column visibility settings.
+- `Property 1=Variant3` is documented here as the text filter popover for a single table column.
+- `Property 1=Variant4` is documented here as the number range filter popover for a single numeric table column.
+- `Property 1=Variant5` is documented here as the date range filter popover for a single date table column.
 - In code, `TableColumnsModal` is a semantic wrapper around `Modal`, `ListItem` and `Button`.
 - The component is intentionally controlled: it receives the current selected ids through `value` and returns the committed selection through `onApply`.
 - The modal does not mutate `Table` directly. The parent updates `visibleColumnIds`, then filters the column definitions passed to `Table`.
@@ -234,7 +380,9 @@ const tableController = useDataTableController({
 | --- | --- | --- | --- |
 | Figma `modalContainer` name | `TableColumnsModal` | Figma component is named generically, but `Property 1=Default` is used for table column visibility settings | Rename Figma component or add documentation link to make the purpose explicit |
 | `Property 1=Variant2` | `DataTableListFilter` pattern via `columns[].filter` | It filters rows by one column value, not column visibility | Keep documented with table filters; add separate Code Connect only if filters become standalone public components |
-| `Property 1=Variant3/4/5` | documented as filter-like variants only | These variants contain text/range/date controls, not column visibility modal UI | Document separately if they become public filter components |
+| `Property 1=Variant3` | `DataTableColumnFilter` pattern via `columns[].filter` | It filters rows by text match in one column, not column visibility | Keep documented with table filters; add separate Code Connect only if filters become standalone public components |
+| `Property 1=Variant4` | `DataTableNumberRangeFilter` pattern via `columns[].filter` | It filters rows by numeric range in one column, not column visibility | Keep documented with table filters; add separate Code Connect only if filters become standalone public components |
+| `Property 1=Variant5` | `DataTableDateRangeFilter` pattern via `columns[].filter` | It filters rows by date range in one column, not column visibility | Keep documented with table filters; add separate Code Connect only if filters become standalone public components |
 | Figma search field | documented only | Runtime `TableColumnsModalProps` has no search props | Add `searchable`, `searchValue`, `onSearchChange` only if large column lists need it |
 | Figma `Сбросить` action | closest runtime action is cancel/close | Runtime has no reset-to-default callback | Add `onReset` / `resetLabel` if product needs a real reset action |
 | Footer label mismatch | `Применить` maps to `applyLabel`, default runtime is `Сохранить` | Figma and code defaults use different wording | Pass `applyLabel="Применить"` when exact copy is required |
