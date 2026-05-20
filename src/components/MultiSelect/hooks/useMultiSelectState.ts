@@ -3,9 +3,14 @@ import { useControllableState, useOpenState } from "@/shared/hooks";
 import { useSelectableOptions } from "./useSelectableOptions";
 import { useSelectionState } from "./useSelectionState";
 import { useSelectAllHandler } from "./useSelectAllHandler";
-import type { UseMultiSelectStateProps } from "../MultiSelect.types.ts";
+import type {
+  MultiSelectOptionValue,
+  UseMultiSelectStateProps,
+} from "../MultiSelect.types.ts";
 
-export function useMultiSelectState<T extends string | number = string>({
+export function useMultiSelectState<
+  T extends MultiSelectOptionValue = MultiSelectOptionValue,
+>({
   value: controlledValue,
   defaultValue = [],
   open: controlledOpen,
@@ -14,6 +19,7 @@ export function useMultiSelectState<T extends string | number = string>({
   onValueChange,
   onClear,
   options = [],
+  selectableOptions,
   returnAll = false,
 }: UseMultiSelectStateProps<T>) {
   const [value, setValue, isControlled] = useControllableState<T[]>({
@@ -30,6 +36,7 @@ export function useMultiSelectState<T extends string | number = string>({
 
   const { selectableValues, valueSet, selectedOptions } = useSelectableOptions({
     options,
+    selectableOptions,
     value,
   });
 

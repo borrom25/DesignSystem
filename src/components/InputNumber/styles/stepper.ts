@@ -1,5 +1,5 @@
 export const stepperContainerClasses =
-  "absolute right-0 flex flex-col shrink-0 h-full w-[48px] rounded-r-xs";
+  "absolute right-0 flex h-full w-[48px] shrink-0 flex-col rounded-r-xs";
 
 export const stepperContainerDisabledClasses = "opacity-50 cursor-not-allowed";
 

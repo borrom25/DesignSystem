@@ -3,11 +3,14 @@ export { FieldLabel, FieldHint, FieldWrapper } from "./Field";
 export { Input, InputVariant } from "./Input";
 export type { InputProps } from "./Input";
 
+export { SearchAutocomplete } from "./SearchAutocomplete";
+export type { SearchAutocompleteProps } from "./SearchAutocomplete";
+
 export { PinInput, PinInputType } from "./PinInput";
 export type { PinInputProps } from "./PinInput";
 
-export { InputNumber } from "./InputNumber";
-export type { InputNumberProps } from "./InputNumber";
+export { InputNumber, InputNumberCompact } from "./InputNumber";
+export type { InputNumberProps, InputNumberCompactProps } from "./InputNumber";
 
 export { InputPassword } from "./InputPassword";
 export type { InputPasswordProps } from "./InputPassword";
@@ -22,7 +25,7 @@ export { InputFiles } from "./InputFiles";
 export type { InputFilesProps } from "./InputFiles";
 
 export { InputImg } from "./InputImg";
-export type { InputImgProps } from "./InputImg";
+export type { InputImgProps, InputImgValue } from "./InputImg";
 
 export { Button } from "./Button";
 export type { ButtonProps } from "./Button";
@@ -80,7 +83,7 @@ export { Accordion } from "./Accordion";
 export type { AccordionProps } from "./Accordion";
 
 export { Switcher } from "./Switcher";
-export type { SwitcherProps } from "./Switcher";
+export type { SwitcherProps, SwitcherValue } from "./Switcher";
 
 export { Segmented } from "./Segmented";
 export type { SegmentedProps } from "./Segmented";
@@ -90,6 +93,9 @@ export type { BarMenuProps } from "./BarMenu";
 
 export { AccountMenu } from "./AccountMenu";
 export type { AccountMenuProps } from "./AccountMenu";
+
+export { BarChartVertical } from "./BarChartVertical";
+export type { BarChartVerticalProps } from "./BarChartVertical";
 
 export {
   Popover,
@@ -144,13 +150,22 @@ export type {
 } from "./Select";
 
 export { MultiSelect } from "./MultiSelect";
-export type { MultiSelectProps, MultiSelectOption } from "./MultiSelect";
+export type {
+  MultiSelectProps,
+  MultiSelectOption,
+  MultiSelectOptionValue,
+  MultiSelectItemProps,
+} from "./MultiSelect";
 
 export { MultiTag } from "./MultiTag";
 export type { MultiTagProps, MultiTagOption } from "./MultiTag";
 
-export { DateRange } from "./DateRange";
-export type { DateRangeProps, DateRangeValue } from "./DateRange";
+export { DateRange, DateRangeCompact } from "./DateRange";
+export type {
+  DateRangeProps,
+  DateRangeCompactProps,
+  DateRangeValue,
+} from "./DateRange";
 
 export { Calendar } from "./Calendar";
 export type { CalendarProps, CalendarMode, CalendarValue } from "./Calendar";
@@ -281,6 +296,9 @@ export type { SliderProps } from "./Slider";
 export { TextArea } from "./TextArea";
 export type { TextAreaProps } from "./TextArea";
 
+export { Text } from "./Text";
+export type { TextProps, TextWeight } from "./Text";
+
 export { Skeleton } from "./Skeleton";
 export type { SkeletonProps } from "./Skeleton";
 
@@ -319,9 +337,12 @@ export {
 } from "./Table";
 export type {
   TableProps,
+  DataTablePopoverActionContext,
+  DataTablePopoverActionProps,
   ColumnDef,
   SortingState,
   ColumnFiltersState,
+  ExpandedState,
   ListFilterConfig,
   DateFilterConfig,
   DateRangeFilterConfig,

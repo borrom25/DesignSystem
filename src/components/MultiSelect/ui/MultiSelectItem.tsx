@@ -1,16 +1,12 @@
-import type { ReactNode } from "react";
 import { BaseItem } from "@/shared/Select";
-import type { MultiSelectOption } from "../MultiSelect.types.ts";
+import type {
+  MultiSelectItemProps,
+  MultiSelectOptionValue,
+} from "../MultiSelect.types.ts";
 
-type MultiSelectItemProps<T extends string | number = string> = {
-  option: MultiSelectOption<T>;
-  selected: boolean;
-  onToggle: (value: T) => void;
-  className?: string;
-  children?: ReactNode;
-};
-
-export function MultiSelectItem<T extends string | number = string>({
+export function MultiSelectItem<
+  T extends MultiSelectOptionValue = MultiSelectOptionValue,
+>({
   option,
   selected,
   onToggle,

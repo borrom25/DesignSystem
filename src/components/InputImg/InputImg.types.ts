@@ -7,9 +7,11 @@ import type {
 import type { Size } from "@/types";
 import type { BaseFieldProps } from "@/types/field";
 
+export type InputImgValue = File | string | null;
+
 export interface InputImgValueProps {
-  value?: File | null;
-  defaultValue?: File | null;
+  value?: InputImgValue;
+  defaultValue?: InputImgValue;
   onChange?: (file: File | null) => void;
   onBeforeUpload?: (file: File) => void;
 }
@@ -76,7 +78,7 @@ export interface DropZoneProps {
 }
 
 export interface ImagePreviewProps {
-  file: File;
+  file: Exclude<InputImgValue, null>;
   size: Size;
   error: boolean;
   disabled: boolean;
@@ -91,7 +93,7 @@ export interface UseInputImgProps
     InputImgInteractionProps {}
 
 export interface UseInputImgReturn {
-  file: File | null;
+  file: InputImgValue;
   isDragActive: boolean;
   inputRef: RefCallback<HTMLInputElement>;
   onDragEnter: (e: DragEvent<HTMLDivElement>) => void;

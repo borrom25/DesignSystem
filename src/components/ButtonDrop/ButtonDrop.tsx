@@ -1,12 +1,13 @@
-import { useState, useMemo, useCallback } from "react";
+import { useMemo, useCallback } from "react";
 import { ChevronDown, MoreVertical } from "lucide-react";
 import { cn } from "@/utils";
 import { Color, Size, Type } from "@/types";
 import { Button } from "@/components/Button";
 import { Popover, PopoverSurface } from "@/components/Popover";
-import { ListItem } from "@/components/ListItem";
 import type { ButtonDropProps } from "./ButtonDrop.types";
 import { buttonDropStyles } from "./styles";
+import { useButtonDropOpen } from "./hooks/useButtonDropOpen";
+import { ButtonDropMenuList } from "./ui/ButtonDropMenuList";
 
 export function ButtonDrop<T extends string | number = string>({
   value,
@@ -19,12 +20,13 @@ export function ButtonDrop<T extends string | number = string>({
   disabled = false,
   hideChevron = false,
   iconOnly = false,
-  open = false,
+  open,
+  onOpenChange,
   className,
   contentClassName,
   matchTriggerWidth = true,
 }: ButtonDropProps<T>) {
-  const [isOpen, setIsOpen] = useState(open);
+  const { isOpen, setIsOpen } = useButtonDropOpen({ open, onOpenChange });
 
   const selectedItem = useMemo(
     () => items.find((item) => item.value === value),
@@ -40,7 +42,7 @@ export function ButtonDrop<T extends string | number = string>({
       item.onClick?.();
       setIsOpen(false);
     },
-    [onChange]
+    [onChange, setIsOpen]
   );
 
   if (iconOnly) {
@@ -66,24 +68,12 @@ export function ButtonDrop<T extends string | number = string>({
         >
           <PopoverSurface>
             <Popover.ScrollArea maxHeight={320}>
-              <div
-                className={cn(
-                  buttonDropStyles.list,
-                  buttonDropStyles.listIconSize[size]
-                )}
-              >
-                {items.map((item) => (
-                  <ListItem
-                    key={item.value}
-                    size={buttonDropStyles.listItemSizeMap[size]}
-                    selected={item.value === value}
-                    disabled={item.disabled}
-                    onClick={() => handleItemClick(item)}
-                  >
-                    {item.label}
-                  </ListItem>
-                ))}
-              </div>
+              <ButtonDropMenuList
+                items={items}
+                value={value}
+                size={size}
+                onItemClick={handleItemClick}
+              />
             </Popover.ScrollArea>
           </PopoverSurface>
         </Popover.Content>
@@ -123,24 +113,12 @@ export function ButtonDrop<T extends string | number = string>({
       >
         <PopoverSurface className="w-full">
           <Popover.ScrollArea maxHeight={320}>
-            <div
-              className={cn(
-                buttonDropStyles.list,
-                buttonDropStyles.listIconSize[size]
-              )}
-            >
-              {items.map((item) => (
-                <ListItem
-                  key={item.value}
-                  size={buttonDropStyles.listItemSizeMap[size]}
-                  selected={item.value === value}
-                  disabled={item.disabled}
-                  onClick={() => handleItemClick(item)}
-                >
-                  {item.label}
-                </ListItem>
-              ))}
-            </div>
+            <ButtonDropMenuList
+              items={items}
+              value={value}
+              size={size}
+              onItemClick={handleItemClick}
+            />
           </Popover.ScrollArea>
         </PopoverSurface>
       </Popover.Content>

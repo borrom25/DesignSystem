@@ -77,7 +77,7 @@ type Story = StoryObj<typeof meta>;
 export const Playground: Story = {
   args: {
     type: ModalType.modal,
-    size: Size.Xs,
+    size: Size.Md,
     title: "Title",
     subtitle: "Subtitle",
     closeOnOverlayClick: true,
@@ -97,20 +97,20 @@ export const Playground: Story = {
           open={open}
           onOpenChange={setOpen}
           actionSlot={
-            <Button type="ghost" size={Size.Xs}>
+            <Button type="ghost" size={Size.Md}>
               Доп. действие
             </Button>
           }
           bottomSlot={
-            <div className="flex w-full items-center justify-between gap-3 py-4">
-              <Button size={Size.Xs} type="ghost">
+            <div className="flex w-full items-center justify-between gap-3">
+              <Button size={Size.Md} type="ghost">
                 Доп. настройка
               </Button>
               <div className="flex items-center gap-3">
-                <Button size={Size.Xs} type="ghost">
+                <Button size={Size.Md} type="ghost">
                   Отмена
                 </Button>
-                <Button size={Size.Xs}>Сохранить</Button>
+                <Button size={Size.Md}>Сохранить</Button>
               </div>
             </div>
           }
@@ -180,20 +180,20 @@ export const Dialog: Story = {
           open={open}
           onOpenChange={setOpen}
           actionSlot={
-            <Button type="ghost" size={Size.Xs}>
+            <Button type="ghost" size={Size.Md}>
               Подробнее
             </Button>
           }
           bottomSlot={
-            <div className="flex w-full items-center justify-end gap-3 py-4">
+            <div className="flex w-full items-center justify-end gap-3">
               <Button
-                size={Size.Xs}
+                size={Size.Md}
                 type="ghost"
                 onClick={() => setOpen(false)}
               >
                 Отмена
               </Button>
-              <Button size={Size.Xs} onClick={() => setOpen(false)}>
+              <Button size={Size.Md} onClick={() => setOpen(false)}>
                 Подтвердить
               </Button>
             </div>

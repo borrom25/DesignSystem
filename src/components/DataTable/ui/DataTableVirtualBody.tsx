@@ -1,31 +1,16 @@
 import { useMemo } from "react";
-import { type Row } from "@tanstack/react-table";
-import type { RefObject } from "react";
 import { TableRow } from "./DataTableRow";
 import { cn } from "@/utils";
 import { tableStyles } from "../styles";
 import { useVirtualScroll } from "../hooks/useVirtualScroll";
-
-interface TableVirtualBodyProps<TData> {
-  rows: Row<TData>[];
-  columnSignature: string;
-  columnCount: number;
-  parentRef: RefObject<HTMLDivElement | null>;
-  rowHeight: number;
-  overscan?: number;
-  onScrollEnd?: () => void;
-  onRowClick?: (row: Row<TData>) => void;
-  onRowDoubleClick?: (row: Row<TData>) => void;
-  rowClassName?: string | ((row: Row<TData>) => string);
-  cellClassName?: string;
-  bordered?: boolean;
-  className?: string;
-}
+import type { TableVirtualBodyProps } from "../types";
+import { getDataTableRowDomKey } from "../utils/rowKeys";
 
 export function TableVirtualBody<TData>({
   rows,
   columnSignature,
   columnCount,
+  beforeStickyRightColumnIds,
   parentRef,
   rowHeight,
   overscan,
@@ -70,15 +55,17 @@ export function TableVirtualBody<TData>({
 
         return (
           <TableRow
-            key={`${row.id}:${columnSignature}`}
+            key={getDataTableRowDomKey(row.id, columnSignature)}
             row={row}
             rowIndex={virtualItem.index}
             isSelected={row.getIsSelected()}
+            isExpanded={row.getIsExpanded()}
             onRowClick={onRowClick}
             onRowDoubleClick={onRowDoubleClick}
             rowClassName={rowClassName}
             cellClassName={cellClassName}
             bordered={bordered}
+            beforeStickyRightColumnIds={beforeStickyRightColumnIds}
             style={rowStyle}
           />
         );

@@ -77,6 +77,7 @@ export function TableColumnsModal<TData = unknown, T extends string = string>({
       onOpenChange={onOpenChange}
       type={ModalType.modal}
       size={size}
+      withBodyPadding={false}
       title={title}
       subtitle={subtitle}
       showCloseButton={showCloseButton}
@@ -113,7 +114,7 @@ export function TableColumnsModal<TData = unknown, T extends string = string>({
             <div className="mx-2 my-1 border-t border-line" />
           )}
 
-          <div className="flex flex-col gap-0.5">
+          <div className="flex flex-col gap-0.5 px-[20px]">
             {resolvedOptions.map((option) => (
               <ListItem
                 key={option.id}

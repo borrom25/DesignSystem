@@ -1,6 +1,10 @@
 import { useRef, useState, useCallback, useMemo } from "react";
 import { isFileAccepted } from "@/components/InputFiles/InputFiles.utils";
-import type { UseInputImgProps, UseInputImgReturn } from "../InputImg.types";
+import type {
+  InputImgValue,
+  UseInputImgProps,
+  UseInputImgReturn,
+} from "../InputImg.types";
 import { defaultMaxSize } from "@/constants";
 
 export function useInputImg({
@@ -17,7 +21,7 @@ export function useInputImg({
   const inputNodeRef = useRef<HTMLInputElement | null>(null);
   const dragCounter = useRef(0);
 
-  const [internalFile, setInternalFile] = useState<File | null>(
+  const [internalFile, setInternalFile] = useState<InputImgValue>(
     defaultValue ?? null
   );
   const [isDragActive, setIsDragActive] = useState(false);

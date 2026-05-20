@@ -25,3 +25,9 @@ export {
   columnFiltersStateToValues,
   getDataTableFilterDefaultValues,
 } from "./columnFiltersMapping";
+export {
+  getDataTablePopoverActionOptions,
+  getRowSelectionSignature,
+  resolveDataTablePopoverActionChildren,
+  resolveDataTablePopoverActionSelectedLabel,
+} from "./popoverAction";

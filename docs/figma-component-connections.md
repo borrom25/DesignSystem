@@ -11,7 +11,7 @@
 yarn figma:status:write
 ```
 
-Итого: 41/70 готово, 0 только docs, 0 только figma.js, 29 не начато.
+Итого: 41/72 готово, 0 только docs, 0 только figma.js, 31 не начато.
 
 | Компонент | Публичный export | Runtime | Story | Docs | figma.js | Статус | Что не хватает |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -21,6 +21,7 @@ yarn figma:status:write
 | AppLayout | да | да | да | да | да | готово | ok |
 | Avatar | да | да | да | да | да | готово | ok |
 | Banner | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| BarChartVertical | да | да | нет | нет | нет | не начато | нет docs, нет figma.js |
 | BarMenu | да | да | нет | да | да | готово | ok |
 | Bubble | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Button | да | да | да | да | да | готово | ok |
@@ -33,8 +34,8 @@ yarn figma:status:write
 | Chips | да | да | да | да | да | готово | ok |
 | CloseBtn | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Counter | да | да | да | да | да | готово | ok |
-| DataTable | нет | да | нет | нет | нет | не начато | нет docs, нет figma.js |
-| DatePicker | нет | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| DataTable | нет | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| DatePicker | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | DateRange | да | да | да | да | да | готово | ok |
 | Field | да | нет | нет | нет | нет | не начато | нет docs, нет figma.js, нет root runtime |
 | Filter | да | нет | нет | нет | нет | не начато | нет docs, нет figma.js, нет root runtime |
@@ -66,6 +67,7 @@ yarn figma:status:write
 | ProgressBar | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | ProgressPie | нет | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Radio | да | да | да | да | да | готово | ok |
+| SearchAutocomplete | да | да | нет | нет | нет | не начато | нет docs, нет figma.js |
 | Segmented | да | да | да | да | да | готово | ok |
 | Select | да | да | да | да | да | готово | ok |
 | Sidebar | да | да | да | да | да | готово | ok |
@@ -79,7 +81,7 @@ yarn figma:status:write
 | TableColumnsModal | да | да | нет | да | да | готово | ok |
 | TabsOverflow | да | да | да | да | да | готово | ok |
 | Tag | да | да | да | да | да | готово | ok |
-| Text | нет | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Text | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | TextArea | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | TimeBar | да | да | да | да | да | готово | ok |
 | TimePicker | да | да | да | нет | нет | не начато | нет docs, нет figma.js |

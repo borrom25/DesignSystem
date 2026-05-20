@@ -62,7 +62,7 @@ export function AccountMenuContent({
       )}
 
       {actionSlot ||
-        (actions.length && (
+        (!!actions.length && (
           <div className={accountMenuClasses.items}>
             {actionSlot ??
               actions.map((props, index) =>

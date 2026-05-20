@@ -1,6 +1,9 @@
 import { useMemo } from "react";
+import type { MultiSelectOptionValue } from "../MultiSelect.types.ts";
 
-export type UseSelectionStateProps<T extends string | number = string> = {
+export type UseSelectionStateProps<
+  T extends MultiSelectOptionValue = MultiSelectOptionValue,
+> = {
   selectableValues: T[];
   valueSet: Set<T>;
 };
@@ -10,7 +13,9 @@ export type UseSelectionStateReturn = {
   someSelected: boolean;
 };
 
-export function useSelectionState<T extends string | number = string>({
+export function useSelectionState<
+  T extends MultiSelectOptionValue = MultiSelectOptionValue,
+>({
   selectableValues,
   valueSet,
 }: UseSelectionStateProps<T>): UseSelectionStateReturn {

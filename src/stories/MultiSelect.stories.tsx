@@ -23,7 +23,7 @@ const renderSelectedSummary = (value: string[], max = 5) => (
   </p>
 );
 
-const iconOptions: MultiSelectOption[] = [
+const iconOptions: MultiSelectOption<string>[] = [
   { value: "star", label: "Favourite", icon: Star },
   { value: "leaf", label: "Organic", icon: Leaf },
   { value: "flame", label: "Spicy", icon: Flame },
@@ -144,6 +144,60 @@ export const Playground: Story = {
   },
 };
 
+// ─── Search ─────────────────────────────────────────────────────────────────
+
+export const Search: Story = {
+  render: () => {
+    const [uncontrolledValue, setUncontrolledValue] = useState<string[]>([]);
+    const [controlledValue, setControlledValue] = useState<string[]>(["star"]);
+    const [searchValue, setSearchValue] = useState("");
+
+    return (
+      <div className="flex flex-col gap-6" style={{ width: storyWidth }}>
+        <div className="flex flex-col gap-3">
+          <p className={mutedTextClasses}>Uncontrolled search:</p>
+          <MultiSelect
+            search
+            options={iconOptions}
+            value={uncontrolledValue}
+            onValueChange={setUncontrolledValue}
+            placeholder="Select items..."
+            searchPlaceholder="Search option"
+            selectAll
+            clearable
+          />
+          {renderSelectedSummary(uncontrolledValue)}
+        </div>
+
+        <div className="flex flex-col gap-3">
+          <p className={mutedTextClasses}>Controlled search:</p>
+          <MultiSelect
+            search
+            options={iconOptions}
+            value={controlledValue}
+            onValueChange={setControlledValue}
+            searchValue={searchValue}
+            onSearchChange={setSearchValue}
+            searchPlaceholder="Search by label"
+            getSearchText={(option) => String(option.label)}
+            placeholder="Select items..."
+            selectAll
+            clearable
+          />
+          <div className={summaryClasses}>
+            <span>
+              Search value: <strong>{searchValue || "—"}</strong>
+            </span>
+            <span>
+              Selected: <strong>{formatList(controlledValue) || "—"}</strong>
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  },
+};
+
 // ─── Lazy load (scroll with data loading) ──────────────────────────────────
 
 export const LazyLoad: Story = {
@@ -157,7 +211,7 @@ export const LazyLoad: Story = {
 
     const icons = [Star, Leaf, Flame, Zap, Droplets, Sun] as const;
 
-    const allOptions: MultiSelectOption[] = Array.from(
+    const allOptions: MultiSelectOption<string>[] = Array.from(
       { length: count },
       (_, i) => ({
         value: `item-${i}`,

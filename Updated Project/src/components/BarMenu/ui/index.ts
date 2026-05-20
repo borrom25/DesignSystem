@@ -1,1 +1,0 @@
-export { BarMenuTrigger } from "./BarMenuTrigger";

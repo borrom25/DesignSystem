@@ -1,1 +1,0 @@
-export { useSliderValue } from "./useSliderValue";

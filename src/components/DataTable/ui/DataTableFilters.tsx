@@ -6,8 +6,8 @@ import {
   useFilterSearch,
   useFilterState,
 } from "@/components/FilterList";
-import { DateRange } from "@/components/DateRange";
-import { InputNumber } from "@/components/InputNumber";
+import { DateRangeCompact } from "@/components/DateRange";
+import { InputNumberCompact } from "@/components/InputNumber";
 import type {
   FilterListOption,
   FilterListGroup,
@@ -16,7 +16,6 @@ import { Calendar } from "@/components/Calendar";
 import { usePopover } from "@/components/Popover/Popover.context";
 import { useCalendarFilterState } from "@/components";
 import { useDraftState } from "@/hooks/useDraftState/useDraftState.ts";
-import { Size } from "@/types";
 import { cn } from "@/utils";
 import type {
   ColumnTextFilterConfig,
@@ -322,9 +321,8 @@ export function DataTableDateRangeFilter({
       applyDisabled={!filter.isDirty}
       resetDisabled={filter.isEmpty && isDateRangeEmpty(filter.draft)}
     >
-      <DateRange
+      <DateRangeCompact
         {...config.dateRangeProps}
-        size={Size.Sm}
         value={filter.draft}
         placeholderStart={config.placeholderStart}
         placeholderEnd={config.placeholderEnd}
@@ -384,9 +382,8 @@ export function DataTableNumberRangeFilter({
       resetDisabled={filter.isEmpty && isNumberRangeEmpty(filter.draft)}
     >
       <div className="flex items-start gap-2">
-        <InputNumber
+        <InputNumberCompact
           {...minInputProps}
-          size={Size.Sm}
           className={cn("min-w-0 w-full flex-1", minInputClassName)}
           placeholder={minInputPlaceholder ?? config.minPlaceholder ?? "От"}
           value={filter.draft.min}
@@ -397,9 +394,8 @@ export function DataTableNumberRangeFilter({
             }));
           }}
         />
-        <InputNumber
+        <InputNumberCompact
           {...maxInputProps}
-          size={Size.Sm}
           className={cn("min-w-0 w-full flex-1", maxInputClassName)}
           placeholder={maxInputPlaceholder ?? config.maxPlaceholder ?? "До"}
           value={filter.draft.max}

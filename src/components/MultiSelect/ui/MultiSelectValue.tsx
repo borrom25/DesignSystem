@@ -4,10 +4,15 @@ import { cn } from "@/utils";
 import { Counter, CounterVariant } from "@/components/Counter";
 import { triggerStyles } from "@/shared/Select";
 import { useMultiSelectContext } from "../MultiSelect.context";
-import type { MultiSelectValueProps } from "../MultiSelect.types.ts";
+import type {
+  MultiSelectOptionValue,
+  MultiSelectValueProps,
+} from "../MultiSelect.types.ts";
 import { counterClasses } from "../styles";
 
-export function MultiSelectValue<T extends string | number = string>({
+export function MultiSelectValue<
+  T extends MultiSelectOptionValue = MultiSelectOptionValue,
+>({
   placeholder = "Select items...",
   selectedOptions,
   renderValue,

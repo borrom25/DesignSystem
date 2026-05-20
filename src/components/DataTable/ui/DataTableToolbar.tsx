@@ -1,5 +1,4 @@
-import { Search } from "lucide-react";
-import { Input } from "@/components/Input";
+import { SearchAutocomplete } from "@/components/SearchAutocomplete";
 import { ButtonDrop } from "@/components/ButtonDrop";
 import { cn } from "@/utils";
 import { Size } from "@/types";
@@ -27,13 +26,10 @@ export function DataTableToolbar({
 
       <div className={tableStyles.toolbarMainRow}>
         <div className={tableStyles.toolbarSearch}>
-          <Input
-            size={Size.Xs}
+          <SearchAutocomplete
             value={searchValue}
-            label="Привет"
-            onChange={(e) => onSearchChange?.(e.target.value)}
+            onValueChange={onSearchChange}
             placeholder={searchPlaceholder}
-            iconLeft={Search}
             clearable
           />
         </div>

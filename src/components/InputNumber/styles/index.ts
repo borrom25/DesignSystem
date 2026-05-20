@@ -1,7 +1,9 @@
 export * from "./stepper";
+export * from "./compact";
 
 import * as sharedInput from "@/shared/Input/styles";
 import * as inputNumberStepper from "./stepper";
+import { compactClasses } from "./compact";
 import { closeBtnRightPadding } from "./base";
 
 export const inputNumberStyles = {
@@ -14,4 +16,5 @@ export const inputNumberStyles = {
   stepperButtonBottom: inputNumberStepper.stepperButtonBottomClasses,
   stepperButtonHover: inputNumberStepper.stepperButtonHoverClasses,
   closeBtnRightPadding: closeBtnRightPadding,
+  compact: compactClasses,
 } as const;

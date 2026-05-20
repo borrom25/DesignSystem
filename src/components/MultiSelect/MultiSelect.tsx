@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Size } from "@/types";
 import { cn } from "@/utils/cn";
 import { Popover } from "@/components/Popover";
@@ -12,9 +12,21 @@ import {
   MultiSelectContent,
 } from "./ui";
 import { wrapperClasses } from "./styles";
-import type { MultiSelectProps } from "./MultiSelect.types.ts";
+import type {
+  MultiSelectOption,
+  MultiSelectOptionValue,
+  MultiSelectProps,
+} from "./MultiSelect.types.ts";
 
-export function MultiSelect<T extends string | number = string>({
+function getDefaultSearchText<T extends MultiSelectOptionValue>(
+  option: MultiSelectOption<T>
+) {
+  return String(option.label);
+}
+
+export function MultiSelect<
+  T extends MultiSelectOptionValue = MultiSelectOptionValue,
+>({
   value,
   defaultValue,
   onValueChange,
@@ -48,13 +60,51 @@ export function MultiSelect<T extends string | number = string>({
   renderValue,
   renderItem,
   selectedLabel,
+  search = false,
+  searchValue: controlledSearchValue,
+  defaultSearchValue = "",
+  onSearchChange,
+  searchPlaceholder,
+  searchClassName,
+  getSearchText = getDefaultSearchText,
   selectAll = false,
   selectAllLabel,
   returnAll = false,
   clearable = false,
   onClear,
 }: MultiSelectProps<T>) {
-  const canUseInternalSelectAll = selectAll && !children && options.length > 0;
+  const [internalSearchValue, setInternalSearchValue] =
+    useState(defaultSearchValue);
+  const canUseInternalSearch = search && !children;
+  const searchValue = controlledSearchValue ?? internalSearchValue;
+  const normalizedSearchValue = searchValue.trim().toLowerCase();
+  const isSearching = canUseInternalSearch && normalizedSearchValue.length > 0;
+
+  const setSearchValue = useCallback(
+    (nextValue: string) => {
+      if (controlledSearchValue === undefined) {
+        setInternalSearchValue(nextValue);
+      }
+
+      onSearchChange?.(nextValue);
+    },
+    [controlledSearchValue, onSearchChange]
+  );
+
+  const clearSearch = useCallback(() => {
+    setSearchValue("");
+  }, [setSearchValue]);
+
+  const visibleOptions = useMemo(() => {
+    if (!isSearching) return options;
+
+    return options.filter((option) =>
+      getSearchText(option).toLowerCase().includes(normalizedSearchValue)
+    );
+  }, [getSearchText, isSearching, normalizedSearchValue, options]);
+
+  const canUseInternalSelectAll =
+    selectAll && !children && visibleOptions.length > 0;
   const {
     value: selectedValues,
     open,
@@ -74,6 +124,7 @@ export function MultiSelect<T extends string | number = string>({
     onOpenChange,
     onClear,
     options,
+    selectableOptions: visibleOptions,
     returnAll,
   });
 
@@ -137,8 +188,14 @@ export function MultiSelect<T extends string | number = string>({
         allSelected={allSelected}
         someSelected={someSelected}
         onSelectAll={canUseInternalSelectAll ? handleSelectAll : undefined}
+        search={canUseInternalSearch}
+        searchValue={searchValue}
+        onSearchChange={setSearchValue}
+        onSearchClear={clearSearch}
+        searchPlaceholder={searchPlaceholder}
+        searchClassName={searchClassName}
       >
-        {options.map((item) => {
+        {visibleOptions.map((item) => {
           const selected = valueSet.has(item.value);
 
           return (

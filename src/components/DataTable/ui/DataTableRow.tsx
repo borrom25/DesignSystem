@@ -1,26 +1,16 @@
 import { memo, useCallback } from "react";
-import { flexRender, type Row } from "@tanstack/react-table";
+import { flexRender } from "@tanstack/react-table";
 import { cn } from "@/utils";
 import { tableStyles } from "../styles";
-import { getStickyPosition, isServiceColumn } from "../utils/columnLayout";
-import type { ColumnDef } from "../types";
-
-interface TableRowProps<TData> {
-  row: Row<TData>;
-  rowIndex?: number;
-  isSelected?: boolean;
-  onRowClick?: (row: Row<TData>) => void;
-  onRowDoubleClick?: (row: Row<TData>) => void;
-  rowClassName?: string | ((row: Row<TData>) => string);
-  cellClassName?: string;
-  bordered?: boolean;
-  style?: React.CSSProperties;
-}
+import type { TableRowProps } from "../types";
+import { getDataTableCellLayout } from "../utils/cellLayout";
 
 function TableRowComponent<TData>({
   row,
   rowIndex,
   isSelected = false,
+  isExpanded = false,
+  beforeStickyRightColumnIds,
   onRowClick,
   onRowDoubleClick,
   rowClassName,
@@ -54,14 +44,17 @@ function TableRowComponent<TData>({
       onClick={onRowClick ? handleClick : undefined}
       onDoubleClick={onRowDoubleClick ? handleDoubleClick : undefined}
       data-state={isSelected ? "selected" : undefined}
+      data-expanded={isExpanded ? "true" : undefined}
       data-table-row-index={rowIndex}
       data-table-row-id={row.id}
     >
       {row.getVisibleCells().map((cell) => {
-        const isServiceCell = isServiceColumn(cell.column.id);
-        const stickyPosition = getStickyPosition(
-          (cell.column.columnDef as ColumnDef<TData>).sticky
-        );
+        const {
+          isServiceCell,
+          stickyPosition,
+          isBeforeStickyRight,
+          widthStyle,
+        } = getDataTableCellLayout(cell, beforeStickyRightColumnIds);
 
         return (
           <td
@@ -70,11 +63,12 @@ function TableRowComponent<TData>({
               tableStyles.cell,
               isServiceCell && tableStyles.cellSelection,
               bordered && tableStyles.cellBordered,
+              isBeforeStickyRight && tableStyles.cellBeforeStickyRight,
               stickyPosition === "left" && tableStyles.cellStickyLeft,
               stickyPosition === "right" && tableStyles.cellStickyRight,
               !isServiceCell && cellClassName
             )}
-            style={isServiceCell ? undefined : { width: cell.column.getSize() }}
+            style={widthStyle}
           >
             {flexRender(cell.column.columnDef.cell, cell.getContext())}
           </td>

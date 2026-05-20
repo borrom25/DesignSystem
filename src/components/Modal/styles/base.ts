@@ -11,10 +11,10 @@ export const contentBaseClasses =
 export const headerClasses =
   "relative flex items-start justify-between gap-4 px-9 pt-8 pb-7";
 
-export const headerTitleWrapperClasses = "flex flex-col gap-1 flex-1 min-w-0";
+export const headerTitleWrapperClasses = "flex flex-col gap-0_5 flex-1 min-w-0";
 
 export const headerTitleClasses =
-  "text-primary font-roboto-flex text-body-b1 font-medium leading-body-b1 tracking-body-b1";
+  "text-primary font-roboto-flex text-body-b1 font-bold leading-body-b1 tracking-body-b1";
 
 export const headerSubtitleClasses =
   "font-roboto-flex text-sm leading-sm tracking-sm font-regular text-secondary";
@@ -30,7 +30,7 @@ export const bodyClasses = "flex-1 overflow-auto";
 
 export const bodyPaddingClasses = "px-9 py-7";
 
-export const footerClasses = "w-full border-t border-line bg-generic px-9 py-0";
+export const footerClasses = "w-full border-t border-line bg-generic px-9 py-6";
 
 export const headerBorderClasses = "border-b border-line";
 

@@ -1,15 +1,18 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import { endOfDay, startOfDay } from "date-fns";
 import {
   useReactTable,
   getCoreRowModel,
   getSortedRowModel,
   getFilteredRowModel,
+  getExpandedRowModel,
   type SortingState,
   type ColumnFiltersState,
   type VisibilityState,
   type RowSelectionState,
+  type ExpandedState,
   type FilterFn,
+  type Row,
 } from "@tanstack/react-table";
 import { rankItem } from "@tanstack/match-sorter-utils";
 import type { UseTableOptions } from "../types";
@@ -27,6 +30,14 @@ const fuzzyFilter = (
   const itemRank = rankItem(row.getValue(columnId), value);
   addMeta({ itemRank });
   return itemRank.passed;
+};
+
+const defaultMaxExpandedDepth = 4;
+
+const getDefaultSubRows = <TData>(row: TData): TData[] | undefined => {
+  const children = (row as { children?: TData[] }).children;
+
+  return Array.isArray(children) ? children : undefined;
 };
 
 const listColumnFilter: FilterFn<unknown> = (row, columnId, filterValue) => {
@@ -225,6 +236,8 @@ export function useTable<TData>(options: UseTableOptions<TData>) {
     onColumnVisibilityChange,
     rowSelection: controlledRowSelection,
     onRowSelectionChange,
+    expanded: controlledExpanded,
+    onExpandedChange,
     enableSorting = true,
     enableFiltering = true,
     enableColumnFilters = true,
@@ -237,6 +250,9 @@ export function useTable<TData>(options: UseTableOptions<TData>) {
     enableColumnResizing = true,
     columnResizeMode = "onChange",
     getRowId,
+    enableNestedRows = false,
+    getSubRows,
+    maxExpandedDepth = defaultMaxExpandedDepth,
   } = options;
 
   const [internalSorting, setInternalSorting] = useState<SortingState>([]);
@@ -247,6 +263,9 @@ export function useTable<TData>(options: UseTableOptions<TData>) {
     useState<VisibilityState>({});
   const [internalRowSelection, setInternalRowSelection] =
     useState<RowSelectionState>({});
+  const [internalExpanded, setInternalExpanded] = useState<ExpandedState>({});
+  const wasAllRowsSelectedRef = useRef(false);
+  const previousDataLengthRef = useRef(data.length);
 
   const sorting = controlledSorting ?? internalSorting;
   const columnFilters = controlledColumnFilters ?? internalColumnFilters;
@@ -254,6 +273,7 @@ export function useTable<TData>(options: UseTableOptions<TData>) {
   const columnVisibility =
     controlledColumnVisibility ?? internalColumnVisibility;
   const rowSelection = controlledRowSelection ?? internalRowSelection;
+  const expanded = controlledExpanded ?? internalExpanded;
 
   const handleSortingChange = onSortingChange ?? setInternalSorting;
   const handleColumnFiltersChange =
@@ -264,6 +284,18 @@ export function useTable<TData>(options: UseTableOptions<TData>) {
     onColumnVisibilityChange ?? setInternalColumnVisibility;
   const handleRowSelectionChange =
     onRowSelectionChange ?? setInternalRowSelection;
+  const handleExpandedChange = onExpandedChange ?? setInternalExpanded;
+
+  const resolvedGetSubRows = useCallback(
+    (originalRow: TData, index: number) =>
+      getSubRows?.(originalRow, index) ?? getDefaultSubRows(originalRow),
+    [getSubRows]
+  );
+
+  const getRowCanExpand = useCallback(
+    (row: Row<TData>) => row.depth < maxExpandedDepth && row.subRows.length > 0,
+    [maxExpandedDepth]
+  );
 
   const table = useReactTable({
     data,
@@ -274,15 +306,18 @@ export function useTable<TData>(options: UseTableOptions<TData>) {
       globalFilter,
       columnVisibility,
       rowSelection,
+      expanded,
     },
     onSortingChange: handleSortingChange,
     onColumnFiltersChange: handleColumnFiltersChange,
     onGlobalFilterChange: handleGlobalFilterChange,
     onColumnVisibilityChange: handleColumnVisibilityChange,
     onRowSelectionChange: handleRowSelectionChange,
+    onExpandedChange: handleExpandedChange,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: manualSorting ? undefined : getSortedRowModel(),
     getFilteredRowModel: manualFiltering ? undefined : getFilteredRowModel(),
+    getExpandedRowModel: enableNestedRows ? getExpandedRowModel() : undefined,
     enableSorting,
     enableFilters: enableFiltering,
     enableColumnFilters,
@@ -303,6 +338,8 @@ export function useTable<TData>(options: UseTableOptions<TData>) {
       dataTableNumberRange: numberRangeColumnFilter,
     },
     getRowId,
+    getSubRows: enableNestedRows ? resolvedGetSubRows : undefined,
+    getRowCanExpand: enableNestedRows ? getRowCanExpand : undefined,
   });
 
   const rows = useMemo(
@@ -310,6 +347,31 @@ export function useTable<TData>(options: UseTableOptions<TData>) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [table.getRowModel().rows]
   );
+
+  useEffect(() => {
+    if (!enableRowSelection) {
+      wasAllRowsSelectedRef.current = false;
+      previousDataLengthRef.current = data.length;
+      return;
+    }
+
+    const rowsWereAdded =
+      previousDataLengthRef.current > 0 &&
+      data.length > previousDataLengthRef.current;
+
+    if (
+      rowsWereAdded &&
+      wasAllRowsSelectedRef.current &&
+      !table.getIsAllRowsSelected()
+    ) {
+      previousDataLengthRef.current = data.length;
+      table.toggleAllRowsSelected(true);
+      return;
+    }
+
+    previousDataLengthRef.current = data.length;
+    wasAllRowsSelectedRef.current = table.getIsAllRowsSelected();
+  }, [data.length, enableRowSelection, table, rowSelection]);
 
   return {
     table,
@@ -319,10 +381,12 @@ export function useTable<TData>(options: UseTableOptions<TData>) {
     globalFilter,
     columnVisibility,
     rowSelection,
+    expanded,
     setSorting: handleSortingChange,
     setColumnFilters: handleColumnFiltersChange,
     setGlobalFilter: handleGlobalFilterChange,
     setColumnVisibility: handleColumnVisibilityChange,
     setRowSelection: handleRowSelectionChange,
+    setExpanded: handleExpandedChange,
   };
 }

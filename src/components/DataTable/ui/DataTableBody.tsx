@@ -1,22 +1,13 @@
-import { type Row } from "@tanstack/react-table";
 import { TableRow } from "./DataTableRow";
 import { cn } from "@/utils";
 import { tableStyles } from "../styles";
-
-interface TableBodyProps<TData> {
-  rows: Row<TData>[];
-  columnSignature: string;
-  onRowClick?: (row: Row<TData>) => void;
-  onRowDoubleClick?: (row: Row<TData>) => void;
-  rowClassName?: string | ((row: Row<TData>) => string);
-  cellClassName?: string;
-  bordered?: boolean;
-  className?: string;
-}
+import type { TableBodyProps } from "../types";
+import { getDataTableRowDomKey } from "../utils/rowKeys";
 
 export function TableBody<TData>({
   rows,
   columnSignature,
+  beforeStickyRightColumnIds,
   onRowClick,
   onRowDoubleClick,
   rowClassName,
@@ -28,15 +19,17 @@ export function TableBody<TData>({
     <tbody className={cn(tableStyles.body, className)}>
       {rows.map((row, index) => (
         <TableRow
-          key={`${row.id}:${columnSignature}`}
+          key={getDataTableRowDomKey(row.id, columnSignature)}
           row={row}
           rowIndex={index}
           isSelected={row.getIsSelected()}
+          isExpanded={row.getIsExpanded()}
           onRowClick={onRowClick}
           onRowDoubleClick={onRowDoubleClick}
           rowClassName={rowClassName}
           cellClassName={cellClassName}
           bordered={bordered}
+          beforeStickyRightColumnIds={beforeStickyRightColumnIds}
         />
       ))}
     </tbody>

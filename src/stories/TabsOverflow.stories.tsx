@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
-import { Counter, TabsOverflow } from "@/components";
+import { Bell, FileText, Settings, Users } from "lucide-react";
+import { TabsOverflow } from "@/components";
 import type { TabsOverflowItem, TabsOverflowProps } from "@/components";
 import { Size } from "@/types";
 
@@ -20,33 +21,58 @@ const itemsWithCounter: TabsOverflowItem<string>[] = [
   {
     value: "overview",
     label: "Обзор",
-    counter: <Counter count={12} size={Size.Xs} />,
+    counterProps: { count: 12 },
   },
   {
     value: "students",
     label: "Студенты",
-    counter: <Counter count={248} size={Size.Xs} />,
+    counterProps: { count: 248 },
   },
   {
     value: "payments",
     label: "Оплаты",
-    counter: <Counter count={4} size={Size.Xs} />,
+    counterProps: { count: 4 },
   },
   {
     value: "documents",
     label: "Документы",
-    counter: <Counter count={18} size={Size.Xs} />,
+    counterProps: { count: 18 },
   },
   {
     value: "schedule",
     label: "Расписание",
-    counter: <Counter count={2} size={Size.Xs} />,
+    counterProps: { count: 2 },
   },
   { value: "settings", label: "Настройки" },
   {
     value: "history",
     label: "История",
-    counter: <Counter count={103} size={Size.Xs} />,
+    counterProps: { count: 103 },
+  },
+];
+
+const itemsWithSlots: TabsOverflowItem<string>[] = [
+  {
+    value: "overview",
+    label: "Обзор",
+    leftSlot: <FileText className="size-4" />,
+  },
+  {
+    value: "students",
+    label: "Студенты",
+    leftSlot: <Users className="size-4" />,
+    counterProps: { count: 248 },
+  },
+  {
+    value: "documents",
+    label: "Документы",
+    rightSlot: <Bell className="size-4" />,
+    counterProps: { count: 18 },
+  },
+  {
+    value: "settings",
+    label: "Настройки",
+    leftSlot: <Settings className="size-4" />,
   },
 ];
 
@@ -133,6 +159,23 @@ export const WithCounter: Story = {
   args: {
     size: Size.Sm,
     items: itemsWithCounter,
+    moreLabel: "Еще",
+  },
+  render: (args) => {
+    const [value, setValue] = useState("students");
+
+    return (
+      <div className="w-[280px]">
+        <TabsOverflow {...args} value={value} onValueChange={setValue} />
+      </div>
+    );
+  },
+};
+
+export const WithSlots: Story = {
+  args: {
+    size: Size.Sm,
+    items: itemsWithSlots,
     moreLabel: "Еще",
   },
   render: (args) => {

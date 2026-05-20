@@ -1,6 +1,9 @@
 import { useCallback, useRef, useEffect } from "react";
+import type { MultiSelectOptionValue } from "../MultiSelect.types.ts";
 
-export type UseSelectAllHandlerProps<T extends string | number = string> = {
+export type UseSelectAllHandlerProps<
+  T extends MultiSelectOptionValue = MultiSelectOptionValue,
+> = {
   value: T[];
   selectableValues: T[];
   valueSet: Set<T>;
@@ -14,7 +17,9 @@ export type UseSelectAllHandlerReturn = {
   selectAllActiveRef: React.MutableRefObject<boolean>;
 };
 
-export function useSelectAllHandler<T extends string | number = string>({
+export function useSelectAllHandler<
+  T extends MultiSelectOptionValue = MultiSelectOptionValue,
+>({
   value,
   selectableValues,
   valueSet,

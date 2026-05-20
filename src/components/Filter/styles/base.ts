@@ -1,6 +1,7 @@
 export const baseClasses = "flex w-full min-w-0 flex-col overflow-hidden";
 
-export const searchClasses = "border-b border-line p-2";
+export const searchClasses =
+  "border-b border-line p-[var(--generic-spacing-4)]";
 
 export const bodyClasses = "flex min-h-0 flex-col gap-2 overflow-y-auto p-2";
 

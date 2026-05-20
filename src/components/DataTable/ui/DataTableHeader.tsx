@@ -1,9 +1,5 @@
 import { useCallback } from "react";
-import {
-  flexRender,
-  type HeaderGroup,
-  type Header,
-} from "@tanstack/react-table";
+import { flexRender } from "@tanstack/react-table";
 import { ChevronsUpDown, Filter } from "lucide-react";
 import { cn } from "@/utils";
 import { Counter } from "@/components/Counter";
@@ -11,31 +7,21 @@ import { IconButton, IconButtonType } from "@/components/IconButton";
 import { Popover, PopoverSurface } from "@/components/Popover";
 import { Size } from "@/types";
 import { tableStyles } from "../styles";
-import { getStickyPosition, isServiceColumn } from "../utils/columnLayout";
-import type { ColumnDef } from "../types";
-import type {
-  DataTableFiltersState,
-  FilterSchema,
-} from "../types/DataTable.filter.types";
+import type { TableHeaderCellProps, TableHeaderProps } from "../types";
 import {
   filterColumnAriaLabel,
   resizeColumnAriaLabel,
   sortColumnAriaLabel,
 } from "../utils/header";
+import { getDataTableHeaderCellLayout } from "../utils/headerCellLayout";
 import { DataTableFilterRenderer } from "./DataTableFilters";
-
-interface TableHeaderProps<TData> {
-  headerGroups: HeaderGroup<TData>[];
-  stickyHeader?: boolean;
-  className?: string;
-  filters?: DataTableFiltersState<FilterSchema>;
-}
 
 export function TableHeader<TData>({
   headerGroups,
   stickyHeader = false,
   className,
   filters,
+  beforeStickyRightColumnIds,
 }: TableHeaderProps<TData>) {
   return (
     <thead
@@ -52,6 +38,9 @@ export function TableHeader<TData>({
               key={header.id}
               header={header}
               filters={filters}
+              isBeforeStickyRight={beforeStickyRightColumnIds.has(
+                header.column.id
+              )}
             />
           ))}
         </tr>
@@ -60,33 +49,25 @@ export function TableHeader<TData>({
   );
 }
 
-interface TableHeaderCellProps<TData> {
-  header: Header<TData, unknown>;
-  filters?: DataTableFiltersState<FilterSchema>;
-}
-
 function TableHeaderCell<TData>({
   header,
   filters,
+  isBeforeStickyRight = false,
 }: TableHeaderCellProps<TData>) {
-  const columnDef = header.column.columnDef as ColumnDef<TData>;
-  const canSort = header.column.getCanSort();
-  const isSorted = header.column.getIsSorted();
-  const isServiceCol = isServiceColumn(header.column.id);
-  const stickyPosition = getStickyPosition(columnDef.sticky);
-  const canResize = header.column.getCanResize() && !isServiceCol;
-  const isResizing = header.column.getIsResizing();
-  const sortButtonStateClass =
-    isSorted === "asc"
-      ? tableStyles.sortButtonAsc
-      : isSorted === "desc"
-        ? tableStyles.sortButtonDesc
-        : tableStyles.sortButtonDefault;
-
-  const filterConfig = columnDef.filter;
-  const filterId = header.column.id;
-  const canFilter = !!filterConfig && !!filters && !isServiceCol;
-  const isFiltered = filters?.hasValue(filterId) ?? false;
+  const {
+    canSort,
+    isSorted,
+    isServiceCol,
+    stickyPosition,
+    canResize,
+    isResizing,
+    sortButtonStateClass,
+    filterConfig,
+    filterId,
+    canFilter,
+    isFiltered,
+    widthStyle,
+  } = getDataTableHeaderCellLayout(header, filters);
 
   const handleSort = useCallback(
     (event: React.MouseEvent) => {
@@ -117,10 +98,11 @@ function TableHeaderCell<TData>({
         isServiceCol && tableStyles.headerCellSelection,
         canSort && tableStyles.headerCellSortable,
         isSorted && tableStyles.headerCellSorted,
+        isBeforeStickyRight && tableStyles.headerCellBeforeStickyRight,
         stickyPosition === "left" && tableStyles.headerCellStickyLeft,
         stickyPosition === "right" && tableStyles.headerCellStickyRight
       )}
-      style={isServiceCol ? undefined : { width: header.getSize() }}
+      style={widthStyle}
     >
       <div
         className={cn(
@@ -158,7 +140,7 @@ function TableHeaderCell<TData>({
                   </div>
                 </Popover.Trigger>
                 <Popover.Content>
-                  <PopoverSurface className={filterConfig.className}>
+                  <PopoverSurface className={tableStyles.filterPopoverSurface}>
                     <DataTableFilterRenderer
                       config={filterConfig}
                       filterId={filterId}

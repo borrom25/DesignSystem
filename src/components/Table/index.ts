@@ -1,4 +1,4 @@
-export { Table } from "./Table";
+export { Table } from "../DataTable";
 export { createDataTableColumnHelper, dataTableFilter } from "../DataTable";
 export type {
   DataTableColumnHelper,
@@ -11,12 +11,15 @@ export type {
 export type {
   TableProps,
   TableContextValue,
+  DataTablePopoverActionContext,
+  DataTablePopoverActionProps,
   UseTableOptions,
   UseVirtualScrollOptions,
   UseInfiniteScrollOptions,
   ColumnDef,
   SortingState,
   ColumnFiltersState,
+  ExpandedState,
   ListFilterConfig,
   DateFilterConfig,
   DateRangeFilterConfig,

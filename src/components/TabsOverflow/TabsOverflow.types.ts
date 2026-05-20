@@ -1,11 +1,15 @@
 import type { HTMLAttributes, ReactNode } from "react";
 import type { Size } from "@/types";
+import type { CounterProps } from "@/components/Counter/Counter.types";
 
 export type TabsOverflowItem<T extends string | number> = {
   label: ReactNode;
   value: T;
   disabled?: boolean;
   counter?: ReactNode;
+  counterProps?: CounterProps;
+  leftSlot?: ReactNode;
+  rightSlot?: ReactNode;
 };
 
 export type TabsOverflowProps<T extends string | number = string> = Omit<
@@ -30,4 +34,13 @@ export type TabTriggerProps<T extends string | number> = {
   isDisabled: boolean;
   registerTabButton: (value: T, element: HTMLButtonElement | null) => void;
   onSelect: (value: T) => void;
+};
+
+export type TabsOverflowIndicatorRect = {
+  left: number;
+  width: number;
+};
+
+export type TabsOverflowItemContentProps<T extends string | number> = {
+  item: TabsOverflowItem<T>;
 };

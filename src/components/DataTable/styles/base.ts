@@ -17,13 +17,14 @@ export const tableBaseStyles = {
   headerSticky: "sticky top-0 z-[15] bg-generic",
   headerRow: "",
   headerCell:
-    "relative [height:var(--generic-spacing-15,40px)] [padding:var(--generic-spacing-0,0)_var(--generic-spacing-7,16px)] text-left font-medium [color:var(--text-basic-primary,#19191A)] [font-size:var(--typography-body-b2-fontSize,14px)] border-b border-r border-[var(--line-basic-generic,#F6F7F8)]",
+    "relative [min-height:56px] [height:56px] [padding:var(--generic-spacing-0,0)_var(--generic-spacing-7,16px)] text-left font-medium [color:var(--text-basic-primary,#19191A)] [font-size:var(--typography-body-b2-fontSize,14px)] [line-height:18px] border-b border-r border-[var(--line-basic-generic,#F6F7F8)]",
   headerCellStickyLeft:
-    "sticky left-[-1px] z-20 bg-generic [box-shadow:1px_0_0_0_var(--line-basic-generic,#F6F7F8)]",
+    "sticky left-[-1px] z-20 border-r-0 bg-generic [box-shadow:inset_-1px_0_0_0_var(--line-basic-generic,#F6F7F8)]",
   headerCellStickyRight:
-    "sticky right-[-1px] z-20 bg-generic [box-shadow:-1px_0_0_0_var(--line-basic-generic,#F6F7F8)]",
+    "sticky right-[-1px] z-20 border-r-0 bg-generic [box-shadow:inset_1px_0_0_0_var(--line-basic-generic,#F6F7F8)]",
+  headerCellBeforeStickyRight: "border-r-0",
   headerCellSelection:
-    "whitespace-nowrap text-center !p-0 !w-[40px] !min-w-[40px] !max-w-[40px] !h-[40px]",
+    "whitespace-nowrap text-center !p-0 !w-[40px] !min-w-[40px] !max-w-[40px] !min-h-[56px] !h-[56px]",
   headerCellSortable: "select-none",
   headerCellSorted: "text-primary",
   headerCellContent: "flex items-center gap-2",
@@ -40,18 +41,28 @@ export const tableBaseStyles = {
   rowInteractive: "cursor-pointer",
   rowSelected: "[&>td]:bg-brand/5",
 
-  cell: "[padding:var(--generic-spacing-4,10px)_var(--generic-spacing-7,16px)] [color:var(--text-basic-complementary,#525357)]  [font-size:var(--typography-body-b2-fontSize,14px)] font-medium border-b border-r border-[var(--line-basic-generic,#F6F7F8)]",
+  cell: "[min-height:56px] [height:56px] [padding:var(--generic-spacing-4,10px)_var(--generic-spacing-7,16px)] [color:var(--text-basic-complementary,#525357)]  [font-size:var(--typography-body-b2-fontSize,14px)] [line-height:18px] font-medium border-b border-r border-[var(--line-basic-generic,#F6F7F8)]",
   cellStickyLeft:
-    "sticky left-[-1px] z-10 bg-generic [box-shadow:1px_0_0_0_var(--line-basic-generic,#F6F7F8)]",
+    "sticky left-[-1px] z-10 border-r-0 bg-generic [box-shadow:inset_-1px_0_0_0_var(--line-basic-generic,#F6F7F8)]",
   cellStickyRight:
-    "sticky right-[-1px] z-10 bg-generic [box-shadow:-1px_0_0_0_var(--line-basic-generic,#F6F7F8)]",
+    "sticky right-[-1px] z-10 border-r-0 bg-generic [box-shadow:inset_1px_0_0_0_var(--line-basic-generic,#F6F7F8)]",
+  cellBeforeStickyRight: "border-r-0",
   cellSelection:
-    "whitespace-nowrap text-center !p-0 !w-[40px] !min-w-[40px] !max-w-[40px] !h-[40px]",
+    "whitespace-nowrap text-center !p-0 !w-[40px] !min-w-[40px] !max-w-[40px] !min-h-[56px] !h-[56px]",
   cellBordered: "border-x border-line first:border-l-0 last:border-r-0",
   selectionControl:
     "mx-auto inline-flex size-[40px] items-center justify-center p-0",
+  expandControl:
+    "inline-flex size-[40px] items-center justify-center p-0 [padding-left:calc(var(--data-table-row-depth,0)*6px)]",
+  expandButton:
+    "inline-flex h-auto min-h-0 w-auto min-w-0 cursor-pointer items-center justify-center border-0 bg-transparent p-0 text-secondary hover:text-primary disabled:cursor-default disabled:text-inverse-text-light",
+  expandIcon:
+    "origin-center rotate-0 transition-transform duration-200 ease-out",
+  expandIconExpanded: "rotate-90",
+  expandIconAllExpanded: "rotate-180",
+  expandButtonPlaceholder: "block size-4 shrink-0",
   actionsControl:
-    "mx-auto inline-flex size-[40px] items-center justify-center p-0",
+    "mx-auto inline-flex size-[40px] items-center justify-center p-0 ",
 
   sortIcon: "ml-2 inline-block size-4 text-secondary",
   sortIconActive: "text-primary",
@@ -70,6 +81,7 @@ export const tableBaseStyles = {
   filterButtonActive: "!text-primary hover:!text-primary",
   filterButtonIndicator:
     "pointer-events-none absolute -top-1 -right-1 z-1 size-2.5",
+  filterPopoverSurface: "p-0",
 
   empty:
     "flex min-h-[240px] w-full items-center justify-center px-4 py-12 text-center text-secondary",
@@ -95,6 +107,16 @@ export const tableBaseStyles = {
     "w-full [padding:var(--generic-spacing-5,12px)_var(--generic-spacing-7,16px)] [border-top:1px_solid_var(--line-basic-generic,#F6F7F8)]",
   toolbar: "mb-4",
   footer: "mt-4",
+
+  popoverActionWrapper:
+    "pointer-events-none absolute bottom-[calc(var(--spacing-13)+var(--spacing-9))] left-1/2 z-30 max-w-[calc(100%-var(--spacing-14))] -translate-x-1/2",
+  popoverAction:
+    "pointer-events-auto flex h-(--spacing-19) max-w-full items-center gap-(--spacing-7) px-(--spacing-7) py-(--spacing-4) rounded-scale-3xl border border-line bg-generic shadow-popover",
+  popoverActionContent: "flex min-w-0 items-center gap-(--spacing-7)",
+  popoverActionSelectedLabel:
+    "shrink-0 whitespace-nowrap font-roboto-flex text-primary text-body-b1 font-medium leading-body-b1 tracking-body-b1",
+  popoverActionSlot: "flex min-w-0 items-center",
+  popoverActionClose: "shrink-0",
 } as const;
 
 type TableSize = "sm" | "md" | "lg";

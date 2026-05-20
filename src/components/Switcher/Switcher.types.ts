@@ -1,13 +1,19 @@
 import { Size } from "@/types";
-import { InputHTMLAttributes } from "react";
+import type { ChangeEvent, InputHTMLAttributes, MouseEvent } from "react";
 
-type SwitсherType = "default" | "minus";
+export type SwitcherValue = string | number;
 
-export interface SwitcherProps extends Omit<
+type SwitcherType = "default" | "minus";
+
+export interface SwitcherProps<
+  T extends SwitcherValue = SwitcherValue,
+> extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
-  "size" | "type"
+  "defaultValue" | "size" | "type" | "value"
 > {
   size?: Size;
-  type?: SwitсherType;
-  onClick?: (e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent) => void;
+  type?: SwitcherType;
+  value?: T;
+  defaultValue?: T;
+  onClick?: (e: ChangeEvent<HTMLInputElement> | MouseEvent) => void;
 }

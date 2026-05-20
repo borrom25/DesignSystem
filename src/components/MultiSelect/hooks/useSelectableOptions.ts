@@ -1,24 +1,36 @@
 import { useMemo } from "react";
-import type { MultiSelectOption } from "../MultiSelect.types.ts";
+import type {
+  MultiSelectOption,
+  MultiSelectOptionValue,
+} from "../MultiSelect.types.ts";
 
-export type UseSelectableOptionsProps<T extends string | number = string> = {
+export type UseSelectableOptionsProps<
+  T extends MultiSelectOptionValue = MultiSelectOptionValue,
+> = {
   options: MultiSelectOption<T>[];
+  selectableOptions?: MultiSelectOption<T>[];
   value: T[];
 };
 
-export type UseSelectableOptionsReturn<T extends string | number = string> = {
+export type UseSelectableOptionsReturn<
+  T extends MultiSelectOptionValue = MultiSelectOptionValue,
+> = {
   selectableValues: T[];
   valueSet: Set<T>;
   selectedOptions: MultiSelectOption<T>[];
 };
 
-export function useSelectableOptions<T extends string | number = string>({
+export function useSelectableOptions<
+  T extends MultiSelectOptionValue = MultiSelectOptionValue,
+>({
   options,
+  selectableOptions = options,
   value,
 }: UseSelectableOptionsProps<T>): UseSelectableOptionsReturn<T> {
   const selectableValues = useMemo(
-    () => options.filter((opt) => !opt.disabled).map((opt) => opt.value),
-    [options]
+    () =>
+      selectableOptions.filter((opt) => !opt.disabled).map((opt) => opt.value),
+    [selectableOptions]
   );
 
   const valueSet = useMemo(() => new Set(value), [value]);

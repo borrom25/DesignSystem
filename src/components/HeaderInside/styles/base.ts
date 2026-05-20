@@ -16,7 +16,7 @@ export const imageSlotClasses =
 
 export const imageSlotImageClasses = "h-full w-full rounded-[6px] object-cover";
 
-export const titleWrapperClasses = "flex flex-col";
+export const titleWrapperClasses = "flex flex-col justify-center";
 
 export const insideTitleClasses =
   "font-roboto-flex text-md font-medium leading-md tracking-md text-primary";

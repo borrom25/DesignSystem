@@ -1,6 +1,9 @@
 import { BaseContent } from "@/shared/Select";
+import { SearchAutocomplete } from "@/components/SearchAutocomplete";
+import { cn } from "@/utils";
 import { MultiSelectAll } from "./MultiSelectAll";
 import type { MultiSelectContentProps } from "../MultiSelect.types.ts";
+import { multiSelectStyles } from "../styles";
 
 export function MultiSelectContent({
   matchTriggerWidth = true,
@@ -19,8 +22,26 @@ export function MultiSelectContent({
   allSelected = false,
   someSelected = false,
   onSelectAll,
+  search = false,
+  searchValue,
+  onSearchChange,
+  onSearchClear,
+  searchPlaceholder = "Поиск",
+  searchClassName,
 }: MultiSelectContentProps) {
-  const header =
+  const searchHeader = search ? (
+    <div className={cn(multiSelectStyles.search, searchClassName)}>
+      <SearchAutocomplete
+        value={searchValue ?? ""}
+        placeholder={searchPlaceholder}
+        clearable
+        onClear={onSearchClear ?? (() => onSearchChange?.(""))}
+        onValueChange={onSearchChange}
+      />
+    </div>
+  ) : undefined;
+
+  const selectAllHeader =
     selectAll && onSelectAll ? (
       <MultiSelectAll
         label={selectAllLabel}
@@ -28,6 +49,14 @@ export function MultiSelectContent({
         indeterminate={someSelected}
         onToggle={onSelectAll}
       />
+    ) : undefined;
+
+  const header =
+    searchHeader || selectAllHeader ? (
+      <>
+        {searchHeader}
+        {selectAllHeader}
+      </>
     ) : undefined;
 
   return (

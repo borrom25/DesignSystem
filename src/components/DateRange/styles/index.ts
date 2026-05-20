@@ -2,11 +2,13 @@ export * from "@/shared/Input/styles";
 export * from "./base";
 export * from "./sizes";
 export * from "./calendar";
+export * from "./compact";
 
 import * as sharedInput from "@/shared/Input/styles";
 import * as dateRangeBase from "./base";
 import * as dateRangeSizes from "./sizes";
 import * as dateRangeCalendar from "./calendar";
+import { compactClasses } from "./compact";
 
 export const dateRangeStyles = {
   base: sharedInput.inputBaseClasses,
@@ -51,4 +53,5 @@ export const dateRangeStyles = {
     timeBarPanel: dateRangeCalendar.dateRangeTimeBarPanelClasses,
   },
   iconSizeMap: dateRangeSizes.dateRangeIconSizeMap,
+  compact: compactClasses,
 } as const;

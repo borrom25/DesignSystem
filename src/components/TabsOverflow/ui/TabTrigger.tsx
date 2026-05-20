@@ -1,5 +1,6 @@
 import { memo, useCallback } from "react";
 import { TabTriggerProps } from "../TabsOverflow.types.ts";
+import { TabsOverflowItemContent } from "./TabsOverflowItemContent";
 
 function TabTriggerInner<T extends string | number>({
   item,
@@ -30,10 +31,7 @@ function TabTriggerInner<T extends string | number>({
       aria-selected={isSelected}
       onClick={handleClick}
     >
-      <span className="inline-flex min-w-0 items-center gap-2">
-        <span className="truncate">{item.label}</span>
-        {item.counter}
-      </span>
+      <TabsOverflowItemContent item={item} />
     </button>
   );
 }

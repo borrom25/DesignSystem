@@ -1,10 +1,10 @@
 import { cn, getIconSize } from "@/utils";
-import { SwitcherProps } from "./Switcher.types";
+import type { SwitcherProps, SwitcherValue } from "./Switcher.types";
 import { switherStyles } from "./styles";
 import { useState } from "react";
 import { Minus } from "lucide-react";
 
-export function Switcher({
+export function Switcher<T extends SwitcherValue = SwitcherValue>({
   size = "sm",
   type = "default",
   disabled,
@@ -12,7 +12,7 @@ export function Switcher({
   defaultChecked = false,
   onClick,
   ...props
-}: SwitcherProps) {
+}: SwitcherProps<T>) {
   const [isChecked, setIsChecked] = useState<boolean>(
     type === "minus" ? true : checked || defaultChecked
   );

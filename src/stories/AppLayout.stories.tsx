@@ -5,7 +5,6 @@ import type { Row } from "@tanstack/react-table";
 import { format, startOfDay } from "date-fns";
 import {
   AppLayout,
-  Counter,
   Header,
   HeaderInside,
   Sidebar,
@@ -47,6 +46,7 @@ interface ProjectRow {
   members: number;
   updatedAt: string;
   updatedAtDate: Date;
+  children?: ProjectRow[];
 }
 
 type ProjectColumnId =
@@ -311,6 +311,122 @@ const buildProject = (index: number): ProjectRow => ({
 const buildProjects = (count: number, offset = 0): ProjectRow[] =>
   Array.from({ length: count }, (_, i) => buildProject(offset + i));
 
+const buildNestedProjects = (): ProjectRow[] => [
+  {
+    ...buildProject(0),
+    id: "nested-production",
+    title: "Производственный контур",
+    children: [
+      {
+        ...buildProject(10),
+        id: "nested-production-line-1",
+        title: "Линия сборки 1",
+        children: [
+          {
+            ...buildProject(20),
+            id: "nested-production-line-1-zone-a",
+            title: "Зона A",
+            children: [
+              {
+                ...buildProject(30),
+                id: "nested-production-line-1-zone-a-post",
+                title: "Пост контроля",
+                children: [
+                  {
+                    ...buildProject(40),
+                    id: "nested-production-line-1-zone-a-post-calibration",
+                    title: "Калибровка датчиков",
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            ...buildProject(21),
+            id: "nested-production-line-1-zone-b",
+            title: "Зона B",
+          },
+          {
+            ...buildProject(24),
+            id: "nested-production-line-1-quality",
+            title: "Контроль качества",
+            children: [
+              {
+                ...buildProject(34),
+                id: "nested-production-line-1-quality-lab",
+                title: "Лаборатория",
+              },
+              {
+                ...buildProject(35),
+                id: "nested-production-line-1-quality-report",
+                title: "Отчетность",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        ...buildProject(11),
+        id: "nested-production-line-2",
+        title: "Линия сборки 2",
+      },
+      {
+        ...buildProject(13),
+        id: "nested-production-maintenance",
+        title: "Плановое обслуживание",
+      },
+    ],
+  },
+  {
+    ...buildProject(1),
+    id: "nested-logistics",
+    title: "Логистика",
+    children: [
+      {
+        ...buildProject(12),
+        id: "nested-logistics-storage",
+        title: "Склад временного хранения",
+        children: [
+          {
+            ...buildProject(22),
+            id: "nested-logistics-storage-gates",
+            title: "Погрузочные ворота",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    ...buildProject(2),
+    id: "nested-finance",
+    title: "Финансовый блок",
+    children: [
+      {
+        ...buildProject(14),
+        id: "nested-finance-budget",
+        title: "Бюджетирование",
+      },
+      {
+        ...buildProject(15),
+        id: "nested-finance-procurement",
+        title: "Закупки",
+        children: [
+          {
+            ...buildProject(25),
+            id: "nested-finance-procurement-contracts",
+            title: "Договоры",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    ...buildProject(3),
+    id: "nested-hr",
+    title: "HR-процессы без вложений",
+  },
+];
+
 const helper = createDataTableColumnHelper<ProjectRow>();
 const createUpdatedAtColumn = (): ColumnDef<ProjectRow> =>
   helper.dateRange("updatedAtDate", {
@@ -394,17 +510,19 @@ interface AppLayoutStoryContentProps {
   args: ComponentProps<typeof AppLayout>;
   variant: "default" | "inside";
   enableColumnSwitchCase?: boolean;
+  enableNestedRowsExample?: boolean;
 }
 
 function AppLayoutStoryContent({
   args,
   variant,
   enableColumnSwitchCase = false,
+  enableNestedRowsExample = false,
 }: AppLayoutStoryContentProps) {
   const [activeTab, setActiveTab] = useState("overview");
   const [activeMenu, setActiveMenu] = useState("home");
   const [rows, setRows] = useState<ProjectRow[]>(() =>
-    buildProjects(BATCH_SIZE)
+    enableNestedRowsExample ? buildNestedProjects() : buildProjects(BATCH_SIZE)
   );
   const [isFetching, setIsFetching] = useState(false);
   const [activeStatusTab, setActiveStatusTab] = useState("all");
@@ -412,7 +530,7 @@ function AppLayoutStoryContent({
   const [visibleColumnIds, setVisibleColumnIds] = useState<ProjectColumnId[]>(
     DEFAULT_VISIBLE_COLUMN_IDS
   );
-  const hasMore = rows.length < MAX_ROWS;
+  const hasMore = !enableNestedRowsExample && rows.length < MAX_ROWS;
   const isInsideVariant = variant === "inside";
 
   const titleGroups = useFilterGroups<
@@ -457,36 +575,6 @@ function AppLayoutStoryContent({
     []
   );
 
-  const toolbarActions = [
-    {
-      label: (
-        <span className="inline-flex items-center gap-2">
-          <Settings className="size-4" />
-          Настроить таблицу
-        </span>
-      ),
-      value: "configure-columns",
-    },
-    {
-      label: (
-        <span className="inline-flex items-center gap-2">
-          <Upload className="size-4" />
-          Выгрузка таблицы по фильтрам
-        </span>
-      ),
-      value: "archive",
-    },
-    {
-      label: (
-        <span className="inline-flex items-center gap-2">
-          <Download className="size-4" />
-          Загрузить данные
-        </span>
-      ),
-      value: "delete",
-    },
-  ];
-
   const rowActions = (row: Row<ProjectRow>) => [
     {
       label: "Редактировать",
@@ -524,27 +612,27 @@ function AppLayoutStoryContent({
       {
         value: "all",
         label: "Все",
-        counter: <Counter count={statusTabCounts.all} size={Size.Xs} />,
+        counterProps: { count: statusTabCounts.all },
       },
       {
         value: "active",
         label: "Активные",
-        counter: <Counter count={statusTabCounts.active} size={Size.Xs} />,
+        counterProps: { count: statusTabCounts.active },
       },
       {
         value: "paused",
         label: "Пауза",
-        counter: <Counter count={statusTabCounts.paused} size={Size.Xs} />,
+        counterProps: { count: statusTabCounts.paused },
       },
       {
         value: "review",
         label: "Согласование",
-        counter: <Counter count={statusTabCounts.review} size={Size.Xs} />,
+        counterProps: { count: statusTabCounts.review },
       },
       {
         value: "draft",
         label: "Черновики",
-        counter: <Counter count={statusTabCounts.draft} size={Size.Xs} />,
+        counterProps: { count: statusTabCounts.draft },
       },
     ],
     [statusTabCounts]
@@ -1002,6 +1090,30 @@ function AppLayoutStoryContent({
     setIsColumnSettingsOpen(true);
   }, []);
 
+  const toolbarActions = useMemo(
+    () => [
+      {
+        icon: Settings,
+        label: "Настроить таблицу",
+        value: "configure-columns",
+        onClick: openColumnSettings,
+      },
+      {
+        icon: Upload,
+        label: "Выгрузка таблицы по фильтрам",
+        value: "archive",
+        onClick: () => console.log('Действие "archive" для таблицы'),
+      },
+      {
+        icon: Download,
+        label: "Загрузить данные",
+        value: "delete",
+        onClick: () => console.log('Действие "delete" для таблицы'),
+      },
+    ],
+    [openColumnSettings]
+  );
+
   const handleColumnSettingsApply = useCallback(
     (value: ProjectColumnId[]) => {
       setVisibleColumnIds((prev) =>
@@ -1014,15 +1126,6 @@ function AppLayoutStoryContent({
       setIsColumnSettingsOpen(false);
     },
     [currentBaseColumnIds]
-  );
-
-  const handleToolbarActionChange = useCallback(
-    (value: string) => {
-      if (value === "configure-columns") {
-        openColumnSettings();
-      }
-    },
-    [openColumnSettings]
   );
 
   const sidebar = isInsideVariant ? (
@@ -1087,18 +1190,48 @@ function AppLayoutStoryContent({
 
   return (
     <AppLayout {...args} header={header} sidebar={sidebar}>
-      <Table
+      <Table<ProjectRow>
         data={visibleRows}
         columns={activeColumns}
-        virtualized
+        virtualized={!enableNestedRowsExample}
         stickyHeader
         rowHeight={40}
         overscan={10}
         striped
-        enableRowSelection
+        enableNestedRows={enableNestedRowsExample}
+        enableRowSelection={!enableNestedRowsExample}
+        popoverAction={
+          !enableNestedRowsExample && {
+            children: ({ selectedRows, hide }) => (
+              <div className="flex items-center gap-2">
+                <Button
+                  size={Size.Xs}
+                  type={Type.Flat}
+                  color={Color.Brand}
+                  onClick={() =>
+                    console.log(
+                      "Применить действие к выбранным проектам:",
+                      selectedRows.map((row) => row.original)
+                    )
+                  }
+                >
+                  Применить
+                </Button>
+                <Button
+                  size={Size.Xs}
+                  type={Type.Outline}
+                  color={Color.Danger}
+                  onClick={hide}
+                >
+                  Скрыть
+                </Button>
+              </div>
+            ),
+          }
+        }
         hasMore={hasMore}
         isFetchingMore={isFetching}
-        onLoadMore={loadMore}
+        onLoadMore={enableNestedRowsExample ? undefined : loadMore}
         showToolbar
         toolbarProps={{
           ...tableController.toolbarProps,
@@ -1115,7 +1248,6 @@ function AppLayoutStoryContent({
           rowCountValue: `${visibleRows.length} / ${rows.length}`,
           actions: toolbarActions,
           actionsPlaceholder: "Действия",
-          onActionChange: handleToolbarActionChange,
           bottomSlot: activeColumnsHint ? (
             <div className="text-sm text-secondary">
               {activeColumnsHint}. Активных column filters:{" "}
@@ -1165,6 +1297,21 @@ export const HeaderInsideAndInsideSidebar: Story = {
       args={args}
       variant="inside"
       enableColumnSwitchCase
+    />
+  ),
+};
+
+export const HeaderAndSidebarNestedRows: Story = {
+  args: {
+    container: "fill",
+    children: null,
+  },
+  render: (args) => (
+    <AppLayoutStoryContent
+      args={args}
+      variant="default"
+      enableColumnSwitchCase
+      enableNestedRowsExample
     />
   ),
 };

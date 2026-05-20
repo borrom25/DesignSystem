@@ -1,9 +1,11 @@
 import type { ReactNode } from "react";
+import type { LucideIcon } from "lucide-react";
 import type { Color, Size, Type } from "@/types";
 
 export type ButtonDropItem<T extends string | number = string> = {
   label: ReactNode;
   value: T;
+  icon?: LucideIcon;
   disabled?: boolean;
   onClick?: () => void;
 };

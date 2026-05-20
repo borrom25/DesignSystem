@@ -13,7 +13,7 @@ export const inputClearSizeClasses: Record<Size, string> = {
 } as const;
 
 export const inputFloatingLabelSizeClasses: Record<Size, string> = {
-  xs: "left-0 text-sm leading-sm tracking-sm",
+  xs: "left-0 text-sm leading-[14px] tracking-sm",
   sm: "left-0 text-md leading-md tracking-md",
   md: "left-0 text-md leading-md tracking-md",
 } as const;

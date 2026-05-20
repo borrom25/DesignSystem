@@ -15,11 +15,17 @@ export { FieldLabel, FieldHint, FieldWrapper } from "./components/Field";
 export { Input, InputVariant } from "./components/Input";
 export type { InputProps } from "./components/Input";
 
+export { SearchAutocomplete } from "./components/SearchAutocomplete";
+export type { SearchAutocompleteProps } from "./components/SearchAutocomplete";
+
 export { PinInput, PinInputType } from "./components/PinInput";
 export type { PinInputProps } from "./components/PinInput";
 
-export { InputNumber } from "./components/InputNumber";
-export type { InputNumberProps } from "./components/InputNumber";
+export { InputNumber, InputNumberCompact } from "./components/InputNumber";
+export type {
+  InputNumberProps,
+  InputNumberCompactProps,
+} from "./components/InputNumber";
 
 export { InputPassword } from "./components/InputPassword";
 export type { InputPasswordProps } from "./components/InputPassword";
@@ -37,7 +43,7 @@ export { InputFiles } from "./components/InputFiles";
 export type { InputFilesProps } from "./components/InputFiles";
 
 export { InputImg } from "./components/InputImg";
-export type { InputImgProps } from "./components/InputImg";
+export type { InputImgProps, InputImgValue } from "./components/InputImg";
 
 export { InputMessage } from "./components/InputMessage";
 export type {
@@ -58,7 +64,7 @@ export { Radio } from "./components/Radio";
 export type { RadioProps } from "./components/Radio";
 
 export { Switcher } from "./components/Switcher";
-export type { SwitcherProps } from "./components/Switcher/Switcher.types";
+export type { SwitcherProps, SwitcherValue } from "./components/Switcher";
 
 export { Slider } from "./components/Slider";
 export type { SliderProps } from "./components/Slider";
@@ -96,17 +102,26 @@ export type {
   SelectOption,
 } from "./components/Select";
 
+export { DatePicker } from "./components/DatePicker";
+export type { DatePickerProps } from "./components/DatePicker";
+
 export { MultiSelect } from "./components/MultiSelect";
 export type {
   MultiSelectProps,
   MultiSelectOption,
+  MultiSelectOptionValue,
+  MultiSelectItemProps,
 } from "./components/MultiSelect";
 
 export { MultiTag } from "./components/MultiTag";
 export type { MultiTagProps, MultiTagOption } from "./components/MultiTag";
 
-export { DateRange } from "./components/DateRange";
-export type { DateRangeProps, DateRangeValue } from "./components/DateRange";
+export { DateRange, DateRangeCompact } from "./components/DateRange";
+export type {
+  DateRangeProps,
+  DateRangeCompactProps,
+  DateRangeValue,
+} from "./components/DateRange";
 
 export { Calendar } from "./components/Calendar";
 export type {
@@ -223,6 +238,12 @@ export type { BarMenuProps } from "./components/BarMenu";
 
 export { Banner, BannerSize } from "./components/Banner";
 export type { BannerSizeType } from "./components/Banner";
+
+export { Text } from "./components/Text";
+export type { TextProps, TextWeight } from "./components/Text";
+
+export { BarChartVertical } from "./components/BarChartVertical";
+export type { BarChartVerticalProps } from "./components/BarChartVertical";
 
 export {
   Popover,

@@ -5,14 +5,26 @@ export type {
   DataTableToolbarProps,
   TableProps,
   TableContextValue,
+  UseDataTableColumnsParams,
+  TableBodySharedProps,
+  TableBodyProps,
+  TableVirtualBodyProps,
+  TableRowProps,
+  TableHeaderProps,
+  TableHeaderCellProps,
   UseTableOptions,
   UseVirtualScrollOptions,
   UseInfiniteScrollOptions,
   SortingState,
   ColumnFiltersState,
+  ExpandedState,
   Row,
   Table as TanStackTable,
 } from "./DataTable.types";
+export type {
+  DataTablePopoverActionContext,
+  DataTablePopoverActionProps,
+} from "./DataTable.popoverAction.types";
 export type {
   ListFilterConfig,
   ColumnTextFilterConfig,

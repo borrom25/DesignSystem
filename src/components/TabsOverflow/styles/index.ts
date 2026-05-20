@@ -5,6 +5,7 @@ export {
   listClasses,
   indicatorClasses,
   itemClasses,
+  itemSlotClasses,
 } from "./base";
 export { triggerSizeClasses, listItemSizeMap } from "./sizes";
 export { tabStateClasses, moreTriggerStateClasses } from "./variants";
@@ -17,6 +18,7 @@ import {
   indicatorClasses,
   itemClasses,
   inlineItemClasses,
+  itemSlotClasses,
 } from "./base";
 import { triggerSizeClasses, listItemSizeMap } from "./sizes";
 import { tabStateClasses, moreTriggerStateClasses } from "./variants";
@@ -32,5 +34,6 @@ export const tabsOverflowStyles = {
   indictor: indicatorClasses,
   item: itemClasses,
   inlineItem: inlineItemClasses,
+  itemSlot: itemSlotClasses,
   listItemSizeMap,
 } as const;

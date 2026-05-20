@@ -11,6 +11,7 @@ export {
   valueClasses,
   triggerChevronOpenClasses,
   counterClasses,
+  searchClasses,
 } from "./base";
 export {
   triggerSizeClasses,
@@ -35,8 +36,10 @@ import {
   selectAllTextClasses,
   selectAllDividerClasses,
 } from "./selectAll";
+import { searchClasses } from "./base";
 
 export const multiSelectStyles = {
+  search: searchClasses,
   selectAll: {
     root: selectAllClasses,
     text: selectAllTextClasses,

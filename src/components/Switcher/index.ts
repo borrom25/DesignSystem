@@ -1,2 +1,2 @@
 export { Switcher } from "./Switcher";
-export type { SwitcherProps } from "./Switcher.types";
+export type { SwitcherProps, SwitcherValue } from "./Switcher.types";

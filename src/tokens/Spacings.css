@@ -2,18 +2,18 @@
   /* number */
   --component-md-padding-y: var(--generic-spacing-0);
   --component-md-gap: var(--generic-spacing-4);
-  --component-md-padding-x: var(--generic-spacing-8);
-  --component-md-height: var(--generic-spacing-16);
+  --component-md-padding-x: var(--generic-spacing-9);
+  --component-md-height: var(--generic-spacing-17);
   --component-md-icon-only-dimensions: var(--component-md-height);
   --component-sm-padding-y: var(--generic-spacing-0);
   --component-sm-gap: var(--generic-spacing-3);
-  --component-sm-padding-x: var(--generic-spacing-7);
-  --component-sm-height: var(--generic-spacing-14);
+  --component-sm-padding-x: var(--generic-spacing-8);
+  --component-sm-height: var(--generic-spacing-15);
   --component-sm-icon-only-dimensions: var(--component-sm-height);
   --component-xs-padding-y: var(--generic-spacing-0);
   --component-xs-gap: var(--generic-spacing-2);
-  --component-xs-padding-x: var(--generic-spacing-4);
-  --component-xs-height: var(--generic-spacing-12);
+  --component-xs-padding-x: var(--generic-spacing-5);
+  --component-xs-height: var(--generic-spacing-13);
   --component-xs-icon-only-dimensions: var(--component-xs-height);
   --generic-spacing-0: 0px;
   --generic-spacing-05: 2px;
@@ -50,12 +50,12 @@
   --input-sm-padding-inputtag-y: var(--generic-spacing-3);
   --input-sm-gap-body: var(--generic-spacing-4);
   --input-sm-padding-x: var(--generic-spacing-7);
-  --input-sm-height: var(--generic-spacing-18);
+  --input-sm-height: var(--generic-spacing-17);
   --input-xs-padding-y: var(--generic-spacing-0);
-  --input-xs-gapcontainercontent: var(--generic-spacing-05); 
+  --input-xs-gapcontainercontent: var(--generic-spacing-05);
   --input-xs-gap-hint: var(--generic-spacing-2);
   --input-xs-padding-inputtag-y: var(--generic-spacing-2);
   --input-xs-gap-body: var(--generic-spacing-3);
   --input-xs-padding-x: var(--generic-spacing-6);
-  --input-xs-height: var(--generic-spacing-17);
+  --input-xs-height: var(--generic-spacing-15);
 }

@@ -15,3 +15,5 @@ export const indicatorClasses =
 export const itemClasses = "flex min-w-0 items-center gap-2";
 
 export const inlineItemClasses = "inline-flex min-w-0 items-center gap-2";
+
+export const itemSlotClasses = "inline-flex shrink-0 items-center";

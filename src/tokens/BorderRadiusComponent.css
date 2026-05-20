@@ -15,9 +15,9 @@
 .br-md {
   /* number */
   --br-component-xs: 8px;
-  --br-component-sm: 9px;
-  --br-component-md: 11px;
-  --br-component-lg: 12px;
+  --br-component-sm: 10px;
+  --br-component-md: 12px;
+  --br-component-lg: 14px;
 }
 .br-lg {
   /* number */

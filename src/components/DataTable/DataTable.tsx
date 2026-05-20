@@ -1,9 +1,11 @@
-import { useRef, useCallback } from "react";
 import { cn } from "@/utils";
 import type { TableProps } from "./types";
 import { useTable } from "./hooks/useDataTable";
 import { useDataTableColumns } from "./hooks/useDataTableColumns";
 import { useInfiniteScroll } from "./hooks/useInfiniteScroll";
+import { useDataTableColumnLayout } from "./hooks/useDataTableColumnLayout";
+import { useDataTableScrollEnd } from "./hooks/useDataTableScrollEnd";
+import { useDataTablePopoverAction } from "./hooks/useDataTablePopoverAction";
 import {
   TableHeader,
   TableBody,
@@ -12,13 +14,13 @@ import {
   TableLoading,
   TableLoadingMore,
   DataTableToolbar,
+  DataTablePopoverAction,
 } from "./ui";
 import { tableStyles } from "./styles";
 import {
   defaultRowHeight,
   defaultOverscan,
   defaultLoadMoreThreshold,
-  scrollEndDistance,
 } from "./utils/constants";
 
 const noop = () => {};
@@ -35,6 +37,8 @@ export function Table<TData>({
   onColumnVisibilityChange,
   rowSelection,
   onRowSelectionChange,
+  expanded,
+  onExpandedChange,
   enableSorting = true,
   enableFiltering = true,
   enableColumnFilters = true,
@@ -64,6 +68,9 @@ export function Table<TData>({
   bordered = false,
   compact = false,
   getRowId,
+  enableNestedRows = false,
+  getSubRows,
+  maxExpandedDepth,
   onRowClick,
   onRowDoubleClick,
   tableClassName,
@@ -76,14 +83,14 @@ export function Table<TData>({
   showToolbar = false,
   toolbarProps,
   rowActions,
+  popoverAction,
   className,
   ...restProps
 }: TableProps<TData>) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
   const tableColumns = useDataTableColumns({
     columns,
     enableRowSelection,
+    enableNestedRows,
     rowActions,
     stickySelectionColumn,
     stickyActionsColumn,
@@ -102,6 +109,8 @@ export function Table<TData>({
     onColumnVisibilityChange,
     rowSelection,
     onRowSelectionChange,
+    expanded,
+    onExpandedChange,
     enableSorting,
     enableFiltering,
     enableColumnFilters,
@@ -114,21 +123,31 @@ export function Table<TData>({
     enableColumnResizing,
     columnResizeMode,
     getRowId,
+    enableNestedRows,
+    getSubRows,
+    maxExpandedDepth,
   });
 
-  const visibleColumnIds = table
-    .getVisibleLeafColumns()
-    .map((column) => column.id);
-  const visibleColumnSignature = visibleColumnIds.join("|");
-  const visibleColumnCount = visibleColumnIds.length;
+  const {
+    visibleColumnSignature,
+    visibleColumnCount,
+    beforeStickyRightColumnIds,
+  } = useDataTableColumnLayout(table);
   const isEmpty = rows.length === 0;
+  const popoverActionState = useDataTablePopoverAction({
+    table,
+    popoverAction,
+  });
 
-  const handleScrollEnd = useCallback(() => {
-    onScrollEnd?.();
-    if (hasMore && !isFetchingMore && onLoadMore) {
-      onLoadMore();
-    }
-  }, [onScrollEnd, hasMore, isFetchingMore, onLoadMore]);
+  const { containerRef, handleScrollEnd, onContainerScroll } =
+    useDataTableScrollEnd({
+      virtualized,
+      isEmpty,
+      hasMore,
+      isFetchingMore,
+      onLoadMore,
+      onScrollEnd,
+    });
 
   const { sentinelRef } = useInfiniteScroll({
     hasMore: !virtualized && hasMore,
@@ -136,21 +155,6 @@ export function Table<TData>({
     onLoadMore: onLoadMore ?? noop,
     threshold: loadMoreThreshold,
   });
-
-  const handleNonVirtualizedScroll = useCallback(() => {
-    const element = containerRef.current;
-    if (!element) return;
-
-    const { scrollTop, scrollHeight, clientHeight } = element;
-    const distanceFromBottom = scrollHeight - scrollTop - clientHeight;
-
-    if (distanceFromBottom <= scrollEndDistance) {
-      handleScrollEnd();
-    }
-  }, [handleScrollEnd]);
-
-  const onContainerScroll =
-    !virtualized && !isEmpty ? handleNonVirtualizedScroll : undefined;
 
   if (loading) {
     return (
@@ -203,6 +207,7 @@ export function Table<TData>({
             stickyHeader={stickyHeader}
             className={headerClassName}
             filters={filters}
+            beforeStickyRightColumnIds={beforeStickyRightColumnIds}
           />
 
           {!isEmpty &&
@@ -221,6 +226,7 @@ export function Table<TData>({
                 cellClassName={cellClassName}
                 bordered={bordered}
                 className={bodyClassName}
+                beforeStickyRightColumnIds={beforeStickyRightColumnIds}
               />
             ) : (
               <TableBody
@@ -232,6 +238,7 @@ export function Table<TData>({
                 cellClassName={cellClassName}
                 bordered={bordered}
                 className={bodyClassName}
+                beforeStickyRightColumnIds={beforeStickyRightColumnIds}
               />
             ))}
         </table>
@@ -257,6 +264,13 @@ export function Table<TData>({
       </div>
 
       {footerSlot && <div className={tableStyles.footer}>{footerSlot}</div>}
+
+      {popoverActionState.shouldShow && popoverActionState.options && (
+        <DataTablePopoverAction
+          context={popoverActionState.context}
+          options={popoverActionState.options}
+        />
+      )}
     </div>
   );
 }

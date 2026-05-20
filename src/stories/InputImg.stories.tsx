@@ -4,6 +4,8 @@ import { Size, Color } from "@/types";
 import { useState, useEffect } from "react";
 
 const SIZES = [Size.Xs, Size.Sm, Size.Md] as const;
+const MOCK_IMAGE_SRC =
+  "data:image/svg+xml,%3Csvg width='400' height='300' viewBox='0 0 400 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%233b82f6'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='300' fill='url(%23g)'/%3E%3Ctext x='200' y='158' text-anchor='middle' font-family='sans-serif' font-size='24' fill='white'%3EString preview%3C/text%3E%3C/svg%3E";
 
 function createMockImageFile(name: string = "example.jpg"): File {
   const canvas = document.createElement("canvas");
@@ -292,6 +294,24 @@ export const WithPreviewModal: Story = {
             onChange={setFile}
           />
         </div>
+      </div>
+    );
+  },
+};
+
+export const WithStringPreview: Story = {
+  render: () => {
+    const [image, setImage] = useState<File | string | null>(MOCK_IMAGE_SRC);
+
+    return (
+      <div className="w-[200px]">
+        <InputImg
+          size={Size.Md}
+          label="Готовое изображение"
+          hint="value может быть URL или data URL"
+          value={image}
+          onChange={setImage}
+        />
       </div>
     );
   },

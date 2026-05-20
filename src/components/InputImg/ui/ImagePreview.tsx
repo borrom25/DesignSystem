@@ -18,8 +18,15 @@ export function ImagePreview({
   const styles = inputImgStyles.preview;
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isStringPreview = typeof file === "string";
+  const imageName = isStringPreview ? "Изображение" : file.name;
 
   useEffect(() => {
+    if (typeof file === "string") {
+      setPreviewUrl(file);
+      return;
+    }
+
     const url = URL.createObjectURL(file);
     setPreviewUrl(url);
     return () => URL.revokeObjectURL(url);
@@ -39,7 +46,7 @@ export function ImagePreview({
     <>
       <div className={cn(styles.container, styles.size[size], className)}>
         {previewUrl && (
-          <img src={previewUrl} alt={file.name} className={styles.image} />
+          <img src={previewUrl} alt={imageName} className={styles.image} />
         )}
 
         <div className={styles.backdrop} />
@@ -74,7 +81,8 @@ export function ImagePreview({
       </div>
 
       <ImageModal
-        file={file}
+        file={isStringPreview ? undefined : file}
+        src={isStringPreview ? file : undefined}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onRemove={onRemove}

@@ -14,9 +14,11 @@ export default tseslint.config(
     ignores: [
       "dist",
       "node_modules",
+      "storybook-static",
       "tokens",
       "components_ver",
       "project-template-local",
+      "Updated Project",
     ],
   },
   js.configs.recommended,

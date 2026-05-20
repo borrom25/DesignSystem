@@ -1,29 +1,15 @@
 import { useMemo } from "react";
-import type { Row } from "@tanstack/react-table";
-import { CheckBox } from "@/components/CheckBox";
-import type { ButtonDropItem } from "@/components/ButtonDrop/ButtonDrop.types";
-import { Size } from "@/types";
-import type { ColumnDef } from "../types";
-import { tableStyles } from "../styles";
+import type { ColumnDef, UseDataTableColumnsParams } from "../types";
 import {
-  selectionColumnId,
-  actionsColumnId,
-  selectionColumnWidth,
-  actionsColumnWidth,
-} from "../utils/constants";
-import { DataTableRowActionsCell } from "../ui/DataTableRowActionsCell";
-
-export interface UseDataTableColumnsParams<TData> {
-  columns: ColumnDef<TData>[];
-  enableRowSelection: boolean | ((row: Row<TData>) => boolean);
-  stickySelectionColumn: boolean;
-  stickyActionsColumn: boolean;
-  rowActions?: (row: Row<TData>) => ButtonDropItem[] | null | undefined;
-}
+  createActionsColumn,
+  createExpanderColumn,
+  createSelectionColumn,
+} from "../utils/columnFactories";
 
 export function useDataTableColumns<TData>({
   columns,
   enableRowSelection,
+  enableNestedRows,
   stickySelectionColumn,
   stickyActionsColumn,
   rowActions,
@@ -31,69 +17,25 @@ export function useDataTableColumns<TData>({
   return useMemo(() => {
     const resultColumns: ColumnDef<TData>[] = [];
 
-    if (enableRowSelection) {
-      const selectionColumn: ColumnDef<TData> = {
-        id: selectionColumnId,
-        sticky: stickySelectionColumn,
-        size: selectionColumnWidth,
-        minSize: selectionColumnWidth,
-        maxSize: selectionColumnWidth,
-        enableSorting: false,
-        enableColumnFilter: false,
-        enableGlobalFilter: false,
-        enableResizing: false,
-        header: ({ table }) => (
-          <div className={tableStyles.selectionControl}>
-            <CheckBox
-              size={Size.Xs}
-              checked={table.getIsAllRowsSelected()}
-              onChange={table.getToggleAllRowsSelectedHandler()}
-              onClick={(event) => event.stopPropagation()}
-              aria-label="Выбрать все строки"
-            />
-          </div>
-        ),
-        cell: ({ row }) => (
-          <div className={tableStyles.selectionControl}>
-            <CheckBox
-              size={Size.Xs}
-              checked={row.getIsSelected()}
-              disabled={!row.getCanSelect()}
-              onChange={row.getToggleSelectedHandler()}
-              onClick={(event) => event.stopPropagation()}
-              aria-label="Выбрать строку"
-            />
-          </div>
-        ),
-      };
-      resultColumns.push(selectionColumn);
+    if (enableNestedRows) {
+      resultColumns.push(createExpanderColumn<TData>(stickySelectionColumn));
+    } else if (enableRowSelection) {
+      resultColumns.push(createSelectionColumn<TData>(stickySelectionColumn));
     }
 
     resultColumns.push(...(columns as ColumnDef<TData>[]));
 
     if (rowActions) {
-      const actionsColumn: ColumnDef<TData> = {
-        id: actionsColumnId,
-        sticky: stickyActionsColumn ? "right" : false,
-        size: actionsColumnWidth,
-        minSize: actionsColumnWidth,
-        maxSize: actionsColumnWidth,
-        enableSorting: false,
-        enableColumnFilter: false,
-        enableGlobalFilter: false,
-        enableResizing: false,
-        header: () => null,
-        cell: ({ row }) => (
-          <DataTableRowActionsCell row={row} rowActions={rowActions} />
-        ),
-      };
-      resultColumns.push(actionsColumn);
+      resultColumns.push(
+        createActionsColumn<TData>(stickyActionsColumn, rowActions)
+      );
     }
 
     return resultColumns;
   }, [
     columns,
     enableRowSelection,
+    enableNestedRows,
     rowActions,
     stickySelectionColumn,
     stickyActionsColumn,

@@ -1,5 +1,5 @@
-import { Input } from "@/components/Input";
 import { Button } from "@/components/Button";
+import { SearchAutocomplete } from "@/components/SearchAutocomplete";
 import { Size, Type, Color } from "@/types";
 import { cn } from "@/utils";
 import type { FilterPanelProps } from "./Filter.types";
@@ -45,15 +45,14 @@ export function FilterPanel({
       style={width !== undefined ? { width } : undefined}
     >
       {shouldRenderSearch && (
-        <div className={filterStyles.base}>
+        <div className={filterStyles.search}>
           {searchSlot ?? (
-            <Input
-              size={Size.Sm}
+            <SearchAutocomplete
               value={searchValue ?? ""}
               placeholder={searchPlaceholder}
               clearable
               onClear={onSearchClear ?? (() => onSearchChange?.(""))}
-              onChange={(event) => onSearchChange?.(event.target.value)}
+              onValueChange={onSearchChange}
             />
           )}
         </div>
