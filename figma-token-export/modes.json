@@ -1,0 +1,223 @@
+﻿{
+  "metadata": {
+    "exportedAt": "2026-05-19T19:12:50.381Z",
+    "sourceUrl": "https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/branch/vhZty8bcWDP1aOmKjx4ZBu/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=11749-927&p=f&t=0Jh6fmGSFyxNhCAy-11",
+    "originalFileKey": "gPjMJwL1jc8V4G6x4lZJDa",
+    "branchKey": "vhZty8bcWDP1aOmKjx4ZBu",
+    "nodeId": "11749:927",
+    "figmaFileName": "Document",
+    "editorType": "figma",
+    "readOnly": true,
+    "existingRepoTokensModified": false,
+    "figmaFileModified": false,
+    "methodsUsed": [
+      "get_libraries",
+      "get_variable_defs (attempted; failed because MCP required selected layer)",
+      "search_design_system (probe only)",
+      "use_figma: figma.variables.getLocalVariableCollectionsAsync",
+      "use_figma: figma.variables.getLocalVariablesAsync",
+      "use_figma: figma.getLocalPaintStylesAsync",
+      "use_figma: figma.getLocalTextStylesAsync",
+      "use_figma: figma.getLocalEffectStylesAsync",
+      "use_figma: figma.getLocalGridStylesAsync",
+      "use_figma: figma.teamLibrary.getAvailableLibraryVariableCollectionsAsync"
+    ],
+    "blockedTransports": [
+      "use_figma response truncates large JSON around 20kb",
+      "fetch is not defined in use_figma Plugin API context",
+      "XMLHttpRequest and WebSocket are not defined in use_figma Plugin API context",
+      "figma.ui.onmessage is not supported by this MCP runtime",
+      "temporary showUI fetch/image beacon did not reach localhost receiver"
+    ]
+  },
+  "modes": [
+    {
+      "collectionId": "VariableCollectionId:11:374",
+      "collectionKey": "a31af3a2e83b2f4e29a4e5a21763dbc0b90e3042",
+      "collectionName": "Primitive Colors",
+      "defaultModeId": "11:0",
+      "modes": [
+        {
+          "name": "Value",
+          "modeId": "11:0"
+        }
+      ]
+    },
+    {
+      "collectionId": "VariableCollectionId:260:16023",
+      "collectionKey": "eddd50222b233807ae0e5788114c038657b0da82",
+      "collectionName": "Border Radius",
+      "defaultModeId": "260:4",
+      "modes": [
+        {
+          "name": "br_size",
+          "modeId": "260:4"
+        }
+      ]
+    },
+    {
+      "collectionId": "VariableCollectionId:6730:3141",
+      "collectionKey": "5d5182fa10726396a281e2d540cf27e626d712de",
+      "collectionName": "Typography",
+      "defaultModeId": "6730:3",
+      "modes": [
+        {
+          "name": "typography",
+          "modeId": "6730:3"
+        },
+        {
+          "name": "Политех",
+          "modeId": "4296:0"
+        }
+      ]
+    },
+    {
+      "collectionId": "VariableCollectionId:19071:2",
+      "collectionKey": "8c7a0d91a933c2dd4b06d250b962c7b415b781cc",
+      "collectionName": "Spacings",
+      "defaultModeId": "19071:0",
+      "modes": [
+        {
+          "name": "spacings",
+          "modeId": "19071:0"
+        }
+      ]
+    },
+    {
+      "collectionId": "VariableCollectionId:19105:2",
+      "collectionKey": "ee1e5c8b7cb2c816b4c7ff8efe97520c1503755d",
+      "collectionName": "Theme",
+      "defaultModeId": "19105:0",
+      "modes": [
+        {
+          "name": "themes_light",
+          "modeId": "19105:0"
+        },
+        {
+          "name": "themes_dark",
+          "modeId": "19177:0"
+        }
+      ]
+    },
+    {
+      "collectionId": "VariableCollectionId:19170:12",
+      "collectionKey": "0123d83c83485b0a75744e5392521a98d42312a0",
+      "collectionName": "TypoComponent",
+      "defaultModeId": "19170:0",
+      "modes": [
+        {
+          "name": "TypoComponent",
+          "modeId": "19170:0"
+        }
+      ]
+    },
+    {
+      "collectionId": "VariableCollectionId:19386:5441",
+      "collectionKey": "da248baa236eb16ba55bd5bc64e135a285f56881",
+      "collectionName": "Border Radius Component",
+      "defaultModeId": "19388:4",
+      "modes": [
+        {
+          "name": "br-xs",
+          "modeId": "19388:4"
+        },
+        {
+          "name": "br-sm",
+          "modeId": "19386:0"
+        },
+        {
+          "name": "br-md",
+          "modeId": "19386:1"
+        },
+        {
+          "name": "br-lg",
+          "modeId": "19386:3"
+        }
+      ]
+    },
+    {
+      "collectionId": "VariableCollectionId:1941:1741",
+      "collectionKey": "9b3606f8e1278bc9e04617ebb885fe091ccbdf3d",
+      "collectionName": "Modal",
+      "defaultModeId": "1941:0",
+      "modes": [
+        {
+          "name": "width_xs",
+          "modeId": "1941:0"
+        },
+        {
+          "name": "width_sm",
+          "modeId": "1941:1"
+        },
+        {
+          "name": "width_md",
+          "modeId": "1941:2"
+        }
+      ]
+    },
+    {
+      "collectionId": "VariableCollectionId:3130:1086",
+      "collectionKey": "691081cfed75afea0ebd20a9264c11b74153b6ff",
+      "collectionName": "Viewport",
+      "defaultModeId": "3130:0",
+      "modes": [
+        {
+          "name": "min-width: 320px",
+          "modeId": "3130:0"
+        },
+        {
+          "name": "min-width: 360px",
+          "modeId": "3179:4"
+        },
+        {
+          "name": "min-width: 375px",
+          "modeId": "3169:1"
+        },
+        {
+          "name": "min-width: 390px",
+          "modeId": "3179:5"
+        },
+        {
+          "name": "min-width: 412px",
+          "modeId": "3169:2"
+        },
+        {
+          "name": "min-width: 430px",
+          "modeId": "3169:3"
+        },
+        {
+          "name": "min-width: 640px",
+          "modeId": "3179:6"
+        },
+        {
+          "name": "min-width: 1240px",
+          "modeId": "3130:2"
+        },
+        {
+          "name": "min-width: 1512px",
+          "modeId": "3130:3"
+        }
+      ]
+    },
+    {
+      "collectionId": "VariableCollectionId:3130:1130",
+      "collectionKey": "ffa20c96ac7a91fbd8914808199c22a4132a2970",
+      "collectionName": "Layout",
+      "defaultModeId": "3130:6",
+      "modes": [
+        {
+          "name": "container_xs",
+          "modeId": "3130:6"
+        },
+        {
+          "name": "container_sm",
+          "modeId": "3130:7"
+        },
+        {
+          "name": "container_md",
+          "modeId": "3130:9"
+        }
+      ]
+    }
+  ]
+}

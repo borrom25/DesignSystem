@@ -1,0 +1,133 @@
+﻿{
+  "metadata": {
+    "exportedAt": "2026-05-19T19:12:50.381Z",
+    "sourceUrl": "https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/branch/vhZty8bcWDP1aOmKjx4ZBu/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=11749-927&p=f&t=0Jh6fmGSFyxNhCAy-11",
+    "originalFileKey": "gPjMJwL1jc8V4G6x4lZJDa",
+    "branchKey": "vhZty8bcWDP1aOmKjx4ZBu",
+    "nodeId": "11749:927",
+    "figmaFileName": "Document",
+    "editorType": "figma",
+    "readOnly": true,
+    "existingRepoTokensModified": false,
+    "figmaFileModified": false,
+    "methodsUsed": [
+      "get_libraries",
+      "get_variable_defs (attempted; failed because MCP required selected layer)",
+      "search_design_system (probe only)",
+      "use_figma: figma.variables.getLocalVariableCollectionsAsync",
+      "use_figma: figma.variables.getLocalVariablesAsync",
+      "use_figma: figma.getLocalPaintStylesAsync",
+      "use_figma: figma.getLocalTextStylesAsync",
+      "use_figma: figma.getLocalEffectStylesAsync",
+      "use_figma: figma.getLocalGridStylesAsync",
+      "use_figma: figma.teamLibrary.getAvailableLibraryVariableCollectionsAsync"
+    ],
+    "blockedTransports": [
+      "use_figma response truncates large JSON around 20kb",
+      "fetch is not defined in use_figma Plugin API context",
+      "XMLHttpRequest and WebSocket are not defined in use_figma Plugin API context",
+      "figma.ui.onmessage is not supported by this MCP runtime",
+      "temporary showUI fetch/image beacon did not reach localhost receiver"
+    ]
+  },
+  "status": "collection-level-normalized-summary",
+  "tokens": [
+    {
+      "source": "figma-variable-collection-summary",
+      "collectionName": "Primitive Colors",
+      "variableCount": 551,
+      "modes": [
+        "Value"
+      ]
+    },
+    {
+      "source": "figma-variable-collection-summary",
+      "collectionName": "Border Radius",
+      "variableCount": 14,
+      "modes": [
+        "br_size"
+      ]
+    },
+    {
+      "source": "figma-variable-collection-summary",
+      "collectionName": "Typography",
+      "variableCount": 80,
+      "modes": [
+        "typography",
+        "Политех"
+      ]
+    },
+    {
+      "source": "figma-variable-collection-summary",
+      "collectionName": "Spacings",
+      "variableCount": 58,
+      "modes": [
+        "spacings"
+      ]
+    },
+    {
+      "source": "figma-variable-collection-summary",
+      "collectionName": "Theme",
+      "variableCount": 138,
+      "modes": [
+        "themes_light",
+        "themes_dark"
+      ]
+    },
+    {
+      "source": "figma-variable-collection-summary",
+      "collectionName": "TypoComponent",
+      "variableCount": 35,
+      "modes": [
+        "TypoComponent"
+      ]
+    },
+    {
+      "source": "figma-variable-collection-summary",
+      "collectionName": "Border Radius Component",
+      "variableCount": 4,
+      "modes": [
+        "br-xs",
+        "br-sm",
+        "br-md",
+        "br-lg"
+      ]
+    },
+    {
+      "source": "figma-variable-collection-summary",
+      "collectionName": "Modal",
+      "variableCount": 1,
+      "modes": [
+        "width_xs",
+        "width_sm",
+        "width_md"
+      ]
+    },
+    {
+      "source": "figma-variable-collection-summary",
+      "collectionName": "Viewport",
+      "variableCount": 2,
+      "modes": [
+        "min-width: 320px",
+        "min-width: 360px",
+        "min-width: 375px",
+        "min-width: 390px",
+        "min-width: 412px",
+        "min-width: 430px",
+        "min-width: 640px",
+        "min-width: 1240px",
+        "min-width: 1512px"
+      ]
+    },
+    {
+      "source": "figma-variable-collection-summary",
+      "collectionName": "Layout",
+      "variableCount": 1,
+      "modes": [
+        "container_xs",
+        "container_sm",
+        "container_md"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+include:
+  - project: 'Gaizin/pipeline-templates'
+    ref: main
+    file:
+      - '/gitlab-ci-build-and-publish.yml'
+      - '/gitlab-ci-scanning.yml'
+      - '/gitlab-ci-deploy.yml'
+
+stages:
+  - report_prepare
+  - pre_build
+  - publish
+  - build
+  - post_build
+  - publish_image
+  - deploy
+  - report
+
+.security_rules_template:
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'master'
+    - if: $CI_COMMIT_BRANCH == 'redesign'
+    - if: $CI_COMMIT_BRANCH == 'dev'
+
+variables:
+    IMAGE_TAG: ${CI_COMMIT_SHORT_SHA}-${CI_PIPELINE_ID}
+
+publish:
+    stage: publish
+    interruptible: true
+    image: node:24-alpine
+    rules:
+        - if: $CI_COMMIT_BRANCH == 'dev'
+        - if: $CI_COMMIT_BRANCH == 'master'
+        - if: $CI_COMMIT_BRANCH == 'redesign'
+    script:
+        - corepack enable
+        - yarn install
+        - yarn build
+        - |
+          if [ "$CI_COMMIT_BRANCH" = "master" ]; then
+            sed -i 's/"name": "[^"]*"/"name": "@games-alabuga\/ui-kit"/' package.json
+          elif [ "$CI_COMMIT_BRANCH" = "redesign" ]; then
+            sed -i 's/"name": "[^"]*"/"name": "@games-alabuga\/ui-kit-dev-redesign"/' package.json
+          else
+            sed -i 's/"name": "[^"]*"/"name": "@games-alabuga\/ui-kit-dev"/' package.json
+          fi
+        - node -e "JSON.parse(require('fs').readFileSync('package.json', 'utf8'))"
+        - echo "//${CI_SERVER_HOST}/api/v4/projects/102/packages/npm/:_authToken=${CI_JOB_TOKEN}">.npmrc
+        - cat .npmrc
+        - npm publish --registry=https://gitlab.alabuga.space/api/v4/projects/102/packages/npm/
+
+build:
+    stage: build
+    cache:
+      key:
+        files:
+          - yarn.lock
+        prefix: $CI_COMMIT_REF_SLUG
+      paths:
+        - node_modules/
+    image: 
+      name: registry.alabuga.space/library/kaniko-node-git:22
+      entrypoint: [""]
+    rules:
+        - if: $CI_MERGE_REQUEST_ID
+        - if: $CI_COMMIT_BRANCH == 'dev'
+        - if: $CI_COMMIT_BRANCH == 'master'
+        - if: $CI_COMMIT_BRANCH == 'redesign'
+    interruptible: true
+    variables:
+      NPM_TOKEN: $UI_KIT_DEPLOY_TOKEN
+    before_script:
+    - |
+      PROJECT="${CI_PROJECT_PATH#*/*/*/}"
+      PROJECT_ENV_FILE="${PROJECT%%/*}/${ENV_FILE}"
+    script:
+      - corepack enable
+      - yarn install
+      - yarn build-storybook
+      - mkdir -p /kaniko/.docker
+      - echo "{\"auths\":{\"${TEMPORARY_REGISTRY}\":{\"username\":\"${TEMPORARY_REGISTRY_USERNAME}\",\"password\":\"${TEMPORARY_REGISTRY_PASSWORD}\"}}}" > /kaniko/.docker/config.json
+      - >-
+        /kaniko/executor
+        --context .
+        --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+        --destination "${TEMPORARY_REGISTRY}/short-lived/${CI_PROJECT_PATH#*/*/*/}:${CI_COMMIT_SHORT_SHA}-${CI_PIPELINE_ID}"
+        --skip-tls-verify-registry ${TEMPORARY_REGISTRY}
+
+publish_image_in_docker_registry:
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'redesign'
+    - if: $CI_COMMIT_BRANCH == 'dev'
+
+publish_image_in_prod_docker_registry:
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'master'
+
+Deploy to Dev:
+  stage: deploy
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'dev'
+      variables:
+        SERVICE: frontend-dev
+        ARGOCD_SERVER: ${DEV_ARGOCD_SERVER}
+        ARGOCD_USERNAME: ${DEV_ARGOCD_USERNAME}
+        ARGOCD_PASSWORD: ${DEV_ARGOCD_PASSWORD}
+  extends:
+    - .k8s_directive
+
+Deploy to Redesign:
+  stage: deploy
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'redesign'
+      variables:
+        SERVICE: frontend-redesign-dev
+        ARGOCD_SERVER: ${DEV_ARGOCD_SERVER}
+        ARGOCD_USERNAME: ${DEV_ARGOCD_USERNAME}
+        ARGOCD_PASSWORD: ${DEV_ARGOCD_PASSWORD}
+  extends:
+    - .k8s_directive
+
+Deploy to Prod:
+  stage: deploy
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'master'
+      variables:
+        SERVICE: frontend-prod
+        ARGOCD_SERVER: ${PROD_ARGOCD_SERVER}
+        ARGOCD_USERNAME: ${PROD_ARGOCD_USERNAME}
+        ARGOCD_PASSWORD: ${PROD_ARGOCD_PASSWORD}
+  extends:
+    - .k8s_directive

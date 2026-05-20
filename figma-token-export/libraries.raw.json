@@ -1,0 +1,130 @@
+﻿{
+  "metadata": {
+    "exportedAt": "2026-05-19T19:12:50.381Z",
+    "sourceUrl": "https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/branch/vhZty8bcWDP1aOmKjx4ZBu/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=11749-927&p=f&t=0Jh6fmGSFyxNhCAy-11",
+    "originalFileKey": "gPjMJwL1jc8V4G6x4lZJDa",
+    "branchKey": "vhZty8bcWDP1aOmKjx4ZBu",
+    "nodeId": "11749:927",
+    "figmaFileName": "Document",
+    "editorType": "figma",
+    "readOnly": true,
+    "existingRepoTokensModified": false,
+    "figmaFileModified": false,
+    "methodsUsed": [
+      "get_libraries",
+      "get_variable_defs (attempted; failed because MCP required selected layer)",
+      "search_design_system (probe only)",
+      "use_figma: figma.variables.getLocalVariableCollectionsAsync",
+      "use_figma: figma.variables.getLocalVariablesAsync",
+      "use_figma: figma.getLocalPaintStylesAsync",
+      "use_figma: figma.getLocalTextStylesAsync",
+      "use_figma: figma.getLocalEffectStylesAsync",
+      "use_figma: figma.getLocalGridStylesAsync",
+      "use_figma: figma.teamLibrary.getAvailableLibraryVariableCollectionsAsync"
+    ],
+    "blockedTransports": [
+      "use_figma response truncates large JSON around 20kb",
+      "fetch is not defined in use_figma Plugin API context",
+      "XMLHttpRequest and WebSocket are not defined in use_figma Plugin API context",
+      "figma.ui.onmessage is not supported by this MCP runtime",
+      "temporary showUI fetch/image beacon did not reach localhost receiver"
+    ]
+  },
+  "libraryVariableCollections": [
+    {
+      "key": "3ae87357566348ffef0c953412cce0cdcc0cd4cd",
+      "name": "Variable collection",
+      "libraryName": "10. DS | IMAGES"
+    },
+    {
+      "key": "a0a021bfa481bc3052bf5952695233f9bf2b90be",
+      "name": "Border Radius Component",
+      "libraryName": "0. Да поможет мне Теплов"
+    },
+    {
+      "key": "bb688bd5510015a514d1b4c8d9ab3e151f59c40b",
+      "name": "Theme",
+      "libraryName": "0. Да поможет мне Теплов"
+    },
+    {
+      "key": "91c9236b03764910eb761245ba0f93b9964b378b",
+      "name": "Spacings",
+      "libraryName": "0. Да поможет мне Теплов"
+    },
+    {
+      "key": "79cf0945ff8b66c0057469536958d66bcaa7819f",
+      "name": "TypoComponent",
+      "libraryName": "0. Да поможет мне Теплов"
+    },
+    {
+      "key": "edaca762ce68a66834e12056d7612652e45ee2c9",
+      "name": "Primitive Colors",
+      "libraryName": "0. Да поможет мне Теплов"
+    },
+    {
+      "key": "622db2a02980725681edcf719cd98cd996461914",
+      "name": "Typography",
+      "libraryName": "0. Да поможет мне Теплов"
+    },
+    {
+      "key": "a7e2554ecd815a0a35fa23082da3db58fc6700a1",
+      "name": "Border Radius",
+      "libraryName": "0. Да поможет мне Теплов"
+    },
+    {
+      "key": "1459b61d2ee1f74fd5ef788687fc1e083236a711",
+      "name": "Modal",
+      "libraryName": "0. Да поможет мне Теплов"
+    },
+    {
+      "key": "c094dd8fa014ee30e286ea7b8669de9ece7e4c08",
+      "name": "Layout",
+      "libraryName": "0. Да поможет мне Теплов"
+    },
+    {
+      "key": "6c5dd65ead0642acf82415038117d72c4b9e9a11",
+      "name": "Viewport",
+      "libraryName": "0. Да поможет мне Теплов"
+    },
+    {
+      "key": "136e26634b261e8469c2ea9b79edff2e481cd122",
+      "name": "COLORS",
+      "libraryName": "0. DS MAIN"
+    },
+    {
+      "key": "28775d07323c2f13caaf9992844a7e5bbeaa8629",
+      "name": "THEME",
+      "libraryName": "0. DS MAIN"
+    },
+    {
+      "key": "ad43150c905c1981367caf9e707f6ef0b375cc65",
+      "name": "SIZE",
+      "libraryName": "0. DS MAIN"
+    },
+    {
+      "key": "82b0239d2700e82c42b9b436b62af6fdd7cab296",
+      "name": "BORDER-RADIUS",
+      "libraryName": "0. DS MAIN"
+    },
+    {
+      "key": "02a24340dcf0937c8a5df2bf68038161b65702bb",
+      "name": "OFFSETS",
+      "libraryName": "0. DS MAIN"
+    },
+    {
+      "key": "8ebbf8bfab61b770bbbc8149e327f3cf4f0df29f",
+      "name": "TYPO",
+      "libraryName": "0. DS MAIN"
+    },
+    {
+      "key": "91cddac4ef32d6ba5de517d1afed297c0a87faa6",
+      "name": "USER VALUES",
+      "libraryName": "0. DS MAIN"
+    },
+    {
+      "key": "71c4acfa4c713c5f444519ca0b6a66291251c58f",
+      "name": "USER VALUES-COMPONENTS",
+      "libraryName": "0. DS MAIN"
+    }
+  ]
+}

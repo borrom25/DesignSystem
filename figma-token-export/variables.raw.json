@@ -1,0 +1,294 @@
+﻿{
+  "metadata": {
+    "exportedAt": "2026-05-19T19:12:50.381Z",
+    "sourceUrl": "https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/branch/vhZty8bcWDP1aOmKjx4ZBu/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=11749-927&p=f&t=0Jh6fmGSFyxNhCAy-11",
+    "originalFileKey": "gPjMJwL1jc8V4G6x4lZJDa",
+    "branchKey": "vhZty8bcWDP1aOmKjx4ZBu",
+    "nodeId": "11749:927",
+    "figmaFileName": "Document",
+    "editorType": "figma",
+    "readOnly": true,
+    "existingRepoTokensModified": false,
+    "figmaFileModified": false,
+    "methodsUsed": [
+      "get_libraries",
+      "get_variable_defs (attempted; failed because MCP required selected layer)",
+      "search_design_system (probe only)",
+      "use_figma: figma.variables.getLocalVariableCollectionsAsync",
+      "use_figma: figma.variables.getLocalVariablesAsync",
+      "use_figma: figma.getLocalPaintStylesAsync",
+      "use_figma: figma.getLocalTextStylesAsync",
+      "use_figma: figma.getLocalEffectStylesAsync",
+      "use_figma: figma.getLocalGridStylesAsync",
+      "use_figma: figma.teamLibrary.getAvailableLibraryVariableCollectionsAsync"
+    ],
+    "blockedTransports": [
+      "use_figma response truncates large JSON around 20kb",
+      "fetch is not defined in use_figma Plugin API context",
+      "XMLHttpRequest and WebSocket are not defined in use_figma Plugin API context",
+      "figma.ui.onmessage is not supported by this MCP runtime",
+      "temporary showUI fetch/image beacon did not reach localhost receiver"
+    ]
+  },
+  "status": "incomplete-raw-values-blocked-by-mcp-transport",
+  "counts": {
+    "localVariableCollections": 10,
+    "localVariables": 884,
+    "localStyles": {
+      "paint": 0,
+      "text": 30,
+      "effect": 3,
+      "grid": 0
+    },
+    "availableLibraryVariableCollections": 19,
+    "byType": {
+      "color": 549,
+      "typography": 80,
+      "radius": 18,
+      "semantic-color": 138,
+      "spacing": 68,
+      "float": 16,
+      "sizing": 13,
+      "boolean": 2
+    },
+    "byCollection": {
+      "Primitive Colors": 551,
+      "Typography": 80,
+      "Border Radius": 14,
+      "Theme": 138,
+      "Spacings": 58,
+      "TypoComponent": 35,
+      "Border Radius Component": 4,
+      "Modal": 1,
+      "Viewport": 2,
+      "Layout": 1
+    },
+    "byResolved": {
+      "COLOR": 687,
+      "STRING": 1,
+      "FLOAT": 194,
+      "BOOLEAN": 2
+    }
+  },
+  "collectionSummaries": [
+    {
+      "id": "VariableCollectionId:11:374",
+      "key": "a31af3a2e83b2f4e29a4e5a21763dbc0b90e3042",
+      "name": "Primitive Colors",
+      "modes": [
+        {
+          "name": "Value",
+          "modeId": "11:0"
+        }
+      ],
+      "defaultModeId": "11:0",
+      "variableCount": 551,
+      "remote": false,
+      "isExtension": false
+    },
+    {
+      "id": "VariableCollectionId:260:16023",
+      "key": "eddd50222b233807ae0e5788114c038657b0da82",
+      "name": "Border Radius",
+      "modes": [
+        {
+          "name": "br_size",
+          "modeId": "260:4"
+        }
+      ],
+      "defaultModeId": "260:4",
+      "variableCount": 14,
+      "remote": false,
+      "isExtension": false
+    },
+    {
+      "id": "VariableCollectionId:6730:3141",
+      "key": "5d5182fa10726396a281e2d540cf27e626d712de",
+      "name": "Typography",
+      "modes": [
+        {
+          "name": "typography",
+          "modeId": "6730:3"
+        },
+        {
+          "name": "Политех",
+          "modeId": "4296:0"
+        }
+      ],
+      "defaultModeId": "6730:3",
+      "variableCount": 80,
+      "remote": false,
+      "isExtension": false
+    },
+    {
+      "id": "VariableCollectionId:19071:2",
+      "key": "8c7a0d91a933c2dd4b06d250b962c7b415b781cc",
+      "name": "Spacings",
+      "modes": [
+        {
+          "name": "spacings",
+          "modeId": "19071:0"
+        }
+      ],
+      "defaultModeId": "19071:0",
+      "variableCount": 58,
+      "remote": false,
+      "isExtension": false
+    },
+    {
+      "id": "VariableCollectionId:19105:2",
+      "key": "ee1e5c8b7cb2c816b4c7ff8efe97520c1503755d",
+      "name": "Theme",
+      "modes": [
+        {
+          "name": "themes_light",
+          "modeId": "19105:0"
+        },
+        {
+          "name": "themes_dark",
+          "modeId": "19177:0"
+        }
+      ],
+      "defaultModeId": "19105:0",
+      "variableCount": 138,
+      "remote": false,
+      "isExtension": false
+    },
+    {
+      "id": "VariableCollectionId:19170:12",
+      "key": "0123d83c83485b0a75744e5392521a98d42312a0",
+      "name": "TypoComponent",
+      "modes": [
+        {
+          "name": "TypoComponent",
+          "modeId": "19170:0"
+        }
+      ],
+      "defaultModeId": "19170:0",
+      "variableCount": 35,
+      "remote": false,
+      "isExtension": false
+    },
+    {
+      "id": "VariableCollectionId:19386:5441",
+      "key": "da248baa236eb16ba55bd5bc64e135a285f56881",
+      "name": "Border Radius Component",
+      "modes": [
+        {
+          "name": "br-xs",
+          "modeId": "19388:4"
+        },
+        {
+          "name": "br-sm",
+          "modeId": "19386:0"
+        },
+        {
+          "name": "br-md",
+          "modeId": "19386:1"
+        },
+        {
+          "name": "br-lg",
+          "modeId": "19386:3"
+        }
+      ],
+      "defaultModeId": "19388:4",
+      "variableCount": 4,
+      "remote": false,
+      "isExtension": false
+    },
+    {
+      "id": "VariableCollectionId:1941:1741",
+      "key": "9b3606f8e1278bc9e04617ebb885fe091ccbdf3d",
+      "name": "Modal",
+      "modes": [
+        {
+          "name": "width_xs",
+          "modeId": "1941:0"
+        },
+        {
+          "name": "width_sm",
+          "modeId": "1941:1"
+        },
+        {
+          "name": "width_md",
+          "modeId": "1941:2"
+        }
+      ],
+      "defaultModeId": "1941:0",
+      "variableCount": 1,
+      "remote": false,
+      "isExtension": false
+    },
+    {
+      "id": "VariableCollectionId:3130:1086",
+      "key": "691081cfed75afea0ebd20a9264c11b74153b6ff",
+      "name": "Viewport",
+      "modes": [
+        {
+          "name": "min-width: 320px",
+          "modeId": "3130:0"
+        },
+        {
+          "name": "min-width: 360px",
+          "modeId": "3179:4"
+        },
+        {
+          "name": "min-width: 375px",
+          "modeId": "3169:1"
+        },
+        {
+          "name": "min-width: 390px",
+          "modeId": "3179:5"
+        },
+        {
+          "name": "min-width: 412px",
+          "modeId": "3169:2"
+        },
+        {
+          "name": "min-width: 430px",
+          "modeId": "3169:3"
+        },
+        {
+          "name": "min-width: 640px",
+          "modeId": "3179:6"
+        },
+        {
+          "name": "min-width: 1240px",
+          "modeId": "3130:2"
+        },
+        {
+          "name": "min-width: 1512px",
+          "modeId": "3130:3"
+        }
+      ],
+      "defaultModeId": "3130:0",
+      "variableCount": 2,
+      "remote": false,
+      "isExtension": false
+    },
+    {
+      "id": "VariableCollectionId:3130:1130",
+      "key": "ffa20c96ac7a91fbd8914808199c22a4132a2970",
+      "name": "Layout",
+      "modes": [
+        {
+          "name": "container_xs",
+          "modeId": "3130:6"
+        },
+        {
+          "name": "container_sm",
+          "modeId": "3130:7"
+        },
+        {
+          "name": "container_md",
+          "modeId": "3130:9"
+        }
+      ],
+      "defaultModeId": "3130:6",
+      "variableCount": 1,
+      "remote": false,
+      "isExtension": false
+    }
+  ],
+  "note": "Full per-variable raw values were visible to use_figma in chunks but could not be safely persisted without response truncation or a working local transport."
+}

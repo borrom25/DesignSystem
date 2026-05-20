@@ -1,0 +1,350 @@
+﻿{
+  "metadata": {
+    "exportedAt": "2026-05-19T19:12:50.381Z",
+    "sourceUrl": "https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/branch/vhZty8bcWDP1aOmKjx4ZBu/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=11749-927&p=f&t=0Jh6fmGSFyxNhCAy-11",
+    "originalFileKey": "gPjMJwL1jc8V4G6x4lZJDa",
+    "branchKey": "vhZty8bcWDP1aOmKjx4ZBu",
+    "nodeId": "11749:927",
+    "figmaFileName": "Document",
+    "editorType": "figma",
+    "readOnly": true,
+    "existingRepoTokensModified": false,
+    "figmaFileModified": false,
+    "methodsUsed": [
+      "get_libraries",
+      "get_variable_defs (attempted; failed because MCP required selected layer)",
+      "search_design_system (probe only)",
+      "use_figma: figma.variables.getLocalVariableCollectionsAsync",
+      "use_figma: figma.variables.getLocalVariablesAsync",
+      "use_figma: figma.getLocalPaintStylesAsync",
+      "use_figma: figma.getLocalTextStylesAsync",
+      "use_figma: figma.getLocalEffectStylesAsync",
+      "use_figma: figma.getLocalGridStylesAsync",
+      "use_figma: figma.teamLibrary.getAvailableLibraryVariableCollectionsAsync"
+    ],
+    "blockedTransports": [
+      "use_figma response truncates large JSON around 20kb",
+      "fetch is not defined in use_figma Plugin API context",
+      "XMLHttpRequest and WebSocket are not defined in use_figma Plugin API context",
+      "figma.ui.onmessage is not supported by this MCP runtime",
+      "temporary showUI fetch/image beacon did not reach localhost receiver"
+    ]
+  },
+  "localCollections": [
+    {
+      "id": "VariableCollectionId:11:374",
+      "key": "a31af3a2e83b2f4e29a4e5a21763dbc0b90e3042",
+      "name": "Primitive Colors",
+      "modes": [
+        {
+          "name": "Value",
+          "modeId": "11:0"
+        }
+      ],
+      "defaultModeId": "11:0",
+      "variableCount": 551,
+      "remote": false,
+      "isExtension": false
+    },
+    {
+      "id": "VariableCollectionId:260:16023",
+      "key": "eddd50222b233807ae0e5788114c038657b0da82",
+      "name": "Border Radius",
+      "modes": [
+        {
+          "name": "br_size",
+          "modeId": "260:4"
+        }
+      ],
+      "defaultModeId": "260:4",
+      "variableCount": 14,
+      "remote": false,
+      "isExtension": false
+    },
+    {
+      "id": "VariableCollectionId:6730:3141",
+      "key": "5d5182fa10726396a281e2d540cf27e626d712de",
+      "name": "Typography",
+      "modes": [
+        {
+          "name": "typography",
+          "modeId": "6730:3"
+        },
+        {
+          "name": "Политех",
+          "modeId": "4296:0"
+        }
+      ],
+      "defaultModeId": "6730:3",
+      "variableCount": 80,
+      "remote": false,
+      "isExtension": false
+    },
+    {
+      "id": "VariableCollectionId:19071:2",
+      "key": "8c7a0d91a933c2dd4b06d250b962c7b415b781cc",
+      "name": "Spacings",
+      "modes": [
+        {
+          "name": "spacings",
+          "modeId": "19071:0"
+        }
+      ],
+      "defaultModeId": "19071:0",
+      "variableCount": 58,
+      "remote": false,
+      "isExtension": false
+    },
+    {
+      "id": "VariableCollectionId:19105:2",
+      "key": "ee1e5c8b7cb2c816b4c7ff8efe97520c1503755d",
+      "name": "Theme",
+      "modes": [
+        {
+          "name": "themes_light",
+          "modeId": "19105:0"
+        },
+        {
+          "name": "themes_dark",
+          "modeId": "19177:0"
+        }
+      ],
+      "defaultModeId": "19105:0",
+      "variableCount": 138,
+      "remote": false,
+      "isExtension": false
+    },
+    {
+      "id": "VariableCollectionId:19170:12",
+      "key": "0123d83c83485b0a75744e5392521a98d42312a0",
+      "name": "TypoComponent",
+      "modes": [
+        {
+          "name": "TypoComponent",
+          "modeId": "19170:0"
+        }
+      ],
+      "defaultModeId": "19170:0",
+      "variableCount": 35,
+      "remote": false,
+      "isExtension": false
+    },
+    {
+      "id": "VariableCollectionId:19386:5441",
+      "key": "da248baa236eb16ba55bd5bc64e135a285f56881",
+      "name": "Border Radius Component",
+      "modes": [
+        {
+          "name": "br-xs",
+          "modeId": "19388:4"
+        },
+        {
+          "name": "br-sm",
+          "modeId": "19386:0"
+        },
+        {
+          "name": "br-md",
+          "modeId": "19386:1"
+        },
+        {
+          "name": "br-lg",
+          "modeId": "19386:3"
+        }
+      ],
+      "defaultModeId": "19388:4",
+      "variableCount": 4,
+      "remote": false,
+      "isExtension": false
+    },
+    {
+      "id": "VariableCollectionId:1941:1741",
+      "key": "9b3606f8e1278bc9e04617ebb885fe091ccbdf3d",
+      "name": "Modal",
+      "modes": [
+        {
+          "name": "width_xs",
+          "modeId": "1941:0"
+        },
+        {
+          "name": "width_sm",
+          "modeId": "1941:1"
+        },
+        {
+          "name": "width_md",
+          "modeId": "1941:2"
+        }
+      ],
+      "defaultModeId": "1941:0",
+      "variableCount": 1,
+      "remote": false,
+      "isExtension": false
+    },
+    {
+      "id": "VariableCollectionId:3130:1086",
+      "key": "691081cfed75afea0ebd20a9264c11b74153b6ff",
+      "name": "Viewport",
+      "modes": [
+        {
+          "name": "min-width: 320px",
+          "modeId": "3130:0"
+        },
+        {
+          "name": "min-width: 360px",
+          "modeId": "3179:4"
+        },
+        {
+          "name": "min-width: 375px",
+          "modeId": "3169:1"
+        },
+        {
+          "name": "min-width: 390px",
+          "modeId": "3179:5"
+        },
+        {
+          "name": "min-width: 412px",
+          "modeId": "3169:2"
+        },
+        {
+          "name": "min-width: 430px",
+          "modeId": "3169:3"
+        },
+        {
+          "name": "min-width: 640px",
+          "modeId": "3179:6"
+        },
+        {
+          "name": "min-width: 1240px",
+          "modeId": "3130:2"
+        },
+        {
+          "name": "min-width: 1512px",
+          "modeId": "3130:3"
+        }
+      ],
+      "defaultModeId": "3130:0",
+      "variableCount": 2,
+      "remote": false,
+      "isExtension": false
+    },
+    {
+      "id": "VariableCollectionId:3130:1130",
+      "key": "ffa20c96ac7a91fbd8914808199c22a4132a2970",
+      "name": "Layout",
+      "modes": [
+        {
+          "name": "container_xs",
+          "modeId": "3130:6"
+        },
+        {
+          "name": "container_sm",
+          "modeId": "3130:7"
+        },
+        {
+          "name": "container_md",
+          "modeId": "3130:9"
+        }
+      ],
+      "defaultModeId": "3130:6",
+      "variableCount": 1,
+      "remote": false,
+      "isExtension": false
+    }
+  ],
+  "libraryVariableCollections": [
+    {
+      "key": "3ae87357566348ffef0c953412cce0cdcc0cd4cd",
+      "name": "Variable collection",
+      "libraryName": "10. DS | IMAGES"
+    },
+    {
+      "key": "a0a021bfa481bc3052bf5952695233f9bf2b90be",
+      "name": "Border Radius Component",
+      "libraryName": "0. Да поможет мне Теплов"
+    },
+    {
+      "key": "bb688bd5510015a514d1b4c8d9ab3e151f59c40b",
+      "name": "Theme",
+      "libraryName": "0. Да поможет мне Теплов"
+    },
+    {
+      "key": "91c9236b03764910eb761245ba0f93b9964b378b",
+      "name": "Spacings",
+      "libraryName": "0. Да поможет мне Теплов"
+    },
+    {
+      "key": "79cf0945ff8b66c0057469536958d66bcaa7819f",
+      "name": "TypoComponent",
+      "libraryName": "0. Да поможет мне Теплов"
+    },
+    {
+      "key": "edaca762ce68a66834e12056d7612652e45ee2c9",
+      "name": "Primitive Colors",
+      "libraryName": "0. Да поможет мне Теплов"
+    },
+    {
+      "key": "622db2a02980725681edcf719cd98cd996461914",
+      "name": "Typography",
+      "libraryName": "0. Да поможет мне Теплов"
+    },
+    {
+      "key": "a7e2554ecd815a0a35fa23082da3db58fc6700a1",
+      "name": "Border Radius",
+      "libraryName": "0. Да поможет мне Теплов"
+    },
+    {
+      "key": "1459b61d2ee1f74fd5ef788687fc1e083236a711",
+      "name": "Modal",
+      "libraryName": "0. Да поможет мне Теплов"
+    },
+    {
+      "key": "c094dd8fa014ee30e286ea7b8669de9ece7e4c08",
+      "name": "Layout",
+      "libraryName": "0. Да поможет мне Теплов"
+    },
+    {
+      "key": "6c5dd65ead0642acf82415038117d72c4b9e9a11",
+      "name": "Viewport",
+      "libraryName": "0. Да поможет мне Теплов"
+    },
+    {
+      "key": "136e26634b261e8469c2ea9b79edff2e481cd122",
+      "name": "COLORS",
+      "libraryName": "0. DS MAIN"
+    },
+    {
+      "key": "28775d07323c2f13caaf9992844a7e5bbeaa8629",
+      "name": "THEME",
+      "libraryName": "0. DS MAIN"
+    },
+    {
+      "key": "ad43150c905c1981367caf9e707f6ef0b375cc65",
+      "name": "SIZE",
+      "libraryName": "0. DS MAIN"
+    },
+    {
+      "key": "82b0239d2700e82c42b9b436b62af6fdd7cab296",
+      "name": "BORDER-RADIUS",
+      "libraryName": "0. DS MAIN"
+    },
+    {
+      "key": "02a24340dcf0937c8a5df2bf68038161b65702bb",
+      "name": "OFFSETS",
+      "libraryName": "0. DS MAIN"
+    },
+    {
+      "key": "8ebbf8bfab61b770bbbc8149e327f3cf4f0df29f",
+      "name": "TYPO",
+      "libraryName": "0. DS MAIN"
+    },
+    {
+      "key": "91cddac4ef32d6ba5de517d1afed297c0a87faa6",
+      "name": "USER VALUES",
+      "libraryName": "0. DS MAIN"
+    },
+    {
+      "key": "71c4acfa4c713c5f444519ca0b6a66291251c58f",
+      "name": "USER VALUES-COMPONENTS",
+      "libraryName": "0. DS MAIN"
+    }
+  ]
+}
