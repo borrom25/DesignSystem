@@ -240,6 +240,13 @@ export type {
 
 export { ProgressBar } from "./ProgressBar";
 export type { ProgressBarProps, ProgressBarStatus } from "./ProgressBar";
+export { ProgressPie } from "./ProgressPie";
+export type {
+  ProgressPieProps,
+  ConfigProps,
+  ProgressPieColors,
+  ProgressPieSize,
+} from "./ProgressPie";
 
 export { Space } from "./Space";
 export type {
@@ -335,6 +342,8 @@ export {
   getFilteredRowModel,
   getPaginationRowModel,
 } from "./Table";
+export { Table as DataTable } from "./DataTable";
+export type { TableProps as DataTableProps } from "./DataTable";
 export type {
   TableProps,
   DataTablePopoverActionContext,

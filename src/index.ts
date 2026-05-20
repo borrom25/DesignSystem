@@ -68,6 +68,14 @@ export type { SwitcherProps, SwitcherValue } from "./components/Switcher";
 
 export { Slider } from "./components/Slider";
 export type { SliderProps } from "./components/Slider";
+export { Space } from "./components/Space";
+export type {
+  SpaceProps,
+  SpaceJustify,
+  SpaceAlign,
+  SpaceDirection,
+  SpaceFlexWrap,
+} from "./components/Space";
 export { Button } from "./components/Button";
 export type { ButtonProps } from "./components/Button";
 
@@ -181,8 +189,19 @@ export type {
   ProgressBarProps,
   ProgressBarStatus,
 } from "./components/ProgressBar";
+export { ProgressPie } from "./components/ProgressPie";
+export type {
+  ProgressPieProps,
+  ConfigProps,
+  ProgressPieColors,
+  ProgressPieSize,
+} from "./components/ProgressPie";
 export { Skeleton } from "./components/Skeleton";
 export type { SkeletonProps } from "./components/Skeleton";
+export { Plug } from "./components/Plug";
+export type { PlugProps } from "./components/Plug";
+export { StepBar } from "./components/StepBar";
+export type { StepBarItem, StepBarProps } from "./components/StepBar";
 export { Tab } from "./components/Tab";
 export type { TabProps, TabType } from "./components/Tab";
 
@@ -385,6 +404,8 @@ export type {
   Row,
   Table as TanStackTable,
 } from "./components/Table";
+export { Table as DataTable } from "./components/DataTable";
+export type { TableProps as DataTableProps } from "./components/DataTable";
 
 export { Cascader } from "./components/Cascader";
 export type { CascaderProps, CascaderItemProps } from "./components/Cascader";
