@@ -3,49 +3,108 @@
 // component=HeaderInside
 const figma = require("figma");
 const instance = figma.selectedInstance;
-void instance;
 
-// Temporary mapping: Figma MCP metadata for this node is unavailable in the
-// current environment, so the snippet uses safe defaults inferred from
-// HeaderInside public API.
-const tabsItems = figma.tsx`[
-  { label: "Tab", value: "tab-1" },
-  { label: "Tab", value: "tab-2" },
-  { label: "Tab", value: "tab-3" },
-  { label: "Tab", value: "tab-4" },
-]`;
+const media = instance.getEnum("Media", {
+  Desktop: "desktop",
+  Mobile: "mobile",
+});
+
+const hasTabList = instance.getBoolean("tabList");
+const hasSlotHead = instance.getBoolean("slotHead");
+const hasTitleButton = instance.getBoolean("titleButton");
+const hasImageSlot = instance.getBoolean("imageSlot");
+const hasSlotInfo = instance.getBoolean("slotInfo");
+const hasSubtitle = instance.getBoolean("subtitlePage");
+
+const title = instance.getString("↳ titlePage");
+const subtitle = instance.getString("↳ subtitlePage");
+
+const headSlot = instance.getSlot("<slotHead>");
+const imageSlot = instance.getSlot("<slotImage>");
+const tabListSlot = instance.getSlot("<slotTablist>");
+const infoSlot = instance.getSlot("<slotInfo>");
+
+void headSlot;
+void imageSlot;
+void infoSlot;
+
+const tabsContent =
+  tabListSlot ||
+  figma.tsx`
+    <TabsOverflow
+      items={[
+        { label: "Overview", value: "overview" },
+        { label: "Activity", value: "activity" },
+        { label: "Files", value: "files" },
+        { label: "Members", value: "members" },
+      ]}
+      size="sm"
+      value="overview"
+      onValueChange={() => {}}
+    />
+  `;
+
+const childrenContent = hasTabList ? tabsContent : "";
+const imageSrcProp = hasImageSlot
+  ? 'imageSrc="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=72&h=72&fit=crop"'
+  : "";
+const subtitleProp = hasSubtitle ? figma.tsx`subtitle="${subtitle}"` : "";
+const actionProps = hasTitleButton
+  ? figma.tsx`
+      showActionButton
+      actionIcon={Settings}
+      onActionClick={() => {}}
+    `
+  : "showActionButton={false}";
+const accountMenuProp = hasSlotInfo
+  ? figma.tsx`
+      accountMenu={
+        <AccountMenu
+          src="https://i.pravatar.cc/160?img=68"
+          fullName="Name User"
+        />
+      }
+    `
+  : "";
 
 export default {
   example: figma.tsx`
     <HeaderInside
-      title="Название страницы"
-      subtitle="Название страницы"
-      showActionButton
-      actionIcon={Settings}
+      title="${title}"
+      ${subtitleProp}
+      ${imageSrcProp}
+      ${actionProps}
       showNotification
       onBackClick={() => {}}
-      onActionClick={() => {}}
       onNotificationClick={() => {}}
+      ${accountMenuProp}
     >
-      <TabsOverflow
-        items={${tabsItems}}
-        size="sm"
-        value="tab-1"
-        onValueChange={() => {}}
-      />
+      ${childrenContent}
     </HeaderInside>
   `,
   imports: [
-    'import { HeaderInside, TabsOverflow } from "borrom-ds-test"',
+    'import { AccountMenu, HeaderInside, TabsOverflow } from "borrom-ds-test"',
     'import { Settings } from "lucide-react"',
   ],
   id: "headerinside",
   metadata: {
     nestable: true,
     props: {
-      hasTemporaryFigmaPropertyMapping: true,
-      hasTemporaryTabsMapping: true,
-      figmaNodeReadStatus: "unavailable",
+      media,
+      hasTabList,
+      hasSlotHead,
+      hasTitleButton,
+      hasImageSlot,
+      hasSlotInfo,
+      hasSubtitle,
+      figmaNodeId: "658:11298",
+      figmaComponent: "Header / insidePage",
+      mediaHandledByScreenProvider: true,
+      backButtonAlwaysRenderedByRuntime: true,
+      slotTablistMappedToChildren: hasTabList,
+      slotInfoMappedToAccountMenu: hasSlotInfo,
+      slotImageMappedToImageSrc: hasImageSlot,
+      headerKind: "insidePage",
     },
   },
 };
