@@ -11,7 +11,7 @@
 yarn figma:status:write
 ```
 
-Итого: 48/72 готово, 0 только docs, 0 только figma.js, 24 не начато.
+Итого: 49/72 готово, 0 только docs, 0 только figma.js, 23 не начато.
 
 | Компонент | Публичный export | Runtime | Story | Docs | figma.js | Статус | Что не хватает |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -57,7 +57,7 @@ yarn figma:status:write
 | Line | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | ListItem | да | да | да | да | да | готово | ok |
 | MinusCheckBox | да | да | нет | нет | нет | не начато | нет docs, нет figma.js |
-| Modal | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| Modal | да | да | да | да | да | готово | ok |
 | MultiSelect | да | да | да | да | да | готово | ok |
 | MultiTag | да | да | да | да | да | готово | ok |
 | Pagination | да | да | да | да | да | готово | ok |
