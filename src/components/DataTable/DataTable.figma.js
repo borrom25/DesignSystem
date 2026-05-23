@@ -79,6 +79,9 @@ const data = isDrop
 
 // Figma Line is a row-level component. Runtime rows are internal, so the
 // snippet maps each visual row mode to the public DataTable API.
+// If the Figma header includes filter icons / modalContainer variants, define
+// columns with dataTableFilter.* and pass filters={tableController.filters}
+// from useDataTableController({ columns }).
 export default {
   example: figma.tsx`
     <DataTable
@@ -124,6 +127,7 @@ export default {
     props: {
       type,
       runtimeOwnsRowsAndCells: true,
+      modalContainerFiltersRequireColumnsFilterAndFiltersState: true,
       basicMapsToRowSelection: !isDrop,
       dropMapsToNestedRows: isDrop,
       itemColumnActionMapsToColumnResizing: true,

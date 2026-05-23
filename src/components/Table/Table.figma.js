@@ -24,6 +24,9 @@ const toolbarPropsProp = hasToolbar
 // Figma exposes <slotHeaders> and <slotCell>, while the public Table API
 // generates headers and cells from data/columns. The snippet below keeps that
 // runtime model instead of hand-assembling internal table pieces.
+// If the Figma header includes filter icons / modalContainer variants, define
+// columns with dataTableFilter.* and pass filters={tableController.filters}
+// from useDataTableController({ columns }).
 export default {
   example: figma.tsx`
     <Table
@@ -113,6 +116,7 @@ export default {
       hasToolbar,
       runtimeOwnsRowsAndColumns: true,
       figmaSlotsMappedToDataAndColumns: true,
+      modalContainerFiltersRequireColumnsFilterAndFiltersState: true,
       itemColumnActionMapsToColumnResizing: true,
       popoveActionMapsToPopoverAction: true,
     },
