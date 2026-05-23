@@ -21,6 +21,30 @@ const modeProps = isDrop
       getRowId={(row) => row.id}
     `;
 
+const selectionActionProps = isDrop
+  ? ""
+  : figma.tsx`
+      popoverAction={{
+        selectedLabel: (count) => \`Выбрано: \${count}\`,
+        children: ({ selectedRows, hide }) => (
+          <Button
+            size={Size.Xs}
+            type={Type.Flat}
+            color={Color.Brand}
+            onClick={() => {
+              console.log(
+                "Действие для выбранных строк:",
+                selectedRows.map((row) => row.original)
+              );
+              hide();
+            }}
+          >
+            Применить
+          </Button>
+        ),
+      }}
+    `;
+
 const data = isDrop
   ? figma.tsx`[
       {
@@ -83,6 +107,7 @@ export default {
         },
       ]}
       ${modeProps}
+      ${selectionActionProps}
       enableColumnResizing
       columnResizeMode="onChange"
       rowActions={() => [{ label: "Открыть", value: "open" }]}
@@ -90,7 +115,9 @@ export default {
       striped
     />
   `,
-  imports: ['import { DataTable } from "borrom-ds-test"'],
+  imports: [
+    'import { Button, Color, DataTable, Size, Type } from "borrom-ds-test"',
+  ],
   id: "data-table-line",
   metadata: {
     nestable: false,
@@ -100,6 +127,7 @@ export default {
       basicMapsToRowSelection: !isDrop,
       dropMapsToNestedRows: isDrop,
       itemColumnActionMapsToColumnResizing: true,
+      popoveActionMapsToPopoverAction: !isDrop,
       checkboxAndExpanderAreMutuallyExclusive: true,
     },
   },

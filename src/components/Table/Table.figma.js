@@ -78,12 +78,33 @@ export default {
       enableColumnResizing
       columnResizeMode="onChange"
       enableRowSelection
+      popoverAction={{
+        selectedLabel: (count) => \`Выбрано: \${count}\`,
+        children: ({ selectedRows, hide }) => (
+          <Button
+            size={Size.Xs}
+            type={Type.Flat}
+            color={Color.Brand}
+            onClick={() => {
+              console.log(
+                "Действие для выбранных строк:",
+                selectedRows.map((row) => row.original)
+              );
+              hide();
+            }}
+          >
+            Применить
+          </Button>
+        ),
+      }}
       stickyHeader
       striped
       rowActions={() => [{ label: "Открыть", value: "open" }]}
     />
   `,
-  imports: ['import { Table } from "borrom-ds-test"'],
+  imports: [
+    'import { Button, Color, Size, Table, Type } from "borrom-ds-test"',
+  ],
   id: "table",
   metadata: {
     nestable: false,
@@ -93,6 +114,7 @@ export default {
       runtimeOwnsRowsAndColumns: true,
       figmaSlotsMappedToDataAndColumns: true,
       itemColumnActionMapsToColumnResizing: true,
+      popoveActionMapsToPopoverAction: true,
     },
   },
 };
