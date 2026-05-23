@@ -60,11 +60,31 @@ export default {
     <DataTable
       data={${data}}
       columns={[
-        { accessorKey: "name", header: "Название", size: 240 },
-        { accessorKey: "owner", header: "Ответственный", size: 180 },
-        { accessorKey: "status", header: "Статус", size: 160 },
+        {
+          accessorKey: "name",
+          header: "Название",
+          size: 240,
+          minSize: 160,
+          maxSize: 420,
+        },
+        {
+          accessorKey: "owner",
+          header: "Ответственный",
+          size: 180,
+          minSize: 140,
+          maxSize: 320,
+        },
+        {
+          accessorKey: "status",
+          header: "Статус",
+          size: 160,
+          minSize: 120,
+          maxSize: 280,
+        },
       ]}
       ${modeProps}
+      enableColumnResizing
+      columnResizeMode="onChange"
       rowActions={() => [{ label: "Открыть", value: "open" }]}
       stickyHeader
       striped
@@ -79,6 +99,7 @@ export default {
       runtimeOwnsRowsAndCells: true,
       basicMapsToRowSelection: !isDrop,
       dropMapsToNestedRows: isDrop,
+      itemColumnActionMapsToColumnResizing: true,
       checkboxAndExpanderAreMutuallyExclusive: true,
     },
   },

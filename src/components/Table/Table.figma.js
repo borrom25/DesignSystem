@@ -44,13 +44,39 @@ export default {
         },
       ]}
       columns={[
-        { accessorKey: "title", header: "Название", size: 220 },
-        { accessorKey: "product", header: "Продукт", size: 180 },
-        { accessorKey: "owner", header: "Ответственный", size: 180 },
-        { accessorKey: "team", header: "Команда", size: 180 },
+        {
+          accessorKey: "title",
+          header: "Название",
+          size: 220,
+          minSize: 160,
+          maxSize: 420,
+        },
+        {
+          accessorKey: "product",
+          header: "Продукт",
+          size: 180,
+          minSize: 140,
+          maxSize: 320,
+        },
+        {
+          accessorKey: "owner",
+          header: "Ответственный",
+          size: 180,
+          minSize: 140,
+          maxSize: 320,
+        },
+        {
+          accessorKey: "team",
+          header: "Команда",
+          size: 180,
+          minSize: 140,
+          maxSize: 320,
+        },
       ]}
       ${showToolbarProp}
       ${toolbarPropsProp}
+      enableColumnResizing
+      columnResizeMode="onChange"
       enableRowSelection
       stickyHeader
       striped
@@ -66,6 +92,7 @@ export default {
       hasToolbar,
       runtimeOwnsRowsAndColumns: true,
       figmaSlotsMappedToDataAndColumns: true,
+      itemColumnActionMapsToColumnResizing: true,
     },
   },
 };
