@@ -1,10 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import {
-  Table,
-  createDataTableColumnHelper,
-  type ColumnDef,
-  type TableProps,
-} from "@/components";
+import { Table } from "@/components/DataTable/DataTable";
+import { createDataTableColumnHelper } from "@/components/DataTable/createDataTableColumnHelper";
+import type { ColumnDef, TableProps } from "@/components/DataTable/types";
 
 interface ProjectTreeRow {
   id: string;
@@ -133,7 +130,7 @@ const buildVirtualizedData = (): ProjectTreeRow[] =>
   }));
 
 const meta = {
-  title: "Components/DataTable",
+  title: "Components/Table",
   component: Table,
   parameters: {
     layout: "fullscreen",

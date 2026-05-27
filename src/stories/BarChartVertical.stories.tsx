@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { BarChartVertical as BarChartVerticalComponent } from "@/components";
+import { BarChartVertical as BarChartVerticalComponent } from "@/components/BarChartVertical";
 
 const meta = {
-  title: "Components/Charts",
+  title: "Components/BarChartVertical",
   component: BarChartVerticalComponent,
   parameters: {
     layout: "fullscreen",
