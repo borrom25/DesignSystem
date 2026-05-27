@@ -24,7 +24,7 @@ export function useInputMessageState({
       if (!isControlled) {
         setInternalValue(newValue);
       }
-      onChange?.(newValue);
+      onChange?.({ value: newValue });
     },
     [isControlled, onChange]
   );

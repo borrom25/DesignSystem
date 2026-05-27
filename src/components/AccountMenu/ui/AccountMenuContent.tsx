@@ -5,7 +5,7 @@ import { AccountMenuContentProps } from "../AccountMenu.types.ts";
 import { ChevronRight, LogOut, Moon, SunMedium } from "lucide-react";
 import { cn } from "@/utils";
 
-export function AccountMenuContent({
+export function AccountMenuContent<T extends string = string>({
   actionSlot,
   switchersSlot,
   language,
@@ -17,7 +17,7 @@ export function AccountMenuContent({
   role,
   actions = [],
   logoutFn,
-}: AccountMenuContentProps) {
+}: AccountMenuContentProps<T>) {
   const { isMobile } = useScreenSize();
   const { setTheme, theme } = useTheme();
   const isShowLanguageSlot =
@@ -85,6 +85,7 @@ export function AccountMenuContent({
             iconLeft={LogOut}
             onClick={logoutFn}
             variant="danger"
+            className={accountMenuClasses.danger}
             iconRight={ChevronRight}
           >
             Выйти

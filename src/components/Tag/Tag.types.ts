@@ -11,4 +11,5 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   leftContent?: ReactNode;
   onClose?: () => void;
   error?: boolean;
+  disabled?: boolean;
 }

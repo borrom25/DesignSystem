@@ -15,8 +15,12 @@ export type { InputNumberProps, InputNumberCompactProps } from "./InputNumber";
 export { InputPassword } from "./InputPassword";
 export type { InputPasswordProps } from "./InputPassword";
 
-export { InputPhone } from "./InputPhone";
-export type { InputPhoneProps } from "./InputPhone";
+export { InputPhone, InputPhoneValueFormat } from "./InputPhone";
+export type {
+  InputPhoneChangeMeta,
+  InputPhoneProps,
+  InputPhoneValueChangeHandler,
+} from "./InputPhone";
 
 export { InputTag } from "./InputTag";
 export type { InputTagProps, InputTagChangeHandler } from "./InputTag";
@@ -74,7 +78,14 @@ export { Tag } from "./Tag";
 export type { TagProps } from "./Tag";
 
 export { Alert } from "./Alert";
-export type { AlertColor, AlertProps } from "./Alert";
+export { alertController } from "./Alert";
+export type {
+  AlertColor,
+  AlertProps,
+  ProgrammaticAlertEntry,
+  ProgrammaticAlertOptions,
+  ProgrammaticAlertType,
+} from "./Alert";
 
 export { Line } from "./Line";
 export type { LineProps } from "./Line";
@@ -96,6 +107,15 @@ export type { AccountMenuProps } from "./AccountMenu";
 
 export { BarChartVertical } from "./BarChartVertical";
 export type { BarChartVerticalProps } from "./BarChartVertical";
+
+export { LineChart } from "./LineChart";
+export type { LineChartProps } from "./LineChart";
+
+export { BarChartHorizontal } from "./BarChartHorizontal";
+export type { BarChartHorizontalProps } from "./BarChartHorizontal";
+
+export { PieChart } from "./PieChart";
+export type { PieChartType, PieChartProps } from "./PieChart";
 
 export {
   Popover,
@@ -177,8 +197,8 @@ export type {
   UseCalendarFilterStateReturn,
 } from "./CalendarFilter";
 
-export { Card } from "./Card";
-export type { CardProps } from "./Card";
+export { Card, CardVariant } from "./Card";
+export type { CardPadding, CardProps, CardVariantType } from "./Card";
 
 export { Bubble, BubbleSide } from "./Bubble";
 export type {
@@ -225,10 +245,19 @@ export {
   ModalType,
   useModalStore,
   useModalsEntries,
+  useProgrammaticModals,
+  modalController,
   useModalContext,
   ModalContext,
 } from "./Modal";
-export type { ModalProps, ModalContextValue, ModalEntry } from "./Modal";
+export type {
+  ModalProps,
+  ModalContextValue,
+  ModalEntry,
+  ProgrammaticModalEntry,
+  ProgrammaticModalOptions,
+  ProgrammaticModalSize,
+} from "./Modal";
 
 export { TableColumnsModal } from "./TableColumnsModal";
 export { useTableColumnsModalOptions } from "./TableColumnsModal";
@@ -240,13 +269,6 @@ export type {
 
 export { ProgressBar } from "./ProgressBar";
 export type { ProgressBarProps, ProgressBarStatus } from "./ProgressBar";
-export { ProgressPie } from "./ProgressPie";
-export type {
-  ProgressPieProps,
-  ConfigProps,
-  ProgressPieColors,
-  ProgressPieSize,
-} from "./ProgressPie";
 
 export { Space } from "./Space";
 export type {
@@ -318,6 +340,9 @@ export type { StepBarItem, StepBarProps } from "./StepBar";
 export { Cascader } from "./Cascader";
 export type { CascaderProps, CascaderItemProps } from "./Cascader";
 
+export { Carousel } from "./Carousel";
+export type { CarouselProps } from "./Carousel";
+
 export { AppLayout } from "./AppLayout";
 export type { AppLayoutProps, AppLayoutContainer } from "./AppLayout";
 
@@ -342,10 +367,15 @@ export {
   getFilteredRowModel,
   getPaginationRowModel,
 } from "./Table";
-export { Table as DataTable } from "./DataTable";
-export type { TableProps as DataTableProps } from "./DataTable";
 export type {
   TableProps,
+  TableExpandedContentContext,
+  TableExpandedContentRenderer,
+  TableCellEditContext,
+  TableCellValueChangeEvent,
+  TableCellValueChangeReason,
+  TableCellEditablePredicate,
+  TableCellEditorRenderer,
   DataTablePopoverActionContext,
   DataTablePopoverActionProps,
   ColumnDef,

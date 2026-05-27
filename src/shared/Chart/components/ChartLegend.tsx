@@ -3,7 +3,8 @@ import { chartStyles } from "../styles";
 import { getBarColor } from "../utils.ts";
 import { ChartProps } from "../types.ts";
 
-interface ChartLegendProps extends LegendProps, Omit<ChartProps, "title"> {
+interface ChartLegendProps
+  extends LegendProps, Omit<Partial<ChartProps>, "title"> {
   width?: number;
 }
 
@@ -19,12 +20,12 @@ export const ChartLegend = ({
       <BarChart data={data} width={width ?? 900} height={20}>
         <Legend
           iconType={iconType}
-          formatter={(value) => (
-            <span className={chartStyles.legend}>{value}</span>
+          formatter={(_, __, index) => (
+            <span className={chartStyles.legend}>{series?.[index].label}</span>
           )}
           {...props}
         />
-        {series.map((item, i) => (
+        {series?.map((item, i) => (
           <Bar
             key={item.dataKey}
             dataKey={item.dataKey}

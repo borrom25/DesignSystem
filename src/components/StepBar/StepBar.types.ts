@@ -3,8 +3,8 @@ import { ReactNode } from "react";
 
 export type StepBarItemType = "successful" | "error";
 
-export interface StepBarItem {
-  id: string;
+export interface StepBarItem<T extends string | number = string> {
+  id: T;
   label: string | ReactNode;
   disabled?: boolean;
   leftIcon?: LucideIcon;
@@ -12,17 +12,17 @@ export interface StepBarItem {
   type?: StepBarItemType;
 }
 
-export interface StepBarProps {
-  items: StepBarItem[];
-  active?: StepBarItem["id"];
-  onChangeStep: (step: StepBarItem["id"]) => void;
+export interface StepBarProps<T extends string | number = string> {
+  items: StepBarItem<T>[];
+  active?: T;
+  onChangeStep: (step: T) => void;
   onClickSuccessButton?: () => void;
   className?: string;
   successButtonText?: string;
 }
 
-export interface UseStepBarProps {
-  items: StepBarItem[];
-  active: StepBarItem["id"];
-  onChangeStep: (step: StepBarItem["id"]) => void;
+export interface UseStepBarProps<T extends string | number = string> {
+  items: StepBarItem<T>[];
+  active: T;
+  onChangeStep: (step: T) => void;
 }

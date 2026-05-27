@@ -67,8 +67,9 @@ export type MultiTagTriggerProps = Omit<
   children?: ReactNode;
   clearable?: boolean;
   onClear?: () => void;
-  hasValue?: boolean;
   maxVisibleRows?: number;
+  label?: ReactNode;
+  required?: boolean;
 };
 
 export type MultiTagValueProps<T extends string | number = string> = {
@@ -78,7 +79,8 @@ export type MultiTagValueProps<T extends string | number = string> = {
   disabled?: boolean;
   error?: boolean;
   onRemove?: (value: T) => void;
-  maxVisibleRows?: number;
+  label?: ReactNode;
+  open?: boolean;
 };
 
 export type MultiTagContentProps = BaseContentProps &

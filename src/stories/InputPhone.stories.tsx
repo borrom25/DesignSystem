@@ -1,10 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
-import { InputPhone, InputVariant } from "@/components";
+import { InputPhone, InputPhoneValueFormat, InputVariant } from "@/components";
 import { Size } from "@/types";
+import type { Country } from "react-phone-number-input";
 
 const SIZES = [Size.Xs, Size.Sm, Size.Md] as const;
 const VARIANTS = [InputVariant.Default, InputVariant.Clear] as const;
+const LIMITED_COUNTRIES: Country[] = ["RU", "KZ", "TR", "CN", "IN", "US"];
 
 const meta = {
   title: "Components/InputPhone",
@@ -14,7 +16,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Поле ввода телефона с фиксированным префиксом +7, вертикальным сепаратором и форматированием в вид 900 000-00-00.",
+          "Поле ввода телефона с выбором страны, поиском по странам и форматированием локальной части номера.",
       },
     },
   },
@@ -35,6 +37,7 @@ export const Playground: Story = {
     const [hasHintError, setHasHintError] = useState(false);
     const [disabled, setDisabled] = useState(false);
     const [value, setValue] = useState("");
+    const [country, setCountry] = useState<Country>("RU");
 
     return (
       <div className="flex flex-col gap-6" style={{ width: 360 }}>
@@ -114,9 +117,14 @@ export const Playground: Story = {
           size={size}
           variant={variant}
           value={value}
+          country={country}
+          onCountryChange={setCountry}
           onChange={(event) => {
             console.log("InputPhone Playground:", event.target.value);
             setValue(event.target.value);
+          }}
+          onValueChange={(nextValue, meta) => {
+            console.log("InputPhone value meta:", nextValue, meta);
           }}
           onClear={() => setValue("")}
           error={error}
@@ -134,7 +142,7 @@ export const Playground: Story = {
 
 export const WithValue: Story = {
   render: () => {
-    const [value, setValue] = useState("9991234567");
+    const [value, setValue] = useState("+79991234567");
 
     return (
       <div style={{ width: 360 }}>
@@ -148,6 +156,29 @@ export const WithValue: Story = {
           label="Телефон"
           placeholder="900 000-00-00"
           hint="Формат применяется и при вставке"
+        />
+      </div>
+    );
+  },
+};
+
+export const LimitedCountries: Story = {
+  render: () => {
+    const [value, setValue] = useState("");
+    const [country, setCountry] = useState<Country>("KZ");
+
+    return (
+      <div style={{ width: 360 }}>
+        <InputPhone
+          value={value}
+          country={country}
+          countries={LIMITED_COUNTRIES}
+          valueFormat={InputPhoneValueFormat.National}
+          onCountryChange={setCountry}
+          onValueChange={setValue}
+          label="Телефон"
+          placeholder="Введите номер"
+          hint="В этом примере наружу возвращаются только национальные цифры"
         />
       </div>
     );

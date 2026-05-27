@@ -1,4 +1,4 @@
-import { closeButtonSize, cn } from "@/utils";
+import { cn } from "@/utils";
 import { Size } from "@/types";
 import { useInputFieldState } from "../hooks";
 import { inputStyles } from "../styles";
@@ -86,6 +86,7 @@ export function InputField({
           disabled={disabled}
           className={cn(
             inputStyles.native,
+            inputStyles.nativeFullHeight,
             disabled && inputStyles.nativeDisabled,
             hasFloatingLabel &&
               isFloatingLabelActive &&
@@ -108,7 +109,7 @@ export function InputField({
 
       {clearable && hasValue && !disabled && (
         <CloseBtn
-          size={closeButtonSize(size)}
+          size={Size.Md}
           onMouseDown={(event) => {
             event.preventDefault();
           }}

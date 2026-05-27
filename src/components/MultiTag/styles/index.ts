@@ -1,68 +1,40 @@
+import { inputTagStyles } from "@/components/InputTag/styles";
 import {
   multiTagTriggerSizeClasses,
-  multiTagTriggerInlinePaddingClasses,
-  tagsContainerClasses,
-  controlsContainerClasses,
-  controlsContainerWrappedClasses,
-  multiTagFieldInlinePaddingClasses,
-  multiTagTriggerInlinePaddingWithValueClasses,
-  tagsContainerWrappedClasses,
-  tagsContainerPaddingClasses,
+  tagsContainerSizeClasses,
   controlsContainerSizeClasses,
+  controlsContainerWithTagsSizeClasses,
+  multiTagFieldInlinePaddingClasses,
+  labelZoneSpacerClasses,
+  labelZoneOffsetClasses,
   tagRowHeightMap,
   tagGap,
 } from "./sizes.ts";
 import {
-  multiTagTriggerBaseClasses,
   triggerChevronOpenClasses,
   placeholderClasses,
   triggerStyles,
-} from "./base.ts";
-
-export {
-  multiTagTriggerSizeClasses,
-  multiTagTriggerInlinePaddingClasses,
+  triggerEmptyClasses,
+  triggerWithTagsClasses,
+  tagsContainerWrapperClasses,
   tagsContainerClasses,
+  tagsContainerEmptyClasses,
+  tagsContainerWithTagsClasses,
   controlsContainerClasses,
-  controlsContainerWrappedClasses,
-  multiTagFieldInlinePaddingClasses,
-  multiTagTriggerInlinePaddingWithValueClasses,
-  tagsContainerWrappedClasses,
-  tagsContainerPaddingClasses,
-  controlsContainerSizeClasses,
-  tagRowHeightMap,
-  tagGap,
-} from "./sizes.ts";
-export {
-  wrapperClasses,
-  labelBaseClasses,
-  requiredMarkClasses,
-  hintBaseClasses,
-  hintDefaultClasses,
-  hintErrorClasses,
-} from "@/components/Field/styles";
-export {
-  multiTagTriggerBaseClasses,
-  triggerChevronOpenClasses,
-  placeholderClasses,
-  iconSizeMap,
-  labelSizeClasses,
-  hintSizeClasses,
-  triggerStyles,
+  controlsContainerWithTagsClasses,
 } from "./base.ts";
 
+export { wrapperClasses } from "@/components/Field/styles";
 export {
   selectAllClasses,
-  selectAllTextClasses,
   selectAllDividerClasses,
 } from "@/components/MultiSelect/styles";
 
 export const multiTagStyles = {
   trigger: {
-    base: multiTagTriggerBaseClasses,
     size: multiTagTriggerSizeClasses,
-    inlinePadding: multiTagTriggerInlinePaddingClasses,
-    inlinePaddingWithValue: multiTagTriggerInlinePaddingWithValueClasses,
+    empty: triggerEmptyClasses,
+    withTags: triggerWithTagsClasses,
     open: triggerStyles.open,
     error: {
       default: triggerStyles.error.default,
@@ -73,13 +45,23 @@ export const multiTagStyles = {
   field: {
     inlinePadding: multiTagFieldInlinePaddingClasses,
   },
+  labelZoneSpacer: labelZoneSpacerClasses,
+  labelZoneOffset: labelZoneOffsetClasses,
+  tagsContainerWrapper: tagsContainerWrapperClasses,
   tagsContainer: tagsContainerClasses,
-  tagsContainerPadding: tagsContainerPaddingClasses,
-  tagsContainerWrapped: tagsContainerWrappedClasses,
+  tagsContainerEmpty: tagsContainerEmptyClasses,
+  tagsContainerSize: tagsContainerSizeClasses,
+  tagsContainerWithTags: tagsContainerWithTagsClasses,
+  floatingLabel: {
+    offsetSize: inputTagStyles.floatingLabelOffsetSize,
+    active: inputTagStyles.floatingLabelActive,
+    activeTypographySize: inputTagStyles.floatingLabelActiveTypographySize,
+  },
   controls: {
     base: controlsContainerClasses,
     size: controlsContainerSizeClasses,
-    wrapped: controlsContainerWrappedClasses,
+    withTags: controlsContainerWithTagsClasses,
+    withTagsSize: controlsContainerWithTagsSizeClasses,
   },
   icon: triggerStyles.icon,
   placeholder: placeholderClasses,
@@ -87,3 +69,5 @@ export const multiTagStyles = {
   tagRowHeight: tagRowHeightMap,
   tagGap,
 } as const;
+
+export { placeholderClasses, triggerStyles, iconSizeMap } from "./base.ts";

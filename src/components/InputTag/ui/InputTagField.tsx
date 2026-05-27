@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type {
   InputHTMLAttributes,
   KeyboardEvent,
   ChangeEvent,
   FocusEvent,
+  MouseEventHandler,
 } from "react";
-import { closeButtonSize, cn } from "@/utils";
+import { cn } from "@/utils";
 import { Size } from "@/types";
 import { CloseBtn } from "@/components/CloseBtn";
 import { Tag } from "@/components/Tag";
@@ -50,9 +51,11 @@ export function InputTagField({
   ...inputProps
 }: InputTagFieldProps) {
   const [focused, setFocused] = useState(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const hasTags = tags.length > 0;
   const hasFloatingLabel = !!label;
   const isLabelActive = hasFloatingLabel && (focused || hasValue);
+  const isActiveWithoutTags = isLabelActive && !hasTags;
   const shouldCenterInputVertically = !inputValue && !isLabelActive;
 
   const handleFocus = (event: FocusEvent<HTMLInputElement>) => {
@@ -65,6 +68,14 @@ export function InputTagField({
     onBlur?.(event);
   };
 
+  const handleWrapperMouseDown: MouseEventHandler<HTMLDivElement> = (event) => {
+    if (disabled || !(event.target instanceof Element)) return;
+    if (event.target.closest("button,input,[role='button']")) return;
+
+    event.preventDefault();
+    inputRef.current?.focus();
+  };
+
   return (
     <div
       className={cn(
@@ -72,6 +83,7 @@ export function InputTagField({
         inputTagStyles.wrapper,
         hasTags ? inputTagStyles.wrapperWithTags : inputTagStyles.wrapperEmpty
       )}
+      onMouseDown={handleWrapperMouseDown}
     >
       {hasFloatingLabel && required && <FloatingLabelRequiredMark />}
 
@@ -82,6 +94,12 @@ export function InputTagField({
           size={size}
           active={isLabelActive}
           disabled={disabled}
+          className={cn(
+            inputTagStyles.floatingLabelOffsetSize[size],
+            isLabelActive && inputTagStyles.floatingLabelActive,
+            isLabelActive &&
+              inputTagStyles.floatingLabelActiveTypographySize[size]
+          )}
         />
       )}
 
@@ -89,8 +107,10 @@ export function InputTagField({
         className={cn(
           inputTagStyles.tagsContainer,
           inputTagStyles.containerSize[size],
+          hasTags && inputTagStyles.tagsContainerWithTags,
           hasFloatingLabel &&
             isLabelActive &&
+            hasTags &&
             inputTagStyles.tagsContainerWithFloatingLabel,
           !hasTags && !isLabelActive && "content-center"
         )}
@@ -99,13 +119,15 @@ export function InputTagField({
           <Tag
             key={index}
             size={size}
-            onClose={disabled ? undefined : () => onRemoveTag(index)}
+            onClose={() => onRemoveTag(index)}
+            disabled={disabled}
           >
             {tag}
           </Tag>
         ))}
 
         <input
+          ref={inputRef}
           type="text"
           disabled={disabled}
           value={inputValue}
@@ -122,11 +144,17 @@ export function InputTagField({
             hasFloatingLabel &&
               isLabelActive &&
               inputTagStyles.nativePlaceholderVisible,
+            isActiveWithoutTags && inputTagStyles.nativeWithFloatingLabel,
+            isActiveWithoutTags && inputTagStyles.nativeActiveWithoutTags,
+            isActiveWithoutTags &&
+              inputTagStyles.nativeActiveWithoutTagsShiftSize[size],
             shouldCenterInputVertically && "self-center",
-            "flex-1 min-w-[80px]",
+            inputTagStyles.nativeText,
+            inputTagStyles.nativePlaceholderTypographySize[size],
             inputClassName
           )}
           {...inputProps}
+          placeholder={hasTags ? undefined : inputProps.placeholder}
           autoComplete="off"
         />
       </div>
@@ -138,11 +166,7 @@ export function InputTagField({
             inputTagStyles.clearButtonWrapperSize[size]
           )}
         >
-          <CloseBtn
-            size={closeButtonSize(size)}
-            onClick={onClearAll}
-            aria-label="Очистить"
-          />
+          <CloseBtn size={Size.Md} onClick={onClearAll} aria-label="Очистить" />
         </div>
       )}
     </div>

@@ -1,4 +1,5 @@
 import {
+  dangerClasses,
   fullNameCLasses,
   headerClasses,
   itemsClasses,
@@ -20,4 +21,5 @@ export const accountMenuClasses = {
   items: itemsClasses,
   popover: popoverClasses,
   modal: modalClasses,
+  danger: dangerClasses,
 } as const;

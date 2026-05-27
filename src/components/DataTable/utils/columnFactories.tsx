@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { ChevronRight, ChevronsDown } from "lucide-react";
+import { ChevronDown, ChevronsDown } from "lucide-react";
 import { CheckBox } from "@/components/CheckBox";
 import { Size } from "@/types";
 import { cn } from "@/utils";
@@ -78,7 +78,7 @@ export function createExpanderColumn<TData>(
               aria-label={isExpanded ? "Свернуть строку" : "Раскрыть строку"}
               aria-expanded={isExpanded}
             >
-              <ChevronRight
+              <ChevronDown
                 size={16}
                 className={cn(
                   tableStyles.expandIcon,

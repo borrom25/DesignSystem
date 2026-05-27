@@ -25,3 +25,4 @@ export const useTextAreaIds = ({
 
 export { useTextAreaResize } from "./useTextAreaResize";
 export { useTextAreaClassNames } from "./useTextAreaClassNames";
+export { useTextAreaFieldState } from "./useTextAreaFieldState";

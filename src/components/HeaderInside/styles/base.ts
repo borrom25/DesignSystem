@@ -2,9 +2,9 @@ export const insideRootClasses =
   "fixed top-0 left-0 right-0 z-40 flex h-19 items-center gap-7 border-b border-line bg-generic p-7 data-[mobile=true]:h-auto data-[mobile=true]:max-h-[88px] data-[mobile=true]:items-start data-[mobile=true]:pt-1";
 
 export const contentClasses =
-  "flex align-center w-[90%] gap-7 data-[mobile=true]:flex-col data-[mobile=true]:gap-2";
+  "flex w-[90%] items-center gap-7 data-[mobile=true]:flex-col data-[mobile=true]:items-start data-[mobile=true]:gap-2";
 
-export const actionSectionClasses = "flex align-center gap-7";
+export const actionSectionClasses = "flex items-center gap-7";
 
 export const backButtonClasses =
   "flex shrink-0 cursor-pointer items-center justify-center border-0 bg-transparent p-0";

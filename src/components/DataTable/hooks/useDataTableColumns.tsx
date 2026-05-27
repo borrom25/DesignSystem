@@ -9,7 +9,7 @@ import {
 export function useDataTableColumns<TData>({
   columns,
   enableRowSelection,
-  enableNestedRows,
+  enableExpanding,
   stickySelectionColumn,
   stickyActionsColumn,
   rowActions,
@@ -17,7 +17,7 @@ export function useDataTableColumns<TData>({
   return useMemo(() => {
     const resultColumns: ColumnDef<TData>[] = [];
 
-    if (enableNestedRows) {
+    if (enableExpanding) {
       resultColumns.push(createExpanderColumn<TData>(stickySelectionColumn));
     } else if (enableRowSelection) {
       resultColumns.push(createSelectionColumn<TData>(stickySelectionColumn));
@@ -35,7 +35,7 @@ export function useDataTableColumns<TData>({
   }, [
     columns,
     enableRowSelection,
-    enableNestedRows,
+    enableExpanding,
     rowActions,
     stickySelectionColumn,
     stickyActionsColumn,

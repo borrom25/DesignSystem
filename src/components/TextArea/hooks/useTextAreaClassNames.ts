@@ -8,6 +8,8 @@ interface UseTextAreaClassNamesProps {
   isError: boolean;
   disabled: boolean;
   inputClassName?: string;
+  hasLabel?: boolean;
+  isPlaceholderVisible?: boolean;
 }
 
 export function useTextAreaClassNames({
@@ -15,32 +17,48 @@ export function useTextAreaClassNames({
   isError,
   disabled,
   inputClassName,
+  hasLabel = false,
+  isPlaceholderVisible = false,
 }: UseTextAreaClassNamesProps) {
-  const textareaClassName = useMemo(
+  const fieldShellClassName = useMemo(
     () =>
-      cn(
-        textAreaStyles.base,
-        textAreaStyles.size[size],
-        isError && textAreaStyles.error,
-        disabled && textAreaStyles.disabled,
-        !isError && !disabled && textAreaStyles.state
-      ),
-    [size, isError, disabled]
+      hasLabel
+        ? cn(
+            textAreaStyles.fieldShell,
+            textAreaStyles.fieldShellSize[size],
+            isError && textAreaStyles.error,
+            disabled && textAreaStyles.disabled,
+            !isError && !disabled && textAreaStyles.state
+          )
+        : undefined,
+    [hasLabel, size, isError, disabled]
   );
 
   const nativeClassName = useMemo(
     () =>
       cn(
-        textareaClassName,
+        hasLabel ? textAreaStyles.nativeWithLabel : textAreaStyles.base,
         textAreaStyles.native,
+        textAreaStyles.nativeTextBase,
+        textAreaStyles.nativeTextSize[size],
+        textAreaStyles.nativePlaceholderBase,
+        textAreaStyles.nativePlaceholderSize[size],
+        hasLabel
+          ? textAreaStyles.sizeWithLabel[size]
+          : cn(textAreaStyles.size[size], textAreaStyles.nativeBottomPadding),
+        !hasLabel && isError && textAreaStyles.error,
+        !hasLabel && disabled && textAreaStyles.disabled,
+        !hasLabel && !isError && !disabled && textAreaStyles.state,
+        disabled && textAreaStyles.nativeDisabledText,
         disabled && textAreaStyles.nativeDisabled,
+        hasLabel &&
+          (isPlaceholderVisible
+            ? textAreaStyles.nativePlaceholderVisible
+            : textAreaStyles.nativePlaceholderHidden),
         inputClassName
       ),
-    [textareaClassName, disabled, inputClassName]
+    [size, isError, disabled, hasLabel, isPlaceholderVisible, inputClassName]
   );
 
-  return {
-    textareaClassName,
-    nativeClassName,
-  };
+  return { fieldShellClassName, nativeClassName };
 }

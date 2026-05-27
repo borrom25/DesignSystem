@@ -6,6 +6,8 @@ export { useDataTableScrollEnd } from "./useDataTableScrollEnd";
 export { useDataTableFilters } from "./useDataTableFilters";
 export { useDataTableController } from "./useDataTableController";
 export { useDataTablePopoverAction } from "./useDataTablePopoverAction";
+export { useEditableCellInput } from "./useEditableCellInput";
+export { useDataTableEditorContainer } from "./useDataTableEditorContainer";
 export type {
   UseDataTableFiltersOptions,
   UseDataTableFiltersReturn,

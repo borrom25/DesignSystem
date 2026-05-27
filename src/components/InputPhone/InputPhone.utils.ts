@@ -1,53 +1,107 @@
-export const phoneDigitsLength = 10;
+import { formatIncompletePhoneNumber } from "libphonenumber-js/min";
+import type { Country } from "react-phone-number-input";
+import {
+  InputPhoneValueFormat,
+  type InputPhoneChangeMeta,
+} from "./InputPhone.types";
+import {
+  defaultPhoneCountry,
+  getPhoneCountryOption,
+} from "./InputPhone.countries";
+
+export const phoneDigitsLength = 15;
 export const phoneCountryCode = "+7";
-export const phonePattern = "[0-9\\- ]*";
+export const phonePattern = "[0-9\\- ()+]*";
 export const phoneAutoComplete = "tel-national";
 export const phoneDefaultInputMode = "numeric";
 
-export function normalizePhoneDigits(value: string): string {
+export function normalizePhoneDigits(
+  value: string,
+  country: Country = defaultPhoneCountry
+): string {
+  const { callingCode } = getPhoneCountryOption(country);
+  const trimmedValue = value.trim();
   const digits = value.replace(/\D/g, "");
-  const hasExplicitCountryCode = value.trim().startsWith(phoneCountryCode);
 
-  if (hasExplicitCountryCode && digits.startsWith("7")) {
-    return digits.slice(1, phoneDigitsLength + 1);
+  if (!digits) {
+    return "";
   }
 
-  if (digits.length === phoneDigitsLength + 1 && /^[78]/.test(digits)) {
+  if (trimmedValue.startsWith("+") && digits.startsWith(callingCode)) {
+    return digits.slice(
+      callingCode.length,
+      callingCode.length + phoneDigitsLength
+    );
+  }
+
+  if (
+    (country === "RU" || country === "KZ") &&
+    digits.length === 11 &&
+    /^[78]/.test(digits)
+  ) {
     return digits.slice(1);
   }
 
   return digits.slice(0, phoneDigitsLength);
 }
 
-export function getPhoneRawValue(value: string): string {
-  const digits = normalizePhoneDigits(value);
+export function getPhoneInternationalValue(
+  value: string,
+  country: Country = defaultPhoneCountry
+): string {
+  const digits = normalizePhoneDigits(value, country);
 
-  return digits ? `${phoneCountryCode}${digits}` : "";
+  return digits ? `${getPhoneCountryOption(country).dialCode}${digits}` : "";
 }
 
-export function formatPhoneValue(value: string): string {
-  const digits = normalizePhoneDigits(value);
+export function getPhoneRawValue(
+  value: string,
+  country: Country = defaultPhoneCountry,
+  valueFormat: InputPhoneValueFormat = InputPhoneValueFormat.International
+): string {
+  const digits = normalizePhoneDigits(value, country);
 
   if (!digits) {
     return "";
   }
 
-  const first = digits.slice(0, 3);
-  const second = digits.slice(3, 6);
-  const third = digits.slice(6, 8);
-  const fourth = digits.slice(8, 10);
-
-  if (digits.length <= 3) {
-    return first;
+  if (valueFormat === InputPhoneValueFormat.National) {
+    return digits;
   }
 
-  if (digits.length <= 6) {
-    return `${first} ${second}`;
+  return getPhoneInternationalValue(digits, country);
+}
+
+export function getPhoneValueMeta(
+  value: string,
+  country: Country = defaultPhoneCountry,
+  valueFormat: InputPhoneValueFormat = InputPhoneValueFormat.International
+): InputPhoneChangeMeta {
+  const nationalValue = normalizePhoneDigits(value, country);
+  const internationalValue = getPhoneInternationalValue(nationalValue, country);
+  const { callingCode } = getPhoneCountryOption(country);
+
+  return {
+    value:
+      valueFormat === InputPhoneValueFormat.National
+        ? nationalValue
+        : internationalValue,
+    nationalValue,
+    internationalValue,
+    country,
+    callingCode,
+  };
+}
+
+export function formatPhoneValue(
+  value: string,
+  country: Country = defaultPhoneCountry
+): string {
+  const digits = normalizePhoneDigits(value, country);
+
+  if (!digits) {
+    return "";
   }
 
-  if (digits.length <= 8) {
-    return `${first} ${second}-${third}`;
-  }
-
-  return `${first} ${second}-${third}-${fourth}`;
+  return formatIncompletePhoneNumber(digits, country);
 }

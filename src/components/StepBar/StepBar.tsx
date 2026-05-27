@@ -16,14 +16,14 @@ const itemClassesByType: Record<StepBarItemType, string> = {
   successful: "text-positive-heavy",
 };
 
-export function StepBar({
+export function StepBar<T extends string | number = string>({
   items,
   active,
   onChangeStep,
   onClickSuccessButton,
   successButtonText = "Готово",
   className,
-}: StepBarProps) {
+}: StepBarProps<T>) {
   const {
     stepsRef,
     indicatorStyle,
@@ -33,7 +33,7 @@ export function StepBar({
     onStepClick,
     goPrev,
     goNext,
-  } = useStepBar({ items, active: active || items[0].id, onChangeStep });
+  } = useStepBar<T>({ items, active: active ?? items[0].id, onChangeStep });
 
   return (
     <div className={cn(stepBarClasses, className)}>

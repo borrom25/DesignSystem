@@ -1,14 +1,19 @@
+import { useCallback, useEffect, useState } from "react";
+import type { FocusEventHandler, MouseEventHandler } from "react";
 import { cn } from "@/utils";
 import { Size } from "@/types";
 import { FieldHint } from "@/components/Field";
 import { wrapperClasses } from "@/components/Field/styles";
 import { InputField } from "@/components/Input/ui/InputField";
 import { InputVariant } from "@/components/Input";
+import { useInputAnchoredPopover } from "@/shared/hooks";
 import type { InputPhoneProps } from "./InputPhone.types";
 import { useInputPhoneState } from "./hooks";
-import { PhoneFlagIsland, PhonePrefix } from "./ui";
+import { PhoneCountrySelector, PhonePrefix } from "./ui";
 import { phoneDefaultInputMode, phonePattern } from "./InputPhone.utils";
 import { inputPhoneStyles } from "./styles";
+
+const countryTriggerSelector = "[data-input-phone-country-trigger]";
 
 export function InputPhone({
   size = Size.Md,
@@ -32,6 +37,14 @@ export function InputPhone({
   defaultValue,
   onChange,
   onClear,
+  onFocus,
+  onMouseUp,
+  country,
+  defaultCountry,
+  countries,
+  valueFormat,
+  onCountryChange,
+  onValueChange,
   placeholder,
   maxLength,
   showFlagIsland = true,
@@ -51,6 +64,10 @@ export function InputPhone({
     inputValue,
     isError,
     prefixSuffixClassName,
+    countryOption,
+    countryOptions,
+    selectedCountry,
+    setSelectedCountry,
     wrapperClassName,
   } = useInputPhoneState({
     size,
@@ -66,10 +83,79 @@ export function InputPhone({
     defaultValue,
     onChange,
     onClear,
+    country,
+    defaultCountry,
+    countries,
+    valueFormat,
+    onCountryChange,
+    onValueChange,
   });
+  const {
+    containerRef,
+    open: countrySelectorOpen,
+    setOpen: setCountrySelectorOpen,
+    openPopover: openCountrySelector,
+    handleRetainFieldInteraction,
+    handleFocusOutside,
+  } = useInputAnchoredPopover(disabled || !showFlagIsland);
+  const [countrySelectorLayout, setCountrySelectorLayout] = useState<{
+    width: number;
+    alignOffset: number;
+  }>();
+
+  useEffect(() => {
+    const container = containerRef.current;
+
+    if (!container || !showFlagIsland) {
+      return;
+    }
+
+    const updateLayout = () => {
+      const containerRect = container.getBoundingClientRect();
+      const trigger = container.querySelector<HTMLElement>(
+        countryTriggerSelector
+      );
+      const triggerRect = trigger?.getBoundingClientRect();
+
+      setCountrySelectorLayout({
+        width: containerRect.width,
+        alignOffset: triggerRect ? containerRect.left - triggerRect.left : 0,
+      });
+    };
+
+    updateLayout();
+
+    const resizeObserver = new ResizeObserver(updateLayout);
+    resizeObserver.observe(container);
+    const trigger = container.querySelector<HTMLElement>(
+      countryTriggerSelector
+    );
+
+    if (trigger) {
+      resizeObserver.observe(trigger);
+    }
+
+    return () => resizeObserver.disconnect();
+  }, [containerRef, showFlagIsland]);
+
+  const handleInputFocus: FocusEventHandler<HTMLInputElement> = useCallback(
+    (event) => {
+      openCountrySelector();
+      onFocus?.(event);
+    },
+    [onFocus, openCountrySelector]
+  );
+
+  const handleInputMouseUp: MouseEventHandler<HTMLInputElement> = useCallback(
+    (event) => {
+      openCountrySelector();
+      onMouseUp?.(event);
+    },
+    [onMouseUp, openCountrySelector]
+  );
 
   return (
-    <div className={cn(wrapperClasses, className)}>
+    <div ref={containerRef} className={cn(wrapperClasses, className)}>
       <InputField
         ref={ref}
         wrapperClassName={cn(
@@ -83,9 +169,23 @@ export function InputPhone({
         iconRight={iconRight}
         prefix={
           showFlagIsland ? (
-            <PhoneFlagIsland size={size} disabled={disabled} />
+            <PhoneCountrySelector
+              size={size}
+              country={selectedCountry}
+              options={countryOptions}
+              disabled={disabled}
+              open={countrySelectorOpen}
+              contentWidth={countrySelectorLayout?.width}
+              contentAlignOffset={countrySelectorLayout?.alignOffset}
+              onOpenChange={setCountrySelectorOpen}
+              onContentInteractOutside={(event) =>
+                handleRetainFieldInteraction(event, event.target)
+              }
+              onContentFocusOutside={handleFocusOutside}
+              onCountryChange={setSelectedCountry}
+            />
           ) : (
-            <PhonePrefix />
+            <PhonePrefix dialCode={countryOption.dialCode} />
           )
         }
         suffix={suffix}
@@ -101,6 +201,8 @@ export function InputPhone({
         inputClassName={inputClassName}
         value={inputValue}
         onChange={handleChange}
+        onFocus={handleInputFocus}
+        onMouseUp={handleInputMouseUp}
         id={inputId}
         type="tel"
         inputMode={inputMode}

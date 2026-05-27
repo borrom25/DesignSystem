@@ -1,7 +1,7 @@
 import { Size } from "@/types";
 import { cn } from "@/utils/cn";
 import { Popover } from "@/components/Popover";
-import { FieldHint, FieldLabel } from "@/components/Field";
+import { FieldHint } from "@/components/Field";
 import { useMultiTagState } from "./hooks/useMultiTagState";
 import {
   MultiTagTrigger,
@@ -63,20 +63,8 @@ export function MultiTag<T extends string | number = string>({
     returnAll,
   });
 
-  const hasValue = selectedValues.length > 0;
-
   return (
     <div className={cn(wrapperClasses, className)}>
-      {label && (
-        <FieldLabel
-          size={size}
-          required={required}
-          className={multiTagStyles.field.inlinePadding[size]}
-        >
-          {label}
-        </FieldLabel>
-      )}
-
       <Popover open={open} onOpenChange={setOpen}>
         <Popover.Trigger asChild>
           <MultiTagTrigger
@@ -88,8 +76,9 @@ export function MultiTag<T extends string | number = string>({
             className={triggerClassName}
             clearable={clearable}
             onClear={clearable ? handleClear : undefined}
-            hasValue={hasValue}
             maxVisibleRows={maxVisibleRows}
+            label={label}
+            required={required}
           >
             <MultiTagValue<T>
               size={size}
@@ -98,6 +87,8 @@ export function MultiTag<T extends string | number = string>({
               disabled={disabled}
               error={error}
               onRemove={handleRemove}
+              label={label}
+              open={open}
             />
           </MultiTagTrigger>
         </Popover.Trigger>

@@ -9,7 +9,7 @@ import {
   inputRightSlotClasses,
 } from "@/shared/Input/styles";
 
-export const triggerBaseClasses = `${inputBaseClasses} overflow-hidden justify-between cursor-pointer border border-transparent bg-generic-medium hover:border-brand-line-light focus-visible:outline-none focus-visible:border-brand-line-heavy disabled:bg-generic-disabled disabled:text-hint disabled:cursor-not-allowed`;
+export const triggerBaseClasses = `${inputBaseClasses} justify-between cursor-pointer border border-transparent bg-generic-medium hover:border-brand-line-light focus-visible:outline-none focus-visible:border-brand-line-heavy disabled:bg-generic-disabled disabled:text-hint disabled:cursor-not-allowed`;
 
 export const iconClasses =
   "shrink-0 text-inverse-text-medium transition-transform duration-200 group-disabled:text-hint";

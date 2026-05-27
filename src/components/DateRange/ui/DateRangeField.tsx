@@ -3,6 +3,7 @@ import { Size } from "@/types";
 import { Calendar } from "lucide-react";
 import { CloseBtn } from "@/components/CloseBtn/CloseBtn";
 import { InputAdornment, InputSeparator } from "@/shared/Input";
+import { dateInputPlaceholder, dataRangeFieldAria } from "../constants";
 import { useDateRangeFieldChrome } from "../hooks/useDateRangeFieldChrome";
 import { dateRangeStyles } from "../styles";
 import type { DateRangeFieldProps } from "../DateRange.types";
@@ -10,10 +11,8 @@ import { DateRangeFieldSection } from "./DateRangeFieldSection";
 
 export function DateRangeField({
   wrapperClassName,
-  chipClassName,
-  chipErrorClassName,
-  formattedStart,
-  formattedEnd,
+  startInputValue,
+  endInputValue,
   placeholderStart,
   placeholderEnd,
   activeBound = null,
@@ -28,6 +27,10 @@ export function DateRangeField({
   onClick,
   onStartClick,
   onEndClick,
+  onStartInputChange,
+  onEndInputChange,
+  onStartInputCommit,
+  onEndInputCommit,
   ref,
   ...props
 }: DateRangeFieldProps) {
@@ -58,29 +61,35 @@ export function DateRangeField({
       <div className={dateRangeStyles.content}>
         <div className={dateRangeStyles.sections}>
           <DateRangeFieldSection
-            text={formattedStart}
-            placeholder={placeholderStart}
-            chipClassName={chipClassName}
-            chipErrorClassName={chipErrorClassName}
-            filled={!!formattedStart}
+            value={startInputValue}
+            label={placeholderStart}
+            placeholder={dateInputPlaceholder}
+            filled={!!startInputValue}
+            active={activeBound === "start"}
             isError={startError}
             disabled={disabled}
-            ariaLabel="Выбрать дату начала"
+            size={size}
+            ariaLabel={dataRangeFieldAria.start}
             onClick={onStartClick}
+            onValueChange={onStartInputChange}
+            onCommit={onStartInputCommit}
           />
 
           <InputSeparator className={dateRangeStyles.separator} />
 
           <DateRangeFieldSection
-            text={formattedEnd}
-            placeholder={placeholderEnd}
-            chipClassName={chipClassName}
-            chipErrorClassName={chipErrorClassName}
-            filled={!!formattedEnd}
+            value={endInputValue}
+            label={placeholderEnd}
+            placeholder={dateInputPlaceholder}
+            filled={!!endInputValue}
+            active={activeBound === "end"}
             isError={endError}
             disabled={disabled}
-            ariaLabel="Выбрать дату окончания"
+            size={size}
+            ariaLabel={dataRangeFieldAria.end}
             onClick={onEndClick}
+            onValueChange={onEndInputChange}
+            onCommit={onEndInputCommit}
           />
 
           {indicatorClassName && <span className={indicatorClassName} />}
@@ -109,7 +118,7 @@ export function DateRangeField({
             >
               <CloseBtn
                 size={size}
-                aria-label="Очистить даты"
+                aria-label={dataRangeFieldAria.clear}
                 onClick={(event) => {
                   event.stopPropagation();
                   onClear?.();

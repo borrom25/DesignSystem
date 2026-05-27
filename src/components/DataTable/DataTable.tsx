@@ -1,3 +1,4 @@
+import { useCallback, useState } from "react";
 import { cn } from "@/utils";
 import type { TableProps } from "./types";
 import { useTable } from "./hooks/useDataTable";
@@ -67,12 +68,24 @@ export function Table<TData>({
   striped = false,
   bordered = false,
   compact = false,
+  embedded = false,
   getRowId,
   enableNestedRows = false,
   getSubRows,
   maxExpandedDepth,
+  renderExpandedContent,
+  getRowCanExpandContent,
+  expandedContentClassName,
+  expandedContentEstimateSize,
   onRowClick,
   onRowDoubleClick,
+  editable = false,
+  editableCellIds,
+  isCellEditable,
+  editablePlaceholder,
+  onCellDraftChange,
+  onCellValueChange,
+  cellEditor,
   tableClassName,
   headerClassName,
   bodyClassName,
@@ -87,10 +100,13 @@ export function Table<TData>({
   className,
   ...restProps
 }: TableProps<TData>) {
+  const [isHeaderSeparated, setIsHeaderSeparated] = useState(false);
+  const enableExpandedContent = Boolean(renderExpandedContent);
+  const enableExpanding = enableNestedRows || enableExpandedContent;
   const tableColumns = useDataTableColumns({
     columns,
     enableRowSelection,
-    enableNestedRows,
+    enableExpanding,
     rowActions,
     stickySelectionColumn,
     stickyActionsColumn,
@@ -126,6 +142,8 @@ export function Table<TData>({
     enableNestedRows,
     getSubRows,
     maxExpandedDepth,
+    enableExpandedContent,
+    getRowCanExpandContent,
   });
 
   const {
@@ -148,6 +166,13 @@ export function Table<TData>({
       onLoadMore,
       onScrollEnd,
     });
+  const handleContainerScroll = useCallback(
+    (event: React.UIEvent<HTMLDivElement>) => {
+      setIsHeaderSeparated(event.currentTarget.scrollTop > 0);
+      onContainerScroll?.();
+    },
+    [onContainerScroll]
+  );
 
   const { sentinelRef } = useInfiniteScroll({
     hasMore: !virtualized && hasMore,
@@ -158,10 +183,16 @@ export function Table<TData>({
 
   if (loading) {
     return (
-      <div className={cn(tableStyles.wrapper, className)} {...restProps}>
+      <div
+        className={cn(
+          embedded ? tableStyles.wrapperEmbedded : tableStyles.wrapper,
+          className
+        )}
+        {...restProps}
+      >
         {showToolbar && (
           <div className={tableStyles.toolbar}>
-            <DataTableToolbar {...toolbarProps} rowCount={0} />
+            <DataTableToolbar {...toolbarProps} />
           </div>
         )}
         {toolbarSlot && (
@@ -173,10 +204,16 @@ export function Table<TData>({
   }
 
   return (
-    <div className={cn(tableStyles.wrapper, className)} {...restProps}>
+    <div
+      className={cn(
+        embedded ? tableStyles.wrapperEmbedded : tableStyles.wrapper,
+        className
+      )}
+      {...restProps}
+    >
       {showToolbar && (
         <div className={tableStyles.toolbar}>
-          <DataTableToolbar {...toolbarProps} rowCount={rows.length} />
+          <DataTableToolbar {...toolbarProps} />
         </div>
       )}
       {toolbarSlot && <div className={tableStyles.toolbar}>{toolbarSlot}</div>}
@@ -185,18 +222,20 @@ export function Table<TData>({
         ref={containerRef}
         data-table-scroll-container="true"
         data-table-virtualized={virtualized ? "true" : "false"}
+        data-table-embedded={embedded ? "true" : "false"}
         className={cn(
-          tableStyles.container,
+          embedded ? tableStyles.containerEmbedded : tableStyles.container,
           virtualized && tableStyles.containerVirtualized,
           isEmpty && tableStyles.containerEmpty
         )}
-        onScroll={onContainerScroll}
+        onScroll={handleContainerScroll}
       >
         <table
           className={cn(
             tableStyles.table,
+            embedded && tableStyles.tableEmbedded,
             striped && tableStyles.tableStriped,
-            bordered && tableStyles.tableBordered,
+            !embedded && bordered && tableStyles.tableBordered,
             compact && tableStyles.tableCompact,
             tableClassName
           )}
@@ -204,8 +243,12 @@ export function Table<TData>({
         >
           <TableHeader
             headerGroups={table.getHeaderGroups()}
-            stickyHeader={stickyHeader}
-            className={headerClassName}
+            stickyHeader={embedded ? false : stickyHeader}
+            className={cn(
+              embedded && tableStyles.headerEmbedded,
+              stickyHeader && isHeaderSeparated && tableStyles.headerScrolled,
+              headerClassName
+            )}
             filters={filters}
             beforeStickyRightColumnIds={beforeStickyRightColumnIds}
           />
@@ -213,15 +256,27 @@ export function Table<TData>({
           {!isEmpty &&
             (virtualized ? (
               <TableVirtualBody
+                table={table}
                 rows={rows}
                 columnSignature={visibleColumnSignature}
                 columnCount={visibleColumnCount}
                 parentRef={containerRef}
                 rowHeight={rowHeight}
+                expandedContentEstimateSize={expandedContentEstimateSize}
                 overscan={overscan}
                 onScrollEnd={handleScrollEnd}
+                renderExpandedContent={renderExpandedContent}
+                getRowCanExpandContent={getRowCanExpandContent}
+                expandedContentClassName={expandedContentClassName}
                 onRowClick={onRowClick}
                 onRowDoubleClick={onRowDoubleClick}
+                editable={editable}
+                editableCellIds={editableCellIds}
+                isCellEditable={isCellEditable}
+                editablePlaceholder={editablePlaceholder}
+                onCellDraftChange={onCellDraftChange}
+                onCellValueChange={onCellValueChange}
+                cellEditor={cellEditor}
                 rowClassName={rowClassName}
                 cellClassName={cellClassName}
                 bordered={bordered}
@@ -230,10 +285,22 @@ export function Table<TData>({
               />
             ) : (
               <TableBody
+                table={table}
                 rows={rows}
                 columnSignature={visibleColumnSignature}
+                columnCount={visibleColumnCount}
+                renderExpandedContent={renderExpandedContent}
+                getRowCanExpandContent={getRowCanExpandContent}
+                expandedContentClassName={expandedContentClassName}
                 onRowClick={onRowClick}
                 onRowDoubleClick={onRowDoubleClick}
+                editable={editable}
+                editableCellIds={editableCellIds}
+                isCellEditable={isCellEditable}
+                editablePlaceholder={editablePlaceholder}
+                onCellDraftChange={onCellDraftChange}
+                onCellValueChange={onCellValueChange}
+                cellEditor={cellEditor}
                 rowClassName={rowClassName}
                 cellClassName={cellClassName}
                 bordered={bordered}
@@ -252,7 +319,7 @@ export function Table<TData>({
           </div>
         )}
 
-        {!isEmpty && (
+        {!isEmpty && !embedded && (
           <div className={tableStyles.contentFill} aria-hidden="true" />
         )}
 

@@ -1,9 +1,9 @@
 import type { Size } from "@/types";
 
 export const inputSizeClasses: Record<Size, string> = {
-  xs: "h-(--size-input-xs-height) [--input-height:var(--size-input-xs-height)] px-(--size-input-xs-padding-x) [--input-gap-container-content:var(--size-input-xs-gap-container-content)] gap-(--size-input-xs-gap-body) rounded-lg text-sm font-medium leading-sm tracking-sm",
-  sm: "h-(--size-input-sm-height) [--input-height:var(--size-input-sm-height)] px-(--size-input-sm-padding-x) [--input-gap-container-content:var(--size-input-sm-gap-container-content)] gap-(--size-input-sm-gap-body) rounded-lg text-md font-medium leading-md tracking-md",
-  md: "h-(--size-input-md-height) [--input-height:var(--size-input-md-height)] px-(--size-input-md-padding-x) [--input-gap-container-content:var(--size-input-md-gap-container-content)] gap-(--size-input-md-gap-body) rounded-lg text-md font-medium leading-md tracking-md min-w-[420px]",
+  xs: "h-(--size-input-xs-height) [--input-height:var(--size-input-xs-height)] px-(--size-input-xs-padding-x) [--input-gap-container-content:var(--size-input-xs-gap-container-content)] gap-(--size-input-xs-gap-body) rounded-sm text-sm font-medium leading-sm tracking-sm",
+  sm: "h-(--size-input-sm-height) [--input-height:var(--size-input-sm-height)] px-(--size-input-sm-padding-x) [--input-gap-container-content:var(--size-input-sm-gap-container-content)] gap-(--size-input-sm-gap-body) rounded-md text-md font-medium leading-md tracking-md",
+  md: "h-(--size-input-md-height) [--input-height:var(--size-input-md-height)] px-(--size-input-md-padding-x) [--input-gap-container-content:var(--size-input-md-gap-container-content)] gap-(--size-input-md-gap-body) rounded-lg text-md font-medium leading-md tracking-md",
 } as const;
 
 export const inputClearSizeClasses: Record<Size, string> = {
@@ -14,7 +14,7 @@ export const inputClearSizeClasses: Record<Size, string> = {
 
 export const inputFloatingLabelSizeClasses: Record<Size, string> = {
   xs: "left-0 text-sm leading-[14px] tracking-sm",
-  sm: "left-0 text-md leading-md tracking-md",
+  sm: "left-0 text-md leading-[18px] tracking-sm",
   md: "left-0 text-md leading-md tracking-md",
 } as const;
 

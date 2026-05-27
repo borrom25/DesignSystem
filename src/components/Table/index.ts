@@ -11,6 +11,13 @@ export type {
 export type {
   TableProps,
   TableContextValue,
+  TableExpandedContentContext,
+  TableExpandedContentRenderer,
+  TableCellEditContext,
+  TableCellValueChangeEvent,
+  TableCellValueChangeReason,
+  TableCellEditablePredicate,
+  TableCellEditorRenderer,
   DataTablePopoverActionContext,
   DataTablePopoverActionProps,
   UseTableOptions,

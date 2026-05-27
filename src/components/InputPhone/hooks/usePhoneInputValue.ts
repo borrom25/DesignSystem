@@ -1,13 +1,22 @@
 import { useCallback, useMemo, useState } from "react";
 import type { ChangeEvent } from "react";
 import type { InputPhoneProps } from "../InputPhone.types";
-import { formatPhoneValue, getPhoneRawValue } from "../InputPhone.utils";
+import { InputPhoneValueFormat } from "../InputPhone.types";
+import {
+  formatPhoneValue,
+  getPhoneValueMeta,
+  normalizePhoneDigits,
+} from "../InputPhone.utils";
+import { defaultPhoneCountry } from "../InputPhone.countries";
 
 interface UsePhoneInputValueProps {
   value?: InputPhoneProps["value"];
   defaultValue?: InputPhoneProps["defaultValue"];
   onChange?: InputPhoneProps["onChange"];
   onClear?: InputPhoneProps["onClear"];
+  country?: InputPhoneProps["country"];
+  valueFormat?: InputPhoneProps["valueFormat"];
+  onValueChange?: InputPhoneProps["onValueChange"];
 }
 
 export function usePhoneInputValue({
@@ -15,23 +24,33 @@ export function usePhoneInputValue({
   defaultValue,
   onChange,
   onClear,
+  country = defaultPhoneCountry,
+  valueFormat = InputPhoneValueFormat.International,
+  onValueChange,
 }: UsePhoneInputValueProps) {
   const isControlled = valueProp !== undefined;
   const [uncontrolledValue, setUncontrolledValue] = useState(() =>
-    getPhoneRawValue(defaultValue ?? "")
+    normalizePhoneDigits(defaultValue ?? "", country)
   );
 
   const value = useMemo(
     () =>
-      formatPhoneValue(isControlled ? (valueProp ?? "") : uncontrolledValue),
-    [isControlled, uncontrolledValue, valueProp]
+      formatPhoneValue(
+        isControlled ? (valueProp ?? "") : uncontrolledValue,
+        country
+      ),
+    [country, isControlled, uncontrolledValue, valueProp]
   );
   const hasValue = value !== "";
 
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      const nextFormattedValue = formatPhoneValue(event.target.value);
-      const nextRawValue = getPhoneRawValue(event.target.value);
+      const nextFormattedValue = formatPhoneValue(event.target.value, country);
+      const nextMeta = getPhoneValueMeta(
+        event.target.value,
+        country,
+        valueFormat
+      );
 
       if (event.target.value !== nextFormattedValue) {
         event.target.value = nextFormattedValue;
@@ -42,17 +61,18 @@ export function usePhoneInputValue({
       }
 
       if (!isControlled) {
-        setUncontrolledValue(nextRawValue);
+        setUncontrolledValue(nextMeta.nationalValue);
       }
 
-      event.target.value = nextRawValue;
-      event.currentTarget.value = nextRawValue;
+      event.target.value = nextMeta.value;
+      event.currentTarget.value = nextMeta.value;
       onChange?.(event);
+      onValueChange?.(nextMeta.value, nextMeta);
 
       event.target.value = nextFormattedValue;
       event.currentTarget.value = nextFormattedValue;
     },
-    [isControlled, onChange]
+    [country, isControlled, onChange, onValueChange, valueFormat]
   );
 
   const handleClear = useCallback(() => {
@@ -60,8 +80,9 @@ export function usePhoneInputValue({
       setUncontrolledValue("");
     }
 
+    onValueChange?.("", getPhoneValueMeta("", country, valueFormat));
     onClear?.();
-  }, [isControlled, onClear]);
+  }, [country, isControlled, onClear, onValueChange, valueFormat]);
 
   return {
     value,

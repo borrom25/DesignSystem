@@ -1,17 +1,3 @@
-export const dateChipBaseClasses =
-  "inline-flex items-center justify-center px-2 py-0_5 rounded-md font-roboto-flex font-medium whitespace-nowrap transition-colors duration-150";
-
-export const dateChipPlaceholderClasses = "text-secondary";
-
-export const dateChipFilledClasses = "bg-transparent text-primary";
-
-export const dateChipErrorClasses = "rounded-md bg-danger-light";
-
-export const dateChipErrorHoverClasses = "hover:bg-danger-light-hover";
-
-export const dateChipDisabledClasses =
-  "bg-transparent border-transparent ring-0 text-hint";
-
 export const separatorClasses = "w-px h-4 bg-generic-medium-hover shrink-0";
 
 export const dateRangeContentClasses =
@@ -23,10 +9,33 @@ export const dateRangeFieldClasses =
 export const dateRangeSectionsClasses =
   "relative flex h-full items-center flex-1 min-w-0 min-h-0";
 
-export const dateRangeSectionClasses = "flex flex-1 min-w-0";
+export const dateRangeSectionClasses = "flex h-full flex-1 basis-0 min-w-0";
 
 export const dateRangeSectionButtonClasses =
-  "flex flex-1 min-w-0 items-center justify-center border-0 bg-transparent px-0 focus:outline-none";
+  "flex h-full w-full flex-1 min-w-0 items-center justify-center border-0 bg-transparent px-0 focus:outline-none";
+
+export const dateRangeSectionButtonStackedClasses =
+  "relative flex-col justify-center gap-0";
+
+export const dateRangeSectionLabelClasses =
+  "pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 font-roboto-flex whitespace-nowrap [color:var(--text-basic-secondary)] transition-all duration-[250ms] ease-out";
+
+export const dateRangeSectionLabelActiveClasses =
+  "top-(--generic-spacing-1) -translate-x-1/2 translate-y-0 opacity-100";
+
+export const dateRangeSectionLabelCenteredClasses = "opacity-100";
+
+export const dateRangeSectionInputClasses =
+  "relative z-10 w-full min-w-0 bg-transparent border-0 outline-none text-center [color:var(--text-basic-primary)] placeholder:text-secondary transition-[opacity,translate] duration-[250ms] ease-out pt-[calc(var(--generic-spacing-6))]";
+
+export const dateRangeSectionInputHiddenClasses =
+  "opacity-0 pointer-events-none";
+
+export const dateRangeSectionInputDefaultClasses =
+  "[color:var(--text-basic-primary)]";
+
+export const dateRangeSectionInputErrorClasses =
+  "[color:var(--text-basic-primary)]";
 
 export const dateRangeSectionButtonInteractiveClasses = "cursor-pointer";
 

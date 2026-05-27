@@ -31,3 +31,10 @@ export {
   resolveDataTablePopoverActionChildren,
   resolveDataTablePopoverActionSelectedLabel,
 } from "./popoverAction";
+export {
+  getDataTableCellId,
+  formatDataTableCellValue,
+  createDataTableCellEditContext,
+  createDataTableCellValueChangeEvent,
+  getIsDataTableCellEditable,
+} from "./cellEditing";

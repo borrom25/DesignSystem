@@ -1,15 +1,27 @@
-import { triggerStyles } from "@/shared/Select";
+import { inputTagStyles } from "@/components/InputTag/styles";
+import { triggerStyles as sharedTriggerStyles } from "@/shared/Select";
 
-export {
-  iconSizeMap,
-  labelSizeClasses,
-  hintSizeClasses,
-  triggerStyles,
-} from "@/shared/Select";
+export { iconSizeMap, triggerStyles } from "@/shared/Select";
 
 export const triggerChevronOpenClasses = "rotate-180";
 
-export const multiTagTriggerBaseClasses =
-  "inline-flex items-center w-full overflow-hidden font-roboto-flex cursor-pointer border border-transparent bg-generic-medium text-primary hover:border-brand-line-light focus-visible:outline-none transition-[border-color,background-color] duration-150 disabled:bg-generic-disabled disabled:text-hint disabled:cursor-not-allowed group";
+export const placeholderClasses = sharedTriggerStyles.placeholder;
 
-export const placeholderClasses = triggerStyles.placeholder;
+export const triggerEmptyClasses = inputTagStyles.wrapperEmpty;
+
+export const triggerWithTagsClasses = inputTagStyles.wrapperWithTags;
+
+export const tagsContainerWrapperClasses =
+  "flex flex-1 min-w-0 flex-col self-stretch";
+
+export const tagsContainerClasses =
+  "flex flex-wrap items-center content-start gap-(--input-gap-container-content) min-w-0 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]";
+
+export const tagsContainerEmptyClasses = "flex-1 flex items-center";
+
+export const tagsContainerWithTagsClasses =
+  "py-(--input-gap-container-content) pb-(--generic-spacing-2)";
+
+export const controlsContainerClasses = "shrink-0 flex items-center";
+
+export const controlsContainerWithTagsClasses = "self-start";

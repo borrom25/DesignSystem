@@ -1,38 +1,34 @@
-import { useMemo } from "react";
 import { ChevronDown } from "lucide-react";
 import { Size } from "@/types";
-import { closeButtonSize, cn, getIconSize } from "@/utils";
+import { cn, getIconSize } from "@/utils";
 import { CloseBtn } from "@/components/CloseBtn";
-import { useWrappedState } from "../hooks/useWrappedState";
-import { multiTagStyles, iconSizeMap } from "../styles";
+import { FloatingLabel, FloatingLabelRequiredMark } from "@/shared/Input";
+import { getTagsMaxHeight } from "../utils/getTagsMaxHeight";
+import { multiTagStyles, iconSizeMap, triggerStyles } from "../styles";
 import type { MultiTagTriggerProps } from "../types";
 
 export function MultiTagTrigger({
   size = Size.Md,
   error,
-  open,
-  isFilled,
+  open = false,
+  isFilled = false,
   disabled,
   className,
   ref,
   children,
   clearable = false,
   onClear,
-  hasValue = false,
+  label,
+  required = false,
   maxVisibleRows = 2,
   ...props
 }: MultiTagTriggerProps) {
-  const showClear = clearable && hasValue && !disabled;
+  const hasLabel = !!label;
+  const isLabelActive = hasLabel && (open || isFilled);
+  const showLabelSpacer = hasLabel && isLabelActive;
+  const showClear = clearable && isFilled && !disabled;
   const iconSize = getIconSize(size, iconSizeMap);
-
-  const singleRowHeight = multiTagStyles.tagRowHeight[size];
-  const { containerRef, isWrapped } = useWrappedState({ singleRowHeight });
-
-  const maxHeight = useMemo(() => {
-    const rowHeight = multiTagStyles.tagRowHeight[size];
-    const gap = multiTagStyles.tagGap;
-    return maxVisibleRows * rowHeight + (maxVisibleRows - 1) * gap;
-  }, [size, maxVisibleRows]);
+  const maxHeight = getTagsMaxHeight(size, maxVisibleRows);
 
   const handleClear = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -48,31 +44,6 @@ export function MultiTagTrigger({
     }
   };
 
-  const triggerClassName = cn(
-    multiTagStyles.trigger.base,
-    multiTagStyles.trigger.size[size],
-    hasValue
-      ? multiTagStyles.trigger.inlinePaddingWithValue[size]
-      : multiTagStyles.trigger.inlinePadding[size],
-    open && !error && multiTagStyles.trigger.open,
-    error && !isFilled && multiTagStyles.trigger.error.default,
-    error && isFilled && multiTagStyles.trigger.error.filled,
-    error && open && multiTagStyles.trigger.error.open,
-    className
-  );
-
-  const tagsContainerClassName = cn(
-    multiTagStyles.tagsContainer,
-    multiTagStyles.tagsContainerPadding[size],
-    isWrapped && multiTagStyles.tagsContainerWrapped
-  );
-
-  const controlsClassName = cn(
-    multiTagStyles.controls.base,
-    multiTagStyles.controls.size[size],
-    isWrapped && multiTagStyles.controls.wrapped[size]
-  );
-
   return (
     <div
       ref={ref}
@@ -82,21 +53,78 @@ export function MultiTagTrigger({
       aria-haspopup="listbox"
       aria-expanded={open}
       onKeyDown={handleKeyDown}
-      className={triggerClassName}
+      className={cn(
+        triggerStyles.base,
+        multiTagStyles.trigger.size[size],
+        isFilled
+          ? multiTagStyles.trigger.withTags
+          : multiTagStyles.trigger.empty,
+        open && !error && multiTagStyles.trigger.open,
+        error && !isFilled && multiTagStyles.trigger.error.default,
+        error && isFilled && multiTagStyles.trigger.error.filled,
+        error && open && multiTagStyles.trigger.error.open,
+        className
+      )}
       {...props}
     >
+      {hasLabel && required && <FloatingLabelRequiredMark />}
+
+      {hasLabel && (
+        <FloatingLabel
+          as="span"
+          label={label}
+          size={size}
+          active={isLabelActive}
+          disabled={disabled}
+          className={cn(
+            multiTagStyles.floatingLabel.offsetSize[size],
+            isLabelActive && multiTagStyles.floatingLabel.active,
+            isLabelActive &&
+              multiTagStyles.floatingLabel.activeTypographySize[size]
+          )}
+        />
+      )}
+
       <div
-        ref={containerRef}
-        className={tagsContainerClassName}
-        style={{ maxHeight }}
+        className={cn(
+          multiTagStyles.tagsContainerWrapper,
+          multiTagStyles.tagsContainerSize[size],
+          !showLabelSpacer && !isFilled && "justify-center"
+        )}
       >
-        {children}
+        {showLabelSpacer && (
+          <div
+            className={multiTagStyles.labelZoneSpacer[size]}
+            aria-hidden="true"
+          />
+        )}
+
+        <div
+          className={cn(
+            multiTagStyles.tagsContainer,
+            isFilled && multiTagStyles.tagsContainerWithTags,
+            !isFilled && multiTagStyles.tagsContainerEmpty
+          )}
+          style={isFilled ? { maxHeight } : undefined}
+        >
+          {children}
+        </div>
       </div>
 
-      <div className={controlsClassName}>
+      <div
+        className={cn(
+          multiTagStyles.controls.base,
+          multiTagStyles.controls.size[size],
+          isFilled && multiTagStyles.controls.withTags,
+          isFilled && showLabelSpacer && multiTagStyles.labelZoneOffset[size],
+          isFilled &&
+            !showLabelSpacer &&
+            multiTagStyles.controls.withTagsSize[size]
+        )}
+      >
         {showClear ? (
           <CloseBtn
-            size={closeButtonSize(size)}
+            size={Size.Md}
             onClick={handleClear}
             disabled={disabled}
             aria-label="Очистить все"

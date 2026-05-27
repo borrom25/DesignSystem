@@ -10,6 +10,7 @@ import {
   MessageFilePreview,
 } from "./ui";
 import { useMessageFileStore } from "./store";
+import { defaultMaxSize } from "@/constants";
 
 const DEFAULT_MAX_ROWS = 6;
 
@@ -27,6 +28,9 @@ export function InputMessage({
   textareaClassName,
   popoverContentClassName,
   maxRows = DEFAULT_MAX_ROWS,
+  fileAccept = "/",
+  maxFileCount,
+  maxFileSize = defaultMaxSize,
   ...restProps
 }: InputMessageProps) {
   const {
@@ -69,6 +73,12 @@ export function InputMessage({
           disabled={disabled}
           canSend={canSend}
           onSend={handleSend}
+          onChange={({ files, errorMessage }) =>
+            onChange?.({ value: currentValue, files, errorMessage })
+          }
+          fileAccept={fileAccept}
+          maxFileCount={maxFileCount}
+          maxFileSize={maxFileSize}
           popoverContentClassName={popoverContentClassName}
         />
       </div>

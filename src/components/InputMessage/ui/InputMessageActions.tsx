@@ -6,13 +6,15 @@ import { ListItem } from "@/components/ListItem";
 import { inputMessageStyles } from "../styles";
 import { Button } from "@/components/Button/Button";
 import { useInputMessageActions } from "../hooks/useInputMessageActions.ts";
+import { ActionFileChangeProps } from "../InputMessage.types.ts";
 
-export interface InputMessageActionsProps {
+export interface InputMessageActionsProps extends ActionFileChangeProps {
   showAttachments: boolean;
   disabled: boolean;
   canSend: boolean;
   onSend: () => void;
   popoverContentClassName?: string;
+  fileAccept: string;
 }
 
 export function InputMessageActions({
@@ -21,10 +23,19 @@ export function InputMessageActions({
   canSend,
   onSend,
   popoverContentClassName,
+  fileAccept,
+  maxFileCount,
+  maxFileSize,
+  onChange,
 }: InputMessageActionsProps) {
   const [attachOpen, setAttachOpen] = useState(false);
   const { handleAttachmentClick, attachments, fileInputRef, handleFileChange } =
-    useInputMessageActions({ setAttachOpen });
+    useInputMessageActions({
+      setAttachOpen,
+      onChange,
+      maxFileCount,
+      maxFileSize,
+    });
 
   return (
     <div className={inputMessageStyles.actions}>
@@ -49,7 +60,7 @@ export function InputMessageActions({
               <input
                 name="file-input"
                 type="file"
-                accept="/"
+                accept={fileAccept}
                 ref={fileInputRef}
                 className="sr-only"
                 onChange={handleFileChange}

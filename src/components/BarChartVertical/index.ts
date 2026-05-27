@@ -1,2 +1,2 @@
 export { BarChartVertical } from "./BarChartVertical.tsx";
-export type { BarChartVerticalProps } from "./types.ts";
+export type { BarChartVerticalProps } from "./BarChartVertical.types.ts";

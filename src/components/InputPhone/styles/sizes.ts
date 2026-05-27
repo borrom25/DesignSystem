@@ -18,6 +18,12 @@ export const iconSizeClasses: Record<Size, string> = {
   md: "h-[24px] w-[24px]",
 };
 
+export const flagSizeClasses: Record<Size, string> = {
+  xs: "h-[18px] w-[18px]",
+  sm: "h-[20px] w-[20px]",
+  md: "h-[24px] w-[24px]",
+};
+
 export const islandIconSizes: Record<Size, number> = {
   xs: 18,
   sm: 20,

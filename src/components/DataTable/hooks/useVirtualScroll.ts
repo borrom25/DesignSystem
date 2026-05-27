@@ -3,7 +3,15 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import type { UseVirtualScrollOptions } from "../types";
 
 export function useVirtualScroll(options: UseVirtualScrollOptions) {
-  const { count, rowHeight, overscan = 5, parentRef, onScrollEnd } = options;
+  const {
+    count,
+    rowHeight,
+    estimateSize,
+    getItemKey,
+    overscan = 5,
+    parentRef,
+    onScrollEnd,
+  } = options;
 
   const onScrollEndRef = useRef(onScrollEnd);
   const isTriggeredRef = useRef(false);
@@ -19,7 +27,8 @@ export function useVirtualScroll(options: UseVirtualScrollOptions) {
   const virtualizer = useVirtualizer({
     count,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => rowHeight,
+    estimateSize: estimateSize ?? (() => rowHeight),
+    getItemKey,
     overscan,
   });
 

@@ -1,20 +1,28 @@
 export const tableBaseStyles = {
   wrapper:
     "relative w-full min-h-0 h-full max-h-[calc(100vh-var(--generic-spacing-19)-var(--generic-spacing-7,16px)-var(--generic-spacing-7,16px))] flex flex-col overflow-hidden [border-radius:var(--br-2xl-radius,14px)] bg-generic [border-top:1px_solid_var(--line-basic-generic,#F6F7F8)] [border-bottom:1px_solid_var(--line-basic-generic,#F6F7F8)] [border-left:1px_solid_var(--line-basic-generic,#F6F7F8)]",
+  wrapperEmbedded:
+    "relative w-full h-auto max-h-none flex flex-col overflow-visible bg-transparent border-0 [border-radius:0]",
   container:
     "relative w-full flex flex-1 min-h-0 flex-col overflow-auto rounded-[inherit]",
+  containerEmbedded:
+    "relative w-full flex flex-col overflow-visible rounded-none",
   containerVirtualized:
     "h-full overflow-auto overscroll-contain will-change-scroll",
   containerEmpty: "overflow-hidden",
 
   table:
-    "w-full border-collapse text-sm rounded-[inherit] [&_th]:align-middle [&_td]:align-middle",
-  tableStriped: "[&_tbody_tr:nth-child(even)]:bg-generic-light",
+    "w-full border-collapse text-sm rounded-[inherit] [&>thead>tr>th]:align-middle [&>tbody>tr>td]:align-middle",
+  tableStriped: "[&>tbody>tr:nth-child(even)]:bg-generic-light",
   tableBordered: "border border-line",
-  tableCompact: "[&_th]:p-2 [&_td]:p-2",
+  tableCompact: "[&>thead>tr>th]:p-2 [&>tbody>tr>td]:p-2",
+  tableEmbedded: "rounded-none border-0",
 
   header: "bg-generic",
+  headerEmbedded: "bg-generic-light",
   headerSticky: "sticky top-0 z-[15] bg-generic",
+  headerScrolled:
+    "[box-shadow:0_1px_0_0_var(--line-basic-generic,#F6F7F8),var(--shadow-popover)]",
   headerRow: "",
   headerCell:
     "relative [min-height:56px] [height:56px] [padding:var(--generic-spacing-0,0)_var(--generic-spacing-7,16px)] text-left font-medium [color:var(--text-basic-primary,#19191A)] [font-size:var(--typography-body-b2-fontSize,14px)] [line-height:18px] border-b border-r border-[var(--line-basic-generic,#F6F7F8)]",
@@ -27,7 +35,7 @@ export const tableBaseStyles = {
     "whitespace-nowrap text-center !p-0 !w-[40px] !min-w-[40px] !max-w-[40px] !min-h-[56px] !h-[56px]",
   headerCellSortable: "select-none",
   headerCellSorted: "text-primary",
-  headerCellContent: "flex items-center gap-2",
+  headerCellContent: "flex items-center gap-4",
   headerCellIcons: "ml-auto flex shrink-0 items-center gap-1",
   headerCellSelectionContent: "justify-center",
   headerCellResizer:
@@ -40,8 +48,18 @@ export const tableBaseStyles = {
   rowHoverable: "hover:[&>td]:bg-[var(--line-basic-generic,#F6F7F8)]",
   rowInteractive: "cursor-pointer",
   rowSelected: "[&>td]:bg-brand/5",
+  expandedContentRow: "bg-generic",
+  expandedContentServiceCell:
+    "border-b border-[var(--line-basic-generic,#F6F7F8)] p-0",
+  expandedContentCell:
+    "border-b border-r border-[var(--line-basic-generic,#F6F7F8)] p-0",
 
   cell: "[min-height:56px] [height:56px] [padding:var(--generic-spacing-4,10px)_var(--generic-spacing-7,16px)] [color:var(--text-basic-complementary,#525357)]  [font-size:var(--typography-body-b2-fontSize,14px)] [line-height:18px] font-medium border-b border-r border-[var(--line-basic-generic,#F6F7F8)]",
+  cellEditable: "!h-auto p-0 align-middle",
+  cellEditor:
+    "flex min-h-[56px] w-full cursor-default items-center [padding:var(--generic-spacing-4,10px)_var(--generic-spacing-7,16px)]",
+  cellEditorInput:
+    "block min-h-[18px] w-full cursor-text resize-none overflow-hidden whitespace-pre-wrap break-words border-0 bg-transparent p-0 text-sm font-medium text-[var(--text-basic-complementary,#525357)] outline-none [line-height:18px] placeholder:text-secondary",
   cellStickyLeft:
     "sticky left-[-1px] z-10 border-r-0 bg-generic [box-shadow:inset_-1px_0_0_0_var(--line-basic-generic,#F6F7F8)]",
   cellStickyRight:
@@ -58,7 +76,7 @@ export const tableBaseStyles = {
     "inline-flex h-auto min-h-0 w-auto min-w-0 cursor-pointer items-center justify-center border-0 bg-transparent p-0 text-secondary hover:text-primary disabled:cursor-default disabled:text-inverse-text-light",
   expandIcon:
     "origin-center rotate-0 transition-transform duration-200 ease-out",
-  expandIconExpanded: "rotate-90",
+  expandIconExpanded: "rotate-180",
   expandIconAllExpanded: "rotate-180",
   expandButtonPlaceholder: "block size-4 shrink-0",
   actionsControl:
@@ -98,11 +116,8 @@ export const tableBaseStyles = {
   toolbarMainRow:
     "flex flex-wrap items-center gap-[var(--generic-spacing-7,16px)] [padding:var(--generic-spacing-5,12px)_var(--generic-spacing-7,16px)]",
   toolbarSearch: "w-64 max-w-full",
-  toolbarCounter: "flex items-center gap-2",
-  toolbarCounterLabel: "font-medium text-secondary",
-  toolbarCounterValue: "font-medium text-primary",
   toolbarActions: "ml-auto",
-  toolbarMiddleSlot: "flex flex-1",
+  toolbarMiddleSlot: "flex flex-1 min-w-0",
   toolbarBottomSlot:
     "w-full [padding:var(--generic-spacing-5,12px)_var(--generic-spacing-7,16px)] [border-top:1px_solid_var(--line-basic-generic,#F6F7F8)]",
   toolbar: "mb-4",

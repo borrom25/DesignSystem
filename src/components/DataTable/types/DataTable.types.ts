@@ -1,6 +1,7 @@
 import type { HTMLAttributes, ReactNode } from "react";
 import type {
   ColumnDef as TanStackColumnDef,
+  Cell,
   Header,
   HeaderGroup,
   SortingState,
@@ -46,14 +47,50 @@ export type TableFiltersState<TSchema extends FilterSchema = FilterSchema> =
     onColumnFiltersChange?: OnChangeFn<ColumnFiltersState>;
   };
 
+export interface TableExpandedContentContext<TData> {
+  row: Row<TData>;
+  table: Table<TData>;
+}
+
+export type TableExpandedContentRenderer<TData> = (
+  context: TableExpandedContentContext<TData>
+) => ReactNode;
+
+export interface TableCellEditContext<TData> {
+  row: Row<TData>;
+  cell: Cell<TData, unknown>;
+  table: Table<TData>;
+  rowId: string;
+  columnId: string;
+  cellId: string;
+  value: unknown;
+}
+
+export type TableCellValueChangeReason = "change" | "blur" | "enter";
+
+export interface TableCellValueChangeEvent<
+  TData,
+> extends TableCellEditContext<TData> {
+  previousValue: unknown;
+  reason: TableCellValueChangeReason;
+}
+
+export type TableCellEditablePredicate<TData> = (
+  context: TableCellEditContext<TData>
+) => boolean;
+
+export type TableCellEditorRenderer<TData> = (
+  context: TableCellEditContext<TData> & {
+    onValueChange: (value: unknown) => void;
+  }
+) => ReactNode;
+
 export interface DataTableToolbarProps {
   topSlot?: ReactNode;
+  showSearch?: boolean;
   searchValue?: string;
   onSearchChange?: (value: string) => void;
   searchPlaceholder?: string;
-  rowCount?: number;
-  rowCountLabel?: ReactNode;
-  rowCountValue?: ReactNode;
   actions?: ButtonDropItem[];
   actionsPlaceholder?: string;
   onActionChange?: (value: string) => void;
@@ -118,13 +155,26 @@ export interface TableProps<TData> extends Omit<
   striped?: boolean;
   bordered?: boolean;
   compact?: boolean;
+  embedded?: boolean;
 
   getRowId?: (originalRow: TData, index: number) => string;
   enableNestedRows?: boolean;
   getSubRows?: (originalRow: TData, index: number) => TData[] | undefined;
   maxExpandedDepth?: number;
+  renderExpandedContent?: TableExpandedContentRenderer<TData>;
+  getRowCanExpandContent?: (row: Row<TData>) => boolean;
+  expandedContentClassName?: string;
+  expandedContentEstimateSize?: number;
   onRowClick?: (row: Row<TData>) => void;
   onRowDoubleClick?: (row: Row<TData>) => void;
+
+  editable?: boolean;
+  editableCellIds?: string[];
+  isCellEditable?: TableCellEditablePredicate<TData>;
+  editablePlaceholder?: string;
+  onCellDraftChange?: (event: TableCellValueChangeEvent<TData>) => void;
+  onCellValueChange?: (event: TableCellValueChangeEvent<TData>) => void;
+  cellEditor?: TableCellEditorRenderer<TData>;
 
   tableClassName?: string;
   headerClassName?: string;
@@ -159,20 +209,32 @@ export interface TableContextValue<TData> {
 export interface UseDataTableColumnsParams<TData> {
   columns: ColumnDef<TData>[];
   enableRowSelection: boolean | ((row: Row<TData>) => boolean);
-  enableNestedRows: boolean;
+  enableExpanding: boolean;
   stickySelectionColumn: boolean;
   stickyActionsColumn: boolean;
   rowActions?: (row: Row<TData>) => ButtonDropItem[] | null | undefined;
 }
 
 export interface TableBodySharedProps<TData> {
+  table: Table<TData>;
   rows: Row<TData>[];
   columnSignature: string;
+  columnCount: number;
   beforeStickyRightColumnIds: ReadonlySet<string>;
+  renderExpandedContent?: TableExpandedContentRenderer<TData>;
+  getRowCanExpandContent?: (row: Row<TData>) => boolean;
+  expandedContentClassName?: string;
   onRowClick?: (row: Row<TData>) => void;
   onRowDoubleClick?: (row: Row<TData>) => void;
   rowClassName?: string | ((row: Row<TData>) => string);
   cellClassName?: string;
+  editable?: boolean;
+  editableCellIds?: string[];
+  isCellEditable?: TableCellEditablePredicate<TData>;
+  editablePlaceholder?: string;
+  onCellDraftChange?: (event: TableCellValueChangeEvent<TData>) => void;
+  onCellValueChange?: (event: TableCellValueChangeEvent<TData>) => void;
+  cellEditor?: TableCellEditorRenderer<TData>;
   bordered?: boolean;
   className?: string;
 }
@@ -182,14 +244,15 @@ export type TableBodyProps<TData> = TableBodySharedProps<TData>;
 export interface TableVirtualBodyProps<
   TData,
 > extends TableBodySharedProps<TData> {
-  columnCount: number;
   parentRef: React.RefObject<HTMLDivElement | null>;
   rowHeight: number;
+  expandedContentEstimateSize?: number;
   overscan?: number;
   onScrollEnd?: () => void;
 }
 
 export interface TableRowProps<TData> {
+  table: Table<TData>;
   row: Row<TData>;
   rowIndex?: number;
   isSelected?: boolean;
@@ -199,6 +262,13 @@ export interface TableRowProps<TData> {
   onRowDoubleClick?: (row: Row<TData>) => void;
   rowClassName?: string | ((row: Row<TData>) => string);
   cellClassName?: string;
+  editable?: boolean;
+  editableCellIds?: string[];
+  isCellEditable?: TableCellEditablePredicate<TData>;
+  editablePlaceholder?: string;
+  onCellDraftChange?: (event: TableCellValueChangeEvent<TData>) => void;
+  onCellValueChange?: (event: TableCellValueChangeEvent<TData>) => void;
+  cellEditor?: TableCellEditorRenderer<TData>;
   bordered?: boolean;
   style?: React.CSSProperties;
 }
@@ -247,11 +317,15 @@ export interface UseTableOptions<TData> {
   enableNestedRows?: boolean;
   getSubRows?: (originalRow: TData, index: number) => TData[] | undefined;
   maxExpandedDepth?: number;
+  enableExpandedContent?: boolean;
+  getRowCanExpandContent?: (row: Row<TData>) => boolean;
 }
 
 export interface UseVirtualScrollOptions {
   count: number;
   rowHeight: number;
+  estimateSize?: (index: number) => number;
+  getItemKey?: (index: number) => string | number;
   overscan?: number;
   parentRef: React.RefObject<HTMLDivElement | null>;
   onScrollEnd?: () => void;

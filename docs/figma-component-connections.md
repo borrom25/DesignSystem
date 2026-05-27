@@ -11,7 +11,7 @@
 yarn figma:status:write
 ```
 
-Итого: 49/72 готово, 0 только docs, 0 только figma.js, 23 не начато.
+Итого: 49/76 готово, 0 только docs, 0 только figma.js, 27 не начато.
 
 | Компонент | Публичный export | Runtime | Story | Docs | figma.js | Статус | Что не хватает |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -21,25 +21,27 @@ yarn figma:status:write
 | AppLayout | да | да | да | да | да | готово | ok |
 | Avatar | да | да | да | да | да | готово | ok |
 | Banner | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
-| BarChartVertical | да | да | нет | нет | нет | не начато | нет docs, нет figma.js |
-| BarMenu | да | да | нет | да | да | готово | ok |
+| BarChartHorizontal | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| BarChartVertical | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| BarMenu | да | да | да | да | да | готово | ok |
 | Bubble | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Button | да | да | да | да | да | готово | ok |
-| ButtonDrop | да | да | нет | нет | нет | не начато | нет docs, нет figma.js |
+| ButtonDrop | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Calendar | да | да | да | да | да | готово | ok |
-| CalendarFilter | да | нет | нет | нет | нет | не начато | нет docs, нет figma.js, нет root runtime |
+| CalendarFilter | да | нет | да | нет | нет | не начато | нет docs, нет figma.js, нет root runtime |
 | Card | да | да | да | да | да | готово | ok |
+| Carousel | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Cascader | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | CheckBox | да | да | да | да | да | готово | ok |
 | Chips | да | да | да | да | да | готово | ok |
 | CloseBtn | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Counter | да | да | да | да | да | готово | ok |
-| DataTable | да | да | да | да | да | готово | ok |
+| DataTable | нет | да | да | да | да | готово | ok |
 | DatePicker | да | да | да | да | да | готово | ok |
 | DateRange | да | да | да | да | да | готово | ok |
 | Field | да | нет | нет | нет | нет | не начато | нет docs, нет figma.js, нет root runtime |
 | Filter | да | нет | нет | нет | нет | не начато | нет docs, нет figma.js, нет root runtime |
-| FilterList | да | да | нет | нет | нет | не начато | нет docs, нет figma.js |
+| FilterList | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Header | да | да | да | да | да | готово | ok |
 | HeaderInside | да | да | да | да | да | готово | ok |
 | IconAvatar | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
@@ -55,19 +57,21 @@ yarn figma:status:write
 | InsideSidebar | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Label | да | да | да | да | да | готово | ok |
 | Line | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| LineChart | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | ListItem | да | да | да | да | да | готово | ok |
-| MinusCheckBox | да | да | нет | нет | нет | не начато | нет docs, нет figma.js |
+| MinusCheckBox | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Modal | да | да | да | да | да | готово | ok |
 | MultiSelect | да | да | да | да | да | готово | ok |
 | MultiTag | да | да | да | да | да | готово | ok |
 | Pagination | да | да | да | да | да | готово | ok |
+| PieChart | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | PinInput | да | да | да | да | да | готово | ok |
 | Plug | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Popover | да | да | да | да | да | готово | ok |
 | ProgressBar | да | да | да | да | да | готово | ok |
-| ProgressPie | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
+| ProgressPie | нет | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Radio | да | да | да | да | да | готово | ok |
-| SearchAutocomplete | да | да | нет | нет | нет | не начато | нет docs, нет figma.js |
+| SearchAutocomplete | да | да | да | нет | нет | не начато | нет docs, нет figma.js |
 | Segmented | да | да | да | да | да | готово | ok |
 | Select | да | да | да | да | да | готово | ok |
 | Sidebar | да | да | да | да | да | готово | ok |
@@ -77,8 +81,8 @@ yarn figma:status:write
 | StepBar | да | да | да | да | да | готово | ok |
 | Switcher | да | да | да | да | да | готово | ok |
 | Tab | да | да | да | да | да | готово | ok |
-| Table | да | да | нет | да | да | готово | ok |
-| TableColumnsModal | да | да | нет | да | да | готово | ok |
+| Table | да | да | да | да | да | готово | ok |
+| TableColumnsModal | да | да | да | да | да | готово | ok |
 | TabsOverflow | да | да | да | да | да | готово | ok |
 | Tag | да | да | да | да | да | готово | ok |
 | Text | да | да | да | нет | нет | не начато | нет docs, нет figma.js |

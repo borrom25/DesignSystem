@@ -6,7 +6,7 @@ import {
   chartBaseStroke,
   chartBaseAxisTickStyle,
 } from "@/shared/Chart";
-import { BarChartVerticalProps } from "./types.ts";
+import { BarChartVerticalProps } from "./BarChartVertical.types.ts";
 
 export function BarChartVertical({
   series,

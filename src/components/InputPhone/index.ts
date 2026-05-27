@@ -1,3 +1,8 @@
 export { InputPhone } from "./InputPhone";
-export type { InputPhoneProps } from "./InputPhone.types";
+export { InputPhoneValueFormat } from "./InputPhone.types";
+export type {
+  InputPhoneChangeMeta,
+  InputPhoneProps,
+  InputPhoneValueChangeHandler,
+} from "./InputPhone.types";
 export { formatPhoneValue, normalizePhoneDigits } from "./InputPhone.utils";

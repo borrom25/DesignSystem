@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useInputClassNames, useInputIds } from "@/components/Input/hooks";
 import {
   formatCountDisplay,
@@ -5,8 +6,15 @@ import {
 } from "@/components/Input/Input.utils";
 import { inputStyles } from "@/components/Input/styles";
 import { getIconSize } from "@/utils";
+import { useControllableState } from "@/shared/hooks";
 import type { InputPhoneProps } from "../InputPhone.types";
 import { usePhoneInputValue } from "./usePhoneInputValue";
+import {
+  defaultPhoneCountry,
+  getPhoneCountryOption,
+  getPhoneCountryOptions,
+  isPhoneCountry,
+} from "../InputPhone.countries";
 
 type UseInputPhoneStateProps = Pick<
   InputPhoneProps,
@@ -23,6 +31,12 @@ type UseInputPhoneStateProps = Pick<
   | "defaultValue"
   | "onChange"
   | "onClear"
+  | "country"
+  | "defaultCountry"
+  | "countries"
+  | "valueFormat"
+  | "onCountryChange"
+  | "onValueChange"
 > & {
   size: NonNullable<InputPhoneProps["size"]>;
   variant: NonNullable<InputPhoneProps["variant"]>;
@@ -42,7 +56,39 @@ export function useInputPhoneState({
   defaultValue,
   onChange,
   onClear,
+  country,
+  defaultCountry = defaultPhoneCountry,
+  countries,
+  valueFormat,
+  onCountryChange,
+  onValueChange,
 }: UseInputPhoneStateProps) {
+  const countryOptions = useMemo(
+    () => getPhoneCountryOptions(countries),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [countries?.join(",")]
+  );
+  const firstCountry = countryOptions[0]?.iso ?? defaultPhoneCountry;
+  const [selectedCountry, setSelectedCountry] = useControllableState({
+    value: country,
+    defaultValue: isPhoneCountry(defaultCountry)
+      ? defaultCountry
+      : defaultPhoneCountry,
+    onChange: onCountryChange,
+  });
+  const resolvedCountry = useMemo(() => {
+    const isAllowed = countryOptions.some(
+      (option) => option.iso === selectedCountry
+    );
+    return isPhoneCountry(selectedCountry) && isAllowed
+      ? selectedCountry
+      : firstCountry;
+  }, [countryOptions, firstCountry, selectedCountry]);
+  const countryOption = useMemo(
+    () => getPhoneCountryOption(resolvedCountry),
+    [resolvedCountry]
+  );
+
   const {
     value: inputValue,
     hasValue,
@@ -53,6 +99,9 @@ export function useInputPhoneState({
     defaultValue,
     onChange,
     onClear,
+    country: resolvedCountry,
+    valueFormat,
+    onValueChange,
   });
 
   const { inputId, hintId } = useInputIds({ id, hint, hintError });
@@ -85,6 +134,10 @@ export function useInputPhoneState({
     inputValue,
     isError,
     prefixSuffixClassName,
+    countryOptions,
+    countryOption,
+    selectedCountry: resolvedCountry,
+    setSelectedCountry,
     wrapperClassName,
   };
 }

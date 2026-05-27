@@ -21,3 +21,5 @@ export const roleClasses =
 export const itemsClasses = "flex flex-col items-stretch gap-0_5 self-stretch";
 
 export const modalClasses = "items-stretch";
+
+export const dangerClasses = "bg-danger-light";

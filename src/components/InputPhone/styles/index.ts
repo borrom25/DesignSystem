@@ -1,4 +1,17 @@
 import {
+  countryEmptyClasses,
+  countryFlagClasses,
+  countryFlagFallbackClasses,
+  countryListClasses,
+  countryListItemClasses,
+  countryListItemContentClasses,
+  countryListItemNameClasses,
+  countryListItemSuffixClasses,
+  countryPopoverSurfaceClasses,
+  countryScrollAreaClasses,
+  countryScrollContainerClasses,
+  countrySearchWrapperClasses,
+  countryTriggerStateClasses,
   disabledClasses,
   fieldRowClasses,
   islandClasses,
@@ -10,11 +23,25 @@ import {
 
 import {
   iconSizeClasses,
+  flagSizeClasses,
   inputPhoneWrapperSizeClasses,
   islandSizeClasses,
 } from "./sizes.ts";
 
 export {
+  countryEmptyClasses,
+  countryFlagClasses,
+  countryFlagFallbackClasses,
+  countryListClasses,
+  countryListItemClasses,
+  countryListItemContentClasses,
+  countryListItemNameClasses,
+  countryListItemSuffixClasses,
+  countryPopoverSurfaceClasses,
+  countryScrollAreaClasses,
+  countryScrollContainerClasses,
+  countrySearchWrapperClasses,
+  countryTriggerStateClasses,
   disabledClasses,
   fieldRowClasses,
   islandClasses,
@@ -25,6 +52,7 @@ export {
 } from "./base.ts";
 
 export {
+  flagSizeClasses,
   iconSizeClasses,
   inputPhoneWrapperSizeClasses,
   islandSizeClasses,
@@ -39,7 +67,21 @@ export const inputPhoneStyles = {
   separator: separatorClasses,
   disabled: disabledClasses,
   island: islandClasses,
+  countryTriggerState: countryTriggerStateClasses,
+  countryFlag: countryFlagClasses,
+  countryFlagFallback: countryFlagFallbackClasses,
+  countryPopoverSurface: countryPopoverSurfaceClasses,
+  countrySearchWrapper: countrySearchWrapperClasses,
+  countryScrollArea: countryScrollAreaClasses,
+  countryScrollContainer: countryScrollContainerClasses,
+  countryList: countryListClasses,
+  countryListItem: countryListItemClasses,
+  countryListItemSuffix: countryListItemSuffixClasses,
+  countryListItemContent: countryListItemContentClasses,
+  countryListItemName: countryListItemNameClasses,
+  countryEmpty: countryEmptyClasses,
   islandSize: islandSizeClasses,
   wrapperSize: inputPhoneWrapperSizeClasses,
   iconSize: iconSizeClasses,
+  flagSize: flagSizeClasses,
 };

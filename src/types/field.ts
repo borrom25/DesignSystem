@@ -1,6 +1,6 @@
-export type BaseFieldProps<T extends string | number = string> = {
-  label?: T;
-  subtitle?: T;
+export type BaseFieldProps = {
+  label?: string;
+  subtitle?: string;
   required?: boolean;
   hint?: string;
   hintError?: string;

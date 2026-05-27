@@ -4,12 +4,12 @@ import { ListItemProps } from "../ListItem";
 import type { ReactElement } from "react";
 import { AccountMenu } from "./AccountMenu";
 
-export type AccountMenuContentProps = {
+export type AccountMenuContentProps<T extends string = string> = {
   actionSlot?: ReactNode;
   switchersSlot?: ReactNode;
-  languages?: SegmentedOption[];
-  language?: string;
-  onChangeLanguage?: (value: string) => void;
+  languages?: SegmentedOption<T>[];
+  language?: T;
+  onChangeLanguage?: (value: T) => void;
   themes?: SegmentedOption[];
   showTheme?: boolean;
   src: string;
@@ -19,11 +19,12 @@ export type AccountMenuContentProps = {
   logoutFn?: () => void;
 };
 
-export type AccountMenuProps = AccountMenuContentProps & {
-  trigger?: ReactNode;
-  isOpen?: boolean;
-  setIsOpen?: Dispatch<SetStateAction<boolean>>;
-};
+export type AccountMenuProps<T extends string = string> =
+  AccountMenuContentProps<T> & {
+    trigger?: ReactNode;
+    isOpen?: boolean;
+    setIsOpen?: Dispatch<SetStateAction<boolean>>;
+  };
 
 export type AccountMenuElement = ReactElement<
   AccountMenuProps,

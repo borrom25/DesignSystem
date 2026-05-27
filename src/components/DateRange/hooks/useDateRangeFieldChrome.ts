@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { cn, getIconSize } from "@/utils";
 import { Size } from "@/types";
 import { dateRangeStyles } from "../styles";
@@ -25,25 +24,18 @@ export const useDateRangeFieldChrome = ({
   const isInteractive = !disabled && !!onClick;
   const showClearButton = clearable && hasValue;
 
-  const indicatorClassName = useMemo(() => {
-    if (!activeBound) {
-      return undefined;
-    }
-    return cn(
-      dateRangeStyles.section.indicator,
-      activeBound === "start"
-        ? dateRangeStyles.section.indicatorStart
-        : dateRangeStyles.section.indicatorEnd
-    );
-  }, [activeBound]);
+  const indicatorClassName = activeBound
+    ? cn(
+        dateRangeStyles.section.indicator,
+        activeBound === "start"
+          ? dateRangeStyles.section.indicatorStart
+          : dateRangeStyles.section.indicatorEnd
+      )
+    : undefined;
 
-  const calendarIconClassName = useMemo(
-    () =>
-      cn(
-        dateRangeStyles.calendarButton.icon,
-        showClearButton && dateRangeStyles.calendarButton.iconHover
-      ),
-    [showClearButton]
+  const calendarIconClassName = cn(
+    dateRangeStyles.calendarButton.icon,
+    showClearButton && dateRangeStyles.calendarButton.iconHover
   );
 
   return {

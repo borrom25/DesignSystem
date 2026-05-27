@@ -1,4 +1,4 @@
-import { closeButtonSize, cn } from "@/utils";
+import { cn } from "@/utils";
 import { Size } from "@/types";
 import type { TagProps } from "./Tag.types";
 import { avatarSizeMap, tagStyles } from "./styles";
@@ -11,6 +11,7 @@ export function Tag({
   leftContent,
   onClose,
   error = false,
+  disabled = false,
   className,
   children,
   ...restProps
@@ -23,6 +24,7 @@ export function Tag({
         tagStyles.base,
         tagStyles.size[size],
         error && tagStyles.error,
+        disabled && tagStyles.disabled,
         hasAvatar && tagStyles.gap[size],
         hasAvatar && tagStyles.withAvatar,
         hasAvatar && tagStyles.withAvatarSize[size],
@@ -42,10 +44,11 @@ export function Tag({
         {children}
         {onClose && (
           <CloseBtn
-            size={closeButtonSize(size)}
+            size={Size.Md}
             onClick={onClose}
             aria-label="Закрыть"
             error={error}
+            disabled={disabled}
           />
         )}
       </span>

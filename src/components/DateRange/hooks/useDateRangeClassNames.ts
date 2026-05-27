@@ -23,21 +23,5 @@ export const useDateRangeClassNames = ({
     );
   }, [size, disabled, isError, open]);
 
-  const chipClassName = useMemo(() => {
-    return cn(
-      dateRangeStyles.chip.base,
-      dateRangeStyles.chip.size[size],
-      disabled && dateRangeStyles.chip.disabled
-    );
-  }, [size, disabled]);
-
-  const chipErrorClassName = useMemo(() => {
-    return cn(
-      dateRangeStyles.chip.base,
-      dateRangeStyles.chip.size[size],
-      dateRangeStyles.chip.error
-    );
-  }, [size]);
-
-  return { wrapperClassName, chipClassName, chipErrorClassName };
+  return { wrapperClassName };
 };

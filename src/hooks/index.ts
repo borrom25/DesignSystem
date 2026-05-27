@@ -11,3 +11,10 @@ export type {
   UseDraftStateOptions,
   UseDraftStateReturn,
 } from "./useDraftState";
+export { useUiController, uiController } from "./useUiController";
+export type { UiController } from "./useUiController";
+export {
+  useOverlayController,
+  overlayController,
+} from "./useOverlayController";
+export type { OverlayController } from "./useOverlayController";

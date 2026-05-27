@@ -6,6 +6,12 @@ export const sizeClasses: Record<Size, string> = {
   md: "flex w-12 h-12 p-0 gap-0 rounded-[6px]",
 } as const;
 
+export const titleSizeClasses: Record<Size, string> = {
+  xs: "text-xs",
+  sm: "text-sm",
+  md: "text-md",
+} as const;
+
 export const iconSizeMap: Record<Size, number> = {
   xs: 16,
   sm: 16,

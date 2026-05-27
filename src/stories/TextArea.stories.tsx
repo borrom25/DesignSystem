@@ -30,6 +30,7 @@ export const Playground: Story = {
     const [required, setRequired] = useState(true);
     const [hasHintError, setHasHintError] = useState(false);
     const [disabled, setDisabled] = useState(false);
+    const [maxLength, setMaxLength] = useState(200);
     const [value, setValue] = useState("");
 
     return (
@@ -87,6 +88,19 @@ export const Playground: Story = {
             />
             disabled
           </label>
+
+          <label className="flex items-center gap-1.5">
+            maxLength:
+            <input
+              type="number"
+              min={0}
+              value={maxLength}
+              onChange={(event) =>
+                setMaxLength(Number(event.target.value) || 0)
+              }
+              className="w-16 bg-transparent border border-white/10 rounded px-1 py-0.5"
+            />
+          </label>
         </div>
 
         <TextArea
@@ -101,6 +115,7 @@ export const Playground: Story = {
           hint="Введите описание"
           hintError={hasHintError ? "Поле обязательно" : undefined}
           placeholder="Напишите что-нибудь..."
+          maxLength={maxLength > 0 ? maxLength : undefined}
           rows={4}
         />
       </div>

@@ -1,5 +1,10 @@
-export { baseClasses, labelClasses } from "./base";
-export { sizeClasses, iconSizeMap } from "./sizes";
+export {
+  baseClasses,
+  labelClasses,
+  containerClasses,
+  titleClasses,
+} from "./base";
+export { sizeClasses, iconSizeMap, titleSizeClasses } from "./sizes";
 export {
   inputStateClasses,
   inputHoverClasses,
@@ -7,8 +12,13 @@ export {
   iconBaseClasses,
 } from "./states";
 
-import { baseClasses, labelClasses } from "./base";
-import { sizeClasses, iconSizeMap } from "./sizes";
+import {
+  baseClasses,
+  labelClasses,
+  containerClasses,
+  titleClasses,
+} from "./base";
+import { sizeClasses, iconSizeMap, titleSizeClasses } from "./sizes";
 import {
   inputStateClasses,
   inputHoverClasses,
@@ -20,6 +30,7 @@ export const checkBoxStyles = {
   base: baseClasses,
   label: labelClasses,
   size: sizeClasses,
+  titleSize: titleSizeClasses,
   iconSizeMap: iconSizeMap,
   input: {
     state: inputStateClasses,
@@ -27,4 +38,6 @@ export const checkBoxStyles = {
     disabled: disabledStateClasses,
   },
   icon: iconBaseClasses,
+  container: containerClasses,
+  title: titleClasses,
 } as const;

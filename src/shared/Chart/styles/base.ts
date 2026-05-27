@@ -1,4 +1,4 @@
-export const legendClasses = "shrink-0 text-complementary";
+export const legendClasses = "shrink-0 text-complementary ml-[4px] text-sm";
 
 export const legendContainerClasses = "flex justify-center";
 

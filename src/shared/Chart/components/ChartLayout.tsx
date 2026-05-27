@@ -3,15 +3,18 @@ import { ChartLegend } from "./ChartLegend";
 import { ChartProps } from "../types.ts";
 import { useLayoutEffect, useRef, useState } from "react";
 import { chartStyles } from "../styles";
+import { LegendType } from "recharts";
 
 interface ChartLayoutProps extends ChartProps {
   children: React.ReactNode;
+  legendType?: LegendType;
 }
 
 export const ChartLayout = ({
   title,
   data,
   series,
+  legendType,
   children,
 }: ChartLayoutProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -35,7 +38,12 @@ export const ChartLayout = ({
         </div>
       </div>
 
-      <ChartLegend data={data} series={series} width={contentWidth} />
+      <ChartLegend
+        data={data}
+        series={series}
+        width={contentWidth}
+        iconType={legendType}
+      />
     </div>
   );
 };

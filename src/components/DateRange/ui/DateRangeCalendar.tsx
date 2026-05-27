@@ -1,6 +1,7 @@
 import { ru } from "date-fns/locale";
 import { cn } from "@/utils";
 import { Calendar } from "@/components/Calendar";
+import { calendarMonthsDefault } from "../constants";
 import type { DateRangeValue } from "../DateRange.types";
 import { dateRangeStyles } from "../styles";
 
@@ -17,7 +18,7 @@ export function DateRangeCalendar({
   value,
   onSelect,
   displayMonth,
-  numberOfMonths = 2,
+  numberOfMonths = calendarMonthsDefault,
   disabled = false,
   className,
 }: DateRangeCalendarProps) {

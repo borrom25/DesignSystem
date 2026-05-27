@@ -1,16 +1,21 @@
 import { useRef } from "react";
 import { cn } from "@/utils";
 import { Size } from "@/types";
-import { FieldLabel, FieldHint } from "@/components/Field";
+import { FieldHint } from "@/components/Field";
 import { CloseBtn } from "@/components/CloseBtn";
 import dropAreaIcon from "@/assets/icons/dropArea.svg";
 import { useClearField } from "@/shared/hooks";
+import {
+  formatCountDisplay,
+  getInputCount,
+} from "@/components/Input/Input.utils";
 import type { TextAreaProps } from "./TextArea.types";
 import { textAreaStyles } from "./styles";
 import {
   useTextAreaIds,
   useTextAreaResize,
   useTextAreaClassNames,
+  useTextAreaFieldState,
 } from "./hooks/useTextAreaIds";
 import { wrapperClasses } from "@/components/Field/styles";
 
@@ -29,8 +34,14 @@ export function TextArea({
   onClear,
   value,
   clearable = true,
+  maxLength,
+  onFocus,
+  onBlur,
+  onChange,
+  defaultValue,
   ...restProps
 }: TextAreaProps) {
+  const hasLabel = !!label;
   const { textareaId, hintId } = useTextAreaIds({
     id: idProp,
     hint,
@@ -38,35 +49,69 @@ export function TextArea({
   });
   const isError = error || !!hintError;
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const { nativeClassName } = useTextAreaClassNames({
+  const {
+    currentValue,
+    isLabelActive,
+    isPlaceholderVisible,
+    handleFocus,
+    handleBlur,
+    handleChange,
+  } = useTextAreaFieldState({
+    value,
+    defaultValue,
+    onFocus,
+    onBlur,
+    onChange,
+  });
+
+  const { fieldShellClassName, nativeClassName } = useTextAreaClassNames({
     size,
     isError,
     disabled,
     inputClassName,
+    hasLabel,
+    isPlaceholderVisible,
   });
 
   const { handleMouseDown } = useTextAreaResize({
-    textareaRef,
+    targetRef: hasLabel ? containerRef : textareaRef,
     resizeMode,
   });
 
   const handleClearClick = useClearField({ ref: textareaRef, onClear });
 
+  const countDisplay =
+    maxLength !== undefined
+      ? formatCountDisplay(getInputCount(currentValue), maxLength)
+      : null;
+
   return (
     <div className={cn(wrapperClasses, className)}>
-      {label && (
-        <FieldLabel
-          size={size}
-          required={required}
-          disabled={disabled}
-          htmlFor={textareaId}
-        >
-          {label}
-        </FieldLabel>
-      )}
+      <div
+        ref={containerRef}
+        className={cn(textAreaStyles.wrapperInner, fieldShellClassName)}
+      >
+        {required && (
+          <span aria-hidden className={cn(textAreaStyles.requiredMark)}>
+            *
+          </span>
+        )}
+        {label && (
+          <label
+            htmlFor={textareaId}
+            className={cn(
+              textAreaStyles.label,
+              textAreaStyles.labelSize[size],
+              isLabelActive && textAreaStyles.labelActiveSize[size],
+              disabled && textAreaStyles.labelDisabled
+            )}
+          >
+            {label}
+          </label>
+        )}
 
-      <div className={textAreaStyles.wrapperInner}>
         <textarea
           ref={textareaRef}
           id={textareaId}
@@ -76,9 +121,25 @@ export function TextArea({
           aria-describedby={hintId}
           aria-invalid={isError || undefined}
           className={nativeClassName}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          maxLength={maxLength}
           {...restProps}
           autoComplete="off"
         />
+
+        {countDisplay && (
+          <span
+            className={cn(
+              textAreaStyles.counter,
+              disabled && textAreaStyles.counterDisabled
+            )}
+            aria-live="polite"
+          >
+            {countDisplay}
+          </span>
+        )}
 
         {!!value && clearable && (
           <CloseBtn

@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import type { DateRangeBound, DateRangeValue } from "../DateRange.types";
+import { getFieldClickBound } from "../utils/dateRangeValue";
 
 export interface UseDateRangeInteractionParams {
   disabled: boolean;
@@ -16,9 +17,6 @@ export interface UseDateRangeInteractionParams {
       }
     | undefined;
 }
-
-const fieldClickBound = (value: DateRangeValue): DateRangeBound =>
-  value.start && !value.end ? "end" : "start";
 
 export const useDateRangeInteraction = ({
   disabled,
@@ -45,7 +43,7 @@ export const useDateRangeInteraction = ({
     if (disabled) {
       return;
     }
-    handleBoundClick(fieldClickBound(currentValue));
+    handleBoundClick(getFieldClickBound(currentValue));
   }, [currentValue, disabled, handleBoundClick]);
 
   const handleOpenChange = useCallback((nextOpen: boolean) => {

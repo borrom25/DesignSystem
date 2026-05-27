@@ -16,13 +16,15 @@ export function CheckBox({
   hintError,
   error,
   scaling = true,
+  title,
   ...restProps
 }: CheckBoxProps) {
-  const hasField = label || hint || hintError;
+  const hasField = label || hint || hintError || title;
 
   const input = (
     <CheckBoxInput
       size={size}
+      title={title}
       className={className}
       checked={checked}
       defaultChecked={defaultChecked}

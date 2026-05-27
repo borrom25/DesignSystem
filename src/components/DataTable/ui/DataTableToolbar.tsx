@@ -7,12 +7,10 @@ import { tableStyles } from "../styles";
 
 export function DataTableToolbar({
   topSlot,
+  showSearch = true,
   searchValue,
   onSearchChange,
   searchPlaceholder = "Поиск",
-  rowCount,
-  rowCountLabel = "Счетчик строк",
-  rowCountValue,
   actions,
   actionsPlaceholder = "Действия",
   onActionChange,
@@ -25,25 +23,14 @@ export function DataTableToolbar({
       {topSlot && <div className={tableStyles.toolbarTopSlot}>{topSlot}</div>}
 
       <div className={tableStyles.toolbarMainRow}>
-        <div className={tableStyles.toolbarSearch}>
-          <SearchAutocomplete
-            value={searchValue}
-            onValueChange={onSearchChange}
-            placeholder={searchPlaceholder}
-            clearable
-          />
-        </div>
-
-        {rowCount !== undefined && (
-          <div className={tableStyles.toolbarCounter}>
-            {rowCountLabel !== null && rowCountLabel !== undefined && (
-              <span className={tableStyles.toolbarCounterLabel}>
-                {rowCountLabel}:
-              </span>
-            )}
-            <span className={tableStyles.toolbarCounterValue}>
-              {rowCountValue ?? rowCount}
-            </span>
+        {showSearch && (
+          <div className={tableStyles.toolbarSearch}>
+            <SearchAutocomplete
+              value={searchValue}
+              onValueChange={onSearchChange}
+              placeholder={searchPlaceholder}
+              clearable
+            />
           </div>
         )}
 

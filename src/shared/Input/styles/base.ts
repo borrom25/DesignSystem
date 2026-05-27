@@ -10,7 +10,7 @@ export const inputDisabledClasses =
   "bg-generic-disabled text-hint cursor-not-allowed";
 
 export const inputErrorClasses =
-  "border border-danger-line-light bg-danger-light hover:border-danger-line-light hover:bg-danger-light-hover focus-within:border-danger-line-light focus-within:bg-danger-light focus-within:hover:border-danger-line-light focus-within:hover:bg-danger-light-hover";
+  "border border-danger-line-light  hover:border-danger-line-light focus-within:border-danger-line-light focus-within:hover:border-danger-line-light";
 
 export const inputClearClasses =
   "border-0 border-transparent bg-transparent hover:rounded-lg hover:bg-generic-medium focus-within:rounded-lg focus-within:bg-generic-medium focus-within:hover:rounded-lg focus-within:hover:bg-generic-medium";
@@ -18,8 +18,7 @@ export const inputClearClasses =
 export const inputClearDisabledClasses =
   "border-0 border-transparent bg-transparent text-hint cursor-not-allowed";
 
-export const inputClearErrorClasses =
-  "border-0 border-transparent bg-danger-light hover:bg-danger-light-hover focus-within:bg-danger-light focus-within:hover:bg-danger-light-hover";
+export const inputClearErrorClasses = "border-0 border-transparent";
 
 export const inputAdornmentClasses = "shrink-0 text-complementary";
 
@@ -39,6 +38,8 @@ export const inputBodyClasses =
 
 export const inputNativeClasses =
   "relative z-10 flex-1 min-w-0 bg-transparent border-none outline-none placeholder:text-secondary disabled:cursor-not-allowed text-primary disabled:text-hint will-change-transform transition-[translate] duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] [&::placeholder]:transition-opacity [&::placeholder]:duration-[250ms] [&::placeholder]:ease-out";
+
+export const inputNativeFullHeightClasses = "h-full";
 
 export const inputNativeDisabledClasses = "placeholder:text-hint";
 
@@ -60,7 +61,7 @@ export const inputFloatingLabelActiveClasses =
 export const inputFloatingLabelDisabledClasses = "text-hint";
 
 export const inputFloatingLabelRequiredMarkClasses =
-  "pointer-events-none absolute -left-2 top-0 z-20 inline-flex size-[21px] -translate-y-1/3 items-center justify-center text-[21px] font-bold leading-[21px] tracking-md text-danger-text-heavy";
+  "pointer-events-none absolute -left-1 top-1 z-30 inline-flex size-[21px] -translate-y-1/3 items-center justify-center text-[30px] font-bold leading-[21px] tracking-md text-danger-text-heavy";
 
 export const inputClearButtonClasses =
   "shrink-0 p-0 border-0 bg-transparent text-complementary cursor-pointer opacity-0 scale-95 pointer-events-none transition-[opacity,scale,color] duration-200 ease-out group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:scale-100 group-focus-within:pointer-events-auto disabled:text-hint disabled:cursor-not-allowed disabled:pointer-events-none";

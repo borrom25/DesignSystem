@@ -1,13 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { BarChartVertical as BarChartVerticalComponent } from "@/components/BarChartVertical";
+import { BarChartVertical as BarChartVerticalComponent } from "@/components";
 
 const meta = {
-  title: "Components/BarChartVertical",
+  title: "Components/Charts",
   component: BarChartVerticalComponent,
   parameters: {
     layout: "fullscreen",
   },
   tags: ["autodocs"],
+  argTypes: {
+    data: { table: { disable: true } },
+    series: { table: { disable: true } },
+  },
 } satisfies Meta<typeof BarChartVerticalComponent>;
 
 export default meta;
@@ -23,9 +27,6 @@ const chartData = [
     b5: 45,
     b6: 60,
     b7: 25,
-    b8: 40,
-    b9: 55,
-    b10: 70,
   },
   {
     name: "Вт",
@@ -36,9 +37,6 @@ const chartData = [
     b5: 50,
     b6: 70,
     b7: 30,
-    b8: 45,
-    b9: 65,
-    b10: 80,
   },
   {
     name: "Ср",
@@ -49,9 +47,6 @@ const chartData = [
     b5: 60,
     b6: 85,
     b7: 35,
-    b8: 55,
-    b9: 75,
-    b10: 90,
   },
   {
     name: "Чт",
@@ -62,9 +57,6 @@ const chartData = [
     b5: 55,
     b6: 75,
     b7: 28,
-    b8: 48,
-    b9: 68,
-    b10: 82,
   },
   {
     name: "Пт",
@@ -75,9 +67,6 @@ const chartData = [
     b5: 70,
     b6: 95,
     b7: 40,
-    b8: 60,
-    b9: 80,
-    b10: 100,
   },
   {
     name: "Сб",
@@ -88,9 +77,6 @@ const chartData = [
     b5: 85,
     b6: 115,
     b7: 45,
-    b8: 70,
-    b9: 95,
-    b10: 120,
   },
   {
     name: "Вс",
@@ -101,9 +87,6 @@ const chartData = [
     b5: 78,
     b6: 105,
     b7: 42,
-    b8: 68,
-    b9: 88,
-    b10: 110,
   },
   {
     name: "Вс",
@@ -114,9 +97,6 @@ const chartData = [
     b5: 78,
     b6: 105,
     b7: 42,
-    b8: 68,
-    b9: 88,
-    b10: 110,
   },
   {
     name: "Вс",
@@ -127,9 +107,6 @@ const chartData = [
     b5: 78,
     b6: 105,
     b7: 42,
-    b8: 68,
-    b9: 88,
-    b10: 110,
   },
 ];
 
@@ -141,13 +118,12 @@ export const BarChartVertical: Story = {
       { dataKey: "b1", label: "Органика" },
       { dataKey: "b2", label: "Платный трафик" },
       { dataKey: "b3", label: "Соцсети" },
-      { dataKey: "b4", label: "Рефералы" },
+      { dataKey: "b4", label: "Орешки" },
       { dataKey: "b5", label: "Рефералы" },
-      { dataKey: "b6", label: "Рефералы" },
+      { dataKey: "b6", label: "бебебе" },
       { dataKey: "b7", label: "Рефералы" },
     ],
   },
-
   render: (args) => (
     <div className="p-10">
       <BarChartVerticalComponent {...args} />

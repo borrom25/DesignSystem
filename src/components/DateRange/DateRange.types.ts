@@ -61,10 +61,8 @@ export interface DateRangeFieldProps extends Omit<
   "children"
 > {
   wrapperClassName: string;
-  chipClassName: string;
-  chipErrorClassName: string;
-  formattedStart: string;
-  formattedEnd: string;
+  startInputValue: string;
+  endInputValue: string;
   placeholderStart: string;
   placeholderEnd: string;
   activeBound?: DateRangeBound | null;
@@ -77,4 +75,8 @@ export interface DateRangeFieldProps extends Omit<
   onClear?: () => void;
   onStartClick?: () => void;
   onEndClick?: () => void;
+  onStartInputChange?: (value: string) => void;
+  onEndInputChange?: (value: string) => void;
+  onStartInputCommit?: () => void;
+  onEndInputCommit?: () => void;
 }

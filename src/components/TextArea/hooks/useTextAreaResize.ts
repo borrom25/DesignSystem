@@ -1,14 +1,14 @@
 import { useCallback, type RefObject } from "react";
 
 interface UseTextAreaResizeProps {
-  textareaRef: RefObject<HTMLTextAreaElement>;
+  targetRef: RefObject<HTMLElement | null>;
   resizeMode: "vertical" | "both";
   minHeight?: number;
   minWidth?: number;
 }
 
 export function useTextAreaResize({
-  textareaRef,
+  targetRef,
   resizeMode,
   minHeight = 48,
   minWidth = 120,
@@ -16,23 +16,27 @@ export function useTextAreaResize({
   const handleMouseDown = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
-      const textarea = textareaRef.current;
-      if (!textarea) return;
+      event.stopPropagation();
+
+      const target = targetRef.current;
+      if (!target) return;
 
       const startX = event.clientX;
       const startY = event.clientY;
-      const startWidth = textarea.offsetWidth;
-      const startHeight = textarea.offsetHeight;
+      const startWidth = target.offsetWidth;
+      const startHeight = target.offsetHeight;
 
       const onMouseMove = (moveEvent: MouseEvent) => {
         const deltaY = moveEvent.clientY - startY;
         const nextHeight = Math.max(minHeight, startHeight + deltaY);
-        textarea.style.height = `${nextHeight}px`;
+        target.style.height = `${nextHeight}px`;
+        target.style.minHeight = `${nextHeight}px`;
 
         if (resizeMode === "both") {
           const deltaX = moveEvent.clientX - startX;
           const nextWidth = Math.max(minWidth, startWidth + deltaX);
-          textarea.style.width = `${nextWidth}px`;
+          target.style.width = `${nextWidth}px`;
+          target.style.minWidth = `${nextWidth}px`;
         }
       };
 
@@ -44,10 +48,8 @@ export function useTextAreaResize({
       window.addEventListener("mousemove", onMouseMove);
       window.addEventListener("mouseup", onMouseUp);
     },
-    [textareaRef, resizeMode, minHeight, minWidth]
+    [targetRef, resizeMode, minHeight, minWidth]
   );
 
-  return {
-    handleMouseDown,
-  };
+  return { handleMouseDown };
 }

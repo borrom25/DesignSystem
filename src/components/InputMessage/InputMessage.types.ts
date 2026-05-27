@@ -9,13 +9,22 @@ export type InputMessageAttachment = {
   disabled?: boolean;
 };
 
+export type InputMessageOnFileChangeArgs = {
+  files?: File[] | FileList;
+  errorMessage?: string;
+};
+
+export type InputMessageOnChangeArgs = InputMessageOnFileChangeArgs & {
+  value: string;
+};
+
 export type InputMessageProps = Omit<
   TextareaHTMLAttributes<HTMLTextAreaElement>,
   "onChange" | "value" | "defaultValue"
 > & {
   value?: string;
   defaultValue?: string;
-  onChange?: (value: string) => void;
+  onChange?: ({ value, files, errorMessage }: InputMessageOnChangeArgs) => void;
   placeholder?: string;
   disabled?: boolean;
   showAttachments?: boolean;
@@ -26,9 +35,18 @@ export type InputMessageProps = Omit<
   textareaClassName?: string;
   popoverContentClassName?: string;
   maxRows?: number;
+  fileAccept?: string;
+  maxFileCount?: number;
+  maxFileSize?: number;
 };
 
 export interface MessageFilePreviewProps {
   file: File;
   onRemove: () => void;
 }
+
+export type ActionFileChangeProps = {
+  onChange?: ({ files, errorMessage }: InputMessageOnFileChangeArgs) => void;
+  maxFileCount?: number;
+  maxFileSize: number;
+};

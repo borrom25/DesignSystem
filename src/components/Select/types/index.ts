@@ -22,44 +22,44 @@ export type SelectContextValue<T extends string | number = string> = {
   onClear?: () => void;
 };
 
-export type SelectOption = BaseSelectOption;
-export type SelectRenderValue = (
-  selected: SelectOption | undefined
+export type SelectOption<T extends string | number = string> =
+  BaseSelectOption<T>;
+export type SelectRenderValue<T extends string | number = string> = (
+  selected: SelectOption<T> | undefined
 ) => ReactNode;
-export type SelectRenderItem = (
-  option: SelectOption,
+export type SelectRenderItem<T extends string | number = string> = (
+  option: SelectOption<T>,
   state: { selected: boolean }
 ) => ReactNode;
 
-export type SelectProps<T extends string | number = string> =
-  BaseFieldProps<T> & {
-    value?: T;
-    defaultValue?: T;
-    onValueChange?: (value?: T) => void;
-    open?: boolean;
-    defaultOpen?: boolean;
-    onOpenChange?: (open: boolean) => void;
-    options?: SelectOption[];
-    disabled?: boolean;
-    name?: string;
-    size?: Size;
-    className?: string;
-    triggerClassName?: string;
-    contentClassName?: string;
-    itemClassName?: string;
-    children?: ReactNode;
-    placeholder?: string;
-    renderValue?: SelectRenderValue;
-    renderItem?: SelectRenderItem;
-    matchTriggerWidth?: boolean;
-    maxHeight?: number | "available";
-    onScrollEnd?: () => void;
-    scrollEndOffset?: number;
-    side?: "top" | "bottom" | "left" | "right";
-    sideOffset?: number;
-    align?: "start" | "center" | "end";
-    onClear?: () => void;
-  };
+export type SelectProps<T extends string | number = string> = BaseFieldProps & {
+  value?: T;
+  defaultValue?: T;
+  onValueChange?: (value?: T) => void;
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  options?: SelectOption<T>[];
+  disabled?: boolean;
+  name?: string;
+  size?: Size;
+  className?: string;
+  triggerClassName?: string;
+  contentClassName?: string;
+  itemClassName?: string;
+  children?: ReactNode;
+  placeholder?: string;
+  renderValue?: SelectRenderValue<T>;
+  renderItem?: SelectRenderItem<T>;
+  matchTriggerWidth?: boolean;
+  maxHeight?: number | "available";
+  onScrollEnd?: () => void;
+  scrollEndOffset?: number;
+  side?: "top" | "bottom" | "left" | "right";
+  sideOffset?: number;
+  align?: "start" | "center" | "end";
+  onClear?: () => void;
+};
 
 export type SelectTriggerProps = BaseTriggerProps & {
   onClear?: () => void;

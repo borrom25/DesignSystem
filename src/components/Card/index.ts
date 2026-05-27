@@ -1,2 +1,7 @@
 export { Card } from "./Card";
-export type { CardProps } from "./Card.types";
+export { CardVariant } from "./Card.types";
+export type {
+  CardPadding,
+  CardProps,
+  CardVariant as CardVariantType,
+} from "./Card.types";

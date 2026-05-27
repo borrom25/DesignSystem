@@ -8,14 +8,14 @@ import {
   chartBaseStroke,
 } from "../consts";
 
-interface ChartYAxisProps extends YAxisProps, ChartProps {}
+interface ChartAxisProps extends YAxisProps, ChartProps {}
 
 export const ChartYAxis = ({
   data,
   title,
   series,
   ...props
-}: ChartYAxisProps) => {
+}: ChartAxisProps) => {
   return (
     <div className={chartStyles.yAxis}>
       <BarChart

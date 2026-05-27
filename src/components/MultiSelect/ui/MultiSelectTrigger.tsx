@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import type { MouseEvent, PointerEvent } from "react";
 import { ChevronDown } from "lucide-react";
 import { Size } from "@/types";
-import { closeButtonSize, cn, getIconSize } from "@/utils";
+import { cn, getIconSize } from "@/utils";
 import closeCircleIconRaw from "@/assets/icons/closeCircle.svg?raw";
 import { Popover } from "@/components/Popover";
 import { closeBtnStyles } from "@/components/CloseBtn/styles";
@@ -50,8 +50,7 @@ export const MultiSelectTrigger = forwardRef<
   const showClear = clearable && hasValue;
   const hideChevron = hideChevronProp ?? showClear;
   const iconSize = getIconSize(size, triggerStyles.iconSizeMap);
-  const clearSize = closeButtonSize(size);
-  const clearIconSize = closeBtnStyles.iconSizeMap[clearSize];
+  const clearIconSize = closeBtnStyles.iconSizeMap["md"];
 
   const handleClear = (
     e: MouseEvent<HTMLSpanElement> | PointerEvent<HTMLSpanElement>
@@ -96,7 +95,7 @@ export const MultiSelectTrigger = forwardRef<
                 onClick={handleClear}
                 className={cn(
                   closeBtnStyles.base,
-                  closeBtnStyles.size[clearSize],
+                  closeBtnStyles.size["md"],
                   triggerStyles.clearButton,
                   open && "opacity-100 scale-100 pointer-events-auto",
                   "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"

@@ -4,11 +4,19 @@ export { UIKitProvider, ThemeProvider, ScreenProvider } from "./providers";
 export type { KitProviderProps, Theme } from "./providers";
 export { useTheme, useScreenSize } from "./providers";
 export { useDraftState, useDebouncedValue } from "./hooks";
+export {
+  useUiController,
+  uiController,
+  useOverlayController,
+  overlayController,
+} from "./hooks";
 export type {
   UseDraftStateOptions,
   UseDraftStateReturn,
   UseDebouncedValueOptions,
   UseDebouncedValueReturn,
+  UiController,
+  OverlayController,
 } from "./hooks";
 export { FieldLabel, FieldHint, FieldWrapper } from "./components/Field";
 
@@ -68,14 +76,6 @@ export type { SwitcherProps, SwitcherValue } from "./components/Switcher";
 
 export { Slider } from "./components/Slider";
 export type { SliderProps } from "./components/Slider";
-export { Space } from "./components/Space";
-export type {
-  SpaceProps,
-  SpaceJustify,
-  SpaceAlign,
-  SpaceDirection,
-  SpaceFlexWrap,
-} from "./components/Space";
 export { Button } from "./components/Button";
 export type { ButtonProps } from "./components/Button";
 
@@ -182,26 +182,22 @@ export type {
 } from "./components/IconAvatar";
 
 export { Alert } from "./components/Alert";
-export type { AlertColor, AlertProps } from "./components/Alert";
+export { alertController } from "./components/Alert";
+export type {
+  AlertColor,
+  AlertProps,
+  ProgrammaticAlertEntry,
+  ProgrammaticAlertOptions,
+  ProgrammaticAlertType,
+} from "./components/Alert";
 
 export { ProgressBar } from "./components/ProgressBar";
 export type {
   ProgressBarProps,
   ProgressBarStatus,
 } from "./components/ProgressBar";
-export { ProgressPie } from "./components/ProgressPie";
-export type {
-  ProgressPieProps,
-  ConfigProps,
-  ProgressPieColors,
-  ProgressPieSize,
-} from "./components/ProgressPie";
 export { Skeleton } from "./components/Skeleton";
 export type { SkeletonProps } from "./components/Skeleton";
-export { Plug } from "./components/Plug";
-export type { PlugProps } from "./components/Plug";
-export { StepBar } from "./components/StepBar";
-export type { StepBarItem, StepBarProps } from "./components/StepBar";
 export { Tab } from "./components/Tab";
 export type { TabProps, TabType } from "./components/Tab";
 
@@ -227,8 +223,12 @@ export type {
 export { InsideSidebar } from "./components/InsideSidebar";
 export type { InsideSidebarProps } from "./components/InsideSidebar";
 
-export { Card } from "./components/Card";
-export type { CardProps } from "./components/Card";
+export { Card, CardVariant } from "./components/Card";
+export type {
+  CardPadding,
+  CardProps,
+  CardVariantType,
+} from "./components/Card";
 
 export { Bubble, BubbleSide } from "./components/Bubble";
 export type {
@@ -263,6 +263,18 @@ export type { TextProps, TextWeight } from "./components/Text";
 
 export { BarChartVertical } from "./components/BarChartVertical";
 export type { BarChartVerticalProps } from "./components/BarChartVertical";
+
+export { Carousel } from "./components/Carousel";
+export type { CarouselProps } from "./components/Carousel";
+
+export { LineChart } from "./components/LineChart";
+export type { LineChartProps } from "./components/LineChart";
+
+export { PieChart } from "./components/PieChart";
+export type { PieChartType, PieChartProps } from "./components/PieChart";
+
+export { BarChartHorizontal } from "./components/BarChartHorizontal";
+export type { BarChartHorizontalProps } from "./components/BarChartHorizontal";
 
 export {
   Popover,
@@ -299,6 +311,8 @@ export {
   ModalType,
   useModalStore,
   useModalsEntries,
+  useProgrammaticModals,
+  modalController,
   useModalContext,
   ModalContext,
 } from "./components/Modal";
@@ -306,6 +320,9 @@ export type {
   ModalProps,
   ModalContextValue,
   ModalEntry,
+  ProgrammaticModalEntry,
+  ProgrammaticModalOptions,
+  ProgrammaticModalSize,
 } from "./components/Modal";
 export { TableColumnsModal } from "./components/TableColumnsModal";
 export { useTableColumnsModalOptions } from "./components/TableColumnsModal";
@@ -378,6 +395,11 @@ export {
 } from "./components/Table";
 export type {
   TableProps,
+  TableCellEditContext,
+  TableCellValueChangeEvent,
+  TableCellValueChangeReason,
+  TableCellEditablePredicate,
+  TableCellEditorRenderer,
   ColumnDef,
   SortingState,
   ColumnFiltersState,
@@ -404,8 +426,6 @@ export type {
   Row,
   Table as TanStackTable,
 } from "./components/Table";
-export { Table as DataTable } from "./components/DataTable";
-export type { TableProps as DataTableProps } from "./components/DataTable";
 
 export { Cascader } from "./components/Cascader";
 export type { CascaderProps, CascaderItemProps } from "./components/Cascader";
@@ -420,7 +440,8 @@ export type {
 export { SidebarTypes } from "./shared/Sidebar";
 export type { SidebarTypesType } from "./shared/Sidebar";
 
-export { cn } from "./utils";
+export { cn, mergeStyleWithVerticalPadding } from "./utils";
+export type { VerticalPaddingStyle } from "./utils";
 
 export { Segmented } from "./components/Segmented";
 export type { SegmentedProps } from "./components/Segmented";

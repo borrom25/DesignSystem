@@ -1,0 +1,1 @@
+export { BarChartHorizontalLegend } from "./BarChartHorizontalLegend";

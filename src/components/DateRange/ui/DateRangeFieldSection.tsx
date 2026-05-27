@@ -1,59 +1,103 @@
-import { cn, withStopPropagationClick } from "@/utils";
+import { cn } from "@/utils";
+import { Size } from "@/types";
+import { dateInputMaxLength, dateInputPlaceholder } from "../constants";
+import { useDateRangeFieldSection } from "../hooks/useDateRangeFieldSection";
 import { dateRangeStyles } from "../styles";
-import { DateChip } from "./DateChip";
 
 export interface DateRangeFieldSectionProps {
-  text: string;
+  value: string;
+  label: string;
   placeholder: string;
-  chipClassName: string;
-  chipErrorClassName: string;
   filled: boolean;
+  active: boolean;
   isError: boolean;
   disabled: boolean;
+  size: Size;
   ariaLabel: string;
   onClick?: () => void;
+  onValueChange?: (value: string) => void;
+  onCommit?: () => void;
 }
 
 export function DateRangeFieldSection({
-  text,
-  placeholder,
-  chipClassName,
-  chipErrorClassName,
+  value,
+  label,
+  placeholder = dateInputPlaceholder,
   filled,
+  active,
   isError,
   disabled,
+  size,
   ariaLabel,
   onClick,
+  onValueChange,
+  onCommit,
 }: DateRangeFieldSectionProps) {
-  const isInteractive = !disabled && !!onClick;
-  const handleClick = withStopPropagationClick(
-    isInteractive ? onClick : undefined
-  );
+  const {
+    inputRef,
+    isInteractive,
+    isLabelActive,
+    handleSectionClick,
+    handleInputClick,
+    handleInputFocus,
+  } = useDateRangeFieldSection({
+    disabled,
+    filled,
+    active,
+    onClick,
+  });
 
   return (
     <div className={dateRangeStyles.section.base}>
-      <button
-        type="button"
+      <div
         className={cn(
           dateRangeStyles.section.button,
+          dateRangeStyles.section.buttonStacked,
           isInteractive && dateRangeStyles.section.interactive
         )}
-        onClick={handleClick}
-        disabled={disabled}
-        aria-label={ariaLabel}
+        onClick={handleSectionClick}
       >
-        <DateChip
-          className={isError ? chipErrorClassName : chipClassName}
-          isFilled={filled}
-          isError={isError}
-          disabled={disabled}
-          filledClassName={dateRangeStyles.chip.filled}
-          placeholderClassName={dateRangeStyles.chip.placeholder}
-          errorHoverClassName={dateRangeStyles.chip.errorHover}
+        <span
+          className={cn(
+            dateRangeStyles.section.label,
+            isLabelActive && dateRangeStyles.section.labelActive,
+            isLabelActive && dateRangeStyles.sectionLabelActiveSize[size],
+            !isLabelActive && dateRangeStyles.section.labelCentered,
+            !isLabelActive && dateRangeStyles.sectionLabelCenteredSize[size]
+          )}
         >
-          {text || placeholder}
-        </DateChip>
-      </button>
+          {label}
+        </span>
+
+        <input
+          ref={inputRef}
+          value={value}
+          onChange={(event) => onValueChange?.(event.target.value)}
+          onBlur={onCommit}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              event.preventDefault();
+              onCommit?.();
+            }
+          }}
+          inputMode="numeric"
+          maxLength={dateInputMaxLength}
+          placeholder={placeholder}
+          autoComplete="off"
+          className={cn(
+            dateRangeStyles.section.input,
+            dateRangeStyles.sectionInputSize[size],
+            isError
+              ? dateRangeStyles.section.inputError
+              : dateRangeStyles.section.inputDefault,
+            !isLabelActive && dateRangeStyles.section.inputHidden
+          )}
+          aria-label={ariaLabel}
+          disabled={disabled}
+          onClick={handleInputClick}
+          onFocus={handleInputFocus}
+        />
+      </div>
     </div>
   );
 }

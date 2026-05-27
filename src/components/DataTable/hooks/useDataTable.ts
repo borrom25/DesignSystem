@@ -253,6 +253,8 @@ export function useTable<TData>(options: UseTableOptions<TData>) {
     enableNestedRows = false,
     getSubRows,
     maxExpandedDepth = defaultMaxExpandedDepth,
+    enableExpandedContent = false,
+    getRowCanExpandContent,
   } = options;
 
   const [internalSorting, setInternalSorting] = useState<SortingState>([]);
@@ -292,9 +294,25 @@ export function useTable<TData>(options: UseTableOptions<TData>) {
     [getSubRows]
   );
 
+  const enableExpanding = enableNestedRows || enableExpandedContent;
+
   const getRowCanExpand = useCallback(
-    (row: Row<TData>) => row.depth < maxExpandedDepth && row.subRows.length > 0,
-    [maxExpandedDepth]
+    (row: Row<TData>) => {
+      const canExpandNestedRows =
+        enableNestedRows &&
+        row.depth < maxExpandedDepth &&
+        row.subRows.length > 0;
+      const canExpandContent =
+        enableExpandedContent && Boolean(getRowCanExpandContent?.(row));
+
+      return canExpandNestedRows || canExpandContent;
+    },
+    [
+      enableExpandedContent,
+      enableNestedRows,
+      getRowCanExpandContent,
+      maxExpandedDepth,
+    ]
   );
 
   const table = useReactTable({
@@ -317,7 +335,7 @@ export function useTable<TData>(options: UseTableOptions<TData>) {
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: manualSorting ? undefined : getSortedRowModel(),
     getFilteredRowModel: manualFiltering ? undefined : getFilteredRowModel(),
-    getExpandedRowModel: enableNestedRows ? getExpandedRowModel() : undefined,
+    getExpandedRowModel: enableExpanding ? getExpandedRowModel() : undefined,
     enableSorting,
     enableFilters: enableFiltering,
     enableColumnFilters,
@@ -339,7 +357,7 @@ export function useTable<TData>(options: UseTableOptions<TData>) {
     },
     getRowId,
     getSubRows: enableNestedRows ? resolvedGetSubRows : undefined,
-    getRowCanExpand: enableNestedRows ? getRowCanExpand : undefined,
+    getRowCanExpand: enableExpanding ? getRowCanExpand : undefined,
   });
 
   const rows = useMemo(

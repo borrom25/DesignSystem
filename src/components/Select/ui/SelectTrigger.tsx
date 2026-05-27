@@ -1,6 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import { Size } from "@/types";
-import { closeButtonSize, cn, getIconSize } from "@/utils";
+import { cn, getIconSize } from "@/utils";
 import closeCircleIconRaw from "@/assets/icons/closeCircle.svg?raw";
 import { Popover } from "@/components/Popover";
 import { closeBtnStyles } from "@/components/CloseBtn/styles";
@@ -31,8 +31,7 @@ export function SelectTrigger({
   const showClear = hasValue;
   const hideChevron = hideChevronProp ?? showClear;
   const iconSize = getIconSize(size, triggerStyles.iconSizeMap);
-  const clearSize = closeButtonSize(size);
-  const clearIconSize = closeBtnStyles.iconSizeMap[clearSize];
+  const clearIconSize = closeBtnStyles.iconSizeMap["md"];
 
   const handleClear = (
     e: React.MouseEvent<HTMLSpanElement> | React.PointerEvent<HTMLSpanElement>
@@ -74,7 +73,7 @@ export function SelectTrigger({
                 onClick={handleClear}
                 className={cn(
                   closeBtnStyles.base,
-                  closeBtnStyles.size[clearSize],
+                  closeBtnStyles.size["md"],
                   triggerStyles.clearButton,
                   open && "opacity-100 scale-100 pointer-events-auto",
                   "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"

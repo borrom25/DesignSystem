@@ -6,12 +6,12 @@ import type { AccountMenuProps } from "./AccountMenu.types";
 import { accountMenuClasses } from "./styles";
 import { AccountMenuContent } from "./ui";
 
-export function AccountMenu({
+export function AccountMenu<T extends string = string>({
   trigger,
   isOpen: isOpenProp,
   setIsOpen: setIsOpenProp,
   ...props
-}: AccountMenuProps) {
+}: AccountMenuProps<T>) {
   const { isMobile } = useScreenSize();
   const [isOpenState, setIsOpenState] = useState(!!isOpenProp);
   const [isOpen, setIsOpen] = [

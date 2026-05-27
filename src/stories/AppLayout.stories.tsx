@@ -15,6 +15,7 @@ import {
   Button,
   createDataTableColumnHelper,
   useDataTableController,
+  useDataTableFilters,
   useFilterGroups,
 } from "@/components";
 import type { ColumnDef, FilterListOption } from "@/components";
@@ -46,7 +47,16 @@ interface ProjectRow {
   members: number;
   updatedAt: string;
   updatedAtDate: Date;
+  inspections?: ProjectInspectionRow[];
   children?: ProjectRow[];
+}
+
+interface ProjectInspectionRow {
+  id: string;
+  checkpoint: string;
+  inspector: string;
+  status: "Запланировано" | "В работе" | "Готово";
+  priority: "Низкий" | "Средний" | "Высокий";
 }
 
 type ProjectColumnId =
@@ -331,13 +341,34 @@ const buildNestedProjects = (): ProjectRow[] => [
                 ...buildProject(30),
                 id: "nested-production-line-1-zone-a-post",
                 title: "Пост контроля",
-                children: [
+                inspections: [
                   {
-                    ...buildProject(40),
-                    id: "nested-production-line-1-zone-a-post-calibration",
-                    title: "Калибровка датчиков",
+                    id: "nested-production-line-1-zone-a-post-safety",
+                    checkpoint: "Проверка ограждений",
+                    inspector: "Дмитрий Носов",
+                    status: "В работе",
+                    priority: "Высокий",
+                  },
+                  {
+                    id: "nested-production-line-1-zone-a-post-sensors",
+                    checkpoint: "Приемка датчиков",
+                    inspector: "Екатерина Ларионова",
+                    status: "Запланировано",
+                    priority: "Средний",
+                  },
+                  {
+                    id: "nested-production-line-1-zone-a-post-docs",
+                    checkpoint: "Комплект документов",
+                    inspector: "Ольга Смирнова",
+                    status: "Готово",
+                    priority: "Низкий",
                   },
                 ],
+              },
+              {
+                ...buildProject(40),
+                id: "nested-production-line-1-zone-a-post-calibration",
+                title: "Калибровка датчиков",
               },
             ],
           },
@@ -428,6 +459,68 @@ const buildNestedProjects = (): ProjectRow[] => [
 ];
 
 const helper = createDataTableColumnHelper<ProjectRow>();
+const inspectionHelper = createDataTableColumnHelper<ProjectInspectionRow>();
+
+const projectInspectionColumns: ColumnDef<ProjectInspectionRow>[] = [
+  inspectionHelper.columnFilter("checkpoint", {
+    header: "Контрольная точка",
+    size: 100,
+    filter: {
+      searchPlaceholder: "Найти точку",
+    },
+  }),
+  inspectionHelper.columnFilter("inspector", {
+    header: "Инспектор",
+    size: 100,
+    filter: {
+      searchPlaceholder: "Найти инспектора",
+    },
+  }),
+  inspectionHelper.list("status", {
+    header: "Статус",
+    size: 180,
+    filter: {
+      options: [
+        { value: "Запланировано", label: "Запланировано" },
+        { value: "В работе", label: "В работе" },
+        { value: "Готово", label: "Готово" },
+      ],
+    },
+  }),
+  inspectionHelper.list("priority", {
+    header: "Приоритет",
+    size: 160,
+    filter: {
+      options: [
+        { value: "Низкий", label: "Низкий" },
+        { value: "Средний", label: "Средний" },
+        { value: "Высокий", label: "Высокий" },
+      ],
+    },
+  }),
+];
+
+function ProjectInspectionsTable({
+  inspections,
+}: {
+  inspections: ProjectInspectionRow[];
+}) {
+  const filters = useDataTableFilters({
+    columns: projectInspectionColumns,
+  });
+
+  return (
+    <Table
+      embedded
+      data={inspections}
+      columns={projectInspectionColumns}
+      filters={filters}
+      striped
+      getRowId={(row) => row.id}
+    />
+  );
+}
+
 const createUpdatedAtColumn = (): ColumnDef<ProjectRow> =>
   helper.dateRange("updatedAtDate", {
     id: "updatedAt",
@@ -1200,6 +1293,22 @@ function AppLayoutStoryContent({
         striped
         enableNestedRows={enableNestedRowsExample}
         enableRowSelection={!enableNestedRowsExample}
+        expandedContentEstimateSize={enableNestedRowsExample ? 280 : undefined}
+        getRowCanExpandContent={
+          enableNestedRowsExample
+            ? (row) => Boolean(row.original.inspections?.length)
+            : undefined
+        }
+        renderExpandedContent={
+          enableNestedRowsExample
+            ? ({ row }) =>
+                row.original.inspections ? (
+                  <ProjectInspectionsTable
+                    inspections={row.original.inspections}
+                  />
+                ) : null
+            : undefined
+        }
         popoverAction={
           !enableNestedRowsExample && {
             children: ({ selectedRows, hide }) => (
@@ -1244,8 +1353,12 @@ function AppLayoutStoryContent({
               indicatorOffset={12}
             />
           ),
-          rowCountLabel: "Строки",
-          rowCountValue: `${visibleRows.length} / ${rows.length}`,
+          middleSlot: (
+            <div>
+              <span>Количество строк: </span>
+              <span>{visibleRows.length}</span>
+            </div>
+          ),
           actions: toolbarActions,
           actionsPlaceholder: "Действия",
           bottomSlot: activeColumnsHint ? (

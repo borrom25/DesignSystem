@@ -1,34 +1,108 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { TableRow } from "./DataTableRow";
+import { DataTableExpandedContentRow } from "./DataTableExpandedContentRow";
 import { cn } from "@/utils";
 import { tableStyles } from "../styles";
 import { useVirtualScroll } from "../hooks/useVirtualScroll";
-import type { TableVirtualBodyProps } from "../types";
+import type { Row, TableVirtualBodyProps } from "../types";
 import { getDataTableRowDomKey } from "../utils/rowKeys";
 
+type VirtualTableBodyItem<TData> =
+  | {
+      type: "row";
+      key: string;
+      row: Row<TData>;
+      rowIndex: number;
+    }
+  | {
+      type: "expandedContent";
+      key: string;
+      row: Row<TData>;
+      rowIndex: number;
+    };
+
+const defaultExpandedContentEstimateSize = 280;
+
 export function TableVirtualBody<TData>({
+  table,
   rows,
   columnSignature,
   columnCount,
   beforeStickyRightColumnIds,
   parentRef,
   rowHeight,
+  expandedContentEstimateSize = defaultExpandedContentEstimateSize,
   overscan,
   onScrollEnd,
+  renderExpandedContent,
+  getRowCanExpandContent,
+  expandedContentClassName,
   onRowClick,
   onRowDoubleClick,
+  editable = false,
+  editableCellIds,
+  isCellEditable,
+  editablePlaceholder,
+  onCellDraftChange,
+  onCellValueChange,
+  cellEditor,
   rowClassName,
   cellClassName,
   bordered = false,
   className,
 }: TableVirtualBodyProps<TData>) {
-  const { virtualItems, paddingTop, paddingBottom } = useVirtualScroll({
-    count: rows.length,
-    rowHeight,
-    overscan,
-    parentRef,
-    onScrollEnd,
-  });
+  const items = useMemo(() => {
+    const nextItems: VirtualTableBodyItem<TData>[] = [];
+
+    rows.forEach((row, rowIndex) => {
+      const rowKey = getDataTableRowDomKey(row.id, columnSignature);
+      nextItems.push({
+        type: "row",
+        key: rowKey,
+        row,
+        rowIndex,
+      });
+
+      if (
+        renderExpandedContent &&
+        row.getIsExpanded() &&
+        (getRowCanExpandContent?.(row) ?? true)
+      ) {
+        nextItems.push({
+          type: "expandedContent",
+          key: `${rowKey}:expanded-content`,
+          row,
+          rowIndex,
+        });
+      }
+    });
+
+    return nextItems;
+  }, [columnSignature, getRowCanExpandContent, renderExpandedContent, rows]);
+
+  const estimateSize = useCallback(
+    (index: number) =>
+      items[index]?.type === "expandedContent"
+        ? expandedContentEstimateSize
+        : rowHeight,
+    [expandedContentEstimateSize, items, rowHeight]
+  );
+
+  const getItemKey = useCallback(
+    (index: number) => items[index]?.key ?? index,
+    [items]
+  );
+
+  const { virtualizer, virtualItems, paddingTop, paddingBottom } =
+    useVirtualScroll({
+      count: items.length,
+      rowHeight,
+      estimateSize,
+      getItemKey,
+      overscan,
+      parentRef,
+      onScrollEnd,
+    });
 
   const rowStyle = useMemo(
     () => ({
@@ -50,18 +124,43 @@ export function TableVirtualBody<TData>({
         </tr>
       )}
       {virtualItems.map((virtualItem) => {
-        const row = rows[virtualItem.index];
-        if (!row) return null;
+        const item = items[virtualItem.index];
+        if (!item) return null;
+
+        if (item.type === "expandedContent") {
+          if (!renderExpandedContent) return null;
+
+          return (
+            <DataTableExpandedContentRow
+              key={item.key}
+              table={table}
+              row={item.row}
+              columnCount={columnCount}
+              renderExpandedContent={renderExpandedContent}
+              className={expandedContentClassName}
+              virtualIndex={virtualItem.index}
+              measureElement={virtualizer.measureElement}
+            />
+          );
+        }
 
         return (
           <TableRow
-            key={getDataTableRowDomKey(row.id, columnSignature)}
-            row={row}
-            rowIndex={virtualItem.index}
-            isSelected={row.getIsSelected()}
-            isExpanded={row.getIsExpanded()}
+            key={item.key}
+            table={table}
+            row={item.row}
+            rowIndex={item.rowIndex}
+            isSelected={item.row.getIsSelected()}
+            isExpanded={item.row.getIsExpanded()}
             onRowClick={onRowClick}
             onRowDoubleClick={onRowDoubleClick}
+            editable={editable}
+            editableCellIds={editableCellIds}
+            isCellEditable={isCellEditable}
+            editablePlaceholder={editablePlaceholder}
+            onCellDraftChange={onCellDraftChange}
+            onCellValueChange={onCellValueChange}
+            cellEditor={cellEditor}
             rowClassName={rowClassName}
             cellClassName={cellClassName}
             bordered={bordered}

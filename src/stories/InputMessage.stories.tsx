@@ -62,9 +62,10 @@ export const Playground: Story = {
           {...args}
           showAttachments
           value={value}
-          onChange={(v) => {
-            setValue(v);
-            args.onChange?.(v);
+          onChange={({ value, errorMessage }) => {
+            console.log(errorMessage);
+            setValue(value);
+            args.onChange?.({ value });
           }}
           onSend={(v, file) => {
             args.onSend?.(v, file);
@@ -88,7 +89,7 @@ export const WithoutAttachments: Story = {
         <InputMessage
           {...args}
           value={value}
-          onChange={setValue}
+          onChange={({ value }) => setValue(value)}
           onSend={() => setValue("")}
         />
       </div>
@@ -123,7 +124,7 @@ export const MultiLine: Story = {
         <InputMessage
           {...args}
           value={value}
-          onChange={setValue}
+          onChange={({ value }) => setValue(value)}
           onSend={() => setValue("")}
         />
       </div>

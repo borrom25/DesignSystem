@@ -1,6 +1,7 @@
 export { TableHeader } from "./DataTableHeader";
 export { TableBody } from "./DataTableBody";
 export { TableRow } from "./DataTableRow";
+export { DataTableExpandedContentRow } from "./DataTableExpandedContentRow";
 export { TableVirtualBody } from "./DataTableVirtualBody";
 export { TableEmpty } from "./DataTableEmpty";
 export { TableLoading, TableLoadingMore } from "./DataTableLoading";

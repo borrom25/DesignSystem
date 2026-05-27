@@ -6,7 +6,15 @@ export { modalStyles } from "./styles";
 export {
   useModalStore,
   useModalsEntries,
+  useProgrammaticModals,
+  modalController,
   useModalContext,
   ModalContext,
 } from "./model";
-export type { ModalContextValue, ModalEntry } from "./model";
+export type {
+  ModalContextValue,
+  ModalEntry,
+  ProgrammaticModalEntry,
+  ProgrammaticModalOptions,
+  ProgrammaticModalSize,
+} from "./model";

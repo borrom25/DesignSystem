@@ -28,3 +28,11 @@ export const descriptionClasses =
 export const actionsClasses = "mt-1 flex w-full items-center justify-end gap-2";
 
 export const closeButtonClasses = "absolute top-3 right-3";
+
+export const programmaticStackClasses =
+  "pointer-events-none fixed right-6 bottom-6 z-[100] flex max-h-[calc(100vh-24px)] w-[360px] max-w-[calc(100vw-32px)] flex-col gap-3 overflow-y-auto";
+
+export const programmaticOpenClasses = "opacity-100 translate-y-0";
+
+export const programmaticClosedClasses =
+  "opacity-0 translate-y-2 pointer-events-none";

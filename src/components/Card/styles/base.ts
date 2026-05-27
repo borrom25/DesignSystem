@@ -1,1 +1,1 @@
-export const cardBaseClasses = "rounded-scale-3xl bg-generic";
+export const cardBaseClasses = "rounded-scale-3xl";

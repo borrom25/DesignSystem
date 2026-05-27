@@ -113,3 +113,12 @@ export const Playground: Story = {
   },
   render: HeaderInsideWithTabs,
 };
+
+export const BackTitleAndTabs: Story = {
+  args: {
+    title: "Проект",
+    showActionButton: false,
+    showNotification: false,
+  },
+  render: HeaderInsideWithTabs,
+};

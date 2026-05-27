@@ -19,6 +19,7 @@ export const sharedInputStyles = {
   count: sharedInputBase.inputCountClasses,
   body: sharedInputBase.inputBodyClasses,
   native: sharedInputBase.inputNativeClasses,
+  nativeFullHeight: sharedInputBase.inputNativeFullHeightClasses,
   nativeDisabled: sharedInputBase.inputNativeDisabledClasses,
   nativeWithFloatingLabel: sharedInputBase.inputNativeWithFloatingLabelClasses,
   nativePlaceholderHidden: sharedInputBase.inputNativePlaceholderHiddenClasses,

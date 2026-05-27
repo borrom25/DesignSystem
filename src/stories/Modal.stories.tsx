@@ -1,260 +1,198 @@
-import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Button, Modal, ModalType } from "@/components";
-import { Size } from "@/types";
-
-const SIZES = [Size.Xs, Size.Sm, Size.Md] as const;
-const MODAL_TYPES = [
-  ModalType.modal,
-  ModalType.dialog,
-  ModalType.iceBox,
-] as const;
+import type { ReactNode } from "react";
+import { Button, UIKitProvider, uiController, useUiController } from "@/index";
 
 const meta = {
-  title: "Components/Modal",
-  component: Modal,
+  title: "Controllers/Modal",
+  component: Button,
   parameters: {
-    layout: "centered",
+    layout: "fullscreen",
     docs: {
       description: {
         component:
-          "Playground для модального окна. Размеры берутся из токенов `src/tokens/Modal.css`.",
+          "Примеры программного вызова модалки через `uiController` и `useUiController()`.",
       },
     },
   },
   tags: ["autodocs"],
-  argTypes: {
-    type: {
-      control: "select",
-      options: MODAL_TYPES,
-      description: "Тип отображения: modal с контентом или dialog без контента",
-    },
-    size: {
-      control: "select",
-      options: SIZES,
-      description: "Размер модального окна из токенов",
-    },
-    fullScreen: {
-      control: "boolean",
-      description: "Растянуть по высоте",
-    },
-    title: {
-      control: "text",
-      description: "Заголовок",
-    },
-    subtitle: {
-      control: "text",
-      description: "Подзаголовок",
-    },
-    closeOnOverlayClick: {
-      control: "boolean",
-      description: "Закрывать при клике на overlay",
-    },
-    closeOnEscape: {
-      control: "boolean",
-      description: "Закрывать по Escape",
-    },
-    showCloseButton: {
-      control: "boolean",
-      description: "Показывать кнопку закрытия",
-    },
-    open: {
-      table: {
-        disable: true,
-      },
-    },
-    onOpenChange: {
-      table: {
-        disable: true,
-      },
-    },
-  },
-} satisfies Meta<typeof Modal>;
+} satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Playground: Story = {
-  args: {
-    type: ModalType.modal,
-    size: Size.Md,
-    title: "Title",
-    subtitle: "Subtitle",
-    closeOnOverlayClick: true,
-    closeOnEscape: true,
-    showCloseButton: true,
-    fullScreen: false,
-    open: false,
-  },
-  render: (args) => {
-    const [open, setOpen] = useState(false);
+function StoryLayout({
+  children,
+  title,
+}: {
+  children: ReactNode;
+  title: string;
+}) {
+  return (
+    <div className="min-h-screen bg-generic p-6">
+      <div className="mb-4 text-sm text-secondary">{title}</div>
+      <div className="flex flex-wrap items-center gap-3">{children}</div>
+    </div>
+  );
+}
 
-    return (
-      <div className="flex flex-col items-center gap-4 p-8">
-        <Button onClick={() => setOpen(true)}>Открыть Modal</Button>
-        <Modal
-          {...args}
-          open={open}
-          onOpenChange={setOpen}
-          actionSlot={
-            <Button type="ghost" size={Size.Md}>
-              Доп. действие
-            </Button>
-          }
-          bottomSlot={
-            <div className="flex w-full items-center justify-between gap-3">
-              <Button size={Size.Md} type="ghost">
-                Доп. настройка
-              </Button>
-              <div className="flex items-center gap-3">
-                <Button size={Size.Md} type="ghost">
-                  Отмена
+function PrimaryModalContent() {
+  return (
+    <div className="space-y-4">
+      <p className="text-secondary">
+        Это программно открытая модалка. Можно вернуть `result` через
+        `modal.close(result)`.
+      </p>
+      <div className="flex items-center gap-3">
+        <Button
+          type="ghost"
+          onClick={() => uiController.closeModal("cancelled")}
+        >
+          Закрыть с result=cancelled
+        </Button>
+        <Button onClick={() => uiController.closeModal("saved")}>
+          Закрыть с result=saved
+        </Button>
+      </div>
+      <Button
+        type="ghost"
+        onClick={() =>
+          uiController.showModal({
+            title: "Вложенная модалка",
+            size: "small",
+            content: (
+              <div className="space-y-3">
+                <p className="text-secondary">Открыта поверх предыдущей.</p>
+                <Button onClick={() => uiController.closeModal("nested-close")}>
+                  Закрыть верхнюю
                 </Button>
-                <Button size={Size.Md}>Сохранить</Button>
               </div>
-            </div>
-          }
-        >
-          <div className="space-y-3">
-            <div className="rounded-md border border-line bg-generic-medium p-4 text-secondary">
-              Контент модалки. Меняйте `size` в controls и ширины в
-              `src/tokens/Modal.css`.
-            </div>
-            <div className="rounded-md border border-line bg-generic-medium p-4 text-secondary">
-              Второй блок, чтобы было удобнее заполнять и проверять высоту.
-            </div>
-            <div className="rounded-md border border-line bg-generic-medium p-4 text-secondary">
-              Второй блок, чтобы было удобнее заполнять и проверять высоту.
-            </div>
-            <div className="rounded-md border border-line bg-generic-medium p-4 text-secondary">
-              Второй блок, чтобы было удобнее заполнять и проверять высоту.
-            </div>
-            <div className="rounded-md border border-line bg-generic-medium p-4 text-secondary">
-              Второй блок, чтобы было удобнее заполнять и проверять высоту.
-            </div>
-            <div className="rounded-md border border-line bg-generic-medium p-4 text-secondary">
-              Второй блок, чтобы было удобнее заполнять и проверять высоту.
-            </div>
-            <div className="rounded-md border border-line bg-generic-medium p-4 text-secondary">
-              Второй блок, чтобы было удобнее заполнять и проверять высоту.
-            </div>
-            <div className="rounded-md border border-line bg-generic-medium p-4 text-secondary">
-              Второй блок, чтобы было удобнее заполнять и проверять высоту.
-            </div>
-            <div className="rounded-md border border-line bg-generic-medium p-4 text-secondary">
-              Второй блок, чтобы было удобнее заполнять и проверять высоту.
-            </div>
-            <div className="rounded-md border border-line bg-generic-medium p-4 text-secondary">
-              Второй блок, чтобы было удобнее заполнять и проверять высоту.
-            </div>
-            <div className="rounded-md border border-line bg-generic-medium p-4 text-secondary">
-              Второй блок, чтобы было удобнее заполнять и проверять высоту.
-            </div>
-          </div>
-        </Modal>
-      </div>
-    );
-  },
+            ),
+          })
+        }
+      >
+        Открыть модалку поверх текущей
+      </Button>
+    </div>
+  );
+}
+
+function ModalControllerPlayground() {
+  const { showModal, closeModal, showAlert } = useUiController();
+
+  return (
+    <StoryLayout title="Программное управление модалками">
+      <Button
+        onClick={() =>
+          showModal<string>({
+            title: "Программная модалка",
+            subtitle: "Открыта через useUiController().showModal",
+            size: "medium",
+            content: <PrimaryModalContent />,
+            onClose: (result) => {
+              const normalizedResult = String(result ?? "undefined");
+              showAlert(`onClose result: ${normalizedResult}`, "info");
+            },
+          })
+        }
+      >
+        modal.show (hook API)
+      </Button>
+      <Button
+        type="ghost"
+        onClick={() =>
+          uiController.showModal({
+            title: "Глобальный вызов",
+            size: "large",
+            content: (
+              <div className="space-y-3">
+                <p className="text-secondary">
+                  Открыто через `uiController.showModal(...)`.
+                </p>
+                <Button
+                  onClick={() => uiController.closeModal("closed-by-global")}
+                >
+                  Закрыть через global controller
+                </Button>
+              </div>
+            ),
+          })
+        }
+      >
+        modal.show (global controller)
+      </Button>
+      <Button type="ghost" onClick={() => closeModal("manual-close")}>
+        manual-close
+      </Button>
+      <Button
+        type="ghost"
+        onClick={() =>
+          showModal({
+            title: "Fullscreen",
+            size: "fullscreen",
+            content: (
+              <div className="space-y-3">
+                <p className="text-secondary">Режим fullscreen.</p>
+                <Button onClick={() => closeModal("fullscreen-done")}>
+                  Закрыть
+                </Button>
+              </div>
+            ),
+          })
+        }
+      >
+        Открыть fullscreen
+      </Button>
+    </StoryLayout>
+  );
+}
+
+function PreventClosePlayground() {
+  const { showModal, closeModal, showAlert } = useUiController();
+
+  return (
+    <StoryLayout title="preventClose сценарий">
+      <Button
+        onClick={() =>
+          showModal({
+            title: "Обязательное действие",
+            content: (
+              <div className="space-y-3">
+                <p className="text-secondary">
+                  Закрытие через ESC/overlay/крестик отключено.
+                </p>
+                <Button
+                  onClick={() => {
+                    closeModal("accepted");
+                    showAlert("Принято", "success");
+                  }}
+                >
+                  Принять и закрыть
+                </Button>
+              </div>
+            ),
+            preventClose: true,
+            size: "small",
+          })
+        }
+      >
+        Открыть preventClose модалку
+      </Button>
+    </StoryLayout>
+  );
+}
+
+export const Playground: Story = {
+  render: () => (
+    <UIKitProvider>
+      <ModalControllerPlayground />
+    </UIKitProvider>
+  ),
 };
 
-export const Dialog: Story = {
-  args: {
-    type: ModalType.dialog,
-    size: Size.Sm,
-    title: "Подтвердить важное действие",
-    subtitle: "Изменения применятся ко всем выбранным элементам и настройкам.",
-    closeOnOverlayClick: true,
-    closeOnEscape: true,
-    showCloseButton: true,
-    fullScreen: false,
-    open: false,
-  },
-  render: (args) => {
-    const [open, setOpen] = useState(false);
-
-    return (
-      <div className="flex flex-col items-center gap-4 p-8">
-        <Button onClick={() => setOpen(true)}>Открыть Dialog</Button>
-        <Modal
-          {...args}
-          open={open}
-          onOpenChange={setOpen}
-          actionSlot={
-            <Button type="ghost" size={Size.Md}>
-              Подробнее
-            </Button>
-          }
-          bottomSlot={
-            <div className="flex w-full items-center justify-end gap-3">
-              <Button
-                size={Size.Md}
-                type="ghost"
-                onClick={() => setOpen(false)}
-              >
-                Отмена
-              </Button>
-              <Button size={Size.Md} onClick={() => setOpen(false)}>
-                Подтвердить
-              </Button>
-            </div>
-          }
-        />
-      </div>
-    );
-  },
-};
-
-export const IceBox: Story = {
-  args: {
-    type: ModalType.iceBox,
-    title: "Настройки панели",
-    subtitle: "Управление параметрами отображения",
-    closeOnOverlayClick: true,
-    closeOnEscape: true,
-    showCloseButton: true,
-    open: false,
-  },
-  render: (args) => {
-    const [open, setOpen] = useState(false);
-
-    return (
-      <div className="flex flex-col items-center gap-4 p-8">
-        <Button onClick={() => setOpen(true)}>Открыть IceBox</Button>
-        <Modal
-          {...args}
-          open={open}
-          onOpenChange={setOpen}
-          actionSlot={
-            <div className="flex w-full items-center justify-end gap-3">
-              <Button
-                size={Size.Sm}
-                type="ghost"
-                onClick={() => setOpen(false)}
-              >
-                Отмена
-              </Button>
-              <Button size={Size.Sm} onClick={() => setOpen(false)}>
-                Применить изменения
-              </Button>
-            </div>
-          }
-        >
-          <div className="space-y-3">
-            <div className="rounded-md border border-line bg-generic-medium p-4 text-secondary">
-              Контент IceBox. Меняйте блоки так же, как в `type=modal`.
-            </div>
-            <div className="rounded-md border border-line bg-generic-medium p-4 text-secondary">
-              Пример: сюда можно добавить переключатели, фильтры и подсказки.
-            </div>
-            <div className="rounded-md border border-line bg-generic-medium p-4 text-secondary">
-              Дополнительный блок для проверки прокрутки и поведения по высоте.
-            </div>
-            <div className="rounded-md border border-line bg-generic-medium p-4 text-secondary">
-              Ещё один блок контента, чтобы сценарий был близок к `modal`.
-            </div>
-          </div>
-        </Modal>
-      </div>
-    );
-  },
+export const PreventClose: Story = {
+  render: () => (
+    <UIKitProvider>
+      <PreventClosePlayground />
+    </UIKitProvider>
+  ),
 };

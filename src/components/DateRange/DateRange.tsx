@@ -1,15 +1,21 @@
 import { cn } from "@/utils";
 import { Size } from "@/types";
-import { useMemo } from "react";
 import { FieldLabel, FieldHint } from "@/components/Field";
 import { Popover, PopoverSurface } from "@/components/Popover";
 import { TimeBar } from "@/components/TimeBar";
 import { wrapperClasses } from "@/components/Field/styles";
 import { useInputIds } from "@/components/Input/hooks/useInputIds";
+import {
+  dataRangePopover,
+  datePlaceholderEnd,
+  datePlaceholderStart,
+} from "./constants";
 import { dateRangeStyles } from "./styles";
 import type { DateRangeProps } from "./DateRange.types";
+import { useDateRangeCalendar } from "./hooks/useDateRangeCalendar";
 import { useDateRangeClassNames } from "./hooks/useDateRangeClassNames";
 import { useDateRangeInteraction } from "./hooks/useDateRangeInteraction";
+import { useDateRangeTimeBar } from "./hooks/useDateRangeTimeBar";
 import { useDateRangeValue } from "./hooks/useDateRangeValue";
 import { useDateRangeVisualState } from "./hooks/useDateRangeVisualState";
 import { DateRangeCalendar } from "./ui/DateRangeCalendar";
@@ -28,8 +34,8 @@ export function DateRange({
   defaultValue,
   onChange,
   onClear,
-  placeholderStart = "Дата поступления",
-  placeholderEnd = "Дата закрытия",
+  placeholderStart = datePlaceholderStart,
+  placeholderEnd = datePlaceholderEnd,
   className,
   fieldClassName,
   startError = false,
@@ -53,12 +59,14 @@ export function DateRange({
 
   const {
     value: currentValue,
-    formattedStart,
-    formattedEnd,
+    startInputValue,
+    endInputValue,
     hasValue,
     handleClear,
     handleBoundSelect,
     handleTimeSelect,
+    handleBoundInputChange,
+    handleBoundInputCommit,
   } = useDateRangeValue({
     value,
     defaultValue,
@@ -85,70 +93,37 @@ export function DateRange({
     handleBoundSelect,
   });
 
-  const { wrapperClassName, chipClassName, chipErrorClassName } =
-    useDateRangeClassNames({
-      size,
-      disabled,
-      isError,
-      open,
-    });
+  const { wrapperClassName } = useDateRangeClassNames({
+    size,
+    disabled,
+    isError,
+    open,
+  });
 
-  const calendarDisplayMonth =
-    activeBound === "end"
-      ? (currentValue.end ?? currentValue.start ?? new Date())
-      : (currentValue.start ?? currentValue.end ?? new Date());
+  const {
+    displayMonth,
+    numberOfMonths,
+    key: calendarKey,
+  } = useDateRangeCalendar({
+    activeBound,
+    currentValue,
+    showTimeBar,
+    open,
+  });
 
-  const calendarMonths = showTimeBar ? 1 : 2;
-  const calendarKey = `${activeBound ?? "none"}-${calendarDisplayMonth.getFullYear()}-${calendarDisplayMonth.getMonth()}-${calendarMonths}-${open ? "open" : "closed"}`;
-  const activeDate = activeBound ? currentValue[activeBound] : undefined;
-
-  const activeTimeValue = useMemo(() => {
-    if (activeDate) {
-      return {
-        hours: activeDate.getHours(),
-        minutes: activeDate.getMinutes(),
-        seconds: activeDate.getSeconds(),
-      };
-    }
-
-    return {
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
-    };
-  }, [activeDate]);
-
-  const timeBarKey = useMemo(() => {
-    return `timebar-${activeBound ?? "none"}-${activeDate?.getTime() ?? "empty"}`;
-  }, [activeBound, activeDate]);
-
-  const handleActiveTimeChange = (timeValue: {
-    hours: number;
-    minutes: number;
-    seconds: number;
-  }) => {
-    if (!activeBound) {
-      return;
-    }
-
-    handleTimeSelect(activeBound, timeValue);
-  };
-
-  const handleActiveTimeConfirm = (timeValue: {
-    hours: number;
-    minutes: number;
-    seconds: number;
-  }) => {
-    const confirmedBound = activeBound;
-
-    handleActiveTimeChange(timeValue);
-
-    if (confirmedBound === "start") {
-      setActiveBound("end");
-    } else if (confirmedBound === "end") {
-      handleOpenChange(false);
-    }
-  };
+  const {
+    activeDate,
+    value: activeTimeValue,
+    key: timeBarKey,
+    handleChange: handleActiveTimeChange,
+    handleConfirm: handleActiveTimeConfirm,
+  } = useDateRangeTimeBar({
+    activeBound,
+    currentValue,
+    setActiveBound,
+    handleOpenChange,
+    handleTimeSelect,
+  });
 
   return (
     <div className={cn(wrapperClasses, className)}>
@@ -167,10 +142,8 @@ export function DateRange({
         <Popover.Trigger>
           <DateRangeField
             wrapperClassName={cn(wrapperClassName, fieldClassName)}
-            chipClassName={chipClassName}
-            chipErrorClassName={chipErrorClassName}
-            formattedStart={formattedStart}
-            formattedEnd={formattedEnd}
+            startInputValue={startInputValue}
+            endInputValue={endInputValue}
             placeholderStart={placeholderStart}
             placeholderEnd={placeholderEnd}
             size={size}
@@ -184,18 +157,29 @@ export function DateRange({
             onClick={handleFieldClick}
             onStartClick={() => handleBoundClick("start")}
             onEndClick={() => handleBoundClick("end")}
+            onStartInputChange={(nextValue) =>
+              handleBoundInputChange("start", nextValue)
+            }
+            onEndInputChange={(nextValue) =>
+              handleBoundInputChange("end", nextValue)
+            }
+            onStartInputCommit={() => handleBoundInputCommit("start")}
+            onEndInputCommit={() => handleBoundInputCommit("end")}
           />
         </Popover.Trigger>
 
-        <Popover.Content className="w-max">
-          <PopoverSurface className="w-max border-none bg-transparent p-0 shadow-none">
+        <Popover.Content
+          className={dataRangePopover.contentWidth}
+          onOpenAutoFocus={(event) => event.preventDefault()}
+        >
+          <PopoverSurface className={dataRangePopover.surface}>
             <div className={cn(showTimeBar && dateRangeStyles.popover.content)}>
               <DateRangeCalendar
                 key={calendarKey}
                 value={currentValue}
                 onSelect={handleCalendarSelect}
-                displayMonth={calendarDisplayMonth}
-                numberOfMonths={calendarMonths}
+                displayMonth={displayMonth}
+                numberOfMonths={numberOfMonths}
                 disabled={disabled}
                 className={cn(showTimeBar && "!rounded-r-none")}
               />
@@ -210,7 +194,7 @@ export function DateRange({
                     disabled={disabled || !activeBound || !activeDate}
                     columnsFillHeight
                     footerSlot={timeBarFooter}
-                    className="min-h-0 w-full flex-1 rounded-none border-0 bg-transparent shadow-none"
+                    className={dataRangePopover.timeBar}
                   />
                 </div>
               )}

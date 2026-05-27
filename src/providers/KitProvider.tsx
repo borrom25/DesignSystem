@@ -1,4 +1,6 @@
 import { type ReactNode } from "react";
+import { Alerts } from "@/components/Alert/Alerts";
+import { Modals } from "@/components/Modal";
 import { ScreenProvider } from "./screenProvider";
 import { ThemeProvider } from "./themeProvider";
 
@@ -13,13 +15,21 @@ export function UIKitProvider({
   withScreenProvider = true,
   withThemeProvider = true,
 }: KitProviderProps) {
+  const content = (
+    <>
+      {children}
+      <Modals />
+      <Alerts />
+    </>
+  );
+
   return withScreenProvider ? (
     <ScreenProvider>
-      {withThemeProvider ? <ThemeProvider>{children}</ThemeProvider> : children}
+      {withThemeProvider ? <ThemeProvider>{content}</ThemeProvider> : content}
     </ScreenProvider>
   ) : withThemeProvider ? (
-    <ThemeProvider>{children}</ThemeProvider>
+    <ThemeProvider>{content}</ThemeProvider>
   ) : (
-    children
+    content
   );
 }

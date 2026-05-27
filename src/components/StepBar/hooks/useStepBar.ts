@@ -1,7 +1,11 @@
 import { useLayoutEffect, useRef, useState } from "react";
-import { StepBarItem, UseStepBarProps } from "../StepBar.types";
+import { UseStepBarProps } from "../StepBar.types";
 
-export function useStepBar({ items, active, onChangeStep }: UseStepBarProps) {
+export function useStepBar<T extends string | number = string>({
+  items,
+  active,
+  onChangeStep,
+}: UseStepBarProps<T>) {
   const stepsRef = useRef<HTMLDivElement | null>(null);
   const stepRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const [indicatorStyle, setIndicatorStyle] = useState({
@@ -69,7 +73,7 @@ export function useStepBar({ items, active, onChangeStep }: UseStepBarProps) {
     stepRefs.current[index] = element;
   };
 
-  const onStepClick = (step: StepBarItem["id"]) => onChangeStep(step);
+  const onStepClick = (step: T) => onChangeStep(step);
   const goPrev = () =>
     !isFirstStep && onChangeStep(enabledItems[activeItemsIndex - 1].id);
   const goNext = () =>
