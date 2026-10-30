@@ -14,13 +14,13 @@ types: src/components/Plug/Plug.types.ts
 localExport: src/components/Plug/index.ts
 publicExport: src/index.ts
 storybook: src/stories/Plug.stories.tsx
-figmaComponent: null
-figmaNodeId: null
-figmaUrl: null
-codeConnect: null
+figmaComponent: Feedback Plug
+figmaNodeId: 2059:7073
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/?node-id=2059-7073
+codeConnect: src/components/Plug/Plug.figma.js
 apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
 validation: TypeScript public API and synthetic Code Connect scenarios
-liveFigmaMetadata: no confirmed mapping
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
@@ -32,7 +32,7 @@ import { Plug } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return <Plug  />;
+  return (<Plug title="Пример" subtitle="Пример"   />);
 }
 ```
 
@@ -44,6 +44,7 @@ export function Example() {
 | Props / shared types | [src/components/Plug/Plug.types.ts](Plug.types.ts) |
 | Public export | [src/index.ts](../../index.ts) |
 | Storybook | [src/stories/Plug.stories.tsx](../../stories/Plug.stories.tsx) |
+| Code Connect | [src/components/Plug/Plug.figma.js](Plug.figma.js) |
 
 ## Public API
 
@@ -58,7 +59,17 @@ export function Example() {
 
 ## Figma to props mapping
 
-Подтверждённые Figma properties для этого компонента недоступны. Mapping и `.figma.js` не создаются по имени или внешнему сходству.
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `Indicator` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `<slotAction>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `slotAction` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Pictures` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `<slotIMG>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Result` | Pictures, Positive, Warning, Danger, Info | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Media` | Desktop, Mobile | Композиция / нет прямого prop; см. template и Temporary mappings |
 
 ## Supported states
 
@@ -70,6 +81,9 @@ export function Example() {
 
 ## Temporary mappings / assumptions
 
-**Blocker Code Connect:** для этого публичного компонента не подтверждена отдельная опубликованная Figma-связь. После поиска в библиотеке нельзя безопасно выдать mapping только по имени. Требуется точный опубликованный Figma component и его properties.
+Temporary mapping: Media is responsive layout, not a Plug prop.
+Result selects Figma image content; Plug accepts that content through imageItem.
 
-Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Публикация текущего template ещё не подтверждена.
+
+Для неподдерживаемых Figma states и slots ограничения явно указаны в Temporary mapping. Статус публикации проверяется отдельно от наличия файлов.

@@ -96,6 +96,6 @@ Temporary mapping: pinInputItem has no public runtime prop.
 Temporary mapping: Figma "Filled" and "Mask" visual states imply value presence.
 PinInput accepts explicit value string, so we use demo digit "9".
 
-Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Публикация текущего template ещё не подтверждена.
 
-Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.
+Для неподдерживаемых Figma states и slots ограничения явно указаны в Temporary mapping. Статус публикации проверяется отдельно от наличия файлов.

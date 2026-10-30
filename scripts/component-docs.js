@@ -15,6 +15,10 @@ const exports = checker.getExportsOfModule(checker.getSymbolAtLocation(entry));
 const manifestPath = path.join(root, ".cache/figma-snippets/manifest.json");
 const examples = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath, "utf8")) : [];
 const audit = JSON.parse(fs.readFileSync("docs/figma-live-audit.json", "utf8")).components;
+const inventoryPath = "docs/figma-current-inventory.json";
+const currentNodes = fs.existsSync(inventoryPath) ? JSON.parse(fs.readFileSync(inventoryPath, "utf8")).pages.flatMap((p) => p.nodes) : [];
+const publicationPath = "docs/figma-publication-results.json";
+const publication = fs.existsSync(publicationPath) ? JSON.parse(fs.readFileSync(publicationPath, "utf8")).components : [];
 const relative = (file) => path.relative(root, file).replaceAll("\\", "/");
 const cell = (value) => String(value).replaceAll("|", "\\|").replaceAll("\n", " ");
 const rows = [];
@@ -84,7 +88,9 @@ for (const publicSymbol of exports) {
   const template = examples.find((e) => e.template === `${dir}/${name}.figma.js`) ?? examples.find((e) => e.component === name);
   const templateSource = template ? fs.readFileSync(template.template, "utf8") : "";
   const figmaUrl = templateSource.match(/^\/\/ url=(.+)$/m)?.[1]?.trim();
-  const live = template ? audit.find((item) => item.template === template.template) : undefined;
+  const nodeId = figmaUrl?.match(/node-id=([\d-]+)/)?.[1].replace("-", ":");
+  const live = template ? currentNodes.find((item) => item.id === nodeId) ?? audit.find((item) => item.template === template.template) : undefined;
+  const published = publication.filter((item) => item.component === name && item.codeConnect?.verified);
   const properties = new Map();
   for (const branch of branches) {
     for (const prop of branch.getProperties()) {
@@ -126,12 +132,13 @@ for (const publicSymbol of exports) {
   const blocker = name === "Uploader"
     ? "**Blocker Code Connect:** Figma Uploader (3741:11025) — строка загруженного файла с прогрессом; runtime Uploader — drop zone выбора файлов. Подтверждённые properties State=Loading/Positive/Error не имеют корректного прямого mapping к этому API. Связка не создаётся по совпадению имени."
     : "**Blocker Code Connect:** для этого публичного компонента не подтверждена отдельная опубликованная Figma-связь. После поиска в библиотеке нельзя безопасно выдать mapping только по имени. Требуется точный опубликованный Figma component и его properties.";
-  const liveText = template ? "Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались." : blocker;
+  const liveText = template ? `Properties сверены с текущим снимком Figma MCP; snippets проверяются командой \`yarn figma:check\`. ${published.length ? `Code Connect опубликован и прочитан обратно для ${published.length} Figma node; подробности в docs/figma-publication-results.json.` : "Публикация текущего template ещё не подтверждена."}` : blocker;
   const corrected = content.replace(`localExport: ${dir}/index.ts`, `localExport: ${localExport}`)
-    .replace(`figmaUrl: ${figmaUrl ?? "null"}`, `figmaComponent: ${live?.name?.trim() ?? "null"}\nfigmaNodeId: ${live?.nodeId ?? "null"}\nfigmaUrl: ${figmaUrl ?? "null"}`)
+    .replace(`figmaUrl: ${figmaUrl ?? "null"}`, `figmaComponent: ${live?.name?.trim() ?? "null"}\nfigmaNodeId: ${live?.id ?? live?.nodeId ?? "null"}\nfigmaUrl: ${figmaUrl ?? "null"}`)
     .replace("liveFigmaMetadata: unavailable", `liveFigmaMetadata: ${live ? "verified 2026-10-30" : "no confirmed mapping"}`)
     .replace("Сохранённые Figma properties использованы как исторический контракт. Сгенерированные snippets проверяются командой `yarn figma:check`; проверка не подтверждает публикацию компонента или актуальность properties в Figma.", liveText)
     .replace("**Blocker Code Connect:** нет подтверждённых properties и опубликованного Figma component. Инструмент Figma `get_context_for_code_connect` вернул `Unknown tool`; требуется повторная проверка после восстановления подключения.", liveText)
+    .replace("Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.", "Для неподдерживаемых Figma states и slots ограничения явно указаны в Temporary mapping. Статус публикации проверяется отдельно от наличия файлов.")
     .replaceAll(`](../../../${runtime})`, `](${link(runtime)})`)
     .replaceAll("](../../index.ts)", `](${link("src/index.ts")})`);
   let finalContent = corrected;

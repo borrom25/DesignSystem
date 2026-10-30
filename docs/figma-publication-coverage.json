@@ -1,0 +1,1505 @@
+{
+  "checkedAt": "2026-10-30",
+  "components": [
+    {
+      "nodeId": "3124:20448",
+      "name": "App / Desktop",
+      "page": "App",
+      "publishStatus": "CURRENT",
+      "component": "AppLayout",
+      "template": "src/components/AppLayout/AppLayout.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "3159:29",
+      "name": "App / Mobile",
+      "page": "App",
+      "publishStatus": "CURRENT",
+      "component": "AppLayout",
+      "template": "src/components/AppLayout/AppLayoutMobile.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "11486:26770",
+      "name": "layout",
+      "page": "App",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Runtime Space существует, но не экспортируется из публичного src/index.ts. Внутренние импорты в Code Connect запрещены."
+    },
+    {
+      "nodeId": "19405:2038",
+      "name": "Icon-button",
+      "page": "Icon-button",
+      "publishStatus": "CURRENT",
+      "component": "IconButton",
+      "template": "src/components/IconButton/IconButton.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "21552:2622",
+      "name": "Chips",
+      "page": "Chips",
+      "publishStatus": "CURRENT",
+      "component": "Chips",
+      "template": "src/components/Chips/Chips.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "788:7497",
+      "name": "sideMenu",
+      "page": "sideMenu",
+      "publishStatus": "CURRENT",
+      "component": "Sidebar",
+      "template": "src/components/Sidebar/Sidebar.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "1021:18098",
+      "name": "sideMenuInside",
+      "page": "sideMenu",
+      "publishStatus": "CURRENT",
+      "component": "InsideSidebar",
+      "template": "src/components/InsideSidebar/InsideSidebar.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "7654:941",
+      "name": "Blackout",
+      "page": "sideMenu",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "19446:1451",
+      "name": "Tab",
+      "page": "Tab",
+      "publishStatus": "CURRENT",
+      "component": "Tab",
+      "template": "src/components/Tab/Tab.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "19494:2166",
+      "name": "tabsOverflow.item",
+      "page": "Tab",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Внутренний overflow trigger; отдельного публичного runtime нет, используется внутри TabsOverflow."
+    },
+    {
+      "nodeId": "19494:1683",
+      "name": "tabsOverflow.item",
+      "page": "Tab",
+      "publishStatus": "CURRENT",
+      "component": "Tab",
+      "template": "src/components/Tab/TabOverflowItem.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "19497:1623",
+      "name": "tabsOverflow",
+      "page": "Tab",
+      "publishStatus": "CURRENT",
+      "component": "TabsOverflow",
+      "template": "src/components/TabsOverflow/TabsOverflow.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "4027:8157",
+      "name": "Download",
+      "page": "Downloader",
+      "publishStatus": "CURRENT",
+      "component": "Download",
+      "template": "src/components/Download/Download.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "3743:1253",
+      "name": "InputFiles",
+      "page": "InputFiles",
+      "publishStatus": "CURRENT",
+      "component": "InputFiles",
+      "template": "src/components/InputFiles/InputFiles.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "10736:667",
+      "name": "pinnedFile",
+      "page": "InputFiles",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "10753:4431",
+      "name": "InputFailDrop",
+      "page": "InputFiles",
+      "publishStatus": "CURRENT",
+      "component": "InputFileDrop",
+      "template": "src/components/InputFileDrop/InputFileDrop.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "10971:20947",
+      "name": "Preview photo",
+      "page": "InputFiles",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Preview photo — миниатюра вложения; публичный Photo — модальный просмотрщик. Прямого соответствия нет."
+    },
+    {
+      "nodeId": "8576:2288",
+      "name": "сopyLink",
+      "page": "сopyLink",
+      "publishStatus": "CURRENT",
+      "component": "CopyLink",
+      "template": "src/components/CopyLink/CopyLink.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "762:481",
+      "name": "InputImage",
+      "page": "InputImage",
+      "publishStatus": "CURRENT",
+      "component": "InputImg",
+      "template": "src/components/InputImg/InputImg.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "400:1335",
+      "name": "ListItem ",
+      "page": "ListItem",
+      "publishStatus": "CURRENT",
+      "component": "ListItem",
+      "template": "src/components/ListItem/ListItem.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "621:3442",
+      "name": "Header / mainPage",
+      "page": "headerPage",
+      "publishStatus": "CURRENT",
+      "component": "Header",
+      "template": "src/components/Header/Header.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "589:2415",
+      "name": "APP / logo",
+      "page": "headerPage",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "658:11298",
+      "name": "Header / insidePage",
+      "page": "headerPage",
+      "publishStatus": "CURRENT",
+      "component": "HeaderInside",
+      "template": "src/components/HeaderInside/HeaderInside.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "21761:1780",
+      "name": "Scroll bar",
+      "page": "Scroll bar",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "1595:5950",
+      "name": "Pagination",
+      "page": "Pagination",
+      "publishStatus": "CHANGED",
+      "component": "Pagination",
+      "template": "src/components/Pagination/Pagination.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "1036:5854",
+      "name": "Overlay",
+      "page": "Overlay",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "816:7172",
+      "name": "Separator",
+      "page": "Separator",
+      "publishStatus": "CURRENT",
+      "component": "Separator",
+      "template": "src/components/Separator/Separator.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "18:2407",
+      "name": "Search/Autocomplete",
+      "page": "Search/Autocomplete",
+      "publishStatus": "CURRENT",
+      "component": "SearchAutocomplete",
+      "template": "src/components/Input/InputSearch.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "10527:8723",
+      "name": "Skeleton",
+      "page": "Skeleton",
+      "publishStatus": "CURRENT",
+      "component": "Skeleton",
+      "template": "src/components/Skeleton/Skeleton.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "1670:1000",
+      "name": "Time bar",
+      "page": "Time bar",
+      "publishStatus": "CURRENT",
+      "component": "TimeBar",
+      "template": "src/components/TimeBar/TimeBar.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "4762:11608",
+      "name": "DateRange",
+      "page": "DateRange",
+      "publishStatus": "CURRENT",
+      "component": "DateRange",
+      "template": "src/components/DateRange/DateRange.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "4698:9891",
+      "name": "DatePicker",
+      "page": "DatePicker",
+      "publishStatus": "CURRENT",
+      "component": "DatePicker",
+      "template": "src/components/DatePicker/DatePicker.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "4654:4915",
+      "name": "TimePicker",
+      "page": "TimePicker",
+      "publishStatus": "CURRENT",
+      "component": "TimePicker",
+      "template": "src/components/TimePicker/TimePicker.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "21936:3961",
+      "name": "InputNumberButton",
+      "page": "InputNumber",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "4602:2205",
+      "name": "InputNumber",
+      "page": "InputNumber",
+      "publishStatus": "CURRENT",
+      "component": "InputNumber",
+      "template": "src/components/InputNumber/InputNumber.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "4629:7247",
+      "name": "InputNumberButton",
+      "page": "InputNumber",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "4296:4114",
+      "name": "Input",
+      "page": "Input",
+      "publishStatus": "CURRENT",
+      "component": "Input",
+      "template": "src/components/Input/Input.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "4560:2817",
+      "name": "InputTag",
+      "page": "InputTag",
+      "publishStatus": "CHANGED",
+      "component": "InputTag",
+      "template": "src/components/InputTag/InputTag.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "4602:3679",
+      "name": "InputPhone",
+      "page": "InputPhone",
+      "publishStatus": "CHANGED",
+      "component": "InputPhone",
+      "template": "src/components/InputPhone/InputPhone.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "4769:7369",
+      "name": "textArea",
+      "page": "textArea",
+      "publishStatus": "CURRENT",
+      "component": "TextArea",
+      "template": "src/components/TextArea/TextArea.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "19105:18",
+      "name": "Button / Main",
+      "page": "Button",
+      "publishStatus": "CURRENT",
+      "component": "Button",
+      "template": "src/components/Button/Button.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "19175:2069",
+      "name": "Button / Link",
+      "page": "Button",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Button / Link: публичный Button не имеет link type; отдельная семантика ссылки не подтверждена. Стили и API не выдумываются."
+    },
+    {
+      "nodeId": "19396:2123",
+      "name": "Button / Dashed",
+      "page": "Button",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Button / Dashed: публичный Button не имеет dashed type. Требуется согласование API со следующей версией GitLab."
+    },
+    {
+      "nodeId": "922:169",
+      "name": "itemBottomBar",
+      "page": "bottomBar",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "4423:5773",
+      "name": "bottomBar",
+      "page": "bottomBar",
+      "publishStatus": "CHANGED",
+      "component": "BarMenu",
+      "template": "src/components/BarMenu/BarMenu.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "4607:6301",
+      "name": "InputPassword",
+      "page": "InputPassword",
+      "publishStatus": "CURRENT",
+      "component": "InputPassword",
+      "template": "src/components/InputPassword/InputPassword.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "4607:9923",
+      "name": "Selected / Single",
+      "page": "Selected",
+      "publishStatus": "CURRENT",
+      "component": "Select",
+      "template": "src/components/Select/Select.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "5351:1298",
+      "name": "Selected / Multiple",
+      "page": "Selected",
+      "publishStatus": "CURRENT",
+      "component": "MultiSelect",
+      "template": "src/components/MultiSelect/MultiSelect.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "4680:4452",
+      "name": "Selected / MultipleTag",
+      "page": "Selected",
+      "publishStatus": "CURRENT",
+      "component": "MultiTag",
+      "template": "src/components/MultiTag/MultiTag.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "1425:3616",
+      "name": "Switch",
+      "page": "Switch",
+      "publishStatus": "CURRENT",
+      "component": "Switcher",
+      "template": "src/components/Switcher/Switcher.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "1425:3260",
+      "name": "Radio-button",
+      "page": "Radio-button",
+      "publishStatus": "CURRENT",
+      "component": "Radio",
+      "template": "src/components/Radio/Radio.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "1422:8581",
+      "name": "Сheckbox ",
+      "page": "Сheckbox ",
+      "publishStatus": "CURRENT",
+      "component": "CheckBox",
+      "template": "src/components/CheckBox/CheckBox.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "1199:5009",
+      "name": "PinInput",
+      "page": "PinInput",
+      "publishStatus": "CURRENT",
+      "component": "PinInput",
+      "template": "src/components/PinInput/PinInput.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "3741:11025",
+      "name": "Uploader",
+      "page": "Uploader",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Figma Uploader — строка загрузки файла; runtime Uploader — drop zone. Совпадение имени не является корректным mapping."
+    },
+    {
+      "nodeId": "10515:2295",
+      "name": "Slider",
+      "page": "Slider",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "11523:18211",
+      "name": "Handle",
+      "page": "Slider",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "1998:5763",
+      "name": "menuAccount",
+      "page": "Account",
+      "publishStatus": "CURRENT",
+      "component": "AccountMenu",
+      "template": "src/components/AccountMenu/AccountMenu.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "1282:1912",
+      "name": "accordeon",
+      "page": "Accordeon",
+      "publishStatus": "CURRENT",
+      "component": "Accordion",
+      "template": "src/components/Accordion/Accordion.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "10439:5012",
+      "name": "accordionBlock",
+      "page": "Accordeon",
+      "publishStatus": "CURRENT",
+      "component": "AccordionBlock",
+      "template": "src/components/AccordionBlock/AccordionBlock.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "21373:513",
+      "name": "Badge",
+      "page": "Badge",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "21593:5299",
+      "name": "Avatar",
+      "page": "Avatar",
+      "publishStatus": "CURRENT",
+      "component": "Avatar",
+      "template": "src/components/Avatar/Avatar.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "21178:1500",
+      "name": "Counter",
+      "page": "Counter",
+      "publishStatus": "CURRENT",
+      "component": "Counter",
+      "template": "src/components/Counter/Counter.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "643:5569",
+      "name": "Calendar",
+      "page": "Calendar ",
+      "publishStatus": "CURRENT",
+      "component": "Calendar",
+      "template": "src/components/Calendar/Calendar.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "616:5842",
+      "name": "Day",
+      "page": "Calendar ",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "616:5858",
+      "name": "Range",
+      "page": "Calendar ",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "625:519608",
+      "name": "Item",
+      "page": "Calendar ",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "1158:4095",
+      "name": "Headings",
+      "page": "Calendar ",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "604:2100",
+      "name": "Item",
+      "page": "Calendar ",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "1158:4149",
+      "name": "itemHeadings",
+      "page": "Calendar ",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "4436:8329",
+      "name": "Card ",
+      "page": "Card",
+      "publishStatus": "CURRENT",
+      "component": "Card",
+      "template": "src/components/Card/Card.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "6382:455",
+      "name": "Card  / actionContainercard",
+      "page": "Card",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "8531:770",
+      "name": "Block",
+      "page": "Block",
+      "publishStatus": "CURRENT",
+      "component": "Block",
+      "template": "src/components/Block/Block.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "400:9376",
+      "name": "Popover",
+      "page": "Popover",
+      "publishStatus": "CHANGED",
+      "component": "Popover",
+      "template": "src/components/Popover/Popover.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "8553:598",
+      "name": "List",
+      "page": "Popover",
+      "publishStatus": "CHANGED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "21461:952",
+      "name": "Label",
+      "page": "Label",
+      "publishStatus": "CURRENT",
+      "component": "Label",
+      "template": "src/components/Label/Label.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "3368:8739",
+      "name": "Table",
+      "page": "Table",
+      "publishStatus": "CHANGED",
+      "component": "Table",
+      "template": "src/components/Table/Table.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "3351:4497",
+      "name": "Drop",
+      "page": "Table",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "3351:5426",
+      "name": "Headers сolumn",
+      "page": "Table",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "11938:20017",
+      "name": "Cell",
+      "page": "Table",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "6371:851",
+      "name": "popoveAction",
+      "page": "Table",
+      "publishStatus": "CHANGED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "8134:4828",
+      "name": "Settingstable",
+      "page": "Table",
+      "publishStatus": "CHANGED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "8279:9800",
+      "name": "Modal",
+      "page": "Table",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "1438:11403",
+      "name": "Line",
+      "page": "Line",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "21672:239",
+      "name": "Tag",
+      "page": "Tag",
+      "publishStatus": "CURRENT",
+      "component": "Tag",
+      "template": "src/components/Tag/Tag.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "3456:25084",
+      "name": "Filter",
+      "page": "Filter",
+      "publishStatus": "CHANGED",
+      "component": "TableColumnsModal",
+      "template": "src/components/TableColumnsModal/TableColumnsModal.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "2277:2266",
+      "name": "arrowContainer",
+      "page": "Tooltip",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "2277:2530",
+      "name": "Tooltip",
+      "page": "Tooltip",
+      "publishStatus": "CURRENT",
+      "component": "Tooltip",
+      "template": "src/components/Tooltip/Tooltip.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "5477:3926",
+      "name": "Text",
+      "page": "Text",
+      "publishStatus": "CURRENT",
+      "component": "Text",
+      "template": "src/components/Text/Text.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "1777:27",
+      "name": "Segmented",
+      "page": "Segmented",
+      "publishStatus": "CURRENT",
+      "component": "Segmented",
+      "template": "src/components/Segmented/Segmented.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "11333:10045",
+      "name": "segmentedItem",
+      "page": "Segmented",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "1352:28686",
+      "name": "User Item",
+      "page": "User Item",
+      "publishStatus": "CURRENT",
+      "component": "UserItem",
+      "template": "src/components/UserItem/UserItem.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "8797:10724",
+      "name": "ItemFeedbackStar",
+      "page": "Feedback Stars",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "8797:10753",
+      "name": "FeedbackStars",
+      "page": "Feedback Stars",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "2059:7073",
+      "name": "Feedback Plug",
+      "page": "Feedback Plug",
+      "publishStatus": "CURRENT",
+      "component": "Plug",
+      "template": "src/components/Plug/Plug.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "1066:4702",
+      "name": "StepBarItem",
+      "page": "StepBar",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "1066:5093",
+      "name": "StepBar",
+      "page": "StepBar",
+      "publishStatus": "CURRENT",
+      "component": "StepBar",
+      "template": "src/components/StepBar/StepBar.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "2824:14826",
+      "name": "ProgressPie",
+      "page": "Analitics",
+      "publishStatus": "CURRENT",
+      "component": "ProgressPie",
+      "template": "src/components/ProgressPie/ProgressPie.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "1216:1433",
+      "name": "Аlert",
+      "page": "Alert",
+      "publishStatus": "CURRENT",
+      "component": "Alert",
+      "template": "src/components/Alert/Alert.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "1941:2233",
+      "name": "Modal",
+      "page": "Modal",
+      "publishStatus": "CURRENT",
+      "component": "Modal",
+      "template": "src/components/Modal/Modal.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "150:24",
+      "name": "🚧 Loader",
+      "page": "Loader",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Loader — внутренний компонент без публичного export; AppLoader имеет другую реализацию."
+    },
+    {
+      "nodeId": "1274:160",
+      "name": "Progress",
+      "page": "Progress",
+      "publishStatus": "CURRENT",
+      "component": "ProgressBar",
+      "template": "src/components/ProgressBar/ProgressBar.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "2301:10902",
+      "name": "inputMessages ",
+      "page": "inputMessages ",
+      "publishStatus": "CURRENT",
+      "component": "InputMessage",
+      "template": "src/components/InputMessage/InputMessage.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "4006:9921",
+      "name": "pinnedFile",
+      "page": "inputMessages ",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "4096:23125",
+      "name": "Bubble",
+      "page": "inputMessages ",
+      "publishStatus": "CURRENT",
+      "component": "Bubble",
+      "template": "src/components/Bubble/Bubble.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "9854:5589",
+      "name": "popoverCard",
+      "page": "Kanban",
+      "publishStatus": "CHANGED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "9854:6108",
+      "name": "popoverCol",
+      "page": "Kanban",
+      "publishStatus": "CHANGED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "10021:31068",
+      "name": "Icon-button",
+      "page": "Kanban",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "9877:11863",
+      "name": "kanbanCard",
+      "page": "Kanban",
+      "publishStatus": "CHANGED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "10021:31076",
+      "name": "Icon-button",
+      "page": "Kanban",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "9844:24466",
+      "name": "kanbanColumn",
+      "page": "Kanban",
+      "publishStatus": "CHANGED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "10021:31084",
+      "name": "insector",
+      "page": "Kanban",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "9834:16168",
+      "name": "kanbanLayout",
+      "page": "Kanban",
+      "publishStatus": "CHANGED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "9834:24465",
+      "name": "kanbanModal",
+      "page": "Kanban",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "9960:11030",
+      "name": "rowCell",
+      "page": "Event Calendar",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "9960:10564",
+      "name": "colCell",
+      "page": "Event Calendar",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "9923:12374",
+      "name": "cell / week / classes",
+      "page": "Event Calendar",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "10009:21877",
+      "name": "Cell",
+      "page": "Event Calendar",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "9916:32412",
+      "name": "EventItem",
+      "page": "Event Calendar",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "10009:23158",
+      "name": "Marker",
+      "page": "Event Calendar",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "9916:32387",
+      "name": "EventItem / Date / event",
+      "page": "Event Calendar",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "9916:32509",
+      "name": "EventItem / week",
+      "page": "Event Calendar",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "10009:21752",
+      "name": "sheduleHeader",
+      "page": "Event Calendar",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "10021:26254",
+      "name": "Shedule Body",
+      "page": "Event Calendar",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "9703:1312",
+      "name": "Text Editor",
+      "page": "Text Editor",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "9703:2215",
+      "name": ".ToolButtonComponent",
+      "page": "Text Editor",
+      "publishStatus": "UNPUBLISHED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Figma component не опубликован; публикация библиотеки не входит в задачу."
+    },
+    {
+      "nodeId": "9883:4096",
+      "name": ".ToolButtonText",
+      "page": "Text Editor",
+      "publishStatus": "UNPUBLISHED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Figma component не опубликован; публикация библиотеки не входит в задачу."
+    },
+    {
+      "nodeId": "9883:4097",
+      "name": ".ToolButtonColor",
+      "page": "Text Editor",
+      "publishStatus": "UNPUBLISHED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Figma component не опубликован; публикация библиотеки не входит в задачу."
+    },
+    {
+      "nodeId": "9883:4098",
+      "name": "PopoverText",
+      "page": "Text Editor",
+      "publishStatus": "CHANGED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "9883:4099",
+      "name": "PopoverColor",
+      "page": "Text Editor",
+      "publishStatus": "CHANGED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "8456:863",
+      "name": "Player",
+      "page": "Video Player",
+      "publishStatus": "CHANGED",
+      "component": "Player",
+      "template": "src/components/Player/Player.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "8459:1381",
+      "name": "Player Controller",
+      "page": "Video Player",
+      "publishStatus": "CHANGED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "8468:2026",
+      "name": ".Actions Controller",
+      "page": "Video Player",
+      "publishStatus": "UNPUBLISHED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Figma component не опубликован; публикация библиотеки не входит в задачу."
+    },
+    {
+      "nodeId": "4965:1981",
+      "name": "Chart Vertical",
+      "page": "Charts",
+      "publishStatus": "UNPUBLISHED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Figma component не опубликован; публикация библиотеки не входит в задачу."
+    },
+    {
+      "nodeId": "5167:2230",
+      "name": "Chart Lines",
+      "page": "Charts",
+      "publishStatus": "CHANGED",
+      "component": "LineChart",
+      "template": "src/components/LineChart/LineChart.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "5184:459",
+      "name": "Chart Line",
+      "page": "Charts",
+      "publishStatus": "CHANGED",
+      "component": "LineChart",
+      "template": "src/components/LineChart/LineChartSingle.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "5221:862",
+      "name": "BarChart Line Smooth Gradient",
+      "page": "Charts",
+      "publishStatus": "CHANGED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Gradient area chart не поддержан текущим публичным LineChart API."
+    },
+    {
+      "nodeId": "4965:1489",
+      "name": ".barColumn",
+      "page": "Charts",
+      "publishStatus": "UNPUBLISHED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Figma component не опубликован; публикация библиотеки не входит в задачу."
+    },
+    {
+      "nodeId": "5016:1835",
+      "name": ".barRow",
+      "page": "Charts",
+      "publishStatus": "UNPUBLISHED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Figma component не опубликован; публикация библиотеки не входит в задачу."
+    },
+    {
+      "nodeId": "5118:1811",
+      "name": "Chart Horizontal",
+      "page": "Charts",
+      "publishStatus": "CHANGED",
+      "component": "BarChartHorizontal",
+      "template": "src/components/BarChartHorizontal/BarChartHorizontal.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "4965:1516",
+      "name": "legendItem",
+      "page": "Charts",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "4965:1537",
+      "name": "legendItem",
+      "page": "Charts",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "4965:1662",
+      "name": ".vertical",
+      "page": "Charts",
+      "publishStatus": "UNPUBLISHED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Figma component не опубликован; публикация библиотеки не входит в задачу."
+    },
+    {
+      "nodeId": "4965:1672",
+      "name": ".horizontal",
+      "page": "Charts",
+      "publishStatus": "UNPUBLISHED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Figma component не опубликован; публикация библиотеки не входит в задачу."
+    },
+    {
+      "nodeId": "4965:1669",
+      "name": ".dot",
+      "page": "Charts",
+      "publishStatus": "UNPUBLISHED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Figma component не опубликован; публикация библиотеки не входит в задачу."
+    },
+    {
+      "nodeId": "5280:897",
+      "name": ".radialCharts",
+      "page": "Charts",
+      "publishStatus": "UNPUBLISHED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Figma component не опубликован; публикация библиотеки не входит в задачу."
+    },
+    {
+      "nodeId": "5341:876",
+      "name": "withLegend",
+      "page": "Charts",
+      "publishStatus": "UNPUBLISHED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Figma component не опубликован; публикация библиотеки не входит в задачу."
+    },
+    {
+      "nodeId": "6649:1248",
+      "name": "Container",
+      "page": "Carousel",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    },
+    {
+      "nodeId": "6649:1327",
+      "name": "Carousel",
+      "page": "Carousel",
+      "publishStatus": "CURRENT",
+      "component": "Carousel",
+      "template": "src/components/Carousel/Carousel.figma.js",
+      "status": "ready-for-publication",
+      "blocker": null
+    },
+    {
+      "nodeId": "6649:419",
+      "name": ".carouselPagination",
+      "page": "Carousel",
+      "publishStatus": "UNPUBLISHED",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Figma component не опубликован; публикация библиотеки не входит в задачу."
+    },
+    {
+      "nodeId": "21658:626",
+      "name": "bracket",
+      "page": "bracket",
+      "publishStatus": "CURRENT",
+      "component": null,
+      "template": null,
+      "status": "blocked",
+      "blocker": "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся."
+    }
+  ]
+}

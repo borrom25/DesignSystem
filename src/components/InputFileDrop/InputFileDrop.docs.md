@@ -14,13 +14,13 @@ types: src/components/InputFileDrop/InputFileDrop.types.ts
 localExport: src/components/InputFileDrop/index.ts
 publicExport: src/index.ts
 storybook: src/stories/InputFileDrop.stories.tsx
-figmaComponent: null
-figmaNodeId: null
-figmaUrl: null
-codeConnect: null
+figmaComponent: InputFailDrop
+figmaNodeId: 10753:4431
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/?node-id=10753-4431
+codeConnect: src/components/InputFileDrop/InputFileDrop.figma.js
 apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
 validation: TypeScript public API and synthetic Code Connect scenarios
-liveFigmaMetadata: no confirmed mapping
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
@@ -32,7 +32,14 @@ import { InputFileDrop } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return <InputFileDrop  />;
+  return (<InputFileDrop
+
+
+
+
+    textMode={true}
+
+  />);
 }
 ```
 
@@ -45,6 +52,7 @@ export function Example() {
 | Props / shared types | [src/types/field.ts](../../types/field.ts) |
 | Public export | [src/index.ts](../../index.ts) |
 | Storybook | [src/stories/InputFileDrop.stories.tsx](../../stories/InputFileDrop.stories.tsx) |
+| Code Connect | [src/components/InputFileDrop/InputFileDrop.figma.js](InputFileDrop.figma.js) |
 
 ## Public API
 
@@ -79,7 +87,18 @@ export function Example() {
 
 ## Figma to props mapping
 
-Подтверждённые Figma properties для этого компонента недоступны. Mapping и `.figma.js` не создаются по имени или внешнему сходству.
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `<slotPinnedFile>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `requiredMark` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Label` | BOOLEAN | `label`; значения см. template |
+| `textLabe` | TEXT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Hint` | BOOLEAN | `hint / hintError`; значения см. template |
+| `textHint` | TEXT | `hint`; значения см. template |
+| `Icon` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `State` | Default, Hover, Filled, Disable | Композиция / нет прямого prop; см. template и Temporary mappings |
 
 ## Supported states
 
@@ -96,6 +115,10 @@ export function Example() {
 
 ## Temporary mappings / assumptions
 
-**Blocker Code Connect:** для этого публичного компонента не подтверждена отдельная опубликованная Figma-связь. После поиска в библиотеке нельзя безопасно выдать mapping только по имени. Требуется точный опубликованный Figma component и его properties.
+Temporary mapping: Figma's pinned-file slot is visual content. Runtime previews
+need actual File[]; the filled state uses a valid text file for the example.
+No size property is exposed in Figma, so runtime's default size is preserved.
 
-Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Публикация текущего template ещё не подтверждена.
+
+Для неподдерживаемых Figma states и slots ограничения явно указаны в Temporary mapping. Статус публикации проверяется отдельно от наличия файлов.

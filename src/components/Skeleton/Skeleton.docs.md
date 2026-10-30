@@ -14,13 +14,13 @@ types: src/components/Skeleton/Skeleton.types.ts
 localExport: src/components/Skeleton/index.ts
 publicExport: src/index.ts
 storybook: src/stories/Skeleton.stories.tsx
-figmaComponent: null
-figmaNodeId: null
-figmaUrl: null
-codeConnect: null
+figmaComponent: Skeleton
+figmaNodeId: 10527:8723
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/?node-id=10527-8723
+codeConnect: src/components/Skeleton/Skeleton.figma.js
 apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
 validation: TypeScript public API and synthetic Code Connect scenarios
-liveFigmaMetadata: no confirmed mapping
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
@@ -32,7 +32,7 @@ import { Skeleton } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return <Skeleton  />;
+  return (<Skeleton loading />);
 }
 ```
 
@@ -44,6 +44,7 @@ export function Example() {
 | Props / shared types | [src/components/Skeleton/Skeleton.types.ts](Skeleton.types.ts) |
 | Public export | [src/index.ts](../../index.ts) |
 | Storybook | [src/stories/Skeleton.stories.tsx](../../stories/Skeleton.stories.tsx) |
+| Code Connect | [src/components/Skeleton/Skeleton.figma.js](Skeleton.figma.js) |
 
 ## Public API
 
@@ -59,7 +60,11 @@ export function Example() {
 
 ## Figma to props mapping
 
-Подтверждённые Figma properties для этого компонента недоступны. Mapping и `.figma.js` не создаются по имени или внешнему сходству.
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `Property 1` | Default | Композиция / нет прямого prop; см. template и Temporary mappings |
 
 ## Supported states
 
@@ -72,6 +77,9 @@ export function Example() {
 
 ## Temporary mappings / assumptions
 
-**Blocker Code Connect:** для этого публичного компонента не подтверждена отдельная опубликованная Figma-связь. После поиска в библиотеке нельзя безопасно выдать mapping только по имени. Требуется точный опубликованный Figma component и его properties.
+Temporary mapping: the sole Figma variant is a loading placeholder.
+Width, height and radius are application layout choices, not Figma properties.
 
-Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Публикация текущего template ещё не подтверждена.
+
+Для неподдерживаемых Figma states и slots ограничения явно указаны в Temporary mapping. Статус публикации проверяется отдельно от наличия файлов.

@@ -23,10 +23,13 @@ const labels = new Map();
 const examples = [];
 const auditPath = path.join(root, "docs/figma-live-audit.json");
 const audit = fs.existsSync(auditPath) ? JSON.parse(fs.readFileSync(auditPath, "utf8")).components : [];
+const inventoryPath = path.join(root, "docs/figma-current-inventory.json");
+const currentNodes = fs.existsSync(inventoryPath) ? JSON.parse(fs.readFileSync(inventoryPath, "utf8")).pages.flatMap((p) => p.nodes) : [];
 let failures = 0;
 for (const file of files) {
   const source = fs.readFileSync(file, "utf8");
-  const live = audit.find((entry) => entry.template === path.relative(root, file).replaceAll("\\", "/"));
+  const nodeId = source.match(/^\/\/ url=.*node-id=([\d-]+)/m)?.[1].replace("-", ":");
+  const live = currentNodes.find((entry) => entry.id === nodeId) ?? audit.find((entry) => entry.template === path.relative(root, file).replaceAll("\\", "/"));
   const definitions = Object.values(live?.properties ?? {});
   function property(name, type) {
     if (!definitions.length) return undefined;
@@ -79,6 +82,7 @@ for (const file of files) {
       getPropertyValue: (name) => { property(name); return scenario.props[name]; },
       findInstance: () => undefined,
       findText: () => ({ characters: "Пример", textContent: "Пример" }),
+      findLayers: () => [],
     };
     const figma = {
       selectedInstance: instance,
@@ -88,7 +92,7 @@ for (const file of files) {
     try {
       vm.runInNewContext(source.replace(/export default/, "__templateOutput ="), context, { timeout: 1000 });
       const { imports, example } = context.__templateOutput;
-      if (scenario.label === "default") examples.push({ template: path.relative(root, file).replaceAll("\\", "/"), component: source.match(/^\/\/ component=(.+)$/m)?.[1].trim(), imports, example });
+      if (scenario.label === "default") examples.push({ template: path.relative(root, file).replaceAll("\\", "/"), component: source.match(/^\/\/ component=(.+)$/m)?.[1].trim(), imports, example, metadata: context.__templateOutput.metadata ?? {} });
       if (seen.has(example)) continue;
       seen.add(example);
       const index = generated.length;

@@ -103,7 +103,7 @@ export function Example() {
 | `Actions-left` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
 | `↳ Action-left` | INSTANCE_SWAP | Композиция / нет прямого prop; см. template и Temporary mappings |
 | `Icon-left` | BOOLEAN | `iconLeft`; значения см. template |
-| `↳ Flag` | INSTANCE_SWAP | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `↳  Flag` | INSTANCE_SWAP | Композиция / нет прямого prop; см. template и Temporary mappings |
 | `Flag` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
 | `<slotAction-right>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
 | `Action-right` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
@@ -134,6 +134,6 @@ supports the built-in checkbox behavior, not arbitrary action content.
 Temporary mapping: subtitle, counter, and right action are present in Figma
 but do not have public ListItem props yet.
 
-Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Публикация текущего template ещё не подтверждена.
 
-Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.
+Для неподдерживаемых Figma states и slots ограничения явно указаны в Temporary mapping. Статус публикации проверяется отдельно от наличия файлов.

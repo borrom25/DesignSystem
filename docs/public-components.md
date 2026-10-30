@@ -4,7 +4,7 @@
 
 | Компонент | Документация | Code Connect |
 | --- | --- | --- |
-| Plug | [docs](../src/components/Plug/Plug.docs.md) | blocker: нет подтверждённых Figma properties |
+| Plug | [docs](../src/components/Plug/Plug.docs.md) | есть; synthetic snippets проверены отдельно |
 | FieldLabel | [docs](../src/components/Field/FieldLabel.docs.md) | blocker: нет подтверждённых Figma properties |
 | FieldHint | [docs](../src/components/Field/FieldHint.docs.md) | blocker: нет подтверждённых Figma properties |
 | FieldWrapper | [docs](../src/components/Field/FieldWrapper.docs.md) | blocker: нет подтверждённых Figma properties |
@@ -19,8 +19,8 @@
 | InputFiles | [docs](../src/components/InputFiles/InputFiles.docs.md) | есть; synthetic snippets проверены отдельно |
 | Uploader | [docs](../src/components/Uploader/Uploader.docs.md) | blocker: нет подтверждённых Figma properties |
 | InputImg | [docs](../src/components/InputImg/InputImg.docs.md) | есть; synthetic snippets проверены отдельно |
-| InputFileDrop | [docs](../src/components/InputFileDrop/InputFileDrop.docs.md) | blocker: нет подтверждённых Figma properties |
-| ProgressPie | [docs](../src/components/ProgressPie/ProgressPie.docs.md) | blocker: нет подтверждённых Figma properties |
+| InputFileDrop | [docs](../src/components/InputFileDrop/InputFileDrop.docs.md) | есть; synthetic snippets проверены отдельно |
+| ProgressPie | [docs](../src/components/ProgressPie/ProgressPie.docs.md) | есть; synthetic snippets проверены отдельно |
 | InputMessage | [docs](../src/components/InputMessage/InputMessage.docs.md) | есть; synthetic snippets проверены отдельно |
 | TextArea | [docs](../src/components/TextArea/TextArea.docs.md) | есть; synthetic snippets проверены отдельно |
 | CheckBox | [docs](../src/components/CheckBox/CheckBox.docs.md) | есть; synthetic snippets проверены отдельно |
@@ -57,21 +57,21 @@
 | IconAvatar | [docs](../src/components/IconAvatar/IconAvatar.docs.md) | blocker: нет подтверждённых Figma properties |
 | Alert | [docs](../src/components/Alert/Alert.docs.md) | есть; synthetic snippets проверены отдельно |
 | ProgressBar | [docs](../src/components/ProgressBar/ProgressBar.docs.md) | есть; synthetic snippets проверены отдельно |
-| Skeleton | [docs](../src/components/Skeleton/Skeleton.docs.md) | blocker: нет подтверждённых Figma properties |
+| Skeleton | [docs](../src/components/Skeleton/Skeleton.docs.md) | есть; synthetic snippets проверены отдельно |
 | Tab | [docs](../src/components/Tab/Tab.docs.md) | есть; synthetic snippets проверены отдельно |
 | TabsOverflow | [docs](../src/components/TabsOverflow/TabsOverflow.docs.md) | есть; synthetic snippets проверены отдельно |
 | StepBar | [docs](../src/components/StepBar/StepBar.docs.md) | есть; synthetic snippets проверены отдельно |
 | Header | [docs](../src/components/Header/Header.docs.md) | есть; synthetic snippets проверены отдельно |
 | HeaderInside | [docs](../src/components/HeaderInside/HeaderInside.docs.md) | есть; synthetic snippets проверены отдельно |
 | Sidebar | [docs](../src/components/Sidebar/Sidebar.docs.md) | есть; synthetic snippets проверены отдельно |
-| InsideSidebar | [docs](../src/components/InsideSidebar/InsideSidebar.docs.md) | blocker: нет подтверждённых Figma properties |
+| InsideSidebar | [docs](../src/components/InsideSidebar/InsideSidebar.docs.md) | есть; synthetic snippets проверены отдельно |
 | Card | [docs](../src/components/Card/Card.docs.md) | есть; synthetic snippets проверены отдельно |
 | Block | [docs](../src/components/Block/Block.docs.md) | есть; synthetic snippets проверены отдельно |
-| Bubble | [docs](../src/components/Bubble/Bubble.docs.md) | blocker: нет подтверждённых Figma properties |
+| Bubble | [docs](../src/components/Bubble/Bubble.docs.md) | есть; synthetic snippets проверены отдельно |
 | Line | [docs](../src/components/Line/Line.docs.md) | blocker: нет подтверждённых Figma properties |
 | Separator | [docs](../src/components/Separator/Separator.docs.md) | есть; synthetic snippets проверены отдельно |
 | Accordion | [docs](../src/components/Accordion/Accordion.docs.md) | есть; synthetic snippets проверены отдельно |
-| AccordionBlock | [docs](../src/components/AccordionBlock/AccordionBlock.docs.md) | blocker: нет подтверждённых Figma properties |
+| AccordionBlock | [docs](../src/components/AccordionBlock/AccordionBlock.docs.md) | есть; synthetic snippets проверены отдельно |
 | AccountMenu | [docs](../src/components/AccountMenu/AccountMenu.docs.md) | есть; synthetic snippets проверены отдельно |
 | Pagination | [docs](../src/components/Pagination/Pagination.docs.md) | есть; synthetic snippets проверены отдельно |
 | BarMenu | [docs](../src/components/BarMenu/BarMenu.docs.md) | есть; synthetic snippets проверены отдельно |
@@ -80,9 +80,9 @@
 | BarChartVertical | [docs](../src/components/BarChartVertical/BarChartVertical.docs.md) | blocker: нет подтверждённых Figma properties |
 | Carousel | [docs](../src/components/Carousel/Carousel.docs.md) | есть; synthetic snippets проверены отдельно |
 | Photo | [docs](../src/components/Photo/Photo.docs.md) | blocker: нет подтверждённых Figma properties |
-| LineChart | [docs](../src/components/LineChart/LineChart.docs.md) | blocker: нет подтверждённых Figma properties |
+| LineChart | [docs](../src/components/LineChart/LineChart.docs.md) | есть; synthetic snippets проверены отдельно |
 | PieChart | [docs](../src/components/PieChart/PieChart.docs.md) | blocker: нет подтверждённых Figma properties |
-| BarChartHorizontal | [docs](../src/components/BarChartHorizontal/BarChartHorizontal.docs.md) | blocker: нет подтверждённых Figma properties |
+| BarChartHorizontal | [docs](../src/components/BarChartHorizontal/BarChartHorizontal.docs.md) | есть; synthetic snippets проверены отдельно |
 | Download | [docs](../src/components/Download/Download.docs.md) | есть; synthetic snippets проверены отдельно |
 | Player | [docs](../src/components/Player/Player.docs.md) | есть; synthetic snippets проверены отдельно |
 | Popover | [docs](../src/components/Popover/Popover.docs.md) | есть; synthetic snippets проверены отдельно |

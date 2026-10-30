@@ -95,6 +95,6 @@ Runtime has one disabled prop, so we merge both into a single boolean.
 Temporary mapping: Figma Title/textTitle are layout-level label controls.
 Switcher API has no label/text prop, so snippet outputs Switcher only.
 
-Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Публикация текущего template ещё не подтверждена.
 
-Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.
+Для неподдерживаемых Figma states и slots ограничения явно указаны в Temporary mapping. Статус публикации проверяется отдельно от наличия файлов.

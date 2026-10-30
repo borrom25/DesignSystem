@@ -4,7 +4,7 @@
     "runtime": "src/components/Plug/Plug.tsx",
     "docs": "src/components/Plug/Plug.docs.md",
     "story": "src/stories/Plug.stories.tsx",
-    "codeConnect": null,
+    "codeConnect": "src/components/Plug/Plug.figma.js",
     "props": [
       {
         "name": "imageItem",
@@ -1658,7 +1658,7 @@
     "runtime": "src/components/InputFileDrop/InputFileDrop.tsx",
     "docs": "src/components/InputFileDrop/InputFileDrop.docs.md",
     "story": "src/stories/InputFileDrop.stories.tsx",
-    "codeConnect": null,
+    "codeConnect": "src/components/InputFileDrop/InputFileDrop.figma.js",
     "props": [
       {
         "name": "size",
@@ -1835,7 +1835,7 @@
     "runtime": "src/components/ProgressPie/ProgressPie.tsx",
     "docs": "src/components/ProgressPie/ProgressPie.docs.md",
     "story": "src/stories/ProgressPie.stories.tsx",
-    "codeConnect": null,
+    "codeConnect": "src/components/ProgressPie/ProgressPie.figma.js",
     "props": [
       {
         "name": "icon",
@@ -5360,7 +5360,7 @@
     "runtime": "src/components/Skeleton/Skeleton.tsx",
     "docs": "src/components/Skeleton/Skeleton.docs.md",
     "story": "src/stories/Skeleton.stories.tsx",
-    "codeConnect": null,
+    "codeConnect": "src/components/Skeleton/Skeleton.figma.js",
     "props": [
       {
         "name": "loading",
@@ -5927,7 +5927,7 @@
     "runtime": "src/components/InsideSidebar/InsideSidebar.tsx",
     "docs": "src/components/InsideSidebar/InsideSidebar.docs.md",
     "story": "src/stories/InsideSidebar.stories.tsx",
-    "codeConnect": null,
+    "codeConnect": "src/components/InsideSidebar/InsideSidebar.figma.js",
     "props": [
       {
         "name": "title",
@@ -6073,7 +6073,7 @@
     "runtime": "src/components/Bubble/Bubble.tsx",
     "docs": "src/components/Bubble/Bubble.docs.md",
     "story": "src/stories/Bubble.stories.tsx",
-    "codeConnect": null,
+    "codeConnect": "src/components/Bubble/Bubble.figma.js",
     "props": [
       {
         "name": "side",
@@ -6312,7 +6312,7 @@
     "runtime": "src/components/AccordionBlock/AccordionBlock.tsx",
     "docs": "src/components/AccordionBlock/AccordionBlock.docs.md",
     "story": null,
-    "codeConnect": null,
+    "codeConnect": "src/components/AccordionBlock/AccordionBlock.figma.js",
     "props": [
       {
         "name": "title",
@@ -6974,7 +6974,7 @@
     "runtime": "src/components/LineChart/LineChart.tsx",
     "docs": "src/components/LineChart/LineChart.docs.md",
     "story": "src/stories/LineChart.stories.tsx",
-    "codeConnect": null,
+    "codeConnect": "src/components/LineChart/LineChart.figma.js",
     "props": [
       {
         "name": "lineType",
@@ -7062,7 +7062,7 @@
     "runtime": "src/components/BarChartHorizontal/BarChartHorizontal.tsx",
     "docs": "src/components/BarChartHorizontal/BarChartHorizontal.docs.md",
     "story": "src/stories/BarChartHorizontal.stories.tsx",
-    "codeConnect": null,
+    "codeConnect": "src/components/BarChartHorizontal/BarChartHorizontal.figma.js",
     "props": [
       {
         "name": "data",

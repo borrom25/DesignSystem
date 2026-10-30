@@ -36,7 +36,7 @@ npm pack --dry-run
 - [Инвентаризация различий с исходной версией GitHub](docs/gitlab-update-inventory.md).
 - [Проверки и ограничения обновления](docs/gitlab-redesign-update.md).
 
-Figma используется только для чтения properties. Локальные `.figma.js` и `.docs.md` не публикуют и не меняют связи непосредственно в Figma.
+Документация компонентов размещается в поле **Link** Figma component set; Code Connect публикуется отдельно как исполняемый React template. Локальные `.figma.js` и `.docs.md` сами по себе ничего не публикуют. [Текущая сверка и статус публикации](docs/figma-publication.md).
 
 ## Install
 

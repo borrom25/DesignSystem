@@ -14,13 +14,13 @@ types: src/components/ProgressPie/ProgressPie.types.ts
 localExport: src/components/ProgressPie/index.ts
 publicExport: src/index.ts
 storybook: src/stories/ProgressPie.stories.tsx
-figmaComponent: null
-figmaNodeId: null
-figmaUrl: null
-codeConnect: null
+figmaComponent: ProgressPie
+figmaNodeId: 2824:14826
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/?node-id=2824-14826
+codeConnect: src/components/ProgressPie/ProgressPie.figma.js
 apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
 validation: TypeScript public API and synthetic Code Connect scenarios
-liveFigmaMetadata: no confirmed mapping
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
@@ -32,7 +32,7 @@ import { ProgressPie } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return <ProgressPie size={"xs"} />;
+  return (<ProgressPie size="lg" progress={100} showIcon={false} showProgress={false} />);
 }
 ```
 
@@ -44,6 +44,7 @@ export function Example() {
 | Props / shared types | [src/components/ProgressPie/ProgressPie.types.ts](ProgressPie.types.ts) |
 | Public export | [src/index.ts](../../index.ts) |
 | Storybook | [src/stories/ProgressPie.stories.tsx](../../stories/ProgressPie.stories.tsx) |
+| Code Connect | [src/components/ProgressPie/ProgressPie.figma.js](ProgressPie.figma.js) |
 
 ## Public API
 
@@ -60,7 +61,15 @@ export function Example() {
 
 ## Figma to props mapping
 
-Подтверждённые Figma properties для этого компонента недоступны. Mapping и `.figma.js` не создаются по имени или внешнему сходству.
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `Icon` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `↳ Icon` | INSTANCE_SWAP | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `%` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Progress` | 100%, 75%, 50%, 0% | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Size` | Lg, Md, Sm, Xs | `size`; значения см. template |
 
 ## Supported states
 
@@ -72,6 +81,10 @@ export function Example() {
 
 ## Temporary mappings / assumptions
 
-**Blocker Code Connect:** для этого публичного компонента не подтверждена отдельная опубликованная Figma-связь. После поиска в библиотеке нельзя безопасно выдать mapping только по имени. Требуется точный опубликованный Figma component и его properties.
+Temporary mapping: runtime icon is a LucideIcon constructor, not rendered JSX.
+The Figma icon swap is not forwarded; the runtime's default ChartPie is used.
+To use another icon, supply the corresponding public lucide-react constructor.
 
-Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Публикация текущего template ещё не подтверждена.
+
+Для неподдерживаемых Figma states и slots ограничения явно указаны в Temporary mapping. Статус публикации проверяется отдельно от наличия файлов.

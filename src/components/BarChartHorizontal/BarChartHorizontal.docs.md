@@ -14,13 +14,13 @@ types: src/components/BarChartHorizontal/BarChartHorizontal.types.ts
 localExport: src/components/BarChartHorizontal/index.ts
 publicExport: src/index.ts
 storybook: src/stories/BarChartHorizontal.stories.tsx
-figmaComponent: null
-figmaNodeId: null
-figmaUrl: null
-codeConnect: null
+figmaComponent: Chart Horizontal
+figmaNodeId: 5118:1811
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/?node-id=5118-1811
+codeConnect: src/components/BarChartHorizontal/BarChartHorizontal.figma.js
 apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
 validation: TypeScript public API and synthetic Code Connect scenarios
-liveFigmaMetadata: no confirmed mapping
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
@@ -32,7 +32,7 @@ import { BarChartHorizontal } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return <BarChartHorizontal data={[]} />;
+  return (<BarChartHorizontal data={[{ name: "Группа A", value: 32 }, { name: "Группа B", value: 26 }, { name: "Группа C", value: 20 }]} />);
 }
 ```
 
@@ -44,6 +44,7 @@ export function Example() {
 | Props / shared types | [src/components/BarChartHorizontal/BarChartHorizontal.types.ts](BarChartHorizontal.types.ts) |
 | Public export | [src/index.ts](../../index.ts) |
 | Storybook | [src/stories/BarChartHorizontal.stories.tsx](../../stories/BarChartHorizontal.stories.tsx) |
+| Code Connect | [src/components/BarChartHorizontal/BarChartHorizontal.figma.js](BarChartHorizontal.figma.js) |
 
 ## Public API
 
@@ -55,7 +56,32 @@ export function Example() {
 
 ## Figma to props mapping
 
-Подтверждённые Figma properties для этого компонента недоступны. Mapping и `.figma.js` не создаются по имени или внешнему сходству.
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `Row-1` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Row-2` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Row-3` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Row-4` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Row-5` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Row-6` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Row-7` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-1` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-2` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-3` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-4` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-5` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-6` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-7` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-8` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-9` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-10` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-11` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-12` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Primary Info` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Row-8` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Property 1` | Variant2 | Композиция / нет прямого prop; см. template и Temporary mappings |
 
 ## Supported states
 
@@ -67,6 +93,10 @@ export function Example() {
 
 ## Temporary mappings / assumptions
 
-**Blocker Code Connect:** для этого публичного компонента не подтверждена отдельная опубликованная Figma-связь. После поиска в библиотеке нельзя безопасно выдать mapping только по имени. Требуется точный опубликованный Figma component и его properties.
+Temporary mapping: runtime accepts data, not independently editable Figma
+rows, columns and axis labels. Values below are example application data.
+Row/Col/Primary Info booleans have no direct runtime props.
 
-Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Публикация текущего template ещё не подтверждена.
+
+Для неподдерживаемых Figma states и slots ограничения явно указаны в Temporary mapping. Статус публикации проверяется отдельно от наличия файлов.

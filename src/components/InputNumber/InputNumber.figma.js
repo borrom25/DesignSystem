@@ -47,7 +47,7 @@ const textPlaceholder = instance.getString("textPlaceholder");
 const textFilled = instance.getString("textFilled");
 
 const iconLeftSwap = instance.findInstance("Icon-left");
-const slotLeft = instance.getPropertyValue("<slotLeft>");
+const slotLeft = instance.getSlot(" <slotLeft>");
 
 // Temporary mapping: current public InputNumber API has no icon/slot props.
 void iconLeftSwap;

@@ -4,6 +4,214 @@
   "mode": "read-only",
   "components": [
     {
+      "component": "Skeleton",
+      "nodeId": "10527:8723",
+      "template": "src/components/Skeleton/Skeleton.figma.js",
+      "name": "Skeleton",
+      "properties": {
+        "Property 1": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default"
+          ],
+          "key": "Property 1",
+          "name": "Property 1"
+        }
+      },
+      "method": "use_figma componentPropertyDefinitions 2026-10-30",
+      "descendants": []
+    },
+    {
+      "component": "AccordionBlock",
+      "nodeId": "10439:5012",
+      "template": "src/components/AccordionBlock/AccordionBlock.figma.js",
+      "name": "accordionBlock",
+      "properties": {
+        "<slotContent>#10439:0": {
+          "type": "SLOT",
+          "key": "<slotContent>#10439:0",
+          "name": "<slotContent>"
+        },
+        "<slotHead>#10439:2": {
+          "type": "SLOT",
+          "key": "<slotHead>#10439:2",
+          "name": "<slotHead>"
+        },
+        "Chevron-left#10439:4": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "key": "Chevron-left#10439:4",
+          "name": "Chevron-left"
+        },
+        "Chevron-right#10439:7": {
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "key": "Chevron-right#10439:7",
+          "name": "Chevron-right"
+        },
+        "iconLeft#10440:10": {
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "key": "iconLeft#10440:10",
+          "name": "iconLeft"
+        },
+        "↳ IconLeft#10441:13": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1077:4671",
+          "key": "↳ IconLeft#10441:13",
+          "name": "↳ IconLeft"
+        },
+        "Open": {
+          "type": "VARIANT",
+          "defaultValue": "On",
+          "variantOptions": [
+            "On",
+            "Off"
+          ],
+          "key": "Open",
+          "name": "Open"
+        },
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Disable"
+          ],
+          "key": "State",
+          "name": "State"
+        },
+        "Size": {
+          "type": "VARIANT",
+          "defaultValue": "Md",
+          "variantOptions": [
+            "Xs",
+            "Sm",
+            "Md"
+          ],
+          "key": "Size",
+          "name": "Size"
+        }
+      },
+      "method": "use_figma componentPropertyDefinitions 2026-10-30",
+      "descendants": []
+    },
+    {
+      "component": "Plug",
+      "nodeId": "2059:7073",
+      "template": "src/components/Plug/Plug.figma.js",
+      "name": "Feedback Plug",
+      "properties": {
+        "Indicator#2060:0": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "key": "Indicator#2060:0",
+          "name": "Indicator"
+        },
+        "<slotAction>#6591:0": {
+          "type": "SLOT",
+          "key": "<slotAction>#6591:0",
+          "name": "<slotAction>"
+        },
+        "slotAction#6591:11": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "key": "slotAction#6591:11",
+          "name": "slotAction"
+        },
+        "Pictures#6591:22": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "key": "Pictures#6591:22",
+          "name": "Pictures"
+        },
+        "<slotIMG>#10538:0": {
+          "type": "SLOT",
+          "key": "<slotIMG>#10538:0",
+          "name": "<slotIMG>"
+        },
+        "Result": {
+          "type": "VARIANT",
+          "defaultValue": "Pictures",
+          "variantOptions": [
+            "Pictures",
+            "Positive",
+            "Warning",
+            "Danger",
+            "Info"
+          ],
+          "key": "Result",
+          "name": "Result"
+        },
+        "Media": {
+          "type": "VARIANT",
+          "defaultValue": "Desktop",
+          "variantOptions": [
+            "Desktop",
+            "Mobile"
+          ],
+          "key": "Media",
+          "name": "Media"
+        }
+      },
+      "method": "use_figma componentPropertyDefinitions 2026-10-30",
+      "descendants": []
+    },
+    {
+      "component": "ProgressPie",
+      "nodeId": "2824:14826",
+      "template": "src/components/ProgressPie/ProgressPie.figma.js",
+      "name": "ProgressPie",
+      "properties": {
+        "Icon#2824:19": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "key": "Icon#2824:19",
+          "name": "Icon"
+        },
+        "↳ Icon#2824:36": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1652:911",
+          "key": "↳ Icon#2824:36",
+          "name": "↳ Icon"
+        },
+        "%#2824:53": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "key": "%#2824:53",
+          "name": "%"
+        },
+        "Progress": {
+          "type": "VARIANT",
+          "defaultValue": "0%",
+          "variantOptions": [
+            "100%",
+            "75%",
+            "50%",
+            "0%"
+          ],
+          "key": "Progress",
+          "name": "Progress"
+        },
+        "Size": {
+          "type": "VARIANT",
+          "defaultValue": "Lg",
+          "variantOptions": [
+            "Lg",
+            "Md",
+            "Sm",
+            "Xs"
+          ],
+          "key": "Size",
+          "name": "Size"
+        }
+      },
+      "method": "use_figma componentPropertyDefinitions 2026-10-30",
+      "descendants": []
+    },
+    {
       "template": "src/components/Accordion/Accordion.figma.js",
       "nodeId": "1282:1912",
       "component": "Accordion",
@@ -22001,6 +22209,179 @@
         }
       },
       "method": "use_figma read-only componentPropertyDefinitions"
+    },
+    {
+      "component": "InsideSidebar",
+      "nodeId": "1021:18098",
+      "template": "src/components/InsideSidebar/InsideSidebar.figma.js",
+      "name": "sideMenuInside",
+      "properties": {
+        "headSideMenu#1021:35": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "key": "headSideMenu#1021:35",
+          "name": "headSideMenu"
+        },
+        "slotHead#1021:37": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "key": "slotHead#1021:37",
+          "name": "slotHead"
+        },
+        "bottomSlotAction#1503:0": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "key": "bottomSlotAction#1503:0",
+          "name": "bottomSlotAction"
+        },
+        "Body#2866:4": {
+          "type": "SLOT",
+          "description": "<p><br></p>",
+          "preferredValues": [],
+          "key": "Body#2866:4",
+          "name": "Body"
+        },
+        "<slotHead>#3135:0": {
+          "type": "SLOT",
+          "description": "",
+          "preferredValues": [],
+          "key": "<slotHead>#3135:0",
+          "name": "<slotHead>"
+        },
+        "<headSlotAction>#3135:3": {
+          "type": "SLOT",
+          "description": "",
+          "preferredValues": [],
+          "key": "<headSlotAction>#3135:3",
+          "name": "<headSlotAction>"
+        },
+        "<slotAction>#3142:6": {
+          "type": "SLOT",
+          "description": "",
+          "preferredValues": [],
+          "key": "<slotAction>#3142:6",
+          "name": "<slotAction>"
+        },
+        "Media": {
+          "type": "VARIANT",
+          "defaultValue": "Desktop",
+          "variantOptions": [
+            "Mobile",
+            "Desktop"
+          ],
+          "key": "Media",
+          "name": "Media"
+        }
+      },
+      "method": "use_figma read-only componentPropertyDefinitions",
+      "descendants": []
+    },
+    {
+      "component": "InputFileDrop",
+      "nodeId": "10753:4431",
+      "template": "src/components/InputFileDrop/InputFileDrop.figma.js",
+      "name": "InputFailDrop",
+      "properties": {
+        "<slotPinnedFile>#10753:0": {
+          "type": "SLOT",
+          "description": "",
+          "slotSettings": {
+            "stretchChildOnInsert": false,
+            "displayEmptyByDefault": false,
+            "minChildren": null,
+            "maxChildren": null,
+            "allowPreferredValuesOnly": false
+          },
+          "preferredValues": [],
+          "key": "<slotPinnedFile>#10753:0",
+          "name": "<slotPinnedFile>"
+        },
+        "requiredMark#10753:6": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "key": "requiredMark#10753:6",
+          "name": "requiredMark"
+        },
+        "Label#10753:9": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "key": "Label#10753:9",
+          "name": "Label"
+        },
+        "textLabe#10753:12": {
+          "type": "TEXT",
+          "defaultValue": "Label",
+          "key": "textLabe#10753:12",
+          "name": "textLabe"
+        },
+        "Hint#10756:15": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "key": "Hint#10756:15",
+          "name": "Hint"
+        },
+        "textHint#10756:18": {
+          "type": "TEXT",
+          "defaultValue": "Вес файла, не должен превышать более 12 Mb. Разрешенные форматы:   ",
+          "key": "textHint#10756:18",
+          "name": "textHint"
+        },
+        "Icon#10756:27": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "key": "Icon#10756:27",
+          "name": "Icon"
+        },
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Filled",
+            "Disable"
+          ],
+          "key": "State",
+          "name": "State"
+        }
+      },
+      "method": "use_figma read-only componentPropertyDefinitions",
+      "descendants": []
+    },
+    {
+      "component": "MobileAppLayout",
+      "nodeId": "3159:29",
+      "template": null,
+      "blocker": "Runtime exists but MobileAppLayout is not a public package export. Existing AppLayout documentation Link is preserved.",
+      "name": "App / Mobile",
+      "properties": {
+        "<slotContent>#3159:1": {
+          "type": "SLOT",
+          "description": null,
+          "preferredValues": [],
+          "key": "<slotContent>#3159:1",
+          "name": "<slotContent>"
+        },
+        "buttonMenu#8055:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "key": "buttonMenu#8055:0",
+          "name": "buttonMenu"
+        },
+        "Page": {
+          "type": "VARIANT",
+          "defaultValue": "Main",
+          "variantOptions": [
+            "Main",
+            "Inside",
+            "Process"
+          ],
+          "key": "Page",
+          "name": "Page"
+        }
+      },
+      "method": "use_figma read-only componentPropertyDefinitions",
+      "descendants": []
     }
   ]
 }

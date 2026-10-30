@@ -14,13 +14,13 @@ types: src/components/LineChart/LineChart.types.ts
 localExport: src/components/LineChart/index.ts
 publicExport: src/index.ts
 storybook: src/stories/LineChart.stories.tsx
-figmaComponent: null
-figmaNodeId: null
-figmaUrl: null
-codeConnect: null
+figmaComponent: Chart Lines
+figmaNodeId: 5167:2230
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/?node-id=5167-2230
+codeConnect: src/components/LineChart/LineChart.figma.js
 apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
 validation: TypeScript public API and synthetic Code Connect scenarios
-liveFigmaMetadata: no confirmed mapping
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
@@ -32,7 +32,7 @@ import { LineChart } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return <LineChart data={[]} series={[]} />;
+  return (<LineChart data={[{ name: "Январь", primary: 12, secondary: 8 }, { name: "Февраль", primary: 18, secondary: 14 }]} series={[{ dataKey: "primary", label: "Основной" }, { dataKey: "secondary", label: "Дополнительный" }]} />);
 }
 ```
 
@@ -45,6 +45,7 @@ export function Example() {
 | Props / shared types | [src/shared/Chart/types.ts](../../shared/Chart/types.ts) |
 | Public export | [src/index.ts](../../index.ts) |
 | Storybook | [src/stories/LineChart.stories.tsx](../../stories/LineChart.stories.tsx) |
+| Code Connect | [src/components/LineChart/LineChart.figma.js](LineChart.figma.js) |
 
 ## Public API
 
@@ -60,7 +61,36 @@ export function Example() {
 
 ## Figma to props mapping
 
-Подтверждённые Figma properties для этого компонента недоступны. Mapping и `.figma.js` не создаются по имени или внешнему сходству.
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `Row-1` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Row-2` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Row-3` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Row-4` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Row-5` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Row-6` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Row-7` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-1` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-2` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-3` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-4` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-5` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-6` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-7` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-8` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-9` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-10` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-11` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Col-12` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Primary Info` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Secondary Name` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Secondary Labels` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Secondary Info` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Primary Name` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Primary Labels` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Property 1` | Variant2 | Композиция / нет прямого prop; см. template и Temporary mappings |
 
 ## Supported states
 
@@ -72,6 +102,10 @@ export function Example() {
 
 ## Temporary mappings / assumptions
 
-**Blocker Code Connect:** для этого публичного компонента не подтверждена отдельная опубликованная Figma-связь. После поиска в библиотеке нельзя безопасно выдать mapping только по имени. Требуется точный опубликованный Figma component и его properties.
+Temporary mapping: replace sample data/series with application data.
+Figma Row/Col visibility and individual axis/legend label booleans are not
+runtime props. Runtime derives axes and legend from data and series.
 
-Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Публикация текущего template ещё не подтверждена.
+
+Для неподдерживаемых Figma states и slots ограничения явно указаны в Temporary mapping. Статус публикации проверяется отдельно от наличия файлов.

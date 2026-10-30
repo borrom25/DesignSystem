@@ -14,13 +14,13 @@ types: src/components/AccordionBlock/AccordionBlock.types.ts
 localExport: src/components/AccordionBlock/index.ts
 publicExport: src/index.ts
 storybook: null
-figmaComponent: null
-figmaNodeId: null
-figmaUrl: null
-codeConnect: null
+figmaComponent: accordionBlock
+figmaNodeId: 10439:5012
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/?node-id=10439-5012
+codeConnect: src/components/AccordionBlock/AccordionBlock.figma.js
 apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
 validation: TypeScript public API and synthetic Code Connect scenarios
-liveFigmaMetadata: no confirmed mapping
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
@@ -32,7 +32,7 @@ import { AccordionBlock } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return <AccordionBlock title={"Пример"} />;
+  return (<AccordionBlock title="Пример" description="Пример" size="xs" defaultOpen={true}  ></AccordionBlock>);
 }
 ```
 
@@ -43,6 +43,7 @@ export function Example() {
 | Runtime | [src/components/AccordionBlock/AccordionBlock.tsx](AccordionBlock.tsx) |
 | Props / shared types | [src/components/AccordionBlock/AccordionBlock.types.ts](AccordionBlock.types.ts) |
 | Public export | [src/index.ts](../../index.ts) |
+| Code Connect | [src/components/AccordionBlock/AccordionBlock.figma.js](AccordionBlock.figma.js) |
 
 ## Public API
 
@@ -66,7 +67,19 @@ export function Example() {
 
 ## Figma to props mapping
 
-Подтверждённые Figma properties для этого компонента недоступны. Mapping и `.figma.js` не создаются по имени или внешнему сходству.
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `<slotContent>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `<slotHead>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Chevron-left` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Chevron-right` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `iconLeft` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `↳ IconLeft` | INSTANCE_SWAP | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Open` | On, Off | `defaultOpen`; значения см. template |
+| `State` | Default, Hover, Disable | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Size` | Xs, Sm, Md | `size`; значения см. template |
 
 ## Supported states
 
@@ -79,6 +92,10 @@ export function Example() {
 
 ## Temporary mappings / assumptions
 
-**Blocker Code Connect:** для этого публичного компонента не подтверждена отдельная опубликованная Figma-связь. После поиска в библиотеке нельзя безопасно выдать mapping только по имени. Требуется точный опубликованный Figma component и его properties.
+Temporary mapping: runtime owns chevron placement and hover behavior.
+Chevron-left, Chevron-right and iconLeft have no public presentation props.
+The icon swap cannot be passed as a nonexistent AccordionBlock icon prop.
 
-Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Публикация текущего template ещё не подтверждена.
+
+Для неподдерживаемых Figma states и slots ограничения явно указаны в Temporary mapping. Статус публикации проверяется отдельно от наличия файлов.

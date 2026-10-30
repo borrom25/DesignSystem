@@ -95,4 +95,4 @@ export function Example() {
 
 **Blocker Code Connect:** Figma Uploader (3741:11025) — строка загруженного файла с прогрессом; runtime Uploader — drop zone выбора файлов. Подтверждённые properties State=Loading/Positive/Error не имеют корректного прямого mapping к этому API. Связка не создаётся по совпадению имени.
 
-Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.
+Для неподдерживаемых Figma states и slots ограничения явно указаны в Temporary mapping. Статус публикации проверяется отдельно от наличия файлов.

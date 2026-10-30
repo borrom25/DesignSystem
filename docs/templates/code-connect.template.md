@@ -12,7 +12,7 @@ src/components/<Component>/<Component>.figma.js
 src/components/<Component>/<Component>.docs.md
 ```
 
-В поле ссылки у Figma-компонента для Code Connect лучше указывать именно готовый `.figma.js`:
+Поле **Link** у Figma component set ведёт на `<Component>.docs.md` в GitHub. Описание предназначено для краткого назначения компонента. Code Connect публикуется отдельно как полный исполняемый React template; ссылка на `.figma.js` сама по себе его не настраивает. Исходник template хранится рядом с runtime:
 
 ```text
 src/components/<Component>/<Component>.figma.js

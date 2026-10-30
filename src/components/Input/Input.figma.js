@@ -52,15 +52,15 @@ const textFilled = instance.getString("textFilled");
 
 const iconLeftSwap = instance.findInstance("Icon-left");
 const iconRightSwap = instance.findInstance("Icon-right");
-const slotLeft = instance.getPropertyValue("<slotLeft>");
-const slotRight = instance.getPropertyValue("<slotRight>");
+const slotLeft = instance.getSlot(" <slotLeft>");
+const slotRight = instance.getSlot("<slotRight>");
+const showSuffix = instance.getBoolean("Suffix");
+const textSuffix = instance.getString("textSuffix");
 
 // Temporary mapping: current runtime API expects icon components and ReactNode
 // for slots, while Figma swaps/slots here do not provide direct runtime snippets.
 void iconLeftSwap;
 void iconRightSwap;
-void slotLeft;
-void slotRight;
 
 const isFocused = state === "selected";
 const hasValue =
@@ -81,8 +81,8 @@ export default {
       ${showHint ? figma.tsx`${error ? `hintError="${hintText}"` : `hint="${hintText}"`}` : ""}
       ${showIconLeft ? "iconLeft={Check}" : ""}
       ${showIconRight ? "iconRight={Check}" : ""}
-      ${showSlotLeft ? figma.tsx`prefix={<span>Slot left</span>}` : ""}
-      ${showSlotRight ? figma.tsx`suffix={<span>Slot right</span>}` : ""}
+      ${showSlotLeft && slotLeft ? figma.tsx`prefix={${slotLeft}}` : ""}
+      ${showSlotRight && slotRight ? figma.tsx`suffix={${slotRight}}` : showSuffix ? figma.tsx`suffix="${textSuffix}"` : ""}
       ${showCounter ? "count={4} maxCount={10}" : ""}
       ${defaultValue ? figma.tsx`defaultValue="${defaultValue}"` : ""}
     />

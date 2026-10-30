@@ -88,7 +88,7 @@ export function Example() {
 
 | Figma property | Тип / значения | Runtime API / ограничение |
 | --- | --- | --- |
-| `<slotLeft>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| ` <slotLeft>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
 | `textHint` | TEXT | `hint`; значения см. template |
 | `Hint` | BOOLEAN | `hint / hintError`; значения см. template |
 | `slotLeft` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
@@ -119,6 +119,6 @@ export function Example() {
 
 Temporary mapping: current public InputNumber API has no icon/slot props.
 
-Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Публикация текущего template ещё не подтверждена.
 
-Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.
+Для неподдерживаемых Figma states и slots ограничения явно указаны в Temporary mapping. Статус публикации проверяется отдельно от наличия файлов.

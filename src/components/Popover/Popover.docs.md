@@ -14,9 +14,9 @@ types: src/components/Popover/Popover.types.ts
 localExport: src/components/Popover/index.ts
 publicExport: src/index.ts
 storybook: src/stories/Popover.stories.tsx
-figmaComponent: Size=Xs
-figmaNodeId: 400:9377
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=400-9377
+figmaComponent: Popover
+figmaNodeId: 400:9376
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/?node-id=400-9376
 codeConnect: src/components/Popover/Popover.figma.js
 apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
 validation: TypeScript public API and synthetic Code Connect scenarios
@@ -38,7 +38,7 @@ export function Example() {
       </Popover.Trigger>
       <Popover.Content matchTriggerWidth={false}>
         <Popover.Surface>
-          <div className="p-2">Popover content</div>
+          <div className="p-2"></div>
         </Popover.Surface>
       </Popover.Content>
     </Popover>);
@@ -72,7 +72,7 @@ export function Example() {
 | Figma property | Тип / значения | Runtime API / ограничение |
 | --- | --- | --- |
 | `<slotContent>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
-| `Size` | Xs | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Size` | Xs, Sm, Md | Композиция / нет прямого prop; см. template и Temporary mappings |
 
 ## Supported states
 
@@ -85,6 +85,6 @@ export function Example() {
 
 ## Temporary mappings / assumptions
 
-Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Публикация текущего template ещё не подтверждена.
 
-Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.
+Для неподдерживаемых Figma states и slots ограничения явно указаны в Temporary mapping. Статус публикации проверяется отдельно от наличия файлов.
