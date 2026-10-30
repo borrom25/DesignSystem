@@ -7,6 +7,7 @@
 ```yaml
 component: ListItem
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { ListItem } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/ListItem/ListItem.tsx

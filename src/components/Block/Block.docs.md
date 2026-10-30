@@ -7,6 +7,7 @@
 ```yaml
 component: Block
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { Block } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/Block/Block.tsx

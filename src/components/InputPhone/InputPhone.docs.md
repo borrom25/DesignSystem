@@ -7,6 +7,7 @@
 ```yaml
 component: InputPhone
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { InputPhone } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/InputPhone/InputPhone.tsx

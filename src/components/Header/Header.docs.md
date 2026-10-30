@@ -7,6 +7,7 @@
 ```yaml
 component: Header
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { Header } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/Header/Header.tsx

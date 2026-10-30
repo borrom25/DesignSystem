@@ -7,6 +7,7 @@
 ```yaml
 component: Segmented
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { Segmented } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/Segmented/Segmented.tsx

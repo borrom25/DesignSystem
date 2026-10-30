@@ -1,6 +1,6 @@
 # Публичные компоненты
 
-Сводка публичного entrypoint GitLab c277eef5. Наличие Code Connect и проверка TypeScript не подтверждают live Figma metadata. Для деталей см. [отчёт обновления](gitlab-redesign-update.md).
+Документация для `borrom-ds-test@0.0.72`, API из GitLab c277eef5. Статус выпуска см. в [README](../README.md). Наличие Code Connect и проверка TypeScript не подтверждают live Figma metadata. Для деталей см. [отчёт обновления](gitlab-redesign-update.md).
 
 | Компонент | Документация | Code Connect |
 | --- | --- | --- |

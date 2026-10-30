@@ -7,6 +7,7 @@
 ```yaml
 component: Line
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { Line } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/Line/Line.tsx

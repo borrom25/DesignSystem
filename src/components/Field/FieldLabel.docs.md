@@ -7,6 +7,7 @@
 ```yaml
 component: FieldLabel
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { FieldLabel } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/Field/FieldLabel.tsx

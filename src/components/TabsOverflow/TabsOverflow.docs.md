@@ -7,6 +7,7 @@
 ```yaml
 component: TabsOverflow
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { TabsOverflow } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/TabsOverflow/TabsOverflow.tsx

@@ -7,6 +7,7 @@
 ```yaml
 component: Card
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { Card } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/Card/Card.tsx

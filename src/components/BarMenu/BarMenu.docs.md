@@ -7,6 +7,7 @@
 ```yaml
 component: BarMenu
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { BarMenu } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/BarMenu/BarMenu.tsx

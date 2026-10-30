@@ -10,13 +10,13 @@ export interface QuickStartStep {
 export const QUICK_START_STEPS: QuickStartStep[] = [
   {
     title: "1. Установка библиотеки",
-    description: "Установите опубликованную версию пакета:",
-    code: `npm install borrom-ds-test
+    description: "Документация рассчитана на borrom-ds-test@0.0.72. После завершения публикации установите эту версию:",
+    code: `npm install borrom-ds-test@0.0.72
 # или
-yarn add borrom-ds-test
+yarn add borrom-ds-test@0.0.72
 # или
-pnpm add borrom-ds-test`,
-    content: <p>Плейграунд показывает локальные исходники. Новые возможности появятся в npm после отдельной публикации пакета.</p>,
+pnpm add borrom-ds-test@0.0.72`,
+    content: <p>Выпуск 0.0.72 ещё в обработке. Плейграунд показывает локальные исходники; доступность пакета в npm зависит от завершения публикации.</p>,
   },
   {
     title: "2. Подключение стилей",
@@ -44,12 +44,12 @@ createRoot(document.getElementById("root")!).render(
   },
   {
     title: "5. Обновление библиотеки",
-    description: "Перед обновлением проверьте инструкцию миграции в GitHub и доступную версию npm.",
-    code: `npm update borrom-ds-test
+    description: "Перед переходом на 0.0.72 прочитайте инструкцию миграции в GitHub. Выполните команды после завершения публикации.",
+    code: `npm install borrom-ds-test@0.0.72
 # или
-yarn upgrade borrom-ds-test
+yarn add borrom-ds-test@0.0.72
 # или
-pnpm up borrom-ds-test`,
+pnpm add borrom-ds-test@0.0.72`,
     content: <a href="https://github.com/borrom25/DesignSystem/blob/main/docs/migration-gitlab-c277eef5.md" target="_blank" rel="noreferrer">Инструкция миграции в GitHub</a>,
   },
   {

@@ -7,6 +7,7 @@
 ```yaml
 component: InputTag
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { InputTag } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/InputTag/InputTag.tsx

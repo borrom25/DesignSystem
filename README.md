@@ -4,7 +4,7 @@ React UI kit / design system package.
 
 Исходники обновлены из GitLab `redesign`, commit `c277eef5` от 28.10.2026. Наш репозиторий — [GitHub borrom25/DesignSystem](https://github.com/borrom25/DesignSystem). Имя npm-пакета: `borrom-ds-test`.
 
-Обновление GitHub не является публикацией npm: установленная версия npm может отставать от локального Storybook и плейграунда.
+Документация и примеры рассчитаны на `borrom-ds-test@0.0.72`. Выпуск ещё в обработке; команды установки ниже предназначены для использования после завершения публикации. Обновление GitHub само по себе не публикует пакет в npm.
 
 ## Локальный запуск и проверки
 
@@ -41,7 +41,7 @@ npm pack --dry-run
 ## Install
 
 ```bash
-npm install borrom-ds-test
+npm install borrom-ds-test@0.0.72
 ```
 
 ## Usage

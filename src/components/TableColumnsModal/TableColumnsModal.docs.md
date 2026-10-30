@@ -7,6 +7,7 @@
 ```yaml
 component: TableColumnsModal
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { TableColumnsModal } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/TableColumnsModal/TableColumnsModal.tsx

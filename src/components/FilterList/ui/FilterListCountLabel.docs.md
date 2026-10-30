@@ -7,6 +7,7 @@
 ```yaml
 component: FilterListCountLabel
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { FilterListCountLabel } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/FilterList/ui/FilterListCountLabel.tsx

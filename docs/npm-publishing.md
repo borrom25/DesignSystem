@@ -2,6 +2,30 @@
 
 Эта инструкция описывает рабочий процесс публикации библиотеки `borrom-ds-test` через npm access token с включенным `Bypass 2FA`.
 
+## Выпуск 0.0.72
+
+Документация и примеры рассчитаны на `borrom-ds-test@0.0.72`. На 30.10.2026 выпуск ещё в обработке; устанавливать его следует после завершения публикации. Изменение `package.json` или отправка исходников в GitHub сами по себе не публикуют пакет в npm.
+
+В этом выпуске есть несовместимые изменения API после обновления из GitLab. Перед обновлением приложения прочитайте [инструкцию по миграции](migration-gitlab-c277eef5.md).
+
+Команды из корня репозитория, если версия уже поднята до `0.0.72`:
+
+```powershell
+corepack yarn lint
+corepack yarn publish:check
+npm whoami --registry=https://registry.npmjs.org/
+# Если whoami вернул 401 — выполните вход и подтвердите его в браузере:
+npm login --registry=https://registry.npmjs.org/ --auth-type=web
+npm publish --access public
+npm view borrom-ds-test dist-tags --registry=https://registry.npmjs.org/
+```
+
+Повторно запускать `yarn bump` для уже подготовленного выпуска не нужно: он снова увеличит версию и создаст commit. Для локального архива без публикации выполните `npm pack`; архив можно установить в другом проекте через `npm install "C:\путь\borrom-ds-test-0.0.72.tgz"`.
+
+После публикации установите в приложении `npm install borrom-ds-test@0.0.72` и подключите `import "borrom-ds-test/styles.css"` один раз в точке входа.
+
+Официальные команды: [npm login](https://docs.npmjs.com/cli/v11/commands/npm-login/), [npm publish](https://docs.npmjs.com/cli/v11/commands/npm-publish/).
+
 ## Что важно понимать
 
 GitHub и npm - это разные места хранения:
@@ -145,7 +169,7 @@ git commit -m "fix: export all components from public api"
 
 ### 3. Поднять версию пакета
 
-npm не разрешает публиковать одну и ту же версию дважды. Если текущая опубликованная версия `0.0.70`, следующая должна быть `0.0.71`.
+npm не разрешает публиковать одну и ту же версию дважды. Например, после `0.0.71` следующий patch-выпуск — `0.0.72`. Для уже подготовленного выпуска `0.0.72` повторно поднимать версию не нужно.
 
 В проекте есть скрипт:
 
@@ -215,7 +239,7 @@ npm publish --access public
 Успешная публикация выглядит примерно так:
 
 ```text
-+ borrom-ds-test@0.0.71
++ borrom-ds-test@0.0.72
 ```
 
 ### 7. Проверить опубликованную версию
@@ -230,10 +254,10 @@ npm view borrom-ds-test version --registry=https://registry.npmjs.org/
 npm view borrom-ds-test dist-tags --registry=https://registry.npmjs.org/
 ```
 
-Ожидаемый результат:
+Ожидаемый результат после завершения публикации `0.0.72`:
 
 ```text
-{ latest: "0.0.71" }
+{ latest: "0.0.72" }
 ```
 
 Иногда сразу после публикации `npm view borrom-ds-test version` может на короткое время показать старую версию из-за задержки registry/cache. Повторите команду через минуту или используйте `--registry=https://registry.npmjs.org/`.
@@ -251,7 +275,7 @@ cd "C:\Проекты\Codeconnect Test"
 И обновить зависимость:
 
 ```powershell
-npm install borrom-ds-test@latest
+npm install borrom-ds-test@0.0.72
 ```
 
 Проверить установленную версию:
@@ -263,13 +287,13 @@ npm ls borrom-ds-test
 Ожидаемый результат:
 
 ```text
-borrom-ds-test@0.0.71
+borrom-ds-test@0.0.72
 ```
 
 После этого новые экспорты доступны в проекте:
 
 ```tsx
-import { Space, Plug, StepBar, ProgressPie, DataTable } from "borrom-ds-test";
+import { Plug, StepBar, ProgressPie, Table } from "borrom-ds-test";
 ```
 
 ## Частые ошибки
@@ -349,6 +373,6 @@ npm view borrom-ds-test version --registry=https://registry.npmjs.org/
 
 ```powershell
 cd "C:\Проекты\Codeconnect Test"
-npm install borrom-ds-test@latest
+npm install borrom-ds-test@0.0.72
 npm ls borrom-ds-test
 ```

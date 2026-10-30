@@ -7,6 +7,7 @@
 ```yaml
 component: AppLayout
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { AppLayout } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/AppLayout/AppLayout.tsx

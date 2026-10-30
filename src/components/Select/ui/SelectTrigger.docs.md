@@ -7,6 +7,7 @@
 ```yaml
 component: SelectTrigger
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { SelectTrigger } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/Select/ui/SelectTrigger.tsx

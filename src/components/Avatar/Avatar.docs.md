@@ -7,6 +7,7 @@
 ```yaml
 component: Avatar
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { Avatar } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/Avatar/Avatar.tsx

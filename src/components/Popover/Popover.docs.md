@@ -7,6 +7,7 @@
 ```yaml
 component: Popover
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { Popover } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/Popover/Popover.tsx

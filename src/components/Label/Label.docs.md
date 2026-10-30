@@ -7,6 +7,7 @@
 ```yaml
 component: Label
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { Label } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/Label/Label.tsx

@@ -7,6 +7,7 @@
 ```yaml
 component: AppLoader
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { AppLoader } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/AppLoader/AppLoader.tsx

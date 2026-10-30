@@ -7,6 +7,7 @@
 ```yaml
 component: Calendar
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { Calendar } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/Calendar/Calendar.tsx

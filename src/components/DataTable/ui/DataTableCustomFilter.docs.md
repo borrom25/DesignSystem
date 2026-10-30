@@ -7,6 +7,7 @@
 ```yaml
 component: DataTableCustomFilter
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { DataTableCustomFilter } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/DataTable/ui/DataTableFilters.tsx

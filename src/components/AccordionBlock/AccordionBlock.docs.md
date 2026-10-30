@@ -7,6 +7,7 @@
 ```yaml
 component: AccordionBlock
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { AccordionBlock } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/AccordionBlock/AccordionBlock.tsx

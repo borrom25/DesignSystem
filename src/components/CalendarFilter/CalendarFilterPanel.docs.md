@@ -7,6 +7,7 @@
 ```yaml
 component: CalendarFilterPanel
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { CalendarFilterPanel } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/CalendarFilter/CalendarFilterPanel.tsx

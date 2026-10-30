@@ -7,6 +7,7 @@
 ```yaml
 component: HeaderInside
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { HeaderInside } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/HeaderInside/HeaderInside.tsx

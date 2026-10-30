@@ -7,6 +7,7 @@
 ```yaml
 component: Download
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { Download } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/Download/Download.tsx

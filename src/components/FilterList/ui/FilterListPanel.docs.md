@@ -7,6 +7,7 @@
 ```yaml
 component: FilterListPanel
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { FilterListPanel } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/FilterList/ui/FilterListPanel.tsx

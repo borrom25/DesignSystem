@@ -7,6 +7,7 @@
 ```yaml
 component: Modal
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { Modal } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/Modal/Modal.tsx

@@ -7,6 +7,7 @@
 ```yaml
 component: Carousel
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { Carousel } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/Carousel/Carousel.tsx

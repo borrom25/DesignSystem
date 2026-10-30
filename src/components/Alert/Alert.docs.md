@@ -7,6 +7,7 @@
 ```yaml
 component: Alert
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { Alert } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/Alert/Alert.tsx

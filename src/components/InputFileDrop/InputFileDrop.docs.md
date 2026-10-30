@@ -7,6 +7,7 @@
 ```yaml
 component: InputFileDrop
 package: borrom-ds-test
+packageVersion: 0.0.72
 import: import { InputFileDrop } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/InputFileDrop/InputFileDrop.tsx
