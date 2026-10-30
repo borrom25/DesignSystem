@@ -18,7 +18,9 @@ const size = instance.getEnum("Size", {
   Xs: "xs",
   Sm: "sm",
   Md: "md",
-});
+}) || "md";
+// Temporary mapping: the published default variant has an empty Size value.
+// Use runtime's default md instead of emitting the invalid size="" prop.
 
 const error = instance.getEnum("Error", {
   Off: false,

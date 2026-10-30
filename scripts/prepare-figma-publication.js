@@ -1,5 +1,6 @@
 // Build a reviewable publication queue; this script never writes to Figma.
 import fs from "node:fs";
+import path from "node:path";
 const inventory = JSON.parse(fs.readFileSync("docs/figma-current-inventory.json", "utf8"));
 const manifest = JSON.parse(fs.readFileSync(".cache/figma-snippets/manifest.json", "utf8"));
 const registry = JSON.parse(fs.readFileSync("docs/public-component-api.json", "utf8"));
@@ -27,6 +28,16 @@ for (const item of manifest) {
 }
 fs.mkdirSync(".cache/figma-publication", { recursive: true });
 fs.writeFileSync(".cache/figma-publication/queue.json", JSON.stringify(queue, null, 2) + "\n");
+// The CLI preserves // source verbatim. Stage copies with public GitHub source
+// URLs, while repository templates retain their locally verifiable runtime paths.
+const stage = ".cache/figma-publication/staged";
+fs.mkdirSync(stage, { recursive: true });
+const stagedFiles = queue.map((item) => {
+  const filename = `${item.nodeId.replace(":", "-")}.figma.js`;
+  fs.writeFileSync(path.join(stage, filename), item.template.replace(/^\/\/ source=.+$/m, `// source=${item.source}`));
+  return filename;
+});
+fs.writeFileSync(path.join(stage, "figma.config.json"), JSON.stringify({ codeConnect: { include: stagedFiles, label: "React", language: "tsx", defaultBranch: "main" } }, null, 2) + "\n");
 const specific = {
   "19175:2069": "Button / Link: публичный Button не имеет link type; отдельная семантика ссылки не подтверждена. Стили и API не выдумываются.",
   "19396:2123": "Button / Dashed: публичный Button не имеет dashed type. Требуется согласование API со следующей версией GitLab.",

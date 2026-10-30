@@ -63,6 +63,8 @@ for (const file of files) {
   const scenarios = [{ label: "default", props: {} }];
   for (const [name, values] of enums) {
     for (const value of values) scenarios.push({ label: `${name}=${value}`, props: { [name]: value } });
+    const liveDefault = definitions.find((p) => p.name === name)?.defaultValue;
+    if (liveDefault === "" && !values.includes("")) scenarios.push({ label: `${name}=empty-live-default`, props: { [name]: "" } });
   }
   for (const name of booleans) scenarios.push({ label: `${name}=true`, props: { [name]: true } });
   scenarios.push({ label: "all-booleans", props: Object.fromEntries([...booleans].map((name) => [name, true])) });

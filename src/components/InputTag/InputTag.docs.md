@@ -103,6 +103,9 @@ export function Example() {
 
 ## Temporary mappings / assumptions
 
+Temporary mapping: the published default variant has an empty Size value.
+Use runtime's default md instead of emitting the invalid size="" prop.
+
 Temporary mapping: InputTag has no dedicated error prop or hintError prop.
 For Error=On we map textError to the regular hint prop.
 
