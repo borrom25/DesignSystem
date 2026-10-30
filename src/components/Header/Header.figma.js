@@ -12,10 +12,11 @@ const media = instance.getEnum("Media", {
 const hasTabList = instance.getBoolean("tabList");
 const hasSlotInfo = instance.getBoolean("slotInfo");
 const hasSlotHead = instance.getBoolean("slotHead");
-const hasSlotAction = instance.getBoolean("slotAction");
+const hasSlotAction = Boolean(instance.getSlot("<slotAction>"));
 
 const tabListSlot = instance.getSlot("<slotTablist>");
-const infoSlot = instance.getSlot("<slotInfo>");
+// Temporary mapping: slotInfo is a visibility toggle with no separate slot.
+const infoSlot = undefined;
 const actionSlot = instance.getSlot("<slotAction>");
 
 void infoSlot;
@@ -40,12 +41,10 @@ const tabsContent =
 const childrenContent = hasTabList ? tabsContent : "";
 const accountMenuProp = hasSlotAction
   ? figma.tsx`
-      accountMenu={
-        <AccountMenu
-          src="https://i.pravatar.cc/160?img=68"
-          fullName="Name User"
-        />
-      }
+      accountMenuProps={{
+        src: "https://i.pravatar.cc/160?img=68",
+        fullName: "Name User",
+      }}
     `
   : "";
 
@@ -66,7 +65,7 @@ export default {
     </Header>
   `,
   imports: [
-    'import { AccountMenu, Header, TabsOverflow } from "borrom-ds-test"',
+    'import { Header, TabsOverflow } from "borrom-ds-test"',
   ],
   id: "header",
   metadata: {

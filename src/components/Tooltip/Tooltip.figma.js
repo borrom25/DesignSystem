@@ -20,7 +20,7 @@ const position = instance.getEnum("Position", {
 });
 
 const showIcon = instance.getBoolean("icon");
-const showButtonsGroup = instance.getBoolean("buttonsGroup");
+const showButtonsGroup = instance.getBoolean("Action");
 const iconSwap = instance.getInstanceSwap("↳ Icon");
 void iconSwap;
 

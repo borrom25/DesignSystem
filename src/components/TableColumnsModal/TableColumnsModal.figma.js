@@ -19,9 +19,13 @@ const isNumberRangeFilterVariant = property1 === "variant4";
 const isDateRangeFilterVariant = property1 === "variant5";
 
 const columnSettingsExample = figma.tsx`
+  function ColumnSettingsExample() {
+    const [visibleColumnIds, setVisibleColumnIds] = useState<string[]>(["title", "product"]);
+    const [isColumnSettingsOpen, setIsColumnSettingsOpen] = useState(true);
+    return (
   <TableColumnsModal
-    open
-    value={["title", "product"]}
+    open={isColumnSettingsOpen}
+    value={visibleColumnIds}
     options={[
       { id: "title", label: "Название" },
       { id: "product", label: "Продукт" },
@@ -33,29 +37,29 @@ const columnSettingsExample = figma.tsx`
     }}
     onOpenChange={setIsColumnSettingsOpen}
     title="Настройка таблицы"
-    selectAllLabel="Выбрать всё"
     cancelLabel="Отмена"
     applyLabel="Сохранить"
   />
+    );
+  }
 `;
 
 const listFilterExample = figma.tsx`
   function ProductsTable() {
+    const helper = createDataTableColumnHelper<{ product: string }>();
     const columns = [
-      {
-        accessorKey: "product",
+      helper.list("product", {
         header: "Продукт",
-        filter: dataTableFilter.list({
+        filter: {
           options: [
             { value: "profile", label: "Личный кабинет" },
             { value: "analytics", label: "Аналитика" },
           ],
           searchable: true,
           searchPlaceholder: "Поиск",
-          getSearchText: (option) => option.label,
-        }),
-        filterFn: "dataTableList",
-      },
+          getSearchText: (option) => String(option.label ?? ""),
+        },
+      }),
     ];
 
     const tableController = useDataTableController({ columns });
@@ -75,15 +79,14 @@ const listFilterExample = figma.tsx`
 
 const textFilterExample = figma.tsx`
   function PriorityTable() {
+    const helper = createDataTableColumnHelper<{ priority: string }>();
     const columns = [
-      {
-        accessorKey: "priority",
+      helper.columnFilter("priority", {
         header: "Приоритет",
-        filter: dataTableFilter.columnFilter({
+        filter: {
           searchPlaceholder: "Поиск",
-        }),
-        filterFn: "dataTableColumnFilter",
-      },
+        },
+      }),
     ];
 
     const tableController = useDataTableController({ columns });
@@ -104,11 +107,11 @@ const textFilterExample = figma.tsx`
 
 const numberRangeFilterExample = figma.tsx`
   function TeamMembersTable() {
-    const columns = [
-      {
-        accessorKey: "members",
+    const helper = createDataTableColumnHelper<{ members: number }>();
+    const columns: ColumnDef<{ members: number }>[] = [
+      helper.numberRange("members", {
         header: "Команда, чел",
-        filter: dataTableFilter.numberRange({
+        filter: {
           minPlaceholder: "От, чел.",
           maxPlaceholder: "До, чел.",
           minInputProps: {
@@ -119,9 +122,8 @@ const numberRangeFilterExample = figma.tsx`
             min: 0,
             step: 1,
           },
-        }),
-        filterFn: "dataTableNumberRange",
-      },
+        },
+      }),
     ];
 
     const tableController = useDataTableController({ columns });
@@ -142,16 +144,15 @@ const numberRangeFilterExample = figma.tsx`
 
 const dateRangeFilterExample = figma.tsx`
   function UpdatedProjectsTable() {
-    const columns = [
-      {
-        accessorKey: "updatedAt",
+    const helper = createDataTableColumnHelper<{ updatedAt: Date }>();
+    const columns: ColumnDef<{ updatedAt: Date }>[] = [
+      helper.dateRange("updatedAt", {
         header: "Обновлено",
-        filter: dataTableFilter.dateRange({
+        filter: {
           placeholderStart: "Дата от",
           placeholderEnd: "Дата до",
-        }),
-        filterFn: "dataTableDateRange",
-      },
+        },
+      }),
     ];
 
     const tableController = useDataTableController({ columns });
@@ -191,9 +192,9 @@ export default {
     isNumberRangeFilterVariant ||
     isDateRangeFilterVariant
       ? [
-          'import { Table, dataTableFilter, useDataTableController } from "borrom-ds-test"',
+          'import { Table, createDataTableColumnHelper, useDataTableController, type ColumnDef } from "borrom-ds-test"',
         ]
-      : ['import { TableColumnsModal } from "borrom-ds-test"'],
+      : ['import { useState } from "react"', 'import { TableColumnsModal } from "borrom-ds-test"'],
   id: "table-columns-modal",
   metadata: {
     nestable: false,

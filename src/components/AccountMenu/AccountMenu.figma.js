@@ -4,8 +4,9 @@
 const figma = require("figma");
 const instance = figma.selectedInstance;
 
-const props = instance.getEnum("Props", {
-  1: "1",
+const props = instance.getEnum("Media", {
+  Desktop: "desktop",
+  Mobile: "mobile",
 });
 
 const slotContent = instance.getSlot("<slotContent>");
@@ -18,6 +19,9 @@ void slotContent;
 
 export default {
   example: figma.tsx`
+    function AccountMenuExample() {
+      const [language, setLanguage] = useState("ru");
+      return (
     <AccountMenu
       isOpen
       src="https://i.pravatar.cc/160?img=68"
@@ -29,7 +33,7 @@ export default {
         { value: "fr", label: "FR" },
         { value: "ch", label: "CH" },
       ]}
-      language="ru"
+      language={language}
       onChangeLanguage={(nextLanguage) => {
         setLanguage(nextLanguage);
       }}
@@ -40,12 +44,15 @@ export default {
         { iconLeft: CircleQuestionMark, title: "Поддержка" },
       ]}
       logoutFn={() => {
-        handleLogout();
+        console.info("Выход из аккаунта: подключите обработчик приложения");
       }}
       trigger={<Button>Аккаунт</Button>}
     />
+      );
+    }
   `,
   imports: [
+    'import { useState } from "react"',
     'import { AccountMenu, Button } from "borrom-ds-test"',
     'import { CircleQuestionMark, CircleUserRound, Settings } from "lucide-react"',
   ],

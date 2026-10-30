@@ -66,7 +66,7 @@ export default {
       placeholderEnd="Дата конца"
       ${disabled ? "disabled" : ""}
       ${error ? "error" : ""}
-      ${showLabel ? 'label="Период"' : ""}
+      ${showLabel ? 'aria-label="Период"' : ""}
       ${requiredMark ? "required" : ""}
       ${showHint ? figma.tsx`${error ? `hintError="${hintText}"` : `hint="${hintText}"`}` : ""}
       ${defaultValueProp}

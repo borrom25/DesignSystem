@@ -10,7 +10,7 @@ const size = instance.getEnum("Size", {
   Md: "md",
 });
 
-const showMore = instance.getBoolean("Ещё");
+const showMore = instance.getBoolean("More");
 
 const containerClassNameBySize = {
   xs: "w-[245px]",

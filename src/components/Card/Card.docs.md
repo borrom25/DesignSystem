@@ -1,8 +1,6 @@
 # Card
 
-Документация для связи Figma component set `Card` с runtime-компонентом `Card`.
-
-`Card` - это контейнерный компонент: он задает фон, радиус и внутренние отступы, а содержимое передается через `children`.
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -17,112 +15,84 @@ localExport: src/components/Card/index.ts
 publicExport: src/index.ts
 storybook: src/stories/Card.stories.tsx
 figmaComponent: Card
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=4436-8329
 figmaNodeId: 4436:8329
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=4436-8329
 codeConnect: src/components/Card/Card.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
+
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
 
 ```tsx
 import { Card } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return (
-    <Card size="md">
+  return (<Card
+      size="xs"
+
+    >
       <div>Content</div>
-    </Card>
-  );
+    </Card>);
 }
 ```
 
 ## Source files
 
-| Purpose | Path |
+| Назначение | Путь |
 | --- | --- |
-| Runtime component | `src/components/Card/Card.tsx` |
-| Public props | `src/components/Card/Card.types.ts` |
-| Local export | `src/components/Card/index.ts` |
-| Styles entry | `src/components/Card/styles/index.ts` |
-| Size styles | `src/components/Card/styles/sizes.ts` |
-| Storybook | `src/stories/Card.stories.tsx` |
-| Code Connect | `src/components/Card/Card.figma.js` |
+| Runtime | [src/components/Card/Card.tsx](Card.tsx) |
+| Props / shared types | [src/components/Card/Card.types.ts](Card.types.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/Card.stories.tsx](../../stories/Card.stories.tsx) |
+| Code Connect | [src/components/Card/Card.figma.js](Card.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | optional | См. типы и пример выше |
+| `size` | `Size \| undefined` | optional | См. типы и пример выше |
+| `variant` | `CardVariant \| undefined` | optional | См. типы и пример выше |
+| `padding` | `VerticalPaddingStyle \| undefined` | optional | См. типы и пример выше |
+| `title` | `ReactNode` | optional | См. типы и пример выше |
+| `subtitle` | `ReactNode` | optional | См. типы и пример выше |
+| `titleProps` | `CardTextProps \| undefined` | optional | См. типы и пример выше |
+| `subtitleProps` | `CardTextProps \| undefined` | optional | См. типы и пример выше |
+| `actionSlot` | `ReactNode` | optional | См. типы и пример выше |
+| `hoverable` | `boolean \| undefined` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Figma values | Code prop | Code values | Default | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `<slotBody>` | slot | `children` | `ReactNode` | - | Основное содержимое карточки |
-| `Size` | `Xs`, `Sm`, `Md` | `size` | `xs`, `sm`, `md` | `md` | Прямой mapping на `Size` из `src/types` |
-| `Type` | `Basic` | - | - | `Basic` | Runtime default: `bg-generic` |
-| `Type` | `Secondary` | `className` | `bg-generic-medium` | - | Temporary mapping: в runtime API нет `type`/`variant` для карточки |
-| HTML attributes | - | `...restProps` | `HTMLAttributes<HTMLDivElement>` | - | `className`, `style`, `id`, `data-*`, handlers |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
 
-## Runtime styles
-
-| Code prop | Runtime classes | Notes |
+| Figma property | Тип / значения | Runtime API / ограничение |
 | --- | --- | --- |
-| Base | `rounded-scale-3xl bg-generic` | Общий фон и радиус |
-| `size="xs"` | `p-3` | Компактные отступы |
-| `size="sm"` | `p-6` | Средние отступы |
-| `size="md"` | `py-7 px-9` | Дефолтные отступы |
+| `<slotBody>` | SLOT | `children`; значения см. template |
+| `Type` | Basic, Secondary | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Size` | Xs, Sm, Md | `size`; значения см. template |
 
-## Supported behavior
+## Supported states
 
-| Behavior | Supported in code | How to use |
-| --- | --- | --- |
-| Basic container | Yes | `<Card>...</Card>` |
-| Size variants | Yes | `size="xs"`, `size="sm"`, `size="md"` |
-| Arbitrary content | Yes | Pass any `ReactNode` as `children` |
-| Custom classes | Yes | `className="..."` |
-| Secondary background | Partial | `className="bg-generic-medium"` until a public `type` prop exists |
-| Interaction state | Via HTML props | Use standard `onClick`, `tabIndex`, `role`, etc. if needed |
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
 
 ## Design matching notes
 
-- Figma node `4436:8329` exposes only `Type`, `Size` and `<slotBody>`.
-- Runtime `Card` intentionally does not know about header, footer, title, actions or loading state. These are consumer content inside `children`.
-- `Card` should not duplicate nested components from the slot. Use real runtime children: `UserItem`, `Alert`, `Skeleton`, text blocks, layout wrappers and so on.
-- `Type=Secondary` is visually a background change only. Current runtime API does not expose this as a first-class prop.
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item | Current mapping | Reason | Follow-up |
-| --- | --- | --- | --- |
-| `Type=Secondary` | `className="bg-generic-medium"` | `CardProps` has no `type`/`variant`; `className` is the only public extension point | Add `type?: "basic" | "secondary"` only if product needs it as stable API |
-| `<slotBody>` empty state | `<div>Content</div>` fallback in Code Connect | Figma slot can be empty when selected component has no connected children | Replace with real children in product code |
-| Figma fixed width/slot height | not mapped | Runtime Card is content-driven and should not force width/height | Set layout constraints in consumer layout when needed |
+Temporary mapping:
+Figma exposes Type=Secondary, but the runtime Card API only has size and
+standard div attributes. Use className for the secondary background until a
+dedicated public variant prop exists.
 
-## Examples
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
 
-### Basic
-
-```tsx
-<Card size="md">
-  <div>Content</div>
-</Card>
-```
-
-### Secondary
-
-```tsx
-<Card size="md" className="bg-generic-medium">
-  <div>Secondary content</div>
-</Card>
-```
-
-### With Design System Content
-
-```tsx
-<Card size="sm">
-  <UserItem size="sm">
-    <UserItem.Content>
-      <UserItem.Text>
-        <UserItem.Title>Name User</UserItem.Title>
-        <UserItem.Subtitle>Role</UserItem.Subtitle>
-      </UserItem.Text>
-    </UserItem.Content>
-  </UserItem>
-</Card>
-```
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

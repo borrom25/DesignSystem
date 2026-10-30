@@ -10,19 +10,19 @@ const media = instance.getEnum("Media", {
 });
 
 const hasTabList = instance.getBoolean("tabList");
-const hasSlotHead = instance.getBoolean("slotHead");
+const hasSlotHead = Boolean(instance.getSlot("<slotTitle>"));
 const hasTitleButton = instance.getBoolean("titleButton");
 const hasImageSlot = instance.getBoolean("imageSlot");
-const hasSlotInfo = instance.getBoolean("slotInfo");
+const hasSlotInfo = Boolean(instance.getSlot("<slotAction>"));
 const hasSubtitle = instance.getBoolean("subtitlePage");
 
 const title = instance.getString("↳ titlePage");
 const subtitle = instance.getString("↳ subtitlePage");
 
-const headSlot = instance.getSlot("<slotHead>");
+const headSlot = instance.getSlot("<slotTitle>");
 const imageSlot = instance.getSlot("<slotImage>");
 const tabListSlot = instance.getSlot("<slotTablist>");
-const infoSlot = instance.getSlot("<slotInfo>");
+const infoSlot = instance.getSlot("<slotAction>");
 
 void headSlot;
 void imageSlot;
@@ -58,12 +58,10 @@ const actionProps = hasTitleButton
   : "showActionButton={false}";
 const accountMenuProp = hasSlotInfo
   ? figma.tsx`
-      accountMenu={
-        <AccountMenu
-          src="https://i.pravatar.cc/160?img=68"
-          fullName="Name User"
-        />
-      }
+      accountMenuProps={{
+        src: "https://i.pravatar.cc/160?img=68",
+        fullName: "Name User",
+      }}
     `
   : "";
 
@@ -83,7 +81,7 @@ export default {
     </HeaderInside>
   `,
   imports: [
-    'import { AccountMenu, HeaderInside, TabsOverflow } from "borrom-ds-test"',
+    'import { HeaderInside, TabsOverflow } from "borrom-ds-test"',
     'import { Settings } from "lucide-react"',
   ],
   id: "headerinside",

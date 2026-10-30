@@ -1,8 +1,6 @@
 # Pagination
 
-Документация для связи Figma-компонента `Pagination` с runtime-компонентом `Pagination`.
-
-Ссылку из Figma можно вести на этот файл, если нужна документация, или на `Pagination.figma.js`, если нужен Code Connect.
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -17,129 +15,105 @@ localExport: src/components/Pagination/index.ts
 publicExport: src/index.ts
 storybook: src/stories/Pagination.stories.tsx
 figmaComponent: Pagination
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=1595-5950
 figmaNodeId: 1595:5950
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=1595-5950
 codeConnect: src/components/Pagination/Pagination.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
 
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
+
 ```tsx
 import { Pagination } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
-import { useState } from "react";
 
 export function Example() {
-  const [page, setPage] = useState(1);
-
-  return (
-    <Pagination
-      currentPage={page}
-      totalPages={50}
-      onPageChange={setPage}
-      showFirstLast
-      showPageNumbers
-      showPageInput
-      prevText="Назад"
-      nextText="Далее"
-    />
-  );
+  return (<Pagination
+      className=""
+      currentPage={1}
+      totalPages={6}
+      onPageChange={() => {}}
+      showFirstLast={false}
+      showPageNumbers={false}
+      showPageInput={false}
+      prevText=""
+      nextText=""
+      pageInputPlaceholder="Page #"
+      size="sm"
+      type="fill"
+    />);
 }
 ```
 
 ## Source files
 
-| Purpose | Path |
+| Назначение | Путь |
 | --- | --- |
-| Runtime component | `src/components/Pagination/Pagination.tsx` |
-| Public props | `src/components/Pagination/Pagination.types.ts` |
-| Utilities | `src/components/Pagination/Pagination.utils.ts` |
-| Local export | `src/components/Pagination/index.ts` |
-| Styles entry | `src/components/Pagination/styles/index.ts` |
-| Storybook | `src/stories/Pagination.stories.tsx` |
-| Code Connect | `src/components/Pagination/Pagination.figma.js` |
+| Runtime | [src/components/Pagination/Pagination.tsx](Pagination.tsx) |
+| Props / shared types | [src/components/Pagination/Pagination.types.ts](Pagination.types.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/Pagination.stories.tsx](../../stories/Pagination.stories.tsx) |
+| Code Connect | [src/components/Pagination/Pagination.figma.js](Pagination.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `currentPage` | `number` | required (зависит от union) | См. типы и пример выше |
+| `totalPages` | `number` | required (зависит от union) | См. типы и пример выше |
+| `onPageChange` | `(page: number) => void` | required (зависит от union) | См. типы и пример выше |
+| `size` | `Size \| undefined` | optional | См. типы и пример выше |
+| `type` | `TabType \| undefined` | optional | См. типы и пример выше |
+| `showFirstLast` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `showPageNumbers` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `showPageInput` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `prevText` | `string \| undefined` | optional | См. типы и пример выше |
+| `nextText` | `string \| undefined` | optional | См. типы и пример выше |
+| `pageInputPlaceholder` | `string \| undefined` | optional | См. типы и пример выше |
+| `disabled` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `siblingCount` | `number \| undefined` | optional | См. типы и пример выше |
+| `inputDebounceDelay` | `number \| undefined` | optional | См. типы и пример выше |
+| `forwardOnly` | `boolean \| undefined` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Figma values | Code prop | Code values | Default | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `State` | `Clear` | `showFirstLast`, `showPageNumbers`, `showPageInput` | `true`, `true`, from `gapIntoPage` | `true,true,false` | Базовый вариант без контейнера-обертки |
-| `State` | `Generic` | `className` + те же props | tokenized wrapper class + базовая пагинация | - | Temporary mapping: обертка в Figma не имеет отдельного runtime prop |
-| `State` | `Button only` | `showFirstLast`, `showPageNumbers`, `showPageInput`, `prevText`, `nextText` | `false`, `false`, `false`, text values | - | Режим карточек previous/next маппится на упрощенный режим кнопок |
-| `endPage` | `true/false` | `totalPages` | `50` / `6` | required | Temporary mapping: значение последней страницы выводится из boolean |
-| `gapIntoPage` | `true/false` | `showPageInput` | `boolean` | `false` | Отображение поля перехода на страницу |
-| `pages` | `true/false` | `showPageNumbers` | `boolean` | `true` | Управление блоком нумерации |
-| `textPrevious` | text | `prevText` | `string` | - | Текст кнопки "назад" |
-| `textNext` | text | `nextText` | `string` | - | Текст кнопки "вперед" |
-| `leftButtons` | `true/false` | `showFirstLast` + `prevText` | `boolean` + text/empty | - | Temporary mapping: скрыть всю левую группу one-to-one нельзя |
-| `rightButtons` | `true/false` | `showFirstLast` + `nextText` | `boolean` + text/empty | - | Temporary mapping: скрыть всю правую группу one-to-one нельзя |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `endPage` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Gap into page` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `rightButtons` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `leftButtons` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Pages` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `textPrevious` | TEXT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `textNext` | TEXT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `<Slot>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `State` | Clear, Generic, Button only | Композиция / нет прямого prop; см. template и Temporary mappings |
 
 ## Supported states
 
-| State | Supported in code | How to use |
-| --- | --- | --- |
-| Default (full navigation) | Yes | `showFirstLast showPageNumbers` |
-| With page input | Yes | `showPageInput` |
-| Button-only simplified | Partial | `showFirstLast={false} showPageNumbers={false}` |
-| Generic boxed wrapper | Partial | `className` wrapper classes |
-| Disabled | Yes | `disabled` |
-| Few pages without ellipsis | Yes | small `totalPages` |
-| Large pages with ellipsis | Yes | `totalPages` больше окна видимости |
+- `disabled`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
 
 ## Design matching notes
 
-- `Pagination` собран через `Tab` и `Input`, поэтому визуальные режимы зависят от `type`, `size` и boolean-флагов показа секций.
-- Логика страниц и `...` формируется в `generatePaginationItems` (`Pagination.utils.ts`) и зависит от `currentPage`, `totalPages`, `siblingCount`.
-- Переход через инпут поддерживает debounce (`inputDebounceDelay`) и Enter/blur обработчики.
-- Вариант Figma `Button only` визуально ближе к layout-обертке из двух карточек; runtime дает близкий сценарий через отключение блока страниц/инпута.
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item | Current mapping | Reason | Follow-up |
-| --- | --- | --- | --- |
-| `State=Generic` wrapper | `className` с border/background/padding | В API нет отдельного пропса режима контейнера | Добавить `variant` для wrapper, если это нужно как стабильный паттерн |
-| `leftButtons/rightButtons=false` | `showFirstLast={false}` + пустой `prevText`/`nextText` | Runtime не умеет скрывать по отдельности левую/правую группу полностью | При необходимости добавить `showPrev` / `showNext` / `showPrevGroup` / `showNextGroup` |
-| `endPage` boolean | `totalPages=50` или `6` | В Figma хранится факт наличия финальной страницы, не само число | Добавить numeric property в Figma для прямого маппинга |
+Temporary mapping: Figma has separate leftButtons/rightButtons toggles.
+Runtime API does not support hiding entire left or right groups independently.
 
-## Examples
+Temporary mapping: "Generic" in Figma includes a wrapper surface.
+Runtime API has no dedicated wrapper variant, so we map it via className.
 
-### Full navigation
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
 
-```tsx
-<Pagination
-  currentPage={1}
-  totalPages={50}
-  onPageChange={() => {}}
-  showFirstLast
-  showPageNumbers
-  showPageInput
-  prevText="Назад"
-  nextText="Далее"
-/>
-```
-
-### Button-only
-
-```tsx
-<Pagination
-  currentPage={3}
-  totalPages={10}
-  onPageChange={() => {}}
-  showFirstLast={false}
-  showPageNumbers={false}
-  showPageInput={false}
-  prevText="Previous page"
-  nextText="Next page"
-/>
-```
-
-### Disabled
-
-```tsx
-<Pagination
-  currentPage={2}
-  totalPages={12}
-  onPageChange={() => {}}
-  disabled
-/>
-```
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

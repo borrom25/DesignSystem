@@ -20,7 +20,7 @@ const figmaColor = instance.getEnum("Color", {
   Action: "action",
   Warning: "warning",
   Info: "info",
-  Inverse: "inverse",
+  Secondary: "inverse",
   Disable: "disable",
   contrastDark: "contrastDark",
   contrastLight: "contrastLight",
@@ -53,7 +53,7 @@ const color =
     : figmaColor;
 
 function getConnectedIcon(propName) {
-  const icon = instance.getInstanceSwap(propName);
+  const icon = instance.findInstance(propName);
 
   if (icon && icon.type === "INSTANCE" && icon.hasCodeConnect()) {
     return icon.executeTemplate().example;
@@ -62,12 +62,12 @@ function getConnectedIcon(propName) {
   return undefined;
 }
 
-const iconLeftCode = showIconLeft ? getConnectedIcon("↳ Icon-left") : undefined;
+const iconLeftCode = showIconLeft ? getConnectedIcon("Icon-left") : undefined;
 const iconRightCode = showIconRight
-  ? getConnectedIcon("↳ Icon-right")
+  ? getConnectedIcon("Icon-right")
   : undefined;
 const iconOnlyCode = isIconOnly
-  ? getConnectedIcon("↳ Icon-only")
+  ? getConnectedIcon("Icon-left") || figma.tsx`Check`
   : undefined;
 
 const iconLeftProp =
@@ -102,7 +102,7 @@ export default {
           ${text}
         </Label>
       `,
-  imports: ['import { Label } from "borrom-ds-test"'],
+  imports: ['import { Label } from "borrom-ds-test"', 'import { Check } from "lucide-react"'],
   id: "label",
   metadata: {
     nestable: true,

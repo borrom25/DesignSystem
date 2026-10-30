@@ -1,8 +1,6 @@
 # BarMenu
 
-Документация для связи Figma node `bottombar` с runtime-компонентом `BarMenu`.
-
-Ссылку из Figma можно вести на этот файл, если нужна документация, или на `BarMenu.figma.js`, если нужен Code Connect.
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -15,80 +13,84 @@ runtime: src/components/BarMenu/BarMenu.tsx
 types: src/components/BarMenu/BarMenu.types.ts
 localExport: src/components/BarMenu/index.ts
 publicExport: src/index.ts
-storybook: missing
-figmaComponent: bottombar
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=4423-5773
+storybook: null
+figmaComponent: bottomBar
 figmaNodeId: 4423:5773
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=4423-5773
 codeConnect: src/components/BarMenu/BarMenu.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
 
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
+
 ```tsx
-import { Home, Search, Settings } from "lucide-react";
 import { BarMenu } from "borrom-ds-test";
+import { Home, Search, Settings, User } from "lucide-react";
 import "borrom-ds-test/styles.css";
-import { useState } from "react";
 
 export function Example() {
-  const [activeId, setActiveId] = useState("home");
-
-  return (
-    <BarMenu
-      value={activeId}
-      onSelect={setActiveId}
-      onMoreClick={() => console.log("open more")}
+  return (<BarMenu
+      value="home"
+      onSelect={() => {}}
       items={[
-        { id: "home", icon: Home, label: "Главная" },
-        { id: "search", icon: Search, label: "Поиск" },
-        { id: "settings", icon: Settings, label: "Настройки" },
-      ]}
-    />
-  );
+  { id: "home", icon: Home, label: "Главная" },
+  { id: "search", icon: Search, label: "Поиск" },
+  { id: "profile", icon: User, label: "Профиль" },
+  { id: "settings", icon: Settings, label: "Настройки" },
+]}
+    />);
 }
 ```
 
 ## Source files
 
-| Purpose           | Path                                      |
-| ----------------- | ----------------------------------------- |
-| Runtime component | `src/components/BarMenu/BarMenu.tsx`      |
-| Public props      | `src/components/BarMenu/BarMenu.types.ts` |
-| Local export      | `src/components/BarMenu/index.ts`         |
-| Styles entry      | `src/components/BarMenu/styles/index.ts`  |
-| Storybook         | `missing`                                 |
-| Code Connect      | `src/components/BarMenu/BarMenu.figma.js` |
+| Назначение | Путь |
+| --- | --- |
+| Runtime | [src/components/BarMenu/BarMenu.tsx](BarMenu.tsx) |
+| Props / shared types | [src/components/BarMenu/BarMenu.types.ts](BarMenu.types.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Code Connect | [src/components/BarMenu/BarMenu.figma.js](BarMenu.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `items` | `BarMenuItem[]` | required (зависит от union) | См. типы и пример выше |
+| `value` | `string \| undefined` | optional | См. типы и пример выше |
+| `onSelect` | `(value: string) => void` | required (зависит от union) | См. типы и пример выше |
+| `className` | `string \| undefined` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant     | Code prop          | Code values               | Default  | Notes                                                             |
-| ---------------------------- | ------------------ | ------------------------- | -------- | ----------------------------------------------------------------- |
-| `Bottom items` (inferred)    | `items`            | `BarMenuItem[]`           | required | Assumption: each icon item in bottombar maps to one `BarMenuItem` |
-| `Selected item` (inferred)   | `value`            | `string`                  | -        | Controlled selected state                                         |
-| `Tap on item` (inferred)     | `onSelect`         | `(value: string) => void` | required | Runtime callback receives selected `id`                           |
-| `Overflow / more` (inferred) | `onMoreClick`      | `() => void`              | required | Trigger for hidden overflowed items                               |
-| `Disabled item` (inferred)   | `items[].disabled` | `boolean`                 | `false`  | Maps to disabled `ListItem` trigger                               |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `<slotlistItembottomBar>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Menu` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `<slotlistItembottomBar>2` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Property 1` | Default | Композиция / нет прямого prop; см. template и Temporary mappings |
 
 ## Supported states
 
-| State         | Supported in code | How to use                                            |
-| ------------- | ----------------- | ----------------------------------------------------- |
-| Default       | Yes               | provide `items`                                       |
-| Selected item | Yes               | control via `value` + `onSelect`                      |
-| Disabled item | Yes               | set `disabled: true` on item                          |
-| Overflow      | Yes               | runtime auto-collapses items and shows `more` trigger |
+- `value`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
 
 ## Design matching notes
 
-- `BarMenu` renders icon-only `ListItem` triggers and relies on `useOverflowLayout` for adaptive overflow.
-- Overflowed items are hidden from the main row; `onMoreClick` should open your overflow UI.
-- Component is data-driven and expects stable `id` per item.
-- Runtime currently uses fixed `Size.Md` for visible triggers.
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item             | Current mapping              | Reason                                                                                                                              | Follow-up                                                                         |
-| ---------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| Figma properties | inferred by runtime API only | Figma MCP is unavailable in current session (`Transport channel closed` on `get_context_for_code_connect` and `get_design_context`) | Re-run Figma extraction and refine `BarMenu.figma.js` after successful Figma sync |
-| Storybook        | `missing`                    | `src/stories/BarMenu.stories.tsx` does not exist                                                                                    | Add Storybook story before finalizing full design-to-code coverage                |
-| `codeConnect`    | parserless temporary mapping | Cannot read Figma properties safely now                                                                                             | Replace temporary mapping with property-level mapping after successful Figma sync |
+Temporary mapping: Figma bottomBar stores items in slots. Runtime uses a
+data-driven items array; replace the sample navigation with application data.
+
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
+
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

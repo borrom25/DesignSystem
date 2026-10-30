@@ -39,7 +39,7 @@ const disable = instance.getEnum("Disable", {
 
 const showBadge = instance.getBoolean("Badge");
 const disabled = state === "disable" || disable === "on";
-const icon = instance.getInstanceSwap("↳ Icon");
+const icon = instance.findInstance("Icon");
 
 export default {
   example: figma.tsx`

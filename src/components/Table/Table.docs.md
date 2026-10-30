@@ -1,16 +1,6 @@
 # Table
 
-Документация для связи Figma component set `Table` с публичным runtime-компонентом `Table`.
-
-```text
-src/components/Table/Table.docs.md
-```
-
-Парный Code Connect файл:
-
-```text
-src/components/Table/Table.figma.js
-```
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -19,285 +9,217 @@ component: Table
 package: borrom-ds-test
 import: import { Table } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
-runtime: src/components/Table/Table.tsx
-implementation: src/components/DataTable/DataTable.tsx
+runtime: src/components/DataTable/DataTable.tsx
 types: src/components/DataTable/types/DataTable.types.ts
-localExport: src/components/Table/index.ts
+localExport: src/components/DataTable/index.ts
 publicExport: src/index.ts
-storybook: src/stories/AppLayout.stories.tsx
+storybook: src/stories/DataTable.stories.tsx
 figmaComponent: Table
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=3368-8739
 figmaNodeId: 3368:8739
-codeConnect: src/components/Table/Table.figma.js
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/?node-id=3368-8739
+codeConnect: src/components/DataTable/DataTable.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
 
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
+
 ```tsx
-import { Table } from "borrom-ds-test";
+import { Button, Color, Table, Size, Type } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
-const data = [
-  {
-    id: "1",
-    title: "Админка кураторов",
-    product: "Личный кабинет",
-    owner: "Елена П.",
-  },
-];
-
-const columns = [
-  { accessorKey: "title", header: "Название", size: 220 },
-  { accessorKey: "product", header: "Продукт", size: 180 },
-  { accessorKey: "owner", header: "Ответственный", size: 180 },
-];
-
 export function Example() {
-  return (
-    <Table
-      data={data}
-      columns={columns}
-      showToolbar
-      toolbarProps={{
-        searchPlaceholder: "Поиск",
-        rowCountLabel: "Строки",
-      }}
+  return (<Table
+      data={[
+      {
+        id: "1",
+        name: "Админка кураторов",
+        owner: "Елена П.",
+        status: "Активно",
+      },
+      {
+        id: "2",
+        name: "Воронка обучения",
+        owner: "Кирилл Л.",
+        status: "Пауза",
+      },
+    ]}
+      columns={[
+        {
+          accessorKey: "name",
+          header: "Название",
+          size: 240,
+          minSize: 160,
+          maxSize: 420,
+        },
+        {
+          accessorKey: "owner",
+          header: "Ответственный",
+          size: 180,
+          minSize: 140,
+          maxSize: 320,
+        },
+        {
+          accessorKey: "status",
+          header: "Статус",
+          size: 160,
+          minSize: 120,
+          maxSize: 280,
+        },
+      ]}
+
       enableRowSelection
+      getRowId={(row) => row.id}
+
+
+      popoverAction={{
+        selectedLabel: (count) => `Выбрано: ${count}`,
+        children: ({ selectedRows, hide }) => (
+          <Button
+            size={Size.Xs}
+            type={Type.Flat}
+            color={Color.Brand}
+            onClick={() => {
+              console.log(
+                "Действие для выбранных строк:",
+                selectedRows.map((row) => row.original)
+              );
+              hide();
+            }}
+          >
+            Применить
+          </Button>
+        ),
+      }}
+
+      enableColumnResizing
+      columnResizeMode="onChange"
+      rowActions={() => [{ label: "Открыть", value: "open" }]}
       stickyHeader
       striped
-    />
-  );
+    />);
 }
 ```
 
 ## Source files
 
-| Purpose | Path |
+| Назначение | Путь |
 | --- | --- |
-| Public facade | `src/components/Table/Table.tsx` |
-| Runtime implementation | `src/components/DataTable/DataTable.tsx` |
-| Public props | `src/components/DataTable/types/DataTable.types.ts` |
-| Column helper | `src/components/DataTable/createDataTableColumnHelper.ts` |
-| Controller hook | `src/components/DataTable/hooks/useDataTableController.ts` |
-| Filter helpers | `src/components/DataTable/dataTableFilter.ts` |
-| Internal UI pieces | `src/components/DataTable/ui/*` |
-| Styles entry | `src/components/DataTable/styles/index.ts` |
-| Local export | `src/components/Table/index.ts` |
-| Storybook usage | `src/stories/AppLayout.stories.tsx` |
-| Code Connect | `src/components/Table/Table.figma.js` |
+| Runtime | [src/components/DataTable/DataTable.tsx](../DataTable/DataTable.tsx) |
+| Props / shared types | [src/components/DataTable/types/DataTable.types.ts](../DataTable/types/DataTable.types.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/DataTable.stories.tsx](../../stories/DataTable.stories.tsx) |
+| Code Connect | [src/components/DataTable/DataTable.figma.js](../DataTable/DataTable.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `data` | `TData[]` | required (зависит от union) | См. типы и пример выше |
+| `columns` | `ColumnDef<TData, any>[]` | required (зависит от union) | См. типы и пример выше |
+| `sorting` | `SortingState \| undefined` | optional | См. типы и пример выше |
+| `onSortingChange` | `OnChangeFn<SortingState> \| undefined` | optional | См. типы и пример выше |
+| `filters` | `TableFiltersState<FilterSchema> \| undefined` | optional | См. типы и пример выше |
+| `globalFilter` | `string \| undefined` | optional | См. типы и пример выше |
+| `onGlobalFilterChange` | `OnChangeFn<string> \| undefined` | optional | См. типы и пример выше |
+| `columnVisibility` | `VisibilityState \| undefined` | optional | См. типы и пример выше |
+| `onColumnVisibilityChange` | `OnChangeFn<VisibilityState> \| undefined` | optional | См. типы и пример выше |
+| `rowSelection` | `RowSelectionState \| undefined` | optional | См. типы и пример выше |
+| `onRowSelectionChange` | `OnChangeFn<RowSelectionState> \| undefined` | optional | См. типы и пример выше |
+| `expanded` | `ExpandedState \| undefined` | optional | См. типы и пример выше |
+| `onExpandedChange` | `OnChangeFn<ExpandedState> \| undefined` | optional | См. типы и пример выше |
+| `enableSorting` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `enableFiltering` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `enableColumnFilters` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `enableGlobalFilter` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `enableRowSelection` | `boolean \| ((row: Row<TData>) => boolean) \| undefined` | optional | См. типы и пример выше |
+| `enableMultiRowSelection` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `manualSorting` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `manualFiltering` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `manualPagination` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `enableColumnResizing` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `columnResizeMode` | `ColumnResizeMode \| undefined` | optional | См. типы и пример выше |
+| `virtualized` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `rowHeight` | `number \| undefined` | optional | См. типы и пример выше |
+| `overscan` | `number \| undefined` | optional | См. типы и пример выше |
+| `hasMore` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `isFetchingMore` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `onLoadMore` | `(() => void) \| undefined` | optional | См. типы и пример выше |
+| `onScrollEnd` | `(() => void) \| undefined` | optional | См. типы и пример выше |
+| `loadMoreThreshold` | `number \| undefined` | optional | См. типы и пример выше |
+| `loading` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `emptyState` | `ReactNode` | optional | См. типы и пример выше |
+| `loadingState` | `ReactNode` | optional | См. типы и пример выше |
+| `stickyHeader` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `stickySelectionColumn` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `stickyActionsColumn` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `striped` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `bordered` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `compact` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `embedded` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `embeddedLeadingInset` | `number \| undefined` | optional | См. типы и пример выше |
+| `getRowId` | `((originalRow: TData, index: number) => string) \| undefined` | optional | См. типы и пример выше |
+| `enableNestedRows` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `getSubRows` | `((originalRow: TData, index: number) => TData[] \| undefined) \| undefined` | optional | См. типы и пример выше |
+| `maxExpandedDepth` | `number \| undefined` | optional | См. типы и пример выше |
+| `renderExpandedContent` | `TableExpandedContentRenderer<TData> \| undefined` | optional | См. типы и пример выше |
+| `getRowCanExpandContent` | `((row: Row<TData>) => boolean) \| undefined` | optional | См. типы и пример выше |
+| `expandedContentClassName` | `string \| undefined` | optional | См. типы и пример выше |
+| `expandedContentEstimateSize` | `number \| undefined` | optional | См. типы и пример выше |
+| `onRowClick` | `((row: Row<TData>) => void) \| undefined` | optional | См. типы и пример выше |
+| `onRowDoubleClick` | `((row: Row<TData>) => void) \| undefined` | optional | См. типы и пример выше |
+| `editable` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `editableCellIds` | `string[] \| undefined` | optional | См. типы и пример выше |
+| `isCellEditable` | `TableCellEditablePredicate<TData> \| undefined` | optional | См. типы и пример выше |
+| `editablePlaceholder` | `string \| undefined` | optional | См. типы и пример выше |
+| `onCellDraftChange` | `((event: TableCellValueChangeEvent<TData>) => void) \| undefined` | optional | См. типы и пример выше |
+| `onCellValueChange` | `((event: TableCellValueChangeEvent<TData>) => void) \| undefined` | optional | См. типы и пример выше |
+| `cellEditor` | `TableCellEditorRenderer<TData> \| undefined` | optional | См. типы и пример выше |
+| `tableClassName` | `string \| undefined` | optional | См. типы и пример выше |
+| `headerClassName` | `string \| undefined` | optional | См. типы и пример выше |
+| `bodyClassName` | `string \| undefined` | optional | См. типы и пример выше |
+| `rowClassName` | `string \| ((row: Row<TData>) => string) \| undefined` | optional | См. типы и пример выше |
+| `cellClassName` | `string \| undefined` | optional | См. типы и пример выше |
+| `toolbarSlot` | `ReactNode` | optional | См. типы и пример выше |
+| `footerSlot` | `ReactNode` | optional | См. типы и пример выше |
+| `showToolbar` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `toolbarProps` | `Omit<DataTableToolbarProps, "rowCount"> \| undefined` | optional | См. типы и пример выше |
+| `rowActions` | `((row: Row<TData>) => ButtonDropItem[] \| null \| undefined) \| undefined` | optional | См. типы и пример выше |
+| `popoverAction` | `boolean \| DataTablePopoverActionProps<TData> \| undefined` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Figma values | Code prop | Code values | Default | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `Property 1` | `Default` | - | - | `Default` | Единственный опубликованный variant; runtime API не требует отдельного prop |
-| `Head_L2` | boolean | `showToolbar` | `boolean` | `false` | Code Connect включает `showToolbar` и базовый `toolbarProps`, когда Figma показывает header area |
-| Header search | nested `Search/Autocomplete` | `toolbarProps.searchPlaceholder`, `toolbarProps.searchValue`, `toolbarProps.onSearchChange` | controlled search props | - | В runtime это часть `DataTableToolbar`, не отдельный публичный `TableHeader` |
-| Row counter | text layer | `toolbarProps.rowCountLabel`, `toolbarProps.rowCountValue` | `ReactNode` | generated row count | Runtime получает `rowCount` из количества строк и позволяет переопределить label/value |
-| Header action button | nested `Button / Main` | `toolbarProps.actions`, `toolbarProps.onActionChange` | `ButtonDropItem[]` | - | В runtime это dropdown actions через `ButtonDrop`, а не произвольная кнопка |
-| `<slotHeaders>` | slot | `columns` | `ColumnDef<TData>[]` | required | Temporary mapping: headers генерируются из `columns`, слот напрямую не передается |
-| `<slotCell>` | slot | `data`, `columns[].cell` | `TData[]`, cell renderer | required | Temporary mapping: cells генерируются из данных и render-функций колонок |
-| Header filter icon | nested `IconButton` | `columns[].filter`, `filters` | filter config + controller state | - | Колонка показывает filter action, если у column definition есть `filter` и передан `filters` |
-| `modalContainer` filter popover | `Property 1=Variant2/3/4/5` | `columns[].filter`, `filters={tableController.filters}` | `dataTableFilter.list/columnFilter/numberRange/dateRange` + `useDataTableController` | - | Table opens these variants through `DataTableHeader -> Popover -> DataTableFilterRenderer`; do not mount `modalContainer` manually |
-| Header sort icon | nested `IconButton` | `enableSorting`, column sorting options | `boolean`, TanStack options | `true` | Sorting включен по умолчанию и управляется `sorting/onSortingChange` при controlled mode |
-| Header resize handle | `ItemColumn` boolean `Action` / right vertical marker | `enableColumnResizing`, `columnResizeMode`, `columns[].size/minSize/maxSize`, `columns[].enableResizing` | `boolean`, `onChange`/`onEnd`, column sizing props | `enableColumnResizing=true`, `columnResizeMode="onChange"` | Если в Figma у header column есть правый marker растяжки, в коде колонка должна оставаться resizable. Для отключения на конкретной колонке используй `enableResizing: false` |
-| Selection checkbox column | nested `CheckBox` | `enableRowSelection` | `boolean` or row predicate | `false` | Service column создается runtime-компонентом |
-| Select all checkbox | header `CheckBox` | `enableRowSelection`, `rowSelection`, `onRowSelectionChange` | selection props | internal state | Верхний checkbox выбирает все текущие selectable rows; `popoverAction` получает полный `selectedRows` и корректный `selectedCount` |
-| Row action menu | nested `IconButton` / menu | `rowActions` | `(row) => ButtonDropItem[]` | - | Service column создается runtime-компонентом |
-| Scroll bars | nested `Scroll bar` | native scroll / `virtualized` | `boolean` | `false` | Runtime использует обычный scroll container; отдельный ScrollBar component не нужен |
-| `popoveAction` | overlay component | `popoverAction` | `boolean` or `DataTablePopoverActionProps<TData>` | `false` | Показывается только при `selectedRows.length > 0`; обычно используется вместе с `enableRowSelection` |
-| `Drop` | expand/collapse markers | `enableNestedRows`, `expanded`, `onExpandedChange`, `getSubRows` | nested rows props | `false` | Expand/collapse controls создаются runtime-компонентом; см. `DataTable` docs для row-level mapping |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `tabsOverflow` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `<slotHeaders>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `<slotCell>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `popoveAction` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `<slot>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `<slsotHeader>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Type` | Default | Композиция / нет прямого prop; см. template и Temporary mappings |
 
 ## Supported states
 
-| State | Supported in code | How to use |
-| --- | --- | --- |
-| Basic table | Yes | pass `data` and `columns` |
-| Toolbar | Yes | `showToolbar` with `toolbarProps` |
-| Search | Yes | `toolbarProps.searchValue`, `toolbarProps.onSearchChange` or `useDataTableController` |
-| Row count | Yes | automatic `rowCount`, optional `toolbarProps.rowCountLabel/rowCountValue` |
-| Toolbar actions | Yes | `toolbarProps.actions` and `toolbarProps.onActionChange` |
-| Sorting | Yes | enabled by default, controlled through `sorting/onSortingChange` if needed |
-| Column resizing | Yes | `enableColumnResizing`, `columnResizeMode`, column `size/minSize/maxSize`; double click on the handle resets width |
-| Column filters | Yes | column `filter` config plus `filters` from `useDataTableController` |
-| Filter popovers / `modalContainer` | Yes | `dataTableFilter.*` or `createDataTableColumnHelper().list/date/columnFilter/numberRange/dateRange`, then `filters={tableController.filters}` |
-| Row selection | Yes | `enableRowSelection`, `rowSelection`, `onRowSelectionChange` |
-| Select all | Yes | header checkbox from `enableRowSelection`; counts all selected rows in `popoverAction` |
-| Selection action bar | Yes | `popoverAction`, optional `selectedLabel`, `children`, `onClose` |
-| Row actions | Yes | `rowActions={(row) => items}` |
-| Sticky header | Yes | `stickyHeader` |
-| Sticky selection/actions columns | Yes | `stickySelectionColumn`, `stickyActionsColumn` |
-| Virtualized body | Yes | `virtualized`, `rowHeight`, `overscan` |
-| Infinite scroll | Yes | `hasMore`, `isFetchingMore`, `onLoadMore` |
-| Loading / empty | Yes | `loading`, `loadingState`, `emptyState` |
-| Striped / bordered / compact | Yes | `striped`, `bordered`, `compact` |
-| Tree rows / expand markers | Yes | `enableNestedRows`, `getSubRows`, `expanded`, `onExpandedChange` |
+- `loading`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
 
 ## Design matching notes
 
-- Figma node `3368:8739` is a published component set named `Table`.
-- Public package API exposes `Table` from `borrom-ds-test`; internally it delegates to `DataTable`.
-- Figma `ItemColumn`, `Line`, table `Header`, scroll bars and row action pieces are implementation details for the design file. In code they are generated by `Table` from `data`, `columns`, `filters`, selection state and `rowActions`.
-- In `ItemColumn`, the right vertical `Action` marker on a header means the column is resizable. Do not implement it as a decorative icon; keep `enableColumnResizing` enabled and provide column sizing through `size`, `minSize` and `maxSize`.
-- Figma `modalContainer` variants for filters are connected to the table through column filter config. The click target is the header filter icon, the overlay is `Popover`, and the content is selected by `DataTableFilterRenderer`.
-- `modalContainer` filter variants are not separate props on `Table`: list filter maps to `dataTableFilter.list`, text search to `dataTableFilter.columnFilter`, number range to `dataTableFilter.numberRange`, and date range to `dataTableFilter.dateRange`.
-- Figma node `6371:851` is `popoveAction`; in runtime it maps to the table-level `popoverAction` prop. It is not rendered until row selection has at least one selected row.
-- When the header checkbox selects all rows, runtime uses TanStack row selection, so `popoverAction` receives every selected row in `selectedRows` and `selectedCount` reflects the total selected amount.
-- Connected nested components already cover reusable primitives inside the table: `InputSearch`, `Button`, `IconButton`, `CheckBox`, `ListItem`, `Popover`.
-- The current Storybook example is embedded in `Layout/AppLayout`, where `Table` is used with `useDataTableController`, status tabs, toolbar actions, filters, virtualized rows and `TableColumnsModal`.
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item | Current mapping | Reason | Follow-up |
-| --- | --- | --- | --- |
-| Figma `<slotHeaders>` | sample `columns` in Code Connect | Runtime API intentionally generates headers from TanStack column definitions | Keep mapping data-driven; do not expose header slots unless product needs manual header composition |
-| Figma `<slotCell>` | sample `data` and default cell renderers | Runtime API intentionally generates cells from row data and column renderers | Use `columns[].cell` for custom content |
-| `Head_L2` | `showToolbar` + minimal `toolbarProps` | Figma names the visual header area differently from runtime toolbar API | Rename/clarify Figma property if designers need exact Dev Mode semantics |
-| `modalContainer` filter variants | `columns[].filter` + `filters` | Runtime owns the popover shell and chooses filter content from `filter.kind` | Keep this as table column configuration; do not render modal containers directly |
-| `ItemColumn` `Action` marker | `enableColumnResizing` + column sizing props | Runtime renders the resize handle from TanStack column resize state | Keep this as table behavior, not a standalone nested component |
-| `popoveAction` visual slot | `popoverAction.children` | Runtime accepts ReactNode or render function with `{ selectedCount, selectedRows, table, hide }` | Keep actions in the prop; do not implement a separate floating panel outside the table |
-| Dedicated `Table` runtime file | facade to `DataTable` | Public API is named `Table`, implementation folder is `DataTable` | Keep facade so Figma docs and tracker can point to the public component name |
+Temporary mapping: the former Figma row node 3368:8130 was removed.
+This legacy file now targets the public Table component.
 
-## Examples
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
 
-### Basic
-
-```tsx
-<Table data={data} columns={columns} />
-```
-
-### With Resizable Columns
-
-```tsx
-const columns = [
-  {
-    accessorKey: "title",
-    header: "Название",
-    size: 220,
-    minSize: 160,
-    maxSize: 420,
-  },
-  {
-    accessorKey: "owner",
-    header: "Ответственный",
-    size: 180,
-    minSize: 140,
-    maxSize: 320,
-  },
-];
-
-<Table
-  data={data}
-  columns={columns}
-  enableColumnResizing
-  columnResizeMode="onChange"
-/>;
-```
-
-### With Selection Action Bar
-
-```tsx
-<Table
-  data={data}
-  columns={columns}
-  getRowId={(row) => row.id}
-  enableRowSelection
-  popoverAction={{
-    selectedLabel: (count) => `Выбрано: ${count}`,
-    children: ({ selectedRows, hide }) => (
-      <Button
-        size={Size.Xs}
-        type={Type.Flat}
-        color={Color.Brand}
-        onClick={() => {
-          archiveRows(selectedRows.map((row) => row.original));
-          hide();
-        }}
-      >
-        Архивировать
-      </Button>
-    ),
-  }}
-/>;
-```
-
-### With Column Filters
-
-```tsx
-const columns = [
-  {
-    accessorKey: "product",
-    header: "Продукт",
-    filter: dataTableFilter.list({
-      options: [
-        { label: "Личный кабинет", value: "Личный кабинет" },
-        { label: "Аналитика", value: "Аналитика" },
-      ],
-    }),
-    filterFn: "dataTableList",
-  },
-  {
-    accessorKey: "budget",
-    header: "Бюджет",
-    filter: dataTableFilter.numberRange(),
-    filterFn: "dataTableNumberRange",
-  },
-];
-
-const tableController = useDataTableController({ columns });
-
-<Table
-  data={data}
-  columns={columns}
-  filters={tableController.filters}
-/>;
-```
-
-### With Toolbar
-
-```tsx
-<Table
-  data={data}
-  columns={columns}
-  showToolbar
-  toolbarProps={{
-    searchValue,
-    onSearchChange: setSearchValue,
-    searchPlaceholder: "Поиск",
-    rowCountLabel: "Строки",
-  }}
-/>
-```
-
-### With Selection And Row Actions
-
-```tsx
-<Table
-  data={data}
-  columns={columns}
-  enableRowSelection
-  rowActions={() => [
-    { label: "Открыть", value: "open" },
-    { label: "Архивировать", value: "archive" },
-  ]}
-/>
-```
-
-### With Controller
-
-```tsx
-const tableController = useDataTableController({
-  columns,
-  toolbarProps: {
-    searchPlaceholder: "Поиск",
-  },
-});
-
-<Table
-  data={data}
-  columns={columns}
-  showToolbar
-  toolbarProps={tableController.toolbarProps}
-  filters={tableController.filters}
-/>;
-```
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

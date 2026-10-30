@@ -1,8 +1,6 @@
 # Accordion
 
-Документация для связи Figma component `accordeon` с runtime-компонентом `Accordion`.
-
-Ссылку из Figma можно вести на этот файл, если нужна документация, или на `Accordion.figma.js`, если нужен Code Connect.
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -17,130 +15,98 @@ localExport: src/components/Accordion/index.ts
 publicExport: src/index.ts
 storybook: src/stories/Accordion.stories.tsx
 figmaComponent: accordeon
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=1282-1912
 figmaNodeId: 1282:1912
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=1282-1912
 codeConnect: src/components/Accordion/Accordion.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
 
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
+
 ```tsx
-import { Accordion } from "borrom-ds-test";
+import { Accordion, Button } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return (
-    <Accordion title="Accordion" subtitle="Subtitle" position="start">
+  return (<Accordion
+      title="Accordion"
+      position="start"
+      chevronPosition="none"
+      defaultOpen
+      subtitle="Пример"
+
+
+
+    >
       Content
-    </Accordion>
-  );
+    </Accordion>);
 }
 ```
 
 ## Source files
 
-| Purpose | Path |
+| Назначение | Путь |
 | --- | --- |
-| Runtime component | `src/components/Accordion/Accordion.tsx` |
-| Public props | `src/components/Accordion/Accordion.types.ts` |
-| Local export | `src/components/Accordion/index.ts` |
-| Styles entry | `src/components/Accordion/styles/index.ts` |
-| Storybook | `src/stories/Accordion.stories.tsx` |
-| Code Connect | `src/components/Accordion/Accordion.figma.js` |
+| Runtime | [src/components/Accordion/Accordion.tsx](Accordion.tsx) |
+| Props / shared types | [src/components/Accordion/Accordion.types.ts](Accordion.types.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/Accordion.stories.tsx](../../stories/Accordion.stories.tsx) |
+| Code Connect | [src/components/Accordion/Accordion.figma.js](Accordion.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `title` | `ReactNode` | required (зависит от union) | См. типы и пример выше |
+| `children` | `ReactNode` | required (зависит от union) | См. типы и пример выше |
+| `className` | `string \| undefined` | optional | См. типы и пример выше |
+| `subtitle` | `ReactNode` | optional | См. типы и пример выше |
+| `titleProps` | `AccordionTextProps \| undefined` | optional | См. типы и пример выше |
+| `subtitleProps` | `AccordionTextProps \| undefined` | optional | См. типы и пример выше |
+| `headSlot` | `ReactElement<any, string \| import("react").JSXElementConstructor<any>> \| undefined` | optional | См. типы и пример выше |
+| `iconLeft` | `LucideIcon \| undefined` | optional | См. типы и пример выше |
+| `prefix` | `ReactNode` | optional | См. типы и пример выше |
+| `position` | `AccordionPosition \| undefined` | optional | См. типы и пример выше |
+| `chevronPosition` | `AccordionChevronPosition \| undefined` | optional | См. типы и пример выше |
+| `disabled` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `defaultOpen` | `boolean \| undefined` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Figma values | Code prop | Code values | Default | Notes |
-| --- | --- | --- | --- | --- | --- |
-| Text layer `title` | text | `title` | `string` | required | Temporary mapping: Figma title is a text layer, not a component property. |
-| `Subtitle` | boolean | `subtitle` | `ReactNode` | - | When `true`, Code Connect reads `↳ Subtitle`. |
-| `↳ Subtitle` | text | `subtitle` | `ReactNode` | - | Direct subtitle content. |
-| `Order` | `Start`, `Mid`, `End` | `position` | `start`, `mid`, `end` | `start` | Direct enum mapping. |
-| `State` | `Default` | - | - | - | Default runtime state. |
-| `State` | `Hover` | - | CSS runtime state | - | Hover is implemented by runtime CSS and is not exposed as a prop. |
-| `State` | `Disable` | `disabled` | `true` | `false` | Maps to disabled behavior and disabled styles. |
-| `Open` | `On`, `Off` | - | - | - | Not supported by current runtime API; open state is internal uncontrolled state. |
-| `Type` | `Clear` | - | - | - | Only one Figma value; no runtime prop. |
-| `Size` | `Md` | - | - | - | Only one Figma value; no runtime prop. |
-| `Icon Left` | boolean | `iconLeft` | `LucideIcon` | - | Requires a lucide icon component. |
-| `↳ Icon Left` | instance swap | `iconLeft` | `LucideIcon` | - | Code Connect outputs this only when the nested icon has Code Connect. |
-| `Actions` | boolean | `headSlot` | `ReactElement` | - | Temporary mapping: Code Connect emits a placeholder `Button` as `headSlot`. |
-| `<slotAction>` | slot | `headSlot` | `ReactElement` | - | Runtime accepts one `headSlot` element; arbitrary Figma slot content is not extracted yet. |
-| `<slotContent>` | slot | `children` | `ReactNode` | required | Temporary mapping: Code Connect emits placeholder content. |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `IconLeft` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `↳ IconLeft` | INSTANCE_SWAP | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `<slotContent>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `<slotHead>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Chevron-left` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Chevron-right` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Order` | Start, Mid, End | `position`; значения см. template |
+| `Open` | On, Off | `defaultOpen`; значения см. template |
+| `State` | Default, Hover, Disable | Композиция / нет прямого prop; см. template и Temporary mappings |
 
 ## Supported states
 
-| State | Supported in code | How to use |
-| --- | --- | --- |
-| Default closed | Yes | `<Accordion title="Accordion">Content</Accordion>` |
-| Open | Partial | User toggles open at runtime; no public controlled/default-open prop |
-| Hover | Yes | Runtime CSS hover styles, no prop |
-| Disabled | Yes | `<Accordion title="Accordion" disabled>Content</Accordion>` |
-| Start order | Yes | `<Accordion position="start" ... />` |
-| Mid order | Yes | `<Accordion position="mid" ... />` |
-| End order | Yes | `<Accordion position="end" ... />` |
-| Icon left | Yes | `<Accordion iconLeft={Check} ... />` |
-| Header action slot | Yes | `<Accordion headSlot={<Button>Action</Button>} ... />` |
-| Content slot | Yes | Use `children` |
+- `disabled`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
 
 ## Design matching notes
 
-- Figma component is named `accordeon`, but runtime export is `Accordion`.
-- Runtime `Accordion` is a single accordion row with internal open state. It is not a controlled accordion group.
-- `Order` controls spacing and separator behavior through `position`.
-- Figma `Open=On` cannot be represented in the initial generated JSX without adding a `defaultOpen` or controlled API.
-- Runtime visual values come from `src/components/Accordion/styles`.
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item | Current mapping | Reason | Follow-up |
-| --- | --- | --- | --- |
-| Text layer `title` | read with `findText("title")`, fallback `"Accordion"` | Figma title is not exposed as a TEXT component property | Expose title as a Figma text property |
-| `Open=On` | metadata only | Runtime open state is internal and starts closed | Add `defaultOpen` / controlled props if Figma open state should generate code |
-| `Actions=true` | placeholder `headSlot={<Button size="xs">headSlot</Button>}` | Figma slot content is not extracted into a React element | Define slot extraction or expose action props |
-| `<slotContent>` | placeholder text child | Figma slot cannot map directly to `children` without slot extraction | Define Code Connect slot strategy |
-| `↳ Icon Left` | omitted unless nested icon has Code Connect | `Accordion` prop requires `LucideIcon` | Add Code Connect or stable icon mapping for lucide icons |
+Temporary mapping: Figma Actions/<slotAction> is arbitrary slot content,
+while runtime Accordion accepts one ReactElement in headSlot.
 
-## Examples
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
 
-### Basic
-
-```tsx
-<Accordion title="Accordion" subtitle="Subtitle" position="start">
-  Content
-</Accordion>
-```
-
-### Disabled
-
-```tsx
-<Accordion title="Accordion" subtitle="Subtitle" disabled>
-  Content
-</Accordion>
-```
-
-### With Icon
-
-```tsx
-import { Check } from "lucide-react";
-
-<Accordion title="Accordion" iconLeft={Check}>
-  Content
-</Accordion>
-```
-
-### With Header Action
-
-```tsx
-import { Accordion, Button } from "borrom-ds-test";
-
-<Accordion title="Accordion" headSlot={<Button size="xs">headSlot</Button>}>
-  Content
-</Accordion>
-```
-
-## When to use Code Connect instead
-
-Use Code Connect when Figma Dev Mode should generate a JSX snippet automatically from the selected component instance.
-
-For `Accordion`, keep Code Connect and this document consistent. Current Code Connect includes temporary mappings for `Open`, `Actions`, `<slotAction>`, `<slotContent>`, and title text extraction.
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

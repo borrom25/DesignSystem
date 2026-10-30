@@ -1,8 +1,6 @@
 # StepBar
 
-Документация для связи Figma-компонента `StepBar (stepper/process)` с runtime-компонентом `StepBar`.
-
-Ссылку из Figma можно вести на этот файл, если нужна документация, или на `StepBar.figma.js`, если нужен Code Connect.
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -17,136 +15,92 @@ localExport: src/components/StepBar/index.ts
 publicExport: src/index.ts
 storybook: src/stories/StepBar.stories.tsx
 figmaComponent: StepBar
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=1066-5093
 figmaNodeId: 1066:5093
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=1066-5093
 codeConnect: src/components/StepBar/StepBar.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
 
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
+
 ```tsx
 import { StepBar } from "borrom-ds-test";
-import "borrom-ds-test/styles.css";
 import { Check } from "lucide-react";
-import { useState } from "react";
-
-const items = [
-  { id: "step-1", label: "Шаг 1" },
-  { id: "step-2", label: "Шаг 2", type: "successful", rightIcon: Check },
-  { id: "step-3", label: "Шаг 3" },
-  { id: "step-4", label: "Шаг 4" },
-];
+import "borrom-ds-test/styles.css";
 
 export function Example() {
-  const [active, setActive] = useState("step-1");
+  return (<StepBar
+      className="w-[512px] max-w-full"
+      items={[
+  { id: "step-1", label: "{nameStep} 1" },
+  { id: "step-2", label: "{nameStep} 2" },
+  { id: "step-3", label: "{nameStep} 3" },
+  { id: "step-4", label: "{nameStep} 4" },
+]}
+      active="step-1"
+      onChangeStep={() => {}}
 
-  return (
-    <StepBar
-      items={items}
-      active={active}
-      onChangeStep={setActive}
-      onClickSuccessButton={() => {}}
-      successButtonText="Готово"
-    />
-  );
+    />);
 }
 ```
 
 ## Source files
 
-| Purpose | Path |
+| Назначение | Путь |
 | --- | --- |
-| Runtime component | `src/components/StepBar/StepBar.tsx` |
-| Public props | `src/components/StepBar/StepBar.types.ts` |
-| Logic hook | `src/components/StepBar/hooks/useStepBar.ts` |
-| Local export | `src/components/StepBar/index.ts` |
-| Styles entry | `src/components/StepBar/styles/index.ts` |
-| Storybook | `src/stories/StepBar.stories.tsx` |
-| Code Connect | `src/components/StepBar/StepBar.figma.js` |
+| Runtime | [src/components/StepBar/StepBar.tsx](StepBar.tsx) |
+| Props / shared types | [src/components/StepBar/StepBar.types.ts](StepBar.types.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/StepBar.stories.tsx](../../stories/StepBar.stories.tsx) |
+| Code Connect | [src/components/StepBar/StepBar.figma.js](StepBar.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `items` | `TItems` | required (зависит от union) | См. типы и пример выше |
+| `active` | `StepBarItemId<TItems> \| undefined` | optional | См. типы и пример выше |
+| `defaultActive` | `StepBarItemId<TItems> \| undefined` | optional | См. типы и пример выше |
+| `onChangeStep` | `((step: StepBarItemId<TItems>) => void) \| undefined` | optional | См. типы и пример выше |
+| `onStepTransition` | `((meta: StepBarTransitionMeta<StepBarItemId<TItems>>) => void) \| undefined` | optional | См. типы и пример выше |
+| `onClickSuccessButton` | `(() => void) \| undefined` | optional | См. типы и пример выше |
+| `className` | `string \| undefined` | optional | См. типы и пример выше |
+| `successButtonText` | `string \| undefined` | optional | См. типы и пример выше |
+| `loadingPrev` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `loadingNext` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `loadingSuccess` | `boolean \| undefined` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Figma values | Code prop | Code values | Default | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `Result` | `Default` | `onClickSuccessButton` | `undefined` | `undefined` | Показывается правая стрелка навигации |
-| `Result` | `Positive` | `onClickSuccessButton`, `successButtonText` | callback, `"Готово"` | - | На последнем шаге показывается action-кнопка |
-| `Media` | `Desktop`, `Mobile` | `className` | `w-[1000px]`, `w-[512px]` | - | Temporary mapping: у runtime нет отдельного `media` prop |
-| `nameStep1` | `true/false` | `items[].label` | `string \| ReactNode` | required | Temporary mapping: runtime не поддерживает скрытие шагов через boolean |
-| `<Stepslot>` | slot | `items` | `StepBarItem[]` | required | Основной источник шагов и иконок |
-| active step line | visual state | `active` | `StepBarItem["id"]` | first item | Активный шаг управляется внешним состоянием |
-| left/right buttons | visual state | `onChangeStep` | `(id) => void` | required | Навигация назад/вперед через хук `useStepBar` |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `<slotStep>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Media` | Mobile, Desktop | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Result` | Default, Positive | Композиция / нет прямого prop; см. template и Temporary mappings |
 
 ## Supported states
 
-| State | Supported in code | How to use |
-| --- | --- | --- |
-| Default | Yes | задать `items`, `active`, `onChangeStep` |
-| Positive (final action) | Yes | `onClickSuccessButton` и `active` на последнем шаге |
-| Error step | Yes | `items[i].type = "error"` |
-| Successful step | Yes | `items[i].type = "successful"` |
-| Disabled step | Yes | `items[i].disabled = true` |
-| Step icons | Yes | `leftIcon` / `rightIcon` на шаге |
-| Long lists with horizontal scroll | Yes | передать больше шагов в `items` |
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
 
 ## Design matching notes
 
-- `StepBar` — controlled-компонент: активный шаг задается через `active`, переключение приходит в `onChangeStep`.
-- Левый/правый навигационные контролы встроены в компонент и работают по порядку `items`.
-- Индикатор активного шага (`activeStepClasses`) вычисляется из фактической ширины/позиции кнопки шага в `useStepBar`.
-- Variant `Result=Positive` в Figma соответствует состоянию `isLastStep` + `onClickSuccessButton`.
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item | Current mapping | Reason | Follow-up |
-| --- | --- | --- | --- |
-| `Media` | через `className` ширины (`1000px`/`512px`) | В runtime API нет отдельного `media` prop | Если понадобится, вынести в отдельный layout wrapper |
-| `nameStep1=false` | не скрывает шаги, используются fallback-labels | Runtime требует непустой `items` и не поддерживает boolean-тоггл пустого step-slot | При необходимости добавить явный API для empty-state |
-| `Result=Positive` | `active` последнего шага + `onClickSuccessButton` | В runtime нет прямого `result` prop | Оставить как каноничный mapping через публичные props |
+Temporary mapping: names are nested inside <slotStep>, not a root boolean.
 
-## Examples
+Temporary mapping: Figma boolean nameStep1 hides visual step labels in one
+variant, but runtime StepBar requires a non-empty items array.
 
-### Basic
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
 
-```tsx
-<StepBar
-  items={[
-    { id: "1", label: "Шаг 1" },
-    { id: "2", label: "Шаг 2" },
-    { id: "3", label: "Шаг 3" },
-  ]}
-  active="1"
-  onChangeStep={() => {}}
-/>
-```
-
-### Final action
-
-```tsx
-<StepBar
-  items={[
-    { id: "1", label: "Шаг 1", type: "successful" },
-    { id: "2", label: "Шаг 2", type: "successful" },
-    { id: "3", label: "Шаг 3", type: "successful" },
-  ]}
-  active="3"
-  onChangeStep={() => {}}
-  onClickSuccessButton={() => {}}
-  successButtonText="Готово"
-/>
-```
-
-### With status and icons
-
-```tsx
-import { Check, CircleAlert } from "lucide-react";
-
-<StepBar
-  items={[
-    { id: "1", label: "Черновик" },
-    { id: "2", label: "Проверка", type: "successful", rightIcon: Check },
-    { id: "3", label: "Ошибка", type: "error", leftIcon: CircleAlert },
-  ]}
-  active="2"
-  onChangeStep={() => {}}
-/>
-```
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

@@ -11,9 +11,9 @@ const state = instance.getEnum("State", {
 });
 
 const endPage = instance.getBoolean("endPage");
-const gapIntoPage = instance.getBoolean("gapIntoPage");
+const gapIntoPage = instance.getBoolean("Gap into page");
 const leftButtons = instance.getBoolean("leftButtons");
-const pages = instance.getBoolean("pages");
+const pages = instance.getBoolean("Pages");
 const rightButtons = instance.getBoolean("rightButtons");
 
 const rawNextText = instance.getString("textNext");

@@ -1,16 +1,6 @@
 # PinInput
 
-Документ для привязки Figma-компонента `PinInput` к runtime-компоненту `PinInput`.
-
-```text
-src/components/PinInput/PinInput.docs.md
-```
-
-Парный Code Connect файл:
-
-```text
-src/components/PinInput/PinInput.figma.js
-```
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -25,89 +15,87 @@ localExport: src/components/PinInput/index.ts
 publicExport: src/index.ts
 storybook: src/stories/PinInput.stories.tsx
 figmaComponent: PinInput
+figmaNodeId: 1199:5009
 figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=1199-5009
 codeConnect: src/components/PinInput/PinInput.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
 
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
+
 ```tsx
-import { PinInput, PinInputType } from "borrom-ds-test";
+import { PinInput } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return <PinInput size="md" type={PinInputType.Default} />;
+  return (<PinInput
+      size="xs"
+      type="default"
+      error={true}
+
+      value=""
+    />);
 }
 ```
 
 ## Source files
 
-| Purpose | Path |
+| Назначение | Путь |
 | --- | --- |
-| Runtime component | `src/components/PinInput/PinInput.tsx` |
-| Public props | `src/components/PinInput/PinInput.types.ts` |
-| Local export | `src/components/PinInput/index.ts` |
-| Styles entry | `src/components/PinInput/styles/index.ts` |
-| Storybook | `src/stories/PinInput.stories.tsx` |
+| Runtime | [src/components/PinInput/PinInput.tsx](PinInput.tsx) |
+| Props / shared types | [src/components/PinInput/PinInput.types.ts](PinInput.types.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/PinInput.stories.tsx](../../stories/PinInput.stories.tsx) |
+| Code Connect | [src/components/PinInput/PinInput.figma.js](PinInput.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `size` | `Size \| undefined` | optional | См. типы и пример выше |
+| `type` | `PinInputType \| undefined` | optional | См. типы и пример выше |
+| `error` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `value` | `string \| undefined` | optional | См. типы и пример выше |
+| `onChange` | `((value: string) => void) \| undefined` | optional | См. типы и пример выше |
+| `onComplete` | `((value: string) => void) \| undefined` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Code prop | Code values | Default | Notes |
-| --- | --- | --- | --- | --- |
-| `Size` | `size` | `xs`, `sm`, `md` | `md` | `Xs -> xs`, `Sm -> sm`, `Md -> md` |
-| `Mask` | `type` | `default`, `masked` | `default` | `Off -> default`, `On -> masked` |
-| `Error` | `error` | `boolean` | `false` | `Off -> false`, `On -> true` |
-| `Result` | `error` | `boolean` | `false` | `Error -> true`, `Normal -> false` |
-| `Filled` | `value` | `string` | `""` | `On -> "9"` (временный демо-value), `Off -> ""` |
-| `State` | partial | - | `Default` | `Disablet -> disabled`; `Mask/Filled` усиливают `value/type`; `Hover/Selected` это runtime CSS/focus |
-| `pinInputItem` | - | - | - | Temporary mapping: нет соответствующего публичного prop |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `pinInputItem` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `State` | Default, Hover, Selected, Filled, Disable, Mask | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Size` | Xs, Sm, Md | `size`; значения см. template |
+| `Error` | Off, On | `error`; значения см. template |
+| `Result` | Error, Normal | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Mask` | Off, On | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Filled` | Off, On | Композиция / нет прямого prop; см. template и Temporary mappings |
 
 ## Supported states
 
-| State | Supported in code | How to use |
-| --- | --- | --- |
-| Default | Yes | без специальных props |
-| Hover | Runtime CSS | отдельный prop не нужен |
-| Selected | Runtime focus | состояние фокуса через interaction |
-| Filled | Yes | передать `value` |
-| Disablet | Yes | `disabled` |
-| Mask | Yes | `type="masked"` и `value` |
-| Error | Yes | `error` |
+- `error`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- `value`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
 
 ## Design matching notes
 
-- `PinInput` в коде реализован как **одна ячейка** (`maxLength={1}`).
-- Многоячеечный PIN/OTP в проекте собирается композицией нескольких `PinInput` (см. `CodeInput` в `src/stories/PinInput.stories.tsx`).
-- Поэтому Figma-сет с несколькими ячейками нужно маппить на внешний layout + набор экземпляров `PinInput`, а не на отдельный runtime-компонент группы.
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item | Current mapping | Reason | Follow-up |
-| --- | --- | --- | --- |
-| `Filled=On` | `value="9"` | В Figma текстовый символ не вынесен в editable property | Если появится property для символа, маппить напрямую |
-| `pinInputItem` | не маппится | Нет соответствующего prop в `PinInputProps` | Уточнить назначение property в Figma |
-| `State=Selected` | не маппится в prop | Выбранность это focus/interaction состояние | Не требуется |
+Temporary mapping: pinInputItem has no public runtime prop.
 
-## Examples
+Temporary mapping: Figma "Filled" and "Mask" visual states imply value presence.
+PinInput accepts explicit value string, so we use demo digit "9".
 
-### Single cell
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
 
-```tsx
-<PinInput size="md" value="5" />
-```
-
-### Masked
-
-```tsx
-<PinInput size="md" type={PinInputType.Masked} value="9" />
-```
-
-### OTP group (composition)
-
-```tsx
-<div className="flex gap-2">
-  {["", "", "", ""].map((digit, idx) => (
-    <PinInput key={idx} value={digit} />
-  ))}
-</div>
-```
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

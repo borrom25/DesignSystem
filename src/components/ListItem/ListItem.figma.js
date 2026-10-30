@@ -43,7 +43,7 @@ const showCounter = instance.getBoolean("Counter");
 const showIconLeft = instance.getBoolean("Icon-left");
 const showIconRight = instance.getBoolean("Icon-right");
 const showActionsLeft = instance.getBoolean("Actions-left");
-const showActionsRight = instance.getBoolean("Actions-right");
+const showActionsRight = instance.getBoolean("Action-right");
 
 const disabled = state === "disable";
 const selected = state === "selected" || selectedVariant === "on";
@@ -51,7 +51,7 @@ const isIconOnly = iconOnly === "on";
 const variant = error === "on" ? "danger" : "default";
 
 function getConnectedInstance(propName) {
-  const connectedInstance = instance.getInstanceSwap(propName);
+  const connectedInstance = instance.findInstance(propName);
 
   if (
     connectedInstance &&
@@ -65,9 +65,9 @@ function getConnectedInstance(propName) {
 }
 
 const iconLeftCode =
-  showIconLeft || isIconOnly ? getConnectedInstance("↳ Icon-left") : undefined;
+  showIconLeft || isIconOnly ? getConnectedInstance("Icon-left") : undefined;
 const iconRightCode = showIconRight
-  ? getConnectedInstance("↳ Icon-right")
+  ? getConnectedInstance("Icon-right")
   : undefined;
 
 const iconLeftProp = iconLeftCode

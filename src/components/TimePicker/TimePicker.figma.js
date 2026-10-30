@@ -72,10 +72,8 @@ export default {
       ${requiredMark ? "required" : ""}
       ${showPlaceholder ? figma.tsx`placeholder="${textPlaceholder}"` : ""}
       ${showHint ? figma.tsx`${error ? `hintError="${hintText}"` : `hint="${hintText}"`}` : ""}
-      ${value ? figma.tsx`value="${value}"` : ""}
-      ${value ? "time={{ hours: 12, minutes: 30, seconds: 0 }}" : ""}
-      ${value ? "onChangeValue={setTimeValue}" : ""}
-      ${value ? "onChangeTime={setTime}" : ""}
+      ${value ? figma.tsx`defaultValue="${value}"` : ""}
+      ${value ? "defaultTime={{ hours: 12, minutes: 30, seconds: 0 }}" : ""}
       ${rightSlotProp}
     />
   `,

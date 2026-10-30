@@ -47,11 +47,11 @@ const showIconRight = instance.getBoolean("Icon-right");
 const textHint = instance.getString("textHint");
 const textError = instance.getString("textError");
 const textLabel = instance.getString("textLabel");
-const textPlaceholder = instance.getString("textPlaceholder");
+const textPlaceholder = instance.getString("↳ textPlaceholder");
 const textFilled = instance.getString("textFilled");
 
-const iconLeftSwap = instance.getInstanceSwap("↳ Icon-left");
-const iconRightSwap = instance.getInstanceSwap("↳ Icon-right");
+const iconLeftSwap = instance.findInstance("Icon-left");
+const iconRightSwap = instance.findInstance("Icon-right");
 const slotLeft = instance.getPropertyValue("<slotLeft>");
 const slotRight = instance.getPropertyValue("<slotRight>");
 

@@ -1,16 +1,6 @@
 # Tooltip
 
-Документация для связи Figma-компонента `Tooltip` с runtime-компонентом `Tooltip`.
-
-```text
-src/components/Tooltip/Tooltip.docs.md
-```
-
-Парный Code Connect файл:
-
-```text
-src/components/Tooltip/Tooltip.figma.js
-```
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -25,70 +15,85 @@ localExport: src/components/Tooltip/index.ts
 publicExport: src/index.ts
 storybook: src/stories/Tooltip.stories.tsx
 figmaComponent: Tooltip
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=2277-2530
 figmaNodeId: 2277:2530
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=2277-2530
 codeConnect: src/components/Tooltip/Tooltip.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
 
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
+
 ```tsx
 import { Tooltip, Button } from "borrom-ds-test";
+import { Info } from "lucide-react";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return (
-    <Tooltip>
+  return (<Tooltip>
       <Tooltip.Trigger>
-        <Button size="sm">Hover me</Button>
+        <Button size="sm">Trigger</Button>
       </Tooltip.Trigger>
       <Tooltip.Content
         title="Title"
         subTitle="Subtitle"
-        side="top"
+        side="bottom"
         align="center"
+
+
       />
-    </Tooltip>
-  );
+    </Tooltip>);
 }
 ```
 
 ## Source files
 
-| Purpose | Path |
+| Назначение | Путь |
 | --- | --- |
-| Runtime root | `src/components/Tooltip/Tooltip.tsx` |
-| Public props | `src/components/Tooltip/Tooltip.types.ts` |
-| Content layout | `src/components/Tooltip/ui/TooltipContent.tsx` |
-| Trigger wrapper | `src/components/Tooltip/ui/TooltipTrigger.tsx` |
-| Surface wrapper | `src/components/Tooltip/ui/TooltipSurface.tsx` |
-| Storybook | `src/stories/Tooltip.stories.tsx` |
+| Runtime | [src/components/Tooltip/Tooltip.tsx](Tooltip.tsx) |
+| Props / shared types | [src/components/Tooltip/Tooltip.types.ts](Tooltip.types.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/Tooltip.stories.tsx](../../stories/Tooltip.stories.tsx) |
+| Code Connect | [src/components/Tooltip/Tooltip.figma.js](Tooltip.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `open` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `defaultOpen` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `onOpenChange` | `((open: boolean) => void) \| undefined` | optional | См. типы и пример выше |
+| `children` | `ReactNode` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Code prop | Code values | Default | Notes |
-| --- | --- | --- | --- | --- |
-| `Direction` | `side` | `bottom`, `top`, `left`, `right` | `top` | `Bot -> bottom`, `Top -> top`, `Left -> left`, `Right -> right` |
-| `Position` | `align` | `start`, `center`, `end` | `center` | Для `top/bottom`: `Left/Centre/Right`; для `left/right`: `Top/Centre/Bot` |
-| `icon` + `↳ Icon` | `icon` | `LucideIcon` | - | Temporary mapping: `icon=On -> Info` |
-| `buttonsGroup` | `actionSlot` | `ReactNode` | - | Temporary mapping: demo-кнопки в actionSlot |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
 
-## Supported behavior
-
-| Behavior | Supported in code | How to use |
+| Figma property | Тип / значения | Runtime API / ограничение |
 | --- | --- | --- |
-| Open state control | Yes | `open`, `defaultOpen`, `onOpenChange` |
-| Direction | Yes | `side` |
-| Position / alignment | Yes | `align`, `alignOffset` |
-| Arrow | Yes | `showArrow`, `arrowWidth`, `arrowHeight` |
-| Max width | Yes | `maxWidth` |
-| Optional icon | Yes | `icon={LucideIcon}` |
-| Optional action block | Yes | `actionSlot={<.../>}` |
+| `↳ Icon` | INSTANCE_SWAP | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `icon` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `<slotAction>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Action` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Direction` | Bot, Top, Left, Right | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Position` | Centre, Left, Right, Bot, Top | Композиция / нет прямого prop; см. template и Temporary mappings |
+
+## Supported states
+
+- `open`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
+
+## Design matching notes
+
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item | Current mapping | Reason | Follow-up |
-| --- | --- | --- | --- |
-| `icon`/`↳ Icon` | `icon={Info}` | Runtime ждет `LucideIcon`, а Figma swap не дает прямой импорт | Заменить на точный icon import при ручной вставке |
-| `buttonsGroup` | demo `actionSlot` с двумя `Button` | В Figma это отдельный вложенный компонент, без явного runtime API для кнопок | Подменять на проектный actionSlot |
-| Title/subtitle text | `title="Title"`, `subTitle="Subtitle"` | Текст в текущем узле не отдан как верхнеуровневые text-properties | При появлении text-properties маппить напрямую |
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
+
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

@@ -1,8 +1,6 @@
 # TimePicker
 
-Документация для связи Figma component set `TimePicker` с runtime-компонентом `TimePicker`.
-
-`TimePicker` - это поле ввода времени на базе `Input`, которое открывает `TimeBar` в `Popover`. Компонент поддерживает ручной ввод, выбор времени в поповере, очистку значения, ошибки, disabled-состояние, обязательную отметку, подсказки и правый slot.
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -17,155 +15,128 @@ localExport: src/components/TimePicker/index.ts
 publicExport: src/index.ts
 storybook: src/stories/TimePicker.stories.tsx
 figmaComponent: TimePicker
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=4654-4915
 figmaNodeId: 4654:4915
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=4654-4915
 codeConnect: src/components/TimePicker/TimePicker.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
 
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
+
 ```tsx
-import { useState } from "react";
-import { TimePicker, type TimeValue } from "borrom-ds-test";
+import { TimePicker, Button } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  const [value, setValue] = useState("");
-  const [time, setTime] = useState<TimeValue | undefined>();
-
-  return (
-    <TimePicker
-      size="md"
-      label="Время начала"
-      placeholder="ЧЧ:ММ"
-      value={value}
-      time={time}
+  return (<TimePicker
+      size="xs"
       showSeconds={false}
-      onChangeValue={(nextValue) => setValue(nextValue ?? "")}
-      onChangeTime={setTime}
-      onClear={() => {
-        setValue("");
-        setTime(undefined);
-      }}
-    />
-  );
+      format="HH:mm"
+
+
+
+
+
+
+
+
+
+    />);
 }
 ```
 
 ## Source files
 
-| Purpose | Path |
+| Назначение | Путь |
 | --- | --- |
-| Runtime component | `src/components/TimePicker/TimePicker.tsx` |
-| Public props | `src/components/TimePicker/TimePicker.types.ts` |
-| Value hook | `src/components/TimePicker/hooks/useTimePickerValue.ts` |
-| Local export | `src/components/TimePicker/index.ts` |
-| Styles entry | `src/components/TimePicker/styles/index.ts` |
-| Storybook | `src/stories/TimePicker.stories.tsx` |
-| Code Connect | `src/components/TimePicker/TimePicker.figma.js` |
+| Runtime | [src/components/TimePicker/TimePicker.tsx](TimePicker.tsx) |
+| Props / shared types | [src/components/TimePicker/TimePicker.types.ts](TimePicker.types.ts) |
+| Props / shared types | [src/types/field.ts](../../types/field.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/TimePicker.stories.tsx](../../stories/TimePicker.stories.tsx) |
+| Code Connect | [src/components/TimePicker/TimePicker.figma.js](TimePicker.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `id` | `string \| undefined` | optional | См. типы и пример выше |
+| `size` | `Size \| undefined` | optional | См. типы и пример выше |
+| `disabled` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `value` | `string \| undefined` | optional | См. типы и пример выше |
+| `time` | `TimeValue \| undefined` | optional | См. типы и пример выше |
+| `defaultValue` | `string \| undefined` | optional | См. типы и пример выше |
+| `defaultTime` | `TimeValue \| undefined` | optional | См. типы и пример выше |
+| `onChangeValue` | `((value?: string) => void) \| undefined` | optional | См. типы и пример выше |
+| `onChangeTime` | `((value?: TimeValue) => void) \| undefined` | optional | См. типы и пример выше |
+| `onClear` | `(() => void) \| undefined` | optional | См. типы и пример выше |
+| `placeholder` | `string \| undefined` | optional | См. типы и пример выше |
+| `className` | `string \| undefined` | optional | См. типы и пример выше |
+| `fieldClassName` | `string \| undefined` | optional | См. типы и пример выше |
+| `error` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `format` | `string \| undefined` | optional | См. типы и пример выше |
+| `minTime` | `string \| TimeValue \| undefined` | optional | См. типы и пример выше |
+| `maxTime` | `string \| TimeValue \| undefined` | optional | См. типы и пример выше |
+| `showSeconds` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `use24Hour` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `showNowButton` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `showConfirmButton` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `nowButtonText` | `string \| undefined` | optional | См. типы и пример выше |
+| `confirmButtonText` | `string \| undefined` | optional | См. типы и пример выше |
+| `rightSlot` | `ReactNode` | optional | См. типы и пример выше |
+| `label` | `string \| undefined` | optional | См. типы и пример выше |
+| `subtitle` | `string \| undefined` | optional | См. типы и пример выше |
+| `required` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `hint` | `string \| undefined` | optional | См. типы и пример выше |
+| `hintError` | `string \| undefined` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Figma values | Code prop | Code values | Default | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `Size` | `Xs`, `Sm`, `Md` | `size` | `xs`, `sm`, `md` | `md` | Code Connect always emits `size` to match selected Figma variant |
-| `Error` | `Off`, `On` | `error` | `boolean` | `false` | Changes field error styling; error text comes from `hintError` |
-| `Disable` | `Off`, `On` | `disabled` | `boolean` | `false` | Blocks input, clear action and popover interaction |
-| `Filled` | `Off`, `On` | `value`, `time` | `string`, `TimeValue` | - | Filled visual maps to a controlled value sample |
-| `State` | `Default` | - | - | - | Basic visual state |
-| `State` | `Hover` | runtime CSS | - | - | Hover is handled by field styles, not by a public prop |
-| `State` | `Selected` | runtime interaction | - | - | Focus/open state is managed by `Input` and `Popover` |
-| `State` | `Input text` | `value` | `string` | - | Typing state maps to a controlled string value |
-| `State` | `Filled in` | `value`, `time` | `string`, `TimeValue` | - | Filled state maps to a selected time |
-| `State` | `Filled in Hover` | `value`, runtime CSS | `string` | - | Value is mapped, hover remains CSS-driven |
-| `Label` + `textLabel` | boolean + text | `label` | `string` | `Время` | Label is emitted only when `Label=On` |
-| `Placeholder` + `textPlaceholder` | boolean + text | `placeholder` | `string` | `ЧЧ:ММ` | Placeholder is emitted only when `Placeholder=On` |
-| `requiredMark` | boolean | `required` | `boolean` | `false` | Renders required mark through shared field API |
-| `Hint` + `textHint` | boolean + text | `hint` | `string` | - | Used when `Error=Off` |
-| `Hint` + `textError` | boolean + text | `hintError` | `string` | - | Used when `Error=On` |
-| `slotRight` + `<slotRight>` | boolean + slot | `rightSlot` | `ReactNode` | - | Optional content after clock/clear affordance |
-| Clock icon instance | nested icon | internal suffix | - | `Clock` | Runtime owns the default empty-state icon |
-| Close icon instance | nested icon | internal clear | - | `CloseBtn` | Runtime shows clear button when there is a value |
-| Popover content | not in this Figma node | `TimeBar` props | `showSeconds`, `use24Hour`, buttons | see defaults | `TimePicker` renders `TimeBar` internally inside `PopoverSurface` |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
 
-## Supported behavior
-
-| Behavior | Supported in code | How to use |
+| Figma property | Тип / значения | Runtime API / ограничение |
 | --- | --- | --- |
-| Manual input | Yes | `value`, `onChangeValue`, `format` |
-| Time selection in popover | Yes | `time`, `onChangeTime`; popover renders `TimeBar` |
-| Controlled value | Yes | `value` + `onChangeValue` |
-| Controlled structured time | Yes | `time` + `onChangeTime` |
-| Clear action | Yes | `onClear`; runtime shows `CloseBtn` when value is non-empty |
-| Disabled | Yes | `<TimePicker disabled />` |
-| Error | Yes | `<TimePicker error hintError="..." />` |
-| Required mark | Yes | `<TimePicker required />` |
-| HH:MM:SS | Yes | omit `showSeconds` or set `showSeconds={true}` |
-| HH:MM | Yes | `<TimePicker showSeconds={false} format="HH:mm" />` |
-| 24-hour mode | Yes | omit `use24Hour` or set `use24Hour={true}` |
-| Right slot | Yes | `rightSlot={<Button ... />}` |
-| Custom popover button text | Yes | `nowButtonText`, `confirmButtonText` |
+| `<slotRight>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `textHint` | TEXT | `hint`; значения см. template |
+| `Hint` | BOOLEAN | `hint / hintError`; значения см. template |
+| `slotRight` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `textError` | TEXT | `hintError`; значения см. template |
+| `requiredMark` | BOOLEAN | `required`; значения см. template |
+| `textPlaceholder` | TEXT | `placeholder`; значения см. template |
+| `textLabel` | TEXT | `label`; значения см. template |
+| `textFilled` | TEXT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Placeholder` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Label` | BOOLEAN | `label`; значения см. template |
+| `State` | Default, Hover, Selected, Input text, Filled in, Filled in Hover | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Size` | Xs, Sm, Md | `size`; значения см. template |
+| `Error` | Off, On | `error`; значения см. template |
+| `Disable` | Off, On | `disabled`; значения см. template |
+| `Filled` | Off, On | Композиция / нет прямого prop; см. template и Temporary mappings |
 
-## Runtime behavior
+## Supported states
 
-- `TimePicker` renders `Input` as the trigger and `TimeBar` inside `Popover.Content`.
-- The displayed value is formatted by `format`; if `format` is not provided, runtime uses `HH:mm:ss` when `showSeconds=true` and `HH:mm` when `showSeconds=false`.
-- Manual input and selection in `TimeBar` are synchronized through `useTimePickerValue`.
-- `onChangeValue` receives the formatted string, while `onChangeTime` receives `{ hours, minutes, seconds }`.
-- `onClear` clears both string and structured time in the internal hook; controlled consumers should clear both external states too.
-- The clock icon and clear button are internal suffix behavior, so they should not be manually reimplemented in usage code.
+- `disabled`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- `error`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- `value`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- `defaultValue`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
+
+## Design matching notes
+
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item | Current mapping | Reason | Follow-up |
-| --- | --- | --- | --- |
-| `State=Hover`, `State=Filled in Hover` | runtime CSS | Runtime has no persistent hover prop | Verify visually in Storybook/browser after style changes |
-| `State=Selected` | interaction/open state | Focus and popover opening are controlled by user interaction | Use real focus/click interaction in the app |
-| `State=Input text` | sample `value="12:30"` | Figma visual represents typing, but runtime API receives a plain string | Replace sample with product state in real screens |
-| `Filled=On` / `textFilled` | `value` plus `time` sample | Figma text can be placeholder-like; runtime needs a valid time string for reliable examples | Use a valid product value such as `12:30` |
-| `slotRight` fallback | `<Button size="xs">Button</Button>` | Slot content can be empty or not connected to Code Connect | Replace with the actual action node in product code |
-| Seconds mode | Code Connect emits `showSeconds={false}` for HH:MM visual | Figma field shows `ЧЧ:ММ`, while runtime default popover supports seconds | Add a Figma property if seconds visibility must be generated from design |
+Temporary mapping:
+Figma exposes focus/hover/typing states visually, while TimePicker runtime
+handles them through Input CSS, typed value and Popover + TimeBar interaction.
 
-## Examples
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
 
-### Basic
-
-```tsx
-<TimePicker size="md" label="Время" placeholder="ЧЧ:ММ" showSeconds={false} />
-```
-
-### Filled
-
-```tsx
-<TimePicker
-  size="md"
-  label="Время начала"
-  value="12:30"
-  time={{ hours: 12, minutes: 30, seconds: 0 }}
-  showSeconds={false}
-  onChangeValue={(nextValue) => setValue(nextValue ?? "")}
-  onChangeTime={setTime}
-/>
-```
-
-### Error
-
-```tsx
-<TimePicker
-  error
-  label="Время"
-  hintError="Проверьте время"
-  placeholder="ЧЧ:ММ"
-  showSeconds={false}
-/>
-```
-
-### With Right Slot
-
-```tsx
-<TimePicker
-  label="Время"
-  showSeconds={false}
-  rightSlot={<Button size="xs">Button</Button>}
-/>
-```
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

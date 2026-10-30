@@ -14,7 +14,8 @@ const result = instance.getEnum("Result", {
   Positive: "positive",
 });
 
-const hasNameStep = instance.getBoolean("nameStep1");
+// Temporary mapping: names are nested inside <slotStep>, not a root boolean.
+const hasNameStep = true;
 const isPositive = result === "positive";
 const isMobile = media === "mobile";
 

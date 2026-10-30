@@ -16,6 +16,8 @@ const state = instance.getEnum("State", {
   Hover: "hover",
   loading: "loading",
   Error: "error",
+  "Filled-Hover": "filledHover",
+  Disable: "disable",
 });
 
 const overlay = instance.getEnum("Overlay", {
@@ -30,12 +32,12 @@ const errorVariant = instance.getEnum("Error", {
 
 const isError = state === "error" || errorVariant === "on";
 const isLoading = state === "loading";
-const isFilled = state === "filled";
+const isFilled = state === "filled" || state === "filledHover";
 
 // Temporary mapping: Figma keeps stateful visuals. Runtime API needs a real
 // File value to render preview mode.
 const filledProp = isFilled
-  ? figma.tsx`defaultValue={new File(["demo"], "name.file", { type: "image/jpeg" })}`
+  ? figma.tsx`defaultValue={new File([Uint8Array.from(atob("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a5MsAAAAASUVORK5CYII="), (c) => c.charCodeAt(0))], "example.png", { type: "image/png" })}`
   : "";
 
 export default {
@@ -44,6 +46,7 @@ export default {
       size="${size}"
       textUpload="Загрузить"
       ${isError ? "error" : ""}
+      ${state === "disable" ? "disabled" : ""}
       ${isLoading ? 'loading progress={1} textLoading="Загрузка"' : ""}
       ${filledProp}
     />

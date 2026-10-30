@@ -1,8 +1,6 @@
 # InputImg
 
-Документация для связи Figma component `InputImage` с runtime-компонентом `InputImg`.
-
-Ссылку из Figma можно вести на этот файл, если нужна документация, или на `InputImg.figma.js`, если нужен Code Connect.
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -17,106 +15,106 @@ localExport: src/components/InputImg/index.ts
 publicExport: src/index.ts
 storybook: src/stories/InputImg.stories.tsx
 figmaComponent: InputImage
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=762-481
 figmaNodeId: 762:481
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=762-481
 codeConnect: src/components/InputImg/InputImg.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
+
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
 
 ```tsx
 import { InputImg } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return (
-    <InputImg
-      size="md"
-      label="Изображение"
-      hint="Поддерживаются JPG, PNG, WEBP"
-      accept="image/*"
-    />
-  );
+  return (<InputImg
+      size="xs"
+      textUpload="Загрузить"
+
+
+
+
+    />);
 }
 ```
 
 ## Source files
 
-| Purpose           | Path                                        |
-| ----------------- | ------------------------------------------- |
-| Runtime component | `src/components/InputImg/InputImg.tsx`      |
-| Public props      | `src/components/InputImg/InputImg.types.ts` |
-| Local export      | `src/components/InputImg/index.ts`          |
-| Styles entry      | `src/components/InputImg/styles/index.ts`   |
-| Storybook         | `src/stories/InputImg.stories.tsx`          |
-| Code Connect      | `src/components/InputImg/InputImg.figma.js` |
+| Назначение | Путь |
+| --- | --- |
+| Runtime | [src/components/InputImg/InputImg.tsx](InputImg.tsx) |
+| Props / shared types | [src/components/InputImg/InputImg.types.ts](InputImg.types.ts) |
+| Props / shared types | [src/types/field.ts](../../types/field.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/InputImg.stories.tsx](../../stories/InputImg.stories.tsx) |
+| Code Connect | [src/components/InputImg/InputImg.figma.js](InputImg.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `size` | `Size \| undefined` | optional | См. типы и пример выше |
+| `error` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `fill` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `className` | `string \| undefined` | optional | См. типы и пример выше |
+| `onPreviewClick` | `(() => void) \| undefined` | optional | См. типы и пример выше |
+| `label` | `string \| undefined` | optional | См. типы и пример выше |
+| `subtitle` | `string \| undefined` | optional | См. типы и пример выше |
+| `hint` | `string \| undefined` | optional | См. типы и пример выше |
+| `hintError` | `string \| undefined` | optional | См. типы и пример выше |
+| `value` | `InputImgValue \| undefined` | optional | См. типы и пример выше |
+| `defaultValue` | `InputImgValue \| undefined` | optional | См. типы и пример выше |
+| `onChange` | `((file: File \| null) => void) \| undefined` | optional | См. типы и пример выше |
+| `onBeforeUpload` | `((file: File) => void) \| undefined` | optional | См. типы и пример выше |
+| `maxSize` | `number \| undefined` | optional | См. типы и пример выше |
+| `validateFile` | `UploadValidateFile \| undefined` | optional | См. типы и пример выше |
+| `onValidationError` | `UploadValidationErrorHandler \| undefined` | optional | См. типы и пример выше |
+| `onSizeError` | `((file: File) => void) \| undefined` | optional | См. типы и пример выше |
+| `onAcceptError` | `((file: File) => void) \| undefined` | optional | См. типы и пример выше |
+| `previewHoverEnabled` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `previewRemoveEnabled` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `previewZoomEnabled` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `textUpload` | `string \| undefined` | optional | См. типы и пример выше |
+| `textLoading` | `string \| undefined` | optional | См. типы и пример выше |
+| `loading` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `progress` | `number \| undefined` | optional | См. типы и пример выше |
+| `onCancelUpload` | `(() => void) \| undefined` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Figma values       | Code prop      | Code values                   | Default     | Notes                                                                               |
-| ------------------------ | ------------------ | -------------- | ----------------------------- | ----------- | ----------------------------------------------------------------------------------- |
-| `Size`                   | `Xs`, `Sm`, `Md`   | `size`         | `xs`, `sm`, `md`              | `md`        | Direct enum mapping                                                                 |
-| `State`                  | `loading`          | `loading`      | `true`                        | `false`     | Loading mode                                                                        |
-| `State`                  | `Error`            | `error`        | `true`                        | `false`     | Error mode                                                                          |
-| `Error`                  | `On`               | `error`        | `true`                        | `false`     | Duplicates `State=Error`                                                            |
-| `State`                  | `Filled`           | `defaultValue` | `File`                        | -           | Temporary mapping: preview state in Figma maps to placeholder image file in runtime |
-| `State`                  | `Default`, `Hover` | -              | CSS/runtime interaction state | -           | Hover is runtime CSS/drag interaction, not public prop                              |
-| `Overlay`                | `Default`, `Hover` | -              | CSS hover overlay             | -           | Overlay is internal preview hover behavior, no public prop                          |
-| Text `Загрузить`         | text layer         | `textUpload`   | `string`                      | `Загрузить` | Temporary mapping from design text layer                                            |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `State` | Default, Filled, Hover, loading, Error, Filled-Hover, Disable | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Size` | Xs, Sm, Md | `size`; значения см. template |
+| `Overlay` | Default, Hover | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Error` | Off, On | `error`; значения см. template |
 
 ## Supported states
 
-| State           | Supported in code | How to use                                |
-| --------------- | ----------------- | ----------------------------------------- |
-| Default         | Yes               | omit state props                          |
-| Hover           | Yes               | runtime CSS hover styles, no prop         |
-| Filled preview  | Yes               | pass `value` / `defaultValue` with `File` |
-| Loading         | Yes               | `<InputImg loading progress={40} />`      |
-| Error           | Yes               | `<InputImg error hintError="..." />`      |
-| Disabled        | Yes               | `<InputImg disabled />`                   |
-| Overlay actions | Yes               | shown on preview hover, internal behavior |
+- `loading`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- `error`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- `value`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- `defaultValue`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
 
 ## Design matching notes
 
-- Figma `InputImage` maps to public `InputImg` from `borrom-ds-test`.
-- Runtime is split into two internal states: `DropZone` (empty/loading) and `ImagePreview` (filled).
-- Figma `Overlay` variant corresponds to internal hover overlay over preview image with action buttons; this is not a separate public prop.
-- `InputImg` supports only one file (`File | null`) and does not expose a list API.
-- Runtime visual values come from `src/components/InputImg/styles` and shared tokens.
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item                       | Current mapping                                | Reason                                                                  | Follow-up                                                            |
-| -------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `State=Filled`             | `defaultValue={new File(...)}` in Code Connect | Figma stores visual filled state, runtime requires actual `File` object | For product snippets, replace demo file with real controlled `value` |
-| `State=Hover`              | no prop                                        | Hover is CSS/interaction state                                          | Keep as runtime behavior; no API expansion needed                    |
-| `Overlay=Hover`            | metadata only                                  | Overlay actions are internal preview UI                                 | Keep internal behavior unless product requests explicit control      |
-| `Error=On` + `State=Error` | both map to `error`                            | Duplicated semantics in Figma variants                                  | Consider simplifying Figma variants to one error source              |
+Temporary mapping: Figma keeps stateful visuals. Runtime API needs a real
+File value to render preview mode.
 
-## Examples
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
 
-### Basic
-
-```tsx
-<InputImg size="md" label="Изображение" hint="Поддерживаются JPG, PNG, WEBP" />
-```
-
-### Loading
-
-```tsx
-<InputImg loading progress={32} textLoading="Загрузка" />
-```
-
-### Filled Preview
-
-```tsx
-<InputImg
-  defaultValue={new File(["demo"], "preview.jpg", { type: "image/jpeg" })}
-/>
-```
-
-### Error
-
-```tsx
-<InputImg error hintError="Не удалось загрузить изображение" />
-```
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

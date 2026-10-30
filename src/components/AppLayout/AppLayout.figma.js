@@ -7,7 +7,7 @@ const instance = figma.selectedInstance;
 
 const page = instance.getEnum("Page", {
   Main: "main",
-  Inside: "inside",
+  insidePage: "inside",
   Process: "process",
 });
 
@@ -98,7 +98,6 @@ const processChildren = figma.tsx`
     <BarMenu
       value="home"
       onSelect={() => {}}
-      onMoreClick={() => {}}
       items={${bottomBarItems}}
     />
   </>

@@ -1,6 +1,6 @@
 # Input
 
-Документация для связи Figma-компонента `🚧 Input` с runtime-компонентом `Input`.
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -14,119 +14,124 @@ types: src/components/Input/Input.types.ts
 localExport: src/components/Input/index.ts
 publicExport: src/index.ts
 storybook: src/stories/Input.stories.tsx
-figmaComponent: 🚧 Input
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=4296-4114
+figmaComponent: Input
 figmaNodeId: 4296:4114
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=4296-4114
 codeConnect: src/components/Input/Input.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
 
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
+
 ```tsx
 import { Input } from "borrom-ds-test";
+import { Check } from "lucide-react";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return (
-    <Input
-      size="md"
-      label="Label"
-      placeholder="Placeholder"
-      hint="Hint"
-      required
-    />
-  );
+  return (<Input
+      size="xs"
+
+
+
+
+
+
+
+
+
+
+
+
+
+    />);
 }
 ```
 
 ## Source files
 
-| Purpose | Path |
+| Назначение | Путь |
 | --- | --- |
-| Runtime component | `src/components/Input/Input.tsx` |
-| Public props | `src/components/Input/Input.types.ts` |
-| Local export | `src/components/Input/index.ts` |
-| Styles entry | `src/components/Input/styles/index.ts` |
-| Storybook | `src/stories/Input.stories.tsx` |
-| Code Connect | `src/components/Input/Input.figma.js` |
+| Runtime | [src/components/Input/Input.tsx](Input.tsx) |
+| Props / shared types | [src/components/Input/Input.types.ts](Input.types.ts) |
+| Props / shared types | [src/types/field.ts](../../types/field.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/Input.stories.tsx](../../stories/Input.stories.tsx) |
+| Code Connect | [src/components/Input/Input.figma.js](Input.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `size` | `Size \| undefined` | optional | См. типы и пример выше |
+| `variant` | `InputVariant \| undefined` | optional | См. типы и пример выше |
+| `error` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `iconLeft` | `LucideIcon \| undefined` | optional | См. типы и пример выше |
+| `iconRight` | `LucideIcon \| undefined` | optional | См. типы и пример выше |
+| `prefix` | `ReactNode` | optional | См. типы и пример выше |
+| `suffix` | `ReactNode` | optional | См. типы и пример выше |
+| `count` | `number \| undefined` | optional | См. типы и пример выше |
+| `maxCount` | `number \| undefined` | optional | См. типы и пример выше |
+| `inputClassName` | `string \| undefined` | optional | См. типы и пример выше |
+| `clearable` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `onClear` | `(() => void) \| undefined` | optional | См. типы и пример выше |
+| `labelActive` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `ref` | `Ref<HTMLInputElement> \| undefined` | optional | См. типы и пример выше |
+| `label` | `string \| undefined` | optional | См. типы и пример выше |
+| `subtitle` | `string \| undefined` | optional | См. типы и пример выше |
+| `hint` | `string \| undefined` | optional | См. типы и пример выше |
+| `hintError` | `string \| undefined` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Code prop | Code values | Default | Notes |
-| --- | --- | --- | --- | --- |
-| `Size` | `size` | `xs`, `sm`, `md` | `md` | `Xs -> xs`, `Sm -> sm`, `Md -> md` |
-| `Error` | `error` | `boolean` | `false` | `Off -> false`, `On -> true` |
-| `Disable` | `disabled` | `boolean` | `false` | `Off -> false`, `On -> true` |
-| `Label` + `textLabel` | `label` | `string` | - | При `Label=On` используется `textLabel` |
-| `requiredMark` | `required` | `boolean` | `false` | Показывает required-mark через API поля |
-| `Hint` + `textHint`/`textError` | `hint` / `hintError` | `string` | - | При `Error=On` используется `hintError=textError`, иначе `hint=textHint` |
-| `Placeholder` + `textPlaceholder` | `placeholder` | `string` | - | При `Placeholder=On` используется `textPlaceholder` |
-| `Filled` + `textFilled` | `defaultValue` | `string` | - | При `Filled=On` используется `textFilled` |
-| `Counter` | `count`, `maxCount` | `number` | - | Temporary mapping: демо-значения `count=4`, `maxCount=10` |
-| `icon-left`, `↳ Icon-left` | `iconLeft` | `LucideIcon` | - | Temporary mapping на `Check` |
-| `Icon-right`, `↳ Icon-right` | `iconRight` | `LucideIcon` | - | Temporary mapping на `Check` |
-| `slotLeft`, `<slotLeft>` | `prefix` | `ReactNode` | - | Temporary mapping: демо-узел `<span>Slot left</span>` |
-| `slotRight`, `<slotRight>` | `suffix` | `ReactNode` | - | Temporary mapping: демо-узел `<span>Slot right</span>` |
-| `State` | partial | - | `Default` | `Selected -> autoFocus`; `Hover/Input text/Filled in Hover` — runtime CSS/interaction |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `<slotLeft>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `<slotRight>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `textHint` | TEXT | `hint`; значения см. template |
+| `Hint` | BOOLEAN | `hint / hintError`; значения см. template |
+| `slotLeft` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `slotRight` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `icon-left` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Icon-right` | BOOLEAN | `iconRight`; значения см. template |
+| `Counter` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `textError` | TEXT | `hintError`; значения см. template |
+| `requiredMark` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `↳ textPlaceholder` | TEXT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `textLabel` | TEXT | `label`; значения см. template |
+| `textFilled` | TEXT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Placeholder` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Label` | BOOLEAN | `label`; значения см. template |
+| `Suffix` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `textSuffix` | TEXT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `State` | Default, Hover, Selected, Filled in, Input text, Filled in Hover | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Size` | Xs, Sm, Md | `size`; значения см. template |
+| `Error` | Off, On | `error`; значения см. template |
+| `Disable` | Off, On | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Filled` | Off, On | Композиция / нет прямого prop; см. template и Temporary mappings |
 
 ## Supported states
 
-| State | Supported in code | How to use |
-| --- | --- | --- |
-| Default | Yes | без специальных props |
-| Hover | Runtime CSS | отдельный prop не нужен |
-| Selected | Partial | `autoFocus` только для стартового фокуса |
-| Input text | Yes | `defaultValue`/`value` |
-| Filled in | Yes | `defaultValue`/`value` |
-| Filled in Hover | Runtime CSS + value | `defaultValue`/`value` |
-| Disabled | Yes | `disabled` |
-| Error | Yes | `error` + `hintError` |
+- `error`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
 
-## Search preset
+## Design matching notes
 
-`Input` можно использовать как search:
-
-```tsx
-import { Search } from "lucide-react";
-import { Input } from "borrom-ds-test";
-
-<Input type="search" iconLeft={Search} placeholder="Поиск" />;
-```
-
-Это не отдельный runtime-компонент `Search`, а пресет на базе `Input`.
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item | Current mapping | Reason | Follow-up |
-| --- | --- | --- | --- |
-| `↳ Icon-left`, `↳ Icon-right` | `Check` из `lucide-react` | API ожидает `LucideIcon`, а Figma swap не дает прямой code-value для импорта | При появлении стабильного icon mapping обновить на точный импорт |
-| `slotLeft`, `slotRight` | демо `prefix/suffix` | SLOT-поля в Figma не дают прямой runtime-snippet | При необходимости заменить вручную на проектный узел |
-| `Counter` | `count=4`, `maxCount=10` | В Figma нет отдельных числовых properties | Добавить numeric properties в Figma для точного mapping |
-| `State=Selected` | `autoFocus` | В API нет персистентного selected-state prop | Управлять фокусом на уровне интеграции |
+Temporary mapping: current runtime API expects icon components and ReactNode
+for slots, while Figma swaps/slots here do not provide direct runtime snippets.
 
-## Examples
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
 
-### Basic
-
-```tsx
-<Input size="sm" label="Label" placeholder="Placeholder" />
-```
-
-### Error
-
-```tsx
-<Input error hintError="Ошибка валидации" />
-```
-
-### With adornments
-
-```tsx
-import { Check } from "lucide-react";
-
-<Input
-  iconLeft={Check}
-  iconRight={Check}
-  prefix={<span>Before</span>}
-  suffix={<span>After</span>}
-/>;
-```
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

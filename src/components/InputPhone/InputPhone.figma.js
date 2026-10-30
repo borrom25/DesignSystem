@@ -37,7 +37,8 @@ const filled = instance.getEnum("Filled", {
 const showHint = instance.getBoolean("Hint");
 const showLabel = instance.getBoolean("Label");
 const requiredMark = instance.getBoolean("requiredMark");
-const slotLeft = instance.getBoolean("slotLeft");
+// Temporary mapping: country flag belongs to the runtime phone input chrome.
+const slotLeft = true;
 
 const textHint = instance.getString("textHint");
 const textError = instance.getString("textError");
@@ -50,8 +51,8 @@ const hasValue =
   filled || state === "inputText" || state === "filledIn" || state === "filledInHover";
 const hintText = error ? textError : textHint;
 
-// Temporary mapping: runtime prefix is fixed (+7), there is no arbitrary slot API.
-// slotLeft is represented by showFlagIsland toggle only.
+// Temporary mapping: runtime country selection owns the dial code and flag.
+// There is no slotLeft property in the current Figma component.
 const showFlagIsland = slotLeft;
 
 const fallbackPhone = "9991234567";

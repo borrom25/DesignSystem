@@ -1,8 +1,6 @@
 # ListItem
 
-Документация для связи Figma component `ListItem` с runtime-компонентом `ListItem`.
-
-Ссылку из Figma можно вести на этот файл, если нужна документация, или на `ListItem.figma.js`, если нужен Code Connect.
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -12,180 +10,130 @@ package: borrom-ds-test
 import: import { ListItem } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/ListItem/ListItem.tsx
-types: src/components/ListItem/ListItem.types.ts
+types: src/types/polymorphic.ts
 localExport: src/components/ListItem/index.ts
 publicExport: src/index.ts
 storybook: src/stories/ListItem.stories.tsx
 figmaComponent: ListItem
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=400-1335
 figmaNodeId: 400:1335
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=400-1335
 codeConnect: src/components/ListItem/ListItem.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
+
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
 
 ```tsx
 import { ListItem } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return <ListItem title="Title" size="xs" />;
+  return (<ListItem
+          title="Пример"
+          size="xs"
+          variant="default"
+
+
+
+
+
+
+
+        />);
 }
 ```
 
 ## Source files
 
-| Purpose | Path |
+| Назначение | Путь |
 | --- | --- |
-| Runtime component | `src/components/ListItem/ListItem.tsx` |
-| Public props | `src/components/ListItem/ListItem.types.ts` |
-| Local export | `src/components/ListItem/index.ts` |
-| Styles entry | `src/components/ListItem/styles/index.ts` |
-| Storybook | `src/stories/ListItem.stories.tsx` |
-| Code Connect | `src/components/ListItem/ListItem.figma.js` |
+| Runtime | [src/components/ListItem/ListItem.tsx](ListItem.tsx) |
+| Props / shared types | [src/types/polymorphic.ts](../../types/polymorphic.ts) |
+| Props / shared types | [src/components/ListItem/ListItem.types.ts](ListItem.types.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/ListItem.stories.tsx](../../stories/ListItem.stories.tsx) |
+| Code Connect | [src/components/ListItem/ListItem.figma.js](ListItem.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | required (зависит от union) | См. типы и пример выше |
+| `disabled` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `size` | `Size \| undefined` | optional | См. типы и пример выше |
+| `variant` | `ListItemVariant \| undefined` | optional | См. типы и пример выше |
+| `selected` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `visualSelected` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `iconOnly` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `indeterminate` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `ref` | `Ref<HTMLButtonElement> \| undefined` | optional | См. типы и пример выше |
+| `scaling` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `leading` | `undefined` | optional | См. типы и пример выше |
+| `prefix` | `ReactNode` | optional | См. типы и пример выше |
+| `suffix` | `ReactNode` | optional | См. типы и пример выше |
+| `wrapText` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `asChild` | `true` | required (зависит от union) | См. типы и пример выше |
+| `checkbox` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `radio` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `avatar` | `Omit<AvatarProps, "style" \| "size"> \| undefined` | optional | См. типы и пример выше |
+| `iconLeft` | `LucideIcon \| undefined` | optional | См. типы и пример выше |
+| `iconRight` | `LucideIcon \| undefined` | optional | См. типы и пример выше |
+| `hideSelectedOutline` | `boolean \| undefined` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Figma values | Code prop | Code values | Default | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `↳ textTitle` | text | `title` or `children` | `string` / `ReactNode` | - | Use `title` for plain text; use `children` for custom content. Do not pass both. |
-| `Size` | `Xs`, `Sm`, `Md` | `size` | `xs`, `sm`, `md` | `xs` | Direct enum mapping from Figma title case to code lowercase. |
-| `State` | `Default` | - | - | - | Default runtime state; omit state props. |
-| `State` | `Selected` | `selected` | `true` | `false` | Figma also has separate `selected`; both map to the same code prop. |
-| `Selected` | `Off`, `On` | `selected` | `boolean` | `false` | Controls `aria-pressed` and selected visual state when `visualSelected` is enabled. |
-| `State` | `Hover` | - | CSS runtime state | - | Hover is implemented by runtime CSS and is not exposed as a prop. |
-| `State` | `Disable` | `disabled` | `true` | `false` | Maps to the button `disabled` attribute and `aria-disabled`. |
-| `iconOnly` | `Off`, `On` | `iconOnly` | `boolean` | `false` | In icon-only mode text is visually hidden/collapsed; provide an accessible label. |
-| `Error` | `Off`, `On` | `variant` | `danger` when `On`, `default` when `Off` | `default` | Temporary mapping: runtime API uses `variant`, Figma exposes an `Error` variant. |
-| `Icon-left` | boolean | `iconLeft` | `LucideIcon` | - | Requires passing a lucide icon component, for example `Settings`. |
-| `↳ Icon-left` | instance swap | `iconLeft` | `LucideIcon` | - | Code Connect outputs this only when the nested icon has Code Connect. |
-| `Icon-right` | boolean | `iconRight` | `LucideIcon` | - | Requires passing a lucide icon component, for example `ChevronRight`. |
-| `↳ Icon-right` | instance swap | `iconRight` | `LucideIcon` | - | Code Connect outputs this only when the nested icon has Code Connect. |
-| `Avatar` | boolean | `avatar` | `Omit<AvatarProps, "size" \| "style">` | - | Temporary mapping: Figma only controls visibility; Code Connect emits placeholder avatar data. |
-| `Actions-left` | boolean | `checkbox` | `boolean` | `false` | Temporary mapping: Figma left action currently maps to built-in checkbox behavior. |
-| `↳ Actions-left` | instance swap | - | - | - | Runtime supports only the built-in read-only `CheckBox`, not arbitrary left action slot. |
-| `Actions-right` | boolean | - | - | - | Not supported as a dedicated prop in runtime. |
-| `↳ Actions-right` | instance swap | - | - | - | Use `suffix` only for right-side text/content; there is no right action checkbox slot. |
-| `Suffix` | boolean | `suffix` | `ReactNode` | - | Use with `↳ textSuffix` for the visible suffix text. |
-| `↳ textSuffix` | text | `suffix` | `ReactNode` | - | Pass the text as `suffix="Suffix"` or a custom React node. |
-| `Subtitle` | boolean | - | - | - | Not supported by current runtime API. |
-| `↳ textSubtitle` | text | - | - | - | Not supported because `ListItem` renders a single title/content line. |
-| `Counter` | boolean | - | - | - | Not supported by current runtime API. |
-| `visualSelected` | not in Figma | `visualSelected` | `boolean` | `true` | Runtime-only escape hatch for `aria-pressed` visual behavior. |
-| `hideSelectedOutline` | not in Figma | `hideSelectedOutline` | `boolean` | `false` | Runtime-only variant of selected/disabled background behavior. |
-| `asChild` | not in Figma | `asChild` | `boolean` | `false` | Runtime-only composition mode via Radix Slot. |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `↳ textTitle` | TEXT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `↳ textSubtitle` | TEXT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Subtitle` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `↳ textSuffix` | TEXT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Avatar` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Suffix` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Counter` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Icon-right` | BOOLEAN | `iconRight`; значения см. template |
+| `Actions-left` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `↳ Action-left` | INSTANCE_SWAP | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Icon-left` | BOOLEAN | `iconLeft`; значения см. template |
+| `↳ Flag` | INSTANCE_SWAP | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Flag` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `<slotAction-right>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Action-right` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `State` | Default, Selected, Hover, Disable | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Size` | Xs, Sm, Md | `size`; значения см. template |
+| `iconOnly` | Off, On | `iconOnly`; значения см. template |
+| `Error` | Off, On | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Selected` | Off, On | Композиция / нет прямого prop; см. template и Temporary mappings |
 
 ## Supported states
 
-| State | Supported in code | How to use |
-| --- | --- | --- |
-| Default | Yes | `<ListItem title="Title" />` |
-| Hover | Yes | Runtime CSS hover styles, no prop |
-| Selected | Yes | `<ListItem title="Title" selected />` |
-| Disabled | Yes | `<ListItem title="Title" disabled />` |
-| Error / danger | Partial | `<ListItem title="Title" variant="danger" />` |
-| Icon left | Yes | `<ListItem title="Title" iconLeft={Settings} />` |
-| Icon right | Yes | `<ListItem title="Title" iconRight={ChevronRight} />` |
-| Icon only | Yes | `<ListItem iconOnly iconLeft={Settings} aria-label="Settings">Settings</ListItem>` |
-| Checkbox left action | Yes | `<ListItem title="Title" checkbox selected />` |
-| Avatar | Partial | `<ListItem title="Title" avatar={{ src, alt }} />`; Figma has visibility only |
-| Suffix | Yes | `<ListItem title="Title" suffix="Suffix" />` |
-| Subtitle | No | No runtime prop yet |
-| Counter | No | No runtime prop yet |
-| Right action checkbox | No | No runtime prop yet |
+- `disabled`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- `selected`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
 
 ## Design matching notes
 
-- Figma `ListItem` maps to the public `ListItem` export from `borrom-ds-test`.
-- Runtime visual values come from `src/components/ListItem/styles` and shared tokens/classes, not from raw Figma fallback CSS.
-- Figma `Error=On` should currently be represented as `variant="danger"`. This is an assumption because runtime does not expose an `error` prop.
-- Figma `State=Hover` should stay a CSS state in runtime and should not become a public prop.
-- Figma icon instance swaps need a manual lucide-react icon mapping until icon components have their own Code Connect strategy.
-- `avatar`, `actionsLeft`, `suffix`, and icon visibility are structural options in Figma; runtime needs concrete React props or nodes for the rendered content.
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item | Current mapping | Reason | Follow-up |
-| --- | --- | --- | --- |
-| `Error=On` | `variant="danger"` | Code uses `ListItemVariant.Danger`; Figma exposes an `Error` variant | Decide whether to add `error` prop or keep documenting it as danger variant |
-| `Subtitle` / `↳ textSubtitle` | Not mapped | Runtime renders one text slot and has no subtitle API | Add subtitle support or remove subtitle from Figma mapping for this component |
-| `Counter=On` | Not mapped | Runtime has no counter/count prop | Add a counter prop or compose counter content through a new slot |
-| `Actions-right=On` | Not mapped | Runtime has no right action slot | Add a right action prop if this is required by product layouts |
-| `↳ Actions-left` instance swap | `checkbox` only | Runtime supports only built-in checkbox behavior | Add a left action slot or keep Figma limited to checkbox |
-| `Avatar=On` | `avatar={{ src: "", alt: "Avatar", initials: "AB" }}` | Figma visibility does not provide runtime image data | Define default avatar data in usage examples or connect Avatar separately |
-| `↳ Icon-left` / `↳ Icon-right` instance swap | omitted unless nested icon has Code Connect | `ListItem` props require `LucideIcon`, but current icon Figma components may not be connected | Add Code Connect or a stable icon mapping strategy for lucide icons |
+Temporary mapping: Figma exposes Avatar as a visibility boolean, while the
+current ListItem API needs concrete Avatar data.
 
-## Examples
+Temporary mapping: Figma exposes only a left action slot. Runtime ListItem
+supports the built-in checkbox behavior, not arbitrary action content.
 
-### Basic
+Temporary mapping: subtitle, counter, and right action are present in Figma
+but do not have public ListItem props yet.
 
-```tsx
-<ListItem title="Title" size="xs" />
-```
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
 
-### Selected
-
-```tsx
-<ListItem title="Title" size="sm" selected />
-```
-
-### Disabled
-
-```tsx
-<ListItem title="Title" size="md" disabled />
-```
-
-### Danger
-
-```tsx
-import { ListItem, ListItemVariant } from "borrom-ds-test";
-
-<ListItem title="Title" variant={ListItemVariant.Danger} />
-```
-
-### With checkbox
-
-```tsx
-<ListItem title="Title" checkbox selected />
-```
-
-### With avatar
-
-```tsx
-<ListItem
-  title="Title"
-  avatar={{
-    src: "https://example.com/avatar.png",
-    alt: "User avatar",
-  }}
-/>
-```
-
-### With icons and suffix
-
-```tsx
-import { ChevronRight, Settings } from "lucide-react";
-
-<ListItem
-  title="Title"
-  iconLeft={Settings}
-  iconRight={ChevronRight}
-  suffix="Suffix"
-/>
-```
-
-### Icon only
-
-```tsx
-import { Settings } from "lucide-react";
-
-<ListItem iconOnly iconLeft={Settings} aria-label="Settings">
-  Settings
-</ListItem>
-```
-
-## When to use Code Connect instead
-
-Use Code Connect when Figma Dev Mode should generate a JSX snippet automatically from the selected component instance.
-
-For `ListItem`, keep Code Connect and this document consistent. Current Code Connect includes temporary mappings for `Avatar`, `Actions-left`, `Subtitle`, `Counter`, `Actions-right`, and nested icon instance swaps.
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

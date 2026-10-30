@@ -1,16 +1,6 @@
 # CheckBox
 
-Документ для привязки Figma-компонента `Сheckbox` к runtime-компоненту `CheckBox`.
-
-```text
-src/components/CheckBox/CheckBox.docs.md
-```
-
-Парный Code Connect файл:
-
-```text
-src/components/CheckBox/CheckBox.figma.js
-```
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -25,87 +15,88 @@ localExport: src/components/CheckBox/index.ts
 publicExport: src/index.ts
 storybook: src/stories/CheckBox.stories.tsx
 figmaComponent: Сheckbox
+figmaNodeId: 1422:8581
 figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=1422-8581
 codeConnect: src/components/CheckBox/CheckBox.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
+
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
 
 ```tsx
 import { CheckBox } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return <CheckBox size="md" />;
+  return (<CheckBox
+      size="xs"
+
+
+
+
+    />);
 }
 ```
 
 ## Source files
 
-| Purpose | Path |
+| Назначение | Путь |
 | --- | --- |
-| Runtime component | `src/components/CheckBox/CheckBox.tsx` |
-| Public props | `src/components/CheckBox/CheckBox.types.ts` |
-| Local export | `src/components/CheckBox/index.ts` |
-| Styles entry | `src/components/CheckBox/styles/index.ts` |
-| Storybook | `src/stories/CheckBox.stories.tsx` |
+| Runtime | [src/components/CheckBox/CheckBox.tsx](CheckBox.tsx) |
+| Props / shared types | [src/components/CheckBox/CheckBox.types.ts](CheckBox.types.ts) |
+| Props / shared types | [src/types/field.ts](../../types/field.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/CheckBox.stories.tsx](../../stories/CheckBox.stories.tsx) |
+| Code Connect | [src/components/CheckBox/CheckBox.figma.js](CheckBox.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `size` | `Size \| undefined` | optional | См. типы и пример выше |
+| `indeterminate` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `inputRef` | `Ref<HTMLInputElement> \| undefined` | optional | См. типы и пример выше |
+| `scaling` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `title` | `string \| undefined` | optional | См. типы и пример выше |
+| `label` | `string \| undefined` | optional | См. типы и пример выше |
+| `subtitle` | `string \| undefined` | optional | См. типы и пример выше |
+| `hint` | `string \| undefined` | optional | См. типы и пример выше |
+| `hintError` | `string \| undefined` | optional | См. типы и пример выше |
+| `error` | `boolean \| undefined` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Code prop | Code values | Default | Notes |
-| --- | --- | --- | --- | --- |
-| `Size` | `size` | `xs`, `sm`, `md` | `md` | `Xs -> xs`, `Sm -> sm`, `Md -> md` |
-| `Checked` | `checked` | `boolean` | `false` | `Off -> false`, `On -> true` |
-| `Disable` | `disabled` | `boolean` | `false` | `Off -> false`, `On -> true` |
-| `Indefinite` | `indeterminate` | `boolean` | `false` | `Off -> false`, `On -> true` |
-| `Title` + `textTitle` | `label` | `string` | - | Если `Title=On`, то `label=textTitle`; иначе label не передается |
-| `State` | - | - | `Default` | `Selected` и `Disable` дублируются через `checked/disabled`; `Hover` — runtime CSS |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `textTitle` | TEXT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Title` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `State` | Default, Hover, Disable, Selected | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Size` | Xs, Sm, Md | `size`; значения см. template |
+| `Checked` | Off, On | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Indefinite` | Off, On | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Disable` | Off, On | Композиция / нет прямого prop; см. template и Temporary mappings |
 
 ## Supported states
 
-| State | Supported in code | How to use |
-| --- | --- | --- |
-| Default | Yes | без специальных props |
-| Selected | Yes | `checked` |
-| Indefinite | Yes | `indeterminate` |
-| Disabled | Yes | `disabled` |
-| Hover / focus / pressed | Runtime CSS | отдельные props не требуются |
+- `error`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
 
 ## Design matching notes
 
-- `CheckBox` поддерживает поле `label` через `BaseFieldProps`, поэтому текст из Figma можно маппить напрямую.
-- `Indefinite` в runtime задается prop `indeterminate` у input.
-- В библиотеке есть отдельный `MinusCheckBox`; для узла `Сheckbox` текущий mapping строится на `CheckBox`.
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item | Current mapping | Reason | Follow-up |
-| --- | --- | --- | --- |
-| `State=Hover` | не маппится в prop | Hover задается CSS состоянием | Не требуется |
-| `State=Selected/Disable` | дублирует `Checked/Disable` | В Figma и variants, и state описывают одно состояние | При желании упростить Figma-модель |
+Temporary mapping: Figma duplicates state via Checked/Disable and State.
 
-## Examples
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
 
-### Basic
-
-```tsx
-<CheckBox size="sm" />
-```
-
-### Checked
-
-```tsx
-<CheckBox size="md" checked />
-```
-
-### Indefinite
-
-```tsx
-<CheckBox size="md" indeterminate />
-```
-
-### With label
-
-```tsx
-<CheckBox size="sm" label="Опция" />
-```
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

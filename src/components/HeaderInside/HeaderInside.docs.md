@@ -1,8 +1,6 @@
 # HeaderInside
 
-Документация для связи Figma component `Header / insidePage` с runtime-компонентом `HeaderInside`.
-
-`HeaderInside` - это header внутренней страницы. Главное отличие от `Header`: здесь есть стрелка назад (`BackButton`) и обязательный title страницы.
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -17,140 +15,100 @@ localExport: src/components/HeaderInside/index.ts
 publicExport: src/index.ts
 storybook: src/stories/HeaderInside.stories.tsx
 figmaComponent: Header / insidePage
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=658-11298
 figmaNodeId: 658:11298
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=658-11298
 codeConnect: src/components/HeaderInside/HeaderInside.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
 
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
+
 ```tsx
-import { useState } from "react";
-import { Settings } from "lucide-react";
 import { HeaderInside, TabsOverflow } from "borrom-ds-test";
+import { Settings } from "lucide-react";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  const [tab, setTab] = useState("overview");
+  return (<HeaderInside
+      title="Пример"
 
-  return (
-    <HeaderInside
-      title="Название страницы"
-      subtitle="Описание страницы"
-      showActionButton
-      actionIcon={Settings}
+
+      showActionButton={false}
       showNotification
       onBackClick={() => {}}
-      onActionClick={() => {}}
       onNotificationClick={() => {}}
+
     >
-      <TabsOverflow
-        size="sm"
-        value={tab}
-        onValueChange={setTab}
-        items={[
-          { label: "Overview", value: "overview" },
-          { label: "Activity", value: "activity" },
-          { label: "Files", value: "files" },
-        ]}
-      />
-    </HeaderInside>
-  );
+
+    </HeaderInside>);
 }
 ```
 
 ## Source files
 
-| Purpose | Path |
+| Назначение | Путь |
 | --- | --- |
-| Runtime component | `src/components/HeaderInside/HeaderInside.tsx` |
-| Public props | `src/components/HeaderInside/HeaderInside.types.ts` |
-| Layout helper | `src/components/HeaderInside/HeaderInside.utils.ts` |
-| UI parts | `src/components/HeaderInside/ui/*` |
-| Local export | `src/components/HeaderInside/index.ts` |
-| Styles entry | `src/components/HeaderInside/styles/index.ts` |
-| Storybook | `src/stories/HeaderInside.stories.tsx` |
-| Code Connect | `src/components/HeaderInside/HeaderInside.figma.js` |
+| Runtime | [src/components/HeaderInside/HeaderInside.tsx](HeaderInside.tsx) |
+| Props / shared types | [src/components/HeaderInside/HeaderInside.types.ts](HeaderInside.types.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/HeaderInside.stories.tsx](../../stories/HeaderInside.stories.tsx) |
+| Code Connect | [src/components/HeaderInside/HeaderInside.figma.js](HeaderInside.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `imageSrc` | `string \| undefined` | optional | См. типы и пример выше |
+| `title` | `ReactNode` | required (зависит от union) | См. типы и пример выше |
+| `subtitle` | `ReactNode` | optional | См. типы и пример выше |
+| `showActionButton` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `actionIcon` | `LucideIcon \| undefined` | optional | См. типы и пример выше |
+| `children` | `ReactNode` | optional | См. типы и пример выше |
+| `topSlot` | `ReactNode` | optional | См. типы и пример выше |
+| `showNotification` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `showThemeSwitcher` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `accountMenuProps` | `Omit<AccountMenuProps, "trigger"> \| undefined` | optional | См. типы и пример выше |
+| `backButtonTestId` | `string \| undefined` | optional | См. типы и пример выше |
+| `actionButtonTestId` | `string \| undefined` | optional | См. типы и пример выше |
+| `notificationButtonTestId` | `string \| undefined` | optional | См. типы и пример выше |
+| `onBackClick` | `(() => void) \| undefined` | optional | См. типы и пример выше |
+| `onActionClick` | `(() => void) \| undefined` | optional | См. типы и пример выше |
+| `onNotificationClick` | `(() => void) \| undefined` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / layer | Code prop | Code values | Default | Notes |
-| --- | --- | --- | --- | --- |
-| `Media` | provider-driven | `Desktop`, `Mobile` | - | Runtime derives layout from `ScreenProvider`; do not pass media as prop |
-| Arrow-left icon | `onBackClick` | `() => void` | - | Runtime always renders `BackButton`; this is the back arrow |
-| `↳ titlePage` | `title` | `ReactNode` | required | Page title |
-| `subtitlePage` + `↳ subtitlePage` | `subtitle` | `ReactNode` | - | Subtitle is emitted only when `subtitlePage=On` |
-| `imageSlot` + `<slotImage>` | `imageSrc` | `string` | - | Runtime supports image by URL, not arbitrary image slot JSX |
-| `titleButton` | `showActionButton`, `actionIcon`, `onActionClick` | `boolean`, `LucideIcon`, callback | `showActionButton=true` | Action button near title |
-| `tabList` + `<slotTablist>` | `children` | `ReactNode` | - | Usually `TabsOverflow` |
-| Notification button | `showNotification`, `onNotificationClick` | `boolean`, callback | `true` | Runtime owns bell button |
-| Avatar/action area | `accountMenu` | `AccountMenuElement` | - | Runtime injects avatar trigger into `AccountMenu` |
-| `slotInfo` / `<slotInfo>` | partial via `accountMenu` | `AccountMenuElement` | - | Runtime has no generic info slot; account flow belongs to `accountMenu` |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
 
-## Supported behavior
-
-| Behavior | Supported in code | How to use |
+| Figma property | Тип / значения | Runtime API / ограничение |
 | --- | --- | --- |
-| Inside page header | Yes | `<HeaderInside title="..." />` |
-| Back arrow | Yes | `onBackClick` |
-| Page title | Yes | `title` |
-| Subtitle | Yes | `subtitle` |
-| Image slot | Yes | `imageSrc` |
-| Action icon near title | Yes | `showActionButton`, `actionIcon`, `onActionClick` |
-| Tabs/content area | Yes | pass `children`, usually `TabsOverflow` |
-| Notification button | Yes | `showNotification`, `onNotificationClick` |
-| Account menu | Yes | `accountMenu={<AccountMenu ... />}` |
-| Mobile layout | Yes | automatic via `ScreenProvider` |
-| Main page menu button | No | Use `Header`, not `HeaderInside` |
+| `tabList` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `↳ titlePage` | TEXT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `imageSlot` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `subtitlePage` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `↳ subtitlePage` | TEXT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `<slotImage>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `<slotTablist>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `<slotAction>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `<slotTitle>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `titleButton` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Media` | Desktop, Mobile | Композиция / нет прямого prop; см. template и Temporary mappings |
+
+## Supported states
+
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
 
 ## Design matching notes
 
-- `HeaderInside` corresponds to Figma node `658:11298` / `Header / insidePage`.
-- `HeaderInside` is not the same component as `Header`: use this component when the page needs a back arrow.
-- Runtime separates left section (`BackButton`, `ImageSlot`, `TitleSection`, optional action) from right section (`HeaderActions`).
-- Divider visibility is computed in `getHeaderInsideLayoutState` and depends on children, action icon and mobile state.
-- `children` is the central content area. Figma tab slot should be implemented with `TabsOverflow`.
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item | Current mapping | Reason | Follow-up |
-| --- | --- | --- | --- |
-| `Media` | metadata only | Runtime layout is provider-driven, not prop-driven | Test desktop/mobile through `ScreenProvider` |
-| `<slotImage>` | `imageSrc` demo URL | Runtime accepts image URL, not arbitrary slot content | Pass product image URL in real usage |
-| `<slotInfo>` | optional `accountMenu` | Runtime has constrained right action area | Keep account controls in `AccountMenu` |
-| `<slotHead>` | not emitted | Runtime owns back button and title layout | Use `title`, `subtitle`, `imageSrc`, `actionIcon` props instead |
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
 
-## Examples
-
-### Basic
-
-```tsx
-<HeaderInside title="Название страницы" onBackClick={() => {}} />
-```
-
-### With Subtitle And Action
-
-```tsx
-import { Settings } from "lucide-react";
-
-<HeaderInside
-  title="Название страницы"
-  subtitle="Описание страницы"
-  showActionButton
-  actionIcon={Settings}
-  onBackClick={() => {}}
-/>;
-```
-
-### With Tabs
-
-```tsx
-<HeaderInside title="Название страницы" onBackClick={() => {}}>
-  <TabsOverflow
-    size="sm"
-    value="overview"
-    onValueChange={() => {}}
-    items={items}
-  />
-</HeaderInside>
-```
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

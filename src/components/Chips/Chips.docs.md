@@ -1,10 +1,6 @@
 # Chips
 
-Документация для связи Figma component `Chips` с runtime-компонентом `Chips`.
-
-В коде этот компонент называется `Chips`. Он реализован, лежит в `src/components/Chips` и публично экспортируется из `borrom-ds-test`.
-
-Ссылку из Figma можно вести на этот файл, если нужна документация, или на `Chips.figma.js`, если нужен Code Connect.
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -14,135 +10,100 @@ package: borrom-ds-test
 import: import { Chips } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/Chips/Chips.tsx
-types: src/components/Chips/Chips.types.ts
+types: src/types/polymorphic.ts
 localExport: src/components/Chips/index.ts
 publicExport: src/index.ts
 storybook: src/stories/Chips.stories.tsx
 figmaComponent: Chips
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=21552-2622
 figmaNodeId: 21552:2622
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=21552-2622
 codeConnect: src/components/Chips/Chips.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
 
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
+
 ```tsx
-import { Check, X } from "lucide-react";
 import { Chips } from "borrom-ds-test";
+import { Check, Plus, X } from "lucide-react";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return (
-    <Chips type="fill" size="sm" iconLeft={Check} iconRight={X}>
-      Chips
-    </Chips>
-  );
+  return (<Chips
+          type="fill"
+          size="xs"
+
+
+
+
+
+        >
+          Пример
+        </Chips>);
 }
 ```
 
 ## Source files
 
-| Purpose           | Path                                   |
-| ----------------- | -------------------------------------- |
-| Runtime component | `src/components/Chips/Chips.tsx`       |
-| Public props      | `src/components/Chips/Chips.types.ts`  |
-| Local export      | `src/components/Chips/index.ts`        |
-| Styles entry      | `src/components/Chips/styles/index.ts` |
-| Storybook         | `src/stories/Chips.stories.tsx`        |
-| Code Connect      | `src/components/Chips/Chips.figma.js`  |
+| Назначение | Путь |
+| --- | --- |
+| Runtime | [src/components/Chips/Chips.tsx](Chips.tsx) |
+| Props / shared types | [src/types/polymorphic.ts](../../types/polymorphic.ts) |
+| Props / shared types | [src/components/Chips/Chips.types.ts](Chips.types.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/Chips.stories.tsx](../../stories/Chips.stories.tsx) |
+| Code Connect | [src/components/Chips/Chips.figma.js](Chips.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | required (зависит от union) | См. типы и пример выше |
+| `disabled` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `size` | `Size \| undefined` | optional | См. типы и пример выше |
+| `type` | `ChipsAppearance \| undefined` | optional | См. типы и пример выше |
+| `selected` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `scaling` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `asChild` | `true` | required (зависит от union) | См. типы и пример выше |
+| `iconLeft` | `LucideIcon \| undefined` | optional | См. типы и пример выше |
+| `iconRight` | `LucideIcon \| undefined` | optional | См. типы и пример выше |
+| `count` | `number \| undefined` | optional | См. типы и пример выше |
+| `iconOnly` | `undefined` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Figma values      | Code prop   | Code values       | Default | Notes                                                                               |
-| ------------------------ | ----------------- | ----------- | ----------------- | ------- | ----------------------------------------------------------------------------------- |
-| `↳ Text`                 | text              | `children`  | `ReactNode`       | -       | Direct text content                                                                 |
-| `Type`                   | `Fill`, `Outline` | `type`      | `fill`, `outline` | `fill`  | Direct enum mapping                                                                 |
-| `Size`                   | `Xs`, `Sm`, `Md`  | `size`      | `xs`, `sm`, `md`  | `md`    | Direct enum mapping                                                                 |
-| `Selected`               | `Off`, `On`       | `selected`  | `false`, `true`   | `false` | Direct enum-to-boolean mapping                                                      |
-| `State`                  | `Selected`        | `selected`  | `true`            | `false` | Duplicates `Selected=On`                                                            |
-| `State`                  | `Disable`         | `disabled`  | `true`            | `false` | Direct state mapping                                                                |
-| `State`                  | `Hover`           | -           | CSS runtime state | -       | Not exposed as a public prop                                                        |
-| `Icon-left`              | boolean           | `iconLeft`  | `LucideIcon`      | -       | Code Connect emits `Check` when enabled                                             |
-| `↳ Icon-left`            | instance swap     | `iconLeft`  | `LucideIcon`      | -       | Temporary mapping: swapped icon component is not converted to a component reference |
-| `Icon-right`             | boolean           | `iconRight` | `LucideIcon`      | -       | Code Connect emits `X` when enabled                                                 |
-| `↳ Icon-right`           | instance swap     | `iconRight` | `LucideIcon`      | -       | Temporary mapping: swapped icon component is not converted to a component reference |
-| `iconOnly`               | `Off`, `On`       | `iconOnly`  | `LucideIcon`      | -       | When `On`, children are omitted and Code Connect emits `Plus`                       |
-| `↳ iconOnly`             | instance swap     | `iconOnly`  | `LucideIcon`      | -       | Temporary mapping: swapped icon component is not converted to a component reference |
-| `Counter`                | boolean           | `count`     | `number`          | -       | Temporary mapping: Figma exposes visibility only, code needs a numeric value        |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `Icon-left` | BOOLEAN | `iconLeft`; значения см. template |
+| `↳ textChips` | TEXT | `children`; значения см. template |
+| `Icon-right` | BOOLEAN | `iconRight`; значения см. template |
+| `Counter` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Type` | Fill, Outline | `type`; значения см. template |
+| `State` | Default, Hover, Selected, Disable | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Size` | Xs, Sm, Md | `size`; значения см. template |
+| `Selected` | Off, On | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `iconOnly` | Off, On | `iconOnly`; значения см. template |
 
 ## Supported states
 
-| State      | Supported in code | How to use                                                            |
-| ---------- | ----------------- | --------------------------------------------------------------------- |
-| Default    | Yes               | omit state props                                                      |
-| Hover      | Yes               | runtime CSS hover styles, no prop                                     |
-| Selected   | Yes               | `<Chips selected>Chips</Chips>`                                       |
-| Disabled   | Yes               | `<Chips disabled>Chips</Chips>`                                       |
-| Fill       | Yes               | `<Chips type="fill">Chips</Chips>`                                    |
-| Outline    | Yes               | `<Chips type="outline">Chips</Chips>`                                 |
-| Icon left  | Yes               | `<Chips iconLeft={Check}>Chips</Chips>`                               |
-| Icon right | Yes               | `<Chips iconRight={X}>Chips</Chips>`                                  |
-| Icon only  | Yes               | `<Chips iconOnly={Plus} aria-label="Add" />`                          |
-| Counter    | Partial           | `<Chips count={3}>Chips</Chips>`; Figma property has no numeric count |
+- `disabled`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- `selected`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
 
 ## Design matching notes
 
-- Figma `Chips` maps to the public `Chips` export from `borrom-ds-test`.
-- Runtime visual values come from `src/components/Chips/styles` and shared scaling classes.
-- `Chips` is a single chip item, not a chips group/list.
-- `iconOnly` changes the public API branch: when `iconOnly` is passed, `children` must be omitted.
-- Runtime uses `aria-pressed={selected}` to expose selected state.
-- `count` renders the shared `Counter` component with `CounterVariant.White`.
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item           | Current mapping             | Reason                                                                     | Follow-up                                                                   |
-| -------------- | --------------------------- | -------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `↳ Icon-left`  | `iconLeft={Check}`          | Runtime prop expects a `LucideIcon`; Figma nested icon is an instance swap | Add stable icon-name mapping strategy for lucide components                 |
-| `↳ Icon-right` | `iconRight={X}`             | Runtime prop expects a `LucideIcon`; Figma nested icon is an instance swap | Add stable icon-name mapping strategy for lucide components                 |
-| `↳ iconOnly`   | `iconOnly={Plus}`           | Runtime prop expects a `LucideIcon`; Figma nested icon is an instance swap | Add stable icon-name mapping strategy for lucide components                 |
-| `Counter=true` | `count={1}` in Code Connect | Figma exposes only visibility, but code requires a numeric `count`         | Add numeric Figma text/property for counter value or edit generated snippet |
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
 
-## Examples
-
-### Basic
-
-```tsx
-<Chips type="fill" size="sm">
-  Chips
-</Chips>
-```
-
-### Selected
-
-```tsx
-<Chips type="fill" size="sm" selected>
-  Chips
-</Chips>
-```
-
-### With Icons
-
-```tsx
-import { Check, X } from "lucide-react";
-
-<Chips type="fill" size="sm" iconLeft={Check} iconRight={X}>
-  Chips
-</Chips>;
-```
-
-### Icon Only
-
-```tsx
-import { Plus } from "lucide-react";
-
-<Chips iconOnly={Plus} type="fill" size="sm" aria-label="Add" />;
-```
-
-### With Counter
-
-```tsx
-<Chips type="fill" size="sm" count={3}>
-  Chips
-</Chips>
-```
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

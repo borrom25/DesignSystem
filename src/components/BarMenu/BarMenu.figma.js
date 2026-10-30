@@ -5,9 +5,8 @@ const figma = require("figma");
 const instance = figma.selectedInstance;
 void instance;
 
-// Temporary mapping: Figma MCP metadata for this node is unavailable in the
-// current environment, so the snippet uses safe runtime defaults inferred
-// from BarMenu public API.
+// Temporary mapping: Figma bottomBar stores items in slots. Runtime uses a
+// data-driven items array; replace the sample navigation with application data.
 const itemsCode = figma.tsx`[
   { id: "home", icon: Home, label: "Главная" },
   { id: "search", icon: Search, label: "Поиск" },
@@ -20,7 +19,6 @@ export default {
     <BarMenu
       value="home"
       onSelect={() => {}}
-      onMoreClick={() => {}}
       items={${itemsCode}}
     />
   `,
@@ -34,7 +32,7 @@ export default {
     props: {
       hasTemporaryFigmaPropertyMapping: true,
       hasTemporaryItemsMapping: true,
-      figmaNodeReadStatus: "unavailable",
+      figmaNodeReadStatus: "verified-read-only-2026-10-30",
     },
   },
 };

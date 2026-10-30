@@ -1,8 +1,6 @@
 # AccountMenu
 
-Документация для связи Figma component set `menuAccount` с runtime-компонентом `AccountMenu`.
-
-Ссылку из Figma можно вести на этот файл, если нужна документация, или на `AccountMenu.figma.js`, если нужен Code Connect в Dev Mode.
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -17,37 +15,42 @@ localExport: src/components/AccountMenu/index.ts
 publicExport: src/index.ts
 storybook: src/stories/AccountMenu.stories.tsx
 figmaComponent: menuAccount
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=1998-5763
 figmaNodeId: 1998:5763
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=1998-5763
 codeConnect: src/components/AccountMenu/AccountMenu.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
 
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
+
 ```tsx
 import { useState } from "react";
-import { CircleQuestionMark, CircleUserRound, Settings } from "lucide-react";
 import { AccountMenu, Button } from "borrom-ds-test";
+import { CircleQuestionMark, CircleUserRound, Settings } from "lucide-react";
 import "borrom-ds-test/styles.css";
 
-const languages = [
-  { value: "ru", label: "Ru" },
-  { value: "en", label: "En" },
-  { value: "fr", label: "FR" },
-  { value: "ch", label: "CH" },
-];
-
-export function Example() {
-  const [language, setLanguage] = useState("ru");
-
-  return (
+function AccountMenuExample() {
+      const [language, setLanguage] = useState("ru");
+      return (
     <AccountMenu
+      isOpen
       src="https://i.pravatar.cc/160?img=68"
       fullName="Name User"
       role="Caption Caption Caption Caption Caption"
-      languages={languages}
+      languages={[
+        { value: "ru", label: "Ru" },
+        { value: "en", label: "En" },
+        { value: "fr", label: "FR" },
+        { value: "ch", label: "CH" },
+      ]}
       language={language}
-      onChangeLanguage={setLanguage}
+      onChangeLanguage={(nextLanguage) => {
+        setLanguage(nextLanguage);
+      }}
       showTheme
       actions={[
         { iconLeft: CircleUserRound, title: "Сменить роль" },
@@ -55,116 +58,73 @@ export function Example() {
         { iconLeft: CircleQuestionMark, title: "Поддержка" },
       ]}
       logoutFn={() => {
-        console.log("logout");
+        console.info("Выход из аккаунта: подключите обработчик приложения");
       }}
-      trigger={<Button>Открыть меню аккаунта</Button>}
+      trigger={<Button>Аккаунт</Button>}
     />
-  );
-}
+      );
+    }
 ```
 
 ## Source files
 
-| Purpose | Path |
+| Назначение | Путь |
 | --- | --- |
-| Runtime component | `src/components/AccountMenu/AccountMenu.tsx` |
-| Public props | `src/components/AccountMenu/AccountMenu.types.ts` |
-| Content UI | `src/components/AccountMenu/ui/AccountMenuContent.tsx` |
-| Local export | `src/components/AccountMenu/index.ts` |
-| Styles entry | `src/components/AccountMenu/styles/index.ts` |
-| Storybook | `src/stories/AccountMenu.stories.tsx` |
-| Code Connect | `src/components/AccountMenu/AccountMenu.figma.js` |
+| Runtime | [src/components/AccountMenu/AccountMenu.tsx](AccountMenu.tsx) |
+| Props / shared types | [src/components/AccountMenu/AccountMenu.types.ts](AccountMenu.types.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/AccountMenu.stories.tsx](../../stories/AccountMenu.stories.tsx) |
+| Code Connect | [src/components/AccountMenu/AccountMenu.figma.js](AccountMenu.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `actionSlot` | `ReactNode` | optional | См. типы и пример выше |
+| `switchersSlot` | `ReactNode` | optional | См. типы и пример выше |
+| `avatarProps` | `Omit<AvatarProps, "size" \| "src"> \| undefined` | optional | См. типы и пример выше |
+| `languages` | `SegmentedOption<T>[] \| undefined` | optional | См. типы и пример выше |
+| `language` | `T \| undefined` | optional | См. типы и пример выше |
+| `onChangeLanguage` | `((value: T) => void) \| undefined` | optional | См. типы и пример выше |
+| `themes` | `SegmentedOption<string>[] \| undefined` | optional | См. типы и пример выше |
+| `showTheme` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `src` | `string \| null \| undefined` | optional | См. типы и пример выше |
+| `fullName` | `string` | required (зависит от union) | См. типы и пример выше |
+| `role` | `string \| undefined` | optional | См. типы и пример выше |
+| `actions` | `ListItemProps[] \| undefined` | optional | См. типы и пример выше |
+| `logoutFn` | `(() => void) \| undefined` | optional | См. типы и пример выше |
+| `accountMenuProps` | `Omit<AccountMenuProps<string>, "trigger"> \| undefined` | optional | См. типы и пример выше |
+| `trigger` | `ReactNode` | optional | См. типы и пример выше |
+| `isOpen` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `setIsOpen` | `Dispatch<SetStateAction<boolean>> \| undefined` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / layer | Code prop | Code values | Default | Notes |
-| --- | --- | --- | --- | --- |
-| `Props` | metadata only | `1` | `1` | Единственный вариант component set; runtime не принимает `props` |
-| User avatar | `src` | `string` | required | Runtime передает картинку в `Avatar size={80}` |
-| User title | `fullName` | `string` | required | В Code Connect demo: `Name User` |
-| User captions | `role` | `string` | - | Figma показывает caption-строку; runtime хранит ее одним `role` |
-| Language segmented | `languages`, `language`, `onChangeLanguage` | `SegmentedOption[]`, `string`, callback | - | Runtime рендерит `Segmented shape="round"` только если есть все три значения |
-| Theme segmented | `showTheme` | `boolean` | `false` | Runtime сам берет `theme`/`setTheme` из `useTheme` и показывает sun/moon |
-| `<slotContent>` / ListItem rows | `actions` | `ListItemProps[]` | `[]` | Основные строки меню лучше задавать data-driven через `actions`, а не ручной версткой slot |
-| Logout row | `logoutFn` | `() => void` | - | Если задан, runtime добавляет danger `ListItem` с `LogOut` и `ChevronRight` |
-| Trigger | `trigger` | `ReactNode` | - | На desktop открывает `Popover`, на mobile открывает `Modal` |
-| Open state | `isOpen`, `setIsOpen` | `boolean`, setter | uncontrolled | Можно контролировать извне, иначе компонент управляет состоянием сам |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
 
-## Supported behavior
-
-| Behavior | Supported in code | How to use |
+| Figma property | Тип / значения | Runtime API / ограничение |
 | --- | --- | --- |
-| Desktop popover | Yes | `<AccountMenu trigger={...} />` |
-| Mobile modal | Yes | Runtime переключается через `useScreenSize` |
-| User header | Yes | `src`, `fullName`, `role` |
-| Language switcher | Yes | `languages`, `language`, `onChangeLanguage` |
-| Theme switcher | Yes | `showTheme` |
-| Action rows | Yes | `actions={[{ iconLeft, title, onClick }]}` |
-| Custom switcher content | Yes | `switchersSlot` |
-| Custom actions content | Yes | `actionSlot` |
-| Logout row | Yes | `logoutFn` |
-| Controlled open state | Yes | `isOpen`, `setIsOpen` |
+| `<slotContent>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `<slotContent>2` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Media` | Desktop, Mobile | Композиция / нет прямого prop; см. template и Temporary mappings |
 
-## Runtime behavior
+## Supported states
 
-- `AccountMenu` является overlay-компонентом: на desktop использует `Popover`, на mobile - `Modal`.
-- `trigger` клонируется и получает обработчик открытия меню.
-- Контент вынесен в `AccountMenuContent` и строится из `Avatar`, `Segmented` и `ListItem`.
-- `actions` должны быть данными для `ListItem`, а не готовой разметкой. Для полностью кастомного блока есть `actionSlot`.
-- `showTheme` не требует внешних options: компонент сам собирает переключатель `light` / `dark` из `useTheme`.
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
+
+## Design matching notes
+
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item | Current mapping | Reason | Follow-up |
-| --- | --- | --- | --- |
-| Figma name `menuAccount` | `AccountMenu` | В коде публичный компонент называется `AccountMenu`; отдельного `Account` нет | Использовать `AccountMenu` во всех imports |
-| `Props=1` | metadata only | В Figma есть единственный variant, который не соответствует runtime prop | Оставить как служебный variant |
-| `<slotContent>` | `actions` + `logoutFn` | Runtime уже умеет строить функциональные строки меню из данных | Использовать `actionSlot` только если нужен кастомный JSX |
-| User text from nested `User Item` | demo values | Figma не вынесла `fullName`/`role` как top-level properties | Добавить top-level text properties в Figma, если нужны точные значения из инстанса |
-| Nested `Line` | runtime layout | Runtime не использует отдельный public `Line` prop для меню | Не маппить как отдельный consumer API |
+Temporary mapping:
+Figma exposes menu rows through <slotContent>, while AccountMenu runtime owns
+functional rows through actions/logoutFn. Prefer data-driven actions so the
+generated snippet keeps real click handlers and menu behavior.
 
-## Examples
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
 
-### Open By Button
-
-```tsx
-<AccountMenu
-  src="https://i.pravatar.cc/160?img=68"
-  fullName="Name User"
-  role="Product Designer"
-  trigger={<Button>Аккаунт</Button>}
-/>
-```
-
-### With Actions
-
-```tsx
-import { CircleQuestionMark, CircleUserRound, Settings } from "lucide-react";
-
-<AccountMenu
-  src="https://i.pravatar.cc/160?img=68"
-  fullName="Name User"
-  actions={[
-    { iconLeft: CircleUserRound, title: "Сменить роль" },
-    { iconLeft: Settings, title: "Настройки" },
-    { iconLeft: CircleQuestionMark, title: "Поддержка" },
-  ]}
-  logoutFn={() => console.log("logout")}
-/>;
-```
-
-### With Language And Theme
-
-```tsx
-<AccountMenu
-  src="https://i.pravatar.cc/160?img=68"
-  fullName="Name User"
-  languages={[
-    { value: "ru", label: "Ru" },
-    { value: "en", label: "En" },
-  ]}
-  language="ru"
-  onChangeLanguage={setLanguage}
-  showTheme
-/>;
-```
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

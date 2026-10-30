@@ -4,7 +4,7 @@
 const figma = require("figma");
 const instance = figma.selectedInstance;
 
-const label = instance.getString("↳ Text");
+const label = instance.getString("↳ textChips");
 
 const type = instance.getEnum("Type", {
   Fill: "fill",
@@ -41,9 +41,9 @@ const selected = state === "selected" || selectedVariant === "on";
 const disabled = state === "disable";
 const isIconOnly = iconOnly === "on";
 
-const iconLeft = instance.getInstanceSwap("↳ Icon-left");
-const iconRight = instance.getInstanceSwap("↳ Icon-right");
-const iconOnlySwap = instance.getInstanceSwap("↳ iconOnly");
+const iconLeft = instance.findInstance("Icon-left");
+const iconRight = instance.findInstance("Icon-right");
+const iconOnlySwap = instance.findInstance("Icon-left");
 
 export default {
   example: isIconOnly

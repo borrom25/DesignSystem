@@ -7,18 +7,13 @@ const instance = figma.selectedInstance;
 const showLabel = instance.getBoolean("Label");
 const label = instance.getString("textLabel");
 
-const borderRadius = instance.getEnum("borderRadius", {
-  Sm: "sm",
-  Lg: "lg",
-});
-
-const direction = instance.getEnum("Direction", {
-  "↕": "vertical",
-  "↔": "horizontal",
-});
+const verticalIcon = instance.getEnum("Vertical iconOnly", { Off: false, On: true });
+const verticalLabel = instance.getEnum("Vertical label", { Off: false, On: true });
+const direction = verticalIcon || verticalLabel ? "vertical" : "horizontal";
 
 const position = direction;
-const shape = borderRadius === "lg" ? "round" : "default";
+// Temporary mapping: shape is not exposed in the current Figma properties.
+const shape = "default";
 
 // Temporary mapping: Figma stores segment texts inside nested Tab instances,
 // but Segmented expects a runtime options array.

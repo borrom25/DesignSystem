@@ -20,11 +20,10 @@ const color = instance.getEnum("Color", {
   Action: "action",
   Warning: "warning",
   Info: "info",
-  Inverse: "inverse",
+  Secondary: "inverse",
   contrastDark: "contrastDark",
   contrastLight: "contrastLight",
-  // Temporary mapping: Figma has Color=Generic, but Button Color API does not.
-  Generic: "brand",
+  Generic: "generic",
 });
 
 const size = instance.getEnum("Size", {
@@ -63,7 +62,7 @@ const disabled = state === "disable" || disable === "on";
 const isIconOnly = iconOnly === "on";
 
 function getConnectedIcon(propName) {
-  const icon = instance.getInstanceSwap(propName);
+  const icon = instance.findInstance(propName);
 
   if (icon && icon.type === "INSTANCE" && icon.hasCodeConnect()) {
     return icon.executeTemplate().example;
@@ -72,11 +71,13 @@ function getConnectedIcon(propName) {
   return undefined;
 }
 
-const iconLeftCode = showIconLeft ? getConnectedIcon("↳ Icon-left") : undefined;
+const iconLeftCode = showIconLeft ? getConnectedIcon("Icon-left") : undefined;
 const iconRightCode = showIconRight
-  ? getConnectedIcon("↳ Icon-right")
+  ? getConnectedIcon("Icon-right")
   : undefined;
-const iconOnlyCode = isIconOnly ? getConnectedIcon("↳ iconOnly") : undefined;
+// Temporary mapping: icon-only variants reuse the nested Icon-left instance.
+// Temporary mapping: use a Lucide fallback when the nested icon is unconnected.
+const iconOnlyCode = isIconOnly ? getConnectedIcon("Icon-left") || figma.tsx`Check` : undefined;
 
 const iconOnlyProp = iconOnlyCode
   ? figma.tsx`iconOnly={${iconOnlyCode}}`
@@ -113,7 +114,7 @@ export default {
           ${label}
         </Button>
       `,
-  imports: ['import { Button } from "borrom-ds-test"'],
+  imports: ['import { Button } from "borrom-ds-test"', 'import { Check } from "lucide-react"'],
   id: "button",
   metadata: {
     nestable: true,

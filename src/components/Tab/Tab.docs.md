@@ -1,9 +1,6 @@
 # Tab
 
-Документация для связи Figma-компонента `Tab` с runtime-компонентом `Tab`.
-
-Важно: это документ только про одиночный `Tab` (узел `19446:1451`).  
-Для группы табов с кнопкой `Ещё` используется отдельный компонент `TabsOverflow` и отдельная документация.
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -13,109 +10,95 @@ package: borrom-ds-test
 import: import { Tab } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/Tab/Tab.tsx
-types: src/components/Tab/Tab.types.ts
+types: src/types/polymorphic.ts
 localExport: src/components/Tab/index.ts
 publicExport: src/index.ts
 storybook: src/stories/Tab.stories.tsx
 figmaComponent: Tab
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=19446-1451
 figmaNodeId: 19446:1451
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=19446-1451
 codeConnect: src/components/Tab/Tab.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
+
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
 
 ```tsx
 import { Tab } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return (
-    <Tab type="fill" size="sm" selected>
-      Tab
-    </Tab>
-  );
+  return (<Tab
+      type="fill"
+      size="xs"
+
+
+
+
+    >
+      Пример
+    </Tab>);
 }
 ```
 
 ## Source files
 
-| Purpose | Path |
+| Назначение | Путь |
 | --- | --- |
-| Runtime component | `src/components/Tab/Tab.tsx` |
-| Public props | `src/components/Tab/Tab.types.ts` |
-| Local export | `src/components/Tab/index.ts` |
-| Styles entry | `src/components/Tab/styles/index.ts` |
-| Storybook | `src/stories/Tab.stories.tsx` |
-| Code Connect | `src/components/Tab/Tab.figma.js` |
+| Runtime | [src/components/Tab/Tab.tsx](Tab.tsx) |
+| Props / shared types | [src/types/polymorphic.ts](../../types/polymorphic.ts) |
+| Props / shared types | [src/components/Tab/Tab.types.ts](Tab.types.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/Tab.stories.tsx](../../stories/Tab.stories.tsx) |
+| Code Connect | [src/components/Tab/Tab.figma.js](Tab.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | required (зависит от union) | См. типы и пример выше |
+| `type` | `TabType \| undefined` | optional | См. типы и пример выше |
+| `size` | `Size \| undefined` | optional | См. типы и пример выше |
+| `selected` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `scaling` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `asChild` | `true` | required (зависит от union) | См. типы и пример выше |
+| `iconLeft` | `LucideIcon \| undefined` | optional | См. типы и пример выше |
+| `count` | `number \| undefined` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Figma values | Code prop | Code values | Default | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `↳ Text` | text | `children` | `ReactNode` | `Tab` | Текст таба |
-| `Type` | `Fill`, `Ghost`, `Outline` | `type` | `fill`, `ghost`, `outline` | `fill` | Полный one-to-one mapping |
-| `Size` | `Xs`, `Sm`, `Md` | `size` | `xs`, `sm`, `md` | `md` | Полный one-to-one mapping |
-| `Selected` | `Off`, `On` | `selected` | `false`, `true` | `false` | Явный флаг выбранности |
-| `State` | `Selected` | `selected` | `true` | `false` | Поддерживается как дублирующий сигнал selected |
-| `State` | `Disable` | `disabled` | `true` | `false` | Нативный disabled |
-| `State` | `Default`, `Hover` | - | runtime/CSS state | - | Hover не отдельный prop |
-| `Icon-left` | boolean | `iconLeft` | `LucideIcon` | - | Берется из `↳ Icon-left` instance swap |
-| `↳ Icon-left` | instance swap | `iconLeft` | `LucideIcon` | - | Через `executeTemplate()` если у вложенной иконки есть Code Connect |
-| `Counter` | boolean | `count` | `number` | - | Temporary mapping: `true -> count={1}` |
-| `iconOnly` | `Off`, `On` | `iconLeft`, `children` | icon + empty text | `Off` | Temporary mapping: у runtime нет отдельного `iconOnly` prop |
-| `↳ iconOnly` | instance swap | `iconLeft` | `LucideIcon` | - | Используется для `iconOnly=On` |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `Icon-left` | BOOLEAN | `iconLeft`; значения см. template |
+| `↳ textTab` | TEXT | `children`; значения см. template |
+| `Counter` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Type` | Fill, Outline, Ghost | `type`; значения см. template |
+| `State` | Default, Hover, Selected, Disable | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Size` | Xs, Sm, Md | `size`; значения см. template |
+| `iconOnly` | Off, On | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Selected` | Off, On | Композиция / нет прямого prop; см. template и Temporary mappings |
 
 ## Supported states
 
-| State | Supported in code | How to use |
-| --- | --- | --- |
-| Default | Yes | omit state props |
-| Hover | Yes | runtime CSS hover behavior |
-| Selected | Yes | `<Tab selected />` |
-| Disable | Yes | `<Tab disabled />` |
-| Type Fill/Ghost/Outline | Yes | `type="fill" \| "ghost" \| "outline"` |
-| Icon left | Yes | `iconLeft={Icon}` |
-| Counter | Partial | `count={number}`; Figma дает только boolean |
-| Icon only | Partial | mapping через `iconLeft` и пустой label |
+- `selected`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
 
 ## Design matching notes
 
-- Этот документ относится только к Figma-узлу `Tab` (`19446:1451`) с матрицей вариантов `Type/State/Size/iconOnly/Selected`.
-- `tabsOverflow` (узел `19497:1623`) — отдельный компонент и отдельный слой API (`TabsOverflow`).
-- Runtime `Tab` уже поддерживает все три типа (`fill`, `ghost`, `outline`) и все размеры (`xs`, `sm`, `md`).
-- `State=Hover` не должен становиться публичным prop — это визуальное CSS-состояние.
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item | Current mapping | Reason | Follow-up |
-| --- | --- | --- | --- |
-| `Counter=true` | `count={1}` | Figma хранит только видимость, а runtime требует число | Добавить в Figma numeric property для счетчика |
-| `iconOnly=On` | `iconLeft` + empty `children` | В runtime нет отдельного `iconOnly` prop | Если нужен явный API, добавить `iconOnly` в `TabProps` |
-| Nested icon swap | only if nested icon has Code Connect | `iconLeft` ждет `LucideIcon` | Привязать lucide-иконки через Code Connect consistently |
+Temporary mapping: without a connected icon, preserve an accessible label.
 
-## Examples
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
 
-### Basic
-
-```tsx
-<Tab type="fill" size="sm">
-  Tab
-</Tab>
-```
-
-### Selected outline
-
-```tsx
-<Tab type="outline" size="md" selected>
-  Tab
-</Tab>
-```
-
-### With counter
-
-```tsx
-<Tab type="ghost" size="sm" count={3}>
-  Tab
-</Tab>
-```
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

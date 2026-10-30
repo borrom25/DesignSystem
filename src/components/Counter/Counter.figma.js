@@ -16,7 +16,10 @@ const variant = instance.getEnum("Color", {
   Accent: "accent",
   Neutral: "neutral",
   White: "white",
+  // Temporary mapping: disabled is a state, not a CounterVariant.
+  Disable: "neutral",
 });
+const disabled = instance.getEnum("Color", { Accent: false, Neutral: false, White: false, Disable: true });
 
 const normalizedText = text.trim();
 const parsedCount = Number.parseInt(normalizedText, 10);
@@ -32,6 +35,7 @@ export default {
       count={${count}}
       size="${size}"
       variant="${variant}"
+      ${disabled ? "disabled" : ""}
       ${maxCountProp}
     />
   `,

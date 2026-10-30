@@ -1,8 +1,6 @@
 # InputFiles
 
-Документация для связи Figma component `InputFiles` с runtime-компонентом `InputFiles`.
-
-Ссылку из Figma можно вести на этот файл, если нужна документация, или на `InputFiles.figma.js`, если нужен Code Connect.
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -17,126 +15,125 @@ localExport: src/components/InputFiles/index.ts
 publicExport: src/index.ts
 storybook: src/stories/InputFiles.stories.tsx
 figmaComponent: InputFiles
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=3743-1253
 figmaNodeId: 3743:1253
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=3743-1253
 codeConnect: src/components/InputFiles/InputFiles.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
+
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
 
 ```tsx
 import { InputFiles } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return (
-    <InputFiles
-      label="Документы"
-      subtitle="Добавьте файлы"
-      hint="Поддерживаются файлы до 12 MB"
-      multiple
-      maxFiles={5}
-      accept="*"
-    />
-  );
+  return (<InputFiles
+      size="md"
+      multiple={true}
+      textSelect=""
+      textDrag=""
+
+
+
+
+
+
+
+    />);
 }
 ```
 
 ## Source files
 
-| Purpose           | Path                                            |
-| ----------------- | ----------------------------------------------- |
-| Runtime component | `src/components/InputFiles/InputFiles.tsx`      |
-| Public props      | `src/components/InputFiles/InputFiles.types.ts` |
-| Local export      | `src/components/InputFiles/index.ts`            |
-| Styles entry      | `src/components/InputFiles/styles/index.ts`     |
-| Storybook         | `src/stories/InputFiles.stories.tsx`            |
-| Code Connect      | `src/components/InputFiles/InputFiles.figma.js` |
+| Назначение | Путь |
+| --- | --- |
+| Runtime | [src/components/InputFiles/InputFiles.tsx](InputFiles.tsx) |
+| Props / shared types | [src/components/InputFiles/InputFiles.types.ts](InputFiles.types.ts) |
+| Props / shared types | [src/types/field.ts](../../types/field.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/InputFiles.stories.tsx](../../stories/InputFiles.stories.tsx) |
+| Code Connect | [src/components/InputFiles/InputFiles.figma.js](InputFiles.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `size` | `Size \| undefined` | optional | См. типы и пример выше |
+| `error` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `className` | `string \| undefined` | optional | См. типы и пример выше |
+| `placeholderFullWidth` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `label` | `string \| undefined` | optional | См. типы и пример выше |
+| `subtitle` | `string \| undefined` | optional | См. типы и пример выше |
+| `hint` | `string \| undefined` | optional | См. типы и пример выше |
+| `hintError` | `string \| undefined` | optional | См. типы и пример выше |
+| `value` | `File[] \| null \| undefined` | optional | См. типы и пример выше |
+| `defaultValue` | `File[] \| null \| undefined` | optional | См. типы и пример выше |
+| `onChange` | `((files: File[] \| null) => void) \| undefined` | optional | См. типы и пример выше |
+| `maxFiles` | `number \| undefined` | optional | См. типы и пример выше |
+| `maxSize` | `number \| undefined` | optional | См. типы и пример выше |
+| `validateFile` | `UploadValidateFile \| undefined` | optional | См. типы и пример выше |
+| `onValidationError` | `UploadValidationErrorHandler \| undefined` | optional | См. типы и пример выше |
+| `onSizeError` | `((file: File) => void) \| undefined` | optional | См. типы и пример выше |
+| `onAcceptError` | `((file: File) => void) \| undefined` | optional | См. типы и пример выше |
+| `viewMode` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `isLoading` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `uploaderPercent` | `number \| undefined` | optional | См. типы и пример выше |
+| `downloadUrl` | `string \| undefined` | optional | См. типы и пример выше |
+| `onDownload` | `((file: File) => void) \| undefined` | optional | См. типы и пример выше |
+| `showDownload` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `textSelect` | `string \| undefined` | optional | См. типы и пример выше |
+| `textDrag` | `string \| undefined` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Figma values | Code prop                                                      | Code values                   | Default         | Notes                                                                                  |
-| ------------------------ | ------------ | -------------------------------------------------------------- | ----------------------------- | --------------- | -------------------------------------------------------------------------------------- |
-| `textTitle`              | text         | `textSelect`                                                   | `string`                      | `Выберите файл` | Temporary mapping: runtime splits text into `textSelect` and `textDrag`                |
-| `textSusbtitle`          | text         | `placeholder`                                                  | `string`                      | -               | Temporary mapping: subtitle inside drop zone maps to `placeholder`                     |
-| `Susbtitle`              | boolean      | `placeholder`                                                  | `string` / `undefined`        | -               | `false` hides placeholder text                                                         |
-| `State`                  | `DIsable`    | `disabled`                                                     | `true`                        | `false`         | Direct state mapping                                                                   |
-| `State`                  | `Default`    | -                                                              | CSS runtime state             | -               | No dedicated prop                                                                      |
-| `State`                  | `Hover`      | -                                                              | CSS runtime state             | -               | Hover is runtime CSS behavior                                                          |
-| `State`                  | `Upload`     | `textSelect`, `textDrag`                                       | `Перетащите его сюда`, `""`   | -               | Temporary mapping for upload copy; drag-active style is runtime interaction state      |
-| `containerText`          | boolean      | `textSelect`, `textDrag`, `placeholder`                        | `string` / `undefined`        | -               | Temporary mapping: runtime always renders text block, no boolean prop to hide it       |
-| `<slot>`                 | boolean      | `label`                                                        | `ReactNode`                   | -               | Temporary mapping: root slot visibility maps to showing field label                    |
-| `<listUploader>`         | slot         | `defaultValue`, `showDownload`, `isLoading`, `uploaderPercent` | `File[]`, `boolean`, `number` | -               | Temporary mapping: runtime uses `FilePreview` from file list, not arbitrary slot nodes |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `listUploader` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `textTitle` | TEXT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `containerText` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Susbtitle` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `textSusbtitle` | TEXT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `textLabe` | TEXT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `textHinterror` | TEXT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `textHint` | TEXT | `hint`; значения см. template |
+| `Hint` | BOOLEAN | `hint / hintError`; значения см. template |
+| `Labe` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Hint error` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Icon` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `<slotListuploader>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Head` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Type` | Multiple, Single | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `State` | Default, Hover, Upload, DIsable, Error | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Error` | Off, On | `error`; значения см. template |
 
 ## Supported states
 
-| State                                  | Supported in code | How to use                                                |
-| -------------------------------------- | ----------------- | --------------------------------------------------------- |
-| Default                                | Yes               | omit state props                                          |
-| Hover                                  | Yes               | runtime CSS hover styles, no prop                         |
-| Upload (drag active)                   | Partial           | runtime interaction only (`isDragActive`), no public prop |
-| Disabled                               | Yes               | `<InputFiles disabled />`                                 |
-| Subtitle/placeholder text in drop zone | Yes               | `placeholder="..."`                                       |
-| File preview list                      | Yes               | `value` / `defaultValue` with `File[]`                    |
-| View mode                              | Yes               | `<InputFiles viewMode showDownload />`                    |
-| Error state                            | Yes               | `<InputFiles error hintError="..." />`                    |
+- `error`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- `value`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- `defaultValue`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
 
 ## Design matching notes
 
-- Figma `InputFiles` maps to the public `InputFiles` export from `borrom-ds-test`.
-- Runtime component is split into `DropZone` and `FilePreview`; slot-like content in Figma maps to data-driven file list in runtime.
-- Figma `State=Upload` is an interaction state. Runtime shows it during drag operations (`isDragActive`) and does not expose direct public prop.
-- Runtime visual values come from `src/components/InputFiles/styles` and shared drop-zone token classes.
-- Field caption parts (`label`, `subtitle`, `hint`, `hintError`) are external field-level props and can be combined independently of Figma state variant.
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item                      | Current mapping                                                                    | Reason                                                               | Follow-up                                                                            |
-| ------------------------- | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| `textTitle`               | `textSelect="<textTitle>"`, `textDrag=""`                                          | Figma keeps full phrase in one text property, runtime uses two props | Add separate Figma property for `textDrag`                                           |
-| `State=Upload`            | `textSelect="Перетащите его сюда"`, `textDrag=""`                                  | Runtime drag-active visual state is internal interaction state       | If static upload demo is needed, add explicit public prop or dedicated Story wrapper |
-| `containerText=false`     | `textSelect=""`, `textDrag=""`, `placeholder=undefined`                            | Runtime has no prop to hide text container block entirely            | Add `hideTexts`/`showTexts` API only if product requires                             |
-| `<listUploader>` slot     | `defaultValue=[new File(...)]`, `showDownload`, `isLoading`, `uploaderPercent={1}` | Runtime does not accept arbitrary slot nodes for previews            | Expose list item data properties in Figma or keep placeholder `File[]` mapping       |
-| `Susbtitle` typo in Figma | maps to `placeholder`                                                              | Figma property name differs from runtime naming                      | Normalize property naming in Figma library                                           |
+Temporary mapping: Figma keeps full title in one property, while runtime
+text is split between textSelect and textDrag.
 
-## Examples
+Temporary mapping: Figma slot content is visual. Runtime previews are
+data-driven and require File[] values.
 
-### Basic
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
 
-```tsx
-<InputFiles
-  label="Загрузка файла"
-  hint="Выберите файл для загрузки"
-  accept="*"
-/>
-```
-
-### Multiple Files
-
-```tsx
-<InputFiles
-  label="Документы"
-  multiple
-  maxFiles={5}
-  hint="Можно выбрать до 5 файлов"
-/>
-```
-
-### Disabled
-
-```tsx
-<InputFiles label="Документы" disabled placeholder="Загрузка недоступна" />
-```
-
-### View Mode With Download
-
-```tsx
-<InputFiles
-  label="Прикрепленный файл"
-  viewMode
-  showDownload
-  defaultValue={[
-    new File(["demo"], "document.pdf", { type: "application/pdf" }),
-  ]}
-/>
-```
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

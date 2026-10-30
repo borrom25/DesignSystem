@@ -46,7 +46,7 @@ const textLabel = instance.getString("textLabel");
 const textPlaceholder = instance.getString("textPlaceholder");
 const textFilled = instance.getString("textFilled");
 
-const iconLeftSwap = instance.getInstanceSwap("↳ Icon-left");
+const iconLeftSwap = instance.findInstance("Icon-left");
 const slotLeft = instance.getPropertyValue("<slotLeft>");
 
 // Temporary mapping: current public InputNumber API has no icon/slot props.

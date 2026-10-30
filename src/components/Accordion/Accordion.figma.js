@@ -4,14 +4,14 @@
 const figma = require("figma");
 const instance = figma.selectedInstance;
 
-const titleLayer = instance.findText("title");
+const titleLayer = instance.findText("Title");
 const title =
   titleLayer && titleLayer.type === "TEXT"
     ? titleLayer.textContent
     : "Accordion";
 
-const showSubtitle = instance.getBoolean("Subtitle");
-const subtitle = instance.getString("↳ Subtitle");
+const subtitle = instance.findText("Subtitle")?.textContent || "";
+const showSubtitle = Boolean(subtitle);
 
 const order = instance.getEnum("Order", {
   Start: "start",
@@ -30,8 +30,9 @@ const state = instance.getEnum("State", {
   Disable: "disable",
 });
 
-const showActions = instance.getBoolean("Actions");
-const showIconLeft = instance.getBoolean("Icon Left");
+const showActions = Boolean(instance.getSlot("<slotHead>"));
+const showIconLeft = instance.getBoolean("IconLeft");
+const chevronPosition = instance.getBoolean("Chevron-left") ? "left" : instance.getBoolean("Chevron-right") ? "right" : "none";
 const disabled = state === "disable";
 
 function getConnectedIcon(propName) {
@@ -45,7 +46,7 @@ function getConnectedIcon(propName) {
 }
 
 const iconLeftCode = showIconLeft
-  ? getConnectedIcon("↳ Icon Left")
+  ? getConnectedIcon("↳ IconLeft")
   : undefined;
 const iconLeftProp = iconLeftCode
   ? figma.tsx`iconLeft={${iconLeftCode}}`
@@ -62,6 +63,8 @@ export default {
     <Accordion
       title="${title}"
       position="${order}"
+      chevronPosition="${chevronPosition}"
+      ${open === "on" ? "defaultOpen" : ""}
       ${showSubtitle ? figma.tsx`subtitle="${subtitle}"` : ""}
       ${disabled ? "disabled" : ""}
       ${iconLeftProp}

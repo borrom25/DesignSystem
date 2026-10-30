@@ -1,173 +1,34 @@
-import { readdir, readFile, stat, writeFile } from "node:fs/promises";
+import { readFile, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const rootDir = path.join(__dirname, "..");
-
-const componentsDir = path.join(rootDir, "src", "components");
-const storiesDir = path.join(rootDir, "src", "stories");
-const publicIndexPath = path.join(rootDir, "src", "index.ts");
-const componentsIndexPath = path.join(rootDir, "src", "components", "index.ts");
-const outputPath = path.join(rootDir, "docs", "figma-component-connections.md");
-
-async function pathExists(filePath) {
-  try {
-    await stat(filePath);
-    return true;
-  } catch {
-    return false;
-  }
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const registry = JSON.parse(await readFile(path.join(root, "docs/public-component-api.json"), "utf8"));
+const audit = JSON.parse(await readFile(path.join(root, "docs/figma-live-audit.json"), "utf8"));
+async function exists(file) {
+  if (!file) return false;
+  try { return (await stat(path.join(root, file))).isFile(); } catch { return false; }
 }
-
-function hasComponentExport(indexContent, componentName) {
-  const escapedName = componentName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const componentPathPattern = new RegExp(
-    `from\\s+["']\\.\\/components\\/${escapedName}(?:\\/[^"']*)?["']`
-  );
-  const localPathPattern = new RegExp(
-    `from\\s+["']\\.\\/${escapedName}(?:\\/[^"']*)?["']`
-  );
-
-  return (
-    componentPathPattern.test(indexContent) || localPathPattern.test(indexContent)
-  );
-}
-
-function statusLabel(hasDocs, hasFigma) {
-  if (hasDocs && hasFigma) {
-    return "готово";
-  }
-
-  if (hasDocs) {
-    return "только docs";
-  }
-
-  if (hasFigma) {
-    return "только figma.js";
-  }
-
-  return "не начато";
-}
-
-function issueLabel({ hasDocs, hasFigma, hasRuntime }) {
-  const issues = [];
-
-  if (!hasDocs) {
-    issues.push("нет docs");
-  }
-
-  if (!hasFigma) {
-    issues.push("нет figma.js");
-  }
-
-  if (!hasRuntime) {
-    issues.push("нет root runtime");
-  }
-
-  return issues.length ? issues.join(", ") : "ok";
-}
-
-function mark(value) {
-  return value ? "да" : "нет";
-}
-
-function createMarkdown(rows) {
-  const total = rows.length;
-  const connected = rows.filter((row) => row.status === "готово").length;
-  const docsOnly = rows.filter((row) => row.status === "только docs").length;
-  const figmaOnly = rows.filter((row) => row.status === "только figma.js").length;
-  const notStarted = rows.filter((row) => row.status === "не начато").length;
-
-  const lines = [
-    "# Статус связки компонентов с Figma",
-    "",
-    "Этот файл показывает, у каких компонентов уже есть оба Figma-facing артефакта:",
-    "",
-    "- `<Component>.docs.md` для документации и design-to-code mapping;",
-    "- `<Component>.figma.js` для Code Connect в Figma Dev Mode.",
-    "",
-    "Обновить файл можно командой:",
-    "",
-    "```bash",
-    "yarn figma:status:write",
-    "```",
-    "",
-    `Итого: ${connected}/${total} готово, ${docsOnly} только docs, ${figmaOnly} только figma.js, ${notStarted} не начато.`,
-    "",
-    "| Компонент | Публичный export | Runtime | Story | Docs | figma.js | Статус | Что не хватает |",
-    "| --- | --- | --- | --- | --- | --- | --- | --- |",
-  ];
-
-  for (const row of rows) {
-    lines.push(
-      `| ${row.component} | ${mark(row.publicExport)} | ${mark(row.hasRuntime)} | ${mark(row.hasStory)} | ${mark(row.hasDocs)} | ${mark(row.hasFigma)} | ${row.status} | ${row.issues} |`
-    );
-  }
-
-  lines.push("");
-
-  return lines.join("\n");
-}
-
-async function main() {
-  const entries = await readdir(componentsDir, { withFileTypes: true });
-  const componentNames = entries
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
-    .sort((a, b) => a.localeCompare(b, "en"));
-
-  const [publicIndex, componentsIndex] = await Promise.all([
-    readFile(publicIndexPath, "utf8"),
-    readFile(componentsIndexPath, "utf8"),
-  ]);
-
-  const rows = [];
-
-  for (const componentName of componentNames) {
-    const componentDir = path.join(componentsDir, componentName);
-    const runtimePath = path.join(componentDir, `${componentName}.tsx`);
-    const docsPath = path.join(componentDir, `${componentName}.docs.md`);
-    const figmaPath = path.join(componentDir, `${componentName}.figma.js`);
-    const storyPath = path.join(storiesDir, `${componentName}.stories.tsx`);
-
-    const [hasRuntime, hasDocs, hasFigma, hasStory] = await Promise.all([
-      pathExists(runtimePath),
-      pathExists(docsPath),
-      pathExists(figmaPath),
-      pathExists(storyPath),
-    ]);
-
-    const publicExport =
-      hasComponentExport(publicIndex, componentName) ||
-      hasComponentExport(componentsIndex, componentName);
-    const status = statusLabel(hasDocs, hasFigma);
-
-    rows.push({
-      component: componentName,
-      publicExport,
-      hasRuntime,
-      hasStory,
-      hasDocs,
-      hasFigma,
-      status,
-      issues: issueLabel({ hasDocs, hasFigma, hasRuntime }),
-    });
-  }
-
-  const markdown = createMarkdown(rows);
-
-  if (process.argv.includes("--write")) {
-    await writeFile(outputPath, markdown, "utf8");
-    console.log(`Wrote ${path.relative(rootDir, outputPath)}`);
-    return;
-  }
-
-  console.log(markdown);
-}
-
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+const rows = await Promise.all(registry.map(async (entry) => {
+  const [runtime, docs, story, figma] = await Promise.all([entry.runtime, entry.docs, entry.story, entry.codeConnect].map(exists));
+  const live = audit.components.find((item) => item.template === entry.codeConnect);
+  return { ...entry, runtimeExists: runtime, docsExists: docs, storyExists: story, figmaExists: figma, live: Boolean(live?.properties) };
+}));
+rows.sort((a, b) => a.component.localeCompare(b.component, "en"));
+const mark = (value) => value ? "да" : "нет";
+const lines = [
+  "# Статус связки компонентов с Figma", "",
+  "Источник списка — публичный TypeScript entrypoint пакета, а не имена папок. Compound subcomponents описаны в документах родительских компонентов; отдельно экспортируемые компоненты имеют отдельные строки.", "",
+  `Публичных React-компонентов: ${rows.length}. Документы: ${rows.filter((r) => r.docsExists).length}. Основные Code Connect templates: ${rows.filter((r) => r.figmaExists).length}.`, "",
+  "Наличие файлов не означает успешной проверки или публикации. Проверки содержимого: `yarn docs:check` и `yarn figma:check`. Последний результат и ограничения перечислены в [отчёте обновления](gitlab-redesign-update.md). Figma использовалась только для чтения.", "",
+  "В таблице MCP означает наличие прочитанного контракта properties в `figma-live-audit.json`. Это не статус публикации локального template в Figma. Отсутствие отдельной story допустимо для составных и вспомогательных компонентов; их API проверяется через документацию и stories родительского компонента.", "",
+  "Обновление: сначала `yarn figma:check`, затем `node scripts/component-docs.js --write`, затем `yarn figma:status:write`.", "",
+  "| Компонент | Runtime | Story | Docs | figma.js | MCP properties | Статус файлов |", "| --- | --- | --- | --- | --- | --- | --- |",
+  ...rows.map((r) => `| ${r.component} | ${mark(r.runtimeExists)} | ${mark(r.storyExists)} | [${mark(r.docsExists)}](../${r.docs}) | ${mark(r.figmaExists)} | ${mark(r.live)} | ${r.docsExists && r.figmaExists ? "оба артефакта" : r.docsExists ? "docs; blocker/ограничение Code Connect в документе" : "нет документации"} |`), "",
+  "Дополнительные сохранённые ссылки: [Table](../src/components/Table/Table.docs.md), [Search / Autocomplete](../src/components/Input/InputSearch.docs.md), [внутренний Loader](../src/components/Loader/Loader.docs.md). Для Table также сохранён `Table/Table.figma.js`; для SearchAutocomplete сохранён путь `Input/InputSearch.figma.js`.", "",
+];
+const text = lines.join("\n");
+if (process.argv.includes("--write")) {
+  await writeFile(path.join(root, "docs/figma-component-connections.md"), text);
+  console.log("Updated docs/figma-component-connections.md");
+} else console.log(text);

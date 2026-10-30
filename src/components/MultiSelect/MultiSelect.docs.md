@@ -1,16 +1,6 @@
 # MultiSelect
 
-Документация для связи Figma-компонента `🚧 Selected / Multiple` с runtime-компонентом `MultiSelect`.
-
-```text
-src/components/MultiSelect/MultiSelect.docs.md
-```
-
-Парный Code Connect файл:
-
-```text
-src/components/MultiSelect/MultiSelect.figma.js
-```
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -20,91 +10,151 @@ package: borrom-ds-test
 import: import { MultiSelect } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/MultiSelect/MultiSelect.tsx
-types: src/components/MultiSelect/MultiSelect.types.ts
+types: src/types/field.ts
 localExport: src/components/MultiSelect/index.ts
 publicExport: src/index.ts
 storybook: src/stories/MultiSelect.stories.tsx
-figmaComponent: 🚧 Selected / Multiple
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=5351-1298
+figmaComponent: Selected / Multiple
 figmaNodeId: 5351:1298
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=5351-1298
 codeConnect: src/components/MultiSelect/MultiSelect.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
+
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
 
 ```tsx
 import { MultiSelect } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return (
-    <MultiSelect
-      size="md"
-      label="Выбери теги"
-      placeholder="Select items..."
+  return (<MultiSelect
       options={[
-        { value: "react", label: "React" },
-        { value: "ts", label: "TypeScript" },
-        { value: "storybook", label: "Storybook" },
-      ]}
-      defaultValue={["react", "ts"]}
-      clearable
-    />
-  );
+  { value: "selected", label: "Пример" },
+  { value: "option-2", label: "Option 2" },
+  { value: "option-3", label: "Option 3" },
+]}
+      size="xs"
+      placeholder="Select items..."
+
+
+
+
+
+
+
+
+
+    />);
 }
 ```
 
 ## Source files
 
-| Purpose | Path |
+| Назначение | Путь |
 | --- | --- |
-| Runtime component | `src/components/MultiSelect/MultiSelect.tsx` |
-| Public props | `src/components/MultiSelect/MultiSelect.types.ts` |
-| Local export | `src/components/MultiSelect/index.ts` |
-| Hooks | `src/components/MultiSelect/hooks` |
-| Styles | `src/components/MultiSelect/styles` |
-| Storybook | `src/stories/MultiSelect.stories.tsx` |
+| Runtime | [src/components/MultiSelect/MultiSelect.tsx](MultiSelect.tsx) |
+| Props / shared types | [src/types/field.ts](../../types/field.ts) |
+| Props / shared types | [src/components/MultiSelect/MultiSelect.types.ts](MultiSelect.types.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/MultiSelect.stories.tsx](../../stories/MultiSelect.stories.tsx) |
+| Code Connect | [src/components/MultiSelect/MultiSelect.figma.js](MultiSelect.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `label` | `string \| undefined` | optional | См. типы и пример выше |
+| `subtitle` | `string \| undefined` | optional | См. типы и пример выше |
+| `required` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `hint` | `string \| undefined` | optional | См. типы и пример выше |
+| `hintError` | `string \| undefined` | optional | См. типы и пример выше |
+| `error` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `value` | `T[] \| undefined` | optional | См. типы и пример выше |
+| `defaultValue` | `T[] \| undefined` | optional | См. типы и пример выше |
+| `open` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `defaultOpen` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `onOpenChange` | `((open: boolean) => void) \| undefined` | optional | См. типы и пример выше |
+| `options` | `MultiSelectOption<T>[] \| undefined` | optional | См. типы и пример выше |
+| `size` | `Size \| undefined` | optional | См. типы и пример выше |
+| `placeholder` | `string \| undefined` | optional | См. типы и пример выше |
+| `disabled` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `name` | `string \| undefined` | optional | См. типы и пример выше |
+| `className` | `string \| undefined` | optional | См. типы и пример выше |
+| `triggerClassName` | `string \| undefined` | optional | См. типы и пример выше |
+| `contentClassName` | `string \| undefined` | optional | См. типы и пример выше |
+| `itemClassName` | `string \| undefined` | optional | См. типы и пример выше |
+| `maxHeight` | `number \| "available" \| undefined` | optional | См. типы и пример выше |
+| `matchTriggerWidth` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `onScrollEnd` | `(() => void) \| undefined` | optional | См. типы и пример выше |
+| `scrollEndOffset` | `number \| undefined` | optional | См. типы и пример выше |
+| `side` | `"top" \| "bottom" \| "left" \| "right" \| undefined` | optional | См. типы и пример выше |
+| `sideOffset` | `number \| undefined` | optional | См. типы и пример выше |
+| `align` | `"start" \| "center" \| "end" \| undefined` | optional | См. типы и пример выше |
+| `isLoading` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `hasMore` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `children` | `ReactNode` | optional | См. типы и пример выше |
+| `renderValue` | `MultiSelectRenderValue<T> \| undefined` | optional | См. типы и пример выше |
+| `renderItem` | `MultiSelectRenderItem<T> \| undefined` | optional | См. типы и пример выше |
+| `selectedLabel` | `string \| undefined` | optional | См. типы и пример выше |
+| `search` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `searchValue` | `string \| undefined` | optional | См. типы и пример выше |
+| `defaultSearchValue` | `string \| undefined` | optional | См. типы и пример выше |
+| `onSearchChange` | `((value: string) => void) \| undefined` | optional | См. типы и пример выше |
+| `searchPlaceholder` | `string \| undefined` | optional | См. типы и пример выше |
+| `searchClassName` | `string \| undefined` | optional | См. типы и пример выше |
+| `getSearchText` | `((option: MultiSelectOption<T>) => string) \| undefined` | optional | См. типы и пример выше |
+| `selectAll` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `selectAllLabel` | `string \| undefined` | optional | См. типы и пример выше |
+| `clearable` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `onClear` | `(() => void) \| undefined` | optional | См. типы и пример выше |
+| `returnAll` | `false \| undefined` | optional | См. типы и пример выше |
+| `onValueChange` | `((value: T[]) => void) \| undefined` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Code prop | Code values | Default | Notes |
-| --- | --- | --- | --- | --- |
-| `Size` | `size` | `xs`, `sm`, `md` | `md` | `Xs -> xs`, `Sm -> sm`, `Md -> md` |
-| `Error` | `error` | `boolean` | `false` | `Off -> false`, `On -> true` |
-| `Disable` / `State=Disable` | `disabled` | `boolean` | `false` | `On -> true` |
-| `Label` + `textLabel` | `label` | `ReactNode` | - | При `Label=On` используется `textLabel` |
-| `requiredMark` | `required` | `boolean` | `false` | Required mark в label |
-| `Hint` + `textHint` / `textError` | `hint` / `hintError` | `string` | - | При `Error=On` используется `hintError=textError` |
-| `Placeholder` + `textPlaceholder` | `placeholder` | `string` | `Select items...` | При `Placeholder=On` используется `textPlaceholder` |
-| `Filled` + `textFilled` | `defaultValue` | `string[]` | `[]` | Temporary mapping на массив выбранных значений |
-| `State=Selected` | `defaultOpen` | `boolean` | `false` | Открытое состояние триггера |
-| `State=Filled in Hover` | `clearable` | `boolean` | `false` | Temporary mapping по наличию кнопки очистки |
-| runtime-only selected counter label | `selectedLabel` | `string` | - | Новый runtime prop; Figma property для этого текста пока не выделен |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `textHint` | TEXT | `hint`; значения см. template |
+| `Hint` | BOOLEAN | `hint / hintError`; значения см. template |
+| `textError` | TEXT | `hintError`; значения см. template |
+| `requiredMark` | BOOLEAN | `required`; значения см. template |
+| `textPlaceholder` | TEXT | `placeholder`; значения см. template |
+| `textLabel` | TEXT | `label`; значения см. template |
+| `textFilled` | TEXT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Placeholder` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Label` | BOOLEAN | `label`; значения см. template |
+| `State` | Default, Hover, Selected, Filled in, Disable, Filled in Hover | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Size` | Xs, Sm, Md | `size`; значения см. template |
+| `Error` | Off, On | `error`; значения см. template |
+| `Disable` | Off, On | `disabled`; значения см. template |
+| `Filled` | Off, On | Композиция / нет прямого prop; см. template и Temporary mappings |
 
 ## Supported states
 
-| State | Supported in code | How to use |
-| --- | --- | --- |
-| Default | Yes | без специальных props |
-| Hover | Runtime CSS | отдельный prop не нужен |
-| Selected | Yes | `defaultOpen` |
-| Filled in | Yes | `value`/`defaultValue` (массив) |
-| Filled in Hover | Partial | `value/defaultValue` + `clearable` + runtime CSS |
-| Disable | Yes | `disabled` |
-| Error | Yes | `error` + `hintError` |
+- `disabled`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- `error`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- `open`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- `value`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- `defaultValue`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
 
-## Single vs Multiple
+## Design matching notes
 
-- `Select` и `MultiSelect` в библиотеке — это **разные runtime-компоненты**.
-- Figma `🚧 Selected / Single` маппится на `Select`.
-- Figma `🚧 Selected / Multiple` (этот узел) маппится на `MultiSelect`.
-- Это не один и тот же компонент с простым флагом `single/multiple`.
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item | Current mapping | Reason | Follow-up |
-| --- | --- | --- | --- |
-| `textFilled` | первый выбранный label в generated options | В Figma нет структурного списка выбранных values | Если добавятся properties для списка, заменить на точный mapping |
-| Filled-state value | `defaultValue={["selected", "option-2"]}` | Для MultiSelect нужно `string[]`, а Figma даёт только текстовый маркер | Уточнить формат данных selected items |
-| Counter/clear icon | `clearable` только для `Filled in Hover` | В Figma это визуальные инстансы без явных boolean-свойств | Добавить явные boolean properties в Figma при необходимости |
-| `selectedLabel` | not mapped in Code Connect | В Figma нет отдельного property для prefix счетчика выбранных | Добавить Figma property, если prefix должен генерироваться из Dev Mode |
+Temporary mapping: Figma component doesn't expose selected items as structured list.
+
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
+
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

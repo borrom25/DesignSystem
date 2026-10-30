@@ -1,8 +1,6 @@
 # Button
 
-Документация для связи Figma component `Button / Main` с runtime-компонентом `Button`.
-
-Ссылку из Figma можно вести на этот файл, если нужна документация, или на `Button.figma.js`, если нужен Code Connect.
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -17,136 +15,105 @@ localExport: src/components/Button/index.ts
 publicExport: src/index.ts
 storybook: src/stories/Button.stories.tsx
 figmaComponent: Button / Main
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=19105-18
 figmaNodeId: 19105:18
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=19105-18
 codeConnect: src/components/Button/Button.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
 
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
+
 ```tsx
 import { Button } from "borrom-ds-test";
+import { Check } from "lucide-react";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return (
-    <Button type="fill" color="brand" size="md">
-      Button
-    </Button>
-  );
+  return (<Button
+          type="fill"
+          color="brand"
+          size="xs"
+
+
+
+
+
+        >
+          Пример
+        </Button>);
 }
 ```
 
 ## Source files
 
-| Purpose | Path |
+| Назначение | Путь |
 | --- | --- |
-| Runtime component | `src/components/Button/Button.tsx` |
-| Public props | `src/components/Button/Button.types.ts` |
-| Local export | `src/components/Button/index.ts` |
-| Styles entry | `src/components/Button/styles/index.ts` |
-| Storybook | `src/stories/Button.stories.tsx` |
-| Code Connect | `src/components/Button/Button.figma.js` |
+| Runtime | [src/components/Button/Button.tsx](Button.tsx) |
+| Props / shared types | [src/components/Button/Button.types.ts](Button.types.ts) |
+| Props / shared types | [src/types/polymorphic.ts](../../types/polymorphic.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/Button.stories.tsx](../../stories/Button.stories.tsx) |
+| Code Connect | [src/components/Button/Button.figma.js](Button.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `color` | `"brand" \| "danger" \| "positive" \| "action" \| "warning" \| "info" \| "inverse" \| "contrastDark" \| "contrastLight" \| "generic" \| undefined` | optional | См. типы и пример выше |
+| `type` | `Type \| undefined` | optional | См. типы и пример выше |
+| `size` | `Size \| undefined` | optional | См. типы и пример выше |
+| `ref` | `Ref<HTMLButtonElement> \| undefined` | optional | См. типы и пример выше |
+| `scaling` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `asChild` | `true` | required (зависит от union) | См. типы и пример выше |
+| `htmlType` | `HtmlType \| undefined` | optional | См. типы и пример выше |
+| `iconLeft` | `LucideIcon \| undefined` | optional | См. типы и пример выше |
+| `iconRight` | `LucideIcon \| undefined` | optional | См. типы и пример выше |
+| `count` | `number \| undefined` | optional | См. типы и пример выше |
+| `counterColor` | `CounterVariant \| undefined` | optional | См. типы и пример выше |
+| `loading` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `disabled` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `iconOnly` | `undefined` | optional | См. типы и пример выше |
+| `children` | `ReactNode` | required (зависит от union) | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Figma values | Code prop | Code values | Default | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `textButton` | text | `children` | `ReactNode` | `Button` | Direct text content |
-| `Type` | `Fill`, `Outline`, `Ghost`, `Flat` | `type` | `fill`, `outline`, `ghost`, `flat` | `fill` | Direct enum mapping |
-| `Color` | `Brand`, `Danger`, `Positive`, `Action`, `Warning`, `Info`, `Inverse`, `contrastDark`, `contrastLight` | `color` | `brand`, `danger`, `positive`, `action`, `warning`, `info`, `inverse`, `contrastDark`, `contrastLight` | `brand` | Direct enum mapping |
-| `Color` | `Generic` | `color` | `brand` | - | Temporary mapping: `Generic` does not exist in current `Color` API |
-| `Size` | `Xs`, `Sm`, `Md` | `size` | `xs`, `sm`, `md` | `md` | Direct enum mapping |
-| `Loader` | `Off`, `On` | `loading` | `false`, `true` | `false` | `On` maps to `loading` |
-| `State` | `Loader` | `loading` | `true` | `false` | Duplicates `Loader=On`; Code Connect treats either as loading |
-| `Disable` | `Off`, `On` | `disabled` | `false`, `true` | `false` | `On` maps to `disabled` |
-| `State` | `Disable` | `disabled` | `true` | `false` | Duplicates `Disable=On`; Code Connect treats either as disabled |
-| `State` | `Hover` | - | CSS runtime state | - | Not exposed as a public prop |
-| `Icon-left` | boolean | `iconLeft` | `LucideIcon` | - | Requires nested icon Code Connect to output an icon prop |
-| `↳ Icon-left` | instance swap | `iconLeft` | `LucideIcon` | - | Uses `executeTemplate()` only when swapped icon has Code Connect |
-| `Icon-right` | boolean | `iconRight` | `LucideIcon` | - | Requires nested icon Code Connect to output an icon prop |
-| `↳ Icon-right` | instance swap | `iconRight` | `LucideIcon` | - | Uses `executeTemplate()` only when swapped icon has Code Connect |
-| `iconOnly` | `Off`, `On` | `iconOnly` | `LucideIcon` | - | Requires nested icon Code Connect to output `iconOnly` |
-| `↳ iconOnly` | instance swap | `iconOnly` | `LucideIcon` | - | Uses `executeTemplate()` only when swapped icon has Code Connect |
-| `Counter` | boolean | `count` | `number` | - | Temporary mapping: Figma exposes visibility only, code needs a numeric value |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `Icon-left` | BOOLEAN | `iconLeft`; значения см. template |
+| `Icon-right` | BOOLEAN | `iconRight`; значения см. template |
+| `textButton` | TEXT | `children`; значения см. template |
+| `Counter` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Type` | Fill, Outline, Ghost, Flat | `type`; значения см. template |
+| `Color` | Brand, Secondary, Danger, Positive, Action, Warning, Info, contrastDark, contrastLight, Generic | `color`; значения см. template |
+| `State` | Default, Hover, Loader, Disable | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Size` | Xs, Sm, Md | `size`; значения см. template |
+| `Loader` | Off, On | `loading`; значения см. template |
+| `iconOnly` | Off, On | `iconOnly`; значения см. template |
+| `Disable` | Off, On | `disabled`; значения см. template |
 
 ## Supported states
 
-| State | Supported in code | How to use |
-| --- | --- | --- |
-| Default | Yes | omit state props |
-| Hover | Yes | runtime CSS hover styles, no prop |
-| Loader | Yes | `<Button loading />` |
-| Disable | Yes | `<Button disabled />` |
-| Icon left | Yes | `<Button iconLeft={Icon}>Label</Button>` |
-| Icon right | Yes | `<Button iconRight={Icon}>Label</Button>` |
-| Icon only | Yes | `<Button iconOnly={Icon} aria-label="Label" />` |
-| Counter | Partial | `<Button count={3}>Label</Button>`; Figma property has no numeric count |
+- `disabled`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- `loading`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
 
 ## Design matching notes
 
-- Figma `Button / Main` maps to the public `Button` export from `borrom-ds-test`.
-- Runtime visual values come from shared tokenized styles in `src/components/Button/styles` and `src/styles/variants`.
-- `State=Hover` is intentionally not a prop. It should be represented by CSS hover behavior in runtime.
-- Figma nested lucide icons are separate Figma components. Code Connect will output icon props only after those icon components receive their own Code Connect mapping.
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item | Current mapping | Reason | Follow-up |
-| --- | --- | --- | --- |
-| `Color=Generic` | `color="brand"` | `generic` is not present in `src/types/variants.ts` `Color` | Decide whether to add `generic` to public API or remove/rename the Figma variant |
-| `Counter=true` | `count={1}` in Code Connect | Figma exposes only visibility, but code requires a numeric `count` | Add numeric Figma text/property for counter value or document fixed default |
-| Nested lucide icons | omitted unless nested icon has Code Connect | `Button` props require `LucideIcon`, but current icon Figma components are not connected | Add Code Connect for lucide icon components or define a stable icon mapping strategy |
+Temporary mapping: icon-only variants reuse the nested Icon-left instance.
+Temporary mapping: use a Lucide fallback when the nested icon is unconnected.
 
-## Examples
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
 
-### Basic
-
-```tsx
-<Button type="fill" color="brand" size="md">
-  Button
-</Button>
-```
-
-### Loading
-
-```tsx
-<Button type="fill" color="brand" size="md" loading>
-  Button
-</Button>
-```
-
-### Disabled
-
-```tsx
-<Button type="fill" color="brand" size="md" disabled>
-  Button
-</Button>
-```
-
-### With counter
-
-```tsx
-<Button type="fill" color="brand" size="md" count={3}>
-  Button
-</Button>
-```
-
-### With icon
-
-```tsx
-import { Check } from "lucide-react";
-
-<Button type="fill" color="brand" size="md" iconLeft={Check}>
-  Button
-</Button>
-```
-
-### Icon only
-
-```tsx
-import { Plus } from "lucide-react";
-
-<Button type="fill" color="brand" size="md" iconOnly={Plus} aria-label="Add" />
-```
-
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

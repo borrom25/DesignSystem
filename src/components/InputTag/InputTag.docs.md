@@ -1,16 +1,6 @@
 # InputTag
 
-Документация для связи Figma-компонента `🚧 InputTag` с runtime-компонентом `InputTag`.
-
-```text
-src/components/InputTag/InputTag.docs.md
-```
-
-Парный Code Connect файл:
-
-```text
-src/components/InputTag/InputTag.figma.js
-```
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -24,98 +14,98 @@ types: src/components/InputTag/InputTag.types.ts
 localExport: src/components/InputTag/index.ts
 publicExport: src/index.ts
 storybook: src/stories/InputTag.stories.tsx
-figmaComponent: 🚧 InputTag
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=4560-2817
+figmaComponent: InputTag
 figmaNodeId: 4560:2817
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=4560-2817
 codeConnect: src/components/InputTag/InputTag.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
+
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
 
 ```tsx
 import { InputTag } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return (
-    <InputTag
-      size="md"
-      label="Теги"
-      hint="Введите тег и нажмите Enter"
-      value={["React", "TypeScript"]}
-    />
-  );
+  return (<InputTag
+      size="xs"
+
+
+
+
+
+
+
+    />);
 }
 ```
 
 ## Source files
 
-| Purpose | Path |
+| Назначение | Путь |
 | --- | --- |
-| Runtime component | `src/components/InputTag/InputTag.tsx` |
-| Public props | `src/components/InputTag/InputTag.types.ts` |
-| Local export | `src/components/InputTag/index.ts` |
-| Styles entry | `src/components/InputTag/styles/index.ts` |
-| Storybook | `src/stories/InputTag.stories.tsx` |
+| Runtime | [src/components/InputTag/InputTag.tsx](InputTag.tsx) |
+| Props / shared types | [src/components/InputTag/InputTag.types.ts](InputTag.types.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/InputTag.stories.tsx](../../stories/InputTag.stories.tsx) |
+| Code Connect | [src/components/InputTag/InputTag.figma.js](InputTag.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `size` | `Size \| undefined` | optional | См. типы и пример выше |
+| `value` | `string[] \| undefined` | optional | См. типы и пример выше |
+| `defaultValue` | `string[] \| undefined` | optional | См. типы и пример выше |
+| `onChange` | `InputTagChangeHandler \| undefined` | optional | См. типы и пример выше |
+| `onCreateTag` | `((rawValue: string) => string \| null) \| undefined` | optional | См. типы и пример выше |
+| `onClear` | `(() => void) \| undefined` | optional | См. типы и пример выше |
+| `inputClassName` | `string \| undefined` | optional | См. типы и пример выше |
+| `label` | `string \| undefined` | optional | См. типы и пример выше |
+| `hint` | `string \| undefined` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Code prop | Code values | Default | Notes |
-| --- | --- | --- | --- | --- |
-| `Size` | `size` | `xs`, `sm`, `md` | `md` | `Xs -> xs`, `Sm -> sm`, `Md -> md` |
-| `Disable` | `disabled` | `boolean` | `false` | `Off -> false`, `On -> true` |
-| `Label` + `textLabel` | `label` | `string` | - | При `Label=On` используется `textLabel` |
-| `requiredMark` | `required` | `boolean` | `false` | Required mark через `FieldLabel` |
-| `Hint` + `textHint` | `hint` | `string` | - | При `Error=Off` используется `textHint` |
-| `Hint` + `textError` | `hint` | `string` | - | Temporary mapping для Error-сценария |
-| `Placeholder` + `textPlaceholder` | `placeholder` | `string` | - | Placeholder input-поля |
-| `Filled` / `State=Filled in` | `value` | `string[]` | `[]` | Маппинг на демо теги `["Tag 1", "Tag 2"]` |
-| `State=Selected` | `autoFocus` | `boolean` | `false` | Temporary mapping для focus-состояния |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `textHint` | TEXT | `hint`; значения см. template |
+| `Hint` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `requiredMark` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `textError` | TEXT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `textPlaceholder` | TEXT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `textLabel` | TEXT | `label`; значения см. template |
+| `Placeholder` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Label` | BOOLEAN | `label`; значения см. template |
+| `State` | Default, Hover, Selected, Adding tag, Input text, Filled in, Filled in Hover | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Size` | Xs, Sm, Md | `size`; значения см. template |
+| `Error` | Off, On | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Disable` | Off, On | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Filled` | Off, On | Композиция / нет прямого prop; см. template и Temporary mappings |
 
 ## Supported states
 
-| State | Supported in code | How to use |
-| --- | --- | --- |
-| Default | Yes | без специальных props |
-| Hover | Runtime CSS | отдельный prop не нужен |
-| Selected | Partial | `autoFocus` для начального фокуса |
-| Input text | Partial | ввод текста есть, но не контролируется отдельным публичным prop |
-| Adding tag | Partial | runtime поддерживает Enter-добавление, но состояние не задаётся отдельным prop |
-| Filled in | Yes | `value`/`defaultValue` с массивом тегов |
-| Filled in Hover | Runtime CSS + value | `value` + hover через CSS |
-| Disabled | Yes | `disabled` |
-| Error | Partial | нет `error` prop, используем `hint=textError` как ближайший mapping |
+- `value`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- `defaultValue`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
 
 ## Design matching notes
 
-- `InputTag` управляет списком тегов (`value: string[]`) и внутренним полем ввода.
-- Добавление тега происходит по `Enter`, удаление — через `Backspace` при пустом поле или крестик на теге.
-- В текущем API отсутствуют отдельные `error`/`hintError` props.
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item | Current mapping | Reason | Follow-up |
-| --- | --- | --- | --- |
-| `Error=On` | `hint={textError}` | В `InputTagProps` нет `error` и `hintError` | Добавить error API, если нужен визуальный error-state |
-| `State=Input text` / `State=Adding tag` | не маппится в отдельный prop | Нет публичного prop для текущего текста в input | Добавить controlled `inputValue` в API при необходимости |
-| `State=Selected` | `autoFocus` | Нет персистентного selected-state prop | Управлять фокусом на уровне интеграции |
+Temporary mapping: InputTag has no dedicated error prop or hintError prop.
+For Error=On we map textError to the regular hint prop.
 
-## Examples
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
 
-### Basic
-
-```tsx
-<InputTag placeholder="Добавить тег..." />
-```
-
-### Controlled tags
-
-```tsx
-<InputTag value={["UI", "Design"]} onChange={() => {}} />
-```
-
-### Disabled
-
-```tsx
-<InputTag disabled value={["Locked"]} />
-```
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

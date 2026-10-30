@@ -1,96 +1,90 @@
 # Popover
 
-Документация для связи Figma-компонента `Popover` с runtime-компонентом `Popover`.
-
-```text
-src/components/Popover/Popover.docs.md
-```
-
-Парный Code Connect файл:
-
-```text
-src/components/Popover/Popover.figma.js
-```
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
 ```yaml
 component: Popover
 package: borrom-ds-test
-import: import { Popover, PopoverSurface } from "borrom-ds-test";
+import: import { Popover } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/Popover/Popover.tsx
 types: src/components/Popover/Popover.types.ts
 localExport: src/components/Popover/index.ts
 publicExport: src/index.ts
 storybook: src/stories/Popover.stories.tsx
-figmaComponent: Popover
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=400-9517
-figmaNodeId: 400:9517
+figmaComponent: Size=Xs
+figmaNodeId: 400:9377
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=400-9377
 codeConnect: src/components/Popover/Popover.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
 
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
+
 ```tsx
-import { Popover, PopoverSurface } from "borrom-ds-test";
+import { Popover } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return (
-    <Popover>
+  return (<Popover>
       <Popover.Trigger>
-        <button type="button">Open</button>
+        <button type="button">Open popover</button>
       </Popover.Trigger>
-      <Popover.Content>
-        <PopoverSurface>
-          <div className="p-3">Content</div>
-        </PopoverSurface>
+      <Popover.Content matchTriggerWidth={false}>
+        <Popover.Surface>
+          <div className="p-2">Popover content</div>
+        </Popover.Surface>
       </Popover.Content>
-    </Popover>
-  );
+    </Popover>);
 }
 ```
 
 ## Source files
 
-| Purpose | Path |
+| Назначение | Путь |
 | --- | --- |
-| Runtime component | `src/components/Popover/Popover.tsx` |
-| Public props | `src/components/Popover/Popover.types.ts` |
-| Local export | `src/components/Popover/index.ts` |
-| Content sizing utils | `src/components/Popover/Popover.utils.ts` |
-| Content UI | `src/components/Popover/ui/PopoverContent.tsx` |
-| Scroll area UI | `src/components/Popover/ui/PopoverScrollArea.tsx` |
-| Storybook | `src/stories/Popover.stories.tsx` |
+| Runtime | [src/components/Popover/Popover.tsx](Popover.tsx) |
+| Props / shared types | [src/components/Popover/Popover.types.ts](Popover.types.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/Popover.stories.tsx](../../stories/Popover.stories.tsx) |
+| Code Connect | [src/components/Popover/Popover.figma.js](Popover.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `open` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `onOpenChange` | `((open: boolean) => void) \| undefined` | optional | См. типы и пример выше |
+| `children` | `ReactNode` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Code prop | Code values | Default | Notes |
-| --- | --- | --- | --- | --- |
-| `<slotContent>` | `children` внутри `PopoverSurface` | `ReactNode` | - | Слот контента поповера |
-| `Size= Xs / Sm / Md` | нет прямого prop | runtime layout | - | Размер в runtime задается отступами/контентом, а не отдельным `size` prop |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
 
-## Supported behavior
-
-| Behavior | Supported in code | How to use |
+| Figma property | Тип / значения | Runtime API / ограничение |
 | --- | --- | --- |
-| Открытие/закрытие | Yes | `open`, `onOpenChange` или внутренний state |
-| Привязка к триггеру | Yes | `Popover.Trigger` + `Popover.Content` |
-| Ограничение ширины по триггеру | Yes | `matchTriggerWidth` |
-| Ограничение высоты/скролл | Yes | `Popover.ScrollArea` + `maxHeight` |
-| Lazy load при скролле | Yes | `onScrollEnd`, `scrollEndOffset` |
-| Mobile поведение | Yes | На mobile `Popover.Content` рендерится через `Modal` |
+| `<slotContent>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Size` | Xs | Композиция / нет прямого prop; см. template и Temporary mappings |
 
-## Desktop vs mobile
+## Supported states
 
-- В десктопной версии это popover-позиционирование (`@radix-ui/react-popover`).
-- В мобильной версии `Popover.Content` переключается в `Modal` (shutter-подобный паттерн).
-- Поэтому Figma desktop `Popover` и mobile `Shutter` могут быть разными компонентами в макете, но в runtime это единая логика через `Popover`.
+- `open`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
+
+## Design matching notes
+
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item | Current mapping | Reason | Follow-up |
-| --- | --- | --- | --- |
-| `Size` из Figma | отступы внутри slot-контента (`p-2/p-3/p-4`) | В `Popover` нет публичного `size` prop | Если появится `size` API, заменить mapping на прямой prop |
-| `node-id=400:9517` | агрегирующий узел (набор размеров) | Свойства slot/size получены с дочерних узлов `400:9377`, `2020:2121`, `2020:2417` | При публикации component set можно привязать один master-node |
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
+
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

@@ -35,7 +35,7 @@ const state = instance.getEnum("State", {
   Hover: "hover",
   Selected: "selected",
   Filled: "filled",
-  Disablet: "disablet",
+  Disable: "disablet",
   Mask: "mask",
 });
 

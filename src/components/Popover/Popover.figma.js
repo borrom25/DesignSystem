@@ -23,13 +23,13 @@ export default {
         <button type="button">Open popover</button>
       </Popover.Trigger>
       <Popover.Content matchTriggerWidth={false}>
-        <PopoverSurface>
+        <Popover.Surface>
           <div className="${paddingClass}">Popover content</div>
-        </PopoverSurface>
+        </Popover.Surface>
       </Popover.Content>
     </Popover>
   `,
-  imports: ['import { Popover, PopoverSurface } from "borrom-ds-test"'],
+  imports: ['import { Popover } from "borrom-ds-test"'],
   id: "popover",
   metadata: {
     nestable: true,

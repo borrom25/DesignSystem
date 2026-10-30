@@ -23,7 +23,7 @@ const state = instance.getEnum("State", {
 });
 
 const showIcon = instance.getBoolean("Icon");
-const showHead = instance.getBoolean("Head");
+const showHead = type === "head";
 const slotProgressDone = instance.getSlot("<slotprogressDone>");
 const slotProgressError = instance.getSlot("<slotprogressError>");
 const slotProgressDone2 = instance.getSlot("<slotprogressDone>2");

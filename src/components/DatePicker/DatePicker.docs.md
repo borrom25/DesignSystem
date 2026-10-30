@@ -1,8 +1,6 @@
 # DatePicker
 
-Документация для связи Figma component set `DatePicker` с runtime-компонентом `DatePicker`.
-
-`DatePicker` - это поле даты на базе `Input`, которое открывает `Calendar` в `Popover`, поддерживает ручной ввод по формату и выбор даты из календаря.
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -17,141 +15,117 @@ localExport: src/components/DatePicker/index.ts
 publicExport: src/index.ts
 storybook: src/stories/DatePicker.stories.tsx
 figmaComponent: DatePicker
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=4698-9891
 figmaNodeId: 4698:9891
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=4698-9891
 codeConnect: src/components/DatePicker/DatePicker.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
 
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
+
 ```tsx
-import { useState } from "react";
-import { DatePicker } from "borrom-ds-test";
+import { DatePicker, Button } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
 export function Example() {
-  const [value, setValue] = useState("");
+  return (<DatePicker
+      size="xs"
+      format="dd.MM.yyyy"
 
-  return (
-    <DatePicker
-      size="md"
-      label="Дата"
-      placeholder="ДД.ММ.ГГГГ"
-      hint="Выберите дату"
-      value={value}
-      onChangeInput={(nextValue) => setValue(nextValue ?? "")}
-      onChangeDate={(nextDate) => {
-        console.log(nextDate);
-      }}
-    />
-  );
+
+
+
+
+
+
+
+    />);
 }
 ```
 
 ## Source files
 
-| Purpose | Path |
+| Назначение | Путь |
 | --- | --- |
-| Runtime component | `src/components/DatePicker/DatePicker.tsx` |
-| Public props | `src/components/DatePicker/DatePicker.types.ts` |
-| Value hook | `src/components/DatePicker/hooks/useDatePickerValue.ts` |
-| Local export | `src/components/DatePicker/index.ts` |
-| Styles entry | `src/components/DatePicker/styles/index.ts` |
-| Storybook | `src/stories/DatePicker.stories.tsx` |
-| Code Connect | `src/components/DatePicker/DatePicker.figma.js` |
+| Runtime | [src/components/DatePicker/DatePicker.tsx](DatePicker.tsx) |
+| Props / shared types | [src/components/DatePicker/DatePicker.types.ts](DatePicker.types.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/DatePicker.stories.tsx](../../stories/DatePicker.stories.tsx) |
+| Code Connect | [src/components/DatePicker/DatePicker.figma.js](DatePicker.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `size` | `Size \| undefined` | optional | См. типы и пример выше |
+| `label` | `string \| undefined` | optional | См. типы и пример выше |
+| `value` | `string \| undefined` | optional | См. типы и пример выше |
+| `defaultValue` | `string \| undefined` | optional | См. типы и пример выше |
+| `onChangeInput` | `((value?: string) => void) \| undefined` | optional | См. типы и пример выше |
+| `onChangeDate` | `((date?: Date) => void) \| undefined` | optional | См. типы и пример выше |
+| `placeholder` | `string \| undefined` | optional | См. типы и пример выше |
+| `icon` | `LucideIcon \| undefined` | optional | См. типы и пример выше |
+| `rightSlot` | `ReactNode` | optional | См. типы и пример выше |
+| `disabled` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `error` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `hintError` | `string \| undefined` | optional | См. типы и пример выше |
+| `className` | `string \| undefined` | optional | См. типы и пример выше |
+| `required` | `boolean \| undefined` | optional | См. типы и пример выше |
+| `onClear` | `(() => void) \| undefined` | optional | См. типы и пример выше |
+| `variant` | `InputVariant \| undefined` | optional | См. типы и пример выше |
+| `format` | `string \| undefined` | optional | См. типы и пример выше |
+| `hint` | `string \| undefined` | optional | См. типы и пример выше |
+| `minDate` | `string \| Date \| undefined` | optional | См. типы и пример выше |
+| `maxDate` | `string \| Date \| undefined` | optional | См. типы и пример выше |
+| `calendarProps` | `Omit<CalendarBaseProps, "className"> \| undefined` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Figma values | Code prop | Code values | Default | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `Size` | `Xs`, `Sm`, `Md` | `size` | `xs`, `sm`, `md` | `sm` | Runtime default differs from many Figma examples, so Code Connect always emits `size` |
-| `Error` | `Off`, `On` | `error` | `boolean` | `false` | Changes input border and hint color |
-| `Disable` | `Off`, `On` | `disabled` | `boolean` | `false` | Blocks input and popover opening |
-| `Filled` | `Off`, `On` | `value` | `string` | - | Code Connect uses `textFilled` when filled-state is selected |
-| `State` | `Default` | - | - | - | Basic visual state |
-| `State` | `Hover` | runtime CSS | - | - | Separate prop is not needed |
-| `State` | `Selected` | runtime interaction | - | - | Focus/open state is managed by input and popover |
-| `State` | `Input text` | `value` | `string` | - | Demo value follows Figma typing state |
-| `State` | `Filled in` | `value` | `string` | - | Filled state maps to a controlled string value |
-| `State` | `Filled in Hover` | `value` + runtime CSS | `string` | - | Hover stays CSS-driven |
-| `Label` + `textLabel` | boolean + text | `label` | `string` | `Дата` | Label is emitted only when `Label=On` |
-| `Placeholder` + `textPlaceholder` | boolean + text | `placeholder` | `string` | - | Placeholder is emitted only when `Placeholder=On` |
-| `requiredMark` | boolean | `required` | `boolean` | `false` | Also sets `aria-required` internally |
-| `Hint` + `textHint` | boolean + text | `hint` | `string` | - | Used when `Error=Off` |
-| `Hint` + `textError` | boolean + text | `hintError` | `string` | - | Used when `Error=On` |
-| `slotRight` + `<slotRight>` | boolean + slot | `rightSlot` | `ReactNode` | - | Optional content after the calendar/clear icon |
-| Calendar icon instance | nested icon | `icon` | `LucideIcon` | `CalendarIcon` | Runtime owns default calendar icon |
-| Clear icon instance | nested icon | internal clear | - | - | Runtime shows `CloseBtn` when there is a value |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
 
-## Supported behavior
-
-| Behavior | Supported in code | How to use |
+| Figma property | Тип / значения | Runtime API / ограничение |
 | --- | --- | --- |
-| Manual input | Yes | `value`, `onChangeInput`, `format` |
-| Calendar selection | Yes | `onChangeDate`; internal `Calendar` writes formatted string |
-| Controlled value | Yes | `value` + `onChangeInput` |
-| Clear action | Yes | `onClear`; runtime shows clear button when value is non-empty |
-| Disabled | Yes | `disabled` |
-| Error | Yes | `error`, `hintError` |
-| Required mark | Yes | `required` |
-| Custom icon | Yes | `icon={Calendar}` or another `LucideIcon` |
-| Right slot | Yes | `rightSlot={<Button ... />}` |
-| Clear input variant | Yes | `variant={InputVariant.Clear}`; Figma does not expose this variant here |
+| `<slotRight>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `textHint` | TEXT | `hint`; значения см. template |
+| `Hint` | BOOLEAN | `hint / hintError`; значения см. template |
+| `slotRight` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `textError` | TEXT | `hintError`; значения см. template |
+| `requiredMark` | BOOLEAN | `required`; значения см. template |
+| `textPlaceholder` | TEXT | `placeholder`; значения см. template |
+| `textLabel` | TEXT | `label`; значения см. template |
+| `textFilled` | TEXT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Placeholder` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Label` | BOOLEAN | `label`; значения см. template |
+| `State` | Default, Hover, Selected, Filled in, Input text, Filled in Hover | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Size` | Xs, Sm, Md | `size`; значения см. template |
+| `Error` | Off, On | `error`; значения см. template |
+| `Disable` | Off, On | `disabled`; значения см. template |
+| `Filled` | Off, On | Композиция / нет прямого prop; см. template и Temporary mappings |
 
-## Runtime behavior
+## Supported states
 
-- `DatePicker` renders `Input` as the trigger and `Calendar` inside `Popover.Content`.
-- The displayed value is a string formatted by `format`, default `dd.MM.yyyy`.
-- Manual input strips letters, keeps only date separators/numbers and clamps day/month ranges.
-- When the input length matches the format length, the hook parses a `Date` and calls `onChangeDate`.
-- Selecting a date in `Calendar` updates both the string value and `onChangeDate`.
-- `rightSlot` is rendered beside the calendar/clear affordance, not instead of the date input.
+- `disabled`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- `error`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- `value`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- `defaultValue`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
+
+## Design matching notes
+
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item | Current mapping | Reason | Follow-up |
-| --- | --- | --- | --- |
-| `State=Selected` | metadata only | Runtime does not expose a persistent selected/focused prop | Use real focus/open interaction in the app |
-| `State=Hover`, `State=Filled in Hover` | runtime CSS | Hover is not a public prop | Verify in Storybook/browser if visual behavior changes |
-| `State=Input text` | `value="12.0"` fallback when needed | Figma visual shows partial typed date; runtime value is a plain string | Replace with product value in real usage |
-| `slotRight` fallback | `<Button size="xs">Button</Button>` | Figma slot can be empty or not connected to code | Replace with project-specific action node |
-| Nested calendar/clear icons | runtime-owned | Default icon and clear behavior already exist in `DatePicker` | Use `icon` prop only for a deliberate custom icon |
+Temporary mapping:
+Figma exposes focus/hover/typing states visually, while DatePicker runtime
+handles them through Input CSS, user input and Popover interaction.
 
-## Examples
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
 
-### Basic
-
-```tsx
-<DatePicker size="md" label="Дата" placeholder="ДД.ММ.ГГГГ" />
-```
-
-### Filled
-
-```tsx
-<DatePicker
-  size="md"
-  label="Дата"
-  value="27.04.2026"
-  onChangeInput={(nextValue) => setValue(nextValue ?? "")}
-/>
-```
-
-### Error
-
-```tsx
-<DatePicker
-  error
-  hintError="Проверьте дату"
-  label="Дата"
-  placeholder="ДД.ММ.ГГГГ"
-/>
-```
-
-### With Right Slot
-
-```tsx
-<DatePicker
-  label="Дата"
-  rightSlot={<Button size="xs">Button</Button>}
-/>
-```
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

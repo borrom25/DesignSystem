@@ -7,15 +7,18 @@ const instance = figma.selectedInstance;
 const textTitle = instance.getString("textTitle");
 const textSusbtitle = instance.getString("textSusbtitle");
 
-const showRootSlot = instance.getBoolean("<slot>");
+const showRootSlot = instance.getBoolean("listUploader");
 const showContainerText = instance.getBoolean("containerText");
 const showSusbtitle = instance.getBoolean("Susbtitle");
+const multiple = instance.getEnum("Type", { Multiple: true, Single: false });
+const error = instance.getEnum("Error", { Off: false, On: true });
 
 const state = instance.getEnum("State", {
   Default: "default",
   Hover: "hover",
   Upload: "upload",
   DIsable: "disable",
+  Error: "error",
 });
 
 const disabled = state === "disable";
@@ -38,17 +41,19 @@ const placeholderProp =
 // Temporary mapping: Figma slot content is visual. Runtime previews are
 // data-driven and require File[] values.
 const previewProp = showRootSlot
-  ? figma.tsx`defaultValue={[new File(["demo"], "fileName.png", { type: "image/png" })]}`
+  ? figma.tsx`defaultValue={[new File(["Пример файла"], "example.txt", { type: "text/plain" })]}`
   : "";
 
 export default {
   example: figma.tsx`
     <InputFiles
       size="md"
+      multiple={${multiple}}
       textSelect="${textSelect}"
       textDrag="${textDrag}"
       ${placeholderProp}
       ${disabled ? "disabled" : ""}
+      ${state === "error" || error ? 'error hintError="Ошибка загрузки"' : ""}
       ${showRootSlot ? 'label="Файлы"' : ""}
       ${previewProp}
       ${showRootSlot ? "showDownload" : ""}

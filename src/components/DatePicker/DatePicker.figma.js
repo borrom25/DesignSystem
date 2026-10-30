@@ -74,8 +74,7 @@ export default {
       ${requiredMark ? "required" : ""}
       ${showPlaceholder ? figma.tsx`placeholder="${textPlaceholder}"` : ""}
       ${showHint ? figma.tsx`${error ? `hintError="${hintText}"` : `hint="${hintText}"`}` : ""}
-      ${value ? figma.tsx`value="${value}"` : ""}
-      ${value ? "onChangeInput={setDateValue}" : ""}
+      ${value ? figma.tsx`defaultValue="${value}"` : ""}
       ${rightSlotProp}
     />
   `,

@@ -1,8 +1,6 @@
 # AppLayout
 
-Документация для связи Figma-компонентов `App / Desktop` и `AppMobile` с runtime-компонентом `AppLayout`.
-
-Ссылку из Figma можно вести на этот файл, если нужна документация, или на `AppLayout.figma.js`, если нужен Code Connect.
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -16,135 +14,102 @@ types: src/components/AppLayout/AppLayout.types.ts
 localExport: src/components/AppLayout/index.ts
 publicExport: src/index.ts
 storybook: src/stories/AppLayout.stories.tsx
-figmaComponent: App / Desktop, AppMobile
-figmaUrls:
-  - https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=3124-20448
-  - https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=3159-29
-figmaNodeIds:
-  - 3124:20448
-  - 3159:29
+figmaComponent: App / Desktop
+figmaNodeId: 3124:20448
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=3124-20448
 codeConnect: src/components/AppLayout/AppLayout.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
 
 ## Public usage
 
-```tsx
-import { AppLayout, Header, Sidebar } from "borrom-ds-test";
-import "borrom-ds-test/styles.css";
-import { Home, Settings, Users } from "lucide-react";
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
 
-const items = [
-  { id: "home", icon: Home, label: "Главная" },
-  { id: "users", icon: Users, label: "Пользователи" },
-  { id: "settings", icon: Settings, label: "Настройки" },
-];
+```tsx
+import { AppLayout, Header, HeaderInside, Sidebar, InsideSidebar, TabsOverflow, BarMenu, Button, Color, Size, Type } from "borrom-ds-test";
+import { BarChart3, FileText, Home, Plus, Settings, Users } from "lucide-react";
+import "borrom-ds-test/styles.css";
 
 export function Example() {
-  return (
-    <AppLayout
+  return (<AppLayout
       container="640"
-      header={<Header title="Платформа" showNotification />}
-      sidebar={<Sidebar title="Меню" activeItemId="home" items={items} />}
+      header={
+      <Header title="Платформа" showMenuButton showNotification>
+        <TabsOverflow
+          items={[
+  { label: "Tab", value: "tab-1" },
+  { label: "Tab", value: "tab-2" },
+  { label: "Tab", value: "tab-3" },
+  { label: "Tab", value: "tab-4" },
+]}
+          value="tab-1"
+          onValueChange={() => {}}
+          size="sm"
+          indicatorOffset={10}
+        />
+      </Header>
+    }
+      sidebar={
+      <Sidebar
+        title="Меню"
+        activeItemId="home"
+        items={[
+  { id: "home", icon: Home, label: "Главная" },
+  { id: "users", icon: Users, label: "Пользователи" },
+  { id: "docs", icon: FileText, label: "Документы" },
+  { id: "analytics", icon: BarChart3, label: "Аналитика" },
+  { id: "settings", icon: Settings, label: "Настройки" },
+]}
+      />
+    }
     >
-      <div style={{ minHeight: 320 }}>Контент страницы</div>
-    </AppLayout>
-  );
+      <div style={{ minHeight: 320 }}>Page content</div>
+    </AppLayout>);
 }
 ```
 
 ## Source files
 
-| Purpose | Path |
+| Назначение | Путь |
 | --- | --- |
-| Runtime component | `src/components/AppLayout/AppLayout.tsx` |
-| Public props | `src/components/AppLayout/AppLayout.types.ts` |
-| Sidebar width hook | `src/components/AppLayout/hooks/useSidebarWidth.ts` |
-| Local export | `src/components/AppLayout/index.ts` |
-| Styles entry | `src/components/AppLayout/styles/index.ts` |
-| Storybook | `src/stories/AppLayout.stories.tsx` |
-| Code Connect | `src/components/AppLayout/AppLayout.figma.js` |
+| Runtime | [src/components/AppLayout/AppLayout.tsx](AppLayout.tsx) |
+| Props / shared types | [src/components/AppLayout/AppLayout.types.ts](AppLayout.types.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Storybook | [src/stories/AppLayout.stories.tsx](../../stories/AppLayout.stories.tsx) |
+| Code Connect | [src/components/AppLayout/AppLayout.figma.js](AppLayout.figma.js) |
+
+## Public API
+
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
+
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `container` | `AppLayoutContainer \| undefined` | optional | См. типы и пример выше |
+| `size` | `number \| undefined` | optional | См. типы и пример выше |
+| `header` | `ReactNode` | optional | См. типы и пример выше |
+| `sidebar` | `ReactNode` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Figma values | Code prop | Code values | Default | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `Page` | `Main` | `header`, `sidebar`, `children` | `Header` + `Sidebar` + контент | - | Composition mapping через slots |
-| `Page` | `Inside` | `header`, `sidebar`, `children` | `HeaderInside` + `InsideSidebar` + контент | - | Composition mapping через slots |
-| `Page` | `Process` | `header`, `sidebar`, `children` | `HeaderInside` + `InsideSidebar` + контент | - | Step bar в макете не отдельный prop `AppLayout` |
-| `slotContent` | slot | `children` | `ReactNode` | required | Основной контент страницы |
-| `sideMenu` (desktop layout) | visual toggle | `sidebar` | `ReactNode` / `undefined` | `undefined` | Sidebar передается как узел, не через boolean prop |
-| Container width (desktop) | 640 area | `container` | `"640"`, `"720"`, `"fill"` | `"fill"` | Для макетов Figma обычно подходит `container="640"` |
-| Mobile/Desktop | adaptive | - | provider-driven | - | Переключение делается через `ScreenProvider`, не через prop |
-| Mobile `bottomBar` | visual slot | - | external composition | - | Не входит в API `AppLayout`, подключается соседним компонентом (`BarMenu`) |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
+
+| Figma property | Тип / значения | Runtime API / ограничение |
+| --- | --- | --- |
+| `sideMenu` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Page` | Main, insidePage, Process | Композиция / нет прямого prop; см. template и Temporary mappings |
 
 ## Supported states
 
-| State | Supported in code | How to use |
-| --- | --- | --- |
-| Header + content | Yes | передать `header` и `children` |
-| Header + sidebar + content | Yes | передать `header`, `sidebar`, `children` |
-| No sidebar | Yes | не передавать `sidebar` |
-| Desktop width 640 | Yes | `container="640"` |
-| Desktop width 720 | Yes | `container="720"` |
-| Fill container | Yes | `container="fill"` |
-| Mobile layout | Yes | автоматически через `ScreenProvider` |
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
 
 ## Design matching notes
 
-- `AppLayout` в runtime — композиционный контейнер, а не готовый page-template со встроенными `Header`, `Sidebar`, `BarMenu` и `StepBar`.
-- Макеты `App / Desktop` и `AppMobile` собираются из одного `AppLayout` плюс дочерних компонентов, которые передаются в `header`, `sidebar` и `children`.
-- На desktop ширина sidebar вычисляется автоматически через `useSidebarWidth` по фактической ширине переданного узла.
-- На mobile ширина sidebar не фиксируется через inline width; layout переключается через `useScreenSize`.
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item | Current mapping | Reason | Follow-up |
-| --- | --- | --- | --- |
-| `Page=Process` step bar | Рендерится внутри `children` как композиция | У `AppLayout` нет отдельного `stepBar` prop | Если нужен first-class API, добавить отдельный layout preset или slot |
-| Mobile `bottomBar` | Подключается отдельным `BarMenu` рядом с `AppLayout` | `AppLayout` не содержит встроенный нижний бар | Добавить внешний shell-компонент, если нужен единый API страницы |
-| `sideMenu` toggle из Figma | Преобразуется в наличие/отсутствие `sidebar` узла | В runtime нет boolean-пропа `sideMenu` | При необходимости добавить `withSidebar` только если будет подтвержден use-case |
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
 
-## Examples
-
-### Main page
-
-```tsx
-<AppLayout
-  container="640"
-  header={<Header title="Платформа" showNotification />}
-  sidebar={<Sidebar title="Меню" activeItemId="home" items={items} />}
->
-  <div style={{ minHeight: 320 }}>Контент main page</div>
-</AppLayout>
-```
-
-### Inside page
-
-```tsx
-<AppLayout
-  container="640"
-  header={<HeaderInside title="Название страницы" subtitle="Подзаголовок" />}
-  sidebar={<InsideSidebar title="Разделы" />}
->
-  <div style={{ minHeight: 320 }}>Контент inside page</div>
-</AppLayout>
-```
-
-### Mobile composition
-
-```tsx
-<>
-  <AppLayout container="fill" header={<Header title="Платформа" />}>
-    <div style={{ minHeight: 320 }}>Контент mobile page</div>
-  </AppLayout>
-  <BarMenu
-    value="home"
-    onSelect={() => {}}
-    onMoreClick={() => {}}
-    items={[
-      { id: "home", icon: Home, label: "Главная" },
-      { id: "profile", icon: User, label: "Профиль" },
-    ]}
-  />
-</>
-```
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

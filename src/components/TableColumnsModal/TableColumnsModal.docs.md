@@ -1,21 +1,6 @@
 # TableColumnsModal
 
-Документация для связи Figma component set `modalContainer` с table-related runtime-паттернами:
-
-- `Property 1=Default` - настройка видимости колонок через `TableColumnsModal`;
-- `Property 1=Variant2` - фильтр конкретного столбца со списком значений через table column filter.
-
-```text
-src/components/TableColumnsModal/TableColumnsModal.docs.md
-```
-
-Парный Code Connect файл:
-
-```text
-src/components/TableColumnsModal/TableColumnsModal.figma.js
-```
-
-Важно: у Figma component set `modalContainer` одна ссылка и один Code Connect файл. Варианты внутри этого файла обрабатываются через `Property 1`.
+Актуальный публичный компонент пакета `borrom-ds-test`. API сверено с GitLab `c277eef5`; документация предназначена для ссылки из Figma и использования библиотеки.
 
 ## Machine-readable summary
 
@@ -28,407 +13,108 @@ runtime: src/components/TableColumnsModal/TableColumnsModal.tsx
 types: src/components/TableColumnsModal/TableColumnsModal.types.ts
 localExport: src/components/TableColumnsModal/index.ts
 publicExport: src/index.ts
-storybook: src/stories/AppLayout.stories.tsx
-figmaComponent: modalContainer
-figmaVariant: Property 1=Default, Property 1=Variant2
-figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=3456-25084
+storybook: null
+figmaComponent: Filter
 figmaNodeId: 3456:25084
+figmaUrl: https://www.figma.com/design/gPjMJwL1jc8V4G6x4lZJDa/0.-%D0%94%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D1%82-%D0%BC%D0%BD%D0%B5-%D0%A2%D0%B5%D0%BF%D0%BB%D0%BE%D0%B2?node-id=3456-25084
 codeConnect: src/components/TableColumnsModal/TableColumnsModal.figma.js
+apiSource: GitLab c277eef53c8f0b655064d3c67855f2df70ddfccd
+validation: TypeScript public API and synthetic Code Connect scenarios
+liveFigmaMetadata: verified 2026-10-30
 ```
-
-## Code Connect Variant Routing
-
-`TableColumnsModal.figma.js` обслуживает один Figma component set `modalContainer` и выбирает snippet по `Property 1`:
-
-| Figma variant | Code snippet | Runtime flow |
-| --- | --- | --- |
-| `Default` | `<TableColumnsModal ... />` | Пользователь выбирает видимые колонки, `onApply` возвращает `columnId[]`, родитель обновляет `visibleColumnIds` |
-| `Variant2` | `<Table ... filters={tableController.filters} />` with list filter column config | Пользователь выбирает значения конкретного столбца, `DataTableListFilter` обновляет column filter state |
-| `Variant3` | `<Table ... filters={tableController.filters} />` with text column filter config | Пользователь вводит текст для поиска совпадений в конкретном столбце, `DataTableColumnFilter` обновляет column filter state |
-| `Variant4` | `<Table ... filters={tableController.filters} />` with number range column config | Пользователь задает `min/max` для числового столбца, `DataTableNumberRangeFilter` обновляет column filter state |
-| `Variant5` | `<Table ... filters={tableController.filters} />` with date range column config | Пользователь задает дату `start/end`, `DataTableDateRangeFilter` обновляет column filter state |
-
-Не нужно создавать отдельный `.figma.js` для `Variant2`, `Variant3`, `Variant4` или `Variant5`: это варианты того же Figma component set, поэтому routing остается внутри `TableColumnsModal.figma.js`.
 
 ## Public usage
 
+Пример использует публичные импорты. Для темы, языка, модальных окон и уведомлений оберните приложение в `UIKitProvider`.
+
 ```tsx
-import { Table, TableColumnsModal } from "borrom-ds-test";
+import { useState } from "react";
+import { TableColumnsModal } from "borrom-ds-test";
 import "borrom-ds-test/styles.css";
 
-const options = [
-  { id: "title", label: "Название" },
-  { id: "product", label: "Продукт" },
-  { id: "owner", label: "Ответственный" },
-  { id: "team", label: "Команда" },
-];
-
-export function Example() {
-  const [open, setOpen] = useState(false);
-  const [visibleColumnIds, setVisibleColumnIds] = useState([
-    "title",
-    "product",
-  ]);
-
-  return (
-    <TableColumnsModal
-      open={open}
-      onOpenChange={setOpen}
-      value={visibleColumnIds}
-      options={options}
-      onApply={setVisibleColumnIds}
-      title="Настройка таблицы"
-    />
-  );
-}
+function ColumnSettingsExample() {
+    const [visibleColumnIds, setVisibleColumnIds] = useState<string[]>(["title", "product"]);
+    const [isColumnSettingsOpen, setIsColumnSettingsOpen] = useState(true);
+    return (
+  <TableColumnsModal
+    open={isColumnSettingsOpen}
+    value={visibleColumnIds}
+    options={[
+      { id: "title", label: "Название" },
+      { id: "product", label: "Продукт" },
+      { id: "owner", label: "Ответственный" },
+      { id: "team", label: "Команда" },
+    ]}
+    onApply={(nextValue) => {
+      setVisibleColumnIds(nextValue);
+    }}
+    onOpenChange={setIsColumnSettingsOpen}
+    title="Настройка таблицы"
+    cancelLabel="Отмена"
+    applyLabel="Сохранить"
+  />
+    );
+  }
 ```
 
 ## Source files
 
-| Purpose | Path |
+| Назначение | Путь |
 | --- | --- |
-| Runtime component | `src/components/TableColumnsModal/TableColumnsModal.tsx` |
-| Public props | `src/components/TableColumnsModal/TableColumnsModal.types.ts` |
-| Options helper | `src/components/TableColumnsModal/useTableColumnsModalOptions.ts` |
-| Utilities | `src/components/TableColumnsModal/TableColumnsModal.utils.ts` |
-| Styles entry | `src/components/TableColumnsModal/styles/index.ts` |
-| Local export | `src/components/TableColumnsModal/index.ts` |
-| Storybook usage | `src/stories/AppLayout.stories.tsx` |
-| Code Connect | `src/components/TableColumnsModal/TableColumnsModal.figma.js` |
+| Runtime | [src/components/TableColumnsModal/TableColumnsModal.tsx](TableColumnsModal.tsx) |
+| Props / shared types | [src/components/TableColumnsModal/TableColumnsModal.types.ts](TableColumnsModal.types.ts) |
+| Public export | [src/index.ts](../../index.ts) |
+| Code Connect | [src/components/TableColumnsModal/TableColumnsModal.figma.js](TableColumnsModal.figma.js) |
 
-## What It Does
+## Public API
 
-`Property 1=Default` управляет видимостью колонок таблицы через `TableColumnsModal`. Компонент не фильтрует строки и не меняет данные таблицы: он возвращает список выбранных `columnId`, а вызывающий код решает, какие `columns` передать в `Table`.
+Свойства ниже получены из текущих TypeScript declarations. Наследуемые HTML/React props смотрите в исходных типах; взаимоисключающие комбинации определяются union-типом, а не этой сводной таблицей. Значения по умолчанию определены в runtime и показаны в Storybook/плейграунде.
 
-В текущем Storybook-сценарии поток такой:
-
-1. Пользователь открывает dropdown `Действия`.
-2. Выбирает `Настроить таблицу`.
-3. Открывается `TableColumnsModal`.
-4. Пользователь включает или выключает пункты списка.
-5. `onApply` возвращает выбранные id.
-6. Родитель фильтрует `baseColumns` по `visibleColumnIds` и передает результат в `Table`.
-
-Функциональный контракт `Default`:
-
-1. Родитель хранит `visibleColumnIds`.
-2. Родитель вычисляет `activeColumns = baseColumns.filter(...)`.
-3. `Table` получает именно `activeColumns`.
-4. `TableColumnsModal` получает текущее значение через `value`.
-5. Список пунктов строится из `options` или из `columns`.
-6. Клик по пункту меняет только draft state внутри модалки.
-7. `Сохранить` / `Применить` вызывает `onApply(nextColumnIds)`.
-8. Родитель обновляет `visibleColumnIds`.
-9. `activeColumns` пересчитывается, и таблица реально скрывает или показывает столбцы.
-
-Если родитель не обновляет `visibleColumnIds` и не передает пересчитанный `columns` в `Table`, модалка будет визуальной, но столбцы не изменятся. Это неправильная интеграция.
-
-`Property 1=Variant2` - это фильтр конкретного столбца. Он не включает и не выключает колонки. Он меняет filter value для одной колонки, после чего таблица показывает только строки, подходящие под выбранные значения.
-
-В коде этот сценарий живет в `src/components/DataTable/ui/DataTableFilters.tsx`:
-
-- `DataTableListFilter` - список значений с чекбоксами, поиском, reset/apply;
-- `DataTableColumnFilter` - текстовый фильтр;
-- `DataTableDateFilter` и `DataTableDateRangeFilter` - фильтры по датам;
-- `DataTableNumberRangeFilter` - фильтр диапазона чисел.
-
-`Variant2` ближе всего к `DataTableListFilter`: search input сверху, список checkbox-options и footer actions `Сбросить` / `Применить`.
-
-Функциональный контракт `Variant2`:
-
-1. Колонка создается с `filter: dataTableFilter.list(...)` или через `createDataTableColumnHelper().list(...)`.
-2. У колонки должен быть `filterFn: "dataTableList"`; helper `.list(...)` ставит его автоматически.
-3. `useDataTableController({ columns })` создает `filters`, default values и `columnFiltersState`.
-4. `Table` получает `filters={tableController.filters}`.
-5. Header видит `column.filter` и рисует filter icon.
-6. По клику открывается popover с `DataTableListFilter`.
-7. `Применить` вызывает `filters.setValue(filterId, value)`.
-8. `useTable` передает `columnFilters` в TanStack Table и подключает `getFilteredRowModel()`.
-9. `dataTableList` filter function оставляет только строки, где значение столбца входит в выбранный список.
-
-`Property 1=Variant3` - это текстовый фильтр конкретного столбца. Он не управляет видимостью колонок. Он меняет filter value на строку поиска, после чего таблица показывает только строки, где значение столбца содержит введенный текст.
-
-Функциональный контракт `Variant3`:
-
-1. Колонка создается с `filter: dataTableFilter.columnFilter(...)` или через `createDataTableColumnHelper().columnFilter(...)`.
-2. У колонки должен быть `filterFn: "dataTableColumnFilter"`; helper `.columnFilter(...)` ставит его автоматически.
-3. `useDataTableController({ columns })` создает default value `undefined` или `filter.defaultValue`.
-4. `Table` получает `filters={tableController.filters}`.
-5. Header видит `column.filter` и рисует filter icon.
-6. По клику открывается popover с `DataTableColumnFilter`.
-7. Пользователь вводит текст.
-8. `Применить` вызывает `filters.setValue(filterId, value)`.
-9. `useTable` передает `columnFilters` в TanStack Table и подключает `getFilteredRowModel()`.
-10. `dataTableColumnFilter` filter function оставляет только строки, где строковое значение столбца содержит введенный текст без учета регистра.
-
-`Property 1=Variant4` - это фильтр диапазона для числового столбца. Он не управляет видимостью колонок. Он меняет filter value вида `{ min, max }`, после чего таблица показывает только строки, где значение столбца попадает в диапазон.
-
-Функциональный контракт `Variant4`:
-
-1. Колонка создается с `filter: dataTableFilter.numberRange(...)` или через `createDataTableColumnHelper().numberRange(...)`.
-2. У колонки должен быть `filterFn: "dataTableNumberRange"`; helper `.numberRange(...)` ставит его автоматически.
-3. `useDataTableController({ columns })` создает default value `{ min: undefined, max: undefined }`.
-4. `Table` получает `filters={tableController.filters}`.
-5. Header видит `column.filter` и рисует filter icon.
-6. По клику открывается popover с `DataTableNumberRangeFilter`.
-7. Пользователь вводит `min` и/или `max`.
-8. `Применить` вызывает `filters.setValue(filterId, { min, max })`.
-9. `useTable` передает `columnFilters` в TanStack Table и подключает `getFilteredRowModel()`.
-10. `dataTableNumberRange` filter function оставляет только строки, где числовое значение столбца больше или равно `min` и меньше или равно `max`.
-
-`Property 1=Variant5` - это фильтр диапазона дат для одного столбца. Он не управляет видимостью колонок. Он меняет filter value вида `{ start, end }`, после чего таблица показывает только строки, где дата столбца попадает в выбранный диапазон.
-
-Функциональный контракт `Variant5`:
-
-1. Колонка создается с `filter: dataTableFilter.dateRange(...)` или через `createDataTableColumnHelper().dateRange(...)`.
-2. У колонки должен быть `filterFn: "dataTableDateRange"`; helper `.dateRange(...)` ставит его автоматически.
-3. `useDataTableController({ columns })` создает default value `{ start: undefined, end: undefined }`.
-4. `Table` получает `filters={tableController.filters}`.
-5. Header видит `column.filter` и рисует filter icon.
-6. По клику открывается popover с `DataTableDateRangeFilter`.
-7. Пользователь выбирает `start` и/или `end`.
-8. `Применить` вызывает `filters.setValue(filterId, { start, end })`.
-9. `useTable` передает `columnFilters` в TanStack Table и подключает `getFilteredRowModel()`.
-10. `dataTableDateRange` filter function оставляет только строки, где дата столбца находится между `start` и `end` включительно.
+| Prop | Тип | Обязательность в объявлении | Описание |
+| --- | --- | --- | --- |
+| `columns` | `ColumnDef<TData>[] \| undefined` | optional | См. типы и пример выше |
+| `options` | `TableColumnsModalOption<T>[] \| undefined` | optional | См. типы и пример выше |
+| `open` | `boolean` | required (зависит от union) | См. типы и пример выше |
+| `onOpenChange` | `((open: boolean) => void) \| undefined` | optional | См. типы и пример выше |
+| `value` | `T[]` | required (зависит от union) | См. типы и пример выше |
+| `onApply` | `((value: T[]) => void) \| undefined` | optional | См. типы и пример выше |
+| `title` | `ReactNode` | optional | См. типы и пример выше |
+| `subtitle` | `ReactNode` | optional | См. типы и пример выше |
+| `cancelLabel` | `ReactNode` | optional | См. типы и пример выше |
+| `applyLabel` | `ReactNode` | optional | См. типы и пример выше |
+| `size` | `Size \| undefined` | optional | См. типы и пример выше |
+| `showCloseButton` | `boolean \| undefined` | optional | См. типы и пример выше |
 
 ## Figma to props mapping
 
-| Figma property / variant | Figma values | Code prop | Code values | Default | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `Property 1` | `Default` | - | - | `Default` | Variant для настройки видимости колонок, маппится на `TableColumnsModal` |
-| `Property 1` | `Variant2` | `columns[].filter`, `filters` | list filter config + state | - | Variant фильтра конкретного столбца, ближе всего к `DataTableListFilter` |
-| `Property 1` | `Variant3` | `columns[].filter`, `filters` | text filter config + state | - | Variant текстового фильтра конкретного столбца, ближе всего к `DataTableColumnFilter` |
-| `Property 1` | `Variant4` | `columns[].filter`, `filters` | number range filter config + state | - | Variant фильтра диапазона для числового столбца, ближе всего к `DataTableNumberRangeFilter` |
-| `Property 1` | `Variant5` | `columns[].filter`, `filters` | date range filter config + state | - | Variant фильтра диапазона дат, ближе всего к `DataTableDateRangeFilter` |
-| `<slotHead>` | search slot | - | - | - | Temporary mapping: текущий runtime `TableColumnsModal` не поддерживает поиск по списку колонок |
-| `<slotBody>` | checkbox list | `options` or `columns` | `TableColumnsModalOption[]` or `ColumnDef[]` | required | Runtime строит список из `options`; если их нет, получает id/label из `columns` |
-| `Выбрать всё` checkbox | checked / indeterminate / off | internal draft state | computed from `value` | - | `data-indeterminate` выставляется, когда выбрана только часть колонок |
-| Checked item | selected checkbox | `value` | `string[]` | required | Каждый id из `value` считается выбранной колонкой |
-| Footer reset button | `Сбросить` in Figma | `cancelLabel` / `onOpenChange(false)` | `ReactNode` | `Отмена` | Temporary mapping: runtime не имеет отдельного reset-to-default action |
-| Footer apply button | `Применить` in Figma | `applyLabel`, `onApply` | `ReactNode`, callback | `Сохранить` | Сохраняет draft selection и закрывает modal |
-| Modal title | design context | `title` | `ReactNode` | `Настройка таблицы` | Runtime title передается в базовый `Modal` |
-| Close button | visible by default | `showCloseButton` | `boolean` | `true` | Передается в базовый `Modal` |
+Снимок текущих properties прочитан через Figma MCP 30.10.2026. Точные enum-преобразования, условные props и композиция находятся в `.figma.js`; пример выше взят из этого template. Псевдосостояния не становятся props автоматически.
 
-## Supported States
-
-| State | Supported in code | How to use |
+| Figma property | Тип / значения | Runtime API / ограничение |
 | --- | --- | --- |
-| Open / closed | Yes | `open`, `onOpenChange` |
-| Explicit options | Yes | `options={[{ id, label }]}` |
-| Options from table columns | Yes | pass `columns`; ids come from `id` or `accessorKey` |
-| Selected columns | Yes | `value={visibleColumnIds}` |
-| Select all | Yes | built in |
-| Partially selected | Yes | computed internally with `data-indeterminate` |
-| Apply selection | Yes | `onApply={(nextValue) => ...}` |
-| Cancel / close | Yes | close button, overlay behavior from `Modal`, cancel button |
-| Custom labels | Yes | `title`, `subtitle`, `selectAllLabel`, `cancelLabel`, `applyLabel` |
-| Search inside columns | No | not in current `TableColumnsModalProps` |
-| Reset to default | No | implement in parent or add a new prop later |
-| Column list filter | Yes | configure `columns[].filter` and pass `filters` from `useDataTableController` |
-| Column filter search | Yes | `filter.searchable`, `filter.searchPlaceholder`, `getSearchText` in list filter config |
-| Column filter apply/reset | Yes | built into `DataTableListFilter` through `FilterPanel` |
-| Text column filter | Yes | configure `dataTableFilter.columnFilter(...)` or `helper.columnFilter(...)` and pass `filters` from `useDataTableController` |
-| Number range column filter | Yes | configure `dataTableFilter.numberRange(...)` or `helper.numberRange(...)` and pass `filters` from `useDataTableController` |
-| Date range column filter | Yes | configure `dataTableFilter.dateRange(...)` or `helper.dateRange(...)` and pass `filters` from `useDataTableController` |
+| `<slotHead>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `<slotBody>` | SLOT | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `slotBody` | BOOLEAN | Композиция / нет прямого prop; см. template и Temporary mappings |
+| `Property 1` | Default, Variant5, Variant4 | Композиция / нет прямого prop; см. template и Temporary mappings |
 
-## Variant2 Column Filter Usage
+## Supported states
 
-`Variant2` describes a filter popover for one table column. It is usually not rendered by app code directly. Instead, it appears when a column has a `filter` config and the user clicks the filter icon in the table header.
-
-```tsx
-const columns = [
-  helper.list("product", {
-    header: "Продукт",
-    size: 180,
-    cell: ({ getValue }) => productLabels[getValue()],
-    filter: {
-      options: [
-        { value: "lk", label: "Личный кабинет" },
-        { value: "analytics", label: "Аналитика" },
-      ],
-      searchable: true,
-      searchPlaceholder: "Поиск по продукту",
-      getSearchText: (option) => option.label,
-    },
-  }),
-];
-
-const tableController = useDataTableController({
-  columns,
-});
-
-<Table
-  data={data}
-  columns={columns}
-  filters={tableController.filters}
-/>;
-```
-
-`DataTableListFilter` хранит draft selection внутри popover до нажатия `Применить`. После apply значение попадает в `filters`, а `Table` использует его как column filter state.
-
-## Variant3 Text Column Filter Usage
-
-`Variant3` describes a text filter popover for one table column. It is usually not rendered by app code directly. Instead, it appears when a column has a `columnFilter` config and the user clicks the filter icon in the table header.
-
-```tsx
-const columns = [
-  helper.columnFilter("priority", {
-    header: "Приоритет",
-    size: 140,
-    filter: {
-      searchPlaceholder: "Поиск по приоритету",
-    },
-  }),
-];
-
-const tableController = useDataTableController({
-  columns,
-});
-
-<Table
-  data={data}
-  columns={columns}
-  filters={tableController.filters}
-/>;
-```
-
-`DataTableColumnFilter` хранит draft search string внутри popover до нажатия `Применить`. После apply значение попадает в `filters`, а `Table` использует его как column filter state.
-
-## Variant4 Number Range Filter Usage
-
-`Variant4` describes a number range filter popover for one table column. It is usually not rendered by app code directly. Instead, it appears when a numeric column has a `numberRange` filter config and the user clicks the filter icon in the table header.
-
-```tsx
-const columns = [
-  helper.numberRange("members", {
-    header: "Команда, чел",
-    size: 140,
-    filter: {
-      minPlaceholder: "От, чел.",
-      maxPlaceholder: "До, чел.",
-      minInputProps: {
-        min: 0,
-        step: 1,
-      },
-      maxInputProps: {
-        min: 0,
-        step: 1,
-      },
-    },
-  }),
-];
-
-const tableController = useDataTableController({
-  columns,
-});
-
-<Table
-  data={data}
-  columns={columns}
-  filters={tableController.filters}
-/>;
-```
-
-`DataTableNumberRangeFilter` хранит draft `{ min, max }` внутри popover до нажатия `Применить`. После apply значение попадает в `filters`, а `Table` использует его как column filter state.
-
-## Variant5 Date Range Filter Usage
-
-`Variant5` describes a date range filter popover for one table column. It is usually not rendered by app code directly. Instead, it appears when a date column has a `dateRange` filter config and the user clicks the filter icon in the table header.
-
-```tsx
-const columns = [
-  helper.dateRange("updatedAtDate", {
-    id: "updatedAt",
-    header: "Обновлено",
-    size: 160,
-    cell: ({ row }) => row.original.updatedAt,
-    filter: {
-      placeholderStart: "Дата от",
-      placeholderEnd: "Дата до",
-    },
-  }),
-];
-
-const tableController = useDataTableController({
-  columns,
-});
-
-<Table
-  data={data}
-  columns={columns}
-  filters={tableController.filters}
-/>;
-```
-
-`DataTableDateRangeFilter` хранит draft `{ start, end }` внутри popover до нажатия `Применить`. После apply значение попадает в `filters`, а `Table` использует его как column filter state.
+- `open`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- `value`: см. тип в Public API; управляемые значения требуют соответствующего обработчика из API.
+- Hover/focus/pressed проверяются в runtime и Storybook; не добавляйте несуществующие props для имитации CSS-состояний.
 
 ## Design matching notes
 
-- Figma node `3456:25084` is a published component set named `modalContainer`.
-- `Property 1=Default` is documented here as `TableColumnsModal`.
-- `Property 1=Variant2` is documented here as the list filter popover for a single table column.
-- `Property 1=Variant3` is documented here as the text filter popover for a single table column.
-- `Property 1=Variant4` is documented here as the number range filter popover for a single numeric table column.
-- `Property 1=Variant5` is documented here as the date range filter popover for a single date table column.
-- In code, `TableColumnsModal` is a semantic wrapper around `Modal`, `ListItem` and `Button`.
-- The component is intentionally controlled: it receives the current selected ids through `value` and returns the committed selection through `onApply`.
-- The modal does not mutate `Table` directly. The parent updates `visibleColumnIds`, then filters the column definitions passed to `Table`.
+Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.
 
 ## Temporary mappings / assumptions
 
-| Item | Current mapping | Reason | Follow-up |
-| --- | --- | --- | --- |
-| Figma `modalContainer` name | `TableColumnsModal` | Figma component is named generically, but `Property 1=Default` is used for table column visibility settings | Rename Figma component or add documentation link to make the purpose explicit |
-| `Property 1=Variant2` | `DataTableListFilter` pattern via `columns[].filter` | It filters rows by one column value, not column visibility | Keep documented with table filters; add separate Code Connect only if filters become standalone public components |
-| `Property 1=Variant3` | `DataTableColumnFilter` pattern via `columns[].filter` | It filters rows by text match in one column, not column visibility | Keep documented with table filters; add separate Code Connect only if filters become standalone public components |
-| `Property 1=Variant4` | `DataTableNumberRangeFilter` pattern via `columns[].filter` | It filters rows by numeric range in one column, not column visibility | Keep documented with table filters; add separate Code Connect only if filters become standalone public components |
-| `Property 1=Variant5` | `DataTableDateRangeFilter` pattern via `columns[].filter` | It filters rows by date range in one column, not column visibility | Keep documented with table filters; add separate Code Connect only if filters become standalone public components |
-| Figma search field | documented only | Runtime `TableColumnsModalProps` has no search props | Add `searchable`, `searchValue`, `onSearchChange` only if large column lists need it |
-| Figma `Сбросить` action | closest runtime action is cancel/close | Runtime has no reset-to-default callback | Add `onReset` / `resetLabel` if product needs a real reset action |
-| Footer label mismatch | `Применить` maps to `applyLabel`, default runtime is `Сохранить` | Figma and code defaults use different wording | Pass `applyLabel="Применить"` when exact copy is required |
+Temporary mapping:
+Figma exposes <slotHead> and <slotBody>, while TableColumnsModal receives
+column/options data and owns the list rendering internally. Only
+Property 1=Default represents the column visibility picker flow. Variant2,
+Variant3, Variant4 and Variant5 are documented as filter flows for a concrete
+table column.
 
-## Examples
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Связки в Figma не изменялись и не публиковались.
 
-### With Options
-
-```tsx
-<TableColumnsModal
-  open={open}
-  onOpenChange={setOpen}
-  value={visibleColumnIds}
-  options={[
-    { id: "title", label: "Название" },
-    { id: "product", label: "Продукт" },
-    { id: "owner", label: "Ответственный" },
-  ]}
-  onApply={setVisibleColumnIds}
-/>
-```
-
-### With Table Columns
-
-```tsx
-<TableColumnsModal
-  open={open}
-  onOpenChange={setOpen}
-  value={visibleColumnIds}
-  columns={baseColumns}
-  onApply={setVisibleColumnIds}
-/>
-```
-
-### Match Current Figma Copy
-
-```tsx
-<TableColumnsModal
-  open={open}
-  onOpenChange={setOpen}
-  value={visibleColumnIds}
-  options={options}
-  onApply={setVisibleColumnIds}
-  title="Настройка таблицы"
-  selectAllLabel="Выбрать всё"
-  cancelLabel="Сбросить"
-  applyLabel="Применить"
-/>
-```
+Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.

@@ -16,7 +16,8 @@ const avatarPosition = instance.getEnum("positionAvatar", {
   Center: "top",
 });
 
-const title = instance.getString("Title");
+// Temporary mapping: title is nested text rather than a root TEXT property.
+const title = instance.findText("Title")?.textContent || "Пользователь";
 const showAvatar = instance.getBoolean("Avatar");
 const showCaption = instance.getBoolean("Caption");
 const showLabels = instance.getBoolean("label");

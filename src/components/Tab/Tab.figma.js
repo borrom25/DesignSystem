@@ -4,7 +4,7 @@
 const figma = require("figma");
 const instance = figma.selectedInstance;
 
-const label = instance.getString("↳ Text");
+const label = instance.getString("↳ textTab");
 
 const type = instance.getEnum("Type", {
   Fill: "fill",
@@ -41,7 +41,7 @@ const selected = state === "selected" || selectedVariant === "on";
 const disabled = state === "disable";
 
 function getConnectedIcon(propName) {
-  const icon = instance.getInstanceSwap(propName);
+  const icon = instance.findInstance(propName);
 
   if (icon && icon.type === "INSTANCE" && icon.hasCodeConnect()) {
     return icon.executeTemplate().example;
@@ -50,10 +50,11 @@ function getConnectedIcon(propName) {
   return undefined;
 }
 
-const iconSourceProp = iconOnly === "on" ? "↳ iconOnly" : "↳ Icon-left";
+const iconSourceProp = "Icon-left";
 const iconLeftCode = showIconLeft ? getConnectedIcon(iconSourceProp) : undefined;
 const iconLeftProp = iconLeftCode ? figma.tsx`iconLeft={${iconLeftCode}}` : "";
-const textValue = iconOnly === "on" ? "" : label;
+// Temporary mapping: without a connected icon, preserve an accessible label.
+const textValue = iconOnly === "on" && iconLeftCode ? "" : label;
 
 export default {
   example: figma.tsx`

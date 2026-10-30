@@ -9,10 +9,8 @@ const media = instance.getEnum("Media", {
   Mobile: "mobile",
 });
 
-const height = instance.getEnum("Height", {
-  "Content size": "content",
-  "Full height": "full",
-});
+// Temporary mapping: Height is no longer a Figma variant.
+const height = "content";
 
 const modalType = instance.getEnum("Type", {
   Modal: "modal",
@@ -21,10 +19,10 @@ const modalType = instance.getEnum("Type", {
 });
 
 const showActionBar = instance.getBoolean("actionBar");
-const showHead = instance.getBoolean("headModal");
+const showHead = instance.getBoolean("slotHead");
 const slotBody = instance.getSlot("<slotBody>");
 const slotHead = instance.getSlot("<slotHead>");
-const slotActionBar = instance.getSlot("<slotActionBar>");
+const slotActionBar = instance.getSlot("<slotActionbar>");
 
 // Temporary mapping: Modal runtime has structured header props
 // (`title`, `subtitle`, `actionSlot`), not an arbitrary header slot.
@@ -65,6 +63,9 @@ const shouldRenderBody = modalType !== "dialog";
 
 export default {
   example: figma.tsx`
+    function ModalExample() {
+      const [isModalOpen, setModalOpen] = useState(true);
+      return (
     <Modal
       open={isModalOpen}
       onOpenChange={setModalOpen}
@@ -76,13 +77,16 @@ export default {
     >
       ${shouldRenderBody ? bodyContent : ""}
     </Modal>
+      );
+    }
   `,
   imports: [
+    'import { useState } from "react"',
     'import { Button, Modal, ModalType } from "borrom-ds-test"',
   ],
   id: "modal",
   metadata: {
-    nestable: true,
+    nestable: false,
     props: {
       media,
       height,
