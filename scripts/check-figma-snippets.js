@@ -52,6 +52,10 @@ for (const file of files) {
       const [name, values] = node.arguments;
       if (name && ts.isStringLiteral(name)) {
         if (method === "getBoolean") booleans.add(name.text);
+        if (method === "getPropertyValue") {
+          const definition = definitions.find((p) => p.name === name.text);
+          if (definition?.type === "VARIANT") enums.set(name.text, definition.variantOptions);
+        }
         if (method === "getEnum" && values && ts.isObjectLiteralExpression(values)) {
           enums.set(name.text, values.properties.map((p) => p.name.text));
         }

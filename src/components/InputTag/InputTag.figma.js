@@ -14,11 +14,8 @@ const state = instance.getEnum("State", {
   "Filled in Hover": "filledInHover",
 });
 
-const size = instance.getEnum("Size", {
-  Xs: "xs",
-  Sm: "sm",
-  Md: "md",
-}) || "md";
+const requestedSize = instance.getPropertyValue("Size");
+const size = requestedSize === "Xs" ? "xs" : requestedSize === "Sm" ? "sm" : "md";
 // Temporary mapping: the published default variant has an empty Size value.
 // Use runtime's default md instead of emitting the invalid size="" prop.
 

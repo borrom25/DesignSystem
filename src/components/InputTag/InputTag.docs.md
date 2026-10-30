@@ -33,7 +33,7 @@ import "borrom-ds-test/styles.css";
 
 export function Example() {
   return (<InputTag
-      size="xs"
+      size="md"
 
 
 
@@ -109,6 +109,6 @@ Use runtime's default md instead of emitting the invalid size="" prop.
 Temporary mapping: InputTag has no dedicated error prop or hintError prop.
 For Error=On we map textError to the regular hint prop.
 
-Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Link на документацию прочитан обратно и подтверждён для 1 Figma node. Публикация исполняемого template не подтверждена; ограничение MCP описано в docs/figma-publication.md.
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Link на документацию прочитан обратно и подтверждён для 1 Figma node. Code Connect опубликован и прочитан обратно для 1 Figma node; подробности в docs/figma-publication-results.json.
 
 Для неподдерживаемых Figma states и slots ограничения явно указаны в Temporary mapping. Статус публикации проверяется отдельно от наличия файлов.
