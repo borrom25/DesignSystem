@@ -7,7 +7,8 @@
 ```yaml
 component: MultiTag
 package: borrom-ds-test
-packageVersion: 0.0.72
+documentedApiVersion: 0.0.72
+install: npm install borrom-ds-test@latest
 import: import { MultiTag } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/MultiTag/MultiTag.tsx

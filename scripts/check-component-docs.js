@@ -15,6 +15,7 @@ function walk(dir) {
 }
 walk(path.join(root, "src/components"));
 files.push(path.join(root, "docs/migration-gitlab-c277eef5.md"));
+files.push(path.join(root, "docs/using-design-system.md"));
 const labels = new Map();
 const generated = [];
 for (const file of files) {
@@ -22,7 +23,7 @@ for (const file of files) {
   for (const match of source.matchAll(/\]\(([^)]+)\)/g)) {
     const target = match[1].split("#")[0];
     if (!target || /^(?:https?:|mailto:)/.test(target)) continue;
-    if (!fs.existsSync(path.resolve(path.dirname(file), target))) throw new Error(`${path.relative(root, file)}: broken link ${target}`);
+    if (!fs.existsSync(path.resolve(path.dirname(file), decodeURIComponent(target)))) throw new Error(`${path.relative(root, file)}: broken link ${target}`);
   }
   const snippets = [...source.matchAll(/```tsx\r?\n([\s\S]*?)```/g)];
   for (const [index, match] of snippets.entries()) {

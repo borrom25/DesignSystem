@@ -7,7 +7,8 @@
 ```yaml
 component: Skeleton
 package: borrom-ds-test
-packageVersion: 0.0.72
+documentedApiVersion: 0.0.72
+install: npm install borrom-ds-test@latest
 import: import { Skeleton } from "borrom-ds-test";
 stylesImport: import "borrom-ds-test/styles.css";
 runtime: src/components/Skeleton/Skeleton.tsx

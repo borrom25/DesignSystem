@@ -15,6 +15,8 @@
 - raw-значения из Figma не переносить напрямую в runtime components, если есть токен или локальный style helper;
 - если точного токена нет, фиксируй `temporary mapping` или `assumption`;
 - публичное имя npm-пакета библиотеки: `borrom-ds-test`;
+- в проектах-потребителях при подключении или обновлении ДС всегда использовать последнюю опубликованную версию по тегу npm `latest`: `npm install borrom-ds-test@latest` (либо `yarn add` / `pnpm add` с `@latest`); сохранять lockfile, сверять установленную версию и читать миграции;
+- для строгого использования ДС в проекте-потребителе применять `docs/using-design-system.md` и `docs/templates/consumer-agents.template.md`; номер версии в документации обозначает снимок API, а не требование навсегда закрепить старый выпуск;
 - для публичного компонента, связанного с Figma, формируй сразу оба Figma-facing артефакта: `<Component>.docs.md` и `<Component>.figma.js`;
 - Figma-документацию (`<Component>.docs.md` и `<Component>.figma.js`) создавай только для компонента, который уже реализован в `src/components`; если компонента нет, явно сообщай об этом и фиксируй blocker;
 - после кодовых изменений запускай релевантную проверку: обычно `yarn lint`, `yarn build:types` или `yarn build`;

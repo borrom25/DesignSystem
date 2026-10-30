@@ -1,6 +1,6 @@
 # Публичные компоненты
 
-Документация для `borrom-ds-test@0.0.72`, API из GitLab c277eef5. Статус выпуска см. в [README](../README.md). Наличие Code Connect и проверка TypeScript не подтверждают live Figma metadata. Для деталей см. [отчёт обновления](gitlab-redesign-update.md).
+Снимок API выпуска `borrom-ds-test@0.0.72`, API из GitLab c277eef5. Для подключения и обновления всегда используйте `borrom-ds-test@latest`. Правила использования — в [инструкции проекта-потребителя](using-design-system.md), статус выпуска — в [README](../README.md). Наличие Code Connect и проверка TypeScript не подтверждают live Figma metadata. Для деталей см. [отчёт обновления](gitlab-redesign-update.md).
 
 | Компонент | Документация | Code Connect |
 | --- | --- | --- |

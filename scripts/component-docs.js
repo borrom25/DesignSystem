@@ -130,7 +130,7 @@ for (const publicSymbol of exports) {
     "## Design matching notes", "", "Визуальные значения берутся из токенов и локальных style helpers актуальной версии GitLab. Существующие Figma URL и node ID сохранены; визуальное совпадение с изменившейся библиотекой Figma автоматически не подразумевается.", "",
     "## Temporary mappings / assumptions", "", ...(notes ? [notes, ""] : []), template ? "Сохранённые Figma properties использованы как исторический контракт. Сгенерированные snippets проверяются командой `yarn figma:check`; проверка не подтверждает публикацию компонента или актуальность properties в Figma." : "**Blocker Code Connect:** нет подтверждённых properties и опубликованного Figma component. Инструмент Figma `get_context_for_code_connect` вернул `Unknown tool`; требуется повторная проверка после восстановления подключения.", "", "Для новых состояний/API, отсутствующих в сохранённом mapping, требуется отдельная сверка Figma. Публикация связок в Figma не выполнялась.", "",
   ];
-  const content = lines.join("\n").replace("package: borrom-ds-test\n", `package: borrom-ds-test\npackageVersion: ${documentationVersion}\n`);
+  const content = lines.join("\n").replace("package: borrom-ds-test\n", `package: borrom-ds-test\ndocumentedApiVersion: ${documentationVersion}\ninstall: npm install borrom-ds-test@latest\n`);
   const blocker = name === "Uploader"
     ? "**Blocker Code Connect:** Figma Uploader (3741:11025) — строка загруженного файла с прогрессом; runtime Uploader — drop zone выбора файлов. Подтверждённые properties State=Loading/Positive/Error не имеют корректного прямого mapping к этому API. Связка не создаётся по совпадению имени."
     : "**Blocker Code Connect:** для этого публичного компонента не подтверждена отдельная опубликованная Figma-связь. После поиска в библиотеке нельзя безопасно выдать mapping только по имени. Требуется точный опубликованный Figma component и его properties.";
@@ -159,6 +159,6 @@ if (write) {
   fs.mkdirSync(".cache", { recursive: true });
   fs.writeFileSync(".cache/component-docs-examples.json", JSON.stringify(generated, null, 2));
   fs.writeFileSync("docs/public-component-api.json", JSON.stringify(rows, null, 2) + "\n");
-  fs.writeFileSync("docs/public-components.md", ["# Публичные компоненты", "", `Документация для \`borrom-ds-test@${documentationVersion}\`, API из GitLab c277eef5. Статус выпуска см. в [README](../README.md). Наличие Code Connect и проверка TypeScript не подтверждают live Figma metadata. Для деталей см. [отчёт обновления](gitlab-redesign-update.md).`, "", "| Компонент | Документация | Code Connect |", "| --- | --- | --- |", ...summaries, ""].join("\n"));
+  fs.writeFileSync("docs/public-components.md", ["# Публичные компоненты", "", `Снимок API выпуска \`borrom-ds-test@${documentationVersion}\`, API из GitLab c277eef5. Для подключения и обновления всегда используйте \`borrom-ds-test@latest\`. Правила использования — в [инструкции проекта-потребителя](using-design-system.md), статус выпуска — в [README](../README.md). Наличие Code Connect и проверка TypeScript не подтверждают live Figma metadata. Для деталей см. [отчёт обновления](gitlab-redesign-update.md).`, "", "| Компонент | Документация | Code Connect |", "| --- | --- | --- |", ...summaries, ""].join("\n"));
 }
 console.log(`${rows.length} public React components${write ? ": docs written" : ""}.`);

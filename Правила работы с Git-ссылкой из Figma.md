@@ -20,6 +20,8 @@
 
 Верстать руками то, что уже есть компонентом, запрещено.
 
+В проекте-потребителе подключать и обновлять ДС до последней опубликованной версии: `npm install borrom-ds-test@latest` (либо `yarn add` / `pnpm add` с `@latest`). Сверять установленную версию и её API с документацией; GitHub main может содержать ещё не опубликованный выпуск. Строгие правила подключения, layout и допустимых изменений: [инструкция проекта-потребителя](docs/using-design-system.md).
+
 ## Что делать со ссылкой
 
 Если ссылка в Figma ведет на документацию компонента, сначала читать этот документ. Хорошая документация должна лежать рядом с runtime file как `src/components/<Component>/<Component>.docs.md`, быть создана по шаблону `docs/templates/component-docs.template.md` и содержать machine-readable summary, public import, source files и mapping Figma properties -> props.

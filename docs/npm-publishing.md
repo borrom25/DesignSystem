@@ -4,7 +4,7 @@
 
 ## Выпуск 0.0.72
 
-Документация и примеры рассчитаны на `borrom-ds-test@0.0.72`. На 30.10.2026 выпуск ещё в обработке; устанавливать его следует после завершения публикации. Изменение `package.json` или отправка исходников в GitHub сами по себе не публикуют пакет в npm.
+Документация описывает API `borrom-ds-test@0.0.72`. На 30.10.2026 выпуск ещё в обработке. В проектах-потребителях при установке и обновлении всегда используем `borrom-ds-test@latest` — последнюю опубликованную версию по тегу npm `latest`. Пока выпуск обрабатывается, тег может указывать на предыдущую версию. Изменение `package.json` или отправка исходников в GitHub сами по себе не публикуют пакет в npm.
 
 В этом выпуске есть несовместимые изменения API после обновления из GitLab. Перед обновлением приложения прочитайте [инструкцию по миграции](migration-gitlab-c277eef5.md).
 
@@ -22,7 +22,7 @@ npm view borrom-ds-test dist-tags --registry=https://registry.npmjs.org/
 
 Повторно запускать `yarn bump` для уже подготовленного выпуска не нужно: он снова увеличит версию и создаст commit. Для локального архива без публикации выполните `npm pack`; архив можно установить в другом проекте через `npm install "C:\путь\borrom-ds-test-0.0.72.tgz"`.
 
-После публикации установите в приложении `npm install borrom-ds-test@0.0.72` и подключите `import "borrom-ds-test/styles.css"` один раз в точке входа.
+После публикации обновите приложение командой `npm install borrom-ds-test@latest` и подключите `import "borrom-ds-test/styles.css"` один раз в точке входа. Проверьте установленную версию через `npm ls borrom-ds-test`; перед обновлением прочитайте миграции. Для строгого использования компонентов см. [инструкцию проекта-потребителя](using-design-system.md).
 
 Официальные команды: [npm login](https://docs.npmjs.com/cli/v11/commands/npm-login/), [npm publish](https://docs.npmjs.com/cli/v11/commands/npm-publish/).
 
@@ -275,7 +275,7 @@ cd "C:\Проекты\Codeconnect Test"
 И обновить зависимость:
 
 ```powershell
-npm install borrom-ds-test@0.0.72
+npm install borrom-ds-test@latest
 ```
 
 Проверить установленную версию:
@@ -284,7 +284,7 @@ npm install borrom-ds-test@0.0.72
 npm ls borrom-ds-test
 ```
 
-Ожидаемый результат:
+Пример результата после публикации `0.0.72` (в дальнейшем здесь будет номер актуального выпуска):
 
 ```text
 borrom-ds-test@0.0.72
@@ -373,6 +373,6 @@ npm view borrom-ds-test version --registry=https://registry.npmjs.org/
 
 ```powershell
 cd "C:\Проекты\Codeconnect Test"
-npm install borrom-ds-test@0.0.72
+npm install borrom-ds-test@latest
 npm ls borrom-ds-test
 ```
