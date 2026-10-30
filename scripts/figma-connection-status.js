@@ -18,7 +18,7 @@ const rows = await Promise.all(registry.map(async (entry) => {
   const source = figma ? await readFile(path.join(root, entry.codeConnect), "utf8") : "";
   const nodeId = source.match(/^\/\/ url=.*node-id=([\d-]+)/m)?.[1].replace("-", ":");
   const current = inventory.pages.flatMap((p) => p.nodes).find((n) => n.id === nodeId);
-  return { ...entry, runtimeExists: runtime, docsExists: docs, storyExists: story, figmaExists: figma, live: Boolean(current?.properties ?? live?.properties), published: publication.filter((p) => p.component === entry.component && p.codeConnect?.verified).length };
+  return { ...entry, runtimeExists: runtime, docsExists: docs, storyExists: story, figmaExists: figma, live: Boolean(current?.properties ?? live?.properties), linked: publication.filter((p) => p.component === entry.component && p.documentation?.verified).length, published: publication.filter((p) => p.component === entry.component && p.codeConnect?.verified).length };
 }));
 rows.sort((a, b) => a.component.localeCompare(b.component, "en"));
 const mark = (value) => value ? "да" : "нет";
@@ -29,8 +29,8 @@ const lines = [
   "Наличие файлов не означает успешной проверки или публикации. Проверки содержимого: `yarn docs:check` и `yarn figma:check`. [Текущий статус публикации](figma-publication.md) и [полная инвентаризация](figma-current-inventory.json) учитываются отдельно.", "",
   "В таблице MCP означает наличие прочитанного контракта properties в `figma-live-audit.json`. Это не статус публикации локального template в Figma. Отсутствие отдельной story допустимо для составных и вспомогательных компонентов; их API проверяется через документацию и stories родительского компонента.", "",
   "Обновление: сначала `yarn figma:check`, затем `node scripts/component-docs.js --write`, затем `yarn figma:status:write`.", "",
-  "| Компонент | Runtime | Story | Docs | figma.js | MCP properties | Опубликовано и прочитано (узлов) | Статус файлов |", "| --- | --- | --- | --- | --- | --- | --- | --- |",
-  ...rows.map((r) => `| ${r.component} | ${mark(r.runtimeExists)} | ${mark(r.storyExists)} | [${mark(r.docsExists)}](../${r.docs}) | ${mark(r.figmaExists)} | ${mark(r.live)} | ${r.published} | ${r.docsExists && r.figmaExists ? "оба артефакта" : r.docsExists ? "docs; blocker/ограничение Code Connect в документе" : "нет документации"} |`), "",
+  "| Компонент | Runtime | Story | Docs | figma.js | MCP properties | Link подтверждён (узлов) | Исполняемый template подтверждён (узлов) | Статус файлов |", "| --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+  ...rows.map((r) => `| ${r.component} | ${mark(r.runtimeExists)} | ${mark(r.storyExists)} | [${mark(r.docsExists)}](../${r.docs}) | ${mark(r.figmaExists)} | ${mark(r.live)} | ${r.linked} | ${r.published} | ${r.docsExists && r.figmaExists ? "оба артефакта" : r.docsExists ? "docs; blocker/ограничение Code Connect в документе" : "нет документации"} |`), "",
   "Дополнительные сохранённые ссылки: [Table](../src/components/Table/Table.docs.md), [Search / Autocomplete](../src/components/Input/InputSearch.docs.md), [внутренний Loader](../src/components/Loader/Loader.docs.md). Для Table также сохранён `Table/Table.figma.js`; для SearchAutocomplete сохранён путь `Input/InputSearch.figma.js`.", "",
 ];
 const text = lines.join("\n");

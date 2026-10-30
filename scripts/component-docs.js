@@ -91,6 +91,7 @@ for (const publicSymbol of exports) {
   const nodeId = figmaUrl?.match(/node-id=([\d-]+)/)?.[1].replace("-", ":");
   const live = template ? currentNodes.find((item) => item.id === nodeId) ?? audit.find((item) => item.template === template.template) : undefined;
   const published = publication.filter((item) => item.component === name && item.codeConnect?.verified);
+  const linked = publication.filter((item) => item.component === name && item.documentation?.verified);
   const properties = new Map();
   for (const branch of branches) {
     for (const prop of branch.getProperties()) {
@@ -132,7 +133,7 @@ for (const publicSymbol of exports) {
   const blocker = name === "Uploader"
     ? "**Blocker Code Connect:** Figma Uploader (3741:11025) — строка загруженного файла с прогрессом; runtime Uploader — drop zone выбора файлов. Подтверждённые properties State=Loading/Positive/Error не имеют корректного прямого mapping к этому API. Связка не создаётся по совпадению имени."
     : "**Blocker Code Connect:** для этого публичного компонента не подтверждена отдельная опубликованная Figma-связь. После поиска в библиотеке нельзя безопасно выдать mapping только по имени. Требуется точный опубликованный Figma component и его properties.";
-  const liveText = template ? `Properties сверены с текущим снимком Figma MCP; snippets проверяются командой \`yarn figma:check\`. ${published.length ? `Code Connect опубликован и прочитан обратно для ${published.length} Figma node; подробности в docs/figma-publication-results.json.` : "Публикация текущего template ещё не подтверждена."}` : blocker;
+  const liveText = template ? `Properties сверены с текущим снимком Figma MCP; snippets проверяются командой \`yarn figma:check\`. ${linked.length ? `Link на документацию прочитан обратно и подтверждён для ${linked.length} Figma node. ` : ""}${published.length ? `Code Connect опубликован и прочитан обратно для ${published.length} Figma node; подробности в docs/figma-publication-results.json.` : "Публикация исполняемого template не подтверждена; ограничение MCP описано в docs/figma-publication.md."}` : blocker;
   const corrected = content.replace(`localExport: ${dir}/index.ts`, `localExport: ${localExport}`)
     .replace(`figmaUrl: ${figmaUrl ?? "null"}`, `figmaComponent: ${live?.name?.trim() ?? "null"}\nfigmaNodeId: ${live?.id ?? live?.nodeId ?? "null"}\nfigmaUrl: ${figmaUrl ?? "null"}`)
     .replace("liveFigmaMetadata: unavailable", `liveFigmaMetadata: ${live ? "verified 2026-10-30" : "no confirmed mapping"}`)

@@ -96,6 +96,6 @@ Temporary mapping: runtime owns chevron placement and hover behavior.
 Chevron-left, Chevron-right and iconLeft have no public presentation props.
 The icon swap cannot be passed as a nonexistent AccordionBlock icon prop.
 
-Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Публикация текущего template ещё не подтверждена.
+Properties сверены с текущим снимком Figma MCP; snippets проверяются командой `yarn figma:check`. Link на документацию прочитан обратно и подтверждён для 1 Figma node. Публикация исполняемого template не подтверждена; ограничение MCP описано в docs/figma-publication.md.
 
 Для неподдерживаемых Figma states и slots ограничения явно указаны в Temporary mapping. Статус публикации проверяется отдельно от наличия файлов.

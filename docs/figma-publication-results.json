@@ -1,0 +1,1738 @@
+{
+  "fileKey": "gPjMJwL1jc8V4G6x4lZJDa",
+  "checkedAt": "2026-10-30",
+  "githubPreparedCommit": "ea3f04e575942d06735dd98408df3db578cd6b3b",
+  "summary": {
+    "documentationLinksVerified": 70,
+    "documentationLinksAdded": 18,
+    "documentationLinksCorrected": 1,
+    "documentationLinksPreserved": 51,
+    "executableTemplatesVerified": 0
+  },
+  "components": [
+    {
+      "nodeId": "1282:1912",
+      "component": "Accordion",
+      "template": "src/components/Accordion/Accordion.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Accordion/Accordion.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Accordion/Accordion.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "10439:5012",
+      "component": "AccordionBlock",
+      "template": "src/components/AccordionBlock/AccordionBlock.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/AccordionBlock/AccordionBlock.docs.md"
+          }
+        ],
+        "previousLinks": [],
+        "action": "added",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "1998:5763",
+      "component": "AccountMenu",
+      "template": "src/components/AccountMenu/AccountMenu.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/AccountMenu/AccountMenu.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/AccountMenu/AccountMenu.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "1216:1433",
+      "component": "Alert",
+      "template": "src/components/Alert/Alert.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Alert/Alert.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Alert/Alert.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "3124:20448",
+      "component": "AppLayout",
+      "template": "src/components/AppLayout/AppLayout.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/AppLayout/AppLayout.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/AppLayout/AppLayout.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "3159:29",
+      "component": "AppLayout",
+      "template": "src/components/AppLayout/AppLayoutMobile.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/AppLayout/AppLayout.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/AppLayout/AppLayout.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "21593:5299",
+      "component": "Avatar",
+      "template": "src/components/Avatar/Avatar.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Avatar/Avatar.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Avatar/Avatar.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "5118:1811",
+      "component": "BarChartHorizontal",
+      "template": "src/components/BarChartHorizontal/BarChartHorizontal.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/BarChartHorizontal/BarChartHorizontal.docs.md"
+          }
+        ],
+        "previousLinks": [],
+        "action": "added",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "4423:5773",
+      "component": "BarMenu",
+      "template": "src/components/BarMenu/BarMenu.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/BarMenu/BarMenu.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/BarMenu/BarMenu.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "8531:770",
+      "component": "Block",
+      "template": "src/components/Block/Block.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Block/Block.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Card/Card.docs.md"
+          }
+        ],
+        "action": "corrected",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "source-mapping-confirmed-template-unconfirmed",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified.",
+        "readback": {
+          "8531:771": {
+            "componentName": "Block",
+            "source": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Block/Block.tsx",
+            "version": "unknown",
+            "hasTemplate": false
+          },
+          "8531:773": {
+            "componentName": "Block",
+            "source": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Block/Block.tsx",
+            "version": "unknown",
+            "hasTemplate": false
+          },
+          "8531:775": {
+            "componentName": "Block",
+            "source": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Block/Block.tsx",
+            "version": "unknown",
+            "hasTemplate": false
+          },
+          "8531:777": {
+            "componentName": "Block",
+            "source": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Block/Block.tsx",
+            "version": "unknown",
+            "hasTemplate": false
+          },
+          "8531:779": {
+            "componentName": "Block",
+            "source": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Block/Block.tsx",
+            "version": "unknown",
+            "hasTemplate": false
+          },
+          "8531:781": {
+            "componentName": "Block",
+            "source": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Block/Block.tsx",
+            "version": "unknown",
+            "hasTemplate": false
+          }
+        }
+      }
+    },
+    {
+      "nodeId": "4096:23125",
+      "component": "Bubble",
+      "template": "src/components/Bubble/Bubble.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Bubble/Bubble.docs.md"
+          }
+        ],
+        "previousLinks": [],
+        "action": "added",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "19105:18",
+      "component": "Button",
+      "template": "src/components/Button/Button.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Button/Button.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Button/Button.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "643:5569",
+      "component": "Calendar",
+      "template": "src/components/Calendar/Calendar.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Calendar/Calendar.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Calendar/Calendar.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "4436:8329",
+      "component": "Card",
+      "template": "src/components/Card/Card.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Card/Card.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Card/Card.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "6649:1327",
+      "component": "Carousel",
+      "template": "src/components/Carousel/Carousel.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Carousel/Carousel.docs.md"
+          }
+        ],
+        "previousLinks": [],
+        "action": "added",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "1422:8581",
+      "component": "CheckBox",
+      "template": "src/components/CheckBox/CheckBox.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/CheckBox/CheckBox.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/CheckBox/CheckBox.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "21552:2622",
+      "component": "Chips",
+      "template": "src/components/Chips/Chips.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Chips/Chips.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Chips/Chips.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "8576:2288",
+      "component": "CopyLink",
+      "template": "src/components/CopyLink/CopyLink.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/CopyLink/CopyLink.docs.md"
+          }
+        ],
+        "previousLinks": [],
+        "action": "added",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "21178:1500",
+      "component": "Counter",
+      "template": "src/components/Counter/Counter.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Counter/Counter.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Counter/Counter.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "4698:9891",
+      "component": "DatePicker",
+      "template": "src/components/DatePicker/DatePicker.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/DatePicker/DatePicker.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/DatePicker/DatePicker.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "4762:11608",
+      "component": "DateRange",
+      "template": "src/components/DateRange/DateRange.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/DateRange/DateRange.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/DateRange/DateRange.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "4027:8157",
+      "component": "Download",
+      "template": "src/components/Download/Download.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Download/Download.docs.md"
+          }
+        ],
+        "previousLinks": [],
+        "action": "added",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "621:3442",
+      "component": "Header",
+      "template": "src/components/Header/Header.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Header/Header.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Header/Header.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "658:11298",
+      "component": "HeaderInside",
+      "template": "src/components/HeaderInside/HeaderInside.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/HeaderInside/HeaderInside.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/HeaderInside/HeaderInside.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "19405:2038",
+      "component": "IconButton",
+      "template": "src/components/IconButton/IconButton.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/IconButton/IconButton.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/IconButton/IconButton.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "4296:4114",
+      "component": "Input",
+      "template": "src/components/Input/Input.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Input/Input.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Input/Input.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "18:2407",
+      "component": "SearchAutocomplete",
+      "template": "src/components/Input/InputSearch.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Input/InputSearch.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Input/InputSearch.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "10753:4431",
+      "component": "InputFileDrop",
+      "template": "src/components/InputFileDrop/InputFileDrop.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/InputFileDrop/InputFileDrop.docs.md"
+          }
+        ],
+        "previousLinks": [],
+        "action": "added",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "3743:1253",
+      "component": "InputFiles",
+      "template": "src/components/InputFiles/InputFiles.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/InputFiles/InputFiles.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/InputFiles/InputFiles.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "762:481",
+      "component": "InputImg",
+      "template": "src/components/InputImg/InputImg.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/InputImg/InputImg.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/InputImg/InputImg.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "2301:10902",
+      "component": "InputMessage",
+      "template": "src/components/InputMessage/InputMessage.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/InputMessage/InputMessage.docs.md"
+          }
+        ],
+        "previousLinks": [],
+        "action": "added",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "4602:2205",
+      "component": "InputNumber",
+      "template": "src/components/InputNumber/InputNumber.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/InputNumber/InputNumber.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/InputNumber/InputNumber.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "4607:6301",
+      "component": "InputPassword",
+      "template": "src/components/InputPassword/InputPassword.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/InputPassword/InputPassword.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/InputPassword/InputPassword.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "4602:3679",
+      "component": "InputPhone",
+      "template": "src/components/InputPhone/InputPhone.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/InputPhone/InputPhone.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/InputPhone/InputPhone.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "4560:2817",
+      "component": "InputTag",
+      "template": "src/components/InputTag/InputTag.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/InputTag/InputTag.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/InputTag/InputTag.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "1021:18098",
+      "component": "InsideSidebar",
+      "template": "src/components/InsideSidebar/InsideSidebar.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/InsideSidebar/InsideSidebar.docs.md"
+          }
+        ],
+        "previousLinks": [],
+        "action": "added",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "21461:952",
+      "component": "Label",
+      "template": "src/components/Label/Label.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Label/Label.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Label/Label.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "5167:2230",
+      "component": "LineChart",
+      "template": "src/components/LineChart/LineChart.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/LineChart/LineChart.docs.md"
+          }
+        ],
+        "previousLinks": [],
+        "action": "added",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "5184:459",
+      "component": "LineChart",
+      "template": "src/components/LineChart/LineChartSingle.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/LineChart/LineChart.docs.md"
+          }
+        ],
+        "previousLinks": [],
+        "action": "added",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "400:1335",
+      "component": "ListItem",
+      "template": "src/components/ListItem/ListItem.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/ListItem/ListItem.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/ListItem/ListItem.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "1941:2233",
+      "component": "Modal",
+      "template": "src/components/Modal/Modal.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Modal/Modal.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Modal/Modal.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "5351:1298",
+      "component": "MultiSelect",
+      "template": "src/components/MultiSelect/MultiSelect.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/MultiSelect/MultiSelect.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/MultiSelect/MultiSelect.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "4680:4452",
+      "component": "MultiTag",
+      "template": "src/components/MultiTag/MultiTag.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/MultiTag/MultiTag.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/MultiTag/MultiTag.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "1595:5950",
+      "component": "Pagination",
+      "template": "src/components/Pagination/Pagination.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Pagination/Pagination.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Pagination/Pagination.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "1199:5009",
+      "component": "PinInput",
+      "template": "src/components/PinInput/PinInput.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/PinInput/PinInput.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/PinInput/PinInput.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "8456:863",
+      "component": "Player",
+      "template": "src/components/Player/Player.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Player/Player.docs.md"
+          }
+        ],
+        "previousLinks": [],
+        "action": "added",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "2059:7073",
+      "component": "Plug",
+      "template": "src/components/Plug/Plug.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Plug/Plug.docs.md"
+          }
+        ],
+        "previousLinks": [],
+        "action": "added",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "400:9376",
+      "component": "Popover",
+      "template": "src/components/Popover/Popover.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Popover/Popover.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Popover/Popover.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "1274:160",
+      "component": "ProgressBar",
+      "template": "src/components/ProgressBar/ProgressBar.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/ProgressBar/ProgressBar.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/ProgressBar/ProgressBar.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "2824:14826",
+      "component": "ProgressPie",
+      "template": "src/components/ProgressPie/ProgressPie.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/ProgressPie/ProgressPie.docs.md"
+          }
+        ],
+        "previousLinks": [],
+        "action": "added",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "1425:3260",
+      "component": "Radio",
+      "template": "src/components/Radio/Radio.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Radio/Radio.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Radio/Radio.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "1777:27",
+      "component": "Segmented",
+      "template": "src/components/Segmented/Segmented.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Segmented/Segmented.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Segmented/Segmented.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "4607:9923",
+      "component": "Select",
+      "template": "src/components/Select/Select.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Select/Select.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Select/Select.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "816:7172",
+      "component": "Separator",
+      "template": "src/components/Separator/Separator.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Separator/Separator.docs.md"
+          }
+        ],
+        "previousLinks": [],
+        "action": "added",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "788:7497",
+      "component": "Sidebar",
+      "template": "src/components/Sidebar/Sidebar.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Sidebar/Sidebar.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Sidebar/Sidebar.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "10527:8723",
+      "component": "Skeleton",
+      "template": "src/components/Skeleton/Skeleton.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Skeleton/Skeleton.docs.md"
+          }
+        ],
+        "previousLinks": [],
+        "action": "added",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "source-mapping-confirmed-template-unconfirmed",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified.",
+        "readback": {
+          "10527:8722": {
+            "componentName": "Skeleton",
+            "source": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Skeleton/Skeleton.tsx",
+            "version": "unknown",
+            "hasTemplate": false
+          }
+        }
+      }
+    },
+    {
+      "nodeId": "1066:5093",
+      "component": "StepBar",
+      "template": "src/components/StepBar/StepBar.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/StepBar/StepBar.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/StepBar/StepBar.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "1425:3616",
+      "component": "Switcher",
+      "template": "src/components/Switcher/Switcher.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Switcher/Switcher.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Switcher/Switcher.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "19446:1451",
+      "component": "Tab",
+      "template": "src/components/Tab/Tab.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Tab/Tab.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Tab/Tab.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "19494:1683",
+      "component": "Tab",
+      "template": "src/components/Tab/TabOverflowItem.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Tab/Tab.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Tab/Tab.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "3368:8739",
+      "component": "Table",
+      "template": "src/components/Table/Table.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Table/Table.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Table/Table.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "3456:25084",
+      "component": "TableColumnsModal",
+      "template": "src/components/TableColumnsModal/TableColumnsModal.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/TableColumnsModal/TableColumnsModal.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/TableColumnsModal/TableColumnsModal.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "19497:1623",
+      "component": "TabsOverflow",
+      "template": "src/components/TabsOverflow/TabsOverflow.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/TabsOverflow/TabsOverflow.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/TabsOverflow/TabsOverflow.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "21672:239",
+      "component": "Tag",
+      "template": "src/components/Tag/Tag.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Tag/Tag.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Tag/Tag.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "5477:3926",
+      "component": "Text",
+      "template": "src/components/Text/Text.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Text/Text.docs.md"
+          }
+        ],
+        "previousLinks": [],
+        "action": "added",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "4769:7369",
+      "component": "TextArea",
+      "template": "src/components/TextArea/TextArea.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/TextArea/TextArea.docs.md"
+          }
+        ],
+        "previousLinks": [],
+        "action": "added",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "1670:1000",
+      "component": "TimeBar",
+      "template": "src/components/TimeBar/TimeBar.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/TimeBar/TimeBar.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/TimeBar/TimeBar.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "4654:4915",
+      "component": "TimePicker",
+      "template": "src/components/TimePicker/TimePicker.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/TimePicker/TimePicker.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/TimePicker/TimePicker.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "2277:2530",
+      "component": "Tooltip",
+      "template": "src/components/Tooltip/Tooltip.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Tooltip/Tooltip.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/Tooltip/Tooltip.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    },
+    {
+      "nodeId": "1352:28686",
+      "component": "UserItem",
+      "template": "src/components/UserItem/UserItem.figma.js",
+      "documentation": {
+        "verified": true,
+        "links": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/UserItem/UserItem.docs.md"
+          }
+        ],
+        "previousLinks": [
+          {
+            "uri": "https://github.com/borrom25/DesignSystem/blob/main/src/components/UserItem/UserItem.docs.md"
+          }
+        ],
+        "action": "preserved",
+        "preservedStructure": true
+      },
+      "codeConnect": {
+        "verified": false,
+        "status": "existing-mapping-preserved-template-publication-deferred",
+        "blocker": "MCP accepts template parameters but readback reports hasTemplate:false. Full executable-template publication is not verified."
+      }
+    }
+  ]
+}

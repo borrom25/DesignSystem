@@ -8,7 +8,11 @@
 
 Поле **Link** у component set должно вести на документацию в GitHub. Корректные существующие ссылки сохраняются. Description, варианты, свойства и визуальные параметры изменению не подлежат. Code Connect — отдельный полный parserless React template с публичными импортами `borrom-ds-test`.
 
-Текущее состояние: запись Link и Code Connect в Figma не выполнялась. После чтения через рабочий аккаунт с Full seat подключение MCP запросило повторную авторизацию. Подготовка GitHub не зависит от этого ограничения.
+Рабочий аккаунт `design-5@ssr-business-games.com` с Full seat восстановлен. **Все 70 Link прочитаны обратно и подтверждены:** 18 добавлены, у Block исправлена ошибочная ссылка на Card, 51 корректная ссылка сохранена. Размеры, описания и component properties сохранены; runtime и API не менялись. [Фактические результаты по каждому узлу](figma-publication-results.json).
+
+**Полная публикация Code Connect не подтверждена.** `add_code_connect_map` получил полный исполняемый template Block и вернул success, но `get_code_connect_map` затем показал только source mapping с `hasTemplate: false`. Альтернативный `send_code_connect_mappings` для Skeleton дал такой же readback. Повторный bulk-вызов для Block вернул `Component is already mapped to code`. Дальнейшие 68 записи templates не выполнялись, чтобы не заменять действующие связи неподтверждённой публикацией. Source mappings Block и Skeleton сохранены; это не исполняемые React-примеры с props.
+
+Это ограничение текущего поведения MCP, а не ошибка авторизации. Для завершения нужен работающий путь публикации parserless templates (исправленный MCP либо CLI с доступом Figma Code Connect). Все 70 шаблонов уже доступны в GitHub начиная с `ea3f04e`.
 
 Данные до записи сохранены в [backup](figma-connection-backup.json); [инвентаризация](figma-current-inventory.json) содержит properties, Link и размеры. Ответы Code Connect сгруппированы без потери node ID вариантов. Ранее сохранённые связи указывали на исходники; ответы MCP не подтвердили наличие исполняемых templates.
 
