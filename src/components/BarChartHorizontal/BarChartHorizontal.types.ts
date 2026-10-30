@@ -1,9 +1,8 @@
-export interface PieChartData {
+export interface BarChartHorizontalData {
   name: string;
   value: number;
 }
 
 export interface BarChartHorizontalProps {
-  data: PieChartData[];
-  title?: string;
+  data: BarChartHorizontalData[];
 }

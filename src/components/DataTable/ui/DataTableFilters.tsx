@@ -6,6 +6,9 @@ import {
   useFilterSearch,
   useFilterState,
 } from "@/components/FilterList";
+import { filterListStyles } from "@/components/FilterList/styles";
+import { ListItem } from "@/components/ListItem";
+import { Size } from "@/types";
 import { DateRangeCompact } from "@/components/DateRange";
 import { InputNumberCompact } from "@/components/InputNumber";
 import type {
@@ -20,6 +23,7 @@ import { cn } from "@/utils";
 import type {
   ColumnTextFilterConfig,
   ListFilterConfig,
+  RadioFilterConfig,
   DateFilterConfig,
   DateRangeFilterConfig,
   DateRangeFilterValue,
@@ -141,6 +145,10 @@ function isNumberRangeEmpty(value: NumberRangeValue): boolean {
   return value.min === undefined && value.max === undefined;
 }
 
+function isRadioValueEmpty(value: unknown): boolean {
+  return value === undefined || value === null || value === "";
+}
+
 interface DataTableListFilterProps {
   config: ListFilterConfig;
   value: unknown[];
@@ -163,6 +171,9 @@ export function DataTableListFilter({
     getSearchText: config.getSearchText as
       | ((option: FilterListOption<unknown>) => string)
       | undefined,
+    searchValue: config.searchValue,
+    onSearchChange: config.onSearchChange,
+    filterOptionsLocally: config.filterOptionsLocally,
   });
 
   const showSearch = config.searchable ?? true;
@@ -175,6 +186,10 @@ export function DataTableListFilter({
       searchValue={search.searchValue}
       onSearchChange={search.setSearchValue}
       onSearchClear={search.clearSearch}
+      onScrollEnd={config.onScrollEnd}
+      scrollEndOffset={config.scrollEndOffset}
+      isLoading={config.isLoading}
+      hasMore={config.hasMore}
       searchPlaceholder={config.searchPlaceholder ?? "Поиск"}
       onReset={() => {
         filter.clear();
@@ -197,6 +212,145 @@ export function DataTableListFilter({
           onChange={filter.setDraft}
           showSelectAll={config.selectAll ?? true}
           selectAllLabel={config.selectAllLabel}
+        />
+      ) : (
+        <div className="px-2 py-6 text-center text-sm text-secondary">
+          {config.emptyMessage ?? "Ничего не найдено"}
+        </div>
+      )}
+    </FilterPanel>
+  );
+}
+
+interface DataTableRadioOptionsProps {
+  options?: FilterListOption<unknown>[];
+  groups?: FilterListGroup<unknown>[];
+  value: unknown;
+  onSelect: (value: unknown) => void;
+}
+
+function DataTableRadioOptions({
+  options,
+  groups,
+  value,
+  onSelect,
+}: DataTableRadioOptionsProps) {
+  const groupItems = groups ?? [];
+  const hasGroups = groupItems.length > 0;
+
+  const renderOption = (option: FilterListOption<unknown>) => {
+    const selected = Object.is(value, option.value);
+
+    return (
+      <ListItem
+        key={String(option.value)}
+        size={Size.Xs}
+        radio
+        selected={selected}
+        disabled={option.disabled}
+        hideSelectedOutline
+        visualSelected={false}
+        role="radio"
+        aria-checked={selected}
+        onClick={() => onSelect(selected ? undefined : option.value)}
+      >
+        {option.label}
+      </ListItem>
+    );
+  };
+
+  const renderGroup = (group: FilterListGroup<unknown>, index: number) => (
+    <div
+      key={group.label ? String(group.label) : `group-${index}`}
+      className={filterListStyles.list}
+    >
+      {index > 0 && <div className={filterListStyles.separator} />}
+      {group.label && (
+        <div className={filterListStyles.groupLabel}>{group.label}</div>
+      )}
+      {group.options.map(renderOption)}
+    </div>
+  );
+
+  return (
+    <div role="radiogroup" className={filterListStyles.allList}>
+      {hasGroups ? (
+        groupItems.map(renderGroup)
+      ) : (
+        <div className={filterListStyles.list}>
+          {(options ?? []).map(renderOption)}
+        </div>
+      )}
+    </div>
+  );
+}
+
+interface DataTableRadioFilterProps {
+  config: RadioFilterConfig;
+  value: unknown;
+  onApply: (value: unknown) => void;
+}
+
+export function DataTableRadioFilter({
+  config,
+  value,
+  onApply,
+}: DataTableRadioFilterProps) {
+  const filter = useDraftState<unknown>({
+    value,
+    defaultValue: undefined,
+    onChange: onApply,
+    isEqual: Object.is,
+    isEmpty: isRadioValueEmpty,
+  });
+
+  const search = useFilterSearch<unknown>({
+    options: config.options as FilterListOption<unknown>[] | undefined,
+    groups: config.groups as FilterListGroup<unknown>[] | undefined,
+    getSearchText: config.getSearchText as
+      | ((option: FilterListOption<unknown>) => string)
+      | undefined,
+    searchValue: config.searchValue,
+    onSearchChange: config.onSearchChange,
+    filterOptionsLocally: config.filterOptionsLocally,
+  });
+
+  const showSearch = config.searchable ?? true;
+
+  return (
+    <FilterPanel
+      className={config.className}
+      width={config.popoverWidth ?? 270}
+      showSearch={showSearch}
+      searchValue={search.searchValue}
+      onSearchChange={search.setSearchValue}
+      onSearchClear={search.clearSearch}
+      onScrollEnd={config.onScrollEnd}
+      scrollEndOffset={config.scrollEndOffset}
+      isLoading={config.isLoading}
+      hasMore={config.hasMore}
+      searchPlaceholder={config.searchPlaceholder ?? "Поиск"}
+      onReset={() => {
+        filter.clear();
+        search.clearSearch();
+      }}
+      onApply={() => {
+        filter.apply();
+        search.clearSearch();
+      }}
+      resetLabel={config.resetLabel}
+      applyLabel={config.applyLabel}
+      applyDisabled={!filter.isDirty}
+      resetDisabled={
+        filter.isEmpty && isRadioValueEmpty(filter.draft) && !search.searchValue
+      }
+    >
+      {search.hasResults ? (
+        <DataTableRadioOptions
+          options={search.filteredOptions}
+          groups={search.filteredGroups}
+          value={filter.draft}
+          onSelect={filter.setDraft}
         />
       ) : (
         <div className="px-2 py-6 text-center text-sm text-secondary">
@@ -299,6 +453,9 @@ export function DataTableDateRangeFilter({
   value,
   onApply,
 }: DataTableDateRangeFilterProps) {
+  const { className: dateRangeClassName, ...dateRangeProps } =
+    config.dateRangeProps ?? {};
+
   const filter = useDraftState<DateRangeFilterValue>({
     value: normalizeDateRangeValue(value),
     defaultValue: normalizeDateRangeValue(config.defaultValue),
@@ -322,10 +479,11 @@ export function DataTableDateRangeFilter({
       resetDisabled={filter.isEmpty && isDateRangeEmpty(filter.draft)}
     >
       <DateRangeCompact
-        {...config.dateRangeProps}
+        {...dateRangeProps}
+        className={cn(dateRangeClassName)}
         value={filter.draft}
-        placeholderStart={config.placeholderStart}
-        placeholderEnd={config.placeholderEnd}
+        placeholderStart={config.placeholderStart ?? "Дата от"}
+        placeholderEnd={config.placeholderEnd ?? "Дата до"}
         onChange={(nextValue) => {
           filter.setDraft(normalizeDateRangeValue(nextValue));
         }}
@@ -441,6 +599,15 @@ export function DataTableFilterRenderer({
   const { setIsOpen } = usePopover();
   const value = filters.getValue(filterId);
 
+  const handleRadioApply = (newValue: unknown) => {
+    if (isRadioValueEmpty(newValue)) {
+      filters.clearValue(filterId);
+    } else {
+      filters.setValue(filterId, newValue);
+    }
+    setIsOpen(false);
+  };
+
   const handleListApply = (newValue: unknown[]) => {
     if (Array.isArray(newValue) && newValue.length === 0) {
       filters.clearValue(filterId);
@@ -501,6 +668,14 @@ export function DataTableFilterRenderer({
           config={config}
           value={(value as unknown[]) ?? []}
           onApply={handleListApply}
+        />
+      );
+    case "radio":
+      return (
+        <DataTableRadioFilter
+          config={config}
+          value={value}
+          onApply={handleRadioApply}
         />
       );
     case "date":

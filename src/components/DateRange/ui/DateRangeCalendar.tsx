@@ -2,11 +2,11 @@ import { ru } from "date-fns/locale";
 import { cn } from "@/utils";
 import { Calendar } from "@/components/Calendar";
 import { calendarMonthsDefault } from "../constants";
-import type { DateRangeValue } from "../DateRange.types";
+import type { DateRangeNativeValue } from "../DateRange.types";
 import { dateRangeStyles } from "../styles";
 
 export interface DateRangeCalendarProps {
-  value: DateRangeValue;
+  value: DateRangeNativeValue;
   onSelect: (range: { from?: Date; to?: Date } | undefined) => void;
   displayMonth?: Date;
   numberOfMonths?: number;

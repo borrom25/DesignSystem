@@ -2,6 +2,7 @@ import { Size } from "@/types";
 import { cn } from "@/utils/cn";
 import { Popover } from "@/components/Popover";
 import { FieldHint } from "@/components/Field";
+import { getOptionKey, type SelectOptionValue } from "@/shared/Select";
 import { useMultiTagState } from "./hooks/useMultiTagState";
 import {
   MultiTagTrigger,
@@ -12,7 +13,7 @@ import {
 import { multiTagStyles, wrapperClasses } from "./styles";
 import type { MultiTagProps } from "./types";
 
-export function MultiTag<T extends string | number = string>({
+export function MultiTag<T extends SelectOptionValue = string>({
   value,
   defaultValue,
   onChange,
@@ -40,7 +41,7 @@ export function MultiTag<T extends string | number = string>({
   returnAll = false,
   clearable = false,
   onClear,
-  maxVisibleRows = 2,
+  maxVisibleRows = 4,
 }: MultiTagProps<T>) {
   const {
     value: selectedValues,
@@ -110,7 +111,7 @@ export function MultiTag<T extends string | number = string>({
           {children ??
             options.map((option) => (
               <MultiTagItem<T>
-                key={option.value}
+                key={getOptionKey(option.value)}
                 option={option}
                 selected={selectedValues.includes(option.value)}
                 onToggle={handleToggle}

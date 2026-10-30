@@ -1,10 +1,11 @@
 import { Size } from "@/types";
 import { cn } from "@/utils";
 import { Tag } from "@/components/Tag";
+import { getOptionKey, type SelectOptionValue } from "@/shared/Select";
 import { placeholderClasses, triggerStyles } from "../styles";
 import type { MultiTagValueProps } from "../types";
 
-export function MultiTagValue<T extends string | number = string>({
+export function MultiTagValue<T extends SelectOptionValue = string>({
   placeholder = "Выберите...",
   selectedOptions,
   size = Size.Md,
@@ -18,15 +19,16 @@ export function MultiTagValue<T extends string | number = string>({
   const isLabelActive = hasLabel && (open || selectedOptions.length > 0);
 
   if (selectedOptions.length === 0) {
+    const showPlaceholder = !hasLabel || isLabelActive;
+
+    if (!showPlaceholder) return null;
+
     return (
       <span
         className={cn(
           triggerStyles.value,
           placeholderClasses,
-          hasLabel &&
-            (isLabelActive
-              ? triggerStyles.valuePlaceholderVisible
-              : triggerStyles.valuePlaceholderHidden)
+          hasLabel && triggerStyles.valuePlaceholderVisible
         )}
       >
         {placeholder}
@@ -42,7 +44,7 @@ export function MultiTagValue<T extends string | number = string>({
     <>
       {selectedOptions.map((option) => (
         <Tag
-          key={option.value}
+          key={getOptionKey(option.value)}
           size={size}
           error={error}
           onClose={disabled ? undefined : handleRemove(option.value)}

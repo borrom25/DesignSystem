@@ -17,3 +17,9 @@ export const minusIconSizeClasses: Record<Size, number> = {
   sm: 16,
   md: 20,
 } as const;
+
+export const titleSizeClasses: Record<Size, string> = {
+  xs: "text-xs",
+  sm: "text-sm",
+  md: "text-md",
+} as const;

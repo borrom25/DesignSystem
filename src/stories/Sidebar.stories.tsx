@@ -68,7 +68,7 @@ const SidebarInteractive = (args: SidebarProps) => {
           ariaLabel: "Выйти",
           buttonProps: {
             type: Type.Flat,
-            color: Color.Inverse,
+            color: Color.Secondary,
           },
         }}
       />

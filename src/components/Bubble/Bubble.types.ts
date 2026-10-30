@@ -1,11 +1,6 @@
-import type {
-  HTMLAttributes,
-  ImgHTMLAttributes,
-  ReactNode,
-  ComponentType,
-  SVGProps,
-} from "react";
+import type { HTMLAttributes, ImgHTMLAttributes, ReactNode } from "react";
 import type { Size } from "@/types";
+import { LucideIcon } from "lucide-react";
 
 export const BubbleSide = {
   Incoming: "incoming",
@@ -56,12 +51,10 @@ export type BubbleImageItemProps = Omit<
   size: Size;
 };
 
-export type BubbleFileIcon = ComponentType<SVGProps<SVGSVGElement>>;
-
 export type BubbleFileProps = HTMLAttributes<HTMLDivElement> & {
   fileName: ReactNode;
   fileSize?: ReactNode;
-  icon?: BubbleFileIcon;
+  icon?: LucideIcon;
   action?: ReactNode;
   onActionClick?: () => void;
   actionAriaLabel?: string;

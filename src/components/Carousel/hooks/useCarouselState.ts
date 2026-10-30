@@ -42,6 +42,7 @@ export const useCarouselState = ({ children }: useCarouselStateProps) => {
 
   return {
     itemsCount,
+    itemChildren,
     indicatorsChildren,
     prevButtonChildren,
     nextButtonChildren,

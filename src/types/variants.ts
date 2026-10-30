@@ -5,6 +5,7 @@ export const Color = {
   Action: "action",
   Warning: "warning",
   Info: "info",
+  Secondary: "inverse",
   Inverse: "inverse",
   ContrastDark: "contrastDark",
   ContrastLight: "contrastLight",

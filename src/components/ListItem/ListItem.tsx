@@ -5,6 +5,7 @@ import { ListItemVariant } from "./ListItem.types";
 import { listItemStyles } from "./styles";
 import { getListItemTextClassName } from "./ListItem.utils";
 import { CheckBox } from "../CheckBox";
+import { Radio } from "../Radio";
 import { Avatar } from "../Avatar";
 import { scalingClasses } from "@/styles/shared";
 
@@ -14,10 +15,14 @@ export function ListItem({
   selected = false,
   iconOnly = false,
   checkbox = false,
+  radio = false,
+  indeterminate = false,
   avatar,
   iconLeft: IconLeft,
   iconRight: IconRight,
+  leading,
   suffix,
+  prefix,
   title,
   className,
   disabled = false,
@@ -25,6 +30,7 @@ export function ListItem({
   asChild = false,
   hideSelectedOutline = false,
   visualSelected = true,
+  wrapText = true,
   scaling,
   ref,
   ...restProps
@@ -33,17 +39,20 @@ export function ListItem({
   const showTitle = !children && title;
   const iconSize = getIconSize(size, listItemStyles.iconSizeMap);
   const avatarSize = getIconSize(size, listItemStyles.avatarSizeMap);
+  const sizeClasses = wrapText
+    ? listItemStyles.wrapSize[size]
+    : listItemStyles.size[size];
 
   const computedClassName = cn(
     listItemStyles.base,
     listItemStyles.text,
-    iconOnly ? listItemStyles.iconOnlySize[size] : listItemStyles.size[size],
+    iconOnly ? listItemStyles.iconOnlySize[size] : sizeClasses,
     !iconOnly && listItemStyles.titleSize[size],
     listItemStyles.getVariant(variant, hideSelectedOutline),
     className
   );
 
-  const textClassName = getListItemTextClassName(iconOnly);
+  const textClassName = getListItemTextClassName(iconOnly, wrapText);
   const shouldRenderText = !iconOnly && (showTitle || !!children);
 
   if (asChild) {
@@ -70,17 +79,38 @@ export function ListItem({
       ref={ref}
       {...restProps}
     >
+      {leading}
       {checkbox && (
         <CheckBox
           size={Size.Xs}
           checked={selected}
+          indeterminate={indeterminate}
           disabled={disabled}
           readOnly
           tabIndex={-1}
         />
       )}
+      {radio && (
+        <span className="pointer-events-none" aria-hidden>
+          <Radio
+            size={Size.Xs}
+            checked={selected}
+            disabled={disabled}
+            readOnly
+            tabIndex={-1}
+          />
+        </span>
+      )}
       {avatar && <Avatar {...avatar} size={avatarSize} />}
-      {IconLeft && <IconLeft size={iconSize} className={listItemStyles.icon} />}
+
+      {(prefix || IconLeft) && (
+        <div className={listItemStyles.rightGroup}>
+          {prefix && <span className={listItemStyles.icon}>{prefix}</span>}
+          {IconLeft && (
+            <IconLeft size={iconSize} className={listItemStyles.iconLeft} />
+          )}
+        </div>
+      )}
       {shouldRenderText &&
         (showTitle ? (
           <span className={textClassName}>{title}</span>
@@ -91,7 +121,7 @@ export function ListItem({
         <div className={listItemStyles.rightGroup}>
           {suffix && <span className={listItemStyles.icon}>{suffix}</span>}
           {IconRight && (
-            <IconRight size={iconSize} className={listItemStyles.icon} />
+            <IconRight size={iconSize} className={listItemStyles.iconRight} />
           )}
         </div>
       )}

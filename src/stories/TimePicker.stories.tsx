@@ -94,6 +94,22 @@ const meta = {
       control: "text",
       description: "className для поля",
     },
+    minTime: {
+      control: "text",
+      description:
+        "Минимальное время: строка «ЧЧ:ММ» / «ЧЧ:ММ:СС» или TimeValue. Более раннее время недоступно",
+      table: {
+        type: { summary: "TimeValue | string" },
+      },
+    },
+    maxTime: {
+      control: "text",
+      description:
+        "Максимальное время: строка «ЧЧ:ММ» / «ЧЧ:ММ:СС» или TimeValue. Более позднее время недоступно",
+      table: {
+        type: { summary: "TimeValue | string" },
+      },
+    },
     showSeconds: {
       control: "boolean",
       description: "Показывать колонку секунд",
@@ -171,7 +187,12 @@ const baseArgs = {
 };
 
 export const Playground: Story = {
-  render: () => {
+  args: {
+    label: baseArgs.label,
+    placeholder: baseArgs.placeholder,
+    defaultValue: baseArgs.defaultValue,
+  },
+  render: (args) => {
     const [size, setSize] = useState<(typeof SIZES)[number]>(Size.Md);
     const [required, setRequired] = useState(false);
     const [disabled, setDisabled] = useState(false);
@@ -301,6 +322,10 @@ export const Playground: Story = {
           showConfirmButton={showConfirmButton}
           value={value}
           time={time}
+          label={args.label ?? baseArgs.label}
+          placeholder={args.placeholder ?? baseArgs.placeholder}
+          defaultValue={args.defaultValue ?? baseArgs.defaultValue}
+          className={args.className}
           onChangeValue={(nextValue) => {
             console.log("[TimePicker] onChangeValue", nextValue);
             setValue(nextValue ?? "");
@@ -329,6 +354,71 @@ export const Playground: Story = {
                 .padStart(2, "0")}:${time.seconds.toString().padStart(2, "0")}`
             : "не выбрано"}
         </div>
+        <div className="text-xs text-secondary">
+          Input value: {value || "пусто"}
+        </div>
+      </div>
+    );
+  },
+};
+
+export const WithMinMaxTime: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Ограничение диапазона через `minTime` и `maxTime`. Недоступные часы, минуты и секунды в поповере заблокированы, а время вне диапазона, введённое вручную, подтягивается к ближайшей границе.",
+      },
+    },
+  },
+  render: () => {
+    const [minTime, setMinTime] = useState("09:30");
+    const [maxTime, setMaxTime] = useState("18:15");
+    const [showSeconds, setShowSeconds] = useState(false);
+    const [value, setValue] = useState<string>("");
+
+    return (
+      <div className="flex flex-col gap-6" style={{ width: 420 }}>
+        <div className="flex flex-wrap gap-3 text-xs text-secondary">
+          <label className="flex items-center gap-1.5 cursor-pointer">
+            Min:
+            <input
+              value={minTime}
+              onChange={(event) => setMinTime(event.target.value)}
+              className="w-20 bg-transparent border border-white/10 rounded px-1 py-0.5"
+            />
+          </label>
+
+          <label className="flex items-center gap-1.5 cursor-pointer">
+            Max:
+            <input
+              value={maxTime}
+              onChange={(event) => setMaxTime(event.target.value)}
+              className="w-20 bg-transparent border border-white/10 rounded px-1 py-0.5"
+            />
+          </label>
+
+          <label className="flex items-center gap-1.5 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={showSeconds}
+              onChange={(event) => setShowSeconds(event.target.checked)}
+            />
+            Show seconds
+          </label>
+        </div>
+
+        <TimePicker
+          {...baseArgs}
+          hint={`Доступно с ${minTime || "—"} до ${maxTime || "—"}`}
+          showSeconds={showSeconds}
+          minTime={minTime || undefined}
+          maxTime={maxTime || undefined}
+          value={value}
+          onChangeValue={(nextValue) => setValue(nextValue ?? "")}
+          onClear={() => setValue("")}
+        />
+
         <div className="text-xs text-secondary">
           Input value: {value || "пусто"}
         </div>

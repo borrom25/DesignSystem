@@ -142,7 +142,7 @@ export const Playground: Story = {
 
 export const WithValue: Story = {
   render: () => {
-    const [value, setValue] = useState("+79991234567");
+    const [value, setValue] = useState("+79851253564");
 
     return (
       <div style={{ width: 360 }}>

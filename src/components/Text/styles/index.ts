@@ -1,13 +1,16 @@
 export { baseClasses } from "./base";
-export { sizeClasses } from "./sizes";
-export { getWeightClass } from "./weights";
+export { alignClasses } from "./align";
+export { overflowClasses } from "./overflow";
+export { decorationClasses } from "./decoration";
 
 import { baseClasses } from "./base";
-import { sizeClasses } from "./sizes";
-import { getWeightClass } from "./weights";
+import { alignClasses } from "./align";
+import { overflowClasses } from "./overflow";
+import { decorationClasses } from "./decoration";
 
 export const textStyles = {
   base: baseClasses,
-  size: sizeClasses,
-  getWeight: getWeightClass,
+  align: alignClasses,
+  overflow: overflowClasses,
+  decoration: decorationClasses,
 } as const;

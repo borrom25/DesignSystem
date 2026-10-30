@@ -18,3 +18,8 @@ export {
   overlayController,
 } from "./useOverlayController";
 export type { OverlayController } from "./useOverlayController";
+export { useFileDropZone } from "./useFileDropZone";
+export type {
+  UseFileDropZoneOptions,
+  UseFileDropZoneReturn,
+} from "./useFileDropZone";

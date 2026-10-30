@@ -1,0 +1,73 @@
+@keyframes photo-exit-next {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: -100% 0;
+  }
+}
+
+@keyframes photo-enter-next {
+  from {
+    translate: 100% 0;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+
+@keyframes photo-exit-prev {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: 100% 0;
+  }
+}
+
+@keyframes photo-enter-prev {
+  from {
+    translate: -100% 0;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+
+.photo-film-exit-next,
+.photo-film-enter-next,
+.photo-film-exit-prev,
+.photo-film-enter-prev {
+  animation-duration: var(--photo-slide-ms);
+  animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+  animation-fill-mode: both;
+  will-change: translate;
+}
+
+.photo-film-exit-next {
+  animation-name: photo-exit-next;
+}
+
+.photo-film-enter-next {
+  animation-name: photo-enter-next;
+}
+
+.photo-film-exit-prev {
+  animation-name: photo-exit-prev;
+}
+
+.photo-film-enter-prev {
+  animation-name: photo-enter-prev;
+}
+
+.photo-rotate {
+  transition-property: transform;
+  transition-duration: var(--photo-rotate-ms);
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-rotate {
+    transition: none;
+  }
+}

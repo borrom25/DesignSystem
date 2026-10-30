@@ -14,6 +14,7 @@ export function Tab({
   children,
   asChild = false,
   scaling = false,
+  disabled,
   ...restProps
 }: TabProps) {
   const iconSize = getIconSize(size, tabStyles.iconSizeMap);
@@ -24,7 +25,6 @@ export function Tab({
     tabStyles.base,
     tabStyles.getVariant(type),
     tabStyles.size[size],
-    selected && tabStyles.selected,
     scaling && tabStyles.scaling,
     className
   );
@@ -34,6 +34,7 @@ export function Tab({
       <Comp
         className={computedClassName}
         aria-selected={selected}
+        disabled={disabled}
         {...restProps}
       >
         {children}
@@ -42,7 +43,12 @@ export function Tab({
   }
 
   return (
-    <Comp className={computedClassName} aria-selected={selected} {...restProps}>
+    <Comp
+      className={computedClassName}
+      aria-selected={selected}
+      disabled={disabled}
+      {...restProps}
+    >
       <span className={cn(tabStyles.content, tabStyles.gap[size])}>
         {IconLeft && <IconLeft size={iconSize} className={"shrink-0"} />}
         {children}
@@ -51,6 +57,7 @@ export function Tab({
             count={count}
             size={size}
             variant={selected ? CounterVariant.White : CounterVariant.Neutral}
+            disabled={disabled}
             className="self-center"
           />
         )}

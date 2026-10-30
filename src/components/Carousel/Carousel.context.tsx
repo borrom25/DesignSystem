@@ -7,9 +7,14 @@ export const CarouselContext = createContext<CarouselContextValue>({
   orientation: "horizontal",
   itemsCount: 0,
   isHorizontal: true,
-  isWithin: true,
   width: 0,
   height: 0,
+  itemsSizes: [],
+  setItemsSizes: (value) => value,
+  autoSwipeDuration: 0,
+  zoomEnabled: true,
+  isZoomed: false,
+  setIsZoomed: (value) => value,
 });
 
 export function useCarouselContext(): CarouselContextValue {

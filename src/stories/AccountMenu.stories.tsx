@@ -8,13 +8,16 @@ const lagugageOptions: SegmentedOption[] = [
   { value: "ru", label: "Ru" },
   { value: "en", label: "En" },
   { value: "fr", label: "FR" },
-  { value: "ch", label: "CH" },
 ];
 
 const baseArgs: AccountMenuProps = {
   src: "https://i.pravatar.cc/160?img=68",
   fullName: "Константинов К.К.",
   role: "Product Designer",
+  avatarProps: {
+    showEditBadge: true,
+    onEditBadgeClick: () => console.log("account menu avatar edit click"),
+  },
   languages: lagugageOptions,
   language: "ru",
   actions: [

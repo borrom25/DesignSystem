@@ -77,7 +77,7 @@ export const Playground: Story = {
     const [required, setRequired] = useState(true);
     const [hasHintError, setHasHintError] = useState(false);
     const [disabled, setDisabled] = useState(false);
-    const [value, setValue] = useState("");
+    const [value, setValue] = useState<string | null>(null);
     const toggleControls = [
       { key: "error", label: "error", checked: error, onChange: setError },
       {
@@ -136,7 +136,7 @@ export const Playground: Story = {
 
         <Select
           value={value}
-          onValueChange={(value) => setValue(value ?? "")}
+          onValueChange={setValue}
           disabled={disabled}
           error={error}
           size={size}
@@ -147,7 +147,7 @@ export const Playground: Story = {
         >
           <SelectTrigger size={size} error={error}>
             <SelectValue placeholder="Select a fruit...">
-              {FRUITS[value]}
+              {value ? FRUITS[value] : undefined}
             </SelectValue>
           </SelectTrigger>
           <SelectContent>
@@ -183,7 +183,7 @@ export const LazyLoad: Story = {
     const BATCH = 15;
     const [count, setCount] = useState(BATCH);
     const [loading, setLoading] = useState(false);
-    const [value, setValue] = useState("");
+    const [value, setValue] = useState<string | null>(null);
 
     const handleEndReached = () => {
       if (loading || count >= TOTAL) return;
@@ -200,10 +200,7 @@ export const LazyLoad: Story = {
           Loaded {count} of {TOTAL} items
         </p>
 
-        <Select
-          value={value}
-          onValueChange={(value) => !!value && setValue(value)}
-        >
+        <Select value={value} onValueChange={setValue}>
           <SelectTrigger size={Size.Md}>
             <SelectValue placeholder="Select an item...">
               {value && `Item ${parseInt(value.split("-")[1]) + 1}`}
@@ -244,15 +241,14 @@ export const LazyLoad: Story = {
 };
 
 export const WithClearButton: Story = {
-  name: "With Clear Button",
   render: () => {
-    const [value, setValue] = useState("banana");
+    const [value, setValue] = useState<string | null>("banana");
 
     return (
       <div className="flex flex-col gap-3" style={{ width: 320 }}>
         <Select
           value={value}
-          onValueChange={(value) => setValue(value ?? "")}
+          onValueChange={setValue}
           options={CLEAR_BUTTON_FRUIT_VALUES.map((fruitValue) => ({
             value: fruitValue,
             label: FRUITS[fruitValue],

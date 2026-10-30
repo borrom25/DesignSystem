@@ -11,6 +11,7 @@ export function Segmented<T extends string | number = string>({
   options,
   position = "horizontal",
   shape = "default",
+  size = "sm",
   className,
 }: SegmentedProps<T>) {
   const {
@@ -34,6 +35,7 @@ export function Segmented<T extends string | number = string>({
         segmentedStyles.base,
         segmentedStyles.position[position],
         segmentedStyles.shape[shape],
+        segmentedStyles.size[size],
         className
       )}
     >
@@ -53,6 +55,7 @@ export function Segmented<T extends string | number = string>({
           label={label}
           disabled={disabled}
           active={currentValue === value}
+          size={size}
           handleChange={handleChange}
           className={cn(
             segmentedStyles.itemBase,

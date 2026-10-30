@@ -4,4 +4,5 @@ export type {
   ConfigProps,
   ProgressPieColors,
   ProgressPieSize,
+  ProgressCircleProps,
 } from "./ProgressPie.types";

@@ -1,4 +1,4 @@
-import { type MouseEvent } from "react";
+import { useRef, type MouseEvent } from "react";
 import { X } from "lucide-react";
 import { cn } from "@/utils";
 import { Color, Size, Type } from "@/types";
@@ -20,6 +20,7 @@ export function ModalContent({
   className,
   children,
 }: ModalContentProps) {
+  const shouldCloseOnBackdropClickRef = useRef(false);
   const { isMobile } = useScreenSize();
   const wrapperClasses = modalStyles.getWrapper(type);
   const contentClasses = modalStyles.getContent(
@@ -29,7 +30,6 @@ export function ModalContent({
     isMobile,
     sideMenu
   );
-  const closeButtonClasses = modalStyles.getCloseButton(type, sideMenu);
   const animationClasses = modalStyles.getAnimation(
     type,
     isMobile,
@@ -37,15 +37,25 @@ export function ModalContent({
     sideMenu
   );
 
+  const handleBackdropMouseDown = (event: MouseEvent<HTMLDivElement>) => {
+    shouldCloseOnBackdropClickRef.current =
+      event.target === event.currentTarget;
+  };
+
   const handleBackdropClick = (event: MouseEvent<HTMLDivElement>) => {
-    if (event.target === event.currentTarget) {
+    if (
+      event.target === event.currentTarget &&
+      shouldCloseOnBackdropClickRef.current
+    ) {
       handleOverlayClick?.();
     }
+    shouldCloseOnBackdropClickRef.current = false;
   };
 
   return (
     <div
       className={cn(modalStyles.contentWrapper, wrapperClasses)}
+      onMouseDown={handleBackdropMouseDown}
       onClick={handleBackdropClick}
     >
       <div className={modalStyles.contentLayout} data-menu={sideMenu}>
@@ -59,11 +69,10 @@ export function ModalContent({
           role="dialog"
           aria-modal="true"
           data-state={state}
-          onClick={(e) => e.stopPropagation()}
         >
           {children}
         </div>
-        {(!isMobile || sideMenu) && showCloseButton && (
+        {sideMenu && showCloseButton && (
           <Button
             iconOnly={X}
             type={Type.Fill}
@@ -73,7 +82,7 @@ export function ModalContent({
             aria-label="Закрыть"
             data-state={state}
             data-menu={sideMenu}
-            className={closeButtonClasses}
+            className={modalStyles.sideMenuCloseButton}
           />
         )}
       </div>

@@ -65,7 +65,12 @@ export function Chips({
             <IconRight size={iconSize} className={chipsStyles.icon} />
           )}
           {!!count && (
-            <Counter count={count} size={size} variant={CounterVariant.White} />
+            <Counter
+              count={count}
+              disabled={disabled}
+              size={size}
+              variant={CounterVariant.Neutral}
+            />
           )}
         </span>
       )}

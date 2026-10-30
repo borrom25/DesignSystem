@@ -73,6 +73,7 @@ export const activeStepClasses = `
 
 export const buttonClasses = `
   ${flexCenterClasses}
+  relative
   size-(--size-component-md-icon-only-dimensions)
   p-0
   shrink-0
@@ -89,6 +90,7 @@ export const buttonClasses = `
 
 export const successButtonClasses = `
   ${flexCenterClasses}
+  relative
   h-(--size-component-md-height)
   px-(--size-component-md-padding-x)
   py-(--size-component-md-padding-y)
@@ -98,4 +100,9 @@ export const successButtonClasses = `
   bg-(--color-positive-heavy)
   text-on-brand
   cursor-pointer
+  disabled:bg-generic-disabled
+  disabled:text-hint
+  disabled:cursor-default
 `;
+
+export const loaderClasses = "absolute inset-0 m-auto animate-spin";

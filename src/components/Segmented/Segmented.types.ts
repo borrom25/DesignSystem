@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import type { Size } from "@/types";
 
 export type SegmentedPositions = "vertical" | "horizontal";
 export type SegmentedShapeVariants = "default" | "round";
@@ -16,6 +17,7 @@ export interface SegmentedProps<T extends string | number = string> {
   options: SegmentedOption<T>[];
   position?: SegmentedPositions;
   shape?: SegmentedShapeVariants;
+  size?: Size;
   className?: string;
 }
 
@@ -25,6 +27,7 @@ export interface SegmentedItemProps<
   active?: boolean;
   handleChange?: (value: T) => void;
   setRef?: (el: HTMLButtonElement | null) => void;
+  size?: Size;
   className?: string;
 }
 

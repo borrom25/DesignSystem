@@ -10,6 +10,8 @@ export const statusSlotBesideTrackClasses =
 export const statusSlotWithTitleClasses =
   "flex justify-end items-center min-h-11 min-w-[7ch]";
 
+export const statusSlotTopOnlyClasses = "flex w-full justify-end items-center";
+
 export const titleClasses =
   "text-center font-roboto-flex text-xs font-medium leading-xs tracking-xs";
 
@@ -19,4 +21,4 @@ export const progressTrackClasses =
   "h-[6px] min-w-0 flex-1 br-sm rounded-sm bg-generic-medium overflow-hidden relative";
 
 export const progressBarBaseClasses =
-  "h-full br-sm rounded-sm transition-all duration-300 ease-out absolute inset-0";
+  "absolute inset-y-0 left-0 h-full br-sm rounded-sm transition-[width] duration-300 ease-out motion-reduce:transition-none";

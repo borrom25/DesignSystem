@@ -3,6 +3,7 @@ import { Size } from "@/types";
 import { cn } from "@/utils/cn";
 import { Popover } from "@/components/Popover";
 import { FieldHint } from "@/components/Field";
+import { getOptionKey } from "@/shared/Select";
 import { MultiSelectContext } from "./MultiSelect.context";
 import { useMultiSelectState } from "./hooks/useMultiSelectState";
 import {
@@ -200,7 +201,7 @@ export function MultiSelect<
 
           return (
             <MultiSelectItem<T>
-              key={item.value}
+              key={getOptionKey(item.value)}
               option={item}
               selected={selected}
               onToggle={handleToggle}
@@ -232,10 +233,10 @@ export function MultiSelect<
         (selectedValues.length > 0 ? (
           selectedValues.map((selectedValue) => (
             <input
-              key={selectedValue}
+              key={getOptionKey(selectedValue)}
               type="hidden"
               name={name}
-              value={selectedValue}
+              value={selectedValue ?? ""}
             />
           ))
         ) : (

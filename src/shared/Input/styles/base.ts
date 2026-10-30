@@ -7,11 +7,10 @@ export const inputDefaultClasses =
 export const inputStateClasses = inputDefaultClasses;
 
 export const inputDisabledClasses =
-  "bg-generic-disabled text-hint cursor-not-allowed";
+  "border border-transparent bg-generic-disabled text-hint cursor-not-allowed";
 
 export const inputErrorClasses =
-  "border border-danger-line-light  hover:border-danger-line-light focus-within:border-danger-line-light focus-within:hover:border-danger-line-light";
-
+  "border border-danger-line-light bg-generic-medium hover:border-danger-line-light focus-within:border-danger-line-light focus-within:hover:border-danger-line-light";
 export const inputClearClasses =
   "border-0 border-transparent bg-transparent hover:rounded-lg hover:bg-generic-medium focus-within:rounded-lg focus-within:bg-generic-medium focus-within:hover:rounded-lg focus-within:hover:bg-generic-medium";
 
@@ -34,7 +33,7 @@ export const inputCountClasses =
   "inline-flex shrink-0 items-center font-roboto-flex font-medium whitespace-nowrap text-secondary";
 
 export const inputBodyClasses =
-  "relative flex min-w-0 flex-1 self-stretch items-center";
+  "relative flex min-w-0 flex-1 self-stretch items-center overflow-hidden";
 
 export const inputNativeClasses =
   "relative z-10 flex-1 min-w-0 bg-transparent border-none outline-none placeholder:text-secondary disabled:cursor-not-allowed text-primary disabled:text-hint will-change-transform transition-[translate] duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] [&::placeholder]:transition-opacity [&::placeholder]:duration-[250ms] [&::placeholder]:ease-out";
@@ -44,7 +43,7 @@ export const inputNativeFullHeightClasses = "h-full";
 export const inputNativeDisabledClasses = "placeholder:text-hint";
 
 export const inputNativeWithFloatingLabelClasses =
-  "translate-y-[calc(var(--generic-spacing-2)+var(--input-gap-container-content,var(--generic-spacing-05)))]";
+  "pt-[calc(var(--generic-spacing-2)+var(--input-gap-container-content,var(--generic-spacing-05))+10px)]";
 
 export const inputNativePlaceholderHiddenClasses =
   "[&::placeholder]:opacity-0 [&::placeholder]:[transition-delay:0ms]";
@@ -53,7 +52,7 @@ export const inputNativePlaceholderVisibleClasses =
   "[&::placeholder]:opacity-100 [&::placeholder]:[transition-delay:150ms]";
 
 export const inputFloatingLabelClasses =
-  "pointer-events-none absolute top-0 z-0 origin-top-left translate-y-[calc(var(--input-height,56px)_/_2_-_50%)] font-roboto-flex font-medium text-secondary transition-[translate,scale,color] duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] will-change-transform";
+  "pointer-events-none absolute top-0 z-0 origin-top-left translate-y-[calc(var(--input-height,56px)_/_2_-_50%)] font-roboto-flex font-regular text-secondary transition-[translate,font-size,line-height,letter-spacing,color] duration-[250ms] ease-[cubic-bezier(0.4,0,0.2,1)]";
 
 export const inputFloatingLabelActiveClasses =
   "translate-y-(--generic-spacing-2) text-complementary";
@@ -61,7 +60,7 @@ export const inputFloatingLabelActiveClasses =
 export const inputFloatingLabelDisabledClasses = "text-hint";
 
 export const inputFloatingLabelRequiredMarkClasses =
-  "pointer-events-none absolute -left-1 top-1 z-30 inline-flex size-[21px] -translate-y-1/3 items-center justify-center text-[30px] font-bold leading-[21px] tracking-md text-danger-text-heavy";
+  "pointer-events-none absolute left-1 -top-1 z-30 -translate-y-1/4 text-danger-text-heavy text-[18px]";
 
 export const inputClearButtonClasses =
   "shrink-0 p-0 border-0 bg-transparent text-complementary cursor-pointer opacity-0 scale-95 pointer-events-none transition-[opacity,scale,color] duration-200 ease-out group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:scale-100 group-focus-within:pointer-events-auto disabled:text-hint disabled:cursor-not-allowed disabled:pointer-events-none";

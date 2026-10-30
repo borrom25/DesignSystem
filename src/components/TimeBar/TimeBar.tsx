@@ -2,7 +2,12 @@ import { useMemo } from "react";
 import { cn } from "@/utils";
 import { TimeColumn, ControlButtons } from "./ui";
 import { useTimeBarState } from "./hooks/useTimeBarState";
-import { generateHours, generateMinutes, generateSeconds } from "./utils";
+import {
+  generateHours,
+  generateMinutes,
+  generateSeconds,
+  isOutOfTimeLimits,
+} from "./utils";
 import { timeBarStyles } from "./styles";
 import { SELECTION_PILL_HEIGHT } from "./constants/scroll";
 import type { TimeBarProps } from "./TimeBar.types";
@@ -12,6 +17,8 @@ export function TimeBar({
   defaultValue,
   onChange,
   onConfirm,
+  minTime,
+  maxTime,
   disabled = false,
   showSeconds = true,
   use24Hour = true,
@@ -29,11 +36,33 @@ export function TimeBar({
       defaultValue,
       onChange,
       onConfirm,
+      minTime,
+      maxTime,
     });
 
   const hours = useMemo(() => generateHours(use24Hour), [use24Hour]);
   const minutes = useMemo(() => generateMinutes(), []);
   const seconds = useMemo(() => generateSeconds(), []);
+
+  const { hours: selectedHours, minutes: selectedMinutes } = timeValue;
+  const isHourDisabled = (hours: number) =>
+    isOutOfTimeLimits(
+      { hours, minutes: 0, seconds: 0 },
+      { hours, minutes: 59, seconds: 59 },
+      minTime,
+      maxTime
+    );
+  const isMinuteDisabled = (minutes: number) =>
+    isOutOfTimeLimits(
+      { hours: selectedHours, minutes, seconds: 0 },
+      { hours: selectedHours, minutes, seconds: 59 },
+      minTime,
+      maxTime
+    );
+  const isSecondDisabled = (seconds: number) => {
+    const time = { hours: selectedHours, minutes: selectedMinutes, seconds };
+    return isOutOfTimeLimits(time, time, minTime, maxTime);
+  };
 
   return (
     <div
@@ -59,6 +88,7 @@ export function TimeBar({
           values={hours}
           selectedValue={timeValue.hours}
           onSelect={setHours}
+          isValueDisabled={isHourDisabled}
           disabled={disabled}
           fillHeight={columnsFillHeight}
         />
@@ -67,6 +97,7 @@ export function TimeBar({
           values={minutes}
           selectedValue={timeValue.minutes}
           onSelect={setMinutes}
+          isValueDisabled={isMinuteDisabled}
           disabled={disabled}
           fillHeight={columnsFillHeight}
         />
@@ -76,6 +107,7 @@ export function TimeBar({
             values={seconds}
             selectedValue={timeValue.seconds}
             onSelect={setSeconds}
+            isValueDisabled={isSecondDisabled}
             disabled={disabled}
             fillHeight={columnsFillHeight}
           />

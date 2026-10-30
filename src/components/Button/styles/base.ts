@@ -1,6 +1,10 @@
-import { buttonBaseClasses } from "@/styles/shared";
-export { scalingClasses } from "@/styles/shared";
+import {
+  buttonBaseClasses,
+  scalingClasses as sharedScalingClasses,
+} from "@/styles/shared";
+
+export const scalingClasses = `${sharedScalingClasses} !transition-all !duration-350 !ease-in-out`;
 
 export const baseClasses =
   buttonBaseClasses +
-  " relative font-roboto-flex transition-colors disabled:opacity-50 disabled:pointer-events-none";
+  " relative font-roboto-flex transition-all duration-350 ease-in-out disabled:pointer-events-none";

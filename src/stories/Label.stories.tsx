@@ -21,7 +21,7 @@ const COLORS: LabelColor[] = [
   Color.Positive,
   Color.Warning,
   Color.Info,
-  Color.Inverse,
+  Color.Secondary,
 ];
 const TYPES = ["flat", "fill", "outline", "text"] as const;
 const SIZES = Object.values(Size);

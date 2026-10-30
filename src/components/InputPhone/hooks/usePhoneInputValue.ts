@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 import type { ChangeEvent } from "react";
+import type { Country } from "react-phone-number-input";
 import type { InputPhoneProps } from "../InputPhone.types";
 import { InputPhoneValueFormat } from "../InputPhone.types";
 import {
@@ -75,19 +76,27 @@ export function usePhoneInputValue({
     [country, isControlled, onChange, onValueChange, valueFormat]
   );
 
-  const handleClear = useCallback(() => {
-    if (!isControlled) {
-      setUncontrolledValue("");
-    }
+  const resetValue = useCallback(
+    (nextCountry: Country = country) => {
+      if (!isControlled) {
+        setUncontrolledValue("");
+      }
 
-    onValueChange?.("", getPhoneValueMeta("", country, valueFormat));
-    onClear?.();
-  }, [country, isControlled, onClear, onValueChange, valueFormat]);
+      onValueChange?.("", getPhoneValueMeta("", nextCountry, valueFormat));
+      onClear?.();
+    },
+    [country, isControlled, onClear, onValueChange, valueFormat]
+  );
+
+  const handleClear = useCallback(() => {
+    resetValue(country);
+  }, [country, resetValue]);
 
   return {
     value,
     hasValue,
     handleChange,
     handleClear,
+    resetValue,
   };
 }

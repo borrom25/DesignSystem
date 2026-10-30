@@ -5,7 +5,8 @@ import { appLayoutStyles } from "./styles";
 import { useAppLayoutSidebarStyle } from "./hooks";
 
 export function AppLayout({
-  container = "fill",
+  container,
+  size,
   header,
   sidebar,
   children,
@@ -18,11 +19,23 @@ export function AppLayout({
     sidebar,
     hasSidebar,
     isMobile,
+    hasHeader: !!header,
+    isFill: container === "fill",
   });
+
+  const isFill = container === "fill";
+  const containerClassName = isFill
+    ? appLayoutStyles.container.fill
+    : appLayoutStyles.container.default;
+  const containerStyle = appLayoutStyles.getContainerStyle(isFill, size);
 
   return (
     <div className={cn(appLayoutStyles.root, className)} {...restProps}>
-      {header && <header className={appLayoutStyles.header}>{header}</header>}
+      {header && (
+        <header className={appLayoutStyles.header} data-mobile={isMobile}>
+          {header}
+        </header>
+      )}
 
       <div className={appLayoutStyles.body}>
         {hasSidebar && (
@@ -36,7 +49,9 @@ export function AppLayout({
         )}
 
         <main className={appLayoutStyles.main}>
-          <div className={appLayoutStyles.container[container]}>{children}</div>
+          <div className={containerClassName} style={containerStyle}>
+            {children}
+          </div>
         </main>
       </div>
     </div>

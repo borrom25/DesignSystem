@@ -25,7 +25,6 @@ export type TableColumnsModalProps<
   onApply?: (value: T[]) => void;
   title?: ReactNode;
   subtitle?: ReactNode;
-  selectAllLabel?: ReactNode;
   cancelLabel?: ReactNode;
   applyLabel?: ReactNode;
   size?: Size;

@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+import { Fragment, useCallback, useEffect, type MutableRefObject } from "react";
 import { Size } from "@/types";
 import { cn } from "@/utils";
 import { ListItem } from "@/components/ListItem";
-import { Popover, PopoverSurface } from "@/components/Popover";
+import { Popover } from "@/components/Popover";
 import type { TabsOverflowItem, TabsOverflowProps } from "./TabsOverflow.types";
 import { tabsOverflowStyles } from "./styles";
 import { tabsOverflowGapPx } from "@/constants/overflow";
@@ -22,6 +22,9 @@ export function TabsOverflow<T extends string | number = string>({
   indicatorOffset = 0,
   className,
   sideMenu,
+  itemWrapper,
+  placeholder,
+  ref,
   ...restProps
 }: TabsOverflowProps<T>) {
   const state = useTabsOverflowState({
@@ -40,7 +43,25 @@ export function TabsOverflow<T extends string | number = string>({
     containerRef: layout.containerRef,
     value: state.value,
     visibleItems: layout.visibleItems,
+    indicatorOffset,
   });
+
+  const { containerRef } = layout;
+  const setContainerRef = useCallback(
+    (element: HTMLDivElement | null) => {
+      containerRef.current = element;
+
+      if (typeof ref === "function") {
+        ref(element);
+        return;
+      }
+
+      if (ref) {
+        (ref as MutableRefObject<HTMLDivElement | null>).current = element;
+      }
+    },
+    [containerRef, ref]
+  );
 
   const tabTriggerClassName = cn(
     tabsOverflowStyles.triggerBase,
@@ -58,26 +79,34 @@ export function TabsOverflow<T extends string | number = string>({
     if (layout.hiddenItems.length === 0 && state.open) {
       state.setOpen(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [layout.hiddenItems.length, state.open, state.setOpen]);
+  }, [layout.hiddenItems.length, state, state.open, state.setOpen]);
 
   return (
     <div
-      ref={layout.containerRef}
-      className={cn(tabsOverflowStyles.container, className)}
       {...restProps}
+      ref={setContainerRef}
+      className={cn(tabsOverflowStyles.container, className)}
     >
-      {layout.visibleItems.map((item) => (
-        <TabTrigger
-          key={item.value}
-          item={item}
-          className={tabTriggerClassName}
-          isSelected={item.value === state.value}
-          isDisabled={disabled || Boolean(item.disabled)}
-          registerTabButton={registerTabButton}
-          onSelect={state.onSelect}
-        />
-      ))}
+      {layout.visibleItems.map((item, index) => {
+        const tab = (
+          <TabTrigger
+            item={item}
+            className={tabTriggerClassName}
+            isSelected={item.value === state.value}
+            isDisabled={disabled || Boolean(item.disabled)}
+            registerTabButton={registerTabButton}
+            onSelect={state.onSelect}
+          />
+        );
+
+        return (
+          <Fragment key={item.value}>
+            {itemWrapper ? itemWrapper({ item, index, children: tab }) : tab}
+          </Fragment>
+        );
+      })}
+
+      {placeholder}
 
       {indicatorStyle && (
         <div
@@ -86,7 +115,7 @@ export function TabsOverflow<T extends string | number = string>({
           style={{
             transform: `translateX(${indicatorStyle.left}px)`,
             width: indicatorStyle.width,
-            bottom: -indicatorOffset,
+            bottom: indicatorStyle.bottom,
           }}
         />
       )}
@@ -100,7 +129,7 @@ export function TabsOverflow<T extends string | number = string>({
           </Popover.Trigger>
 
           <Popover.Content align="end" sideOffset={4} sideMenu={sideMenu}>
-            <PopoverSurface>
+            <Popover.Surface>
               <Popover.ScrollArea maxHeight={320}>
                 <div className={tabsOverflowStyles.list}>
                   {layout.hiddenItems.map((item) => (
@@ -116,7 +145,7 @@ export function TabsOverflow<T extends string | number = string>({
                   ))}
                 </div>
               </Popover.ScrollArea>
-            </PopoverSurface>
+            </Popover.Surface>
           </Popover.Content>
         </Popover>
       )}

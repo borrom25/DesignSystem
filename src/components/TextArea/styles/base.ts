@@ -1,5 +1,5 @@
 export const textAreaBaseClasses =
-  "flex w-full min-h-[56px] flex-col items-stretch gap-2 font-roboto-flex text-primary transition-[border-color,background-color] duration-150 cursor-text";
+  "flex w-full flex-col items-stretch gap-2 font-roboto-flex text-primary transition-[border-color,background-color] duration-150 cursor-text";
 
 export const textAreaStateClasses =
   "border border-line hover:border-brand-line-light focus:border-brand-line-heavy focus:hover:border-brand-line-heavy [background:var(--color-generic-medium)]";
@@ -11,7 +11,7 @@ export const textAreaErrorClasses =
   "border border-danger-line-light [background:var(--color-generic-medium)] hover:border-danger-line-light focus:border-danger-line-light focus:hover:border-danger-line-light";
 
 export const textAreaNativeClasses =
-  "w-full min-h-0 flex-1 overflow-y-auto bg-transparent outline-none disabled:cursor-not-allowed resize-none pr-12 [&::-webkit-scrollbar]:bg-transparent";
+  "w-full min-h-[88px] flex-1 overflow-y-auto bg-transparent outline-none disabled:cursor-not-allowed resize-none pr-12 [&::-webkit-scrollbar]:bg-transparent";
 
 export const textAreaNativeBottomPaddingClasses = "pb-7";
 
@@ -26,17 +26,22 @@ export const textAreaNativeDisabledTextClasses =
 
 export const textAreaNativeDisabledClasses = "placeholder:text-hint";
 
-export const textAreaWrapperInnerClasses = "relative w-full";
+export const textAreaWrapperInnerClasses =
+  "relative flex flex-col w-full h-full min-h-[88px]";
 
 export const textAreaFieldShellClasses =
-  "flex w-full min-h-[56px] flex-col font-roboto-flex text-primary transition-[border-color,background-color] duration-150 cursor-text";
+  "flex w-full flex-col font-roboto-flex text-primary transition-[border-color,background-color] duration-150 cursor-text";
 
-export const textAreaNativeWithLabelClasses = "min-h-0 flex-1";
+export const textAreaNativeWithLabelClasses = "flex-1";
+
+export const textAreaNativeClipTopClasses = "[clip-path:inset(32px_0_0_0)]";
 
 export const textAreaLabelBaseClasses =
-  "block w-full shrink-0 font-roboto-flex font-medium not-italic text-secondary transition-[font-size,line-height,letter-spacing,padding] duration-150";
+  "absolute z-10 font-roboto-flex font-regular not-italic text-secondary transition-[top,font-size,line-height,letter-spacing] duration-150";
 
 export const textAreaLabelDisabledClasses = "text-hint";
+
+export const textAreaLabelMobileClasses = "line-clamp-3";
 
 export const textAreaNativePlaceholderHiddenClasses =
   "[&::placeholder]:opacity-0 [&::placeholder]:[transition-delay:0ms]";
@@ -61,4 +66,4 @@ export const textAreaResizeBothClasses = "cursor-nwse-resize";
 export const textAreaResizeIconClasses = "h-3 w-3";
 
 export const requiredMarkClasses =
-  "pointer-events-none absolute top-2 left-0 right-full -translate-y-1/2 text-danger-text-heavy text-[30px]";
+  "pointer-events-none absolute top-2 left-0.5 right-full -translate-y-1/2 text-danger-text-heavy text-[18px]";

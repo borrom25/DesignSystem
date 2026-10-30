@@ -1,16 +1,16 @@
-import { useRef, useState } from "react";
-import type {
-  InputHTMLAttributes,
-  KeyboardEvent,
-  ChangeEvent,
-  FocusEvent,
-  MouseEventHandler,
-} from "react";
-import { cn } from "@/utils";
-import { Size } from "@/types";
 import { CloseBtn } from "@/components/CloseBtn";
 import { Tag } from "@/components/Tag";
 import { FloatingLabel, FloatingLabelRequiredMark } from "@/shared/Input";
+import { Size } from "@/types";
+import { cn } from "@/utils";
+import type {
+  ChangeEvent,
+  FocusEvent,
+  InputHTMLAttributes,
+  KeyboardEvent,
+  MouseEventHandler,
+} from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { inputTagStyles } from "../styles";
 
 export interface InputTagFieldProps extends Omit<
@@ -52,9 +52,26 @@ export function InputTagField({
 }: InputTagFieldProps) {
   const [focused, setFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const tagsContainerRef = useRef<HTMLDivElement | null>(null);
+  const prevTagsLengthRef = useRef(tags.length);
+
+  useLayoutEffect(() => {
+    if (tags.length < prevTagsLengthRef.current) {
+      prevTagsLengthRef.current = tags.length;
+      return;
+    }
+
+    const container = tagsContainerRef.current;
+    if (container) {
+      container.scrollTop = container.scrollHeight;
+    }
+
+    prevTagsLengthRef.current = tags.length;
+  }, [tags.length]);
   const hasTags = tags.length > 0;
   const hasFloatingLabel = !!label;
   const isLabelActive = hasFloatingLabel && (focused || hasValue);
+  const isPlaceholderVisible = !hasFloatingLabel || focused;
   const isActiveWithoutTags = isLabelActive && !hasTags;
   const shouldCenterInputVertically = !inputValue && !isLabelActive;
 
@@ -85,7 +102,7 @@ export function InputTagField({
       )}
       onMouseDown={handleWrapperMouseDown}
     >
-      {hasFloatingLabel && required && <FloatingLabelRequiredMark />}
+      {required && !disabled && <FloatingLabelRequiredMark />}
 
       {hasFloatingLabel && (
         <FloatingLabel
@@ -104,10 +121,15 @@ export function InputTagField({
       )}
 
       <div
+        ref={tagsContainerRef}
         className={cn(
           inputTagStyles.tagsContainer,
           inputTagStyles.containerSize[size],
           hasTags && inputTagStyles.tagsContainerWithTags,
+          hasTags &&
+            hasFloatingLabel &&
+            isLabelActive &&
+            inputTagStyles.tagsContainerClipTopFloatingLabel,
           hasFloatingLabel &&
             isLabelActive &&
             hasTags &&
@@ -139,10 +161,10 @@ export function InputTagField({
             inputTagStyles.native,
             disabled && inputTagStyles.nativeDisabled,
             hasFloatingLabel &&
-              !isLabelActive &&
+              !isPlaceholderVisible &&
               inputTagStyles.nativePlaceholderHidden,
             hasFloatingLabel &&
-              isLabelActive &&
+              isPlaceholderVisible &&
               inputTagStyles.nativePlaceholderVisible,
             isActiveWithoutTags && inputTagStyles.nativeWithFloatingLabel,
             isActiveWithoutTags && inputTagStyles.nativeActiveWithoutTags,
@@ -154,7 +176,11 @@ export function InputTagField({
             inputClassName
           )}
           {...inputProps}
-          placeholder={hasTags ? undefined : inputProps.placeholder}
+          placeholder={
+            hasTags || !isPlaceholderVisible
+              ? undefined
+              : inputProps.placeholder
+          }
           autoComplete="off"
         />
       </div>

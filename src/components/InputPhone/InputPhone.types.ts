@@ -1,6 +1,7 @@
-import type { ChangeEventHandler } from "react";
+import type { ChangeEventHandler, ClipboardEventHandler } from "react";
 import type { InputProps } from "@/components/Input";
 import type { Country } from "react-phone-number-input";
+import { PhoneCountryOption } from "./InputPhone.countries";
 
 export const InputPhoneValueFormat = {
   International: "international",
@@ -39,3 +40,10 @@ export interface InputPhoneProps extends Omit<
   onCountryChange?: (country: Country) => void;
   onValueChange?: InputPhoneValueChangeHandler;
 }
+
+export type HandleInputPhonePasteParams = {
+  countryOptions: readonly PhoneCountryOption[];
+  selectedCountry: Country;
+  setSelectedCountry: (country: Country) => void;
+  onPaste?: ClipboardEventHandler<HTMLInputElement>;
+};

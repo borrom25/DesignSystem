@@ -1,8 +1,11 @@
+import type { ReactNode } from "react";
+
 export type PieChartType = "pie" | "donut";
 
 export interface PieChartData {
   name: string;
   value: number;
+  caption?: (percent: number) => ReactNode;
 }
 
 export interface PieChartBaseProps {

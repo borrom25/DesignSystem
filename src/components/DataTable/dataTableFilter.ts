@@ -5,10 +5,16 @@ import type {
   DateRangeFilterConfig,
   ListFilterConfig,
   NumberRangeFilterConfig,
+  RadioFilterConfig,
 } from "./types/DataTable.filter.types";
 
 export type DataTableListFilterOptions<T = string> = Omit<
   ListFilterConfig<T>,
+  "kind"
+>;
+
+export type DataTableRadioFilterOptions<T = string> = Omit<
+  RadioFilterConfig<T>,
   "kind"
 >;
 
@@ -37,6 +43,15 @@ export const dataTableFilter = {
   ): ListFilterConfig<T> {
     return {
       kind: "list",
+      ...options,
+    };
+  },
+
+  radio<T = string>(
+    options: DataTableRadioFilterOptions<T>
+  ): RadioFilterConfig<T> {
+    return {
+      kind: "radio",
       ...options,
     };
   },

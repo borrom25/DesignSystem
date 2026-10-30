@@ -1,9 +1,12 @@
-export const appLayoutRootClasses = "min-h-screen flex flex-col bg-base";
+export const appLayoutRootClasses =
+  "flex h-screen flex-col overflow-hidden bg-page";
 
-export const appLayoutHeaderClasses = "h-19 flex-shrink-0";
+export const appLayoutHeaderClasses =
+  "h-[calc(var(--spacing-7)+var(--spacing-19)+var(--spacing-7))] flex-shrink-0 data-[mobile=true]:h-auto";
 
-export const appLayoutBodyClasses = "flex-1 flex min-h-0";
+export const appLayoutBodyClasses = "flex min-h-0 flex-1";
 
-export const appLayoutSidebarClasses = "flex-shrink-0";
+export const appLayoutSidebarClasses = "h-full flex-shrink-0";
 
-export const appLayoutMainClasses = "flex-1 min-w-0 overflow-auto";
+export const appLayoutMainClasses =
+  "flex-1 min-w-0 overflow-auto [scrollbar-gutter:stable]";

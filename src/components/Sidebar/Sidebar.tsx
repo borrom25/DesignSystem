@@ -28,9 +28,7 @@ export function Sidebar({
     !isMobile &&
     (collapsed ? sidebarStyles.rootCollapsed : sidebarStyles.rootExpanded);
 
-  const headerCLasses =
-    !isMobile &&
-    (collapsed ? sidebarStyles.headerCollapsed : sidebarStyles.headerGap);
+  const headerCLasses = !isMobile && collapsed && sidebarStyles.headerCollapsed;
 
   const titleCLasses =
     !isMobile &&
@@ -57,7 +55,7 @@ export function Sidebar({
             data-mobile={isMobile}
             className={cn(sidebarStyles.title, titleCLasses)}
           >
-            {title}
+            <span className={sidebarStyles.titleInner}>{title}</span>
           </span>
         )}
       </div>
@@ -80,13 +78,7 @@ export function Sidebar({
       </nav>
 
       {action && (
-        <div
-          className={cn(
-            sidebarStyles.footer,
-            isDesktopCollapsed && sidebarStyles.footerCollapsed
-          )}
-          data-mobile={isMobile}
-        >
+        <div className={cn(sidebarStyles.footer)} data-mobile={isMobile}>
           <ActionButton action={action} collapsed={isDesktopCollapsed} />
         </div>
       )}

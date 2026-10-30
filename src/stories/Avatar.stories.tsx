@@ -56,6 +56,7 @@ export const WithEditBadge: Story = {
     size: 64,
     src: "https://api.dicebear.com/7.x/avataaars/svg?seed=with-badge",
     showEditBadge: true,
+    onEditBadgeClick: () => console.log("avatar edit badge click"),
   },
 };
 
@@ -65,6 +66,7 @@ export const WithBorderAndBadge: Story = {
     src: "https://api.dicebear.com/7.x/avataaars/svg?seed=border-and-badge",
     withBorder: true,
     showEditBadge: true,
+    onEditBadgeClick: () => console.log("avatar edit badge click"),
   },
 };
 
@@ -83,6 +85,7 @@ export const WithInitialsAndBadge: Story = {
     initials: "КК",
     withBorder: true,
     showEditBadge: true,
+    onEditBadgeClick: () => console.log("avatar edit badge click"),
   },
 };
 
@@ -167,12 +170,23 @@ export const WithDefaultState: Story = {
           <>
             <div className="flex flex-col justify-between items-start">
               <label className="text-[12px]">{label}</label>
-              <Avatar size={32} src={src} showEditBadge />
+              <Avatar
+                size={32}
+                src={src}
+                showEditBadge
+                onEditBadgeClick={() => console.log("avatar edit badge click")}
+              />
             </div>
             <hr />
             <div className="flex flex-col justify-between items-start">
               <label className="text-[12px]">С бордером</label>
-              <Avatar size={32} src={src} showEditBadge withBorder />
+              <Avatar
+                size={32}
+                src={src}
+                showEditBadge
+                withBorder
+                onEditBadgeClick={() => console.log("avatar edit badge click")}
+              />
             </div>
             {index !== avatars.length - 1 && <hr />}
           </>

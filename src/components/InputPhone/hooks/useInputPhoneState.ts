@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useInputClassNames, useInputIds } from "@/components/Input/hooks";
 import {
   formatCountDisplay,
@@ -7,6 +7,7 @@ import {
 import { inputStyles } from "@/components/Input/styles";
 import { getIconSize } from "@/utils";
 import { useControllableState } from "@/shared/hooks";
+import type { Country } from "react-phone-number-input";
 import type { InputPhoneProps } from "../InputPhone.types";
 import { usePhoneInputValue } from "./usePhoneInputValue";
 import {
@@ -15,6 +16,7 @@ import {
   getPhoneCountryOptions,
   isPhoneCountry,
 } from "../InputPhone.countries";
+import { matchPhoneCountryByValue } from "../InputPhone.utils";
 
 type UseInputPhoneStateProps = Pick<
   InputPhoneProps,
@@ -69,17 +71,37 @@ export function useInputPhoneState({
     [countries?.join(",")]
   );
   const firstCountry = countryOptions[0]?.iso ?? defaultPhoneCountry;
+  const initialCountry = isPhoneCountry(defaultCountry)
+    ? defaultCountry
+    : defaultPhoneCountry;
   const [selectedCountry, setSelectedCountry] = useControllableState({
     value: country,
-    defaultValue: isPhoneCountry(defaultCountry)
-      ? defaultCountry
-      : defaultPhoneCountry,
+    defaultValue:
+      matchPhoneCountryByValue(
+        defaultValue ?? "",
+        countryOptions,
+        initialCountry
+      )?.iso ?? initialCountry,
     onChange: onCountryChange,
   });
+
+  useEffect(() => {
+    if (value === undefined) return;
+
+    const matched = matchPhoneCountryByValue(
+      value,
+      countryOptions,
+      selectedCountry
+    )?.iso;
+
+    if (matched && matched !== selectedCountry) setSelectedCountry(matched);
+  }, [value, countryOptions, setSelectedCountry]);
+
   const resolvedCountry = useMemo(() => {
     const isAllowed = countryOptions.some(
       (option) => option.iso === selectedCountry
     );
+
     return isPhoneCountry(selectedCountry) && isAllowed
       ? selectedCountry
       : firstCountry;
@@ -94,6 +116,7 @@ export function useInputPhoneState({
     hasValue,
     handleChange,
     handleClear,
+    resetValue,
   } = usePhoneInputValue({
     value,
     defaultValue,
@@ -103,6 +126,14 @@ export function useInputPhoneState({
     valueFormat,
     onValueChange,
   });
+
+  const handleCountryChange = useCallback(
+    (nextCountry: Country) => {
+      resetValue(nextCountry);
+      setSelectedCountry(nextCountry);
+    },
+    [resetValue, setSelectedCountry]
+  );
 
   const { inputId, hintId } = useInputIds({ id, hint, hintError });
   const isError = error || !!hintError;
@@ -138,6 +169,7 @@ export function useInputPhoneState({
     countryOption,
     selectedCountry: resolvedCountry,
     setSelectedCountry,
+    handleCountryChange,
     wrapperClassName,
   };
 }

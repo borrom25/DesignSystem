@@ -2,14 +2,17 @@ import { useMemo } from "react";
 import { cn } from "@/utils";
 import type { YearsViewProps } from "../Calendar.types";
 import { calendarStyles } from "../styles";
-import { getYearStateClassName } from "../Calendar.utils";
+import { getYearStateClassName, yearsPerPage } from "../Calendar.utils";
 
 export function YearsView({ currentYear, onYearSelect }: YearsViewProps) {
   const { years, nextYears } = useMemo(() => {
-    const startYear = Math.floor(currentYear / 12) * 12;
+    const startYear = Math.floor(currentYear / yearsPerPage) * yearsPerPage;
     return {
-      years: Array.from({ length: 12 }, (_, i) => startYear + i),
-      nextYears: Array.from({ length: 3 }, (_, i) => startYear + 12 + i),
+      years: Array.from({ length: yearsPerPage }, (_, i) => startYear + i),
+      nextYears: Array.from(
+        { length: 3 },
+        (_, i) => startYear + yearsPerPage + i
+      ),
     };
   }, [currentYear]);
 

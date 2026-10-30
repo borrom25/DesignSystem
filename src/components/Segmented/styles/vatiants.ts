@@ -1,4 +1,5 @@
 import { SegmentedPositions, SegmentedShapeVariants } from "../Segmented.types";
+import { Size } from "@/types";
 
 export const positionClasses: Record<SegmentedPositions, string> = {
   horizontal: "flex w-full flex-row",
@@ -13,4 +14,10 @@ export const itemPositionClasses: Record<SegmentedPositions, string> = {
 export const shapeClasses: Record<SegmentedShapeVariants, string> = {
   default: "rounded-[10px]",
   round: "rounded-full",
+};
+
+export const sizeClasses: Record<Size, string> = {
+  xs: "p-0.5",
+  sm: "p-1",
+  md: "p-1",
 };

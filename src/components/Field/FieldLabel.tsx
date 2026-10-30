@@ -9,18 +9,20 @@ export function FieldLabel({
   htmlFor,
   children,
   className,
+  indent = true,
 }: FieldLabelProps) {
   const combinedClassName = cn(
     fieldLabelStyles.base,
     fieldLabelStyles.size[size],
     disabled && fieldLabelStyles.disabled,
+    !indent && "pl-0",
     className
   );
 
   const content = (
     <span className={fieldLabelStyles.content}>
       {children}
-      {required && (
+      {required && !disabled && (
         <span aria-hidden className={fieldLabelStyles.requiredMark}>
           *
         </span>

@@ -62,6 +62,7 @@ export function DateRangeFieldSection({
             dateRangeStyles.section.label,
             isLabelActive && dateRangeStyles.section.labelActive,
             isLabelActive && dateRangeStyles.sectionLabelActiveSize[size],
+            isLabelActive && dateRangeStyles.sectionLabelActiveOffsetSize[size],
             !isLabelActive && dateRangeStyles.section.labelCentered,
             !isLabelActive && dateRangeStyles.sectionLabelCenteredSize[size]
           )}
@@ -90,7 +91,10 @@ export function DateRangeFieldSection({
             isError
               ? dateRangeStyles.section.inputError
               : dateRangeStyles.section.inputDefault,
-            !isLabelActive && dateRangeStyles.section.inputHidden
+            !isLabelActive && dateRangeStyles.section.inputHidden,
+            isLabelActive
+              ? dateRangeStyles.section.inputPlaceholderVisible
+              : dateRangeStyles.section.inputPlaceholderHidden
           )}
           aria-label={ariaLabel}
           disabled={disabled}

@@ -1,16 +1,16 @@
-import { Input } from "../Input";
-import { CalendarIcon } from "lucide-react";
-import { DatePickerProps } from "./DatePicker.types";
-import { Size } from "@/types";
-import { Popover } from "../Popover";
-import { Calendar } from "../Calendar";
-import { datePickerStyles } from "./styles";
-import { cn } from "@/utils";
-import { useDatePickerValue } from "./hooks/useDatePickerValue";
-import { pointerEventsNone } from "@/styles/shared";
 import { useInputAnchoredPopover } from "@/shared/hooks";
+import { pointerEventsNone } from "@/styles/shared";
+import { Size } from "@/types";
+import { cn } from "@/utils";
+import { CalendarIcon } from "lucide-react";
+import { Calendar } from "../Calendar";
 import { CloseBtn } from "../CloseBtn";
+import { Input } from "../Input";
 import { inputStyles } from "../Input/styles";
+import { Popover } from "../Popover";
+import { DatePickerProps } from "./DatePicker.types";
+import { useDatePickerValue } from "./hooks/useDatePickerValue";
+import { datePickerStyles } from "./styles";
 
 export function DatePicker({
   label = "Дата",
@@ -31,8 +31,12 @@ export function DatePicker({
   required,
   onClear,
   variant,
+  minDate: minDateProp,
+  maxDate: maxDateProp,
+  calendarProps,
 }: DatePickerProps) {
   const Icon = IconProp ?? CalendarIcon;
+  const { displayMonth, ...restCalendarProps } = calendarProps ?? {};
 
   const {
     containerRef,
@@ -47,62 +51,69 @@ export function DatePicker({
     date,
     formattedValue,
     handleInputChange,
+    handleKeyDown,
     handleCalendarChange,
     handleClear,
     hasValue,
+    inputRef,
+    minDate,
+    maxDate,
   } = useDatePickerValue({
     value: valueProp,
     onChangeInput,
     onChangeDate,
     onClear,
     format: formatProp,
+    minDate: minDateProp ?? restCalendarProps.minDate,
+    maxDate: maxDateProp ?? restCalendarProps.maxDate,
   });
 
   return (
     <div ref={containerRef} className={datePickerStyles.containerStyles}>
       <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
         <Input
+          ref={inputRef}
           variant={variant}
           className={className}
           size={size}
           defaultValue={defaultValue}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           value={formattedValue}
           required={required}
           label={label}
+          labelActive={popoverOpen || Boolean(placeholder)}
           placeholder={placeholder}
           onFocus={openPopover}
           onClick={openPopover}
           clearable={false}
           suffix={
-            (!hasValue || rightSlot) && (
-              <div
-                className={cn(
-                  datePickerStyles.rightSlot,
-                  disabled && pointerEventsNone
-                )}
-              >
-                <Popover.Trigger>
-                  {hasValue ? (
-                    <CloseBtn
-                      size={size}
-                      onClick={handleClear}
-                      className={inputStyles.clearButton}
+            <div
+              className={cn(
+                datePickerStyles.rightSlot,
+                disabled && pointerEventsNone
+              )}
+            >
+              <Popover.Trigger>
+                {hasValue ? (
+                  <CloseBtn
+                    size={Size.Md}
+                    onClick={handleClear}
+                    className={inputStyles.clearButton}
+                  />
+                ) : (
+                  <div className={datePickerStyles.iconWrapper}>
+                    <Icon
+                      className={cn(
+                        datePickerStyles.iconStyles,
+                        datePickerStyles.size[size]
+                      )}
                     />
-                  ) : (
-                    <div className={datePickerStyles.iconWrapper}>
-                      <Icon
-                        className={cn(
-                          datePickerStyles.iconStyles,
-                          datePickerStyles.size[size]
-                        )}
-                      />
-                    </div>
-                  )}
-                </Popover.Trigger>
-                {rightSlot}
-              </div>
-            )
+                  </div>
+                )}
+              </Popover.Trigger>
+              {rightSlot}
+            </div>
           }
           disabled={disabled}
           aria-required={required}
@@ -117,7 +128,14 @@ export function DatePicker({
           }
           onFocusOutside={handleFocusOutside}
         >
-          <Calendar value={date} onChange={handleCalendarChange} />
+          <Calendar
+            value={date}
+            onChange={handleCalendarChange}
+            displayMonth={date ?? displayMonth}
+            {...restCalendarProps}
+            minDate={minDate}
+            maxDate={maxDate}
+          />
         </Popover.Content>
       </Popover>
     </div>

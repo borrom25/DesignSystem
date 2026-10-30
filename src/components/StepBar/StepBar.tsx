@@ -1,5 +1,6 @@
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/utils";
-import { StepBarItemType, StepBarProps } from "./StepBar.types";
+import { StepBarItem, StepBarItemType, StepBarProps } from "./StepBar.types";
 import {
   activeStepClasses,
   buttonClasses,
@@ -7,8 +8,9 @@ import {
   stepBarClasses,
   stepsClasses,
   stepClasses,
+  loaderClasses,
 } from "./styles";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { useStepBar } from "./hooks";
 
 const itemClassesByType: Record<StepBarItemType, string> = {
@@ -16,15 +18,50 @@ const itemClassesByType: Record<StepBarItemType, string> = {
   successful: "text-positive-heavy",
 };
 
-export function StepBar<T extends string | number = string>({
+type StepBarItems = readonly StepBarItem<string | number>[];
+
+type StepBarControlButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  loading?: boolean;
+  children: ReactNode;
+};
+
+function StepBarControlButton({
+  className,
+  loading = false,
+  disabled,
+  children,
+  ...rest
+}: StepBarControlButtonProps) {
+  return (
+    <button
+      {...rest}
+      className={cn(className, "relative")}
+      disabled={disabled || loading}
+      aria-busy={loading || undefined}
+    >
+      {loading && <Loader2 size={20} className={loaderClasses} />}
+      <span className={cn("inline-flex items-center", loading && "invisible")}>
+        {children}
+      </span>
+    </button>
+  );
+}
+
+export function StepBar<TItems extends StepBarItems>({
   items,
   active,
+  defaultActive,
   onChangeStep,
+  onStepTransition,
   onClickSuccessButton,
   successButtonText = "Готово",
+  loadingPrev = false,
+  loadingNext = false,
+  loadingSuccess = false,
   className,
-}: StepBarProps<T>) {
+}: StepBarProps<TItems>) {
   const {
+    active: currentActive,
     stepsRef,
     indicatorStyle,
     isFirstStep,
@@ -33,17 +70,30 @@ export function StepBar<T extends string | number = string>({
     onStepClick,
     goPrev,
     goNext,
-  } = useStepBar<T>({ items, active: active ?? items[0].id, onChangeStep });
+  } = useStepBar<TItems>({
+    items,
+    active,
+    defaultActive,
+    onChangeStep,
+    onStepTransition,
+  });
+
+  const isBusy = loadingPrev || loadingNext || loadingSuccess;
 
   return (
     <div className={cn(stepBarClasses, className)}>
-      <button className={buttonClasses} disabled={isFirstStep} onClick={goPrev}>
+      <StepBarControlButton
+        className={buttonClasses}
+        disabled={isFirstStep || isBusy}
+        loading={loadingPrev}
+        onClick={goPrev}
+      >
         <ArrowLeft size={20} />
-      </button>
+      </StepBarControlButton>
       <div className={stepsClasses} ref={stepsRef}>
         {items?.map((item, index) => {
-          const isActive = item.id === active;
-          const isDisabled = !!item.disabled;
+          const isActive = item.id === currentActive;
+          const isDisabled = !!item.disabled || isBusy;
 
           return (
             <button
@@ -68,20 +118,23 @@ export function StepBar<T extends string | number = string>({
         <span className={activeStepClasses} style={indicatorStyle} />
       </div>
       {onClickSuccessButton && isLastStep ? (
-        <button
+        <StepBarControlButton
           className={cn(successButtonClasses, "ml-auto")}
+          disabled={isBusy}
+          loading={loadingSuccess}
           onClick={onClickSuccessButton}
         >
           {successButtonText}
-        </button>
+        </StepBarControlButton>
       ) : (
-        <button
+        <StepBarControlButton
           className={cn(buttonClasses, "ml-auto")}
-          disabled={isLastStep}
+          disabled={isLastStep || isBusy}
+          loading={loadingNext}
           onClick={goNext}
         >
           <ArrowRight size={20} />
-        </button>
+        </StepBarControlButton>
       )}
     </div>
   );

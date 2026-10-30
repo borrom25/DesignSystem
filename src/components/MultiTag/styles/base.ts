@@ -15,12 +15,11 @@ export const tagsContainerWrapperClasses =
   "flex flex-1 min-w-0 flex-col self-stretch";
 
 export const tagsContainerClasses =
-  "flex flex-wrap items-center content-start gap-(--input-gap-container-content) min-w-0 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]";
+  "flex flex-wrap items-center content-start gap-3 min-w-0 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]";
 
 export const tagsContainerEmptyClasses = "flex-1 flex items-center";
 
-export const tagsContainerWithTagsClasses =
-  "py-(--input-gap-container-content) pb-(--generic-spacing-2)";
+export const tagsContainerWithTagsClasses = "pb-(--generic-spacing-2)";
 
 export const controlsContainerClasses = "shrink-0 flex items-center";
 

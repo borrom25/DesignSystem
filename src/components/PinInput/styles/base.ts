@@ -2,7 +2,7 @@ export const pinInputBaseClasses =
   "inline-flex items-center justify-center font-roboto-flex text-primary font-medium transition-[border-color,background-color] duration-150 cursor-text";
 
 export const pinInputStateClasses =
-  "border border-line bg-generic-medium hover:border-brand-line-light hover:bg-generic-hover";
+  "border border-line bg-generic-medium hover:border-brand-line-light";
 
 export const pinInputFocusedClasses =
   "border border-brand-line-heavy bg-generic-medium";

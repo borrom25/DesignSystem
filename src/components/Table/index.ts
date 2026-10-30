@@ -1,5 +1,8 @@
 export { Table } from "../DataTable";
 export { createDataTableColumnHelper, dataTableFilter } from "../DataTable";
+export { ActionPopover } from "../ActionPopover/ActionPopover";
+export type { ActionPopoverProps } from "../ActionPopover/ActionPopover.types";
+export { actionPopoverStyles } from "../ActionPopover/styles";
 export type {
   DataTableColumnHelper,
   DataTableCustomFilterOptions,
@@ -7,6 +10,7 @@ export type {
   DataTableDateRangeFilterOptions,
   DataTableListFilterOptions,
   DataTableNumberRangeFilterOptions,
+  DataTableRadioFilterOptions,
 } from "../DataTable";
 export type {
   TableProps,
@@ -28,6 +32,7 @@ export type {
   ColumnFiltersState,
   ExpandedState,
   ListFilterConfig,
+  RadioFilterConfig,
   DateFilterConfig,
   DateRangeFilterConfig,
   NumberRangeFilterConfig,
@@ -36,6 +41,8 @@ export type {
   DateRangeFilterValue,
   FilterSchema,
   DataTableFiltersState,
+  DataTableScopeKey,
+  DataTableScopedStateOptions,
   NumberRangeValue,
   UseDataTableFiltersOptions,
   UseDataTableFiltersReturn,
@@ -51,6 +58,7 @@ export { useVirtualScroll } from "../DataTable";
 export { useInfiniteScroll } from "../DataTable";
 export {
   DataTableListFilter,
+  DataTableRadioFilter,
   DataTableDateFilter,
   DataTableDateRangeFilter,
   DataTableNumberRangeFilter,

@@ -12,6 +12,7 @@ export type FieldHintProps = {
 export type FieldLabelProps = {
   size: Size;
   required?: boolean;
+  indent?: boolean;
   disabled?: boolean;
   htmlFor?: string;
   children: ReactNode;

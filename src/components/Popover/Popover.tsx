@@ -1,6 +1,11 @@
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import type { PopoverProps } from "./Popover.types";
-import { PopoverTrigger, PopoverContent, PopoverScrollArea } from "./ui";
+import {
+  PopoverTrigger,
+  PopoverContent,
+  PopoverScrollArea,
+  PopoverSurface,
+} from "./ui";
 import { PopoverContext } from "./Popover.context";
 import { useCallback, useState } from "react";
 
@@ -30,4 +35,5 @@ export const Popover = Object.assign(PopoverRoot, {
   Trigger: PopoverTrigger,
   Content: PopoverContent,
   ScrollArea: PopoverScrollArea,
+  Surface: PopoverSurface,
 });

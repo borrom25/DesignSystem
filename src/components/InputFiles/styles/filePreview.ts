@@ -3,7 +3,8 @@ import type { Size } from "@/types";
 export const previewBaseClasses =
   "flex items-center justify-between w-full transition-[background-color] duration-150";
 
-export const previewListClasses = "[&>div:not(:last-child)]:border-b";
+export const previewListClasses =
+  "[&>div:not(:last-child)]:border-b [&>div:first-child]:rounded-t-scale-lg [&>div:last-child]:rounded-b-scale-lg";
 
 export const previewStateClasses =
   "border-line bg-generic-light hover:border-line";

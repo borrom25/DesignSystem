@@ -7,13 +7,10 @@ type HeaderLayoutState = {
 
 export function getHeaderLayoutState(
   children?: ReactNode,
-  showNotification?: boolean,
   isMobile?: boolean
 ): HeaderLayoutState {
   const hasChildren = Boolean(children);
-  const shouldShowSeparator = Boolean(
-    !isMobile && (hasChildren || showNotification)
-  );
+  const shouldShowSeparator = hasChildren && !isMobile;
 
   return {
     hasChildren,

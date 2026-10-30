@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 export interface ImageModalProps {
   file?: File;
   src?: string | null;
@@ -5,4 +7,7 @@ export interface ImageModalProps {
   onClose: () => void;
   onRemove?: () => void;
   disabled?: boolean;
+  onPrev?: () => void;
+  onNext?: () => void;
+  children?: ReactNode;
 }

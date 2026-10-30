@@ -70,3 +70,29 @@ export function formatTimeDisplay(
   }
   return `${h}:${m}`;
 }
+
+export function toSeconds({ hours, minutes, seconds }: TimeValue): number {
+  return hours * 3600 + minutes * 60 + seconds;
+}
+
+export function isOutOfTimeLimits(
+  from: TimeValue,
+  to: TimeValue,
+  minTime?: TimeValue,
+  maxTime?: TimeValue
+): boolean {
+  return (
+    (!!minTime && toSeconds(to) < toSeconds(minTime)) ||
+    (!!maxTime && toSeconds(from) > toSeconds(maxTime))
+  );
+}
+
+export function clampTimeValue(
+  value: TimeValue,
+  minTime?: TimeValue,
+  maxTime?: TimeValue
+): TimeValue {
+  if (minTime && toSeconds(value) < toSeconds(minTime)) return minTime;
+  if (maxTime && toSeconds(value) > toSeconds(maxTime)) return maxTime;
+  return value;
+}

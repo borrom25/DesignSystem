@@ -1,14 +1,52 @@
 import { format, isBefore, isSameDay, isValid, parse } from "date-fns";
 import type { TimeValue } from "@/components/TimeBar";
 import { dateFormat } from "../constants";
-import type { DateRangeBound, DateRangeValue } from "../DateRange.types";
+import type {
+  DateRangeBound,
+  DateRangeDateInput,
+  DateRangeNativeValue,
+  DateRangeValue,
+} from "../DateRange.types";
 import { isDateInputComplete } from "./dateInput";
+
+export const toNativeDate = (
+  value: DateRangeDateInput | undefined
+): Date | undefined => {
+  if (!value) {
+    return undefined;
+  }
+
+  if (value instanceof Date) {
+    return isValid(value) ? value : undefined;
+  }
+
+  if (!value.isValid()) {
+    return undefined;
+  }
+
+  const nativeDate = value.toDate();
+  return isValid(nativeDate) ? nativeDate : undefined;
+};
+
+export const normalizeDateRangeValue = (
+  value?: DateRangeValue
+): DateRangeNativeValue => {
+  if (!value) {
+    return {};
+  }
+
+  return {
+    start: toNativeDate(value.start),
+    end: toNativeDate(value.end),
+  };
+};
 
 export const getOppositeBound = (bound: DateRangeBound): DateRangeBound =>
   bound === "start" ? "end" : "start";
 
-export const getFieldClickBound = (value: DateRangeValue): DateRangeBound =>
-  value.start && !value.end ? "end" : "start";
+export const getFieldClickBound = (
+  value: DateRangeNativeValue
+): DateRangeBound => (value.start && !value.end ? "end" : "start");
 
 export const applyTimeToDate = (date: Date, time: TimeValue): Date => {
   const nextDate = new Date(date);
@@ -47,7 +85,7 @@ export const parseDateInput = (value: string): Date | undefined => {
 export const getSelectedDate = (
   range: { from?: Date; to?: Date } | undefined,
   activeBound: DateRangeBound,
-  currentValue: DateRangeValue
+  currentValue: DateRangeNativeValue
 ) => {
   if (!range?.from && !range?.to) {
     return undefined;
@@ -73,11 +111,11 @@ export const getSelectedDate = (
 };
 
 export const getNextValueForBound = (
-  currentValue: DateRangeValue,
+  currentValue: DateRangeNativeValue,
   activeBound: DateRangeBound,
   selectedDate: Date | undefined,
   showTimeBar: boolean
-): DateRangeValue => {
+): DateRangeNativeValue => {
   if (!selectedDate) {
     return {};
   }

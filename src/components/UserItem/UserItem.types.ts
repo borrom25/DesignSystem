@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactNode } from "react";
+import type { HTMLAttributes, MouseEventHandler, ReactNode } from "react";
 import type { Size } from "@/types";
 
 export const UserItemAvatarPosition = {
@@ -21,6 +21,7 @@ export type UserItemAvatarProps = HTMLAttributes<HTMLDivElement> & {
   size?: number;
   withBorder?: boolean;
   showEditBadge?: boolean;
+  onEditBadgeClick?: MouseEventHandler<HTMLButtonElement>;
   children?: ReactNode;
 };
 

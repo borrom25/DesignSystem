@@ -12,9 +12,9 @@ export interface CollapseButtonProps {
 export function CollapseButton({ collapsed, onClick }: CollapseButtonProps) {
   return (
     <Button
-      size={Size.Sm}
+      size={Size.Xs}
       type={Type.Ghost}
-      color={Color.Inverse}
+      color={Color.Secondary}
       className={cn(
         sidebarStyles.collapseButton,
         collapsed && sidebarStyles.collapseIconRotated

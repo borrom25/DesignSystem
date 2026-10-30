@@ -8,6 +8,7 @@ import {
 } from "@/providers";
 import App from "./App";
 import "./styles/global.css";
+import { LanguageProvider } from "./providers/languageProvider/LanguageProvider";
 
 document.documentElement.className = getInitialClassName();
 
@@ -15,7 +16,9 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ScreenProvider>
       <ThemeProvider>
-        <App />
+        <LanguageProvider>
+          <App />
+        </LanguageProvider>
       </ThemeProvider>
     </ScreenProvider>
   </StrictMode>

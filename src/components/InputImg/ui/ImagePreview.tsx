@@ -12,14 +12,20 @@ export function ImagePreview({
   size,
   error,
   disabled,
+  hoverEnabled,
+  removeEnabled,
+  zoomEnabled,
   onRemove,
   className,
+  fill = false,
+  onPreviewClick,
 }: ImagePreviewProps) {
   const styles = inputImgStyles.preview;
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isStringPreview = typeof file === "string";
   const imageName = isStringPreview ? "Изображение" : file.name;
+  const canRemove = !disabled && removeEnabled;
 
   useEffect(() => {
     if (typeof file === "string") {
@@ -39,45 +45,65 @@ export function ImagePreview({
 
   const handleView = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setIsModalOpen(true);
+    if (onPreviewClick) {
+      onPreviewClick();
+    } else {
+      setIsModalOpen(true);
+    }
   };
 
   return (
     <>
-      <div className={cn(styles.container, styles.size[size], className)}>
+      <div
+        className={cn(
+          styles.container,
+          fill ? styles.fill : styles.size[size],
+          className
+        )}
+      >
         {previewUrl && (
           <img src={previewUrl} alt={imageName} className={styles.image} />
         )}
 
-        <div className={styles.backdrop} />
+        {hoverEnabled && (
+          <>
+            <div className={styles.backdrop} />
 
-        <div className={styles.overlay}>
-          <div className={cn(styles.actions, styles.sizeActions[size])}>
-            {!disabled && (
-              <Button
-                iconOnly={Trash2}
-                size={Size.Sm}
-                type={Type.Fill}
-                color={Color.Danger}
-                onClick={handleRemove}
-                aria-label="Удалить изображение"
-                title="Удалить"
-              />
-            )}
+            <div className={styles.overlay}>
+              <div className={cn(styles.actions, styles.sizeActions[size])}>
+                {canRemove && (
+                  <Button
+                    iconOnly={Trash2}
+                    size={Size.Sm}
+                    type={Type.Fill}
+                    color={Color.Danger}
+                    onClick={handleRemove}
+                    aria-label="Удалить изображение"
+                    title="Удалить"
+                  />
+                )}
 
-            <Button
-              iconOnly={ZoomIn}
-              size={Size.Sm}
-              type={Type.Fill}
-              color={Color.Inverse}
-              onClick={handleView}
-              aria-label="Просмотреть изображение"
-              title="Просмотреть"
-            />
-          </div>
+                {zoomEnabled && (
+                  <Button
+                    iconOnly={ZoomIn}
+                    size={Size.Sm}
+                    type={Type.Fill}
+                    color={Color.Secondary}
+                    onClick={handleView}
+                    aria-label="Просмотреть изображение"
+                    title="Просмотреть"
+                  />
+                )}
+              </div>
 
-          {error && <CircleAlert className={styles.errorIcon} size={20} />}
-        </div>
+              {error && <CircleAlert className={styles.errorIcon} size={20} />}
+            </div>
+          </>
+        )}
+
+        {!hoverEnabled && error && (
+          <CircleAlert className={styles.errorIcon} size={20} />
+        )}
       </div>
 
       <ImageModal
@@ -86,7 +112,7 @@ export function ImagePreview({
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onRemove={onRemove}
-        disabled={disabled}
+        disabled={disabled || !removeEnabled}
       />
     </>
   );

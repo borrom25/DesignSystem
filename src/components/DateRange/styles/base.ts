@@ -18,18 +18,24 @@ export const dateRangeSectionButtonStackedClasses =
   "relative flex-col justify-center gap-0";
 
 export const dateRangeSectionLabelClasses =
-  "pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 font-roboto-flex whitespace-nowrap [color:var(--text-basic-secondary)] transition-all duration-[250ms] ease-out";
+  "pointer-events-none absolute inset-x-0 top-1/2 z-0 -translate-y-1/2 text-center font-roboto-flex whitespace-nowrap [color:var(--text-basic-secondary)] transition-[top,translate,opacity] duration-[250ms] ease-[cubic-bezier(0.4,0,0.2,1)]";
 
 export const dateRangeSectionLabelActiveClasses =
-  "top-(--generic-spacing-1) -translate-x-1/2 translate-y-0 opacity-100";
+  "top-(--generic-spacing-1) translate-y-0 opacity-100";
 
 export const dateRangeSectionLabelCenteredClasses = "opacity-100";
 
 export const dateRangeSectionInputClasses =
-  "relative z-10 w-full min-w-0 bg-transparent border-0 outline-none text-center [color:var(--text-basic-primary)] placeholder:text-secondary transition-[opacity,translate] duration-[250ms] ease-out pt-[calc(var(--generic-spacing-6))]";
+  "relative z-10 w-full min-w-0 bg-transparent border-0 outline-none text-center [color:var(--text-basic-primary)] placeholder:text-secondary will-change-transform transition-[opacity,translate] duration-[250ms] ease-[cubic-bezier(0.4,0,0.2,1)] pt-[calc(var(--generic-spacing-4))] translate-y-[3px] [&::placeholder]:transition-opacity [&::placeholder]:duration-[250ms] [&::placeholder]:ease-out";
 
 export const dateRangeSectionInputHiddenClasses =
   "opacity-0 pointer-events-none";
+
+export const dateRangeSectionInputPlaceholderHiddenClasses =
+  "[&::placeholder]:opacity-0 [&::placeholder]:[transition-delay:0ms]";
+
+export const dateRangeSectionInputPlaceholderVisibleClasses =
+  "[&::placeholder]:opacity-100 [&::placeholder]:[transition-delay:150ms]";
 
 export const dateRangeSectionInputDefaultClasses =
   "[color:var(--text-basic-primary)]";

@@ -1,15 +1,15 @@
 import type { Size } from "@/types";
 
 export const sizeClasses: Record<Size, string> = {
-  xs: "h-(--size-btn-xs-h) px-(--size-btn-xs-px) gap-(--size-btn-xs-gap) rounded-xs text-xs font-medium",
-  sm: "h-(--size-btn-sm-h) px-(--size-btn-sm-px) gap-(--size-btn-sm-gap) rounded-sm text-sm font-medium",
-  md: "h-(--size-btn-md-h) px-(--size-btn-md-px) gap-(--size-btn-md-gap) rounded-md text-md font-medium",
+  xs: "h-(--size-btn-xs-h) px-(--size-btn-xs-px) gap-(--size-btn-xs-gap) rounded-sm text-xs font-medium",
+  sm: "h-(--size-btn-sm-h) px-(--size-btn-sm-px) gap-(--size-btn-sm-gap) rounded-md text-sm font-medium",
+  md: "h-(--size-btn-md-h) px-(--size-btn-md-px) gap-(--size-btn-md-gap) rounded-lg text-md font-medium",
 } as const;
 
 export const iconOnlySizeClasses: Record<Size, string> = {
-  xs: "size-(--size-btn-xs-h) p-2 rounded-xs",
-  sm: "size-(--size-btn-sm-h) p-3 rounded-sm",
-  md: "size-(--size-btn-md-h) p-4 rounded-md",
+  xs: "size-(--size-btn-xs-h) p-2 rounded-sm",
+  sm: "size-(--size-btn-sm-h) p-3 rounded-md",
+  md: "size-(--size-btn-md-h) p-4 rounded-lg",
 } as const;
 
 export const gapClasses: Record<Size, string> = {
@@ -20,7 +20,7 @@ export const gapClasses: Record<Size, string> = {
 
 export const iconSizeMap: Record<Size, number> = {
   xs: 16,
-  sm: 16,
+  sm: 20,
   md: 20,
 } as const;
 

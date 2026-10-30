@@ -1,13 +1,33 @@
 import type { ReactNode, ElementType, HTMLAttributes } from "react";
-import type { Color, Size } from "@/types";
+import type {
+  TextAlign,
+  TextColor,
+  TextDecoration,
+  TextOverflow,
+  TextShade,
+  TextVariant,
+  TextWeight,
+} from "./constants";
 
-export type TextWeight = "regular" | "medium" | "semibold";
+export type {
+  TextAlign,
+  TextColor,
+  TextDecoration,
+  TextOverflow,
+  TextShade,
+  TextVariant,
+  TextWeight,
+} from "./constants";
 
 export interface TextProps extends HTMLAttributes<HTMLElement> {
   children: ReactNode;
-  size?: Size;
-  weight?: TextWeight;
-  color?: Color;
   as?: ElementType;
   className?: string;
+  variant?: TextVariant;
+  weight?: TextWeight;
+  color?: TextColor;
+  shade?: TextShade;
+  align?: TextAlign;
+  overflow?: TextOverflow;
+  decoration?: TextDecoration;
 }

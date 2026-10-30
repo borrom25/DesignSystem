@@ -1,9 +1,9 @@
 import { calendarMonthsDefault, calendarMonthsWithTimeBar } from "../constants";
-import type { DateRangeBound, DateRangeValue } from "../DateRange.types";
+import type { DateRangeBound, DateRangeNativeValue } from "../DateRange.types";
 
 export const getCalendarDisplayMonth = (
   activeBound: DateRangeBound | null,
-  currentValue: DateRangeValue
+  currentValue: DateRangeNativeValue
 ): Date => {
   if (activeBound === "end") {
     return currentValue.end ?? currentValue.start ?? new Date();

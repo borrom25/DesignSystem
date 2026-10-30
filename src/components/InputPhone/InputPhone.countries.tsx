@@ -1,11 +1,11 @@
-import flags from "react-phone-number-input/flags";
-import ruLabels from "react-phone-number-input/locale/ru";
+import type { Country, Flags } from "react-phone-number-input";
 import {
   getCountries,
   getCountryCallingCode,
   isSupportedCountry,
 } from "react-phone-number-input";
-import type { Country, Flags } from "react-phone-number-input";
+import flags from "react-phone-number-input/flags";
+import ruLabels from "react-phone-number-input/locale/ru";
 
 export const defaultPhoneCountry: Country = "RU";
 

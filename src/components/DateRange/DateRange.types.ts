@@ -1,9 +1,19 @@
 import type { ComponentPropsWithRef, ReactNode } from "react";
+import type { Dayjs } from "dayjs";
 import type { TimeValue } from "@/components/TimeBar";
 import type { Size } from "@/types";
 import type { BaseFieldProps } from "@/types/field";
 
+export type DateRangeDateInput = Date | Dayjs;
+
 export interface DateRangeValue {
+  start?: DateRangeDateInput;
+  end?: DateRangeDateInput;
+}
+
+export type DateRangeValueInput = DateRangeValue;
+
+export interface DateRangeNativeValue {
   start?: Date;
   end?: Date;
 }
@@ -12,7 +22,10 @@ export type DateRangeBound = "start" | "end";
 
 export type DateRangeChangeHandler = (value: DateRangeValue) => void;
 
-export interface DateRangeOwnProps extends BaseFieldProps {
+export interface DateRangeOwnProps extends Omit<
+  BaseFieldProps,
+  "label" | "subtitle"
+> {
   id?: string;
   size?: Size;
   disabled?: boolean;
@@ -68,6 +81,7 @@ export interface DateRangeFieldProps extends Omit<
   activeBound?: DateRangeBound | null;
   size?: Size;
   disabled?: boolean;
+  required?: boolean;
   startError?: boolean;
   endError?: boolean;
   clearable?: boolean;

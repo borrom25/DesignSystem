@@ -1,8 +1,9 @@
 import { cn } from "@/utils";
 import { Size } from "@/types";
 import { FieldLabel, FieldHint } from "@/components/Field";
+import { FloatingLabelRequiredMark } from "@/shared/Input";
 import type { InputImgProps } from "./InputImg.types";
-import { useInputImg } from "./hooks/useInputImg";
+import { useInputImg } from "./hooks";
 import { DropZone } from "./ui/DropZone";
 import { ImagePreview } from "./ui/ImagePreview";
 import { inputImgStyles } from "./styles";
@@ -21,6 +22,8 @@ export function InputImg({
   onBeforeUpload,
   maxSize,
   accept = "image/*",
+  validateFile,
+  onValidationError,
   onSizeError,
   onAcceptError,
   textUpload = "Загрузить",
@@ -28,9 +31,14 @@ export function InputImg({
   loading = false,
   progress = 0,
   onCancelUpload,
+  fill = false,
+  previewHoverEnabled = true,
+  previewRemoveEnabled = true,
+  previewZoomEnabled = true,
   className,
   name,
   id,
+  onPreviewClick,
 }: InputImgProps) {
   const isError = error || !!hintError;
 
@@ -51,9 +59,11 @@ export function InputImg({
     onBeforeUpload,
     maxSize,
     accept,
+    validateFile,
     disabled,
     onSizeError,
     onAcceptError,
+    onValidationError,
   });
 
   const renderContent = () => {
@@ -78,6 +88,7 @@ export function InputImg({
           progress={progress}
           textLoading={textLoading}
           onCancelUpload={onCancelUpload}
+          fill={fill}
         />
       );
     }
@@ -89,7 +100,12 @@ export function InputImg({
           size={size}
           error={isError}
           disabled={disabled}
+          fill={fill}
+          hoverEnabled={previewHoverEnabled}
+          removeEnabled={previewRemoveEnabled}
+          zoomEnabled={previewZoomEnabled}
           onRemove={removeFile}
+          onPreviewClick={onPreviewClick}
         />
       );
     }
@@ -114,12 +130,21 @@ export function InputImg({
         progress={progress}
         textLoading={textLoading}
         onCancelUpload={onCancelUpload}
+        fill={fill}
       />
     );
   };
 
+  const showBorderRequiredMark = required && !label && !disabled;
+
   return (
-    <div className={cn(inputImgStyles.wrapper, className)}>
+    <div
+      className={cn(
+        inputImgStyles.wrapper,
+        fill && inputImgStyles.wrapperFill,
+        className
+      )}
+    >
       {label && (
         <FieldLabel
           size={size}
@@ -132,7 +157,17 @@ export function InputImg({
         </FieldLabel>
       )}
 
-      {renderContent()}
+      <div
+        className={cn(
+          inputImgStyles.control,
+          fill && inputImgStyles.controlFill
+        )}
+      >
+        {showBorderRequiredMark && (
+          <FloatingLabelRequiredMark className={inputImgStyles.requiredMark} />
+        )}
+        {renderContent()}
+      </div>
 
       {(hintError || hint) && (
         <FieldHint size={size} error={isError} className="pl-0">

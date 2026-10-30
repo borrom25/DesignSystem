@@ -1,4 +1,10 @@
-import type { CSSProperties } from "react";
+import { Children, type CSSProperties, type ReactNode } from "react";
+
+export const DEFAULT_SEARCH_EMPTY_MESSAGE = "Ничего не найдено";
+
+export function hasRenderableChildren(children: ReactNode): boolean {
+  return Children.toArray(children).length > 0;
+}
 
 export function getContentStyles(
   matchTriggerWidth?: boolean,

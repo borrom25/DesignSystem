@@ -16,6 +16,8 @@ export function useClearField<T extends ClearableFieldElement>({
     const field = ref.current;
 
     if (field) {
+      const shouldRestoreFocus = document.activeElement === field;
+
       if (field instanceof HTMLInputElement) {
         const valueSetter = Object.getOwnPropertyDescriptor(
           HTMLInputElement.prototype,
@@ -34,7 +36,10 @@ export function useClearField<T extends ClearableFieldElement>({
 
       field.dispatchEvent(new Event("input", { bubbles: true }));
       field.dispatchEvent(new Event("change", { bubbles: true }));
-      field.focus();
+
+      if (shouldRestoreFocus) {
+        field.focus();
+      }
     }
 
     onClear?.();

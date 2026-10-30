@@ -1,6 +1,6 @@
 export { InputFiles } from "./InputFiles";
 export type {
   InputFilesProps,
-  DropZoneProps,
+  InputFilesValidationProps,
   FilePreviewProps,
 } from "./InputFiles.types";

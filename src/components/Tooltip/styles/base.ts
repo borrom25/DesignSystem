@@ -1,5 +1,9 @@
 export const contentBaseClasses =
-  "relative z-[100] outline-none origin-[var(--radix-popover-content-transform-origin)] [filter:drop-shadow(0_0_1px_rgba(255,255,255,0.17))_drop-shadow(0_0_18px_rgba(0,0,0,0.07))]";
+  "relative outline-none origin-[var(--radix-popover-content-transform-origin)] [filter:drop-shadow(0_0_1px_rgba(255,255,255,0.17))_drop-shadow(0_0_18px_rgba(0,0,0,0.07))]";
+
+export const contentPageZIndexClasses = "z-40";
+
+export const contentModalZIndexClasses = "z-[140]";
 
 export const surfaceClasses =
   "relative z-10 flex min-h-(--generic-spacing-13) flex-col items-start gap-(--generic-spacing-3) rounded-xs bg-generic p-(--generic-spacing-5)";

@@ -52,7 +52,7 @@ export const Full: Story = {
               <Button
                 key={item}
                 size={Size.Xs}
-                color={gapMode === item ? Color.Brand : Color.Inverse}
+                color={gapMode === item ? Color.Brand : Color.Secondary}
                 type={gapMode === item ? Type.Fill : Type.Outline}
                 onClick={() => setGapMode(item)}
               >
@@ -66,7 +66,7 @@ export const Full: Story = {
               <Button
                 key={item}
                 size={Size.Xs}
-                color={paddingMode === item ? Color.Brand : Color.Inverse}
+                color={paddingMode === item ? Color.Brand : Color.Secondary}
                 type={paddingMode === item ? Type.Fill : Type.Outline}
                 onClick={() => setPaddingMode(item)}
               >
@@ -80,7 +80,7 @@ export const Full: Story = {
               <Button
                 key={item}
                 size={Size.Xs}
-                color={justify === item ? Color.Brand : Color.Inverse}
+                color={justify === item ? Color.Brand : Color.Secondary}
                 type={justify === item ? Type.Fill : Type.Outline}
                 onClick={() => setJustify(item)}
               >
@@ -94,7 +94,7 @@ export const Full: Story = {
               <Button
                 key={item}
                 size={Size.Xs}
-                color={align === item ? Color.Brand : Color.Inverse}
+                color={align === item ? Color.Brand : Color.Secondary}
                 type={align === item ? Type.Fill : Type.Outline}
                 onClick={() => setAlign(item)}
               >
@@ -108,7 +108,7 @@ export const Full: Story = {
               <Button
                 key={item}
                 size={Size.Xs}
-                color={direction === item ? Color.Brand : Color.Inverse}
+                color={direction === item ? Color.Brand : Color.Secondary}
                 type={direction === item ? Type.Fill : Type.Outline}
                 onClick={() => setDirection(item)}
               >
@@ -122,7 +122,7 @@ export const Full: Story = {
               <Button
                 key={item}
                 size={Size.Xs}
-                color={wrap === item ? Color.Brand : Color.Inverse}
+                color={wrap === item ? Color.Brand : Color.Secondary}
                 type={wrap === item ? Type.Fill : Type.Outline}
                 onClick={() => setWrap(item)}
               >
@@ -134,7 +134,7 @@ export const Full: Story = {
           <Space flexWrap="wrap" gapSize={Size.Xs}>
             <Button
               size={Size.Xs}
-              color={fullWidth ? Color.Brand : Color.Inverse}
+              color={fullWidth ? Color.Brand : Color.Secondary}
               type={fullWidth ? Type.Fill : Type.Outline}
               onClick={() => setFullWidth((prev) => !prev)}
             >
@@ -142,7 +142,7 @@ export const Full: Story = {
             </Button>
             <Button
               size={Size.Xs}
-              color={fullHeight ? Color.Brand : Color.Inverse}
+              color={fullHeight ? Color.Brand : Color.Secondary}
               type={fullHeight ? Type.Fill : Type.Outline}
               onClick={() => setFullHeight((prev) => !prev)}
             >
@@ -150,7 +150,7 @@ export const Full: Story = {
             </Button>
             <Button
               size={Size.Xs}
-              color={flex1 ? Color.Brand : Color.Inverse}
+              color={flex1 ? Color.Brand : Color.Secondary}
               type={flex1 ? Type.Fill : Type.Outline}
               onClick={() => setFlex1((prev) => !prev)}
             >

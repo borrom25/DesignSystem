@@ -15,13 +15,12 @@ export interface BarMenuTriggerProps {
   item: BarMenuItem;
   className: string;
   selected?: boolean;
-  registerTabButton: (value: string, element: HTMLButtonElement | null) => void;
   onSelect: (value: string) => void;
 }
 
 export interface BarMenuProps {
   items: BarMenuItem[];
   value?: string;
-  onMoreClick: () => void;
   onSelect: (value: string) => void;
+  className?: string;
 }

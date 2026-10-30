@@ -19,7 +19,7 @@ export function CheckBox({
   title,
   ...restProps
 }: CheckBoxProps) {
-  const hasField = label || hint || hintError || title;
+  const hasField = label || hint || hintError || title || required;
 
   const input = (
     <CheckBoxInput

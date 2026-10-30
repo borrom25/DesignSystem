@@ -6,6 +6,10 @@ import type {
 } from "react";
 import type { Size } from "@/types";
 import type { BaseFieldProps } from "@/types/field";
+import type {
+  UploadValidateFile,
+  UploadValidationErrorHandler,
+} from "@/types/upload";
 
 export type InputImgValue = File | string | null;
 
@@ -19,12 +23,17 @@ export interface InputImgValueProps {
 export interface InputImgValidationProps {
   maxSize?: number;
   accept?: string;
+  validateFile?: UploadValidateFile;
+  onValidationError?: UploadValidationErrorHandler;
   onSizeError?: (file: File) => void;
   onAcceptError?: (file: File) => void;
 }
 
 export interface InputImgInteractionProps {
   disabled?: boolean;
+  previewHoverEnabled?: boolean;
+  previewRemoveEnabled?: boolean;
+  previewZoomEnabled?: boolean;
 }
 
 export interface InputImgTextProps {
@@ -52,7 +61,9 @@ export interface InputImgProps
     InputImgLoadingProps {
   size?: Size;
   error?: boolean;
+  fill?: boolean;
   className?: string;
+  onPreviewClick?: () => void;
 }
 
 export interface DropZoneProps {
@@ -71,6 +82,7 @@ export interface DropZoneProps {
   onDrop: (e: DragEvent<HTMLDivElement>) => void;
   onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   className?: string;
+  fill?: boolean;
   loading?: boolean;
   progress?: number;
   textLoading?: string;
@@ -82,8 +94,13 @@ export interface ImagePreviewProps {
   size: Size;
   error: boolean;
   disabled: boolean;
+  hoverEnabled: boolean;
+  removeEnabled: boolean;
+  zoomEnabled: boolean;
   onRemove: () => void;
   className?: string;
+  fill?: boolean;
+  onPreviewClick?: () => void;
 }
 
 export interface UseInputImgProps

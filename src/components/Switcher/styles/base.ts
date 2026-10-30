@@ -1,7 +1,7 @@
 export const baseClasses =
   "relative inline-flex box-border items-center cursor-pointer py-5 px-1 rounded-[360px] border border-line bg-generic-medium transiton-color duration-200";
 
-export const inputClasses = "peer hidden";
+export const inputClasses = "peer sr-only";
 
 export const hoverClasses =
   "hover:border-brand-line-heavy hover:bg-brand-light";
@@ -20,3 +20,7 @@ export const minusIconClasses =
 
 export const minusBaseClasses =
   "data-[type=minus]:justify-center data-[type=minus]:items-center";
+
+export const titleClasses = "text-complementary";
+
+export const containerClasses = "flex items-center gap-3";

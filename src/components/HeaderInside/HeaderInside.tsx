@@ -14,8 +14,10 @@ export function HeaderInside({
   showActionButton = true,
   actionIcon: ActionIcon,
   children,
+  topSlot,
   showNotification = true,
-  accountMenu,
+  showThemeSwitcher = false,
+  accountMenuProps,
   backButtonTestId,
   actionButtonTestId,
   notificationButtonTestId,
@@ -26,6 +28,8 @@ export function HeaderInside({
   ...props
 }: HeaderInsideProps) {
   const { isMobile } = useScreenSize();
+  const hasRightActions =
+    !!topSlot || showNotification || showThemeSwitcher || !!accountMenuProps;
   const { hasChildren, hasActionButton, shouldShowSeparator } =
     getHeaderInsideLayoutState(
       children,
@@ -36,9 +40,14 @@ export function HeaderInside({
 
   return (
     <header
-      className={cn(headerInsideStyles.root, className)}
+      className={cn(
+        headerInsideStyles.rootPosition[isMobile ? "mobile" : "desktop"],
+        headerInsideStyles.root,
+        className
+      )}
       role="banner"
       data-mobile={isMobile}
+      data-has-children={hasChildren}
       {...props}
     >
       <div className={headerInsideStyles.content} data-mobile={isMobile}>
@@ -54,9 +63,10 @@ export function HeaderInside({
               iconOnly={ActionIcon}
               type={Type.Flat}
               color={Color.Brand}
-              size={Size.Sm}
+              size={Size.Xs}
               onClick={onActionClick}
               data-testid={actionButtonTestId}
+              className={headerInsideStyles.actionButton}
             />
           )}
 
@@ -65,18 +75,26 @@ export function HeaderInside({
           )}
         </div>
 
-        {hasChildren && children}
+        {hasChildren && (
+          <div className={headerInsideStyles.children} data-mobile={isMobile}>
+            {children}
+          </div>
+        )}
       </div>
 
-      <HeaderActions
-        showNotification={showNotification}
-        actionsClassName={headerInsideStyles.actions}
-        notificationButtonClassName={headerInsideStyles.notificationButton}
-        iconClassName={headerInsideStyles.icon}
-        onNotificationClick={onNotificationClick}
-        notificationButtonTestId={notificationButtonTestId}
-        accountMenu={accountMenu}
-      />
+      {hasRightActions && (
+        <HeaderActions
+          topSlot={topSlot}
+          showNotification={showNotification}
+          showThemeSwitcher={showThemeSwitcher}
+          actionsClassName={headerInsideStyles.actions}
+          notificationButtonClassName={headerInsideStyles.notificationButton}
+          iconClassName={headerInsideStyles.icon}
+          onNotificationClick={onNotificationClick}
+          notificationButtonTestId={notificationButtonTestId}
+          accountMenuProps={accountMenuProps}
+        />
+      )}
     </header>
   );
 }

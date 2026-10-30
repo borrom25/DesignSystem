@@ -89,7 +89,12 @@ const baseArgs = {
 };
 
 export const Playground: Story = {
-  render: () => {
+  args: {
+    label: baseArgs.label,
+    placeholder: baseArgs.placeholder,
+    defaultValue: baseArgs.defaultValue,
+  },
+  render: (args) => {
     const [size, setSize] = useState<(typeof SIZES)[number]>(Size.Md);
     const [variant, setVariant] = useState<(typeof VARIANTS)[number]>(
       InputVariant.Default
@@ -192,6 +197,10 @@ export const Playground: Story = {
           hint={hint}
           hintError={hintError}
           value={value}
+          label={args.label ?? baseArgs.label}
+          placeholder={args.placeholder ?? baseArgs.placeholder}
+          defaultValue={args.defaultValue ?? baseArgs.defaultValue}
+          className={args.className}
           onChangeInput={(nextValue) => {
             console.log("[DatePicker] onChangeInput", nextValue);
             setValue(nextValue ?? "");
@@ -207,7 +216,7 @@ export const Playground: Story = {
             <Button
               disabled={disabled}
               size={Size.Xs}
-              color={Color.Inverse}
+              color={Color.Secondary}
               type={Type.Flat}
             >
               Button
@@ -218,6 +227,33 @@ export const Playground: Story = {
         <div className="text-xs text-secondary">
           Value: {value || "не выбрано"}
         </div>
+      </div>
+    );
+  },
+};
+
+export const WithMinMaxDates: Story = {
+  render: () => {
+    const [value, setValue] = useState<string>("");
+    const today = new Date();
+    const minDate = new Date(today.getFullYear(), today.getMonth(), 1);
+    const maxDate = new Date(today.getFullYear(), today.getMonth() + 2, 0);
+
+    return (
+      <div className="flex flex-col gap-4" style={{ width: 320 }}>
+        <DatePicker
+          {...baseArgs}
+          value={value}
+          onChangeInput={(nextValue) => setValue(nextValue ?? "")}
+          onClear={() => setValue("")}
+          minDate={minDate}
+          maxDate={maxDate}
+        />
+        <p className="text-xs text-secondary">
+          Доступен выбор только с {minDate.toLocaleDateString("ru-RU")} по{" "}
+          {maxDate.toLocaleDateString("ru-RU")}. Дата вне диапазона, введённая
+          вручную, подтягивается к ближайшей границе.
+        </p>
       </div>
     );
   },

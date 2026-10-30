@@ -8,21 +8,13 @@ export const getSizingClasses = (size: Size, isIconOnly: boolean): string =>
 
 type LabelStateOptions = {
   hasIconOnly: boolean;
-  hasIconLeft: boolean;
-  hasIconRight: boolean;
 };
 
-export function getLabelState({
-  hasIconOnly,
-  hasIconLeft,
-  hasIconRight,
-}: LabelStateOptions) {
+export function getLabelState({ hasIconOnly }: LabelStateOptions) {
   const isIconOnly = hasIconOnly;
-  const hasSideIcons = hasIconLeft || hasIconRight;
 
   return {
     isIconOnly,
-    canBeRounded: isIconOnly || !hasSideIcons,
   };
 }
 
@@ -32,8 +24,8 @@ type LabelRootClassOptions = {
   size: Size;
   isIconOnly: boolean;
   rounded: boolean;
-  canBeRounded: boolean;
   className?: string;
+  onClick?: () => void;
 };
 
 export function getLabelRootClassName({
@@ -42,15 +34,16 @@ export function getLabelRootClassName({
   size,
   isIconOnly,
   rounded,
-  canBeRounded,
   className,
+  onClick,
 }: LabelRootClassOptions): string {
   return cn(
     labelStyles.base,
     labelStyles.getVariant(appearance, color),
     getSizingClasses(size, isIconOnly),
-    rounded && canBeRounded && labelStyles.rounded,
+    rounded && labelStyles.rounded,
     !isIconOnly && labelStyles.gap[size],
+    onClick && labelStyles.clickable,
     className
   );
 }

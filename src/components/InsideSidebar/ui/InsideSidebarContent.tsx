@@ -22,14 +22,16 @@ export function InsideSidebarContent({
       )}
       {...restProps}
     >
-      <div className={insideSidebarStyles.headerRow}>
-        {title && (
-          <span className={insideSidebarStyles.titleText}>{title}</span>
-        )}
-        {actionSlot && (
-          <div className={insideSidebarStyles.actionSlot}>{actionSlot}</div>
-        )}
-      </div>
+      {(title || actionSlot) && (
+        <div className={insideSidebarStyles.headerRow}>
+          {title && (
+            <span className={insideSidebarStyles.titleText}>{title}</span>
+          )}
+          {actionSlot && (
+            <div className={insideSidebarStyles.actionSlot}>{actionSlot}</div>
+          )}
+        </div>
+      )}
 
       <div className={insideSidebarStyles.separator} />
 

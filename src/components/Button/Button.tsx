@@ -14,6 +14,7 @@ export function Button({
   iconRight: IconRight,
   iconOnly: IconOnly,
   count,
+  counterColor = CounterVariant.Accent,
   loading = false,
   className,
   disabled,
@@ -26,6 +27,7 @@ export function Button({
   const isIconOnly = !!IconOnly;
   const isAsChild = asChild;
   const isLoading = loading;
+  const isDisabled = disabled || isLoading;
   const hasCount = count != null;
   const contentInvisible = isLoading
     ? buttonStyles.contentInvisible
@@ -37,6 +39,7 @@ export function Button({
   const rootClassName = cn(
     buttonStyles.base,
     buttonStyles.getVariant(appearance, color),
+    isDisabled && buttonStyles.getDisabled(appearance),
     buttonStyles.getSize(size, isIconOnly),
     scaling && buttonStyles.scaling,
     className
@@ -55,7 +58,7 @@ export function Button({
       ref={ref}
       type={htmlType}
       className={rootClassName}
-      disabled={disabled || isLoading}
+      disabled={isDisabled}
       {...restProps}
     >
       {isLoading && <Loader2 size={iconSize} className={buttonStyles.loader} />}
@@ -81,9 +84,10 @@ export function Button({
       {hasCount && (
         <Counter
           count={count!}
-          variant={CounterVariant.Accent}
+          variant={counterColor}
           maxCount={99}
           size={Size.Sm}
+          disabled={isDisabled}
           className={buttonStyles.counter}
         />
       )}

@@ -112,7 +112,6 @@ export const Playground: Story = {
 
         <DateRange
           size={size}
-          label="Период"
           hint={
             startError
               ? "Дата начала некорректна"

@@ -34,7 +34,7 @@ export const Playground: Story = {
     const [value, setValue] = useState("");
 
     return (
-      <div className="flex flex-col gap-6" style={{ width: 360 }}>
+      <div className="flex flex-col gap-6" style={{ width: 360, height: 600 }}>
         <div className="flex flex-wrap gap-3 text-xs text-secondary">
           <label className="flex items-center gap-1.5 cursor-pointer">
             Size:
@@ -107,7 +107,6 @@ export const Playground: Story = {
           size={size}
           value={value}
           onChange={(event) => setValue(event.target.value)}
-          onClear={() => setValue("")}
           error={error}
           disabled={disabled}
           label="Описание"

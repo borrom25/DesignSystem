@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { selectionColumnId, actionsColumnId } from "./constants";
 
 export function isSelectionColumn(columnId: string): boolean {
@@ -10,6 +11,24 @@ export function isActionsColumn(columnId: string): boolean {
 
 export function isServiceColumn(columnId: string): boolean {
   return isSelectionColumn(columnId) || isActionsColumn(columnId);
+}
+
+export function getDataTableColumnWidthStyle(
+  columnId: string,
+  size: number
+): Pick<CSSProperties, "width" | "minWidth" | "maxWidth"> {
+  if (isServiceColumn(columnId)) {
+    return {
+      width: size,
+      minWidth: size,
+      maxWidth: size,
+    };
+  }
+
+  return {
+    width: size,
+    minWidth: size,
+  };
 }
 
 export function getStickyPosition(
@@ -29,6 +48,7 @@ export function getStickyPosition(
 interface StickyColumnLike {
   id: string;
   columnDef: unknown;
+  parent?: StickyColumnLike | null;
 }
 
 function getColumnSticky(
@@ -55,7 +75,12 @@ export function getBeforeStickyRightColumnIds<TColumn extends StickyColumnLike>(
       nextColumn &&
       getStickyPosition(getColumnSticky(nextColumn.columnDef)) === "right"
     ) {
-      ids.add(currentColumn.id);
+      let column: StickyColumnLike | null | undefined = currentColumn;
+
+      while (column) {
+        ids.add(column.id);
+        column = column.parent;
+      }
     }
   }
 

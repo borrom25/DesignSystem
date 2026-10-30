@@ -6,6 +6,7 @@ import {
   textAreaNativeClasses,
   textAreaNativeBottomPaddingClasses,
   textAreaNativeWithLabelClasses,
+  textAreaNativeClipTopClasses,
   textAreaNativeTextBaseClasses,
   textAreaNativePlaceholderBaseClasses,
   textAreaNativeDisabledTextClasses,
@@ -24,6 +25,7 @@ import {
   textAreaLabelDisabledClasses,
   textAreaNativePlaceholderHiddenClasses,
   textAreaNativePlaceholderVisibleClasses,
+  textAreaLabelMobileClasses,
 } from "./base";
 import {
   textAreaSizeClasses,
@@ -43,6 +45,7 @@ export {
   textAreaNativeClasses,
   textAreaNativeBottomPaddingClasses,
   textAreaNativeWithLabelClasses,
+  textAreaNativeClipTopClasses,
   textAreaNativeTextBaseClasses,
   textAreaNativePlaceholderBaseClasses,
   textAreaNativeDisabledTextClasses,
@@ -56,6 +59,7 @@ export {
   textAreaResizeVerticalClasses,
   textAreaResizeBothClasses,
   textAreaResizeIconClasses,
+  textAreaLabelMobileClasses,
 };
 export {
   textAreaSizeClasses,
@@ -63,6 +67,7 @@ export {
   textAreaFieldShellSizeClasses,
   textAreaLabelSizeClasses,
   textAreaLabelActiveSizeClasses,
+  textAreaLabelBackdropSizeClasses,
   textAreaNativeTextSizeClasses,
   textAreaNativePlaceholderSizeClasses,
 } from "./sizes";
@@ -74,6 +79,7 @@ export const textAreaStyles = {
   error: textAreaErrorClasses,
   native: textAreaNativeClasses,
   nativeWithLabel: textAreaNativeWithLabelClasses,
+  nativeClipTop: textAreaNativeClipTopClasses,
   nativeBottomPadding: textAreaNativeBottomPaddingClasses,
   nativeTextBase: textAreaNativeTextBaseClasses,
   nativeTextSize: textAreaNativeTextSizeClasses,
@@ -98,6 +104,7 @@ export const textAreaStyles = {
   labelActiveSize: textAreaLabelActiveSizeClasses,
   labelSize: textAreaLabelSizeClasses,
   labelDisabled: textAreaLabelDisabledClasses,
+  labelMobile: textAreaLabelMobileClasses,
   nativePlaceholderHidden: textAreaNativePlaceholderHiddenClasses,
   nativePlaceholderVisible: textAreaNativePlaceholderVisibleClasses,
 } as const;

@@ -4,16 +4,18 @@ export type UseControllableStateProps<T> = {
   value?: T;
   defaultValue: T;
   onChange?: (value: T) => void;
+  isControlled?: boolean;
 };
 
 export function useControllableState<T>({
   value: controlledValue,
   defaultValue,
   onChange,
+  isControlled: isControlledProp,
 }: UseControllableStateProps<T>) {
   const [internalValue, setInternalValue] = useState<T>(defaultValue);
-  const isControlled = controlledValue !== undefined;
-  const value = isControlled ? controlledValue : internalValue;
+  const isControlled = isControlledProp ?? controlledValue !== undefined;
+  const value = isControlled ? (controlledValue as T) : internalValue;
 
   const setValue = useCallback(
     (next: T | ((prev: T) => T)) => {

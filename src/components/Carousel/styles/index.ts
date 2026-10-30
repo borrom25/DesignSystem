@@ -2,10 +2,9 @@ export {
   getIndicatorVariants,
   indicatorsOrientationClasses,
   trackOrientationClasses,
-  indicatorsLayoutClasses,
   containerLayoutClasses,
   controlsLayoutClasses,
-  getSizeClasses,
+  gapSize,
 } from "./variants.ts";
 export {
   baseClasses,
@@ -13,6 +12,7 @@ export {
   baseTrackClasses,
   buttonClasses,
   containerClasses,
+  controlsClasses,
   indicatorsBaseClasses,
   indicatorsItemClasses,
 } from "./base.ts";
@@ -21,10 +21,8 @@ import {
   getIndicatorVariants,
   indicatorsOrientationClasses,
   trackOrientationClasses,
-  indicatorsLayoutClasses,
   containerLayoutClasses,
   controlsLayoutClasses,
-  getSizeClasses,
 } from "./variants.ts";
 import {
   baseClasses,
@@ -32,6 +30,7 @@ import {
   baseTrackClasses,
   buttonClasses,
   containerClasses,
+  controlsClasses,
   indicatorsBaseClasses,
   indicatorsItemClasses,
 } from "./base.ts";
@@ -41,9 +40,8 @@ export const carouselStyles = {
   container: containerClasses,
   button: buttonClasses,
   containerLayout: containerLayoutClasses,
+  controls: controlsClasses,
   controlsLayout: controlsLayoutClasses,
-  indicatorsLayout: indicatorsLayoutClasses,
-  size: getSizeClasses,
   item: {
     base: baseItemClasses,
   },

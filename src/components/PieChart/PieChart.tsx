@@ -1,7 +1,6 @@
 import { Cell, Pie, PieChart as PieChartComponent, Sector } from "recharts";
 import { PieChartDonutProps, PieChartProps } from "./PieChart.types.ts";
-import { ChartTooltip } from "@/shared/Chart";
-import { PieChartLegend } from "./ui";
+import { PieChartLegend, PieChartTooltip } from "./ui";
 import { usePieChartState } from "./hooks";
 import { pieChartStyles } from "./styles";
 
@@ -42,11 +41,11 @@ export const PieChart = ({
               <Sector {...rest} outerRadius={outerRadius + 8} />
             )}
           >
-            <ChartTooltip />
             {visibleData.map(({ name }, i) => (
               <Cell key={i} fill={getCellFill(name)} />
             ))}
           </Pie>
+          <PieChartTooltip />
         </PieChartComponent>
         {(title || subtitle) && (
           <div className={pieChartStyles.textContainer}>

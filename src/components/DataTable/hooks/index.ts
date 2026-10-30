@@ -3,6 +3,7 @@ export { useVirtualScroll } from "./useVirtualScroll";
 export { useInfiniteScroll } from "./useInfiniteScroll";
 export { useDataTableColumnLayout } from "./useDataTableColumnLayout";
 export { useDataTableScrollEnd } from "./useDataTableScrollEnd";
+export { useDataTableViewportMetrics } from "./useDataTableViewportMetrics";
 export { useDataTableFilters } from "./useDataTableFilters";
 export { useDataTableController } from "./useDataTableController";
 export { useDataTablePopoverAction } from "./useDataTablePopoverAction";

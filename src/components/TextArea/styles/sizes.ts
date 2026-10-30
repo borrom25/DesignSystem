@@ -13,21 +13,27 @@ export const textAreaFieldShellSizeClasses: Record<Size, string> = {
 } as const;
 
 export const textAreaSizeWithLabelClasses: Record<Size, string> = {
-  xs: "pb-3 pl-[14px]",
-  sm: "pb-5 pl-[16px]",
-  md: "pb-6 pl-[18px]",
+  xs: "pt-[32px] pb-3 pl-[14px]",
+  sm: "pt-[34px] pb-5 pl-[16px]",
+  md: "pt-[34px] pb-6 pl-[18px]",
 } as const;
 
 export const textAreaLabelSizeClasses: Record<Size, string> = {
-  xs: "pt-[8px] pl-[14px] pr-12 text-sm leading-sm tracking-sm",
-  sm: "pt-[10px] pl-[16px] pr-12 text-md leading-md tracking-md",
-  md: "pt-[12px] pl-[18px] pr-12 text-md leading-md tracking-md",
+  xs: "top-[16px] left-[14px] right-12 text-sm leading-sm tracking-sm",
+  sm: "top-[19px] left-[16px] right-12 text-md leading-md tracking-md",
+  md: "top-[22px] left-[18px] right-12 text-md leading-md tracking-md",
 } as const;
 
 export const textAreaLabelActiveSizeClasses: Record<Size, string> = {
-  xs: "text-xs leading-xs tracking-xs",
-  sm: "text-sm leading-sm tracking-sm",
-  md: "text-sm leading-sm tracking-sm",
+  xs: "top-5 line-clamp-none text-xs leading-xs tracking-xs truncate",
+  sm: "top-5 line-clamp-none text-sm leading-sm tracking-sm truncate",
+  md: "top-5 line-clamp-none text-sm leading-sm tracking-sm truncate",
+} as const;
+
+export const textAreaLabelBackdropSizeClasses: Record<Size, string> = {
+  xs: "h-[30px]",
+  sm: "h-[32px]",
+  md: "h-[34px]",
 } as const;
 
 export const textAreaNativeTextSizeClasses: Record<Size, string> = {

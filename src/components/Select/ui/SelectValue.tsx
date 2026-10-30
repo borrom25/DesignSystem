@@ -7,9 +7,10 @@ export function SelectValue({
   placeholder,
   children,
   className,
+  isFilled = false,
 }: SelectValueProps) {
   const { label, open, value } = useSelectContext();
-  const hasValue = value !== undefined && value !== "";
+  const hasValue = (value != null && value !== "") || isFilled;
   const hasFloatingLabel = !!label;
   const isLabelActive = hasFloatingLabel && (open || hasValue);
 
@@ -29,6 +30,8 @@ export function SelectValue({
     );
   }
 
+  const showPlaceholder = !hasFloatingLabel || isLabelActive;
+
   return (
     <span
       className={cn(
@@ -39,17 +42,16 @@ export function SelectValue({
         className
       )}
     >
-      <span
-        className={cn(
-          triggerStyles.placeholder,
-          hasFloatingLabel &&
-            (isLabelActive
-              ? triggerStyles.valuePlaceholderVisible
-              : triggerStyles.valuePlaceholderHidden)
-        )}
-      >
-        {placeholder}
-      </span>
+      {showPlaceholder && (
+        <span
+          className={cn(
+            triggerStyles.placeholder,
+            hasFloatingLabel && triggerStyles.valuePlaceholderVisible
+          )}
+        >
+          {placeholder}
+        </span>
+      )}
     </span>
   );
 }

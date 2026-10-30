@@ -28,6 +28,7 @@ export function Pagination({
   siblingCount = 1,
   inputDebounceDelay = 500,
   className,
+  forwardOnly,
   ...restProps
 }: PaginationProps) {
   const { items, canGoPrev, canGoNext, isFirstPage, isLastPage } =
@@ -49,6 +50,7 @@ export function Pagination({
     onPageChange,
     disabled,
     inputDebounceDelay,
+    forwardOnly,
   });
 
   if (totalPages <= 0) return null;
@@ -59,7 +61,7 @@ export function Pagination({
       aria-label="Pagination"
       {...restProps}
     >
-      {showFirstLast && (
+      {!forwardOnly && showFirstLast && (
         <PaginationButton
           type={type}
           size={size}
@@ -70,15 +72,17 @@ export function Pagination({
         />
       )}
 
-      <PaginationButton
-        type={type}
-        size={size}
-        icon={ChevronLeft}
-        disabled={disabled || !canGoPrev}
-        onClick={handlePrev}
-        label="Предыдущая страница"
-        text={prevText}
-      />
+      {!forwardOnly && (
+        <PaginationButton
+          type={type}
+          size={size}
+          icon={ChevronLeft}
+          disabled={disabled || !canGoPrev}
+          onClick={handlePrev}
+          label="Предыдущая страница"
+          text={prevText}
+        />
+      )}
 
       {showPageNumbers && (
         <PaginationPages
@@ -88,20 +92,23 @@ export function Pagination({
           size={size}
           disabled={disabled}
           onPageChange={handlePageChange}
+          forwardOnly={forwardOnly}
         />
       )}
 
-      <PaginationButton
-        type={type}
-        size={size}
-        icon={ChevronRight}
-        disabled={disabled || !canGoNext}
-        onClick={handleNext}
-        label="Следующая страница"
-        text={nextText}
-      />
+      {(!forwardOnly || canGoNext) && (
+        <PaginationButton
+          type={type}
+          size={size}
+          icon={ChevronRight}
+          disabled={disabled || !canGoNext}
+          onClick={handleNext}
+          label="Следующая страница"
+          text={nextText}
+        />
+      )}
 
-      {showFirstLast && (
+      {!forwardOnly && showFirstLast && (
         <PaginationButton
           type={type}
           size={size}

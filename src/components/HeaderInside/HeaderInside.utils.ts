@@ -15,7 +15,7 @@ export function getHeaderInsideLayoutState(
 ): HeaderInsideLayoutState {
   const hasChildren = Boolean(children);
   const hasActionButton = Boolean(showActionButton && actionIcon);
-  const shouldShowSeparator = (hasChildren || hasActionButton) && !isMobile;
+  const shouldShowSeparator = hasChildren && !isMobile;
 
   return {
     hasChildren,

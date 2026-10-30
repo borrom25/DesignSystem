@@ -20,6 +20,6 @@ export function getAlertLayoutState(
   return {
     hasDescription,
     hasActions,
-    isCompact: !hasDescription && !hasActions,
+    isCompact: !hasDescription,
   };
 }

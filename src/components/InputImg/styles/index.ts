@@ -28,10 +28,18 @@ import {
   loadingProgressBarClasses,
 } from "./loading";
 
+export const inputImgFillClasses =
+  "aspect-auto h-full min-h-0 w-full flex-1 self-stretch";
+
 export const inputImgStyles = {
   wrapper: wrapperClasses,
+  wrapperFill: "h-full min-h-0",
+  control: "relative w-fit",
+  controlFill: "flex w-full min-h-0 flex-1 flex-col",
+  requiredMark: "-top-[3px]",
   dropZone: {
     size: dropZoneSizeClasses,
+    fill: inputImgFillClasses,
     base: dropZoneBaseClasses,
     state: dropZoneStateClasses,
     active: dropZoneActiveClasses,
@@ -43,6 +51,7 @@ export const inputImgStyles = {
   },
   preview: {
     size: previewSizeClasses,
+    fill: inputImgFillClasses,
     sizeActions: previewActionsSizeClasses,
     container: previewContainerClasses,
     image: previewImageClasses,

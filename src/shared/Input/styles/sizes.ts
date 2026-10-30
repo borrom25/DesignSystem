@@ -13,17 +13,15 @@ export const inputClearSizeClasses: Record<Size, string> = {
 } as const;
 
 export const inputFloatingLabelSizeClasses: Record<Size, string> = {
-  xs: "left-0 text-sm leading-[14px] tracking-sm",
-  sm: "left-0 text-md leading-[18px] tracking-sm",
+  xs: "left-0 text-sm leading-sm tracking-sm",
+  sm: "left-0 text-md leading-md tracking-md",
   md: "left-0 text-md leading-md tracking-md",
 } as const;
 
-export const inputFloatingLabelActiveScale = "scale-[0.875]";
-
 export const inputFloatingLabelActiveSizeClasses: Record<Size, string> = {
-  xs: inputFloatingLabelActiveScale,
-  sm: inputFloatingLabelActiveScale,
-  md: inputFloatingLabelActiveScale,
+  xs: "text-xs leading-xs tracking-xs",
+  sm: "text-sm leading-sm tracking-sm",
+  md: "text-sm leading-sm tracking-sm",
 } as const;
 
 export const inputIconSizeMap: Record<Size, number> = {

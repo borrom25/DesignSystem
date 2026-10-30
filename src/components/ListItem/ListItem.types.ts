@@ -13,24 +13,29 @@ export type ListItemVariant =
 
 type BaseListItemProps = Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
-  "type"
+  "type" | "prefix"
 > & {
   size?: Size;
   variant?: ListItemVariant;
   selected?: boolean;
   visualSelected?: boolean;
   iconOnly?: boolean;
+  indeterminate?: boolean;
   ref?: Ref<HTMLButtonElement>;
   scaling?: boolean;
+  leading?: ReactNode;
+  prefix?: ReactNode;
+  suffix?: ReactNode;
+  wrapText?: boolean;
 };
 
 type ListItemOnlyProps = {
   title?: string;
   checkbox?: boolean;
+  radio?: boolean;
   avatar?: Omit<AvatarProps, "size" | "style">;
   iconLeft?: LucideIcon;
   iconRight?: LucideIcon;
-  suffix?: ReactNode;
   disabled?: boolean;
   hideSelectedOutline?: boolean;
 };
@@ -51,10 +56,11 @@ type ListItemAsChild = AsChildTrueProps<
   BaseListItemProps,
   | "title"
   | "checkbox"
+  | "radio"
   | "avatar"
+  | "leading"
   | "iconLeft"
   | "iconRight"
-  | "suffix"
   | "disabled"
   | "hideSelectedOutline"
 >;

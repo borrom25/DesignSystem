@@ -1,5 +1,5 @@
 export const popoverClasses =
-  "flex flex-col items-start rounded-(--radius-scale-3xl) border border-line bg-generic p-9 shadow-popover";
+  "flex flex-col items-start rounded-(--radius-scale-3xl) border border-line bg-generic p-6 shadow-popover";
 
 export const wrapperClasses =
   "flex flex-col items-center gap-5 rounded-(--radius-scale-5xl) w-[100%]";
@@ -18,8 +18,9 @@ export const fullNameCLasses =
 export const roleClasses =
   "[color:var(--color-inverse-text-medium)] [font-size:var(--font-size-sm)] [font-weight:var(--sm-medium)] text-center";
 
-export const itemsClasses = "flex flex-col items-stretch gap-0_5 self-stretch";
+export const itemsClasses =
+  "flex flex-col items-stretch gap-0_5 self-stretch pt-6 -mx-6 px-6 border-t border-line";
 
 export const modalClasses = "items-stretch";
 
-export const dangerClasses = "bg-danger-light";
+export const themeSwitcherClasses = "w-full";

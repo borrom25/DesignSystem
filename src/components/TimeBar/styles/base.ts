@@ -3,11 +3,11 @@ export const wrapperClasses =
 export const wrapperFillClasses = "min-h-0 flex-1 overflow-hidden";
 
 export const columnsContainerClasses =
-  "relative flex min-h-0 flex-1 items-stretch justify-center gap-[10px] overflow-hidden before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:z-10 before:h-10 before:bg-gradient-to-b before:from-generic before:to-transparent after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:z-10 after:h-10 after:bg-gradient-to-t after:from-generic after:to-transparent";
+  "relative flex min-h-0 flex-1 items-stretch justify-center gap-[10px] overflow-hidden rounded-[14px] before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:z-10 before:h-10 before:bg-gradient-to-b before:from-generic before:to-transparent after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:z-10 after:h-10 after:bg-gradient-to-t after:from-generic after:to-transparent";
 export const columnsContainerFillClasses = "basis-0";
 
 export const selectionPillClasses =
-  "pointer-events-none absolute inset-x-0 top-1/2 z-0 -translate-y-1/2 rounded-[10px] bg-[var(--line-basic-generic)]";
+  "pointer-events-none absolute inset-x-0 top-1/2 z-0 -translate-y-1/2 bg-[var(--line-basic-generic)]";
 
 export const columnClassesBase =
   "relative z-10 flex min-h-0 flex-col items-center self-stretch overflow-y-auto overflow-x-hidden scroll-instant [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] snap-y snap-mandatory data-[mobile=true]:w-[100%]";
@@ -29,4 +29,4 @@ export const itemDisabledClasses =
   "opacity-50 cursor-not-allowed pointer-events-none";
 
 export const buttonsContainerClasses =
-  "flex items-center justify-between pt-3 border-t border-line";
+  "flex items-center justify-between p-3 border-t border-line";

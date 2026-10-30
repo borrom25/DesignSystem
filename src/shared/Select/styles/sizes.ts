@@ -19,7 +19,7 @@ export const iconSlotSizeClasses: Record<Size, string> = {
 export const labelSizeClasses: Record<Size, string> = {
   xs: "text-xs leading-xs tracking-xs",
   sm: "text-sm leading-sm tracking-sm",
-  md: "text-md leading-md tracking-md",
+  md: "text-sm leading-sm tracking-sm",
 } as const;
 
 export const floatingLabelSizeClasses: Record<Size, string> =

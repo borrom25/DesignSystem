@@ -6,6 +6,7 @@ import { MultiSelectAllProps } from "../MultiSelect.types.ts";
 export function MultiSelectAll({
   label,
   checked,
+  indeterminate,
   onToggle,
 }: MultiSelectAllProps) {
   return (
@@ -14,6 +15,7 @@ export function MultiSelectAll({
         size={Size.Xs}
         checkbox
         selected={checked}
+        indeterminate={indeterminate}
         hideSelectedOutline
         className={multiSelectStyles.selectAll.root}
         onClick={onToggle}

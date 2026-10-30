@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import type { DateRangeBound, DateRangeValue } from "../DateRange.types";
+import type { DateRangeBound, DateRangeNativeValue } from "../DateRange.types";
 import {
   buildCalendarKey,
   getCalendarDisplayMonth,
@@ -8,7 +8,7 @@ import {
 
 export interface UseDateRangeCalendarParams {
   activeBound: DateRangeBound | null;
-  currentValue: DateRangeValue;
+  currentValue: DateRangeNativeValue;
   showTimeBar: boolean;
   open: boolean;
 }

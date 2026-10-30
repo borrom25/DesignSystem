@@ -6,6 +6,10 @@ import type {
 } from "react";
 import type { Size } from "@/types";
 import type { BaseFieldProps } from "@/types/field";
+import type {
+  UploadValidateFile,
+  UploadValidationErrorHandler,
+} from "@/types/upload";
 
 export interface InputFilesValueProps {
   value?: File[] | null;
@@ -18,6 +22,8 @@ export interface InputFilesValidationProps {
   maxFiles?: number;
   maxSize?: number;
   accept?: string;
+  validateFile?: UploadValidateFile;
+  onValidationError?: UploadValidationErrorHandler;
   onSizeError?: (file: File) => void;
   onAcceptError?: (file: File) => void;
 }
@@ -56,25 +62,7 @@ export interface InputFilesProps
   size?: Size;
   error?: boolean;
   className?: string;
-}
-
-export interface DropZoneProps {
-  disabled: boolean;
-  isDragActive: boolean;
-  textSelect: string;
-  textDrag: string;
-  placeholder?: string;
-  multiple: boolean;
-  accept: string;
-  name?: string;
-  required?: boolean;
-  inputRef: RefCallback<HTMLInputElement>;
-  onDragEnter: (e: DragEvent<HTMLDivElement>) => void;
-  onDragLeave: (e: DragEvent<HTMLDivElement>) => void;
-  onDragOver: (e: DragEvent<HTMLDivElement>) => void;
-  onDrop: (e: DragEvent<HTMLDivElement>) => void;
-  onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  className?: string;
+  placeholderFullWidth?: boolean;
 }
 
 export interface FilePreviewProps {

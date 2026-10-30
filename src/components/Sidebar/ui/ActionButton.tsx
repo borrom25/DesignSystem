@@ -11,6 +11,7 @@ export interface ActionButtonProps {
 
 export function ActionButton({ action, collapsed }: ActionButtonProps) {
   const { icon, label, ariaLabel, buttonProps } = action;
+  const Icon = icon;
 
   const baseClassName = cn(sidebarStyles.actionButton, buttonProps?.className);
 
@@ -19,17 +20,14 @@ export function ActionButton({ action, collapsed }: ActionButtonProps) {
       {...buttonProps}
       size={buttonProps?.size ?? Size.Sm}
       type={buttonProps?.type ?? Type.Flat}
-      color={buttonProps?.color ?? Color.Inverse}
+      color={buttonProps?.color ?? Color.Secondary}
       className={cn(
         baseClassName,
-        collapsed
-          ? sidebarStyles.actionButtonCollapsed
-          : sidebarStyles.actionButtonExpanded
+        collapsed && sidebarStyles.actionButtonCollapsed
       )}
-      iconLeft={collapsed ? undefined : icon}
-      iconOnly={collapsed ? icon : undefined}
       aria-label={ariaLabel ?? "Sidebar action"}
     >
+      <Icon size={16} className={sidebarStyles.itemIcon} />
       <span
         className={cn(
           sidebarStyles.actionButtonLabel,
@@ -38,7 +36,7 @@ export function ActionButton({ action, collapsed }: ActionButtonProps) {
             : sidebarStyles.actionButtonLabelVisible
         )}
       >
-        {label}
+        <span className={sidebarStyles.actionButtonLabelInner}>{label}</span>
       </span>
     </Button>
   );

@@ -2,7 +2,9 @@ export { BaseTrigger } from "./components/BaseTrigger";
 export type { BaseTriggerProps } from "./components/BaseTrigger";
 export { BaseContent } from "./components/BaseContent";
 export { BaseItem } from "./components/BaseItem";
+export { getOptionKey } from "./getOptionKey";
 export type {
+  SelectOptionValue,
   BaseSelectOption,
   BaseValueProps,
   BaseContentProps,

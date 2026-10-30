@@ -1,4 +1,6 @@
 import {
+  addMonths,
+  addYears,
   eachDayOfInterval,
   endOfMonth,
   endOfWeek,
@@ -11,16 +13,35 @@ import {
 } from "date-fns";
 import { ru } from "date-fns/locale";
 import type { Locale } from "date-fns";
-import type {
-  CalendarMode,
-  GetRangeFlagsOptions,
-  RangeFlags,
-  WeekStartsOn,
+import {
+  CalendarView,
+  type CalendarMode,
+  type GetRangeFlagsOptions,
+  type RangeFlags,
+  type WeekStartsOn,
 } from "./Calendar.types";
 import { calendarStyles } from "./styles";
 
 const calendarGridDays = 42;
 const weekdayFormat = "EEEEEE";
+
+export const yearsPerPage = 12;
+
+export function shiftMonth(
+  currentMonth: Date,
+  view: CalendarView,
+  direction: -1 | 1
+) {
+  if (view === CalendarView.Months) {
+    return addYears(currentMonth, direction);
+  }
+
+  if (view === CalendarView.Years) {
+    return addYears(currentMonth, direction * yearsPerPage);
+  }
+
+  return addMonths(currentMonth, direction);
+}
 
 const monthStateClassNames = [
   calendarStyles.month.inactive,

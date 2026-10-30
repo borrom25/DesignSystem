@@ -3,6 +3,13 @@ import { AccordionProps } from "./Accordion.types";
 import { cloneElement, useMemo, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { IconButton } from "../IconButton";
+import { Text } from "../Text";
+import {
+  hasAccordionCustomTextColor,
+  resolveAccordionIconHoverStyle,
+  resolveAccordionSubtitleProps,
+  resolveAccordionTitleProps,
+} from "./Accordion.typography";
 import { accordionStyles } from "./styles";
 
 export function Accordion({
@@ -12,10 +19,15 @@ export function Accordion({
   headSlot,
   iconLeft: IconLeft,
   position = "start",
+  chevronPosition = "right",
   subtitle,
+  titleProps,
+  subtitleProps,
   disabled,
+  defaultOpen = false,
+  prefix,
 }: AccordionProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(defaultOpen);
 
   const toggleOpen = () => (disabled ? undefined : setIsOpen(!isOpen));
 
@@ -25,6 +37,18 @@ export function Accordion({
         disabled,
       }),
     [disabled, headSlot]
+  );
+
+  const titleHasCustomColor = hasAccordionCustomTextColor(titleProps);
+  const iconHoverStyle = resolveAccordionIconHoverStyle(titleProps, disabled);
+
+  const chevron = (
+    <IconButton
+      icon={isOpen ? ChevronUp : ChevronDown}
+      type="ghost"
+      color="inverse"
+      disabled={disabled}
+    />
   );
 
   return (
@@ -42,22 +66,45 @@ export function Accordion({
           aria-disabled={disabled}
         >
           <div className={accordionStyles.head}>
+            {chevronPosition === "left" && chevron}
+
+            {prefix && <span className={accordionStyles.prefix}>{prefix}</span>}
+
             {IconLeft && (
-              <IconLeft size={20} className={accordionStyles.icon} />
+              <IconLeft
+                size={20}
+                className={cn(
+                  accordionStyles.icon,
+                  iconHoverStyle
+                    ? accordionStyles.iconCustomHover
+                    : !titleHasCustomColor && accordionStyles.iconHover
+                )}
+                style={iconHoverStyle}
+              />
             )}
-            <div>
-              <h2 className={accordionStyles.title}>{title}</h2>
-              <p className={accordionStyles.subtitle}>{subtitle}</p>
+            <div
+              className={cn(
+                accordionStyles.titleGroup,
+                !subtitle && accordionStyles.titleGroupSingleLine
+              )}
+            >
+              <Text
+                {...resolveAccordionTitleProps(title, disabled, titleProps)}
+              />
+              {subtitle && (
+                <Text
+                  {...resolveAccordionSubtitleProps(
+                    subtitle,
+                    disabled,
+                    subtitleProps
+                  )}
+                />
+              )}
             </div>
           </div>
           <div className={accordionStyles.actions}>
             <div onClick={(e) => e.stopPropagation()}>{modifiedSlot}</div>
-            <IconButton
-              icon={isOpen ? ChevronUp : ChevronDown}
-              type="ghost"
-              color="inverse"
-              disabled={disabled}
-            />
+            {chevronPosition === "right" && chevron}
           </div>
         </div>
         <div

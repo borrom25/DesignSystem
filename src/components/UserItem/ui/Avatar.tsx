@@ -10,6 +10,7 @@ export function Avatar({
   size: customSize,
   withBorder = false,
   showEditBadge = false,
+  onEditBadgeClick,
   children,
   className,
   ...restProps
@@ -43,6 +44,7 @@ export function Avatar({
         size={avatarSize}
         withBorder={withBorder}
         showEditBadge={showEditBadge}
+        onEditBadgeClick={onEditBadgeClick}
       />
     </div>
   );

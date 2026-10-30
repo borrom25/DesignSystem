@@ -1,13 +1,21 @@
-import { Avatar, ListItem, Segmented } from "@/components";
-import { useScreenSize, useTheme } from "@/providers";
+import {
+  Avatar,
+  Button,
+  ListItem,
+  Segmented,
+  ThemeSwitcher,
+} from "@/components";
+import { useScreenSize } from "@/providers";
 import { accountMenuClasses } from "../styles";
 import { AccountMenuContentProps } from "../AccountMenu.types.ts";
-import { ChevronRight, LogOut, Moon, SunMedium } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { cn } from "@/utils";
+import { Color, Type } from "@/types/variants.ts";
 
 export function AccountMenuContent<T extends string = string>({
   actionSlot,
   switchersSlot,
+  avatarProps,
   language,
   languages = [],
   onChangeLanguage,
@@ -19,14 +27,13 @@ export function AccountMenuContent<T extends string = string>({
   logoutFn,
 }: AccountMenuContentProps<T>) {
   const { isMobile } = useScreenSize();
-  const { setTheme, theme } = useTheme();
   const isShowLanguageSlot =
     language && onChangeLanguage && !!languages?.length;
 
   return (
     <div className={cn(accountMenuClasses.wrapper, !isMobile && "w-[249px]")}>
       <div className={accountMenuClasses.header}>
-        <Avatar size={80} src={src} />
+        <Avatar {...avatarProps} size={80} src={src} />
         <div className={accountMenuClasses.text}>
           <div className={accountMenuClasses.fullName}>{fullName}</div>
           {role && <div className={accountMenuClasses.role}>{role}</div>}
@@ -37,7 +44,7 @@ export function AccountMenuContent<T extends string = string>({
         <div className={accountMenuClasses.switchers}>
           {switchersSlot ?? (
             <>
-              {language && onChangeLanguage && !!languages.length && (
+              {isShowLanguageSlot && (
                 <Segmented
                   shape="round"
                   value={language}
@@ -45,15 +52,11 @@ export function AccountMenuContent<T extends string = string>({
                   onChange={onChangeLanguage}
                 />
               )}
-              {!!showTheme && (
-                <Segmented
-                  shape="round"
-                  options={[
-                    { label: <SunMedium size={16} />, value: "light" },
-                    { label: <Moon size={16} />, value: "dark" },
-                  ]}
-                  value={theme}
-                  onChange={setTheme}
+              {showTheme && (
+                <ThemeSwitcher
+                  className={cn(
+                    !isShowLanguageSlot && accountMenuClasses.themeSwitcher
+                  )}
                 />
               )}
             </>
@@ -81,15 +84,9 @@ export function AccountMenuContent<T extends string = string>({
 
       {!!logoutFn && (
         <div className={accountMenuClasses.items}>
-          <ListItem
-            iconLeft={LogOut}
-            onClick={logoutFn}
-            variant="danger"
-            className={accountMenuClasses.danger}
-            iconRight={ChevronRight}
-          >
+          <Button color={Color.Secondary} type={Type.Flat} onClick={logoutFn}>
             Выйти
-          </ListItem>
+          </Button>
         </div>
       )}
     </div>

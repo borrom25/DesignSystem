@@ -3,79 +3,79 @@ import { Size } from "@/types";
 import { cn } from "@/utils/cn";
 import { Popover } from "@/components/Popover";
 import { FieldHint } from "@/components/Field";
+import { getOptionKey, type SelectOptionValue } from "@/shared/Select";
 import { SelectContext } from "./Select.context";
 import { useSelectState } from "./hooks/useSelectState";
 import { SelectContent, SelectItem, SelectValue, SelectTrigger } from "./ui";
 import { wrapperClasses } from "./styles";
 import type { SelectProps } from "./types";
 
-export function Select<T extends string | number = string>({
-  value,
-  defaultValue,
-  onValueChange,
-  open,
-  defaultOpen,
-  onOpenChange,
-  options = [],
-  disabled = false,
-  name,
-  required,
-  error = false,
-  label,
-  hint,
-  hintError,
-  size = Size.Md,
-  className,
-  triggerClassName,
-  contentClassName,
-  itemClassName,
-  children,
-  placeholder = "Select...",
-  renderValue,
-  renderItem,
-  matchTriggerWidth = true,
-  maxHeight = 300,
-  onScrollEnd,
-  scrollEndOffset = 40,
-  side = "bottom",
-  sideOffset = 4,
-  align = "start",
-  onClear,
-}: SelectProps<T>) {
-  const state = useSelectState({
-    value,
-    defaultValue,
-    onValueChange,
-    onClear,
-    open,
-    defaultOpen,
-    onOpenChange,
-  });
+export function Select<T extends SelectOptionValue = string>(
+  props: SelectProps<T>
+) {
+  const state = useSelectState(props);
+  const {
+    options = [],
+    disabled = false,
+    name,
+    required,
+    error = false,
+    label,
+    hint,
+    hintError,
+    size = Size.Md,
+    className,
+    triggerClassName,
+    contentClassName,
+    itemClassName,
+    children,
+    placeholder = "Select...",
+    renderValue,
+    renderItem,
+    matchTriggerWidth = true,
+    maxHeight = 300,
+    onScrollEnd,
+    scrollEndOffset = 40,
+    side = "bottom",
+    sideOffset = 4,
+    align = "start",
+    clearable = true,
+  } = props;
 
   const contextValue = useMemo(
     () => ({
       value: state.value,
       open: state.open,
       setOpen: state.setOpen,
-      onSelect: (nextValue: string | number) => state.onSelect(nextValue as T),
+      onSelect: (nextValue: SelectOptionValue) =>
+        state.onSelect(nextValue as T),
       disabled,
+      clearable,
       size,
       label,
       required,
       onClear: state.handleClear,
     }),
-    [disabled, label, required, size, state]
+    [clearable, disabled, label, required, size, state]
   );
 
   const selectedOption = useMemo(
     () => options.find((item) => item.value === state.value),
     [options, state.value]
   );
+  const hasScalarValue = state.value != null && state.value !== "";
+  const isFilled =
+    hasScalarValue || (state.value === null && selectedOption != null);
 
   const resolvedChildren = children ?? (
     <>
-      <SelectTrigger size={size} error={error} className={triggerClassName}>
-        <SelectValue placeholder={placeholder}>
+      <SelectTrigger
+        size={size}
+        error={error}
+        className={triggerClassName}
+        isFilled={isFilled}
+      >
+        <SelectValue placeholder={placeholder} isFilled={isFilled}>
           {renderValue?.(selectedOption) ?? selectedOption?.label}
         </SelectValue>
       </SelectTrigger>
@@ -95,7 +95,7 @@ export function Select<T extends string | number = string>({
 
           return (
             <SelectItem
-              key={item.value}
+              key={getOptionKey(item.value)}
               value={item.value}
               icon={item.icon}
               disabled={item.disabled}

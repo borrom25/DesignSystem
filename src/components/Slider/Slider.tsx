@@ -3,6 +3,8 @@ import type { SliderProps } from "./Slider.types";
 import { sliderStyles } from "./styles";
 import { useSliderValue } from "./hooks";
 import { ThumbCircleIcon, ValuePopoverArrowIcon } from "./ui";
+import { FieldHint, FieldLabel } from "@/components";
+import { Size } from "@/types";
 
 export function Slider({
   value,
@@ -15,6 +17,8 @@ export function Slider({
   disabled = false,
   className,
   "aria-label": ariaLabel,
+  label,
+  hint,
   ...restProps
 }: SliderProps) {
   const { percentage, handleChange } = useSliderValue({
@@ -36,6 +40,11 @@ export function Slider({
       )}
       {...restProps}
     >
+      {label && (
+        <FieldLabel size={Size.Md} disabled={disabled} indent={false}>
+          {label}
+        </FieldLabel>
+      )}
       <div className={sliderStyles.container}>
         <div className={sliderStyles.track}>
           <div
@@ -84,6 +93,8 @@ export function Slider({
           aria-valuenow={value}
         />
       </div>
+
+      {hint && <FieldHint size={Size.Sm}>{hint}</FieldHint>}
     </div>
   );
 }

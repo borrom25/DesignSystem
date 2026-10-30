@@ -26,15 +26,6 @@ export {
   imageContainerClasses,
   imageButtonAllClasses,
 } from "./image";
-export {
-  fileRootClasses,
-  fileIconWrapperClasses,
-  fileIconClasses,
-  fileBodyClasses,
-  fileTitleClasses,
-  fileSizeClasses,
-  fileActionClasses,
-} from "./file";
 
 import {
   containerBaseClasses,
@@ -64,16 +55,6 @@ import {
   imageContainerClasses,
   imageButtonAllClasses,
 } from "./image";
-import {
-  fileRootClasses,
-  fileIconWrapperClasses,
-  fileIconClasses,
-  fileBodyClasses,
-  fileTitleClasses,
-  fileSizeClasses,
-  fileActionClasses,
-  fileClasses,
-} from "./file";
 
 export const bubbleStyles = {
   container: containerBaseClasses,
@@ -103,15 +84,5 @@ export const bubbleStyles = {
     grid: imageGridClasses,
     container: imageContainerClasses,
     buttonAll: imageButtonAllClasses,
-  },
-  file: {
-    root: fileRootClasses,
-    file: fileClasses,
-    iconWrapper: fileIconWrapperClasses,
-    icon: fileIconClasses,
-    body: fileBodyClasses,
-    title: fileTitleClasses,
-    size: fileSizeClasses,
-    action: fileActionClasses,
   },
 } as const;

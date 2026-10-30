@@ -1,14 +1,14 @@
-import { BaseItem } from "@/shared/Select";
+import { BaseItem, type SelectOptionValue } from "@/shared/Select";
 import type { MultiTagOption } from "../types";
 
-type MultiTagItemProps<T extends string | number = string> = {
+type MultiTagItemProps<T extends SelectOptionValue = string> = {
   option: MultiTagOption<T>;
   selected: boolean;
   onToggle: (value: T) => void;
   className?: string;
 };
 
-export function MultiTagItem<T extends string | number = string>({
+export function MultiTagItem<T extends SelectOptionValue = string>({
   option,
   selected,
   onToggle,

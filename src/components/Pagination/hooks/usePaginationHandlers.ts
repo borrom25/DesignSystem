@@ -8,6 +8,7 @@ export interface UsePaginationHandlersProps {
   onPageChange: (page: number) => void;
   disabled: boolean;
   inputDebounceDelay: number;
+  forwardOnly?: boolean;
 }
 
 export function usePaginationHandlers({
@@ -16,6 +17,7 @@ export function usePaginationHandlers({
   onPageChange,
   disabled,
   inputDebounceDelay,
+  forwardOnly,
 }: UsePaginationHandlersProps) {
   const {
     value: inputValue,
@@ -27,12 +29,14 @@ export function usePaginationHandlers({
   const handlePageChange = useCallback(
     (page: number) => {
       if (disabled) return;
+      if (forwardOnly && page !== currentPage + 1) return;
+
       const clampedPage = clampPage(page, totalPages);
       if (clampedPage !== currentPage) {
         onPageChange(clampedPage);
       }
     },
-    [disabled, totalPages, currentPage, onPageChange]
+    [disabled, totalPages, currentPage, onPageChange, forwardOnly]
   );
 
   useEffect(() => {

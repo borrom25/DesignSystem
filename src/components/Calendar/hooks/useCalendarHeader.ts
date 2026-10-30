@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { format, getYear } from "date-fns";
 import type { Locale } from "date-fns";
+import { yearsPerPage } from "../Calendar.utils";
 import { CalendarView } from "../Calendar.types";
 import type {
   CalendarHeaderProps,
@@ -13,8 +14,6 @@ const nextViewMap: Record<CalendarViewType, CalendarViewType> = {
   [CalendarView.Months]: CalendarView.Years,
   [CalendarView.Years]: CalendarView.Days,
 };
-
-const yearsPerPage = 12;
 
 const defaultLocaleText: Required<CalendarLocale> = {
   yearLabel: "Год",
@@ -52,14 +51,18 @@ export function useCalendarHeader({
   currentMonth,
   view,
   onViewChange,
-  onPrevMonth,
-  onNextMonth,
   locale,
   pickerType,
   localeText,
-}: CalendarHeaderProps) {
-  const isDaysView = view === CalendarView.Days;
-
+}: Pick<
+  CalendarHeaderProps,
+  | "currentMonth"
+  | "view"
+  | "onViewChange"
+  | "locale"
+  | "pickerType"
+  | "localeText"
+>) {
   const title = useMemo(() => {
     const titleGenerators: Record<CalendarViewType, () => string> = {
       [CalendarView.Years]: () => getYearsRangeTitle(currentMonth),
@@ -75,23 +78,8 @@ export function useCalendarHeader({
     onViewChange(getNextView(view));
   }, [onViewChange, view]);
 
-  const handlePrev = useCallback(() => {
-    if (isDaysView) {
-      onPrevMonth();
-    }
-  }, [isDaysView, onPrevMonth]);
-
-  const handleNext = useCallback(() => {
-    if (isDaysView) {
-      onNextMonth();
-    }
-  }, [isDaysView, onNextMonth]);
-
   return {
-    isDaysView,
     title,
     handleTitleClick,
-    handlePrev,
-    handleNext,
   };
 }

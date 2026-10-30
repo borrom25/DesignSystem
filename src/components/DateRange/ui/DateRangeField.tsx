@@ -2,7 +2,11 @@ import { cn } from "@/utils";
 import { Size } from "@/types";
 import { Calendar } from "lucide-react";
 import { CloseBtn } from "@/components/CloseBtn/CloseBtn";
-import { InputAdornment, InputSeparator } from "@/shared/Input";
+import {
+  FloatingLabelRequiredMark,
+  InputAdornment,
+  InputSeparator,
+} from "@/shared/Input";
 import { dateInputPlaceholder, dataRangeFieldAria } from "../constants";
 import { useDateRangeFieldChrome } from "../hooks/useDateRangeFieldChrome";
 import { dateRangeStyles } from "../styles";
@@ -18,6 +22,7 @@ export function DateRangeField({
   activeBound = null,
   size = Size.Md,
   disabled = false,
+  required = false,
   clearable = false,
   hasValue = false,
   startError = false,
@@ -57,7 +62,10 @@ export function DateRangeField({
       className={cn(wrapperClassName, dateRangeStyles.field, className)}
       onClick={isInteractive ? onClick : undefined}
       aria-disabled={disabled}
+      aria-required={required || undefined}
     >
+      {required && !disabled && <FloatingLabelRequiredMark />}
+
       <div className={dateRangeStyles.content}>
         <div className={dateRangeStyles.sections}>
           <DateRangeFieldSection
@@ -117,7 +125,7 @@ export function DateRangeField({
               )}
             >
               <CloseBtn
-                size={size}
+                size={Size.Md}
                 aria-label={dataRangeFieldAria.clear}
                 onClick={(event) => {
                   event.stopPropagation();

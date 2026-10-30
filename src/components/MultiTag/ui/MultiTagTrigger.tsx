@@ -20,7 +20,7 @@ export function MultiTagTrigger({
   onClear,
   label,
   required = false,
-  maxVisibleRows = 2,
+  maxVisibleRows,
   ...props
 }: MultiTagTriggerProps) {
   const hasLabel = !!label;
@@ -67,7 +67,7 @@ export function MultiTagTrigger({
       )}
       {...props}
     >
-      {hasLabel && required && <FloatingLabelRequiredMark />}
+      {required && !disabled && <FloatingLabelRequiredMark />}
 
       {hasLabel && (
         <FloatingLabel

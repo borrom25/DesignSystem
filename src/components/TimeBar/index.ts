@@ -5,4 +5,9 @@ export type {
   TimeColumnProps,
   ControlButtonsProps,
 } from "./TimeBar.types";
-export { formatTimeValue, formatTimeDisplay, isValidTimeValue } from "./utils";
+export {
+  formatTimeValue,
+  formatTimeDisplay,
+  isValidTimeValue,
+  clampTimeValue,
+} from "./utils";

@@ -1,5 +1,5 @@
 export const rootClasses =
-  "pointer-events-auto fixed right-6 bottom-6 z-50 flex w-[360px] max-w-[calc(100vw-32px)] flex-col items-start justify-center gap-2 rounded-[10px] border border-line border-l-4 bg-generic p-5 shadow-popover";
+  "pointer-events-auto fixed right-6 bottom-6 z-50 flex w-[360px] max-w-[calc(100vw-var(--spacing-13))] flex-col items-start justify-center gap-2 rounded-scale-lg border border-line border-l-4 bg-generic p-5 shadow-popover";
 
 export const rootClosableClasses = "pr-12";
 
@@ -13,24 +13,27 @@ export const iconWrapperClasses =
 
 export const bodyClasses = "flex min-w-0 flex-1 flex-col gap-2";
 
+export const bodyClosableClasses =
+  "pr-[calc(var(--spacing-9)+var(--spacing-3))]";
+
 export const contentCompactClasses = "items-center";
 
 export const bodyCompactClasses = "justify-center";
 
-export const titleClasses =
-  "break-words text-primary font-roboto-flex text-base not-italic font-medium leading-body-b1 tracking-body-b1";
+export const titleClasses = "m-0 block min-w-0 break-words";
 
 export const titleCompactClasses = "text-left";
 
-export const descriptionClasses =
-  "font-roboto-flex break-words text-sm leading-sm tracking-sm font-regular text-secondary";
+export const descriptionClasses = "m-0 block min-w-0 break-words";
 
-export const actionsClasses = "mt-1 flex w-full items-center justify-end gap-2";
+export const actionsClasses =
+  "flex w-full self-stretch items-center justify-end gap-2";
 
-export const closeButtonClasses = "absolute top-3 right-3";
+export const closeButtonClasses =
+  "absolute top-5 right-5 z-10 shrink-0 p-0 size-auto min-h-0 min-w-0 active:scale-100 hover:opacity-100 [&_.close-circle]:fill-generic-heavy [&_.close-cross]:fill-inverse-additional-heavy hover:[&_.close-circle]:fill-hint";
 
 export const programmaticStackClasses =
-  "pointer-events-none fixed right-6 bottom-6 z-[100] flex max-h-[calc(100vh-24px)] w-[360px] max-w-[calc(100vw-32px)] flex-col gap-3 overflow-y-auto";
+  "pointer-events-none fixed right-6 bottom-6 z-[100] flex max-h-[calc(100vh-var(--spacing-11))] w-[360px] max-w-[calc(100vw-var(--spacing-13))] flex-col gap-3 overflow-y-auto";
 
 export const programmaticOpenClasses = "opacity-100 translate-y-0";
 

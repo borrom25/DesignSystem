@@ -7,6 +7,12 @@ import {
   type UseDataTableFiltersReturn,
 } from "./useDataTableFilters";
 
+const DEFAULT_SCOPE_KEY = "__default__";
+
+function getActiveScopeKey(scopeKey?: string): string {
+  return scopeKey || DEFAULT_SCOPE_KEY;
+}
+
 export interface UseDataTableControllerOptions<
   TSchema extends FilterSchema = FilterSchema,
 > extends UseDataTableFiltersOptions<TSchema> {
@@ -33,32 +39,43 @@ export function useDataTableController<TSchema extends FilterSchema>(
     columns,
     defaultValues,
     onChange,
+    scopeKey,
     searchValue: controlledSearchValue,
     defaultSearchValue = "",
     onSearchChange,
     toolbarProps: toolbarOverrides,
   } = options;
+  const activeScopeKey = getActiveScopeKey(scopeKey);
 
   const filters = useDataTableFilters({
     columns,
     defaultValues,
     onChange,
+    scopeKey,
   });
 
-  const [internalSearchValue, setInternalSearchValue] =
-    useState(defaultSearchValue);
+  const [internalSearchValuesByScope, setInternalSearchValuesByScope] =
+    useState<Record<string, string>>(() => ({
+      [activeScopeKey]: defaultSearchValue,
+    }));
 
-  const searchValue = controlledSearchValue ?? internalSearchValue;
+  const searchValue =
+    controlledSearchValue ??
+    internalSearchValuesByScope[activeScopeKey] ??
+    defaultSearchValue;
 
   const setSearchValue = useCallback(
     (value: string) => {
       if (controlledSearchValue === undefined) {
-        setInternalSearchValue(value);
+        setInternalSearchValuesByScope((prev) => ({
+          ...prev,
+          [activeScopeKey]: value,
+        }));
       }
 
       onSearchChange?.(value);
     },
-    [controlledSearchValue, onSearchChange]
+    [activeScopeKey, controlledSearchValue, onSearchChange]
   );
 
   const clearAll = useCallback(() => {

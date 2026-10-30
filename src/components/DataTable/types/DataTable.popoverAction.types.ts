@@ -15,5 +15,6 @@ export interface DataTablePopoverActionProps<TData> {
     | ((context: DataTablePopoverActionContext<TData>) => ReactNode);
   selectedLabel?: ReactNode | ((count: number) => ReactNode);
   onClose?: (context: DataTablePopoverActionContext<TData>) => void;
+  closeAriaLabel?: string;
   className?: string;
 }

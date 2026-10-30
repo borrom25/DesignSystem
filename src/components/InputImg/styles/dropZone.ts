@@ -12,7 +12,7 @@ export const dropZoneSizeClasses: Record<Size, string> = {
 };
 
 export const dropZoneBaseClasses =
-  "flex flex-col items-center justify-center px-6 py-0 aspect-square rounded-scale-xl border border-dashed cursor-pointer transition-[border-color,background-color] duration-150 gap-2";
+  "relative flex flex-col items-center justify-center px-6 py-0 aspect-square rounded-scale-xl border border-dashed cursor-pointer transition-[border-color,background-color] duration-150 gap-2";
 
 export const dropZoneStateClasses = sharedStateClasses;
 

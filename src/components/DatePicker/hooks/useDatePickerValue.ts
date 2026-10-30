@@ -1,6 +1,21 @@
-import { ChangeEvent, useCallback, useMemo, useState } from "react";
-import { format, isValid, parse } from "date-fns";
+import {
+  ChangeEvent,
+  KeyboardEvent,
+  useCallback,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { format, isAfter, isBefore, isValid, parse } from "date-fns";
 import type { UseDatePickerValueProps } from "../DatePicker.types";
+import { editDateText, formatDateText } from "../utils/dateInputMask";
+
+function clampDate(date: Date, minDate?: Date, maxDate?: Date) {
+  if (minDate && isBefore(date, minDate)) return minDate;
+  if (maxDate && isAfter(date, maxDate)) return maxDate;
+  return date;
+}
 
 export function useDatePickerValue({
   value,
@@ -8,9 +23,23 @@ export function useDatePickerValue({
   onChangeDate,
   onClear,
   format: formatPattern,
+  minDate: minDateProp,
+  maxDate: maxDateProp,
 }: UseDatePickerValueProps) {
   const [valueState, setValueState] = useState<string | undefined>("");
   const [date, setDate] = useState<Date | undefined>();
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const caretRef = useRef<number | null>(null);
+
+  const [minDate, maxDate] = useMemo(
+    () =>
+      [minDateProp, maxDateProp].map((limit) =>
+        typeof limit === "string"
+          ? parse(limit, formatPattern, new Date())
+          : limit
+      ),
+    [minDateProp, maxDateProp, formatPattern]
+  );
 
   const isControlled = value !== undefined;
   const currentValue = isControlled ? value : valueState;
@@ -23,51 +52,7 @@ export function useDatePickerValue({
   );
 
   const formatValue = useCallback(
-    (newValue?: string) => {
-      if (!newValue) return "";
-
-      const separator = formatPattern.match(/[^a-zA-Z]/)?.[0] || ".";
-      const parts = formatPattern.split(separator);
-      const numbers = newValue.replace(/\D/g, "");
-
-      const rawValues: string[] = [];
-      let position = 0;
-
-      for (const part of parts) {
-        const length = part.length;
-        rawValues.push(numbers.slice(position, position + length));
-        position += length;
-      }
-
-      const validated = parts.map((part, index) => {
-        const rawPart = rawValues[index];
-        if (!rawPart) return rawPart;
-
-        const key = part.toLowerCase();
-
-        switch (key) {
-          case "dd": {
-            const day = parseInt(rawPart, 10);
-            if (day > 31) return "31";
-            if (day < 1 && rawPart.length === 2) return "01";
-            return rawPart;
-          }
-          case "mm": {
-            const month = parseInt(rawPart, 10);
-            if (month > 12) return "12";
-            if (month < 1 && rawPart.length === 2) return "01";
-            return rawPart;
-          }
-          default:
-            return rawPart;
-        }
-      });
-
-      while (validated.length && !validated[validated.length - 1])
-        validated.pop();
-
-      return validated.join(separator);
-    },
+    (newValue?: string) => formatDateText(newValue, formatPattern),
     [formatPattern]
   );
 
@@ -76,33 +61,119 @@ export function useDatePickerValue({
     [currentValue, formatValue]
   );
 
-  const handleInputChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const formattedNewValue = event.target.value.replace(/[a-zA-Z]/g, "");
-      const inputLength = formattedNewValue.replace(/\D/g, "").trim().length;
+  const restoreCaret = useCallback(() => {
+    const caret = caretRef.current;
+    const input = inputRef.current;
+    if (caret == null || !input) return;
+
+    input.setSelectionRange(caret, caret);
+    caretRef.current = null;
+  }, []);
+
+  useLayoutEffect(() => {
+    restoreCaret();
+  }, [formattedValue, restoreCaret]);
+
+  const commit = useCallback(
+    (nextText: string, caret?: number) => {
+      const nextValue = formatValue(nextText);
       const formatLength = formatPattern.replace(/[^a-zA-Z]/g, "").length;
+      const inputLength = nextValue.replace(/\D/g, "").length;
+
+      if (caret != null) caretRef.current = caret;
 
       if (inputLength === formatLength) {
-        const parsedDate = parse(formattedNewValue, formatPattern, new Date());
-        setDate(parsedDate);
-        onChangeDate?.(parsedDate);
-        changeValue(formatValue(formattedNewValue));
-      } else if (inputLength < formatLength)
-        changeValue(formatValue(formattedNewValue));
+        const parsedDate = parse(nextValue, formatPattern, new Date());
+        const nextDate = isValid(parsedDate)
+          ? clampDate(parsedDate, minDate, maxDate)
+          : undefined;
+
+        setDate(nextDate);
+        onChangeDate?.(nextDate);
+
+        const committed =
+          nextDate && nextDate !== parsedDate
+            ? formatDate(nextDate)
+            : nextValue;
+
+        if (committed === formattedValue) {
+          restoreCaret();
+        }
+
+        changeValue(committed);
+        return;
+      }
+
+      setDate(undefined);
+      onChangeDate?.(undefined);
+
+      if (nextValue === formattedValue) {
+        restoreCaret();
+      }
+
+      changeValue(nextValue || undefined);
     },
-    [changeValue, formatPattern, formatValue, onChangeDate]
+    [
+      changeValue,
+      formatDate,
+      formatPattern,
+      formatValue,
+      formattedValue,
+      maxDate,
+      minDate,
+      onChangeDate,
+      restoreCaret,
+    ]
+  );
+
+  const handleInputChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const nextValue = formatValue(event.target.value);
+      caretRef.current = nextValue.length;
+      commit(nextValue, nextValue.length);
+    },
+    [commit, formatValue]
+  );
+
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLInputElement>) => {
+      const { key } = event;
+      const isDigit = /^\d$/.test(key);
+      const isEditKey = key === "Backspace" || key === "Delete" || isDigit;
+
+      if (!isEditKey || event.ctrlKey || event.metaKey || event.altKey) return;
+
+      event.preventDefault();
+
+      const input = event.currentTarget;
+      const selectionStart = input.selectionStart ?? 0;
+      const selectionEnd = input.selectionEnd ?? selectionStart;
+      const result = editDateText({
+        value: formattedValue,
+        selectionStart,
+        selectionEnd,
+        key,
+        format: formatPattern,
+      });
+
+      commit(result.value, result.caret);
+    },
+    [commit, formatPattern, formattedValue]
   );
 
   const handleCalendarChange = useCallback(
     (newDate?: Date) => {
+      const nextValue = formatDate(newDate);
+      caretRef.current = nextValue.length;
       setDate(newDate);
       onChangeDate?.(newDate);
-      changeValue(formatDate(newDate));
+      changeValue(nextValue);
     },
     [changeValue, formatDate, onChangeDate]
   );
 
   const handleClear = useCallback(() => {
+    caretRef.current = 0;
     changeValue(undefined);
     setDate(undefined);
     onChangeDate?.(undefined);
@@ -113,8 +184,12 @@ export function useDatePickerValue({
     date,
     formattedValue,
     handleInputChange,
+    handleKeyDown,
     handleCalendarChange,
     handleClear,
     hasValue: !!currentValue?.trim(),
+    inputRef,
+    minDate,
+    maxDate,
   };
 }

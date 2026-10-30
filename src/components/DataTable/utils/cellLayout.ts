@@ -1,12 +1,17 @@
+import type { CSSProperties } from "react";
 import type { Cell } from "@tanstack/react-table";
 import type { ColumnDef, StickyPosition } from "../types";
-import { getStickyPosition, isServiceColumn } from "./columnLayout";
+import {
+  getDataTableColumnWidthStyle,
+  getStickyPosition,
+  isServiceColumn,
+} from "./columnLayout";
 
 export interface DataTableCellLayout {
   isServiceCell: boolean;
   stickyPosition?: StickyPosition;
   isBeforeStickyRight: boolean;
-  widthStyle?: { width: number };
+  widthStyle?: Pick<CSSProperties, "width" | "minWidth" | "maxWidth">;
 }
 
 export function getDataTableCellLayout<TData>(
@@ -22,6 +27,9 @@ export function getDataTableCellLayout<TData>(
     isServiceCell,
     stickyPosition,
     isBeforeStickyRight: beforeStickyRightColumnIds.has(cell.column.id),
-    widthStyle: isServiceCell ? undefined : { width: cell.column.getSize() },
+    widthStyle: getDataTableColumnWidthStyle(
+      cell.column.id,
+      cell.column.getSize()
+    ),
   };
 }

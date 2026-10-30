@@ -1,9 +1,9 @@
 import type { Size } from "@/types";
 
 export const multiTagTriggerSizeClasses: Record<Size, string> = {
-  xs: "min-h-(--size-input-xs-height) [--input-height:var(--size-input-xs-height)] [--input-gap-container-content:var(--size-input-xs-gap-container-content)] px-(--size-input-xs-padding-x) gap-(--size-input-xs-gap-body) rounded-xs text-xs font-medium leading-xs tracking-xs h-auto",
-  sm: "min-h-(--size-input-sm-height) [--input-height:var(--size-input-sm-height)] [--input-gap-container-content:var(--size-input-sm-gap-container-content)] px-(--size-input-sm-padding-x) gap-(--size-input-sm-gap-body) rounded-sm text-sm font-medium leading-sm tracking-sm h-auto",
-  md: "min-h-(--size-input-md-height) [--input-height:var(--size-input-md-height)] [--input-gap-container-content:var(--size-input-md-gap-container-content)] px-(--size-input-md-padding-x) gap-(--size-input-md-gap-body) rounded-md text-md font-medium leading-md tracking-md h-auto",
+  xs: "min-h-(--size-input-xs-height) [--input-height:var(--size-input-xs-height)] [--input-gap-container-content:var(--size-input-xs-gap-container-content)] px-(--size-input-xs-padding-x) gap-(--size-input-xs-gap-body) rounded-sm text-xs font-medium leading-xs tracking-xs h-auto",
+  sm: "min-h-(--size-input-sm-height) [--input-height:var(--size-input-sm-height)] [--input-gap-container-content:var(--size-input-sm-gap-container-content)] px-(--size-input-sm-padding-x) gap-(--size-input-sm-gap-body) rounded-md text-sm font-medium leading-sm tracking-sm h-auto",
+  md: "min-h-(--size-input-md-height) [--input-height:var(--size-input-md-height)] [--input-gap-container-content:var(--size-input-md-gap-container-content)] px-(--size-input-md-padding-x) gap-(--size-input-md-gap-body) rounded-lg text-md font-medium leading-md tracking-md h-auto",
 } as const;
 
 export const multiTagFieldInlinePaddingClasses: Record<Size, string> = {
@@ -48,4 +48,4 @@ export const tagRowHeightMap: Record<Size, number> = {
   md: 36,
 } as const;
 
-export const tagGap = 4;
+export const tagGap = 6;

@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { CalendarSingleProps } from "@components/Calendar/Calendar.types.ts";
+import type { CalendarBaseProps } from "@components/Calendar/Calendar.types.ts";
 
 export interface CalendarFilterPanelProps {
   value?: Date;
@@ -10,10 +10,7 @@ export interface CalendarFilterPanelProps {
   calendarClassName?: string;
   resetLabel?: ReactNode;
   applyLabel?: ReactNode;
-  calendarProps?: Omit<
-    CalendarSingleProps,
-    "mode" | "value" | "defaultValue" | "onChange" | "className"
-  >;
+  calendarProps?: Omit<CalendarBaseProps, "className">;
 }
 
 export interface UseCalendarFilterStateOptions {

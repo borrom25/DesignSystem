@@ -5,52 +5,54 @@ import type {
   BaseSelectOption,
   BaseContentProps,
   BaseScrollProps,
+  SelectOptionValue,
 } from "@/shared/Select";
 
-export type MultiTagOption<T extends string | number = string> = {
+export type MultiTagOption<T extends SelectOptionValue = string> = {
   value: T;
   label: ReactNode;
   disabled?: boolean;
   icon?: BaseSelectOption["icon"];
 };
 
-type BaseMultiTagProps<T extends string | number = string> = BaseFieldProps & {
-  value?: T[];
-  defaultValue?: T[];
-  options?: MultiTagOption<T>[];
-  size?: Size;
-  placeholder?: string;
-  disabled?: boolean;
-  className?: string;
-  triggerClassName?: string;
-  contentClassName?: string;
-  maxHeight?: number | "available";
-  matchTriggerWidth?: boolean;
-  onScrollEnd?: () => void;
-  scrollEndOffset?: number;
-  isLoading?: boolean;
-  hasMore?: boolean;
-  children?: ReactNode;
-  selectAll?: boolean;
-  selectAllLabel?: string;
-  clearable?: boolean;
-  onClear?: () => void;
-  maxVisibleRows?: number;
-};
+type BaseMultiTagProps<T extends SelectOptionValue = string> =
+  BaseFieldProps & {
+    value?: T[];
+    defaultValue?: T[];
+    options?: MultiTagOption<T>[];
+    size?: Size;
+    placeholder?: string;
+    disabled?: boolean;
+    className?: string;
+    triggerClassName?: string;
+    contentClassName?: string;
+    maxHeight?: number | "available";
+    matchTriggerWidth?: boolean;
+    onScrollEnd?: () => void;
+    scrollEndOffset?: number;
+    isLoading?: boolean;
+    hasMore?: boolean;
+    children?: ReactNode;
+    selectAll?: boolean;
+    selectAllLabel?: string;
+    clearable?: boolean;
+    onClear?: () => void;
+    maxVisibleRows?: number;
+  };
 
-type MultiTagWithReturnAll<T extends string | number = string> =
+type MultiTagWithReturnAll<T extends SelectOptionValue = string> =
   BaseMultiTagProps<T> & {
     returnAll: true;
     onChange?: (value: T[] | "all") => void;
   };
 
-type MultiTagWithoutReturnAll<T extends string | number = string> =
+type MultiTagWithoutReturnAll<T extends SelectOptionValue = string> =
   BaseMultiTagProps<T> & {
     returnAll?: false;
     onChange?: (value: T[]) => void;
   };
 
-export type MultiTagProps<T extends string | number = string> =
+export type MultiTagProps<T extends SelectOptionValue = string> =
   | MultiTagWithReturnAll<T>
   | MultiTagWithoutReturnAll<T>;
 
@@ -67,12 +69,12 @@ export type MultiTagTriggerProps = Omit<
   children?: ReactNode;
   clearable?: boolean;
   onClear?: () => void;
-  maxVisibleRows?: number;
+  maxVisibleRows: number;
   label?: ReactNode;
   required?: boolean;
 };
 
-export type MultiTagValueProps<T extends string | number = string> = {
+export type MultiTagValueProps<T extends SelectOptionValue = string> = {
   size?: Size;
   placeholder?: string;
   selectedOptions: MultiTagOption<T>[];

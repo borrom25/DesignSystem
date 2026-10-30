@@ -22,7 +22,7 @@ export function FieldWrapper({
 
   return (
     <div className={cn(wrapperClasses, className)}>
-      {label && (
+      {(label || required) && (
         <FieldLabel
           size={size}
           required={required}

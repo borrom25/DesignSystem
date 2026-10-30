@@ -2,7 +2,6 @@ import { useState, useCallback, useMemo, useEffect } from "react";
 import {
   startOfMonth,
   addMonths,
-  subMonths,
   setMonth,
   setYear,
   isSameDay,
@@ -11,6 +10,7 @@ import {
   startOfDay,
 } from "date-fns";
 import type { CalendarView } from "../Calendar.types";
+import { shiftMonth } from "../Calendar.utils";
 import {
   getInitialDatesFromValue,
   callOnChange,
@@ -143,13 +143,13 @@ export function useCalendarState(options: UseCalendarStateOptions) {
     [mode, selectedDates, isControlled, options, isDateDisabled]
   );
 
-  const goToPrevMonth = useCallback(() => {
-    setCurrentMonth((prev) => subMonths(prev, 1));
-  }, []);
+  const goToPrev = useCallback(() => {
+    setCurrentMonth((prev) => shiftMonth(prev, view, -1));
+  }, [view]);
 
-  const goToNextMonth = useCallback(() => {
-    setCurrentMonth((prev) => addMonths(prev, 1));
-  }, []);
+  const goToNext = useCallback(() => {
+    setCurrentMonth((prev) => shiftMonth(prev, view, 1));
+  }, [view]);
 
   const handleMonthSelect = useCallback(
     (month: number, year?: number) => {
@@ -235,8 +235,8 @@ export function useCalendarState(options: UseCalendarStateOptions) {
     view,
     isDateDisabled,
     handleDateSelect,
-    goToPrevMonth,
-    goToNextMonth,
+    goToPrev,
+    goToNext,
     handleMonthSelect,
     handleYearSelect,
     handleViewChange,

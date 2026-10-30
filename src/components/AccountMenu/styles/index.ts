@@ -1,5 +1,4 @@
 import {
-  dangerClasses,
   fullNameCLasses,
   headerClasses,
   itemsClasses,
@@ -8,6 +7,7 @@ import {
   roleClasses,
   switchersClasses,
   textCLasses,
+  themeSwitcherClasses,
   wrapperClasses,
 } from "./base";
 
@@ -21,5 +21,5 @@ export const accountMenuClasses = {
   items: itemsClasses,
   popover: popoverClasses,
   modal: modalClasses,
-  danger: dangerClasses,
+  themeSwitcher: themeSwitcherClasses,
 } as const;

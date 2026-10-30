@@ -3,7 +3,7 @@ import { ChevronDown, MoreVertical } from "lucide-react";
 import { cn } from "@/utils";
 import { Color, Size, Type } from "@/types";
 import { Button } from "@/components/Button";
-import { Popover, PopoverSurface } from "@/components/Popover";
+import { Popover } from "@/components/Popover";
 import type { ButtonDropProps } from "./ButtonDrop.types";
 import { buttonDropStyles } from "./styles";
 import { useButtonDropOpen } from "./hooks/useButtonDropOpen";
@@ -14,7 +14,7 @@ export function ButtonDrop<T extends string | number = string>({
   onChange,
   items,
   placeholder = "Select",
-  color = Color.Inverse,
+  color = Color.Secondary,
   type = Type.Flat,
   size = Size.Md,
   disabled = false,
@@ -25,6 +25,8 @@ export function ButtonDrop<T extends string | number = string>({
   className,
   contentClassName,
   matchTriggerWidth = true,
+  iconLeft,
+  onCloseAutoFocus,
 }: ButtonDropProps<T>) {
   const { isOpen, setIsOpen } = useButtonDropOpen({ open, onOpenChange });
 
@@ -65,8 +67,9 @@ export function ButtonDrop<T extends string | number = string>({
           className={cn(contentClassName)}
           sideOffset={4}
           align="end"
+          onCloseAutoFocus={onCloseAutoFocus}
         >
-          <PopoverSurface>
+          <Popover.Surface>
             <Popover.ScrollArea maxHeight={320}>
               <ButtonDropMenuList
                 items={items}
@@ -75,7 +78,7 @@ export function ButtonDrop<T extends string | number = string>({
                 onItemClick={handleItemClick}
               />
             </Popover.ScrollArea>
-          </PopoverSurface>
+          </Popover.Surface>
         </Popover.Content>
       </Popover>
     );
@@ -85,6 +88,7 @@ export function ButtonDrop<T extends string | number = string>({
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <Popover.Trigger>
         <Button
+          iconLeft={iconLeft}
           color={color}
           type={type}
           size={size}
@@ -110,8 +114,9 @@ export function ButtonDrop<T extends string | number = string>({
         className={cn(contentClassName)}
         sideOffset={4}
         align="start"
+        onCloseAutoFocus={onCloseAutoFocus}
       >
-        <PopoverSurface className="w-full">
+        <Popover.Surface className="w-full">
           <Popover.ScrollArea maxHeight={320}>
             <ButtonDropMenuList
               items={items}
@@ -120,7 +125,7 @@ export function ButtonDrop<T extends string | number = string>({
               onItemClick={handleItemClick}
             />
           </Popover.ScrollArea>
-        </PopoverSurface>
+        </Popover.Surface>
       </Popover.Content>
     </Popover>
   );

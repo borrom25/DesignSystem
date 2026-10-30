@@ -17,9 +17,24 @@ import {
 import { IconButton } from "@/components/IconButton";
 import { Color, Size } from "@/types";
 
-const COLORS = Object.values(Color).filter(
-  (color) => color !== Color.ContrastDark && color !== Color.ContrastLight
-);
+const COLORS = [
+  Color.Brand,
+  Color.Danger,
+  Color.Positive,
+  Color.Action,
+  Color.Warning,
+  Color.Info,
+  Color.Secondary,
+];
+const COLOR_LABELS: Record<(typeof COLORS)[number], string> = {
+  [Color.Brand]: "brand",
+  [Color.Danger]: "danger",
+  [Color.Positive]: "positive",
+  [Color.Action]: "action",
+  [Color.Warning]: "warning",
+  [Color.Info]: "info",
+  [Color.Secondary]: "secondary",
+};
 const TYPES = ["flat", "ghost", "icon"] as const;
 const SIZES = Object.values(Size);
 
@@ -64,7 +79,7 @@ const meta = {
       },
     },
     color: {
-      control: "select",
+      control: { type: "select", labels: COLOR_LABELS },
       options: COLORS,
       description: "Цветовая схема кнопки",
       table: {

@@ -1,11 +1,11 @@
 import { useCallback, useMemo } from "react";
 import type { TimeValue } from "@/components/TimeBar";
-import type { DateRangeBound, DateRangeValue } from "../DateRange.types";
+import type { DateRangeBound, DateRangeNativeValue } from "../DateRange.types";
 import { buildTimeBarKey, getActiveTimeValue } from "../utils/timeValue";
 
 export interface UseDateRangeTimeBarParams {
   activeBound: DateRangeBound | null;
-  currentValue: DateRangeValue;
+  currentValue: DateRangeNativeValue;
   setActiveBound: (bound: DateRangeBound | null) => void;
   handleOpenChange: (open: boolean) => void;
   handleTimeSelect: (bound: DateRangeBound, time: TimeValue) => void;

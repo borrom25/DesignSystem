@@ -53,7 +53,7 @@ export const Playground: Story = {
     const [required, setRequired] = useState(true);
     const [hasHintError, setHasHintError] = useState(false);
     const [disabled, setDisabled] = useState(false);
-    const [maxVisibleRows, setMaxVisibleRows] = useState(2);
+    const [maxVisibleRows, setMaxVisibleRows] = useState(4);
     const [value, setValue] = useState<string[]>(["star", "leaf"]);
 
     return (

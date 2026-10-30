@@ -1,4 +1,5 @@
-export const sliderWrapperClasses = "group relative w-full py-6";
+export const sliderWrapperClasses =
+  "group relative w-full py-6 flex flex-col gap-4";
 
 export const sliderContainerClasses = "relative w-full h-[6px]";
 

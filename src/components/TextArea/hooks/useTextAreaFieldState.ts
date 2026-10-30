@@ -1,14 +1,17 @@
-import { useCallback, useState } from "react";
 import type {
   ChangeEventHandler,
   FocusEventHandler,
   TextareaHTMLAttributes,
 } from "react";
+import { useCallback, useState } from "react";
 
 type UseTextAreaFieldStateProps = Pick<
   TextareaHTMLAttributes<HTMLTextAreaElement>,
   "value" | "defaultValue" | "onFocus" | "onBlur" | "onChange"
->;
+> & {
+  onClear?: () => void;
+  clearField: () => void;
+};
 
 export function useTextAreaFieldState({
   value,
@@ -16,15 +19,17 @@ export function useTextAreaFieldState({
   onFocus,
   onBlur,
   onChange,
+  onClear,
+  clearField,
 }: UseTextAreaFieldStateProps) {
+  const isControlled = value !== undefined;
   const [isFocused, setIsFocused] = useState(false);
-  const [uncontrolledValue, setUncontrolledValue] = useState(
-    defaultValue ?? ""
+  const [uncontrolledValue, setUncontrolledValue] = useState(() =>
+    defaultValue == null ? "" : String(defaultValue)
   );
 
-  const isControlled = value !== undefined;
   const currentValue = isControlled ? value : uncontrolledValue;
-  const hasValue = String(currentValue ?? "").length > 0;
+  const hasValue = currentValue != null && String(currentValue) !== "";
   const isLabelActive = isFocused || hasValue;
   const isPlaceholderVisible = isFocused;
 
@@ -35,6 +40,15 @@ export function useTextAreaFieldState({
     },
     [onFocus]
   );
+
+  const handleClear = useCallback(() => {
+    if (onClear) {
+      onClear();
+      return;
+    }
+
+    clearField();
+  }, [clearField, onClear]);
 
   const handleBlur: FocusEventHandler<HTMLTextAreaElement> = useCallback(
     (event) => {
@@ -61,5 +75,6 @@ export function useTextAreaFieldState({
     handleFocus,
     handleBlur,
     handleChange,
+    handleClear,
   };
 }

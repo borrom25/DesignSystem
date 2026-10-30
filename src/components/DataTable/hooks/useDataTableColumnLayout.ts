@@ -9,7 +9,7 @@ export function useDataTableColumnLayout<TData>(table: TanStackTable<TData>) {
   const visibleColumnCount = visibleColumnIds.length;
   const beforeStickyRightColumnIds = useMemo(
     () => getBeforeStickyRightColumnIds(visibleLeafColumns),
-    [visibleColumnSignature, visibleLeafColumns]
+    [visibleLeafColumns]
   );
 
   return {

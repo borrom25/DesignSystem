@@ -28,14 +28,15 @@ export function MultiSelectValue<
     if (renderValue) return renderValue(selectedOptions);
 
     if (selectedOptions.length === 0) {
+      const showPlaceholder = !hasLabel || isLabelActive;
+
+      if (!showPlaceholder) return null;
+
       return (
         <span
           className={cn(
             triggerStyles.placeholder,
-            hasLabel &&
-              (isLabelActive
-                ? triggerStyles.valuePlaceholderVisible
-                : triggerStyles.valuePlaceholderHidden)
+            hasLabel && triggerStyles.valuePlaceholderVisible
           )}
         >
           {placeholder}

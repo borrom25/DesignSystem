@@ -1,6 +1,6 @@
+import { Button, UIKitProvider, uiController, useUiController } from "@/index";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { ReactNode } from "react";
-import { Button, UIKitProvider, uiController, useUiController } from "@/index";
 
 const meta = {
   title: "Controllers/Modal",

@@ -1,6 +1,7 @@
 import {
   baseClasses,
   containerClasses,
+  listClasses,
   measurementClasses,
   measurementItemClasses,
   triggerBaseClasses,
@@ -12,4 +13,5 @@ export const barMenuStyles = {
   measurement: measurementClasses,
   triggerBase: triggerBaseClasses,
   measurementItem: measurementItemClasses,
+  list: listClasses,
 };

@@ -1,5 +1,9 @@
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
-import type { TimeValue } from "@/components/TimeBar";
+import {
+  clampTimeValue,
+  isValidTimeValue,
+  type TimeValue,
+} from "@/components/TimeBar";
 import type { UseTimePickerValueProps } from "../TimePicker.types";
 
 const DEFAULT_SEPARATOR = ":";
@@ -122,6 +126,21 @@ function formatTimeByPattern(
     .join(separator);
 }
 
+function parseTimeLimit(
+  limit: TimeValue | string | undefined,
+  withSeconds: boolean
+): TimeValue | undefined {
+  if (!limit) return;
+
+  const [hours, minutes, seconds = 0] =
+    typeof limit === "string"
+      ? limit.split(":").map(Number)
+      : [limit.hours, limit.minutes, limit.seconds];
+  const time = { hours, minutes, seconds: withSeconds ? seconds : 0 };
+
+  return isValidTimeValue(time) ? time : undefined;
+}
+
 export function useTimePickerValue({
   value,
   time,
@@ -131,6 +150,8 @@ export function useTimePickerValue({
   onChangeTime,
   onClear,
   format,
+  minTime: minTimeProp,
+  maxTime: maxTimeProp,
   disabled = false,
 }: UseTimePickerValueProps) {
   const isValueControlled = value !== undefined;
@@ -142,6 +163,15 @@ export function useTimePickerValue({
   const [timeState, setTimeState] = useState<TimeValue | undefined>(
     defaultTime ?? parseValueToTime(defaultValue, format)
   );
+
+  const [minTime, maxTime] = useMemo(() => {
+    const withSeconds = getFormatParts(format).parts.some(
+      (part) => part.toLowerCase() === "ss"
+    );
+    return [minTimeProp, maxTimeProp].map((limit) =>
+      parseTimeLimit(limit, withSeconds)
+    );
+  }, [minTimeProp, maxTimeProp, format]);
 
   const currentValue = useMemo(
     () => (isValueControlled ? value : valueState),
@@ -166,8 +196,14 @@ export function useTimePickerValue({
     (event: ChangeEvent<HTMLInputElement>) => {
       if (disabled) return;
       const nextRawValue = event.target.value.replace(/[a-zA-Z]/g, "");
-      const nextFormattedValue = formatInputValue(nextRawValue, format);
-      const nextTime = parseValueToTime(nextFormattedValue, format);
+      const inputValue = formatInputValue(nextRawValue, format);
+      const parsedTime = parseValueToTime(inputValue, format);
+      const nextTime =
+        parsedTime && clampTimeValue(parsedTime, minTime, maxTime);
+      const nextFormattedValue =
+        nextTime !== parsedTime
+          ? formatTimeByPattern(nextTime, format)
+          : inputValue;
 
       if (!isValueControlled) {
         setValueState(nextFormattedValue);
@@ -186,6 +222,8 @@ export function useTimePickerValue({
       format,
       isValueControlled,
       isTimeControlled,
+      maxTime,
+      minTime,
       onChangeTime,
       onChangeValue,
     ]
@@ -244,5 +282,7 @@ export function useTimePickerValue({
     handleInputChange,
     handleTimeChange,
     handleClear,
+    minTime,
+    maxTime,
   };
 }

@@ -20,7 +20,7 @@ const cardMenu = (
   <IconButton
     icon={MoreVertical}
     type="ghost"
-    color={Color.Inverse}
+    color={Color.Secondary}
     size={Size.Sm}
     aria-label="Меню"
   />
@@ -49,6 +49,7 @@ const meta = {
     children: { control: false },
     size: { control: "select", options: Object.values(Size) },
     variant: { control: "select", options: Object.values(CardVariant) },
+    hoverable: { control: "boolean" },
   },
 } satisfies Meta<typeof Card>;
 
@@ -166,9 +167,9 @@ export const VariantsAndPadding: Story = {
     <div className="flex w-[420px] flex-col gap-4 rounded-scale-3xl bg-page p-6">
       <Card
         size={Size.Sm}
-        variant={CardVariant.Surface}
-        title="Surface"
-        subtitle="variant=surface"
+        variant={CardVariant.Basic}
+        title="Basic"
+        subtitle="variant=basic"
         actionSlot={cardMenu}
       >
         <span className="text-secondary text-sm">Основной вид карточки</span>
@@ -176,9 +177,9 @@ export const VariantsAndPadding: Story = {
 
       <Card
         size={Size.Sm}
-        variant={CardVariant.Nested}
-        title="Nested"
-        subtitle="variant=nested"
+        variant={CardVariant.Secondary}
+        title="Secondary"
+        subtitle="variant=secondary"
         actionSlot={<Tag size={Size.Sm}>Активно</Tag>}
       >
         <span className="text-secondary text-sm">Вложенная карточка</span>
@@ -186,7 +187,7 @@ export const VariantsAndPadding: Story = {
 
       <Card
         size={Size.Sm}
-        variant={CardVariant.Surface}
+        variant={CardVariant.Basic}
         padding={{ top: "16px", bottom: "24px" }}
         title="Custom padding"
         subtitle="top: 16px, bottom: 24px"
@@ -196,6 +197,33 @@ export const VariantsAndPadding: Story = {
           Горизонтальные отступы остаются от size
         </span>
       </Card>
+    </div>
+  ),
+};
+
+export const Hoverable: Story = {
+  args: {
+    hoverable: true,
+    size: Size.Md,
+    title: "Title",
+    subtitle: "Subtitle",
+  },
+  render: ({ hoverable, size, title, subtitle }) => (
+    <div className="flex w-[420px] flex-col gap-4 rounded-scale-3xl bg-page p-6">
+      <Card
+        hoverable={hoverable}
+        size={size}
+        variant={CardVariant.Basic}
+        title={title}
+        subtitle={subtitle}
+      />
+      <Card
+        hoverable={hoverable}
+        size={size}
+        variant={CardVariant.Secondary}
+        title={title}
+        subtitle={subtitle}
+      />
     </div>
   ),
 };

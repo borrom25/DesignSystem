@@ -1,5 +1,6 @@
 export { UIKitProvider } from "./KitProvider";
 export type { KitProviderProps } from "./KitProvider";
+export { useLanguage, LanguageProvider } from "./languageProvider";
 
 export {
   ThemeProvider,

@@ -1,2 +1,6 @@
 export { ProgressBar } from "./ProgressBar";
-export type { ProgressBarProps, ProgressBarStatus } from "./ProgressBar.types";
+export type {
+  ProgressBarLabelPosition,
+  ProgressBarProps,
+  ProgressBarStatus,
+} from "./ProgressBar.types";

@@ -52,7 +52,15 @@ export function useInputFieldState({
     [ref]
   );
 
-  const handleClearClick = useClearField({ ref: inputRef, onClear });
+  const clearField = useClearField({ ref: inputRef });
+  const handleClearClick = useCallback(() => {
+    if (onClear) {
+      onClear();
+      return;
+    }
+
+    clearField();
+  }, [clearField, onClear]);
 
   const handleWrapperMouseDown: MouseEventHandler<HTMLElement> = useCallback(
     (event) => {

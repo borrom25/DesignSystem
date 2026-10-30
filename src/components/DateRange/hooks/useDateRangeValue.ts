@@ -4,7 +4,7 @@ import type { TimeValue } from "@/components/TimeBar";
 import { dateFormat, dateTimeFormat } from "../constants";
 import type {
   DateRangeBound,
-  DateRangeValue,
+  DateRangeNativeValue,
   UseDateRangeValueProps,
 } from "../DateRange.types";
 import { isDateInputEmpty, normalizeDateInputValue } from "../utils/dateInput";
@@ -13,6 +13,7 @@ import {
   getNextValueForBound,
   getOppositeBound,
   getSelectedDate,
+  normalizeDateRangeValue,
   omitDraftValue,
   parseDateInput,
 } from "../utils/dateRangeValue";
@@ -25,18 +26,20 @@ export const useDateRangeValue = ({
   disabled,
   showTimeBar = false,
 }: UseDateRangeValueProps) => {
-  const [internalValue, setInternalValue] = useState<DateRangeValue>(
-    defaultValue ?? {}
+  const [internalValue, setInternalValue] = useState<DateRangeNativeValue>(() =>
+    normalizeDateRangeValue(defaultValue)
   );
   const [draftInputValue, setDraftInputValue] = useState<
     Partial<Record<DateRangeBound, string>>
   >({});
 
   const isControlled = controlledValue !== undefined;
-  const currentValue = isControlled ? controlledValue : internalValue;
+  const currentValue = isControlled
+    ? normalizeDateRangeValue(controlledValue)
+    : internalValue;
 
   const updateValue = useCallback(
-    (newValue: DateRangeValue) => {
+    (newValue: DateRangeNativeValue) => {
       if (disabled) return;
 
       if (!isControlled) {

@@ -82,5 +82,6 @@ export function useSegmented<T extends string | number = string>({
     handleChange,
     registerButtonRef,
     containerRef,
+    updateIndicator,
   };
 }

@@ -39,6 +39,8 @@ export const Default: Story = {
         min={0}
         max={100}
         step={1}
+        label="Label"
+        hint="Hint"
       />
     );
   },

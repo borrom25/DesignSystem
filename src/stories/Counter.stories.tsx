@@ -68,7 +68,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Playground: Story = {
-  name: "Playground",
   args: {
     count: 5,
     size: Size.Sm,

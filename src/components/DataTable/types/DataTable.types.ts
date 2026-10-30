@@ -1,4 +1,5 @@
 import type { HTMLAttributes, ReactNode } from "react";
+import type { LucideIcon } from "lucide-react";
 import type {
   ColumnDef as TanStackColumnDef,
   Cell,
@@ -93,10 +94,14 @@ export interface DataTableToolbarProps {
   searchPlaceholder?: string;
   actions?: ButtonDropItem[];
   actionsPlaceholder?: string;
+  actionsIcon?: LucideIcon | null;
   onActionChange?: (value: string) => void;
   middleSlot?: ReactNode;
   bottomSlot?: ReactNode;
   className?: string;
+  maxSearchCount?: number;
+  filters?: TableFiltersState<FilterSchema>;
+  showResetFilters?: boolean;
 }
 
 export interface TableProps<TData> extends Omit<
@@ -156,6 +161,7 @@ export interface TableProps<TData> extends Omit<
   bordered?: boolean;
   compact?: boolean;
   embedded?: boolean;
+  embeddedLeadingInset?: number;
 
   getRowId?: (originalRow: TData, index: number) => string;
   enableNestedRows?: boolean;
@@ -241,6 +247,15 @@ export interface TableBodySharedProps<TData> {
 
 export type TableBodyProps<TData> = TableBodySharedProps<TData>;
 
+export interface TableSkeletonBodyProps<TData> {
+  table: Table<TData>;
+  beforeStickyRightColumnIds: ReadonlySet<string>;
+  bordered?: boolean;
+  className?: string;
+  cellClassName?: string;
+  rowCount: number;
+}
+
 export interface TableVirtualBodyProps<
   TData,
 > extends TableBodySharedProps<TData> {
@@ -283,6 +298,10 @@ export interface TableHeaderProps<TData> {
 
 export interface TableHeaderCellProps<TData> {
   header: Header<TData, unknown>;
+  rowSpan?: number;
+  colSpan?: number;
+  headerRowIndex?: number;
+  stickyHeader?: boolean;
   filters?: DataTableFiltersState<FilterSchema>;
   isBeforeStickyRight?: boolean;
 }

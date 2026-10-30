@@ -14,7 +14,6 @@ export interface SearchAutocompleteProps extends Omit<
   | "prefix"
   | "suffix"
   | "count"
-  | "maxCount"
   | "onChange"
 > {
   onChange?: ChangeEventHandler<HTMLInputElement>;

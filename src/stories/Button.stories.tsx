@@ -11,10 +11,31 @@ import {
   X,
   Bell,
 } from "lucide-react";
-import { Button } from "@/components";
+import { Button, CounterVariant } from "@/components";
 import { Color, Size, Type } from "@/types";
 
-const COLORS = Object.values(Color);
+const COLORS = [
+  Color.Brand,
+  Color.Danger,
+  Color.Positive,
+  Color.Action,
+  Color.Warning,
+  Color.Info,
+  Color.Secondary,
+  Color.ContrastDark,
+  Color.ContrastLight,
+];
+const COLOR_LABELS: Record<(typeof COLORS)[number], string> = {
+  [Color.Brand]: "brand",
+  [Color.Danger]: "danger",
+  [Color.Positive]: "positive",
+  [Color.Action]: "action",
+  [Color.Warning]: "warning",
+  [Color.Info]: "info",
+  [Color.Secondary]: "secondary",
+  [Color.ContrastDark]: "contrastDark",
+  [Color.ContrastLight]: "contrastLight",
+};
 const TYPES = Object.values(Type);
 const SIZES = Object.values(Size);
 
@@ -54,7 +75,7 @@ const meta = {
       },
     },
     color: {
-      control: "select",
+      control: { type: "select", labels: COLOR_LABELS },
       options: COLORS,
       description: "Цветовая схема кнопки",
       table: {
@@ -123,6 +144,15 @@ const meta = {
         type: { summary: "number" },
       },
     },
+    counterColor: {
+      control: "select",
+      options: Object.values(CounterVariant),
+      description: "Цвет каунтера",
+      table: {
+        type: { summary: "CounterVariant" },
+        defaultValue: { summary: "accent" },
+      },
+    },
     loading: {
       control: "boolean",
       description:
@@ -178,6 +208,7 @@ export const Playground: Story = {
     disabled: false,
     loading: false,
     count: 3,
+    counterColor: CounterVariant.Accent,
     scaling: true,
   },
   parameters: {
@@ -202,6 +233,7 @@ export const AsChild: Story = {
     loading: { table: { disable: true } },
     disabled: { table: { disable: true } },
     count: { table: { disable: true } },
+    counterColor: { table: { disable: true } },
     iconLeft: { table: { disable: true } },
     iconRight: { table: { disable: true } },
     iconOnly: { table: { disable: true } },
@@ -239,12 +271,84 @@ export const WithCounter: Story = {
     size: Size.Md,
     iconLeft: Bell,
     count: 12,
+    counterColor: CounterVariant.Accent,
   },
   parameters: {
     docs: {
       description: {
         story:
-          "Кнопка с каунтером. При `count` отображается бейдж в правом верхнем углу.",
+          "Кнопка с каунтером. При `count` отображается бейдж в правом верхнем углу. Цвет каунтера задаётся через `counterColor`.",
+      },
+    },
+  },
+};
+
+export const DisabledByType: Story = {
+  args: {
+    color: Color.Brand,
+    size: Size.Md,
+    scaling: true,
+  },
+  argTypes: {
+    children: { table: { disable: true } },
+    type: { table: { disable: true } },
+    htmlType: { table: { disable: true } },
+    iconLeft: { table: { disable: true } },
+    iconRight: { table: { disable: true } },
+    iconOnly: { table: { disable: true } },
+    count: { table: { disable: true } },
+    counterColor: { table: { disable: true } },
+    loading: { table: { disable: true } },
+    disabled: { table: { disable: true } },
+    onClick: { table: { disable: true } },
+    className: { table: { disable: true } },
+    scaling: { table: { disable: true } },
+  },
+  render: ({ color, size, scaling }) => (
+    <div className="flex flex-wrap items-center gap-4">
+      <Button
+        color={color}
+        size={size}
+        scaling={scaling}
+        type={Type.Fill}
+        disabled
+      >
+        Fill
+      </Button>
+      <Button
+        color={color}
+        size={size}
+        scaling={scaling}
+        type={Type.Outline}
+        disabled
+      >
+        Outline
+      </Button>
+      <Button
+        color={color}
+        size={size}
+        scaling={scaling}
+        type={Type.Flat}
+        disabled
+      >
+        Flat
+      </Button>
+      <Button
+        color={color}
+        size={size}
+        scaling={scaling}
+        type={Type.Ghost}
+        disabled
+      >
+        Ghost
+      </Button>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Сравнение disabled-состояния для всех типов кнопки: fill, outline, flat и ghost.",
       },
     },
   },

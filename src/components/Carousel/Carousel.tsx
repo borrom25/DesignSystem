@@ -1,5 +1,5 @@
 import { CarouselContext } from "./Carousel.context.tsx";
-import { CarouselProps } from "./Carousel.types.ts";
+import { CarouselItemSize, CarouselProps } from "./Carousel.types.ts";
 import {
   CarouselIndicators,
   CarouselItem,
@@ -7,21 +7,38 @@ import {
   CarouselPrevButton,
   CarouselTrack,
 } from "./ui";
-import { useState } from "react";
+import { isValidElement, useCallback, useState, type ReactNode } from "react";
 import { useCarouselState } from "./hooks/useCarouselState";
 import { cn } from "@/utils";
 import { carouselStyles } from "./styles";
+import { ImageModal } from "@/shared/modals";
+import { findItemImageSrc } from "./utils/findItemImageSrc";
+
+function getItemContent(item: ReactNode) {
+  if (!isValidElement<{ children?: ReactNode; className?: string }>(item)) {
+    return { src: undefined, children: null, className: undefined };
+  }
+
+  return {
+    src: findItemImageSrc(item.props.children),
+    children: item.props.children,
+    className: item.props.className,
+  };
+}
 
 function CarouselRoot({
   defaultValue = 0,
   orientation = "horizontal",
   children,
-  actionsPosition = "within",
   width = 400,
   height = 160,
+  autoSwipeDuration = 0,
+  showIndicators = false,
+  zoomEnabled = true,
 }: CarouselProps) {
   const {
     itemsCount,
+    itemChildren,
     trackChildren,
     nextButtonChildren,
     prevButtonChildren,
@@ -29,16 +46,28 @@ function CarouselRoot({
   } = useCarouselState({ children });
 
   const [activeIndex, setActiveIndex] = useState(defaultValue);
+  const [itemsSizes, setItemsSizes] = useState<CarouselItemSize[]>([]);
+  const [isZoomed, setIsZoomed] = useState(false);
   const isHorizontal = orientation === "horizontal";
-  const isWithin = actionsPosition === "within";
+  const canNavigate = itemsCount > 1;
 
-  const containerStyle = carouselStyles.containerLayout(width, height)[
-    orientation
-  ][actionsPosition];
-  const controlsStyle =
-    carouselStyles.controlsLayout[orientation][actionsPosition];
-  const indicatorsStyle =
-    carouselStyles.indicatorsLayout[orientation][actionsPosition];
+  const handlePrev = useCallback(() => {
+    if (!itemsCount) return;
+    setActiveIndex((prev) => (prev - 1 + itemsCount) % itemsCount);
+  }, [itemsCount]);
+
+  const handleNext = useCallback(() => {
+    if (!itemsCount) return;
+    setActiveIndex((prev) => (prev + 1) % itemsCount);
+  }, [itemsCount]);
+
+  const currentItem = getItemContent(itemChildren[activeIndex]);
+
+  const controlsStyle = cn(
+    carouselStyles.controlsLayout[orientation],
+    showIndicators ? "justify-between" : "justify-center"
+  );
+  const containerStyle = carouselStyles.containerLayout(height)[orientation];
 
   return (
     <CarouselContext.Provider
@@ -48,56 +77,58 @@ function CarouselRoot({
         orientation,
         itemsCount,
         isHorizontal,
-        isWithin,
         width,
         height,
+        itemsSizes,
+        setItemsSizes,
+        autoSwipeDuration,
+        zoomEnabled,
+        isZoomed,
+        setIsZoomed,
       }}
     >
       <div className={cn(carouselStyles.base, containerStyle)}>
-        {isHorizontal && !isWithin && prevButtonChildren}
-
         <div
-          className={cn(
-            carouselStyles.container,
-            carouselStyles.size(width, height)
-          )}
+          className={carouselStyles.container}
+          style={{
+            width: `${width}px`,
+            height: `${height}px`,
+          }}
         >
           {trackChildren}
-
-          {isWithin && (
-            <>
-              <div className={controlsStyle}>
-                <div className={carouselStyles.button}>
-                  {prevButtonChildren}
-                </div>
-                {!isHorizontal && (
-                  <div className={indicatorsStyle}>{indicatorsChildren}</div>
-                )}
-                <div className={carouselStyles.button}>
-                  {nextButtonChildren}
-                </div>
-              </div>
-              {isHorizontal && (
-                <div className={indicatorsStyle}>{indicatorsChildren}</div>
-              )}
-            </>
-          )}
         </div>
 
-        {!isWithin &&
-          (isHorizontal ? (
-            <>
-              {nextButtonChildren}
-              <div className={indicatorsStyle}>{indicatorsChildren}</div>
-            </>
-          ) : (
-            <div className={controlsStyle}>
+        {isHorizontal ? (
+          <div className={controlsStyle}>
+            {showIndicators && indicatorsChildren}
+            <div className={carouselStyles.controls}>
               {prevButtonChildren}
-              {indicatorsChildren}
               {nextButtonChildren}
             </div>
-          ))}
+          </div>
+        ) : (
+          <div className={controlsStyle}>
+            {prevButtonChildren}
+            {showIndicators && indicatorsChildren}
+            {nextButtonChildren}
+          </div>
+        )}
       </div>
+
+      {zoomEnabled && (
+        <ImageModal
+          src={currentItem.src}
+          isOpen={isZoomed}
+          onClose={() => setIsZoomed(false)}
+          disabled
+          onPrev={canNavigate ? handlePrev : undefined}
+          onNext={canNavigate ? handleNext : undefined}
+        >
+          {!currentItem.src && (
+            <div className={currentItem.className}>{currentItem.children}</div>
+          )}
+        </ImageModal>
+      )}
     </CarouselContext.Provider>
   );
 }

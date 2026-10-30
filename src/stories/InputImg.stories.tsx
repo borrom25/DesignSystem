@@ -396,7 +396,7 @@ export const ModalWithActions: Story = {
         <div className="flex gap-3">
           <Button
             size={Size.Sm}
-            color={Color.Inverse}
+            color={Color.Secondary}
             onClick={() => setFile(null)}
           >
             Очистить

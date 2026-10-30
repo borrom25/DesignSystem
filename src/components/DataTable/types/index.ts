@@ -15,6 +15,7 @@ export type {
   UseDataTableColumnsParams,
   TableBodySharedProps,
   TableBodyProps,
+  TableSkeletonBodyProps,
   TableVirtualBodyProps,
   TableRowProps,
   TableHeaderProps,
@@ -34,6 +35,7 @@ export type {
 } from "./DataTable.popoverAction.types";
 export type {
   ListFilterConfig,
+  RadioFilterConfig,
   ColumnTextFilterConfig,
   DateFilterConfig,
   DateRangeFilterConfig,
@@ -41,6 +43,8 @@ export type {
   CustomFilterConfig,
   ColumnFilterConfig,
   CustomFilterRenderProps,
+  DataTableScopeKey,
+  DataTableScopedStateOptions,
   DateRangeFilterValue,
   FilterSchema,
   DataTableFiltersState,

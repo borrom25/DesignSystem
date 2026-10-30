@@ -20,7 +20,8 @@ export function MultiTagAll({
       <ListItem
         size={Size.Xs}
         checkbox
-        selected={checked || indeterminate}
+        selected={checked}
+        indeterminate={indeterminate}
         hideSelectedOutline
         className={selectAllClasses}
         onClick={onToggle}

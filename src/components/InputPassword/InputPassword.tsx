@@ -30,7 +30,7 @@ export function InputPassword({
       size={size}
       iconSize={inputIconSizeMap[size]}
       type={Type.Ghost}
-      color={Color.Inverse}
+      color={Color.Secondary}
       disabled={disabled}
       onClick={toggleVisibility}
       onMouseDown={handleMouseDown}

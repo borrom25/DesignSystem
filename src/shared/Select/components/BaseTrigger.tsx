@@ -63,7 +63,7 @@ export const BaseTrigger = forwardRef<HTMLButtonElement, BaseTriggerProps>(
           )}
           {...props}
         >
-          {hasFloatingLabel && required && <FloatingLabelRequiredMark />}
+          {required && !disabled && <FloatingLabelRequiredMark />}
 
           <span className={triggerStyles.stackedBody}>
             {hasFloatingLabel && (
@@ -120,7 +120,7 @@ export const BaseTrigger = forwardRef<HTMLButtonElement, BaseTriggerProps>(
         )}
         {...props}
       >
-        {hasFloatingLabel && required && <FloatingLabelRequiredMark />}
+        {required && !disabled && <FloatingLabelRequiredMark />}
 
         <span className={triggerStyles.body}>
           {hasFloatingLabel && (

@@ -1,6 +1,9 @@
 import type { ReactNode } from "react";
-import type { CalendarSingleProps } from "@/components/Calendar/Calendar.types";
-import type { DateRangeProps, DateRangeValue } from "@/components/DateRange";
+import type { CalendarBaseProps } from "@/components/Calendar/Calendar.types";
+import type {
+  DateRangeNativeValue,
+  DateRangeProps,
+} from "@/components/DateRange";
 import type { InputNumberProps } from "@/components/InputNumber";
 import type {
   FilterListOption,
@@ -12,7 +15,7 @@ type InputPropsType = Omit<
   "value" | "onChange" | "label" | "required" | "hint" | "hintError" | "error"
 >;
 
-export type DateRangeFilterValue = DateRangeValue;
+export type DateRangeFilterValue = DateRangeNativeValue;
 
 export interface ListFilterConfig<T = string> {
   kind: "list";
@@ -22,10 +25,39 @@ export interface ListFilterConfig<T = string> {
   groups?: FilterListGroup<T>[];
   searchable?: boolean;
   searchPlaceholder?: string;
+  searchValue?: string;
+  onSearchChange?: (value: string) => void;
+  filterOptionsLocally?: boolean;
   selectAll?: boolean;
   selectAllLabel?: ReactNode;
   emptyMessage?: ReactNode;
   getSearchText?: (option: FilterListOption<T>) => string;
+  onScrollEnd?: () => void;
+  scrollEndOffset?: number;
+  isLoading?: boolean;
+  hasMore?: boolean;
+  className?: string;
+}
+
+export interface RadioFilterConfig<T = string> {
+  kind: "radio";
+  defaultValue?: T;
+  popoverWidth?: number;
+  options?: FilterListOption<T>[];
+  groups?: FilterListGroup<T>[];
+  searchable?: boolean;
+  searchPlaceholder?: string;
+  searchValue?: string;
+  onSearchChange?: (value: string) => void;
+  filterOptionsLocally?: boolean;
+  emptyMessage?: ReactNode;
+  getSearchText?: (option: FilterListOption<T>) => string;
+  onScrollEnd?: () => void;
+  scrollEndOffset?: number;
+  isLoading?: boolean;
+  hasMore?: boolean;
+  resetLabel?: ReactNode;
+  applyLabel?: ReactNode;
   className?: string;
 }
 
@@ -43,10 +75,7 @@ export interface DateFilterConfig {
   kind: "date";
   defaultValue?: Date;
   popoverWidth?: number;
-  calendarProps?: Omit<
-    CalendarSingleProps,
-    "mode" | "value" | "defaultValue" | "onChange" | "className"
-  >;
+  calendarProps?: Omit<CalendarBaseProps, "className">;
   resetLabel?: ReactNode;
   applyLabel?: ReactNode;
   className?: string;
@@ -54,7 +83,7 @@ export interface DateFilterConfig {
 
 export interface DateRangeFilterConfig {
   kind: "dateRange";
-  defaultValue?: DateRangeValue;
+  defaultValue?: DateRangeNativeValue;
   popoverWidth?: number;
   placeholderStart?: string;
   placeholderEnd?: string;
@@ -67,7 +96,6 @@ export interface DateRangeFilterConfig {
     | "showTimeBar"
     | "placeholderStart"
     | "placeholderEnd"
-    | "label"
     | "required"
     | "hint"
     | "hintError"
@@ -111,6 +139,7 @@ export interface CustomFilterRenderProps<TValue = unknown> {
 
 export type ColumnFilterConfig<T = string> =
   | ListFilterConfig<T>
+  | RadioFilterConfig<T>
   | ColumnTextFilterConfig
   | DateFilterConfig
   | DateRangeFilterConfig
@@ -121,14 +150,20 @@ export type FilterValue = unknown;
 
 export type FilterSchema = Record<string, FilterValue>;
 
+export type DataTableScopeKey = string;
+
+export interface DataTableScopedStateOptions {
+  scopeKey?: DataTableScopeKey;
+}
+
 export interface DataTableFiltersState<
   TSchema extends FilterSchema = FilterSchema,
 > {
   values: TSchema;
-  setValue: <K extends keyof TSchema>(id: K, value: TSchema[K]) => void;
-  getValue: <K extends keyof TSchema>(id: K) => TSchema[K];
-  clearValue: (id: keyof TSchema) => void;
-  clearAll: () => void;
-  hasValue: (id: keyof TSchema) => boolean;
+  setValue<K extends keyof TSchema>(id: K, value: TSchema[K]): void;
+  getValue<K extends keyof TSchema>(id: K): TSchema[K];
+  clearValue(id: keyof TSchema): void;
+  clearAll(): void;
+  hasValue(id: keyof TSchema): boolean;
   activeCount: number;
 }

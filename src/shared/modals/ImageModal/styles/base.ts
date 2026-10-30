@@ -4,13 +4,24 @@ export const modalOverlayClasses =
 export const modalContentClasses =
   "relative flex flex-col items-center max-w-[90vw] max-h-[90vh] p-0 px-6";
 
+export const modalContentGalleryClasses = "w-[90vw]";
+
 export const modalActionsClasses =
   "flex items-center justify-center gap-2 mb-[17px] z-10 flex-shrink-0";
 
 export const modalActionButtonClasses =
-  "flex w-(--size-component-sm-icon-only-dimensions) h-(--size-component-sm-icon-only-dimensions) p-0 justify-center items-center rounded-lg border border-line bg-generic cursor-pointer transition-opacity hover:opacity-80";
+  "flex shrink-0 w-(--size-component-sm-icon-only-dimensions) h-(--size-component-sm-icon-only-dimensions) p-0 justify-center items-center rounded-lg border border-line bg-generic cursor-pointer transition-opacity hover:opacity-80";
 
 export const modalIconClasses = "text-inverse-text-heavy";
 
 export const modalImageClasses =
-  "w-[100%] max-w-full max-h-[calc(90vh-80px)] object-contain";
+  "max-w-full max-h-[calc(90vh-80px)] w-auto h-auto object-contain";
+
+export const modalViewerClasses =
+  "relative flex items-center justify-center gap-3 min-w-0 w-full";
+
+export const modalStageClasses =
+  "flex-1 min-w-0 flex items-center justify-center";
+
+export const modalFallbackClasses =
+  "max-w-full max-h-[calc(90vh-80px)] overflow-auto flex items-center justify-center";

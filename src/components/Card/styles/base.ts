@@ -1,1 +1,1 @@
-export const cardBaseClasses = "rounded-scale-3xl";
+export const cardBaseClasses = "min-w-0 max-w-full [overflow-wrap:anywhere]";

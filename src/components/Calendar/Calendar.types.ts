@@ -96,8 +96,8 @@ export interface CalendarHeaderProps {
   currentMonth: Date;
   view: CalendarView;
   onViewChange: (view: CalendarView) => void;
-  onPrevMonth: () => void;
-  onNextMonth: () => void;
+  onPrev: () => void;
+  onNext: () => void;
   showNavigation?: boolean;
   locale?: Locale;
   pickerType?: CalendarPickerType;

@@ -5,10 +5,15 @@ import type { Row } from "@tanstack/react-table";
 import { format, startOfDay } from "date-fns";
 import {
   AppLayout,
+  Card,
+  Tag,
   Header,
   HeaderInside,
-  Sidebar,
   InsideSidebar,
+  Input,
+  TextArea,
+  Switcher,
+  Sidebar,
   TableColumnsModal,
   TabsOverflow,
   Table,
@@ -118,12 +123,13 @@ const sidebarItems: SidebarItem[] = [
 ];
 
 const tabs = [
-  { label: "Overview", value: "overview" },
-  { label: "Activity", value: "activity" },
-  { label: "Files", value: "files" },
-  { label: "Members", value: "members" },
-  { label: "Settings", value: "settings" },
-  { label: "Integrations", value: "integrations" },
+  { label: "Главная", value: "home" },
+  { label: "Лиды", value: "leads" },
+  { label: "Воронки", value: "funnels" },
+  { label: "Анкеты", value: "forms" },
+  { label: "Шаблоны КК", value: "templates" },
+  { label: "Библиотека полей", value: "fields" },
+  { label: "Процессы 1С", value: "processes" },
 ];
 
 const STATUS_OPTIONS = ["active", "paused", "review", "draft"] as const;
@@ -460,6 +466,7 @@ const buildNestedProjects = (): ProjectRow[] => [
 
 const helper = createDataTableColumnHelper<ProjectRow>();
 const inspectionHelper = createDataTableColumnHelper<ProjectInspectionRow>();
+const nestedInspectionInset = 56;
 
 const projectInspectionColumns: ColumnDef<ProjectInspectionRow>[] = [
   inspectionHelper.columnFilter("checkpoint", {
@@ -512,6 +519,7 @@ function ProjectInspectionsTable({
   return (
     <Table
       embedded
+      embeddedLeadingInset={nestedInspectionInset}
       data={inspections}
       columns={projectInspectionColumns}
       filters={filters}
@@ -575,7 +583,283 @@ const getProjectColumnId = (
   return null;
 };
 
-const meta: Meta<ComponentProps<typeof AppLayout>> = {
+function AppLayoutCardsContent() {
+  const [status, setStatus] = useState("all");
+  const [expandedProject, setExpandedProject] = useState<string | null>(null);
+  const projects = useMemo(() => buildProjects(6), []);
+  const filteredProjects = projects.filter(
+    (project) => status === "all" || project.status === status
+  );
+  const summary = [
+    {
+      label: "Всего проектов",
+      value: projects.length,
+      hint: "В рабочем пространстве",
+    },
+    {
+      label: "В работе",
+      value: projects.filter((project) => project.status === "active").length,
+      hint: "Активные команды",
+    },
+    {
+      label: "На согласовании",
+      value: projects.filter((project) => project.status === "review").length,
+      hint: "Ожидают решения",
+    },
+  ];
+
+  return (
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-2">
+        <h1 className="text-2xl font-semibold text-primary">Обзор проектов</h1>
+        <p className="text-sm text-secondary">
+          Команды, текущий прогресс и проекты, которым нужно ваше внимание.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,200px),1fr))] gap-4">
+        {summary.map((item) => (
+          <Card key={item.label} size={Size.Sm} title={item.label}>
+            <div className="flex flex-col gap-1">
+              <span className="text-3xl font-semibold tabular-nums text-primary">
+                {item.value}
+              </span>
+              <span className="text-sm text-secondary">{item.hint}</span>
+            </div>
+          </Card>
+        ))}
+      </div>
+
+      <Card
+        title="Фокус недели"
+        subtitle="Подготовка к запуску нового учебного потока"
+        actionSlot={<Tag size={Size.Sm}>Приоритет</Tag>}
+      >
+        <p className="text-sm leading-relaxed text-secondary">
+          Согласуйте дашборд руководителя и проверьте готовность сервиса
+          уведомлений. Эти проекты помогут командам отслеживать заявки и вовремя
+          связываться с участниками.
+        </p>
+        <div>
+          <Button
+            size={Size.Sm}
+            type={Type.Outline}
+            color={Color.Brand}
+            onClick={() => setStatus("review")}
+          >
+            Показать проекты на согласовании
+          </Button>
+        </div>
+      </Card>
+
+      <section className="flex flex-col gap-4" aria-label="Проекты">
+        <TabsOverflow
+          items={[
+            { label: "Все проекты", value: "all" },
+            { label: "В работе", value: "active" },
+            { label: "На согласовании", value: "review" },
+          ]}
+          value={status}
+          onValueChange={setStatus}
+          size={Size.Sm}
+        />
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] items-start gap-4">
+          {filteredProjects.map((project) => {
+            const isExpanded = expandedProject === project.id;
+            const detailsId = `${project.id}-details`;
+
+            return (
+              <Card
+                key={project.id}
+                title={project.title}
+                subtitle={productLabels[project.product]}
+                size={Size.Sm}
+              >
+                <div className="flex flex-wrap gap-2">
+                  <Tag size={Size.Sm}>{statusLabels[project.status]}</Tag>
+                  <Tag size={Size.Sm}>{regionLabels[project.region]}</Tag>
+                </div>
+                <dl className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <dt className="text-secondary">Ответственный</dt>
+                    <dd className="text-primary">{project.owner}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-secondary">Команда</dt>
+                    <dd className="text-primary">{project.team}</dd>
+                  </div>
+                </dl>
+                <div className="flex flex-col gap-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-secondary">Готовность</span>
+                    <span className="text-primary">{project.progress}</span>
+                  </div>
+                  <div
+                    role="progressbar"
+                    aria-label={`Готовность: ${project.title}`}
+                    aria-valuenow={parseInt(project.progress, 10)}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    className="h-2 overflow-hidden rounded-full bg-generic-medium"
+                  >
+                    <div
+                      className="h-full rounded-full bg-brand-heavy"
+                      style={{ width: project.progress }}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <Button
+                    size={Size.Sm}
+                    type={Type.Flat}
+                    color={Color.Brand}
+                    aria-expanded={isExpanded}
+                    aria-controls={detailsId}
+                    onClick={() =>
+                      setExpandedProject(isExpanded ? null : project.id)
+                    }
+                  >
+                    {isExpanded ? "Скрыть подробности" : "Подробнее о проекте"}
+                  </Button>
+                </div>
+                <dl
+                  id={detailsId}
+                  hidden={!isExpanded}
+                  className="border-t border-line pt-4 text-sm"
+                >
+                  <div className="flex justify-between gap-4">
+                    <dt className="text-secondary">Бюджет</dt>
+                    <dd className="text-primary">{project.budget}</dd>
+                  </div>
+                  <div className="mt-2 flex justify-between gap-4">
+                    <dt className="text-secondary">Участники</dt>
+                    <dd className="text-primary">{project.members}</dd>
+                  </div>
+                </dl>
+              </Card>
+            );
+          })}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function AppLayoutInsideContent() {
+  const [saved, setSaved] = useState({
+    title: "Подготовка учебного потока",
+    description:
+      "Объединяем работу приёмной комиссии, кураторов и преподавателей перед запуском нового потока.",
+    notifications: true,
+  });
+  const [draft, setDraft] = useState(saved);
+  const [message, setMessage] = useState("");
+
+  return (
+    <form
+      className="flex flex-col gap-6"
+      onChange={() => setMessage("")}
+      onSubmit={(event) => {
+        event.preventDefault();
+        setSaved(draft);
+        setMessage("Изменения сохранены в этом примере.");
+      }}
+    >
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-semibold text-primary">
+            Настройки проекта
+          </h1>
+          <p className="mt-2 text-sm text-secondary">
+            Основная информация, команда и уведомления.
+          </p>
+        </div>
+        <Tag size={Size.Sm}>В работе</Tag>
+      </div>
+
+      <Card
+        title="Основная информация"
+        subtitle="Как проект увидят участники команды"
+      >
+        <Input
+          label="Название проекта"
+          required
+          value={draft.title}
+          onChange={(event) =>
+            setDraft({ ...draft, title: event.target.value })
+          }
+        />
+        <TextArea
+          label="Описание"
+          rows={4}
+          value={draft.description}
+          onChange={(event) =>
+            setDraft({ ...draft, description: event.target.value })
+          }
+        />
+      </Card>
+
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] items-start gap-4">
+        <Card title="Команда проекта" subtitle="Ответственные за запуск">
+          <ul className="flex flex-col gap-4">
+            {[
+              { name: "Алина К.", role: "Руководитель проекта" },
+              { name: "Мария Т.", role: "Координатор обучения" },
+              { name: "Игорь С.", role: "Куратор потока" },
+            ].map((person) => (
+              <li key={person.name} className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-primary">
+                  {person.name}
+                </span>
+                <span className="text-sm text-secondary">{person.role}</span>
+              </li>
+            ))}
+          </ul>
+        </Card>
+        <Card title="Уведомления" subtitle="Следите за изменениями в проекте">
+          <Switcher
+            title="Получать уведомления"
+            aria-label="Получать уведомления о проекте"
+            checked={draft.notifications}
+            onChange={(event) =>
+              setDraft({ ...draft, notifications: event.target.checked })
+            }
+          />
+          <p className="text-sm leading-relaxed text-secondary">
+            Сообщения о новых участниках, изменениях сроков и завершении этапов.
+          </p>
+        </Card>
+      </div>
+
+      <div className="flex flex-wrap items-center gap-3">
+        <Button htmlType="submit" size={Size.Sm} color={Color.Brand}>
+          Сохранить изменения
+        </Button>
+        <Button
+          size={Size.Sm}
+          type={Type.Outline}
+          color={Color.Secondary}
+          onClick={() => {
+            setDraft(saved);
+            setMessage("Несохранённые изменения отменены.");
+          }}
+        >
+          Отменить
+        </Button>
+        <span role="status" className="text-sm text-secondary">
+          {message}
+        </span>
+      </div>
+    </form>
+  );
+}
+
+type AppLayoutStoryArgs = ComponentProps<typeof AppLayout> & {
+  showThemeSwitcher?: boolean;
+  variant?: "default" | "inside";
+};
+
+const meta: Meta<AppLayoutStoryArgs> = {
   title: "Layout/AppLayout",
   component: AppLayout,
   tags: ["autodocs"],
@@ -584,35 +868,39 @@ const meta: Meta<ComponentProps<typeof AppLayout>> = {
     docs: {
       description: {
         component:
-          "Единый Playground для AppLayout: переключение container, варианты Header/Sidebar и контент с DataTable внутри.",
+          "Fill с таблицей; стандартная ширина и 856 px с карточками; inside-компоненты со слотами сайдбара и настройками проекта.",
       },
     },
   },
+  args: { showThemeSwitcher: true },
   argTypes: {
+    variant: { control: "select", options: ["default", "inside"] },
+    showThemeSwitcher: { control: "boolean" },
     container: {
       control: "select",
-      options: ["640", "720", "fill"],
+      options: ["fill"],
+    },
+    size: {
+      control: { type: "number", min: 0, step: 1 },
     },
   },
 };
 
 export default meta;
-type Story = StoryObj<ComponentProps<typeof AppLayout>>;
+type Story = StoryObj<AppLayoutStoryArgs>;
 
 interface AppLayoutStoryContentProps {
-  args: ComponentProps<typeof AppLayout>;
-  variant: "default" | "inside";
+  args: AppLayoutStoryArgs;
   enableColumnSwitchCase?: boolean;
   enableNestedRowsExample?: boolean;
 }
 
 function AppLayoutStoryContent({
   args,
-  variant,
   enableColumnSwitchCase = false,
   enableNestedRowsExample = false,
 }: AppLayoutStoryContentProps) {
-  const [activeTab, setActiveTab] = useState("overview");
+  const [activeTab, setActiveTab] = useState("templates");
   const [activeMenu, setActiveMenu] = useState("home");
   const [rows, setRows] = useState<ProjectRow[]>(() =>
     enableNestedRowsExample ? buildNestedProjects() : buildProjects(BATCH_SIZE)
@@ -624,7 +912,6 @@ function AppLayoutStoryContent({
     DEFAULT_VISIBLE_COLUMN_IDS
   );
   const hasMore = !enableNestedRowsExample && rows.length < MAX_ROWS;
-  const isInsideVariant = variant === "inside";
 
   const titleGroups = useFilterGroups<
     string,
@@ -835,14 +1122,6 @@ function AppLayoutStoryContent({
     },
     []
   );
-
-  const tableController = useDataTableController<AppLayoutColumnFilters>({
-    columns: allColumns,
-    onChange: handleFiltersChange,
-    toolbarProps: {
-      searchPlaceholder: "Поиск",
-    },
-  });
 
   const expandedColumns = useMemo<ColumnDef<ProjectRow>[]>(
     () => [
@@ -1123,6 +1402,15 @@ function AppLayoutStoryContent({
     [baseColumns, visibleColumnIds]
   );
 
+  const tableController = useDataTableController<AppLayoutColumnFilters>({
+    columns: baseColumns,
+    scopeKey: activeStatusTab,
+    onChange: handleFiltersChange,
+    toolbarProps: {
+      searchPlaceholder: "Поиск",
+    },
+  });
+
   const activeColumnsHint = useMemo(() => {
     if (!enableColumnSwitchCase) {
       return null;
@@ -1221,26 +1509,47 @@ function AppLayoutStoryContent({
     [currentBaseColumnIds]
   );
 
-  const sidebar = isInsideVariant ? (
+  const { showThemeSwitcher, variant, ...layoutArgs } = args;
+  const isInside = variant === "inside";
+
+  const sidebar = isInside ? (
     <InsideSidebar
-      title="Разделы"
+      title="Title sideMenu"
       actionSlot={
-        <Button
-          iconOnly={Plus}
-          size={Size.Xs}
-          type={Type.Flat}
-          color={Color.Brand}
-        />
+        <div className="flex items-center gap-(--spacing-2)">
+          <Button
+            iconOnly={Plus}
+            type={Type.Flat}
+            color={Color.Brand}
+            size={Size.Xs}
+          />
+          <Button
+            iconOnly={Plus}
+            type={Type.Flat}
+            color={Color.Brand}
+            size={Size.Xs}
+          />
+        </div>
       }
       headSlot={
-        <div className="flex h-9 items-center justify-center rounded border border-line bg-generic-medium text-sm text-primary">
-          Inside head
+        <div className="flex h-[36px] items-center justify-center rounded-[8px] border border-line bg-generic-medium text-sm text-primary">
+          headSlot
         </div>
       }
       slotContent={
-        <div className="flex h-full w-full items-center justify-center rounded border border-line bg-generic-medium text-sm text-primary">
-          Inside content
+        <div className="flex h-full w-full items-center justify-center rounded-[8px] border border-line bg-generic-medium text-sm text-primary">
+          slotContent
         </div>
+      }
+      bottomSlotAction={
+        <>
+          <Button type={Type.Flat} color={Color.Secondary} size={Size.Sm}>
+            Button
+          </Button>
+          <Button type={Type.Fill} color={Color.Brand} size={Size.Sm}>
+            Button
+          </Button>
+        </>
       }
     />
   ) : (
@@ -1254,177 +1563,179 @@ function AppLayoutStoryContent({
     />
   );
 
-  const header = isInsideVariant ? (
+  const headerTabs = (
+    <TabsOverflow
+      items={tabs}
+      value={activeTab}
+      onValueChange={setActiveTab}
+      size={Size.Sm}
+      indicatorOffset={9}
+    />
+  );
+  const accountMenuProps = {
+    fullName: "Константинов К.К.",
+    role: "Product Designer",
+    src: "https://i.pravatar.cc/160?img=68",
+    showTheme: false,
+    actions: [{ iconLeft: Settings, title: "Настройки" }],
+  };
+  const header = isInside ? (
     <HeaderInside
-      title="Платформа"
-      subtitle="Playground"
-      actionIcon={Plus}
-      showActionButton
+      title="HRM"
+      subtitle="Рабочее пространство"
+      showThemeSwitcher={showThemeSwitcher}
+      accountMenuProps={accountMenuProps}
+      onBackClick={() => {
+        setActiveTab("home");
+        setActiveMenu("home");
+      }}
     >
-      <TabsOverflow
-        items={tabs}
-        value={activeTab}
-        onValueChange={setActiveTab}
-        size={Size.Sm}
-        indicatorOffset={10}
-      />
+      {headerTabs}
     </HeaderInside>
   ) : (
-    <Header title="Платформа" showMenuButton showNotification>
-      <TabsOverflow
-        items={tabs}
-        value={activeTab}
-        onValueChange={setActiveTab}
-        size={Size.Sm}
-        indicatorOffset={10}
-      />
+    <Header
+      title="HRM"
+      showMenuButton
+      showNotification
+      showThemeSwitcher={showThemeSwitcher}
+      accountMenuProps={accountMenuProps}
+    >
+      {headerTabs}
     </Header>
   );
 
   return (
-    <AppLayout {...args} header={header} sidebar={sidebar}>
-      <Table<ProjectRow>
-        data={visibleRows}
-        columns={activeColumns}
-        virtualized={!enableNestedRowsExample}
-        stickyHeader
-        rowHeight={40}
-        overscan={10}
-        striped
-        enableNestedRows={enableNestedRowsExample}
-        enableRowSelection={!enableNestedRowsExample}
-        expandedContentEstimateSize={enableNestedRowsExample ? 280 : undefined}
-        getRowCanExpandContent={
-          enableNestedRowsExample
-            ? (row) => Boolean(row.original.inspections?.length)
-            : undefined
-        }
-        renderExpandedContent={
-          enableNestedRowsExample
-            ? ({ row }) =>
-                row.original.inspections ? (
-                  <ProjectInspectionsTable
-                    inspections={row.original.inspections}
-                  />
-                ) : null
-            : undefined
-        }
-        popoverAction={
-          !enableNestedRowsExample && {
-            children: ({ selectedRows, hide }) => (
-              <div className="flex items-center gap-2">
-                <Button
-                  size={Size.Xs}
-                  type={Type.Flat}
-                  color={Color.Brand}
-                  onClick={() =>
-                    console.log(
-                      "Применить действие к выбранным проектам:",
-                      selectedRows.map((row) => row.original)
-                    )
-                  }
-                >
-                  Применить
-                </Button>
-                <Button
-                  size={Size.Xs}
-                  type={Type.Outline}
-                  color={Color.Danger}
-                  onClick={hide}
-                >
-                  Скрыть
-                </Button>
-              </div>
-            ),
-          }
-        }
-        hasMore={hasMore}
-        isFetchingMore={isFetching}
-        onLoadMore={enableNestedRowsExample ? undefined : loadMore}
-        showToolbar
-        toolbarProps={{
-          ...tableController.toolbarProps,
-          topSlot: (
-            <TabsOverflow
-              items={statusTabs}
-              value={activeStatusTab}
-              onValueChange={setActiveStatusTab}
-              size={Size.Sm}
-              indicatorOffset={12}
-            />
-          ),
-          middleSlot: (
-            <div>
-              <span>Количество строк: </span>
-              <span>{visibleRows.length}</span>
-            </div>
-          ),
-          actions: toolbarActions,
-          actionsPlaceholder: "Действия",
-          bottomSlot: activeColumnsHint ? (
-            <div className="text-sm text-secondary">
-              {activeColumnsHint}. Активных column filters:{" "}
-              {tableController.filters.activeCount}.
-            </div>
-          ) : undefined,
-        }}
-        rowActions={rowActions}
-        filters={tableController.filters}
-      />
-      <TableColumnsModal
-        open={isColumnSettingsOpen}
-        onOpenChange={setIsColumnSettingsOpen}
-        value={currentBaseColumnIds.filter((columnId) =>
-          visibleColumnIds.includes(columnId)
-        )}
-        columns={baseColumns}
-        onApply={handleColumnSettingsApply}
-        size={Size.Sm}
-        title="Настройка таблицы"
-      />
+    <AppLayout {...layoutArgs} header={header} sidebar={sidebar}>
+      {isInside ? (
+        <AppLayoutInsideContent />
+      ) : layoutArgs.container === "fill" ? (
+        <>
+          <Table<ProjectRow>
+            data={visibleRows}
+            columns={activeColumns}
+            virtualized={!enableNestedRowsExample}
+            stickyHeader
+            rowHeight={40}
+            overscan={10}
+            striped
+            enableNestedRows={enableNestedRowsExample}
+            enableRowSelection={!enableNestedRowsExample}
+            expandedContentEstimateSize={
+              enableNestedRowsExample ? 280 : undefined
+            }
+            getRowCanExpandContent={
+              enableNestedRowsExample
+                ? (row) => Boolean(row.original.inspections?.length)
+                : undefined
+            }
+            renderExpandedContent={
+              enableNestedRowsExample
+                ? ({ row }) =>
+                    row.original.inspections ? (
+                      <ProjectInspectionsTable
+                        inspections={row.original.inspections}
+                      />
+                    ) : null
+                : undefined
+            }
+            popoverAction={
+              !enableNestedRowsExample && {
+                children: ({ selectedRows, hide }) => (
+                  <div className="flex items-center gap-2">
+                    <Button
+                      size={Size.Xs}
+                      type={Type.Flat}
+                      color={Color.Brand}
+                      onClick={() =>
+                        console.log(
+                          "Применить действие к выбранным проектам:",
+                          selectedRows.map((row) => row.original)
+                        )
+                      }
+                    >
+                      Применить
+                    </Button>
+                    <Button
+                      size={Size.Xs}
+                      type={Type.Outline}
+                      color={Color.Danger}
+                      onClick={hide}
+                    >
+                      Скрыть
+                    </Button>
+                  </div>
+                ),
+              }
+            }
+            hasMore={hasMore}
+            isFetchingMore={isFetching}
+            onLoadMore={enableNestedRowsExample ? undefined : loadMore}
+            showToolbar
+            toolbarProps={{
+              ...tableController.toolbarProps,
+              topSlot: (
+                <TabsOverflow
+                  items={statusTabs}
+                  value={activeStatusTab}
+                  onValueChange={setActiveStatusTab}
+                  size={Size.Sm}
+                  indicatorOffset={12}
+                />
+              ),
+              maxSearchCount: 150,
+              middleSlot: (
+                <div>
+                  <span>Количество строк: </span>
+                  <span>{visibleRows.length}</span>
+                </div>
+              ),
+              actions: toolbarActions,
+              actionsPlaceholder: "Настройки",
+              bottomSlot: activeColumnsHint ? (
+                <div className="text-sm text-secondary">
+                  {activeColumnsHint}. Активных column filters:{" "}
+                  {tableController.filters.activeCount}.
+                </div>
+              ) : undefined,
+            }}
+            rowActions={rowActions}
+            filters={tableController.filters}
+          />
+          <TableColumnsModal
+            open={isColumnSettingsOpen}
+            onOpenChange={setIsColumnSettingsOpen}
+            value={currentBaseColumnIds.filter((columnId) =>
+              visibleColumnIds.includes(columnId)
+            )}
+            columns={baseColumns}
+            onApply={handleColumnSettingsApply}
+            size={Size.Xs}
+            title="Настройка таблицы"
+          />
+        </>
+      ) : (
+        <AppLayoutCardsContent />
+      )}
     </AppLayout>
   );
 }
 
-export const HeaderAndSidebar: Story = {
-  args: {
-    container: "fill",
-    children: null,
-  },
-  render: (args) => (
-    <AppLayoutStoryContent
-      args={args}
-      variant="default"
-      enableColumnSwitchCase
-    />
-  ),
+export const Fill: Story = {
+  args: { container: "fill", children: null },
+  render: (args) => <AppLayoutStoryContent args={args} />,
 };
 
-export const HeaderInsideAndInsideSidebar: Story = {
-  args: {
-    container: "fill",
-    children: null,
-  },
-  render: (args) => (
-    <AppLayoutStoryContent
-      args={args}
-      variant="inside"
-      enableColumnSwitchCase
-    />
-  ),
+export const Default: Story = {
+  args: { children: null },
+  render: (args) => <AppLayoutStoryContent args={args} />,
 };
 
-export const HeaderAndSidebarNestedRows: Story = {
-  args: {
-    container: "fill",
-    children: null,
-  },
-  render: (args) => (
-    <AppLayoutStoryContent
-      args={args}
-      variant="default"
-      enableColumnSwitchCase
-      enableNestedRowsExample
-    />
-  ),
+export const Custom856: Story = {
+  args: { size: 856, children: null },
+  render: (args) => <AppLayoutStoryContent args={args} />,
+};
+
+export const Inside: Story = {
+  args: { variant: "inside", children: null },
+  render: (args) => <AppLayoutStoryContent args={args} />,
 };

@@ -11,6 +11,7 @@ export type ButtonDropItem<T extends string | number = string> = {
 };
 
 export type ButtonDropProps<T extends string | number = string> = {
+  iconLeft?: LucideIcon;
   value?: T;
   onChange?: (value: T) => void;
   items: ButtonDropItem<T>[];
@@ -26,4 +27,5 @@ export type ButtonDropProps<T extends string | number = string> = {
   className?: string;
   contentClassName?: string;
   matchTriggerWidth?: boolean;
+  onCloseAutoFocus?: (event: Event) => void;
 };

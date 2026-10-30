@@ -17,6 +17,13 @@ export function Tag({
   ...restProps
 }: TagProps) {
   const hasAvatar = !!avatar;
+  const isSize = size === Size.Xs ? Size.Sm : size;
+
+  const handleCloseClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    onClose?.();
+  };
 
   return (
     <span
@@ -44,8 +51,8 @@ export function Tag({
         {children}
         {onClose && (
           <CloseBtn
-            size={Size.Md}
-            onClick={onClose}
+            size={isSize}
+            onClick={handleCloseClick}
             aria-label="Закрыть"
             error={error}
             disabled={disabled}

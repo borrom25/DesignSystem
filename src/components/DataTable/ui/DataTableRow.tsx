@@ -38,7 +38,8 @@ function TableRowComponent<TData>({
   bordered = false,
   style,
 }: TableRowProps<TData>) {
-  const isClickable = Boolean(onRowClick || onRowDoubleClick);
+  const canExpand = row.getCanExpand();
+  const isClickable = Boolean(onRowClick || onRowDoubleClick || canExpand);
   const {
     handleEditorContainerMouseDown,
     handleEditorContainerClick,
@@ -49,8 +50,11 @@ function TableRowComponent<TData>({
     typeof rowClassName === "function" ? rowClassName(row) : rowClassName;
 
   const handleClick = useCallback(() => {
+    if (canExpand) {
+      row.toggleExpanded();
+    }
     onRowClick?.(row);
-  }, [onRowClick, row]);
+  }, [canExpand, onRowClick, row]);
 
   const handleDoubleClick = useCallback(() => {
     onRowDoubleClick?.(row);
@@ -79,7 +83,7 @@ function TableRowComponent<TData>({
         computedRowClassName
       )}
       style={style}
-      onClick={onRowClick ? handleClick : undefined}
+      onClick={onRowClick || canExpand ? handleClick : undefined}
       onDoubleClick={onRowDoubleClick ? handleDoubleClick : undefined}
       data-state={isSelected ? "selected" : undefined}
       data-expanded={isExpanded ? "true" : undefined}

@@ -12,6 +12,8 @@ export interface TimeBarProps {
   defaultValue?: TimeValue;
   onChange?: (value: TimeValue) => void;
   onConfirm?: (value: TimeValue) => void;
+  minTime?: TimeValue;
+  maxTime?: TimeValue;
   size?: Size;
   disabled?: boolean;
   showSeconds?: boolean;
@@ -29,6 +31,7 @@ export interface TimeColumnProps {
   values: number[];
   selectedValue: number;
   onSelect: (value: number) => void;
+  isValueDisabled?: (value: number) => boolean;
   disabled?: boolean;
   className?: string;
   fillHeight?: boolean;

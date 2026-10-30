@@ -1,4 +1,11 @@
 import { CloseBtn } from "@/components/CloseBtn";
+import {
+  Text,
+  TextColor,
+  TextShade,
+  TextVariant,
+  TextWeight,
+} from "@/components/Text";
 import { cn } from "@/utils";
 import { Color, Size } from "@/types";
 import type { AlertProps } from "./Alert.types";
@@ -26,7 +33,6 @@ export function Alert({
     <div
       className={cn(
         alertStyles.root,
-        closable && alertStyles.rootClosable,
         alertStyles.animation,
         variantStyles.container,
         className
@@ -55,22 +61,40 @@ export function Alert({
           <Icon size={16} className={variantStyles.icon} />
         </div>
         <div
-          className={cn(alertStyles.body, isCompact && alertStyles.bodyCompact)}
+          className={cn(
+            alertStyles.body,
+            closable && alertStyles.bodyClosable,
+            isCompact && alertStyles.bodyCompact
+          )}
         >
-          <div
+          <Text
+            as="div"
+            variant={TextVariant.B1}
+            weight={TextWeight.Semibold}
+            color={TextColor.Basic}
+            shade={TextShade.Primary}
             className={cn(
               alertStyles.title,
               isCompact && alertStyles.titleCompact
             )}
           >
             {title}
-          </div>
+          </Text>
           {hasDescription && (
-            <p className={alertStyles.description}>{description}</p>
+            <Text
+              as="p"
+              variant={TextVariant.B2}
+              weight={TextWeight.Medium}
+              color={TextColor.Basic}
+              shade={TextShade.Secondary}
+              className={alertStyles.description}
+            >
+              {description}
+            </Text>
           )}
-          {hasActions && <div className={alertStyles.actions}>{actions}</div>}
         </div>
       </div>
+      {hasActions && <div className={alertStyles.actions}>{actions}</div>}
     </div>
   );
 }

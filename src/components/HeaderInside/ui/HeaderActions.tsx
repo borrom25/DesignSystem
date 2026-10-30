@@ -1,36 +1,36 @@
+import { AccountMenu } from "@/components/AccountMenu";
+import type { AccountMenuProps } from "@/components/AccountMenu";
 import { Avatar } from "@/components/Avatar";
-import type { AccountMenuElement } from "@/components/AccountMenu";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { NotificationButton } from "./NotificationButton";
-import { cloneElement, isValidElement } from "react";
+import type { ReactNode } from "react";
 
 export interface HeaderActionsProps {
   showNotification?: boolean;
+  showThemeSwitcher?: boolean;
   actionsClassName: string;
   notificationButtonClassName: string;
   iconClassName: string;
   onNotificationClick?: () => void;
   notificationButtonTestId?: string;
-  accountMenu?: AccountMenuElement;
+  accountMenuProps?: Omit<AccountMenuProps, "trigger">;
+  topSlot?: ReactNode;
 }
 
 export function HeaderActions({
   showNotification = true,
+  showThemeSwitcher = false,
   actionsClassName,
   notificationButtonClassName,
   iconClassName,
   onNotificationClick,
   notificationButtonTestId,
-  accountMenu,
+  accountMenuProps,
+  topSlot,
 }: HeaderActionsProps) {
-  const accountMenuWithTrigger = isValidElement(accountMenu)
-    ? cloneElement(accountMenu, {
-        trigger: <Avatar size={36} src={accountMenu.props.src} withBorder />,
-        ...accountMenu.props,
-      })
-    : accountMenu;
-
   return (
     <div className={actionsClassName}>
+      {topSlot}
       {showNotification && (
         <NotificationButton
           onClick={onNotificationClick}
@@ -39,7 +39,13 @@ export function HeaderActions({
           iconClassName={iconClassName}
         />
       )}
-      {accountMenu && accountMenuWithTrigger}
+      {showThemeSwitcher && <ThemeSwitcher size="xs" />}
+      {accountMenuProps && (
+        <AccountMenu
+          {...accountMenuProps}
+          trigger={<Avatar size={36} src={accountMenuProps.src} withBorder />}
+        />
+      )}
     </div>
   );
 }

@@ -4,18 +4,19 @@ import { BarMenuItem, BarMenuProps } from "./BarMenu.types.ts";
 import { Menu } from "lucide-react";
 import { cn } from "@/utils";
 import { barMenuStyles } from "./styles";
-import { ListItem } from "@/components";
-import React, { useCallback, useRef } from "react";
+import { ListItem } from "@/components/ListItem";
+import { Popover } from "@/components/Popover";
+import React, { useCallback, useEffect, useState } from "react";
 import { BarMenuTrigger } from "./ui";
 import { Size } from "@/types";
 
 export const BarMenu = ({
   items,
   value,
-  onMoreClick,
   onSelect,
+  className,
 }: BarMenuProps) => {
-  const tabButtonRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
+  const [open, setOpen] = useState(false);
   const {
     visibleItems,
     containerRef,
@@ -27,14 +28,6 @@ export const BarMenu = ({
     gap: tabsOverflowGapPx,
   });
 
-  const registerTabButton = useCallback(
-    (value: string, element: HTMLButtonElement | null) => {
-      if (element) return tabButtonRefs.current.set(value, element);
-      tabButtonRefs.current.delete(value);
-    },
-    []
-  );
-
   const setMeasureRef = useCallback(
     (index: number) => (el: HTMLButtonElement | null) => {
       itemMeasureRefs.current[index] = el;
@@ -42,32 +35,68 @@ export const BarMenu = ({
     [itemMeasureRefs]
   );
 
+  const handleSelect = useCallback(
+    (id: string) => {
+      onSelect(id);
+      setOpen(false);
+    },
+    [onSelect]
+  );
+
+  useEffect(() => {
+    if (hiddenItems.length === 0 && open) {
+      setOpen(false);
+    }
+  }, [hiddenItems.length, open]);
+
   return (
-    <div ref={containerRef} className={cn(barMenuStyles.container)}>
+    <div ref={containerRef} className={cn(barMenuStyles.container, className)}>
       <div className={barMenuStyles.base}>
-        {visibleItems.map((item) => {
-          const isSelected = value === item.id;
-          return (
-            <BarMenuTrigger
-              key={item.id}
-              item={item}
-              onSelect={onSelect}
-              selected={isSelected}
-              registerTabButton={registerTabButton}
-              className={barMenuStyles.triggerBase}
-            />
-          );
-        })}
-        {hiddenItems.length > 0 && (
-          <ListItem
-            onClick={onMoreClick}
-            iconLeft={Menu}
-            iconOnly
-            size={Size.Md}
+        {visibleItems.map((item) => (
+          <BarMenuTrigger
+            key={item.id}
+            item={item}
+            onSelect={handleSelect}
+            selected={value === item.id}
             className={barMenuStyles.triggerBase}
-          >
-            <React.Fragment />
-          </ListItem>
+          />
+        ))}
+
+        {hiddenItems.length > 0 && (
+          <Popover open={open} onOpenChange={setOpen}>
+            <Popover.Trigger>
+              <ListItem
+                iconLeft={Menu}
+                iconOnly
+                size={Size.Md}
+                className={barMenuStyles.triggerBase}
+                selected={hiddenItems.some((item) => item.id === value)}
+              >
+                <React.Fragment />
+              </ListItem>
+            </Popover.Trigger>
+
+            <Popover.Content align="end" side="top" sideOffset={8}>
+              <Popover.Surface>
+                <Popover.ScrollArea maxHeight={320}>
+                  <div className={barMenuStyles.list}>
+                    {hiddenItems.map((item) => (
+                      <ListItem
+                        key={item.id}
+                        size={Size.Md}
+                        iconLeft={item.icon}
+                        selected={value === item.id}
+                        disabled={item.disabled}
+                        onClick={() => handleSelect(item.id)}
+                      >
+                        {item.label}
+                      </ListItem>
+                    ))}
+                  </div>
+                </Popover.ScrollArea>
+              </Popover.Surface>
+            </Popover.Content>
+          </Popover>
         )}
       </div>
 
@@ -83,7 +112,7 @@ export const BarMenu = ({
           </button>
         ))}
         <button type="button" ref={moreMeasureRef}>
-          <Menu onClick={onMoreClick} />
+          <Menu />
         </button>
       </div>
     </div>

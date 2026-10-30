@@ -2,7 +2,9 @@ import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import type { Size } from "@/types";
 
-export type BaseSelectOption<T extends string | number = string> = {
+export type SelectOptionValue = string | number | null;
+
+export type BaseSelectOption<T extends SelectOptionValue = string> = {
   value: T;
   label: ReactNode;
   disabled?: boolean;

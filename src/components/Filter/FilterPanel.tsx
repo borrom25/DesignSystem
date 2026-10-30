@@ -2,6 +2,7 @@ import { Button } from "@/components/Button";
 import { SearchAutocomplete } from "@/components/SearchAutocomplete";
 import { Size, Type, Color } from "@/types";
 import { cn } from "@/utils";
+import { Popover } from "@/components/Popover";
 import type { FilterPanelProps } from "./Filter.types";
 import { filterStyles } from "./styles";
 
@@ -18,6 +19,10 @@ export function FilterPanel({
   searchSlot,
   showSearch,
   maxBodyHeight = 280,
+  onScrollEnd,
+  scrollEndOffset,
+  isLoading = false,
+  hasMore = true,
   onReset,
   onApply,
   resetLabel = "Сбросить",
@@ -25,7 +30,7 @@ export function FilterPanel({
   resetDisabled = false,
   applyDisabled = false,
   resetButtonType = Type.Flat,
-  resetButtonColor = Color.Inverse,
+  resetButtonColor = Color.Secondary,
   applyButtonType = Type.Fill,
   applyButtonColor = Color.Brand,
   actionButtonSize = Size.Sm,
@@ -58,14 +63,34 @@ export function FilterPanel({
         </div>
       )}
 
-      <div
-        className={cn(filterStyles.body, bodyClassName)}
-        style={
-          maxBodyHeight !== undefined ? { maxHeight: maxBodyHeight } : undefined
-        }
-      >
-        {children}
-      </div>
+      {onScrollEnd ? (
+        <Popover.ScrollArea
+          maxHeight={
+            maxBodyHeight === "available" || typeof maxBodyHeight === "number"
+              ? maxBodyHeight
+              : undefined
+          }
+          onScrollEnd={onScrollEnd}
+          scrollEndOffset={scrollEndOffset}
+          isLoading={isLoading}
+          hasMore={hasMore}
+          showScrollbar
+          className={cn(filterStyles.body, bodyClassName)}
+        >
+          {children}
+        </Popover.ScrollArea>
+      ) : (
+        <div
+          className={cn(filterStyles.body, bodyClassName)}
+          style={
+            maxBodyHeight !== undefined
+              ? { maxHeight: maxBodyHeight }
+              : undefined
+          }
+        >
+          {children}
+        </div>
+      )}
 
       {shouldRenderFooter && (
         <div className={cn(filterStyles.footer, footerClassName)}>

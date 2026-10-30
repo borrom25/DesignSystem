@@ -1,7 +1,7 @@
-export const wrapperClasses = "flex flex-col gap-1 w-full";
+export const wrapperClasses = "flex flex-1 flex-col gap-1 w-full";
 
 export const labelBaseClasses =
-  "font-roboto-flex font-medium text-complementary";
+  "font-roboto-flex font-regular text-complementary";
 
 export const labelDisabledClasses = "text-hint";
 

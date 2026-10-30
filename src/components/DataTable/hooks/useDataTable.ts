@@ -56,6 +56,20 @@ const listColumnFilter: FilterFn<unknown> = (row, columnId, filterValue) => {
   return filterValue.some((value) => Object.is(rowValue, value));
 };
 
+const radioColumnFilter: FilterFn<unknown> = (row, columnId, filterValue) => {
+  if (filterValue === undefined || filterValue === null || filterValue === "") {
+    return true;
+  }
+
+  const rowValue = row.getValue(columnId);
+
+  if (Array.isArray(rowValue)) {
+    return rowValue.some((item) => Object.is(item, filterValue));
+  }
+
+  return Object.is(rowValue, filterValue);
+};
+
 const toDateValue = (value: unknown): Date | null => {
   if (value instanceof Date) {
     return Number.isNaN(value.getTime()) ? null : value;
@@ -350,6 +364,7 @@ export function useTable<TData>(options: UseTableOptions<TData>) {
     globalFilterFn: fuzzyFilter,
     filterFns: {
       dataTableList: listColumnFilter,
+      dataTableRadio: radioColumnFilter,
       dataTableDate: dateColumnFilter,
       dataTableColumnFilter: columnTextFilter,
       dataTableDateRange: dateRangeColumnFilter,

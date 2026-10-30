@@ -8,6 +8,7 @@ export type {
   DataTableDateRangeFilterOptions,
   DataTableListFilterOptions,
   DataTableNumberRangeFilterOptions,
+  DataTableRadioFilterOptions,
 } from "./dataTableFilter";
 export type {
   TableProps,
@@ -33,12 +34,15 @@ export type {
   DataTablePopoverActionContext,
   DataTablePopoverActionProps,
   ListFilterConfig,
+  RadioFilterConfig,
   DateFilterConfig,
   DateRangeFilterConfig,
   NumberRangeFilterConfig,
   CustomFilterConfig,
   ColumnFilterConfig,
   CustomFilterRenderProps,
+  DataTableScopeKey,
+  DataTableScopedStateOptions,
   DateRangeFilterValue,
   FilterSchema,
   DataTableFiltersState,
@@ -59,6 +63,7 @@ export type {
 } from "./hooks/useDataTableController";
 export {
   DataTableListFilter,
+  DataTableRadioFilter,
   DataTableDateFilter,
   DataTableDateRangeFilter,
   DataTableNumberRangeFilter,

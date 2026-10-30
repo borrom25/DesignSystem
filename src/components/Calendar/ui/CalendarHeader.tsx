@@ -10,23 +10,19 @@ export function CalendarHeader({
   currentMonth,
   view,
   onViewChange,
-  onPrevMonth,
-  onNextMonth,
+  onPrev,
+  onNext,
   showNavigation = true,
   locale,
   pickerType,
 }: CalendarHeaderProps) {
-  const { title, handleTitleClick, handlePrev, handleNext } = useCalendarHeader(
-    {
-      currentMonth,
-      view,
-      onViewChange,
-      onPrevMonth,
-      onNextMonth,
-      locale,
-      pickerType,
-    }
-  );
+  const { title, handleTitleClick } = useCalendarHeader({
+    currentMonth,
+    view,
+    onViewChange,
+    locale,
+    pickerType,
+  });
 
   return (
     <div className={calendarStyles.header}>
@@ -47,8 +43,8 @@ export function CalendarHeader({
             icon={ChevronUp}
             size="sm"
             type={Type.Ghost}
-            color={Color.Inverse}
-            onClick={handlePrev}
+            color={Color.Secondary}
+            onClick={onPrev}
             aria-label="Предыдущий"
             title="Предыдущий"
           />
@@ -56,8 +52,8 @@ export function CalendarHeader({
             icon={ChevronDown}
             size="sm"
             type={Type.Ghost}
-            color={Color.Inverse}
-            onClick={handleNext}
+            color={Color.Secondary}
+            onClick={onNext}
             aria-label="Следующий"
             title="Следующий"
           />

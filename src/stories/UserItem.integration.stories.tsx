@@ -154,7 +154,6 @@ export const CompactList: Story = {
 };
 
 export const ProfileHeader: Story = {
-  name: "Profile Header",
   render: () => (
     <div className="w-full max-w-[600px] bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg p-8">
       <UserItem
@@ -196,7 +195,6 @@ export const ProfileHeader: Story = {
 };
 
 export const CommentThread: Story = {
-  name: "Comment Thread",
   render: () => (
     <div className="w-full max-w-[600px] space-y-4">
       {[

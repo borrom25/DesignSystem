@@ -5,13 +5,13 @@ import {
   Download,
   FileIcon,
   LoaderCircle,
-  X,
 } from "lucide-react";
 import { IconButton } from "@/components/IconButton";
 import { Color, Size, Type } from "@/types";
 import type { FilePreviewProps } from "../InputFiles.types";
 import { downloadBlob } from "../InputFiles.utils";
 import { inputFilesStyles } from "../styles";
+import { CloseBtn } from "@/components/CloseBtn";
 
 export function FilePreview({
   file,
@@ -97,14 +97,12 @@ export function FilePreview({
           />
         )}
         {!viewMode && (
-          <IconButton
-            icon={X}
-            size={Size.Sm}
-            type={Type.Ghost}
-            color={Color.Inverse}
+          <CloseBtn
+            size={Size.Md}
             onClick={onRemove}
-            aria-label="Скачать файл"
-            title="Скачать файл"
+            aria-label="Удалить файл"
+            error={error}
+            title="Удалить файл"
           />
         )}
       </div>

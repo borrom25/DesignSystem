@@ -1,10 +1,10 @@
 import { useCallback } from "react";
 import { Size } from "@/types";
-import { BaseItem } from "@/shared/Select";
+import { BaseItem, type SelectOptionValue } from "@/shared/Select";
 import { useSelectContext } from "../Select.context";
 import type { SelectItemProps } from "../types";
 
-export function SelectItem<T extends string | number = string>({
+export function SelectItem<T extends SelectOptionValue = string>({
   value,
   disabled = false,
   className,

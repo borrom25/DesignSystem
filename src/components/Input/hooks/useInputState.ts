@@ -20,7 +20,6 @@ type UseInputStateProps = Pick<
   | "value"
   | "defaultValue"
   | "onChange"
-  | "onClear"
 > & {
   size: NonNullable<InputProps["size"]>;
   variant: NonNullable<InputProps["variant"]>;
@@ -39,18 +38,15 @@ export function useInputState({
   value,
   defaultValue,
   onChange,
-  onClear,
 }: UseInputStateProps) {
   const {
     value: inputValue,
     hasValue,
     handleChange,
-    handleClear,
   } = useInputValue({
     value,
     defaultValue,
     onChange,
-    onClear,
   });
 
   const { inputId, hintId } = useInputIds({ id, hint, hintError });
@@ -74,7 +70,6 @@ export function useInputState({
     adornmentClassName,
     countDisplay,
     handleChange,
-    handleClear,
     hasValue,
     hintId,
     iconSize,

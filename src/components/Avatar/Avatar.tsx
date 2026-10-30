@@ -14,6 +14,7 @@ export function Avatar({
   alt = "Avatar",
   withBorder = false,
   showEditBadge = false,
+  onEditBadgeClick,
   className,
   initials,
   style,
@@ -43,7 +44,7 @@ export function Avatar({
     >
       {!isError && (
         <img
-          src={src}
+          src={src ?? ""}
           alt={alt}
           className={avatarStyles.image}
           style={{ display: isLoaded ? "block" : "none" }}
@@ -65,6 +66,7 @@ export function Avatar({
           iconOnly={Pencil}
           color="brand"
           size="xs"
+          onClick={onEditBadgeClick}
         />
       )}
     </div>

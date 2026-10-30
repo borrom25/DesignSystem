@@ -1,16 +1,14 @@
 import { cardBaseClasses } from "./base";
 import {
   actionSlotClasses,
-  actionSlotPositionClasses,
   contentLayoutClasses,
+  headerClasses,
+  headerSubtitleTextClasses,
   headerTextClasses,
-  headerTextWithActionClasses,
-  subtitleClasses,
-  titleClasses,
-  withActionSlotClasses,
+  headerTitleTextClasses,
 } from "./header";
 import { cardSizeClasses } from "./sizes";
-import { cardVariantClasses } from "./variants";
+import { cardHoverClasses, cardVariantClasses } from "./variants";
 
 export { cardBaseClasses, cardSizeClasses, cardVariantClasses };
 
@@ -18,12 +16,11 @@ export const cardStyles = {
   base: cardBaseClasses,
   size: cardSizeClasses,
   variant: cardVariantClasses,
-  withActionSlot: withActionSlotClasses,
+  hover: cardHoverClasses,
+  header: headerClasses,
   headerText: headerTextClasses,
-  headerTextWithAction: headerTextWithActionClasses,
-  title: titleClasses,
-  subtitle: subtitleClasses,
+  headerTitleText: headerTitleTextClasses,
+  headerSubtitleText: headerSubtitleTextClasses,
   actionSlot: actionSlotClasses,
-  actionSlotPosition: actionSlotPositionClasses,
   contentLayout: contentLayoutClasses,
 } as const;

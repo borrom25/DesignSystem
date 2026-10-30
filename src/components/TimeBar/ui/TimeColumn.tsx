@@ -20,6 +20,7 @@ export function TimeColumn({
   values,
   selectedValue,
   onSelect,
+  isValueDisabled,
   disabled = false,
   className,
   fillHeight = false,
@@ -89,6 +90,7 @@ export function TimeColumn({
       />
       {renderedValues.map(({ key, value, absoluteIndex }) => {
         const isSelected = value === selectedValue;
+        const isItemDisabled = disabled || !!isValueDisabled?.(value);
         return (
           <button
             key={key}
@@ -99,11 +101,13 @@ export function TimeColumn({
             className={cn(
               itemBaseClasses,
               itemHoverClasses,
-              isSelected && itemSelectedClasses
+              isSelected && itemSelectedClasses,
+              isItemDisabled && itemDisabledClasses
             )}
             onClick={() => handleItemClick(value)}
-            disabled={disabled}
+            disabled={isItemDisabled}
             data-index={absoluteIndex}
+            style={{ height: ITEM_HEIGHT }}
           >
             {formatTimeValue(value)}
           </button>

@@ -1,4 +1,4 @@
-import type { TextareaHTMLAttributes } from "react";
+import type { Ref, TextareaHTMLAttributes } from "react";
 import type { Size } from "@/types";
 import type { BaseFieldProps } from "@/types/field";
 
@@ -10,6 +10,7 @@ export interface TextAreaOwnProps extends BaseFieldProps {
   onClear?: () => void;
   resizeMode?: "vertical" | "both";
   clearable?: boolean;
+  ref?: Ref<HTMLTextAreaElement>;
 }
 
 export interface TextAreaProps

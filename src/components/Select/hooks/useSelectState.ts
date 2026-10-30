@@ -1,8 +1,9 @@
 import { useCallback } from "react";
 import { useControllableState, useOpenState } from "@/shared/hooks";
+import type { SelectOptionValue } from "@/shared/Select";
 import type { SelectProps } from "../types";
 
-export type UseSelectStateProps<T extends string | number = string> = Pick<
+export type UseSelectStateProps<T extends SelectOptionValue = string> = Pick<
   SelectProps<T>,
   | "value"
   | "defaultValue"
@@ -13,19 +14,28 @@ export type UseSelectStateProps<T extends string | number = string> = Pick<
   | "onOpenChange"
 >;
 
-export function useSelectState<T extends string | number = string>({
-  value: controlledValue,
-  defaultValue,
-  onValueChange,
-  onClear,
-  open: controlledOpen,
-  defaultOpen = false,
-  onOpenChange,
-}: UseSelectStateProps<T>) {
-  const [value, setValue] = useControllableState({
+export function useSelectState<T extends SelectOptionValue = string>(
+  props: UseSelectStateProps<T>
+) {
+  const {
     value: controlledValue,
     defaultValue,
+    onValueChange,
+    onClear,
+    open: controlledOpen,
+    defaultOpen = false,
+    onOpenChange,
+  } = props;
+  const isValueControlled = Object.prototype.hasOwnProperty.call(
+    props,
+    "value"
+  );
+
+  const [value, setValue] = useControllableState<T | null>({
+    value: controlledValue ?? null,
+    defaultValue: defaultValue ?? null,
     onChange: onValueChange,
+    isControlled: isValueControlled,
   });
 
   const { open, setOpen } = useOpenState({
@@ -46,7 +56,7 @@ export function useSelectState<T extends string | number = string>({
     if (onClear) {
       onClear();
     } else {
-      setValue(undefined);
+      setValue(null);
     }
   }, [onClear, setValue]);
 

@@ -69,6 +69,10 @@ function getColumnFilterDefaultValue(filter: ColumnFilterConfig): unknown {
     return [];
   }
 
+  if (filter.kind === "radio") {
+    return undefined;
+  }
+
   if (filter.kind === "dateRange") {
     return { start: undefined, end: undefined };
   }

@@ -1,0 +1,17 @@
+@import "../../../src/tokens/index.css";
+@import "../../../src/styles/global.css";
+
+@source "../../../src/**/*.{js,ts,jsx,tsx}";
+@source "./**/*.{js,ts,jsx,tsx}";
+
+@keyframes docs-page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

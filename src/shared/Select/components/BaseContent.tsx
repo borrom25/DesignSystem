@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Popover, PopoverSurface } from "@/components/Popover";
+import { Popover } from "@/components/Popover";
 
 type BaseContentProps = {
   matchTriggerWidth?: boolean;
@@ -37,7 +37,7 @@ export function BaseContent({
       sideOffset={sideOffset}
       align={align}
     >
-      <PopoverSurface className={className}>
+      <Popover.Surface className={className}>
         {header}
         <Popover.ScrollArea
           maxHeight={maxHeight}
@@ -45,11 +45,12 @@ export function BaseContent({
           scrollEndOffset={scrollEndOffset}
           isLoading={isLoading}
           hasMore={hasMore}
+          showScrollbar
           className="w-full"
         >
           {children}
         </Popover.ScrollArea>
-      </PopoverSurface>
+      </Popover.Surface>
     </Popover.Content>
   );
 }

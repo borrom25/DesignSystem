@@ -1,5 +1,7 @@
 export {
   contentBaseClasses,
+  contentPageZIndexClasses,
+  contentModalZIndexClasses,
   surfaceClasses,
   headerClasses,
   titleClasses,
@@ -12,6 +14,8 @@ export { tooltipAnimationClasses } from "./animations";
 
 import {
   contentBaseClasses,
+  contentPageZIndexClasses,
+  contentModalZIndexClasses,
   surfaceClasses,
   headerClasses,
   titleClasses,
@@ -24,6 +28,8 @@ import { tooltipAnimationClasses } from "./animations";
 
 export const tooltipStyles = {
   contentBase: contentBaseClasses,
+  contentPageZIndex: contentPageZIndexClasses,
+  contentModalZIndex: contentModalZIndexClasses,
   surface: surfaceClasses,
   header: headerClasses,
   title: titleClasses,

@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactNode } from "react";
+import type { HTMLAttributes, ReactNode, Ref } from "react";
 import type { Size } from "@/types";
 import type { CounterProps } from "@/components/Counter/Counter.types";
 
@@ -11,6 +11,12 @@ export type TabsOverflowItem<T extends string | number> = {
   leftSlot?: ReactNode;
   rightSlot?: ReactNode;
 };
+
+export type TabsOverflowItemWrapper<T extends string | number> = (props: {
+  item: TabsOverflowItem<T>;
+  index: number;
+  children: ReactNode;
+}) => ReactNode;
 
 export type TabsOverflowProps<T extends string | number = string> = Omit<
   HTMLAttributes<HTMLDivElement>,
@@ -25,6 +31,9 @@ export type TabsOverflowProps<T extends string | number = string> = Omit<
   sideMenu?: boolean;
   moreLabel?: string;
   indicatorOffset?: number;
+  itemWrapper?: TabsOverflowItemWrapper<T>;
+  placeholder?: ReactNode;
+  ref?: Ref<HTMLDivElement>;
 };
 
 export type TabTriggerProps<T extends string | number> = {
@@ -39,6 +48,7 @@ export type TabTriggerProps<T extends string | number> = {
 export type TabsOverflowIndicatorRect = {
   left: number;
   width: number;
+  bottom: number;
 };
 
 export type TabsOverflowItemContentProps<T extends string | number> = {

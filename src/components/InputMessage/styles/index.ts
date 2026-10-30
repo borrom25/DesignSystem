@@ -7,18 +7,7 @@ import {
   inputMessageFilesListClasses,
   inputMessageContainerShadowClasses,
 } from "./base";
-import {
-  previewActionsClasses,
-  previewBackdropClasses,
-  previewButtonContainerClasses,
-  previewCloseButtonClasses,
-  previewContainerClasses,
-  previewFileClasses,
-  previewFileNameBaseClasses,
-  previewFileSizeBaseClasses,
-  previewImageClasses,
-  previewOverlayClasses,
-} from "./preview.ts";
+import { fileTilePreviewStyles } from "@/shared/FileTilePreview";
 
 export const inputMessageStyles = {
   wrapper: inputMessageWrapperClasses,
@@ -28,16 +17,5 @@ export const inputMessageStyles = {
   actionsList: inputMessageActionsListClasses,
   filesList: inputMessageFilesListClasses,
   containerShadow: inputMessageContainerShadowClasses,
-  preview: {
-    container: previewContainerClasses,
-    buttonContainer: previewButtonContainerClasses,
-    image: previewImageClasses,
-    backdrop: previewBackdropClasses,
-    overlay: previewOverlayClasses,
-    actions: previewActionsClasses,
-    closeButton: previewCloseButtonClasses,
-    file: previewFileClasses,
-    fileName: previewFileNameBaseClasses,
-    fileSize: previewFileSizeBaseClasses,
-  },
+  preview: fileTilePreviewStyles,
 } as const;

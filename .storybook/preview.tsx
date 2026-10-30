@@ -1,13 +1,14 @@
-import React, { useEffect, useRef } from "react";
 import type { Preview } from "@storybook/react-vite";
+import React, { useEffect } from "react";
 import {
   ScreenProvider,
   ThemeProvider,
   getInitialTheme,
   useTheme,
+  LanguageProvider,
 } from "../src/providers";
-import "../src/tokens/index.css";
 import "../src/styles/global.css";
+import "../src/tokens/index.css";
 
 const initialTheme = getInitialTheme();
 
@@ -18,21 +19,13 @@ const ThemeWrapper = ({
   children: React.ReactNode;
   storybookTheme: "light" | "dark" | undefined;
 }) => {
-  const { setTheme, theme } = useTheme();
-  const isInitialSync = useRef(true);
+  const { setTheme } = useTheme();
 
   useEffect(() => {
-    if (
-      storybookTheme &&
-      (storybookTheme === "light" || storybookTheme === "dark")
-    ) {
-      if (isInitialSync.current) {
-        isInitialSync.current = false;
-      } else if (theme !== storybookTheme) {
-        setTheme(storybookTheme);
-      }
+    if (storybookTheme === "light" || storybookTheme === "dark") {
+      setTheme(storybookTheme);
     }
-  }, [storybookTheme, setTheme, theme]);
+  }, [storybookTheme, setTheme]);
 
   return <>{children}</>;
 };
@@ -79,24 +72,26 @@ const preview: Preview = {
 
       return (
         <ThemeProvider>
-          <ScreenProvider>
-            <ThemeWrapper storybookTheme={storybookTheme}>
-              <StorybookPreviewBackground>
-                <div
-                  style={{
-                    boxSizing: "border-box",
-                    width: "100%",
-                    maxWidth: "100%",
-                    minHeight: "100vh",
-                    background: "var(--background-basic-background-page)",
-                    color: "var(--text-basic-primary)",
-                  }}
-                >
-                  <Story />
-                </div>
-              </StorybookPreviewBackground>
-            </ThemeWrapper>
-          </ScreenProvider>
+          <LanguageProvider>
+            <ScreenProvider>
+              <ThemeWrapper storybookTheme={storybookTheme}>
+                <StorybookPreviewBackground>
+                  <div
+                    style={{
+                      boxSizing: "border-box",
+                      width: "100%",
+                      maxWidth: "100%",
+                      minHeight: "100vh",
+                      background: "var(--background-basic-background-page)",
+                      color: "var(--text-basic-primary)",
+                    }}
+                  >
+                    <Story />
+                  </div>
+                </StorybookPreviewBackground>
+              </ThemeWrapper>
+            </ScreenProvider>
+          </LanguageProvider>
         </ThemeProvider>
       );
     },

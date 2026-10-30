@@ -6,6 +6,12 @@ export const sizeClasses: Record<Size, string> = {
   md: "h-16 px-5 rounded-md",
 } as const;
 
+export const wrapSizeClasses: Record<Size, string> = {
+  xs: "w-full min-w-0 min-h-14 px-4 py-2 rounded-xs",
+  sm: "w-full min-w-0 min-h-15 px-5 py-3 rounded-sm",
+  md: "w-full min-w-0 min-h-16 px-5 py-3 rounded-md",
+} as const;
+
 export const iconOnlySizeClasses: Record<Size, string> = {
   xs: "flex w-14 h-14 px-3 justify-center items-center gap-2",
   sm: "flex w-15 h-15 px-3 justify-center items-center gap-2",

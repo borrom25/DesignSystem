@@ -13,9 +13,9 @@ export function BackButton({ onClick, testId }: BackButtonProps) {
       htmlType={HtmlType.Button}
       onClick={onClick}
       data-testid={testId}
-      type={Type.Ghost}
-      color={Color.Inverse}
-      size={Size.Sm}
+      type={Type.Flat}
+      color={Color.Secondary}
+      size={Size.Xs}
       aria-label="Назад"
       iconOnly={ArrowLeft}
     />

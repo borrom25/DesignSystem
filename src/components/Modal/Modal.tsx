@@ -23,6 +23,8 @@ export function Modal({
   closeOnEscape = true,
   showCloseButton,
   animationClassName,
+  headBottomSlot,
+  slotHead,
   className,
   sideMenu = false,
   withBodyPadding = true,
@@ -45,7 +47,7 @@ export function Modal({
   const isModal = type === ModalType.modal;
 
   const modalContent = (
-    <>
+    <div className={modalStyles.layer} data-ui-modal="">
       <ModalOverlay onClick={handleOverlayClick} state={state} />
       <ModalContent
         type={type}
@@ -69,6 +71,9 @@ export function Modal({
           subtitle={subtitle}
           actionSlot={isIceBox ? undefined : actionSlot}
           onClose={handleClose}
+          headBottomSlot={headBottomSlot}
+          slotHead={slotHead}
+          showCloseButton={showCloseButton !== false && !sideMenu}
         />
 
         {(isModal || isIceBox) && children && (
@@ -81,16 +86,13 @@ export function Modal({
             {children}
           </div>
         )}
-
-        {isIceBox && actionSlot && (
-          <div className={cn(modalStyles.header, modalStyles.actionSlotBorder)}>
-            <div className={modalStyles.actionSlotWrapper}>{actionSlot}</div>
-          </div>
+        {isIceBox ? (
+          <ModalFooter>{actionSlot}</ModalFooter>
+        ) : (
+          <ModalFooter>{bottomSlot}</ModalFooter>
         )}
-
-        {!isIceBox && <ModalFooter>{bottomSlot}</ModalFooter>}
       </ModalContent>
-    </>
+    </div>
   );
 
   return createPortal(modalContent, document.body);

@@ -1,5 +1,5 @@
 import { Size } from "@/types";
-import { Popover, PopoverSurface } from "@/components/Popover";
+import { Popover } from "@/components/Popover";
 import { TimeBar } from "@/components/TimeBar";
 import type { TimePickerProps } from "./TimePicker.types";
 import { useTimePickerValue } from "./hooks/useTimePickerValue";
@@ -28,6 +28,8 @@ export function TimePicker({
   onChangeTime,
   onClear,
   format: formatProp,
+  minTime,
+  maxTime,
   placeholder = "ЧЧ:ММ",
   className,
   fieldClassName,
@@ -57,6 +59,8 @@ export function TimePicker({
     handleInputChange,
     handleTimeChange,
     handleClear,
+    minTime: resolvedMinTime,
+    maxTime: resolvedMaxTime,
   } = useTimePickerValue({
     value: valueProp,
     time,
@@ -66,6 +70,8 @@ export function TimePicker({
     onChangeTime,
     onClear,
     format,
+    minTime,
+    maxTime,
     disabled,
   });
 
@@ -75,6 +81,12 @@ export function TimePicker({
     seconds: number;
   }) => {
     handleTimeChange(timeValue);
+    setOpen(false);
+  };
+
+  const handleClearClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    handleClear();
     setOpen(false);
   };
 
@@ -88,6 +100,7 @@ export function TimePicker({
           onChange={handleInputChange}
           required={required}
           label={label}
+          labelActive={open || Boolean(placeholder)}
           placeholder={placeholder}
           size={size}
           disabled={disabled}
@@ -98,34 +111,32 @@ export function TimePicker({
           onClick={openPopover}
           clearable={false}
           suffix={
-            (!hasValue || rightSlot) && (
-              <div
-                className={cn(
-                  timePickerStyles.rightSlot,
-                  disabled && pointerEventsNone
-                )}
-              >
-                <Popover.Trigger>
-                  {hasValue ? (
-                    <CloseBtn
-                      size={size}
-                      onClick={handleClear}
-                      className={inputStyles.clearButton}
+            <div
+              className={cn(
+                timePickerStyles.rightSlot,
+                disabled && pointerEventsNone
+              )}
+            >
+              <Popover.Trigger>
+                {hasValue && !disabled ? (
+                  <CloseBtn
+                    size={size}
+                    onClick={handleClearClick}
+                    className={inputStyles.clearButton}
+                  />
+                ) : (
+                  <div className={timePickerStyles.iconWrapper}>
+                    <Clock
+                      className={cn(
+                        timePickerStyles.iconStyles,
+                        timePickerStyles.iconSize[size]
+                      )}
                     />
-                  ) : (
-                    <div className={timePickerStyles.iconWrapper}>
-                      <Clock
-                        className={cn(
-                          timePickerStyles.iconStyles,
-                          timePickerStyles.iconSize[size]
-                        )}
-                      />
-                    </div>
-                  )}
-                </Popover.Trigger>
-                {rightSlot}
-              </div>
-            )
+                  </div>
+                )}
+              </Popover.Trigger>
+              {rightSlot}
+            </div>
           }
         />
 
@@ -138,20 +149,20 @@ export function TimePicker({
           }
           onFocusOutside={handleFocusOutside}
         >
-          <PopoverSurface>
-            <TimeBar
-              value={currentTime}
-              onChange={handleTimeChange}
-              onConfirm={handleConfirm}
-              disabled={disabled}
-              showSeconds={showSeconds}
-              use24Hour={use24Hour}
-              showNowButton={showNowButton}
-              showConfirmButton={showConfirmButton}
-              nowButtonText={nowButtonText}
-              confirmButtonText={confirmButtonText}
-            />
-          </PopoverSurface>
+          <TimeBar
+            value={currentTime}
+            onChange={handleTimeChange}
+            onConfirm={handleConfirm}
+            minTime={resolvedMinTime}
+            maxTime={resolvedMaxTime}
+            disabled={disabled}
+            showSeconds={showSeconds}
+            use24Hour={use24Hour}
+            showNowButton={showNowButton}
+            showConfirmButton={showConfirmButton}
+            nowButtonText={nowButtonText}
+            confirmButtonText={confirmButtonText}
+          />
         </Popover.Content>
       </Popover>
     </div>

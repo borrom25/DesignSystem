@@ -17,23 +17,25 @@ export const PieChartLegend = ({
   setHiddenKeys,
   hasInteractiveLegend,
 }: PieChartLegendProps) => {
+  const total = data.reduce((sum, item) => sum + item.value, 0);
+
   return (
     <div className={pieChartStyles.legend}>
-      {hasInteractiveLegend
-        ? data.map(({ name }, i) => {
-            const isChecked = !hiddenKeys.includes(name);
-            const isDisabled =
-              isChecked && hiddenKeys.length === data.length - 1;
+      {data.map(({ name, value, caption }, i) => {
+        const percent = total === 0 ? 0 : Math.round((value / total) * 100);
+        const isChecked = !hiddenKeys.includes(name);
+        const isDisabled = isChecked && hiddenKeys.length === data.length - 1;
 
-            return (
+        return (
+          <div key={name} className={pieChartStyles.legendItem}>
+            {hasInteractiveLegend ? (
               <CheckBox
-                key={name}
                 style={{
                   border: "none",
                   background: isChecked ? getBarColor(i) : "",
                 }}
                 size={Size.Xs}
-                checked={!hiddenKeys.includes(name)}
+                checked={isChecked}
                 disabled={isDisabled}
                 onChange={() =>
                   setHiddenKeys((prev) =>
@@ -42,21 +44,26 @@ export const PieChartLegend = ({
                       : [...prev, name]
                   )
                 }
-                title={name}
               />
-            );
-          })
-        : data.map(({ name }, i) => (
-            <div key={name} className={pieChartStyles.legendItem}>
-              <label
+            ) : (
+              <span
                 className={pieChartStyles.legendIcon}
-                style={{
-                  background: getBarColor(i),
-                }}
+                style={{ background: getBarColor(i) }}
               />
-              <span className={pieChartStyles.legendLabel}>{name}</span>
+            )}
+            <div className={pieChartStyles.legendText}>
+              <p className={pieChartStyles.legendLabel}>
+                {name}: {value}
+              </p>
+              {caption && (
+                <div className={pieChartStyles.legendLabel}>
+                  {caption(percent)}
+                </div>
+              )}
             </div>
-          ))}
+          </div>
+        );
+      })}
     </div>
   );
 };

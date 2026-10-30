@@ -62,9 +62,16 @@ export function FloatingLabel({
   );
 }
 
-export function FloatingLabelRequiredMark() {
+export function FloatingLabelRequiredMark({
+  className,
+}: {
+  className?: string;
+}) {
   return (
-    <span aria-hidden className={sharedInputStyles.floatingLabelRequiredMark}>
+    <span
+      aria-hidden
+      className={cn(sharedInputStyles.floatingLabelRequiredMark, className)}
+    >
       *
     </span>
   );

@@ -1,9 +1,9 @@
 import type { Size } from "@/types";
 
 export const sizeClasses: Record<Size, string> = {
-  xs: "h-(--size-btn-xs-h) px-(--size-btn-xs-px) gap-(--size-btn-xs-gap) rounded-xs text-xs font-medium",
-  sm: "h-(--size-btn-sm-h) px-(--size-btn-sm-px) gap-(--size-btn-sm-gap) rounded-sm text-sm font-medium",
-  md: "h-(--size-btn-md-h) px-(--size-btn-md-px) gap-(--size-btn-md-gap) rounded-md text-md font-medium",
+  xs: "h-(--size-btn-xs-h) px-(--size-btn-xs-px) gap-(--size-btn-xs-gap) rounded-sm text-xs font-medium",
+  sm: "h-(--size-btn-sm-h) px-(--size-btn-sm-px) gap-(--size-btn-sm-gap) rounded-md text-sm font-medium",
+  md: "h-(--size-btn-md-h) px-(--size-btn-md-px) gap-(--size-btn-md-gap) rounded-lg text-md font-medium",
 } as const;
 
 export const gapClasses: Record<Size, string> = {

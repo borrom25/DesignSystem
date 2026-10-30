@@ -17,10 +17,11 @@ export function getVariantClasses(type: Type, color: Color): string {
 
 export function getDisabledClasses(type: Type): string {
   const disabledClassesMap: Record<Type, string> = {
-    fill: "rounded-xs border border-line-disabled bg-generic-disabled text-hint",
-    outline: "rounded-xs border border-line-disabled-hover text-hint",
-    ghost: "text-hint",
-    flat: "rounded-xs border border-line-disabled bg-generic-disabled text-hint",
+    fill: "border-none bg-generic-disabled text-hint",
+    outline:
+      "border border-line-disabled bg-transparent text-hint hover:bg-transparent",
+    ghost: "bg-transparent text-hint hover:bg-transparent",
+    flat: "border-none bg-generic-disabled text-hint",
   };
 
   return disabledClassesMap[type] ?? disabledClassesMap.fill;

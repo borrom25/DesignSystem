@@ -1,10 +1,10 @@
 import { useCallback, useState } from "react";
-import type { DateRangeBound, DateRangeValue } from "../DateRange.types";
+import type { DateRangeBound, DateRangeNativeValue } from "../DateRange.types";
 import { getFieldClickBound } from "../utils/dateRangeValue";
 
 export interface UseDateRangeInteractionParams {
   disabled: boolean;
-  currentValue: DateRangeValue;
+  currentValue: DateRangeNativeValue;
   showTimeBar?: boolean;
   handleClear: () => void;
   handleBoundSelect: (
@@ -13,7 +13,7 @@ export interface UseDateRangeInteractionParams {
   ) =>
     | {
         nextActiveBound: DateRangeBound;
-        nextValue: DateRangeValue;
+        nextValue: DateRangeNativeValue;
       }
     | undefined;
 }

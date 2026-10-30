@@ -9,6 +9,7 @@ interface UseTextAreaClassNamesProps {
   disabled: boolean;
   inputClassName?: string;
   hasLabel?: boolean;
+  isLabelActive?: boolean;
   isPlaceholderVisible?: boolean;
 }
 
@@ -18,6 +19,7 @@ export function useTextAreaClassNames({
   disabled,
   inputClassName,
   hasLabel = false,
+  isLabelActive = false,
   isPlaceholderVisible = false,
 }: UseTextAreaClassNamesProps) {
   const fieldShellClassName = useMemo(
@@ -46,6 +48,7 @@ export function useTextAreaClassNames({
         hasLabel
           ? textAreaStyles.sizeWithLabel[size]
           : cn(textAreaStyles.size[size], textAreaStyles.nativeBottomPadding),
+        hasLabel && isLabelActive && textAreaStyles.nativeClipTop,
         !hasLabel && isError && textAreaStyles.error,
         !hasLabel && disabled && textAreaStyles.disabled,
         !hasLabel && !isError && !disabled && textAreaStyles.state,
@@ -57,7 +60,15 @@ export function useTextAreaClassNames({
             : textAreaStyles.nativePlaceholderHidden),
         inputClassName
       ),
-    [size, isError, disabled, hasLabel, isPlaceholderVisible, inputClassName]
+    [
+      size,
+      isError,
+      disabled,
+      hasLabel,
+      isLabelActive,
+      isPlaceholderVisible,
+      inputClassName,
+    ]
   );
 
   return { fieldShellClassName, nativeClassName };

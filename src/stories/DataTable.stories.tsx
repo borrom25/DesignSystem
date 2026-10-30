@@ -2,13 +2,16 @@ import { useMemo, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { RowSelectionState } from "@tanstack/react-table";
 import {
+  Button,
   Table,
   createDataTableColumnHelper,
+  useDataTableController,
   useDataTableFilters,
   type ColumnDef,
   type TableCellValueChangeEvent,
   type TableProps,
 } from "@/components";
+import { Color, Size, Type } from "@/types";
 
 interface ProjectTreeRow {
   id: string;
@@ -28,8 +31,29 @@ interface InspectionRow {
   priority: "Низкий" | "Средний" | "Высокий";
 }
 
+type InspectionScopeId = "planned" | "completed";
+
+type ScopedInspectionFilters = {
+  checkpoint?: string;
+  inspector?: string;
+  status?: InspectionRow["status"][];
+  priority?: InspectionRow["priority"];
+};
+
+interface GroupedProjectRow {
+  id: string;
+  name: string;
+  owner: string;
+  start: string;
+  finish: string;
+  budget: string;
+  remaining: string;
+}
+
 const columnHelper = createDataTableColumnHelper<ProjectTreeRow>();
 const inspectionColumnHelper = createDataTableColumnHelper<InspectionRow>();
+const groupedColumnHelper = createDataTableColumnHelper<GroupedProjectRow>();
+const nestedInspectionInset = 56;
 
 const columns: ColumnDef<ProjectTreeRow>[] = [
   columnHelper.accessor("name", {
@@ -209,7 +233,7 @@ const inspectionColumns: ColumnDef<InspectionRow>[] = [
       ],
     },
   }),
-  inspectionColumnHelper.list("priority", {
+  inspectionColumnHelper.radio("priority", {
     header: "Приоритет",
     size: 160,
     filter: {
@@ -222,6 +246,41 @@ const inspectionColumns: ColumnDef<InspectionRow>[] = [
   }),
 ];
 
+const inspectionRowsByScope: Record<InspectionScopeId, InspectionRow[]> = {
+  planned: [
+    {
+      id: "planned-1",
+      checkpoint: "Входной контроль",
+      inspector: "Марина Юдина",
+      status: "Запланировано",
+      priority: "Высокий",
+    },
+    {
+      id: "planned-2",
+      checkpoint: "Проверка кабельных трасс",
+      inspector: "Павел Левин",
+      status: "В работе",
+      priority: "Средний",
+    },
+  ],
+  completed: [
+    {
+      id: "completed-1",
+      checkpoint: "Финальная приемка",
+      inspector: "Марина Юдина",
+      status: "Готово",
+      priority: "Высокий",
+    },
+    {
+      id: "completed-2",
+      checkpoint: "Проверка документации",
+      inspector: "Ольга Смирнова",
+      status: "Готово",
+      priority: "Низкий",
+    },
+  ],
+};
+
 function InspectionsTable({ inspections }: { inspections: InspectionRow[] }) {
   const filters = useDataTableFilters({
     columns: inspectionColumns,
@@ -230,6 +289,7 @@ function InspectionsTable({ inspections }: { inspections: InspectionRow[] }) {
   return (
     <Table
       embedded
+      embeddedLeadingInset={nestedInspectionInset}
       data={inspections}
       columns={inspectionColumns}
       filters={filters}
@@ -342,6 +402,237 @@ function EditableCellsExample() {
   );
 }
 
+function PopoverActionExample() {
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+
+  return (
+    <div className="box-border flex h-screen w-full min-h-0 flex-col p-4">
+      <Table
+        data={data}
+        columns={columns}
+        stickyHeader
+        striped
+        enableRowSelection
+        rowSelection={rowSelection}
+        onRowSelectionChange={setRowSelection}
+        getRowId={(row) => row.id}
+        className="min-h-0 flex-1"
+        popoverAction={{
+          selectedLabel: (count) => `Отмечено проектов: ${count}`,
+          children: ({ selectedRows, hide }) => (
+            <div className="flex items-center gap-2">
+              <Button
+                size={Size.Xs}
+                type={Type.Flat}
+                color={Color.Brand}
+                onClick={() =>
+                  console.log(
+                    "Применить действие к выбранным проектам:",
+                    selectedRows.map((row) => row.original)
+                  )
+                }
+              >
+                Применить
+              </Button>
+              <Button
+                size={Size.Xs}
+                type={Type.Outline}
+                color={Color.Danger}
+                onClick={hide}
+              >
+                Скрыть
+              </Button>
+            </div>
+          ),
+          onClose: ({ hide }) => hide(),
+          closeAriaLabel: "Скрыть панель выбранных проектов",
+        }}
+      />
+    </div>
+  );
+}
+
+function ScopedControllerExample() {
+  const [activeScope, setActiveScope] = useState<InspectionScopeId>("planned");
+  const tableController = useDataTableController<ScopedInspectionFilters>({
+    columns: inspectionColumns,
+    scopeKey: activeScope,
+    toolbarProps: {
+      searchPlaceholder: "Поиск по вкладке",
+    },
+  });
+
+  const visibleRows = useMemo(() => {
+    const normalizedSearch = tableController.searchValue.trim().toLowerCase();
+
+    return inspectionRowsByScope[activeScope].filter((row) => {
+      if (!normalizedSearch) {
+        return true;
+      }
+
+      return (
+        row.checkpoint.toLowerCase().includes(normalizedSearch) ||
+        row.inspector.toLowerCase().includes(normalizedSearch)
+      );
+    });
+  }, [activeScope, tableController.searchValue]);
+
+  return (
+    <div className="box-border flex h-screen w-full min-h-0 flex-col">
+      <div className="flex flex-wrap gap-2 px-4 pt-4">
+        <Button
+          size={Size.Sm}
+          type={activeScope === "planned" ? Type.Flat : Type.Outline}
+          color={Color.Brand}
+          onClick={() => setActiveScope("planned")}
+        >
+          План
+        </Button>
+        <Button
+          size={Size.Sm}
+          type={activeScope === "completed" ? Type.Flat : Type.Outline}
+          color={Color.Brand}
+          onClick={() => setActiveScope("completed")}
+        >
+          Завершено
+        </Button>
+      </div>
+
+      <div className="px-4 pt-3 text-sm text-secondary">
+        <code>scopeKey</code> изолирует column filters и toolbar search между
+        вкладками с одинаковыми колонками.
+      </div>
+
+      <div className="min-h-0 flex-1 p-4">
+        <Table
+          data={visibleRows}
+          columns={inspectionColumns}
+          filters={tableController.filters}
+          stickyHeader
+          striped
+          showToolbar
+          toolbarProps={{
+            ...tableController.toolbarProps,
+            middleSlot: (
+              <div className="text-sm text-secondary">
+                Активная вкладка: {activeScope}. Попробуйте задать разные search
+                и filters для каждой вкладки.
+              </div>
+            ),
+          }}
+          getRowId={(row) => row.id}
+          className="min-h-0 h-full"
+        />
+      </div>
+    </div>
+  );
+}
+
+const groupedColumns: ColumnDef<GroupedProjectRow>[] = [
+  groupedColumnHelper.accessor("name", {
+    header: "Проект",
+    size: 240,
+  }),
+  groupedColumnHelper.accessor("owner", {
+    header: "Ответственный",
+    size: 180,
+  }),
+  groupedColumnHelper.group({
+    id: "dates",
+    header: "Сроки",
+    columns: [
+      groupedColumnHelper.accessor("start", {
+        header: "Старт",
+        size: 140,
+      }),
+      groupedColumnHelper.accessor("finish", {
+        header: "Финиш",
+        size: 140,
+      }),
+    ],
+  }),
+  groupedColumnHelper.group({
+    id: "finance",
+    header: "Финансы",
+    columns: [
+      groupedColumnHelper.accessor("budget", {
+        header: "Бюджет",
+        size: 140,
+      }),
+      groupedColumnHelper.accessor("remaining", {
+        header: "Остаток",
+        size: 140,
+      }),
+    ],
+  }),
+];
+
+const groupedData: GroupedProjectRow[] = [
+  {
+    id: "design",
+    name: "Проектирование",
+    owner: "Ольга Смирнова",
+    start: "01.11.2025",
+    finish: "20.12.2025",
+    budget: "3 млн ₽",
+    remaining: "0 млн ₽",
+  },
+  {
+    id: "procurement",
+    name: "Закупка",
+    owner: "Павел Соколов",
+    start: "05.12.2025",
+    finish: "31.01.2026",
+    budget: "9 млн ₽",
+    remaining: "1 млн ₽",
+  },
+  {
+    id: "factory",
+    name: "Производственный контур",
+    owner: "Иван Петров",
+    start: "12.01.2026",
+    finish: "30.06.2026",
+    budget: "18 млн ₽",
+    remaining: "6 млн ₽",
+  },
+  {
+    id: "logistics",
+    name: "Логистика",
+    owner: "Денис Морозов",
+    start: "03.02.2026",
+    finish: "15.09.2026",
+    budget: "11 млн ₽",
+    remaining: "4 млн ₽",
+  },
+  {
+    id: "campus",
+    name: "Кампус",
+    owner: "Анна Орлова",
+    start: "20.03.2026",
+    finish: "01.12.2026",
+    budget: "24 млн ₽",
+    remaining: "19 млн ₽",
+  },
+  {
+    id: "commissioning",
+    name: "Пусконаладка",
+    owner: "Мария Котова",
+    start: "02.12.2026",
+    finish: "28.02.2027",
+    budget: "7 млн ₽",
+    remaining: "7 млн ₽",
+  },
+  {
+    id: "handover",
+    name: "Сдача объекта",
+    owner: "Елена Васильева",
+    start: "01.03.2027",
+    finish: "30.04.2027",
+    budget: "2 млн ₽",
+    remaining: "2 млн ₽",
+  },
+];
+
 const meta = {
   title: "Components/DataTable",
   component: Table,
@@ -363,6 +654,7 @@ export const NestedRows: Story = {
       data={data}
       showToolbar
       toolbarProps={{
+        onSearchChange() {},
         showSearch: false,
         middleSlot: (
           <div className="w-full text-sm text-secondary">
@@ -390,4 +682,92 @@ export const EditableCells: Story = {
     columns,
   },
   render: () => <EditableCellsExample />,
+};
+
+export const PopoverAction: Story = {
+  args: {
+    data,
+    columns,
+  },
+  render: () => <PopoverActionExample />,
+};
+
+export const ScopedControllerState: Story = {
+  args: {
+    data,
+    columns,
+  },
+  render: () => <ScopedControllerExample />,
+};
+
+const groupedScrollData: GroupedProjectRow[] = Array.from(
+  { length: 6 },
+  (_, copy) =>
+    groupedData.map((row) => ({
+      ...row,
+      id: `${row.id}-${copy}`,
+      name: copy === 0 ? row.name : `${row.name} ${copy + 1}`,
+    }))
+).flat();
+
+function GroupedHeadersExample() {
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+  const tableController = useDataTableController({
+    columns: groupedColumns,
+    toolbarProps: {
+      searchPlaceholder: "Поиск по проекту",
+      middleSlot: (
+        <div className="ml-auto">
+          <Button
+            size={Size.Sm}
+            type={Type.Flat}
+            color={Color.Brand}
+            onClick={() => console.log("Добавить проект")}
+          >
+            Добавить
+          </Button>
+        </div>
+      ),
+    },
+  });
+
+  return (
+    <div className="box-border flex h-screen w-full min-h-0 flex-col p-4">
+      <Table
+        data={groupedScrollData}
+        columns={groupedColumns}
+        stickyHeader
+        striped
+        enableRowSelection
+        rowSelection={rowSelection}
+        onRowSelectionChange={setRowSelection}
+        showToolbar
+        toolbarProps={tableController.toolbarProps}
+        globalFilter={tableController.searchValue}
+        getRowId={(row) => row.id}
+        className="min-h-0 flex-1"
+        rowActions={(row) => [
+          {
+            label: "Редактировать",
+            value: "edit",
+            onClick: () => console.log("Редактировать", row.original),
+          },
+          {
+            label: "Дублировать",
+            value: "duplicate",
+            onClick: () => console.log("Дублировать", row.original),
+          },
+          {
+            label: "Удалить",
+            value: "delete",
+            onClick: () => console.log("Удалить", row.original),
+          },
+        ]}
+      />
+    </div>
+  );
+}
+
+export const GroupedHeaders: StoryObj<TableProps<GroupedProjectRow>> = {
+  render: () => <GroupedHeadersExample />,
 };

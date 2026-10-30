@@ -7,6 +7,7 @@ export function SegmentedItem<T extends string | number = string>({
   label,
   disabled = false,
   active = false,
+  size = Size.Sm,
   handleChange,
   setRef,
   className,
@@ -15,7 +16,7 @@ export function SegmentedItem<T extends string | number = string>({
     <Tab
       asChild
       type={Type.Ghost}
-      size={Size.Sm}
+      size={size}
       selected={active}
       className={className}
     >

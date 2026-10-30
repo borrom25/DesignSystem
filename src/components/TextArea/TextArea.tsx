@@ -1,23 +1,24 @@
-import { useRef } from "react";
-import { cn } from "@/utils";
-import { Size } from "@/types";
-import { FieldHint } from "@/components/Field";
-import { CloseBtn } from "@/components/CloseBtn";
 import dropAreaIcon from "@/assets/icons/dropArea.svg";
-import { useClearField } from "@/shared/hooks";
+import { CloseBtn } from "@/components/CloseBtn";
+import { FieldHint } from "@/components/Field";
+import { wrapperClasses } from "@/components/Field/styles";
 import {
   formatCountDisplay,
   getInputCount,
 } from "@/components/Input/Input.utils";
+import { useScreenSize } from "@/providers";
+import { useClearField } from "@/shared/hooks";
+import { Size } from "@/types";
+import { cn } from "@/utils";
+import { useCallback, useRef, type MutableRefObject } from "react";
 import type { TextAreaProps } from "./TextArea.types";
-import { textAreaStyles } from "./styles";
 import {
-  useTextAreaIds,
-  useTextAreaResize,
   useTextAreaClassNames,
   useTextAreaFieldState,
+  useTextAreaIds,
+  useTextAreaResize,
 } from "./hooks/useTextAreaIds";
-import { wrapperClasses } from "@/components/Field/styles";
+import { textAreaStyles } from "./styles";
 
 export function TextArea({
   size = Size.Md,
@@ -39,6 +40,7 @@ export function TextArea({
   onBlur,
   onChange,
   defaultValue,
+  ref,
   ...restProps
 }: TextAreaProps) {
   const hasLabel = !!label;
@@ -50,20 +52,43 @@ export function TextArea({
   const isError = error || !!hintError;
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const setTextareaRef = useCallback(
+    (node: HTMLTextAreaElement | null) => {
+      textareaRef.current = node;
+
+      if (typeof ref === "function") {
+        ref(node);
+        return;
+      }
+
+      if (ref) {
+        (ref as MutableRefObject<HTMLTextAreaElement | null>).current = node;
+      }
+    },
+    [ref]
+  );
+
+  const { isMobile } = useScreenSize();
+
+  const clearField = useClearField({ ref: textareaRef });
 
   const {
     currentValue,
+    hasValue,
     isLabelActive,
     isPlaceholderVisible,
     handleFocus,
     handleBlur,
     handleChange,
+    handleClear,
   } = useTextAreaFieldState({
     value,
     defaultValue,
     onFocus,
     onBlur,
     onChange,
+    onClear,
+    clearField,
   });
 
   const { fieldShellClassName, nativeClassName } = useTextAreaClassNames({
@@ -72,15 +97,15 @@ export function TextArea({
     disabled,
     inputClassName,
     hasLabel,
+    isLabelActive: hasLabel && isLabelActive,
     isPlaceholderVisible,
   });
 
   const { handleMouseDown } = useTextAreaResize({
-    targetRef: hasLabel ? containerRef : textareaRef,
+    targetRef: containerRef,
     resizeMode,
+    minHeight: 88,
   });
-
-  const handleClearClick = useClearField({ ref: textareaRef, onClear });
 
   const countDisplay =
     maxLength !== undefined
@@ -93,7 +118,7 @@ export function TextArea({
         ref={containerRef}
         className={cn(textAreaStyles.wrapperInner, fieldShellClassName)}
       >
-        {required && (
+        {required && !disabled && (
           <span aria-hidden className={cn(textAreaStyles.requiredMark)}>
             *
           </span>
@@ -103,6 +128,7 @@ export function TextArea({
             htmlFor={textareaId}
             className={cn(
               textAreaStyles.label,
+              isMobile && textAreaStyles.labelMobile,
               textAreaStyles.labelSize[size],
               isLabelActive && textAreaStyles.labelActiveSize[size],
               disabled && textAreaStyles.labelDisabled
@@ -113,9 +139,10 @@ export function TextArea({
         )}
 
         <textarea
-          ref={textareaRef}
+          {...restProps}
+          ref={setTextareaRef}
           id={textareaId}
-          value={value}
+          value={currentValue}
           disabled={disabled}
           aria-required={required || undefined}
           aria-describedby={hintId}
@@ -125,7 +152,6 @@ export function TextArea({
           onBlur={handleBlur}
           onChange={handleChange}
           maxLength={maxLength}
-          {...restProps}
           autoComplete="off"
         />
 
@@ -141,11 +167,10 @@ export function TextArea({
           </span>
         )}
 
-        {!!value && clearable && (
+        {clearable && hasValue && !disabled && (
           <CloseBtn
-            size={size}
-            onClick={handleClearClick}
-            disabled={disabled}
+            size={Size.Md}
+            onClick={handleClear}
             className={textAreaStyles.clearButton}
             aria-label="Clear"
           />

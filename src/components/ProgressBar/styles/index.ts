@@ -10,6 +10,7 @@ export const progressBarStyles = {
   header: progressBarBase.headerClasses,
   statusSlotBesideTrack: progressBarBase.statusSlotBesideTrackClasses,
   statusSlotWithTitle: progressBarBase.statusSlotWithTitleClasses,
+  statusSlotTopOnly: progressBarBase.statusSlotTopOnlyClasses,
   title: progressBarBase.titleClasses,
   progressWrapper: progressBarBase.progressWrapperClasses,
   progressTrack: progressBarBase.progressTrackClasses,

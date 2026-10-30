@@ -16,4 +16,5 @@ export interface CounterProps extends HTMLAttributes<HTMLDivElement> {
   count: number;
   maxCount?: number;
   empty?: boolean;
+  disabled?: boolean;
 }

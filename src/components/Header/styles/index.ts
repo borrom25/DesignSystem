@@ -6,8 +6,10 @@ import {
   logoWrapperClasses,
   notificationButtonClasses,
   rootClasses,
+  rootPositionClasses,
   separatorClasses,
   titleClasses,
+  menuList,
 } from "./base.ts";
 
 export {
@@ -18,12 +20,15 @@ export {
   logoWrapperClasses,
   notificationButtonClasses,
   rootClasses,
+  rootPositionClasses,
   separatorClasses,
   titleClasses,
+  menuList,
 } from "./base.ts";
 
 export const headerStyles = {
   root: rootClasses,
+  rootPosition: rootPositionClasses,
   content: contentClasses,
   logoSection: logoSectionClasses,
   notificationButton: notificationButtonClasses,
@@ -32,4 +37,5 @@ export const headerStyles = {
   title: titleClasses,
   separator: separatorClasses,
   actions: actionsClasses,
+  menuList: menuList,
 } as const;

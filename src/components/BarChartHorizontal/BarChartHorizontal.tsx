@@ -1,51 +1,59 @@
-import { Bar, CartesianGrid, XAxis, BarChart, YAxis, Cell } from "recharts";
-import {
-  getBarColor,
-  ChartTooltip,
-  chartBaseStroke,
-  chartBaseAxisTickStyle,
-} from "@/shared/Chart";
+import { useMemo } from "react";
+import { cn } from "@/utils/cn";
 import { BarChartHorizontalProps } from "./BarChartHorizontal.types.ts";
-import { axisLabelStyle } from "@/shared/Chart/consts.ts";
+import { getHorizontalBarColor } from "./styles/colors.ts";
+import { barChartHorizontalStyles } from "./styles";
 import { BarChartHorizontalLegend } from "./ui";
 
-export function BarChartHorizontal({ data, title }: BarChartHorizontalProps) {
+const getPercent = (value: number, total: number) =>
+  total === 0 ? 0 : Math.round((value / total) * 100);
+
+export function BarChartHorizontal({ data }: BarChartHorizontalProps) {
+  const percents = useMemo(() => {
+    const total = data.reduce((sum, item) => sum + item.value, 0);
+
+    return data.map((item) => getPercent(item.value, total));
+  }, [data]);
+
   return (
-    <BarChart
-      syncId="sticky-sync"
-      width={900}
-      height={360}
-      layout="vertical"
-      data={data}
-    >
-      <CartesianGrid horizontal={false} stroke={chartBaseStroke} />
-      <ChartTooltip />
-      <XAxis
-        type="number"
-        stroke={chartBaseStroke}
-        tick={chartBaseAxisTickStyle}
-      />
-      <YAxis
-        dataKey="name"
-        type="category"
-        stroke={chartBaseStroke}
-        tick={chartBaseAxisTickStyle}
-        width={125}
-        interval={0}
-        label={{
-          value: title,
-          angle: -90,
-          position: "left",
-          offset: -10,
-          style: axisLabelStyle,
-        }}
-      />
-      <BarChartHorizontalLegend data={data} />
-      <Bar dataKey="value" radius={[0, 12, 12, 0]} barSize={30}>
-        {data.map((item, i) => (
-          <Cell key={item.name} fill={getBarColor(i)} />
-        ))}
-      </Bar>
-    </BarChart>
+    <div className={barChartHorizontalStyles.base}>
+      <div className={barChartHorizontalStyles.plot}>
+        {data.map((item, index) => {
+          const percent = percents[index];
+          const isLast = index === data.length - 1;
+
+          return (
+            <div
+              key={`${item.name}-${index}`}
+              className={barChartHorizontalStyles.row}
+            >
+              <span
+                className={cn(
+                  barChartHorizontalStyles.percent,
+                  isLast && barChartHorizontalStyles.percentLast
+                )}
+              >
+                {percent}%
+              </span>
+              <div
+                className={cn(
+                  barChartHorizontalStyles.cell,
+                  isLast && barChartHorizontalStyles.cellLast
+                )}
+              >
+                <span
+                  className={barChartHorizontalStyles.bar}
+                  style={{
+                    width: `${percent}%`,
+                    background: getHorizontalBarColor(index),
+                  }}
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <BarChartHorizontalLegend data={data} percents={percents} />
+    </div>
   );
 }

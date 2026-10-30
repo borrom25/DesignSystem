@@ -1,5 +1,6 @@
-import { useRef, useState, useCallback, useMemo } from "react";
-import { isFileAccepted } from "../InputFiles.utils";
+import { useState, useCallback, useMemo } from "react";
+import { useFileDropZone } from "@/hooks/useFileDropZone";
+import { processUploadFiles } from "@/utils/uploadValidation";
 import type {
   UseInputFilesProps,
   UseInputFilesReturn,
@@ -16,18 +17,16 @@ export function useInputFiles({
   maxFiles = 1,
   multiple = false,
   accept,
+  validateFile: customValidateFile,
   disabled = false,
   viewMode = false,
   onSizeError,
   onAcceptError,
+  onValidationError,
 }: UseInputFilesProps): UseInputFilesReturn {
-  const inputNodeRef = useRef<HTMLInputElement | null>(null);
-  const dragCounter = useRef(0);
-
   const [internalFiles, setInternalFiles] = useState<File[]>(
     defaultValue ?? []
   );
-  const [isDragActive, setIsDragActive] = useState(false);
 
   const isControlled = value !== undefined;
   const files = useMemo(
@@ -35,21 +34,6 @@ export function useInputFiles({
     [isControlled, value, internalFiles]
   );
   const isInteractive = !disabled && !viewMode;
-
-  const validateFile = useCallback(
-    (file: File): boolean => {
-      if (file.size > maxSize) {
-        onSizeError?.(file);
-        return false;
-      }
-      if (!isFileAccepted(file, accept)) {
-        onAcceptError?.(file);
-        return false;
-      }
-      return true;
-    },
-    [maxSize, accept, onSizeError, onAcceptError]
-  );
 
   const updateFiles = useCallback(
     (next: File[] | null) => {
@@ -63,88 +47,59 @@ export function useInputFiles({
 
   const addFiles = useCallback(
     (incoming: File[]) => {
-      const valid = incoming.filter(validateFile);
-      if (!valid.length) return;
+      const next = processUploadFiles(incoming, {
+        maxSize,
+        accept,
+        multiple,
+        maxFiles,
+        currentFileCount: files.length,
+        existingFiles: files,
+        validateFile: customValidateFile,
+        onSizeError,
+        onAcceptError,
+        onValidationError,
+      });
 
-      let merged = multiple ? [...files, ...valid] : valid.slice(0, 1);
-      if (merged.length > maxFiles) {
-        merged = merged.slice(0, maxFiles);
-      }
-      updateFiles(merged);
+      if (!next.length) return;
+      updateFiles(next);
     },
-    [files, multiple, maxFiles, validateFile, updateFiles]
+    [
+      accept,
+      customValidateFile,
+      files,
+      maxFiles,
+      maxSize,
+      multiple,
+      onAcceptError,
+      onSizeError,
+      onValidationError,
+      updateFiles,
+    ]
   );
+
+  const {
+    isDragActive,
+    inputRef,
+    onDragEnter,
+    onDragLeave,
+    onDragOver,
+    onDrop,
+    onInputChange,
+    clearInputValue,
+  } = useFileDropZone({
+    disabled: !isInteractive,
+    onFiles: addFiles,
+  });
 
   const removeFile = useCallback(
     (index: number) => {
       if (!isInteractive) return;
       const next = files.filter((_, i) => i !== index);
       updateFiles(next.length ? next : null);
-      if (inputNodeRef.current) {
-        inputNodeRef.current.value = "";
-      }
+      clearInputValue();
     },
-    [files, isInteractive, updateFiles]
+    [clearInputValue, files, isInteractive, updateFiles]
   );
-
-  const onDragEnter = useCallback(
-    (e: React.DragEvent<HTMLDivElement>) => {
-      e.preventDefault();
-      e.stopPropagation();
-      if (!isInteractive) return;
-      dragCounter.current += 1;
-      setIsDragActive(true);
-    },
-    [isInteractive]
-  );
-
-  const onDragLeave = useCallback(
-    (e: React.DragEvent<HTMLDivElement>) => {
-      e.preventDefault();
-      e.stopPropagation();
-      if (!isInteractive) return;
-      dragCounter.current = Math.max(0, dragCounter.current - 1);
-      if (dragCounter.current === 0) setIsDragActive(false);
-    },
-    [isInteractive]
-  );
-
-  const onDragOver = useCallback(
-    (e: React.DragEvent<HTMLDivElement>) => {
-      e.preventDefault();
-      e.stopPropagation();
-      if (!isInteractive) return;
-      if (!isDragActive) setIsDragActive(true);
-      e.dataTransfer.dropEffect = "copy";
-    },
-    [isInteractive, isDragActive]
-  );
-
-  const onDrop = useCallback(
-    (e: React.DragEvent<HTMLDivElement>) => {
-      e.preventDefault();
-      e.stopPropagation();
-      dragCounter.current = 0;
-      setIsDragActive(false);
-      if (!isInteractive) return;
-      const dropped = Array.from(e.dataTransfer.files);
-      addFiles(dropped);
-    },
-    [isInteractive, addFiles]
-  );
-
-  const onInputChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (!isInteractive) return;
-      const selected = Array.from(e.target.files ?? []);
-      addFiles(selected);
-    },
-    [isInteractive, addFiles]
-  );
-
-  const inputRef: React.RefCallback<HTMLInputElement> = useCallback((node) => {
-    inputNodeRef.current = node;
-  }, []);
 
   return {
     files,

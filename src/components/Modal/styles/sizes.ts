@@ -17,26 +17,13 @@ export const sideMenuBaseClasses =
   "fixed h-screen w-[82.5%] rounded-b-none rounded-t-none right-0";
 
 export const sizeClasses: Record<Size, string> = {
-  [Size.Xs]: "width_xs w-[var(--size-modal-width)]",
-  [Size.Sm]: "width_sm w-[var(--size-modal-width)]",
-  [Size.Md]: "width_md w-[var(--size-modal-width)]",
+  [Size.Xs]: "w-[354px]",
+  [Size.Sm]: "w-[404px]",
+  [Size.Md]: "w-[504px]",
 };
 
-export const closeButtonAnimationClasses =
-  " transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] data-[state=open]:opacity-100 data-[state=open]:scale-100 data-[state=closed]:opacity-0 data-[state=closed]:scale-75";
-
-export const closeButtonBaseClasses =
-  "absolute z-10 rounded-full border border-line bg-generic hover:bg-generic-hover" +
-  closeButtonAnimationClasses;
-
-export const closeButtonModalClasses = "top-0 right-[-8px] translate-x-full";
-
-export const closeButtonIceBoxClasses =
-  "top-(--spacing-9) left-[-8px] translate-x-[-100%]";
-
 export const closeButtonSideMenuClasses =
-  "absolute z-10 visible w-[36px] h-[36px] left-[-45vw]" +
-  closeButtonAnimationClasses;
+  "absolute z-10 visible w-[36px] h-[36px] left-[-45vw] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] data-[state=open]:opacity-100 data-[state=open]:scale-100 data-[state=closed]:opacity-0 data-[state=closed]:scale-75";
 
 export function getWrapperClasses(type: ModalType): string {
   return type === ModalType.iceBox ? iceBoxWrapperClasses : modalWrapperClasses;
@@ -57,19 +44,5 @@ export function getContentClasses(
     modalContentClasses,
     sizeClasses[size],
     fullScreen && fullScreenClasses
-  );
-}
-
-export function getCloseButtonClasses(
-  type: ModalType,
-  sideMenu: boolean
-): string {
-  if (sideMenu) return closeButtonSideMenuClasses;
-
-  return cn(
-    closeButtonBaseClasses,
-    type === ModalType.iceBox
-      ? closeButtonIceBoxClasses
-      : closeButtonModalClasses
   );
 }

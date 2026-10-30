@@ -44,7 +44,7 @@ export function BubbleImage({
         {showAll && (
           <Button
             iconRight={ChevronDown}
-            color={Color.Inverse}
+            color={Color.Secondary}
             type={Type.Flat}
             size={Size.Xs}
             className={imageStyles.buttonAll}

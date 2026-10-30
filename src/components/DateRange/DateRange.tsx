@@ -1,7 +1,7 @@
 import { cn } from "@/utils";
 import { Size } from "@/types";
-import { FieldLabel, FieldHint } from "@/components/Field";
-import { Popover, PopoverSurface } from "@/components/Popover";
+import { FieldHint } from "@/components/Field";
+import { Popover } from "@/components/Popover";
 import { TimeBar } from "@/components/TimeBar";
 import { wrapperClasses } from "@/components/Field/styles";
 import { useInputIds } from "@/components/Input/hooks/useInputIds";
@@ -26,7 +26,6 @@ export function DateRange({
   disabled = false,
   error = false,
   showTimeBar = false,
-  label,
   required,
   hint,
   hintError,
@@ -43,7 +42,7 @@ export function DateRange({
   timeBarFooter,
   id: idProp,
 }: DateRangeProps) {
-  const { inputId, hintId } = useInputIds({
+  const { hintId } = useInputIds({
     id: idProp,
     hint,
     hintError,
@@ -127,17 +126,6 @@ export function DateRange({
 
   return (
     <div className={cn(wrapperClasses, className)}>
-      {label && (
-        <FieldLabel
-          size={size}
-          required={required}
-          disabled={disabled}
-          htmlFor={inputId}
-        >
-          {label}
-        </FieldLabel>
-      )}
-
       <Popover open={open} onOpenChange={handleOpenChange}>
         <Popover.Trigger>
           <DateRangeField
@@ -148,6 +136,7 @@ export function DateRange({
             placeholderEnd={placeholderEnd}
             size={size}
             disabled={disabled}
+            required={required}
             activeBound={activeBound}
             clearable
             hasValue={hasValue}
@@ -172,7 +161,7 @@ export function DateRange({
           className={dataRangePopover.contentWidth}
           onOpenAutoFocus={(event) => event.preventDefault()}
         >
-          <PopoverSurface className={dataRangePopover.surface}>
+          <Popover.Surface className={dataRangePopover.surface}>
             <div className={cn(showTimeBar && dateRangeStyles.popover.content)}>
               <DateRangeCalendar
                 key={calendarKey}
@@ -199,12 +188,12 @@ export function DateRange({
                 </div>
               )}
             </div>
-          </PopoverSurface>
+          </Popover.Surface>
         </Popover.Content>
       </Popover>
 
       {showHint && (
-        <FieldHint size={size} error={isError} id={hintId}>
+        <FieldHint size={size} error={!!hintError} id={hintId}>
           {hintError || hint}
         </FieldHint>
       )}

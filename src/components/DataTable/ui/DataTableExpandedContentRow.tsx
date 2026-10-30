@@ -53,7 +53,11 @@ export function DataTableExpandedContentRow<TData>({
     >
       {hasLeadingServiceColumn && (
         <td
-          style={{ width: serviceColumnWidth, minWidth: serviceColumnWidth }}
+          style={{
+            width: serviceColumnWidth,
+            minWidth: serviceColumnWidth,
+            maxWidth: serviceColumnWidth,
+          }}
           className={tableStyles.expandedContentServiceCell}
         />
       )}

@@ -1,2 +1,6 @@
 export { TabsOverflow } from "./TabsOverflow";
-export type { TabsOverflowProps, TabsOverflowItem } from "./TabsOverflow.types";
+export type {
+  TabsOverflowProps,
+  TabsOverflowItem,
+  TabsOverflowItemWrapper,
+} from "./TabsOverflow.types";

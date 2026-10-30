@@ -1,8 +1,9 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import type { ColumnFiltersState, OnChangeFn } from "@tanstack/react-table";
 import type {
   FilterSchema,
   DataTableFiltersState,
+  DataTableScopedStateOptions,
 } from "../types/DataTable.filter.types";
 import {
   isEmptyFilterValue,
@@ -11,7 +12,62 @@ import {
   getDataTableFilterDefaultValues,
 } from "../utils/columnFiltersMapping";
 
-export interface UseDataTableFiltersOptions<TSchema extends FilterSchema> {
+const DEFAULT_SCOPE_KEY = "__default__";
+
+type ScopedFilterState<TSchema extends FilterSchema> = Record<string, TSchema>;
+
+function getActiveScopeKey(scopeKey?: string): string {
+  return scopeKey || DEFAULT_SCOPE_KEY;
+}
+
+function getScopedValues<TSchema extends FilterSchema>(
+  valuesByScope: ScopedFilterState<TSchema>,
+  scopeKey: string,
+  defaultValues: TSchema
+): TSchema {
+  return valuesByScope[scopeKey] ?? defaultValues;
+}
+
+function syncFilterSchemaWithDefaults<TSchema extends FilterSchema>(
+  values: TSchema | undefined,
+  defaultValues: TSchema
+): TSchema {
+  const nextValues = { ...defaultValues } as TSchema;
+
+  if (!values) {
+    return nextValues;
+  }
+
+  for (const key of Object.keys(defaultValues) as Array<keyof TSchema>) {
+    if (key in values) {
+      nextValues[key] = values[key];
+    }
+  }
+
+  return nextValues;
+}
+
+function areFilterSchemasEqual<TSchema extends FilterSchema>(
+  left: TSchema,
+  right: TSchema
+): boolean {
+  const leftKeys = Object.keys(left);
+  const rightKeys = Object.keys(right);
+
+  if (leftKeys.length !== rightKeys.length) {
+    return false;
+  }
+
+  return leftKeys.every(
+    (key) =>
+      (left as Record<string, unknown>)[key] ===
+      (right as Record<string, unknown>)[key]
+  );
+}
+
+export interface UseDataTableFiltersOptions<
+  TSchema extends FilterSchema,
+> extends DataTableScopedStateOptions {
   defaultValues?: TSchema;
   columns?: Parameters<typeof getDataTableFilterDefaultValues>[0];
   onChange?: (values: TSchema) => void;
@@ -27,7 +83,13 @@ export interface UseDataTableFiltersReturn<
 export function useDataTableFilters<TSchema extends FilterSchema>(
   options: UseDataTableFiltersOptions<TSchema>
 ): UseDataTableFiltersReturn<TSchema> {
-  const { columns, defaultValues: controlledDefaultValues, onChange } = options;
+  const {
+    columns,
+    defaultValues: controlledDefaultValues,
+    onChange,
+    scopeKey,
+  } = options;
+  const activeScopeKey = getActiveScopeKey(scopeKey);
 
   const defaultValues = useMemo(
     () =>
@@ -36,17 +98,55 @@ export function useDataTableFilters<TSchema extends FilterSchema>(
     [columns, controlledDefaultValues]
   );
 
-  const [values, setValues] = useState<TSchema>(defaultValues);
+  const [valuesByScope, setValuesByScope] = useState<
+    ScopedFilterState<TSchema>
+  >(() => ({
+    [activeScopeKey]: defaultValues,
+  }));
+
+  useEffect(() => {
+    setValuesByScope((prev) => {
+      const nextScopeValues = syncFilterSchemaWithDefaults(
+        prev[activeScopeKey],
+        defaultValues
+      );
+
+      if (
+        prev[activeScopeKey] &&
+        areFilterSchemasEqual(prev[activeScopeKey], nextScopeValues)
+      ) {
+        return prev;
+      }
+
+      return {
+        ...prev,
+        [activeScopeKey]: nextScopeValues,
+      };
+    });
+  }, [activeScopeKey, defaultValues]);
+
+  const values = useMemo(
+    () => getScopedValues(valuesByScope, activeScopeKey, defaultValues),
+    [activeScopeKey, defaultValues, valuesByScope]
+  );
 
   const setValue = useCallback(
     <K extends keyof TSchema>(id: K, value: TSchema[K]) => {
-      setValues((prev) => {
-        const next = { ...prev, [id]: value };
+      setValuesByScope((prev) => {
+        const currentValues = getScopedValues(
+          prev,
+          activeScopeKey,
+          defaultValues
+        );
+        const next = { ...currentValues, [id]: value };
         onChange?.(next);
-        return next;
+        return {
+          ...prev,
+          [activeScopeKey]: next,
+        };
       });
     },
-    [onChange]
+    [activeScopeKey, defaultValues, onChange]
   );
 
   const getValue = useCallback(
@@ -56,19 +156,30 @@ export function useDataTableFilters<TSchema extends FilterSchema>(
 
   const clearValue = useCallback(
     (id: keyof TSchema) => {
-      setValues((prev) => {
-        const next = { ...prev, [id]: defaultValues[id] };
+      setValuesByScope((prev) => {
+        const currentValues = getScopedValues(
+          prev,
+          activeScopeKey,
+          defaultValues
+        );
+        const next = { ...currentValues, [id]: defaultValues[id] };
         onChange?.(next);
-        return next;
+        return {
+          ...prev,
+          [activeScopeKey]: next,
+        };
       });
     },
-    [defaultValues, onChange]
+    [activeScopeKey, defaultValues, onChange]
   );
 
   const clearAll = useCallback(() => {
-    setValues(defaultValues);
+    setValuesByScope((prev) => ({
+      ...prev,
+      [activeScopeKey]: defaultValues,
+    }));
     onChange?.(defaultValues);
-  }, [defaultValues, onChange]);
+  }, [activeScopeKey, defaultValues, onChange]);
 
   const hasValue = useCallback(
     (id: keyof TSchema): boolean => !isEmptyFilterValue(values[id]),
@@ -87,8 +198,13 @@ export function useDataTableFilters<TSchema extends FilterSchema>(
 
   const onColumnFiltersChange: OnChangeFn<ColumnFiltersState> = useCallback(
     (updaterOrValue) => {
-      setValues((prev) => {
-        const prevColumnFilters = valuesToColumnFiltersState(prev);
+      setValuesByScope((prev) => {
+        const currentValues = getScopedValues(
+          prev,
+          activeScopeKey,
+          defaultValues
+        );
+        const prevColumnFilters = valuesToColumnFiltersState(currentValues);
         const nextColumnFilters =
           typeof updaterOrValue === "function"
             ? updaterOrValue(prevColumnFilters)
@@ -98,10 +214,13 @@ export function useDataTableFilters<TSchema extends FilterSchema>(
           defaultValues
         );
         onChange?.(next);
-        return next;
+        return {
+          ...prev,
+          [activeScopeKey]: next,
+        };
       });
     },
-    [defaultValues, onChange]
+    [activeScopeKey, defaultValues, onChange]
   );
 
   return {

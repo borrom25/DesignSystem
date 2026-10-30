@@ -10,6 +10,7 @@ export function PopoverScrollArea({
   scrollEndOffset = 200,
   isLoading = false,
   hasMore = true,
+  showScrollbar = false,
   className,
   children,
 }: PopoverScrollAreaProps) {
@@ -57,7 +58,10 @@ export function PopoverScrollArea({
     <div
       ref={scrollRef}
       onScroll={checkEndReached}
-      className={cn(scrollAreaClasses, className)}
+      className={cn(
+        showScrollbar ? "overflow-y-auto" : scrollAreaClasses,
+        className
+      )}
       style={scrollAreaStyles}
     >
       {children}

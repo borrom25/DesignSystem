@@ -1,21 +1,21 @@
-import {
-  useCallback,
-  useState,
-  type CSSProperties,
-  type ReactNode,
-} from "react";
+import { useCallback, useState, type ReactNode } from "react";
 import { useSidebarWidth } from "./useSidebarWidth";
+import { getAppLayoutSidebarStyle } from "../styles";
 
 interface UseAppLayoutSidebarStyleOptions {
   sidebar?: ReactNode;
   hasSidebar: boolean;
   isMobile: boolean;
+  hasHeader: boolean;
+  isFill?: boolean;
 }
 
 export function useAppLayoutSidebarStyle({
   sidebar,
   hasSidebar,
   isMobile,
+  hasHeader,
+  isFill = false,
 }: UseAppLayoutSidebarStyleOptions) {
   const [sidebarWrapperElement, setSidebarWrapperElement] =
     useState<HTMLElement | null>(null);
@@ -31,8 +31,10 @@ export function useAppLayoutSidebarStyle({
     sidebarElement: sidebarWrapperElement?.firstElementChild ?? null,
   });
 
-  const sidebarStyle: CSSProperties | undefined =
-    !isMobile && sidebarWidth > 0 ? { width: sidebarWidth } : undefined;
+  const sidebarStyle =
+    !isMobile && hasSidebar
+      ? getAppLayoutSidebarStyle(sidebarWidth, hasHeader, isFill)
+      : undefined;
 
   return {
     sidebarWrapperRef,

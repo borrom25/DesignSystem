@@ -14,6 +14,7 @@ export const listItemStyles = {
   base: listItemBase.baseClasses,
   text: listItemBase.textClasses,
   size: listItemSizes.sizeClasses,
+  wrapSize: listItemSizes.wrapSizeClasses,
   iconOnlySize: listItemSizes.iconOnlySizeClasses,
   titleSize: listItemSizes.titleSizeClasses,
   iconSizeMap: listItemSizes.iconSizeMap,
@@ -21,4 +22,6 @@ export const listItemStyles = {
   getVariant: listItemVariants.getVariantClasses,
   rightGroup: listItemRightGroup.rightGroupClasses,
   icon: listItemIcon.iconClasses,
+  iconRight: listItemIcon.iconRightClasses,
+  iconLeft: listItemIcon.iconLeftClasses,
 } as const;

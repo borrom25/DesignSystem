@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
-import { Button, ListItem, Popover, PopoverSurface } from "@/components";
+import { Button, ListItem, Popover } from "@/components";
 
 const meta = {
   title: "Components/Popover",
@@ -29,7 +29,7 @@ export const Basic: Story = {
         <Button>Открыть поповер</Button>
       </Popover.Trigger>
       <Popover.Content>
-        <PopoverSurface>
+        <Popover.Surface>
           <div className="p-4">
             <h3 className="font-semibold mb-2">Базовый поповер</h3>
             <p className="text-sm text-gray-600">
@@ -37,7 +37,7 @@ export const Basic: Story = {
               чтобы закрыть.
             </p>
           </div>
-        </PopoverSurface>
+        </Popover.Surface>
       </Popover.Content>
     </Popover>
   ),
@@ -55,13 +55,13 @@ export const FocusReturn: Story = {
           <Button>Открыть (затем Esc)</Button>
         </Popover.Trigger>
         <Popover.Content>
-          <PopoverSurface>
+          <Popover.Surface>
             <div className="p-4 w-56">
               <p className="text-sm">
                 Нажмите Esc — фокус вернётся на триггер.
               </p>
             </div>
-          </PopoverSurface>
+          </Popover.Surface>
         </Popover.Content>
       </Popover>
     </div>
@@ -75,14 +75,14 @@ export const MatchTrigger: Story = {
         <Button style={{ width: 300 }}>Широкая кнопка (300px)</Button>
       </Popover.Trigger>
       <Popover.Content matchTriggerWidth>
-        <PopoverSurface>
+        <Popover.Surface>
           <div className="p-4">
             <p className="text-sm">
               Ширина контента совпадает с шириной триггера (через{" "}
               <code>--radix-popover-trigger-width</code>).
             </p>
           </div>
-        </PopoverSurface>
+        </Popover.Surface>
       </Popover.Content>
     </Popover>
   ),
@@ -110,7 +110,7 @@ export const MaxHeight: Story = {
           <Button style={{ width: 300 }}>Открыть с прокруткой</Button>
         </Popover.Trigger>
         <Popover.Content matchTriggerWidth>
-          <PopoverSurface>
+          <Popover.Surface>
             <Popover.ScrollArea
               maxHeight={300}
               scrollEndOffset={0}
@@ -140,7 +140,7 @@ export const MaxHeight: Story = {
                 )}
               </div>
             </Popover.ScrollArea>
-          </PopoverSurface>
+          </Popover.Surface>
         </Popover.Content>
       </Popover>
     );

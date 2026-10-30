@@ -32,6 +32,7 @@ export function useEditableCellInput<TData>({
   const [draft, setDraft] = useState(formattedValue);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const latestDraftRef = useRef(draft);
+  const lastCommittedRef = useRef(formattedValue);
 
   const createEvent = useCallback(
     (nextValue: unknown, reason: TableCellValueChangeReason) =>
@@ -49,16 +50,18 @@ export function useEditableCellInput<TData>({
 
   const commitValue = useCallback(
     (reason: TableCellValueChangeReason) => {
-      if (latestDraftRef.current === formattedValue) return;
+      if (latestDraftRef.current === lastCommittedRef.current) return;
 
+      lastCommittedRef.current = latestDraftRef.current;
       onValueChange?.(createEvent(latestDraftRef.current, reason));
     },
-    [createEvent, formattedValue, onValueChange]
+    [createEvent, onValueChange]
   );
 
   useEffect(() => {
     setDraft(formattedValue);
     latestDraftRef.current = formattedValue;
+    lastCommittedRef.current = formattedValue;
   }, [formattedValue]);
 
   useLayoutEffect(() => {

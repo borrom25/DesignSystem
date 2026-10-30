@@ -1,20 +1,5 @@
 import { wrapperClasses } from "@/components/Field/styles";
 import {
-  dropZoneBaseClasses,
-  dropZoneStateClasses,
-  dropZoneActiveClasses,
-  dropZoneDisabledClasses,
-  dropZoneIconClasses,
-  dropZoneIconDisabledClasses,
-  dropZoneButtonClasses,
-  dropZoneButtonDisabledClasses,
-  dropZoneTextRowClasses,
-  dropZoneTextSelectClasses,
-  dropZoneTextSelectDisabledClasses,
-  dropZoneTextDragClasses,
-  dropZonePlaceholderClasses,
-} from "./dropZone";
-import {
   previewBaseClasses,
   previewStateClasses,
   previewErrorClasses,
@@ -34,21 +19,6 @@ import {
 
 export const inputFilesStyles = {
   wrapper: wrapperClasses,
-  dropZone: {
-    base: dropZoneBaseClasses,
-    state: dropZoneStateClasses,
-    active: dropZoneActiveClasses,
-    disabled: dropZoneDisabledClasses,
-    icon: dropZoneIconClasses,
-    iconDisabled: dropZoneIconDisabledClasses,
-    button: dropZoneButtonClasses,
-    buttonDisabled: dropZoneButtonDisabledClasses,
-    textRow: dropZoneTextRowClasses,
-    textSelect: dropZoneTextSelectClasses,
-    textSelectDisabled: dropZoneTextSelectDisabledClasses,
-    textDrag: dropZoneTextDragClasses,
-    placeholder: dropZonePlaceholderClasses,
-  },
   preview: {
     list: previewListClasses,
     base: previewBaseClasses,

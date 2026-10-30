@@ -1,6 +1,7 @@
 import { Size } from "@/types";
 import { LucideIcon } from "lucide-react";
 import { ReactNode } from "react";
+import type { CalendarBaseProps } from "../Calendar/Calendar.types";
 import { InputVariant } from "../Input";
 
 export interface DatePickerProps {
@@ -22,6 +23,9 @@ export interface DatePickerProps {
   variant?: InputVariant;
   format?: string;
   hint?: string;
+  minDate?: Date | string;
+  maxDate?: Date | string;
+  calendarProps?: Omit<CalendarBaseProps, "className">;
 }
 
 export interface UseDatePickerValueProps {
@@ -30,4 +34,6 @@ export interface UseDatePickerValueProps {
   onChangeDate?: (date?: Date) => void;
   onClear?: () => void;
   format: string;
+  minDate?: Date | string;
+  maxDate?: Date | string;
 }

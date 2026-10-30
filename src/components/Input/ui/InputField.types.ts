@@ -21,6 +21,7 @@ export interface InputFieldProps extends Omit<
   onClear?: () => void;
   size?: Size;
   label?: ReactNode;
+  labelActive?: boolean;
   required?: boolean;
   isError?: boolean;
   inputClassName?: string;

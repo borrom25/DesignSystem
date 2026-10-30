@@ -5,6 +5,9 @@ export interface UseFilterSearchOptions<T> {
   options?: FilterListOption<T>[];
   groups?: FilterListGroup<T>[];
   getSearchText?: (option: FilterListOption<T>) => string;
+  searchValue?: string;
+  onSearchChange?: (value: string) => void;
+  filterOptionsLocally?: boolean;
 }
 
 export interface UseFilterSearchReturn<T> {
@@ -21,21 +24,45 @@ export function useFilterSearch<T = string>({
   options = [],
   groups = [],
   getSearchText = (opt) => String(opt.label),
+  searchValue: controlledSearchValue,
+  onSearchChange,
+  filterOptionsLocally = true,
 }: UseFilterSearchOptions<T>): UseFilterSearchReturn<T> {
-  const [searchValue, setSearchValue] = useState("");
+  const [internalSearchValue, setInternalSearchValue] = useState("");
 
+  const searchValue = controlledSearchValue ?? internalSearchValue;
   const normalizedSearch = searchValue.trim().toLowerCase();
   const isSearching = normalizedSearch.length > 0;
 
+  const setSearchValue = useCallback(
+    (value: string) => {
+      if (controlledSearchValue === undefined) {
+        setInternalSearchValue(value);
+      }
+      onSearchChange?.(value);
+    },
+    [controlledSearchValue, onSearchChange]
+  );
+
+  const clearSearch = useCallback(() => {
+    setSearchValue("");
+  }, [setSearchValue]);
+
   const filteredOptions = useMemo(() => {
-    if (!isSearching) return options;
+    if (!isSearching || !filterOptionsLocally) return options;
     return options.filter((opt) =>
       getSearchText(opt).toLowerCase().includes(normalizedSearch)
     );
-  }, [options, normalizedSearch, isSearching, getSearchText]);
+  }, [
+    options,
+    normalizedSearch,
+    isSearching,
+    getSearchText,
+    filterOptionsLocally,
+  ]);
 
   const filteredGroups = useMemo(() => {
-    if (!isSearching) return groups;
+    if (!isSearching || !filterOptionsLocally) return groups;
     return groups
       .map((group) => ({
         ...group,
@@ -44,16 +71,18 @@ export function useFilterSearch<T = string>({
         ),
       }))
       .filter((group) => group.options.length > 0);
-  }, [groups, normalizedSearch, isSearching, getSearchText]);
+  }, [
+    groups,
+    normalizedSearch,
+    isSearching,
+    getSearchText,
+    filterOptionsLocally,
+  ]);
 
   const hasResults = isSearching
     ? filteredOptions.length > 0 ||
       filteredGroups.some((g) => g.options.length > 0)
     : true;
-
-  const clearSearch = useCallback(() => {
-    setSearchValue("");
-  }, []);
 
   return {
     searchValue,

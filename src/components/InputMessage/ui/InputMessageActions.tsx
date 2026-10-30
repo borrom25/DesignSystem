@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Paperclip, SendHorizontal } from "lucide-react";
 import { Color, Size, Type } from "@/types";
-import { Popover, PopoverSurface } from "@/components/Popover";
+import { Popover } from "@/components/Popover";
 import { ListItem } from "@/components/ListItem";
 import { inputMessageStyles } from "../styles";
 import { Button } from "@/components/Button/Button";
@@ -46,7 +46,7 @@ export function InputMessageActions({
               iconOnly={Paperclip}
               size={Size.Xs}
               type={Type.Flat}
-              color={Color.Inverse}
+              color={Color.Secondary}
               disabled={disabled}
               aria-label="Прикрепить"
             />
@@ -56,7 +56,7 @@ export function InputMessageActions({
             sideOffset={4}
             align="end"
           >
-            <PopoverSurface>
+            <Popover.Surface>
               <input
                 name="file-input"
                 type="file"
@@ -79,7 +79,7 @@ export function InputMessageActions({
                   </ListItem>
                 ))}
               </div>
-            </PopoverSurface>
+            </Popover.Surface>
           </Popover.Content>
         </Popover>
       )}

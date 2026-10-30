@@ -6,7 +6,7 @@ import {
   gapClasses,
   getSizeClasses,
 } from "./sizes";
-import { getVariantClasses } from "./variants";
+import { getDisabledClasses, getVariantClasses } from "./variants";
 import {
   contentClasses,
   contentInvisibleClasses,
@@ -23,6 +23,7 @@ export const buttonStyles = {
   gap: gapClasses,
   getSize: getSizeClasses,
   getVariant: getVariantClasses,
+  getDisabled: getDisabledClasses,
   content: contentClasses,
   contentInvisible: contentInvisibleClasses,
   loader: loaderClasses,

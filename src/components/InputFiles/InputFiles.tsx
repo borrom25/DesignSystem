@@ -2,10 +2,10 @@ import { cn } from "@/utils";
 import { Size } from "@/types";
 import { FieldLabel, FieldSubtitle, FieldHint } from "@/components/Field";
 import type { InputFilesProps } from "./InputFiles.types";
-import { useInputFiles } from "./hooks/useInputFiles";
-import { DropZone } from "./ui/DropZone";
+import { useInputFiles } from "./hooks";
 import { inputFilesStyles } from "./styles";
 import { FilePreview } from "./ui/FilePreview";
+import { Uploader } from "../Uploader/Uploader";
 
 export function InputFiles({
   size = Size.Md,
@@ -23,6 +23,8 @@ export function InputFiles({
   maxFiles = 1,
   maxSize,
   accept = "*",
+  validateFile,
+  onValidationError,
   onSizeError,
   onAcceptError,
   downloadUrl,
@@ -37,6 +39,7 @@ export function InputFiles({
   className,
   name,
   id,
+  placeholderFullWidth = false,
 }: InputFilesProps) {
   const isError = error || !!hintError;
 
@@ -58,10 +61,12 @@ export function InputFiles({
     maxFiles,
     multiple,
     accept,
+    validateFile,
     disabled,
     viewMode,
     onSizeError,
     onAcceptError,
+    onValidationError,
   });
 
   const showDropZone = multiple || files.length === 0;
@@ -70,7 +75,7 @@ export function InputFiles({
 
   return (
     <div className={cn(inputFilesStyles.wrapper, className)}>
-      {label && (
+      {(label || required) && (
         <FieldLabel
           size={size}
           required={required}
@@ -88,8 +93,9 @@ export function InputFiles({
       )}
 
       {showDropZone && (
-        <DropZone
+        <Uploader
           disabled={dropZoneDisabled}
+          error={isError}
           isDragActive={isDragActive}
           textSelect={textSelect}
           textDrag={textDrag}
@@ -104,6 +110,7 @@ export function InputFiles({
           onDragOver={onDragOver}
           onDrop={onDrop}
           onInputChange={onInputChange}
+          placeholderFullWidth={placeholderFullWidth}
         />
       )}
 

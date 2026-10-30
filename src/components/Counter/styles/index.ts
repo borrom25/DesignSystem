@@ -1,15 +1,16 @@
-export { baseClasses, emptyClasses } from "./base";
-export { contentOffsetClasses, sizeClasses } from "./sizes";
+export { baseClasses, emptyClasses, disabledClasses } from "./base";
+export { contentClasses, sizeClasses } from "./sizes";
 export { variantClasses } from "./variants";
 
-import { baseClasses, emptyClasses } from "./base";
-import { contentOffsetClasses, sizeClasses } from "./sizes";
+import { baseClasses, emptyClasses, disabledClasses } from "./base";
+import { contentClasses, sizeClasses } from "./sizes";
 import { variantClasses } from "./variants";
 
 export const counterStyles = {
   base: baseClasses,
   empty: emptyClasses,
+  disabled: disabledClasses,
   size: sizeClasses,
-  contentOffset: contentOffsetClasses,
+  content: contentClasses,
   variant: variantClasses,
 } as const;

@@ -16,20 +16,19 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const chartData = [
-  { value: 40, name: "Органика" },
-  { value: 50, name: "Платный трафик" },
-  { value: 30, name: "Соцсети" },
-  { value: 70, name: "Орешки" },
-  { value: 50, name: "Рефералы" },
-  { value: 40, name: "бебебе" },
-  { value: 15, name: "бобобo" },
+const answer =
+  "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis";
+
+const regions = [
+  { name: answer, value: 32 },
+  { name: answer, value: 26 },
+  { name: answer, value: 20 },
+  { name: answer, value: 18 },
 ];
 
 export const BarChartHorizontal: Story = {
   args: {
-    data: chartData,
-    title: "PrimaryName",
+    data: regions,
   },
   render: (args) => (
     <div className="p-10">

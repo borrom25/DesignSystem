@@ -1,5 +1,10 @@
 import { indicatorClasses, itemBaseClasses, baseClasses } from "./base";
-import { itemPositionClasses, positionClasses, shapeClasses } from "./vatiants";
+import {
+  itemPositionClasses,
+  positionClasses,
+  shapeClasses,
+  sizeClasses,
+} from "./vatiants";
 
 export const segmentedStyles = {
   base: baseClasses,
@@ -7,5 +12,6 @@ export const segmentedStyles = {
   itemPosition: itemPositionClasses,
   position: positionClasses,
   shape: shapeClasses,
+  size: sizeClasses,
   indicator: indicatorClasses,
 };

@@ -1,5 +1,9 @@
 export type CarouselOrientation = "horizontal" | "vertical";
-export type CarouselPosition = "within" | "without";
+
+export type CarouselItemSize = {
+  width: number;
+  height: number;
+};
 
 export interface CarouselContextValue {
   activeIndex: number;
@@ -7,16 +11,23 @@ export interface CarouselContextValue {
   orientation: CarouselOrientation;
   itemsCount: number;
   isHorizontal: boolean;
-  isWithin: boolean;
   width: number;
   height: number;
+  itemsSizes: CarouselItemSize[];
+  setItemsSizes: React.Dispatch<React.SetStateAction<CarouselItemSize[]>>;
+  autoSwipeDuration: number;
+  zoomEnabled: boolean;
+  isZoomed: boolean;
+  setIsZoomed: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface CarouselProps {
   defaultValue?: number;
   orientation?: CarouselOrientation;
-  actionsPosition?: CarouselPosition;
   children: React.ReactNode;
   width?: number;
   height?: number;
+  autoSwipeDuration?: number;
+  showIndicators?: boolean;
+  zoomEnabled?: boolean;
 }

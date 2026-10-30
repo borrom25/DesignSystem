@@ -40,10 +40,13 @@ export const tagsContainerWithTagsClasses = "pb-(--generic-spacing-2)";
 export const tagsContainerWithFloatingLabelClasses =
   "pt-[calc(1lh_+_var(--input-gap-container-content,var(--generic-spacing-05)))]";
 
+export const tagsContainerClipTopFloatingLabelClasses =
+  "[clip-path:inset(calc(1lh_+_var(--input-gap-container-content,var(--generic-spacing-05)))_0_0_0)]";
+
 export const clearButtonWrapperClasses = "shrink-0 self-start";
 
 export const floatingLabelActiveClasses =
-  "text-secondary scale-100 translate-y-(--generic-spacing-1)";
+  "text-secondary translate-y-(--generic-spacing-1)";
 
 export const nativeTextClasses =
   "flex-1 min-w-[80px] text-sm leading-sm tracking-sm text-primary placeholder:text-hint";

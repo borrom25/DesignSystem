@@ -13,7 +13,7 @@ export const layoutChildrenClasses =
   "overflow-x-auto overflow-y-hidden flex-1 h-[370px]";
 
 export const tooltipClasses =
-  "p-6 bg-generic rounded-2xl border border-line flex-col flex gap-1";
+  "flex flex-col gap-1 rounded-2xl border border-line bg-generic p-6 text-primary shadow-popover";
 
 export const tooltipIconClasses = "h-[16px] aspect-square rounded-full";
 

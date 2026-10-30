@@ -14,6 +14,10 @@ export interface FilterPanelProps {
   searchSlot?: ReactNode;
   showSearch?: boolean;
   maxBodyHeight?: number | string;
+  onScrollEnd?: () => void;
+  scrollEndOffset?: number;
+  isLoading?: boolean;
+  hasMore?: boolean;
   onReset?: () => void;
   onApply?: () => void;
   resetLabel?: ReactNode;

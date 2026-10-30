@@ -25,6 +25,7 @@ export function InputNumber({
   inputClassName,
   id: idProp,
   clearable,
+  placeholder = "0",
   onClear,
   ref,
   ...restProps
@@ -71,6 +72,7 @@ export function InputNumber({
       id={inputId}
       value={value ?? ""}
       onChange={handleChange}
+      placeholder={placeholder}
       min={min}
       max={max}
       step={step}

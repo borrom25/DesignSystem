@@ -21,6 +21,8 @@ export interface TimePickerProps extends BaseFieldProps {
   fieldClassName?: string;
   error?: boolean;
   format?: string;
+  minTime?: TimeValue | string;
+  maxTime?: TimeValue | string;
   showSeconds?: boolean;
   use24Hour?: boolean;
   showNowButton?: boolean;
@@ -39,5 +41,7 @@ export interface UseTimePickerValueProps {
   onChangeTime?: (value?: TimeValue) => void;
   onClear?: () => void;
   format: string;
+  minTime?: TimeValue | string;
+  maxTime?: TimeValue | string;
   disabled?: boolean;
 }

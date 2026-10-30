@@ -3,6 +3,7 @@ export {
   ellipsisSizeClasses,
   pageButtonClasses,
   iconButtonClasses,
+  indicatorSizeClasses,
 } from "./base";
 
 import {
@@ -10,6 +11,7 @@ import {
   ellipsisSizeClasses,
   pageButtonClasses,
   iconButtonClasses,
+  indicatorSizeClasses,
 } from "./base";
 
 export const paginationStyles = {
@@ -17,4 +19,5 @@ export const paginationStyles = {
   ellipsisSize: ellipsisSizeClasses,
   pageButton: pageButtonClasses,
   iconButton: iconButtonClasses,
+  indicatorSize: indicatorSizeClasses,
 } as const;

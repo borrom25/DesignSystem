@@ -9,7 +9,7 @@ const colors: Color[] = [
   Color.Positive,
   Color.Warning,
   Color.Info,
-  Color.Inverse,
+  Color.Secondary,
 ];
 const sizes = Object.values(BannerSize);
 
@@ -103,8 +103,8 @@ export const AllColors: Story = {
                 "Цвет предупреждения — для сообщений, требующих внимания пользователя"}
               {color === Color.Info &&
                 "Информационный цвет — для нейтральных справочных сообщений"}
-              {color === Color.Inverse &&
-                "Инвертированный цвет — для тёмных тем и контрастных интерфейсов"}
+              {color === Color.Secondary &&
+                "Secondary цвет — для тёмных тем и контрастных интерфейсов"}
             </p>
           </div>
         </Banner>

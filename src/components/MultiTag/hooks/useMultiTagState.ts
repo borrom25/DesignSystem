@@ -1,8 +1,9 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
+import type { SelectOptionValue } from "@/shared/Select";
 import type { MultiTagOption } from "../types";
 import type { UseMultiTagStateProps } from "../types/hooks";
 
-export function useMultiTagState<T extends string | number = string>({
+export function useMultiTagState<T extends SelectOptionValue = string>({
   value: controlledValue,
   defaultValue,
   onChange,

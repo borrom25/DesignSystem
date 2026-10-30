@@ -1,10 +1,9 @@
 import { cn } from "@/utils";
-import { Size } from "@/types";
-import { ListItem } from "@/components/ListItem";
 import { Slot } from "@radix-ui/react-slot";
 import { sidebarStyles } from "../styles";
 import { getCollapsedLabel } from "../Sidebar.utils";
 import { SidebarItem as SidebarItemType } from "@/shared/Sidebar";
+import type { MouseEvent } from "react";
 
 export interface SidebarItemProps {
   item: SidebarItemType;
@@ -13,8 +12,6 @@ export interface SidebarItemProps {
   onItemClick?: (id: string) => void;
 }
 
-//ToDo:
-
 export function SidebarItem({
   item,
   collapsed,
@@ -22,15 +19,22 @@ export function SidebarItem({
   onItemClick,
 }: SidebarItemProps) {
   const { id, icon: Icon, label, disabled, href, asChild, onClick } = item;
+  const hasClickAction = Boolean(href || onClick || onItemClick);
+  const isDisabled = Boolean(disabled || !hasClickAction);
 
-  const handleClick = () => {
-    if (disabled) return;
+  const handleClick = (event: MouseEvent<HTMLElement>) => {
+    if (isDisabled) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+
     onClick?.();
     onItemClick?.(item.id);
   };
 
   const itemClassName = cn(
-    !collapsed && sidebarStyles.item,
+    sidebarStyles.item,
     collapsed && sidebarStyles.itemCollapsed
   );
 
@@ -38,80 +42,72 @@ export function SidebarItem({
   const ariaLabel = labelText || `Sidebar item ${id}`;
   const title = getCollapsedLabel(label, collapsed);
 
-  if (asChild && href) {
-    return (
-      <ListItem
-        key={id}
-        size={Size.Sm}
-        selected={active}
-        iconOnly={collapsed}
-        className={itemClassName}
-        asChild
-        aria-label={ariaLabel}
+  const itemContent = (
+    <>
+      <Icon size={20} className={sidebarStyles.itemIcon} />
+      <span
+        className={cn(
+          sidebarStyles.itemLabel,
+          collapsed && sidebarStyles.itemLabelHidden,
+          !collapsed && sidebarStyles.itemLabelVisible
+        )}
       >
-        <Slot>
-          <a
-            href={href}
-            onClick={handleClick}
-            title={title}
-            aria-disabled={disabled}
-            className={cn(disabled && sidebarStyles.linkDisabled)}
-          >
-            <Icon size={20} className={sidebarStyles.collapseIcon} />
-            <span
-              className={cn(
-                sidebarStyles.itemLabel,
-                collapsed && sidebarStyles.itemLabelHidden,
-                !collapsed && sidebarStyles.itemLabelVisible
-              )}
-            >
-              {label}
-            </span>
-          </a>
-        </Slot>
-      </ListItem>
-    );
-  }
+        <span className={sidebarStyles.itemLabelInner}>{label}</span>
+      </span>
+    </>
+  );
+
+  const commonProps = {
+    className: itemClassName,
+    title,
+    onClick: handleClick,
+    tabIndex: isDisabled ? -1 : undefined,
+  };
 
   if (href) {
+    if (asChild) {
+      return (
+        <Slot>
+          <a
+            key={id}
+            href={href}
+            {...commonProps}
+            aria-label={ariaLabel}
+            aria-disabled={isDisabled}
+            aria-pressed={active}
+          >
+            {itemContent}
+          </a>
+        </Slot>
+      );
+    }
+
     return (
       <a
+        key={id}
         href={href}
-        onClick={handleClick}
-        title={title}
-        className={cn(
-          sidebarStyles.linkNoUnderline,
-          disabled && sidebarStyles.linkDisabled
-        )}
-        aria-disabled={disabled}
+        {...commonProps}
+        aria-label={ariaLabel}
+        aria-disabled={isDisabled}
+        aria-pressed={active}
       >
-        <ListItem
-          size={Size.Sm}
-          selected={active}
-          iconOnly={collapsed}
-          iconLeft={Icon}
-          className={itemClassName}
-          disabled={disabled}
-          aria-label={ariaLabel}
-        >
-          {label}
-        </ListItem>
+        {itemContent}
       </a>
     );
   }
 
   return (
-    <ListItem
-      size={Size.Xs}
-      selected={active}
-      iconOnly={collapsed}
-      iconLeft={Icon}
+    <button
+      type="button"
       className={itemClassName}
-      disabled={disabled}
+      disabled={isDisabled}
       onClick={handleClick}
       aria-label={ariaLabel}
+      aria-pressed={active}
+      aria-disabled={isDisabled}
+      title={title}
     >
-      {label}
-    </ListItem>
+      {itemContent}
+    </button>
   );
 }

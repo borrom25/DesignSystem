@@ -1,0 +1,1 @@
+export { useInputImg } from "./useInputImg";

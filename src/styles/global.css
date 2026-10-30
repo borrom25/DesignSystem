@@ -28,10 +28,16 @@
   --letter-spacing-lg: calc(var(--lg-letter-spacing) * 1px);
 
   --font-size-body-b1: calc(var(--typography-body-b1-font-size) * 1px);
-  --line-height-body-b1: calc(var(--typography-body-b1-line-height) * 1px);
+  --text-body-b1: var(--font-size-body-b1);
+  --text-body-b1--line-height: calc(
+    var(--typography-body-b1-line-height) * 1px
+  );
+  --line-height-body-b1: var(--text-body-b1--line-height);
+  --leading-body-b1: var(--text-body-b1--line-height);
   --letter-spacing-body-b1: calc(
     var(--typography-body-b1-letter-spacing) * 1px
   );
+  --tracking-body-b1: var(--letter-spacing-body-b1);
   --font-weight-body-b1-regular: var(--typography-body-b1-font-weight-regular);
   --font-weight-body-b1-medium: var(--typography-body-b1-font-weight-medium);
   --font-weight-body-b1-semibold: var(
@@ -143,24 +149,32 @@
   --font-weight-heading-h2-bold: var(--typography-heading-h2-font-weight-bold);
 
   --font-size-heading-h3: calc(var(--typography-heading-h3-font-size) * 1px);
-  --line-height-heading-h3: calc(
+  --text-heading-h3: var(--font-size-heading-h3);
+  --text-heading-h3--line-height: calc(
     var(--typography-heading-h3-line-height) * 1px
   );
+  --line-height-heading-h3: var(--text-heading-h3--line-height);
+  --leading-heading-h3: var(--text-heading-h3--line-height);
   --letter-spacing-heading-h3: calc(
     var(--typography-heading-h3-letter-spacing) * 1px
   );
+  --tracking-heading-h3: var(--letter-spacing-heading-h3);
   --font-weight-heading-h3-medium: var(
     --typography-heading-h3-font-weight-medium
   );
   --font-weight-heading-h3-bold: var(--typography-heading-h3-font-weight-bold);
 
   --font-size-heading-h4: calc(var(--typography-heading-h4-font-size) * 1px);
-  --line-height-heading-h4: calc(
+  --text-heading-h4: var(--font-size-heading-h4);
+  --text-heading-h4--line-height: calc(
     var(--typography-heading-h4-line-height) * 1px
   );
+  --line-height-heading-h4: var(--text-heading-h4--line-height);
+  --leading-heading-h4: var(--text-heading-h4--line-height);
   --letter-spacing-heading-h4: calc(
     var(--typography-heading-h4-letter-spacing) * 1px
   );
+  --tracking-heading-h4: var(--letter-spacing-heading-h4);
   --font-weight-heading-h4-medium: var(
     --typography-heading-h4-font-weight-medium
   );
@@ -385,6 +399,7 @@
   --color-secondary: var(--text-basic-secondary);
   --color-hint: var(--text-basic-hint);
   --color-complementary: var(--text-basic-complementary);
+  --color-overlay: var(--background-basic-overlay);
 
   --color-on-brand: var(--text-contrast-light-heavy);
   --color-brand-text-heavy: var(--text-brand-heavy);
@@ -447,7 +462,13 @@
   --color-contrast-light-line-light: var(--line-contrast-light-light);
   --color-contrast-light-line-medium: var(--line-contrast-light-medium);
 
-  --shadow-popover: 0 0 40px 0 rgba(0, 0, 0, 0.12);
+  --shadow-popover: 0px 0px var(--shadows-blur) 0px var(--shadows-black);
+  --shadow-card:
+    0px 0px var(--shadows-blur) 0px var(--shadows-black),
+    0px 0px 1px 0px var(--shadows-white);
+  --shadow-header:
+    0px 6px var(--shadows-blur) 2px var(--shadows-black),
+    0px 0px 1px 0px var(--shadows-white);
 }
 
 @keyframes shimmer {
@@ -456,6 +477,66 @@
   }
   100% {
     transform: translateX(200%);
+  }
+}
+
+@keyframes app-loader-top {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  30% {
+    opacity: 0;
+    transform: translateY(-20px) rotate(360deg) scale(0.5);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+}
+
+@keyframes app-loader-right {
+  0% {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg) scale(1);
+  }
+  30% {
+    opacity: 0;
+    transform: translateX(20px) rotate(360deg) scale(0.5);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg) scale(1);
+  }
+}
+
+@keyframes app-loader-bottom {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  30% {
+    opacity: 0;
+    transform: translateY(20px) rotate(360deg) scale(0.5);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+}
+
+@keyframes app-loader-left {
+  0% {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg) scale(1);
+  }
+  30% {
+    opacity: 0;
+    transform: translateX(-20px) rotate(360deg) scale(0.5);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg) scale(1);
   }
 }
 
@@ -507,6 +588,15 @@
     );
     border: 6px solid transparent;
     background-clip: content-box;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: var(--color-primary);
+    caret-color: var(--color-primary);
   }
 
   .recharts-wrapper *,

@@ -18,10 +18,9 @@ export function TableColumnsModal<TData = unknown, T extends string = string>({
   onApply,
   title = "Настройка таблицы",
   subtitle,
-  selectAllLabel = "Выбрать все",
   cancelLabel = "Отмена",
   applyLabel = "Сохранить",
-  size = Size.Sm,
+  size = Size.Xs,
   showCloseButton = true,
 }: TableColumnsModalProps<TData, T>) {
   const resolvedOptions = useTableColumnsModalOptions<TData, T>({
@@ -45,10 +44,6 @@ export function TableColumnsModal<TData = unknown, T extends string = string>({
     setDraftValue(normalizeTableColumnsSelection(value, optionIds));
   }, [open, optionIds, value]);
 
-  const areAllSelected =
-    optionIds.length > 0 && optionIds.every((id) => draftValueSet.has(id));
-  const someSelected = optionIds.some((id) => draftValueSet.has(id));
-
   const handleToggleOption = useCallback(
     (optionId: T) => {
       setDraftValue((prev) => {
@@ -61,10 +56,6 @@ export function TableColumnsModal<TData = unknown, T extends string = string>({
     },
     [optionIds]
   );
-
-  const handleToggleAll = useCallback(() => {
-    setDraftValue(areAllSelected ? [] : optionIds);
-  }, [areAllSelected, optionIds]);
 
   const handleApply = useCallback(() => {
     onApply?.(normalizeTableColumnsSelection(draftValue, optionIds));
@@ -97,38 +88,20 @@ export function TableColumnsModal<TData = unknown, T extends string = string>({
       }
     >
       <div className={tableColumnsModalStyles.content}>
-        <div className="flex flex-col gap-2">
-          <ListItem
-            size={Size.Md}
-            checkbox
-            selected={areAllSelected}
-            visualSelected={false}
-            hideSelectedOutline
-            onClick={handleToggleAll}
-            data-indeterminate={someSelected && !areAllSelected}
-          >
-            {selectAllLabel}
-          </ListItem>
-
-          {resolvedOptions.length > 0 && (
-            <div className="mx-2 my-1 border-t border-line" />
-          )}
-
-          <div className="flex flex-col gap-0.5 px-[20px]">
-            {resolvedOptions.map((option) => (
-              <ListItem
-                key={option.id}
-                size={Size.Md}
-                checkbox
-                selected={draftValueSet.has(option.id)}
-                visualSelected={false}
-                hideSelectedOutline
-                onClick={() => handleToggleOption(option.id)}
-              >
-                {option.label}
-              </ListItem>
-            ))}
-          </div>
+        <div className={tableColumnsModalStyles.list}>
+          {resolvedOptions.map((option) => (
+            <ListItem
+              key={option.id}
+              size={Size.Xs}
+              checkbox
+              selected={draftValueSet.has(option.id)}
+              visualSelected={false}
+              hideSelectedOutline
+              onClick={() => handleToggleOption(option.id)}
+            >
+              {option.label}
+            </ListItem>
+          ))}
         </div>
       </div>
     </Modal>

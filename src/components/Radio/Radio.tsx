@@ -16,7 +16,7 @@ export function Radio({
   error,
   ...restProps
 }: RadioProps) {
-  const hasField = label || hint || hintError;
+  const hasField = label || hint || hintError || required;
 
   const input = (
     <label className={radioStyles.label}>

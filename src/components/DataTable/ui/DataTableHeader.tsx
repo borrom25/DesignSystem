@@ -4,7 +4,7 @@ import { ChevronsUpDown, Filter } from "lucide-react";
 import { cn } from "@/utils";
 import { Counter } from "@/components/Counter";
 import { IconButton, IconButtonType } from "@/components/IconButton";
-import { Popover, PopoverSurface } from "@/components/Popover";
+import { Popover } from "@/components/Popover";
 import { Size } from "@/types";
 import { tableStyles } from "../styles";
 import type { TableHeaderCellProps, TableHeaderProps } from "../types";
@@ -31,26 +31,48 @@ export function TableHeader<TData>({
         className
       )}
     >
-      {headerGroups.map((headerGroup) => (
+      {headerGroups.map((headerGroup, headerRowIndex) => (
         <tr key={headerGroup.id} className={tableStyles.headerRow}>
-          {headerGroup.headers.map((header) => (
-            <TableHeaderCell
-              key={header.id}
-              header={header}
-              filters={filters}
-              isBeforeStickyRight={beforeStickyRightColumnIds.has(
-                header.column.id
-              )}
-            />
-          ))}
+          {headerGroup.headers.map((header) => {
+            const hasNestedColumns = Boolean(header.column.columns?.length);
+
+            if (!hasNestedColumns && headerRowIndex > header.column.depth) {
+              return null;
+            }
+
+            const rowSpan = hasNestedColumns
+              ? 1
+              : headerGroups.length - headerRowIndex;
+
+            return (
+              <TableHeaderCell
+                key={header.id}
+                header={header}
+                rowSpan={rowSpan}
+                colSpan={header.colSpan}
+                headerRowIndex={headerRowIndex}
+                stickyHeader={stickyHeader}
+                filters={filters}
+                isBeforeStickyRight={beforeStickyRightColumnIds.has(
+                  header.column.id
+                )}
+              />
+            );
+          })}
         </tr>
       ))}
     </thead>
   );
 }
 
+const headerRowHeight = 56;
+
 function TableHeaderCell<TData>({
   header,
+  rowSpan = 1,
+  colSpan = 1,
+  headerRowIndex = 0,
+  stickyHeader = false,
   filters,
   isBeforeStickyRight = false,
 }: TableHeaderCellProps<TData>) {
@@ -93,16 +115,25 @@ function TableHeaderCell<TData>({
 
   return (
     <th
+      colSpan={colSpan}
+      rowSpan={rowSpan}
       className={cn(
         tableStyles.headerCell,
+        stickyHeader && tableStyles.headerCellStickyHeader,
         isServiceCol && tableStyles.headerCellSelection,
+        rowSpan > 1 && tableStyles.headerCellSpanning,
         canSort && tableStyles.headerCellSortable,
         isSorted && tableStyles.headerCellSorted,
         isBeforeStickyRight && tableStyles.headerCellBeforeStickyRight,
         stickyPosition === "left" && tableStyles.headerCellStickyLeft,
         stickyPosition === "right" && tableStyles.headerCellStickyRight
       )}
-      style={widthStyle}
+      style={{
+        ...widthStyle,
+        ...(stickyHeader
+          ? { top: headerRowIndex * headerRowHeight }
+          : undefined),
+      }}
     >
       <div
         className={cn(
@@ -110,9 +141,7 @@ function TableHeaderCell<TData>({
           isServiceCol && tableStyles.headerCellSelectionContent
         )}
       >
-        {header.isPlaceholder
-          ? null
-          : flexRender(header.column.columnDef.header, header.getContext())}
+        {flexRender(header.column.columnDef.header, header.getContext())}
         {(canFilter || canSort) && (
           <div className={tableStyles.headerCellIcons}>
             {canFilter && filterConfig && filters && (
@@ -139,14 +168,16 @@ function TableHeaderCell<TData>({
                     )}
                   </div>
                 </Popover.Trigger>
-                <Popover.Content>
-                  <PopoverSurface className={tableStyles.filterPopoverSurface}>
+                <Popover.Content
+                  onOpenAutoFocus={(event) => event.preventDefault()}
+                >
+                  <Popover.Surface className={tableStyles.filterPopoverSurface}>
                     <DataTableFilterRenderer
                       config={filterConfig}
                       filterId={filterId}
                       filters={filters}
                     />
-                  </PopoverSurface>
+                  </Popover.Surface>
                 </Popover.Content>
               </Popover>
             )}

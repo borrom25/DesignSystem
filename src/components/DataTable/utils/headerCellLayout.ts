@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Header } from "@tanstack/react-table";
 import type { ColumnDef, StickyPosition } from "../types";
 import type {
@@ -5,7 +6,11 @@ import type {
   FilterSchema,
 } from "../types/DataTable.filter.types";
 import { tableStyles } from "../styles";
-import { getStickyPosition, isServiceColumn } from "./columnLayout";
+import {
+  getDataTableColumnWidthStyle,
+  getStickyPosition,
+  isServiceColumn,
+} from "./columnLayout";
 
 export interface DataTableHeaderCellLayout<TData> {
   columnDef: ColumnDef<TData>;
@@ -20,12 +25,12 @@ export interface DataTableHeaderCellLayout<TData> {
   filterId: string;
   canFilter: boolean;
   isFiltered: boolean;
-  widthStyle?: { width: number };
+  widthStyle?: Pick<CSSProperties, "width" | "minWidth" | "maxWidth">;
 }
 
 export function getDataTableHeaderCellLayout<TData>(
   header: Header<TData, unknown>,
-  filters?: DataTableFiltersState<FilterSchema>
+  filters: DataTableFiltersState<FilterSchema> | undefined
 ): DataTableHeaderCellLayout<TData> {
   const columnDef = header.column.columnDef as ColumnDef<TData>;
   const canSort = header.column.getCanSort();
@@ -44,6 +49,7 @@ export function getDataTableHeaderCellLayout<TData>(
   const filterConfig = columnDef.filter;
   const filterId = header.column.id;
   const canFilter = !!filterConfig && !!filters && !isServiceCol;
+  const isLeafColumn = header.column.columns.length === 0;
 
   return {
     columnDef,
@@ -58,6 +64,8 @@ export function getDataTableHeaderCellLayout<TData>(
     filterId,
     canFilter,
     isFiltered: filters?.hasValue(filterId) ?? false,
-    widthStyle: isServiceCol ? undefined : { width: header.getSize() },
+    widthStyle: isLeafColumn
+      ? getDataTableColumnWidthStyle(header.column.id, header.getSize())
+      : undefined,
   };
 }

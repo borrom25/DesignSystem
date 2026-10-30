@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Bell, FileText, Settings, Users } from "lucide-react";
 import { TabsOverflow } from "@/components";
 import type { TabsOverflowItem, TabsOverflowProps } from "@/components";
@@ -208,6 +208,58 @@ export const DisabledStates: Story = {
     return (
       <div className="w-[220px]">
         <TabsOverflow {...args} value={value} onValueChange={setValue} />
+      </div>
+    );
+  },
+};
+
+export const WithItemWrapper: Story = {
+  args: {
+    size: Size.Sm,
+    items,
+    moreLabel: "Еще",
+    itemWrapper: ({ children }) => (
+      <span className="inline-flex w-fit">{children}</span>
+    ),
+  },
+  render: (args) => {
+    const [value, setValue] = useState("overview");
+
+    return (
+      <div className="w-[360px]">
+        <TabsOverflow {...args} value={value} onValueChange={setValue} />
+      </div>
+    );
+  },
+};
+
+export const WithRefAndPlaceholder: Story = {
+  args: {
+    size: Size.Sm,
+    items,
+    moreLabel: "Еще",
+    placeholder: <span data-testid="tabs-overflow-placeholder" />,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`ref` указывает на контейнер табов, `placeholder` рендерится в нем после видимых табов и до кнопки «Еще». Нужно для drag-and-drop через `@hello-pangea/dnd`: `ref={provided.innerRef}`, `placeholder={provided.placeholder}`.",
+      },
+    },
+  },
+  render: (args) => {
+    const [value, setValue] = useState("overview");
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    return (
+      <div className="w-[360px]">
+        <TabsOverflow
+          {...args}
+          ref={containerRef}
+          value={value}
+          onValueChange={setValue}
+        />
       </div>
     );
   },

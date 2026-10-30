@@ -83,6 +83,86 @@ function AlertControllerPlayground() {
       <Button
         type="ghost"
         onClick={() =>
+          showAlert({
+            message: "Профиль обновлен",
+            description:
+              "Изменения сохранены и синхронизированы на всех устройствах.",
+            type: "success",
+          })
+        }
+      >
+        subtitle + actions (success)
+      </Button>
+      <Button
+        type="ghost"
+        onClick={() =>
+          showAlert({
+            message: "Ошибка публикации",
+            description:
+              "Не удалось отправить изменения на сервер. Проверьте соединение.",
+            type: "error",
+          })
+        }
+      >
+        subtitle + actions (error)
+      </Button>
+      <Button
+        type="ghost"
+        onClick={() =>
+          showAlert({
+            message: "Истекает срок пароля",
+            description:
+              "Смените пароль в течение 3 дней, чтобы сохранить доступ.",
+            type: "warning",
+            actions: (
+              <>
+                <Button size="xs" type="ghost" onClick={() => closeAlert()}>
+                  Позже
+                </Button>
+                <Button
+                  size="xs"
+                  type="flat"
+                  onClick={() => showAlert("Переход к настройкам", "info")}
+                >
+                  Сменить
+                </Button>
+              </>
+            ),
+          })
+        }
+      >
+        subtitle + actions (warning)
+      </Button>
+      <Button
+        type="ghost"
+        onClick={() =>
+          showAlert({
+            message: "Новая активность в проекте",
+            description:
+              "3 участника добавили комментарии. Откройте ленту, чтобы проверить.",
+            type: "info",
+            actions: (
+              <>
+                <Button size="xs" type="ghost" onClick={() => closeAlert()}>
+                  Пропустить
+                </Button>
+                <Button
+                  size="xs"
+                  type="flat"
+                  onClick={() => showAlert("Лента открыта", "success")}
+                >
+                  Смотреть
+                </Button>
+              </>
+            ),
+          })
+        }
+      >
+        subtitle + actions (info)
+      </Button>
+      <Button
+        type="ghost"
+        onClick={() =>
           showModal({
             title: "Alert inside modal",
             size: "small",

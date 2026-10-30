@@ -13,8 +13,10 @@ export default tseslint.config(
   {
     ignores: [
       "dist",
+      ".cache",
       "node_modules",
       "storybook-static",
+      "apps/docs/dist",
       "tokens",
       "components_ver",
       "project-template-local",
@@ -63,6 +65,17 @@ export default tseslint.config(
       "@typescript-eslint/no-unused-vars": "off",
       "no-empty": "off",
     },
+  },
+  {
+    files: ["**/*.config.ts"],
+    languageOptions: { globals: globals.node },
+  },
+  {
+    files: [
+      ".storybook/preview.tsx",
+      "apps/docs/src/pages/components/**/*-docs/config.tsx",
+    ],
+    rules: { "react-refresh/only-export-components": "off" },
   },
   {
     files: ["src/components/**/*.figma.js"],

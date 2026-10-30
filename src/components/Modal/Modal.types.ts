@@ -27,6 +27,8 @@ export interface ModalProps extends Omit<
   animationClassName?: string;
   sideMenu?: boolean;
   withBodyPadding?: boolean;
+  headBottomSlot?: ReactNode;
+  slotHead?: ReactNode;
 }
 
 export interface ModalHeaderProps {
@@ -36,6 +38,9 @@ export interface ModalHeaderProps {
   actionSlot?: ReactNode;
   className?: string;
   onClose?: () => void;
+  showCloseButton?: boolean;
+  headBottomSlot?: ReactNode;
+  slotHead?: ReactNode;
 }
 
 export interface ModalFooterProps {

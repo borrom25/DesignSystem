@@ -5,7 +5,10 @@ import {
   appLayoutSidebarClasses,
   appLayoutMainClasses,
 } from "./base";
-import { appLayoutContainerClasses } from "./container";
+import {
+  appLayoutContainerClasses,
+  getAppLayoutContainerStyle,
+} from "./container";
 
 export {
   appLayoutRootClasses,
@@ -14,7 +17,10 @@ export {
   appLayoutSidebarClasses,
   appLayoutMainClasses,
   appLayoutContainerClasses,
+  getAppLayoutContainerStyle,
 };
+
+export { getAppLayoutSidebarStyle } from "./sidebar";
 
 export const appLayoutStyles = {
   root: appLayoutRootClasses,
@@ -23,4 +29,5 @@ export const appLayoutStyles = {
   sidebar: appLayoutSidebarClasses,
   main: appLayoutMainClasses,
   container: appLayoutContainerClasses,
+  getContainerStyle: getAppLayoutContainerStyle,
 } as const;

@@ -48,6 +48,7 @@ export interface InputOwnProps extends BaseFieldProps {
   inputClassName?: string;
   clearable?: boolean;
   onClear?: () => void;
+  labelActive?: boolean;
   ref?: Ref<HTMLInputElement>;
 }
 

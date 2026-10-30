@@ -19,6 +19,7 @@ import {
   type DataTableDateRangeFilterOptions,
   type DataTableListFilterOptions,
   type DataTableNumberRangeFilterOptions,
+  type DataTableRadioFilterOptions,
 } from "./dataTableFilter";
 
 type DataTableColumnFilterOption<TValue> = {
@@ -79,6 +80,22 @@ export interface DataTableColumnHelper<TData extends RowData> {
       "filter"
     > & {
       filter: DataTableListFilterOptions<TValue>;
+    }
+  ) => DataTableAccessorColumnOutput<TData, TAccessor, TValue>;
+  radio: <
+    TAccessor extends AccessorFn<TData> | DeepKeys<TData>,
+    TValue extends TAccessor extends AccessorFn<TData, infer TReturn>
+      ? TReturn
+      : TAccessor extends DeepKeys<TData>
+        ? DeepValue<TData, TAccessor>
+        : never,
+  >(
+    accessor: TAccessor,
+    column: Omit<
+      DataTableAccessorColumnInput<TData, TAccessor, TValue>,
+      "filter"
+    > & {
+      filter: DataTableRadioFilterOptions<TValue>;
     }
   ) => DataTableAccessorColumnOutput<TData, TAccessor, TValue>;
   date: <
@@ -186,6 +203,18 @@ export function createDataTableColumnHelper<
           ...columnDef,
           filter: dataTableFilter.list(filter),
           filterFn: columnDef.filterFn ?? "dataTableList",
+        } as never
+      ) as never;
+    },
+    radio: (accessor, column) => {
+      const { filter, ...columnDef } = column;
+
+      return helper.accessor(
+        accessor as never,
+        {
+          ...columnDef,
+          filter: dataTableFilter.radio(filter),
+          filterFn: columnDef.filterFn ?? "dataTableRadio",
         } as never
       ) as never;
     },

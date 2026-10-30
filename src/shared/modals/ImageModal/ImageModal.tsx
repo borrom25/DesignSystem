@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { Trash2, Download, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Download, Trash2, X } from "lucide-react";
+import { cn } from "@/utils";
+import { useGalleryKeyboard, useMediaModal } from "../hooks";
 import { inputImgStyles } from "./styles";
-import { ImageModalProps } from "@/shared/modals/ImageModal/ImageModal.types.ts";
+import type { ImageModalProps } from "./ImageModal.types.ts";
 
 export function ImageModal({
   file,
@@ -11,65 +12,40 @@ export function ImageModal({
   onRemove,
   disabled,
   src,
+  onPrev,
+  onNext,
+  children,
 }: ImageModalProps) {
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setPreviewUrl(url);
-      return () => URL.revokeObjectURL(url);
+  const { previewUrl, mediaName, handleDownload, handleRemove } = useMediaModal(
+    {
+      file,
+      src,
+      isOpen,
+      onClose,
+      onRemove,
+      fallbackName: "Фото",
     }
-    if (src) setPreviewUrl(src);
-  }, [file, src]);
+  );
 
-  const imageName = file?.name ?? "Фото";
+  useGalleryKeyboard(isOpen, onPrev, onNext);
 
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isOpen) {
-        onClose();
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("keydown", handleEscape);
-      document.body.style.overflow = "hidden";
-    }
-
-    return () => {
-      document.removeEventListener("keydown", handleEscape);
-      document.body.style.overflow = "";
-    };
-  }, [isOpen, onClose]);
-
-  const handleDownload = () => {
-    if (previewUrl) {
-      const link = document.createElement("a");
-      link.href = previewUrl;
-      link.download = imageName;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  };
-
-  const handleRemove = () => {
-    onRemove?.();
-    onClose();
-  };
+  const isGallery = Boolean(onPrev || onNext);
 
   if (!isOpen) return null;
 
   return createPortal(
     <div className={inputImgStyles.overlay} onClick={onClose}>
       <div
-        className={inputImgStyles.content}
+        className={cn(
+          inputImgStyles.content,
+          isGallery && inputImgStyles.contentGallery
+        )}
         onClick={(e) => e.stopPropagation()}
       >
         <div className={inputImgStyles.actions}>
           {!disabled && (
             <button
+              type="button"
               onClick={handleRemove}
               className={inputImgStyles.actionButton}
               aria-label="Удалить изображение"
@@ -78,15 +54,19 @@ export function ImageModal({
               <Trash2 size={20} className={inputImgStyles.icon} />
             </button>
           )}
+          {previewUrl && (
+            <button
+              type="button"
+              onClick={handleDownload}
+              className={inputImgStyles.actionButton}
+              aria-label="Скачать изображение"
+              title="Скачать"
+            >
+              <Download size={20} className={inputImgStyles.icon} />
+            </button>
+          )}
           <button
-            onClick={handleDownload}
-            className={inputImgStyles.actionButton}
-            aria-label="Скачать изображение"
-            title="Скачать"
-          >
-            <Download size={20} className={inputImgStyles.icon} />
-          </button>
-          <button
+            type="button"
             onClick={onClose}
             className={inputImgStyles.actionButton}
             aria-label="Закрыть"
@@ -95,13 +75,43 @@ export function ImageModal({
             <X size={20} className={inputImgStyles.icon} />
           </button>
         </div>
-        {previewUrl && (
-          <img
-            src={previewUrl}
-            alt={imageName}
-            className={inputImgStyles.image}
-          />
-        )}
+        <div className={inputImgStyles.viewer}>
+          {onPrev && (
+            <button
+              type="button"
+              onClick={onPrev}
+              className={inputImgStyles.actionButton}
+              aria-label="Предыдущее изображение"
+              title="Назад"
+            >
+              <ChevronLeft size={20} className={inputImgStyles.icon} />
+            </button>
+          )}
+          <div className={inputImgStyles.stage}>
+            {previewUrl ? (
+              <img
+                src={previewUrl}
+                alt={mediaName}
+                className={inputImgStyles.image}
+              />
+            ) : (
+              children && (
+                <div className={inputImgStyles.fallback}>{children}</div>
+              )
+            )}
+          </div>
+          {onNext && (
+            <button
+              type="button"
+              onClick={onNext}
+              className={inputImgStyles.actionButton}
+              aria-label="Следующее изображение"
+              title="Вперёд"
+            >
+              <ChevronRight size={20} className={inputImgStyles.icon} />
+            </button>
+          )}
+        </div>
       </div>
     </div>,
     document.body

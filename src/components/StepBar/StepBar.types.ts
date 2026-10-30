@@ -12,17 +12,40 @@ export interface StepBarItem<T extends string | number = string> {
   type?: StepBarItemType;
 }
 
-export interface StepBarProps<T extends string | number = string> {
-  items: StepBarItem<T>[];
-  active?: T;
-  onChangeStep: (step: T) => void;
+type StepBarItems = readonly StepBarItem<string | number>[];
+type StepBarItemId<TItems extends StepBarItems> = TItems[number]["id"];
+export type StepBarTransitionDirection = "forward" | "backward" | "same";
+
+export interface StepBarTransitionMeta<
+  TStepId extends string | number = string,
+> {
+  previousStep: TStepId;
+  nextStep: TStepId;
+  direction: StepBarTransitionDirection;
+}
+
+export interface StepBarProps<TItems extends StepBarItems = StepBarItems> {
+  items: TItems;
+  active?: StepBarItemId<TItems>;
+  defaultActive?: StepBarItemId<TItems>;
+  onChangeStep?: (step: StepBarItemId<TItems>) => void;
+  onStepTransition?: (
+    meta: StepBarTransitionMeta<StepBarItemId<TItems>>
+  ) => void;
   onClickSuccessButton?: () => void;
   className?: string;
   successButtonText?: string;
+  loadingPrev?: boolean;
+  loadingNext?: boolean;
+  loadingSuccess?: boolean;
 }
 
-export interface UseStepBarProps<T extends string | number = string> {
-  items: StepBarItem<T>[];
-  active: T;
-  onChangeStep: (step: T) => void;
+export interface UseStepBarProps<TItems extends StepBarItems = StepBarItems> {
+  items: TItems;
+  active?: StepBarItemId<TItems>;
+  defaultActive?: StepBarItemId<TItems>;
+  onChangeStep?: (step: StepBarItemId<TItems>) => void;
+  onStepTransition?: (
+    meta: StepBarTransitionMeta<StepBarItemId<TItems>>
+  ) => void;
 }

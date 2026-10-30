@@ -13,22 +13,27 @@ export function SelectTrigger({
   error = false,
   className,
   children,
+  clearable: clearableProp,
   onClear: onClearProp,
   hideChevron: hideChevronProp,
+  isFilled: isFilledProp,
 }: SelectTriggerProps) {
   const {
     open,
     disabled,
     value,
+    clearable: clearableContext,
     label,
     required,
     onClear: onClearContext,
   } = useSelectContext();
 
-  const hasValue = value !== undefined && value !== "";
-  const isLabelActive = !!label && (open || hasValue);
+  const hasScalarValue = value != null && value !== "";
+  const isFilled = isFilledProp ?? hasScalarValue;
+  const isLabelActive = !!label && (open || isFilled);
   const onClear = onClearProp ?? onClearContext;
-  const showClear = hasValue;
+  const clearable = clearableProp ?? clearableContext;
+  const showClear = clearable && hasScalarValue && !disabled;
   const hideChevron = hideChevronProp ?? showClear;
   const iconSize = getIconSize(size, triggerStyles.iconSizeMap);
   const clearIconSize = closeBtnStyles.iconSizeMap["md"];
@@ -47,7 +52,7 @@ export function SelectTrigger({
         size={size}
         error={error}
         open={open}
-        isFilled={hasValue}
+        isFilled={isFilled}
         label={label}
         required={required}
         isLabelActive={isLabelActive}

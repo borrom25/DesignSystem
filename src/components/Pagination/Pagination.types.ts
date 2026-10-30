@@ -21,6 +21,7 @@ export interface PaginationProps extends Omit<
   disabled?: boolean;
   siblingCount?: number;
   inputDebounceDelay?: number;
+  forwardOnly?: boolean;
 }
 
 export type PaginationItem =

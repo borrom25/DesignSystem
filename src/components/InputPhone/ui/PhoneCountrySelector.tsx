@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
-import { Popover, PopoverSurface } from "@/components/Popover";
-import type { PopoverContentProps } from "@/components/Popover";
+import { Popover } from "@/components/Popover";
 import { SearchAutocomplete } from "@/components/SearchAutocomplete";
 import { useOpenState } from "@/shared/hooks";
 import type { Size } from "@/types";
@@ -9,6 +8,7 @@ import type { PhoneCountryOption } from "../InputPhone.countries";
 import { inputPhoneStyles } from "../styles";
 import { PhoneCountryList } from "./PhoneCountryList";
 import { PhoneCountryTrigger } from "./PhoneCountryTrigger";
+import { PopoverContentProps } from "@radix-ui/react-popover";
 
 const COUNTRY_LIST_MAX_HEIGHT = 300;
 const COUNTRY_POPOVER_SIDE_OFFSET = 6;
@@ -99,7 +99,7 @@ export function PhoneCountrySelector({
         onInteractOutside={onContentInteractOutside}
         onFocusOutside={onContentFocusOutside}
       >
-        <PopoverSurface className={inputPhoneStyles.countryPopoverSurface}>
+        <Popover.Surface className={inputPhoneStyles.countryPopoverSurface}>
           <div className={inputPhoneStyles.countrySearchWrapper}>
             <SearchAutocomplete
               value={searchValue}
@@ -114,7 +114,7 @@ export function PhoneCountrySelector({
             onSelect={handleCountrySelect}
             maxHeight={COUNTRY_LIST_MAX_HEIGHT}
           />
-        </PopoverSurface>
+        </Popover.Surface>
       </Popover.Content>
     </Popover>
   );

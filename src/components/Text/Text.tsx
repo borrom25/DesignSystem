@@ -1,27 +1,42 @@
 import { cn } from "@/utils";
 import type { TextProps } from "./Text.types";
+import { TEXT_VARIANT_CATEGORY, TextWeight } from "./constants";
 import { textStyles } from "./styles";
-import { Color } from "@/types";
+import { buildTypographyStyles } from "./utils";
 
 export const Text = ({
   children,
-  size,
-  weight = "regular",
   as: Component = "span",
-  color = Color.Inverse,
   className,
+  style,
+  variant,
+  weight = TextWeight.Regular,
+  color,
+  shade,
+  align,
+  overflow,
+  decoration,
   ...props
 }: TextProps) => {
-  const classes = cn(
-    textStyles.base,
-    size && textStyles.size[size],
-    size && weight && textStyles.getWeight(size, weight),
-    className
+  const category = variant ? TEXT_VARIANT_CATEGORY[variant] : undefined;
+  const typographyStyles = buildTypographyStyles(
+    category,
+    variant,
+    weight,
+    color,
+    shade
   );
 
   return (
     <Component
-      className={cn(classes, `[color:var(--color-${color})]`)}
+      className={cn(
+        textStyles.base,
+        align && textStyles.align[align],
+        overflow && textStyles.overflow[overflow],
+        decoration && textStyles.decoration[decoration],
+        className
+      )}
+      style={{ ...typographyStyles, ...style }}
       {...props}
     >
       {children}

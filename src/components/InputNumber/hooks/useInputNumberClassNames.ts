@@ -4,7 +4,6 @@ import type { UseInputNumberClassNamesProps } from "../InputNumber.types";
 import { inputNumberStyles } from "../styles";
 
 export function useInputNumberClassNames({
-  size,
   disabled,
   isError,
 }: UseInputNumberClassNamesProps) {
@@ -17,5 +16,5 @@ export function useInputNumberClassNames({
     });
 
     return { adornmentClassName };
-  }, [size, disabled, isError]);
+  }, [disabled, isError]);
 }

@@ -1,0 +1,17 @@
+export {
+  TextVariant,
+  TextWeight,
+  TextColor,
+  TextShade,
+  TextAlign,
+  TextOverflow,
+  TextDecoration,
+  TEXT_VARIANT_CATEGORY,
+  TEXT_VARIANTS,
+  TEXT_COLOR_CATEGORIES,
+  TEXT_COLOR_SHADES,
+  COLOR_CATEGORY_TOKEN,
+  type TextCategory,
+  type TextColorCategory,
+  type TextColorShade,
+} from "./constants";

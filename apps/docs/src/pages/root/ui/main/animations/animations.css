@@ -1,0 +1,131 @@
+@media (prefers-reduced-motion: reduce) {
+  .motion-reduce\:animate-none {
+    animation: none !important;
+  }
+}
+
+@keyframes green {
+  0% {
+    transform: translate(0, 0);
+  }
+  8.33% {
+    transform: translate(8px, -5px);
+  }
+  16.66% {
+    transform: translate(13px, -8px);
+  }
+  25% {
+    transform: translate(15px, -10px);
+  }
+  33.33% {
+    transform: translate(13px, -15px);
+  }
+  41.66% {
+    transform: translate(8px, -18px);
+  }
+  50% {
+    transform: translate(0, -20px);
+  }
+  58.33% {
+    transform: translate(-8px, -18px);
+  }
+  66.66% {
+    transform: translate(-13px, -15px);
+  }
+  75% {
+    transform: translate(-15px, -10px);
+  }
+  83.33% {
+    transform: translate(-13px, -8px);
+  }
+  91.66% {
+    transform: translate(-8px, -5px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes pink {
+  0% {
+    transform: translate(0, 0);
+  }
+  8.33% {
+    transform: translate(5px, 8px);
+  }
+  16.66% {
+    transform: translate(8px, 13px);
+  }
+  25% {
+    transform: translate(10px, 15px);
+  }
+  33.33% {
+    transform: translate(8px, 20px);
+  }
+  41.66% {
+    transform: translate(5px, 25px);
+  }
+  50% {
+    transform: translate(0, 30px);
+  }
+  58.33% {
+    transform: translate(-5px, 25px);
+  }
+  66.66% {
+    transform: translate(-8px, 20px);
+  }
+  75% {
+    transform: translate(-10px, 15px);
+  }
+  83.33% {
+    transform: translate(-8px, 13px);
+  }
+  91.66% {
+    transform: translate(-5px, 8px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes yellow {
+  0% {
+    transform: translate(0, 0);
+  }
+  8.33% {
+    transform: translate(8px, 5px);
+  }
+  16.66% {
+    transform: translate(13px, 8px);
+  }
+  25% {
+    transform: translate(15px, 10px);
+  }
+  33.33% {
+    transform: translate(13px, 15px);
+  }
+  41.66% {
+    transform: translate(8px, 18px);
+  }
+  50% {
+    transform: translate(0, 20px);
+  }
+  58.33% {
+    transform: translate(-8px, 18px);
+  }
+  66.66% {
+    transform: translate(-13px, 15px);
+  }
+  75% {
+    transform: translate(-15px, 10px);
+  }
+  83.33% {
+    transform: translate(-13px, 8px);
+  }
+  91.66% {
+    transform: translate(-8px, 5px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}

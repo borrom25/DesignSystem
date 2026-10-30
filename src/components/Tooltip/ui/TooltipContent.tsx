@@ -2,6 +2,7 @@ import * as TooltipPrimitive from "@radix-ui/react-popover";
 import { cn } from "@/utils";
 import type { TooltipContentProps } from "../Tooltip.types.ts";
 import { tooltipStyles } from "../styles";
+import { useOverlayPortalContainer } from "@/components/Modal/Modal.utils";
 import { TooltipSurface } from "./TooltipSurface.tsx";
 
 export function TooltipContent({
@@ -21,9 +22,12 @@ export function TooltipContent({
   collisionPadding = 8,
   forceMount,
 }: TooltipContentProps) {
+  const { container, setOverlayNode } = useOverlayPortalContainer();
+
   return (
-    <TooltipPrimitive.Portal forceMount={forceMount}>
+    <TooltipPrimitive.Portal container={container} forceMount={forceMount}>
       <TooltipPrimitive.Content
+        ref={setOverlayNode}
         side={side}
         align={align}
         sideOffset={sideOffset}
@@ -32,6 +36,9 @@ export function TooltipContent({
         avoidCollisions={true}
         className={cn(
           tooltipStyles.contentBase,
+          container
+            ? tooltipStyles.contentModalZIndex
+            : tooltipStyles.contentPageZIndex,
           tooltipStyles.animation,
           className
         )}

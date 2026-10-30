@@ -7,19 +7,19 @@ export const sizeClasses: Record<Size, string> = {
 } as const;
 
 export const gapClasses: Record<Size, string> = {
-  xs: "gap-2",
-  sm: "gap-3",
-  md: "gap-3",
+  xs: "gap-1",
+  sm: "gap-1",
+  md: "gap-1.5",
 } as const;
 
 export const withAvatarSizeClasses: Record<Size, string> = {
-  xs: "pr-4",
-  sm: "pr-4",
-  md: "pr-6",
+  xs: "pr-2",
+  sm: "pr-2.5",
+  md: "pr-3",
 } as const;
 
 export const avatarSizeMap: Record<Size, number> = {
-  xs: 27,
-  sm: 31,
-  md: 35,
+  xs: 28,
+  sm: 32,
+  md: 36,
 };

@@ -17,7 +17,7 @@ export const countryTriggerStateClasses =
   "cursor-pointer transition-colors hover:bg-generic-medium-hover disabled:cursor-not-allowed disabled:hover:bg-generic-disabled";
 
 export const countryFlagClasses =
-  "inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-generic-medium [&>svg]:h-full [&>svg]:w-full";
+  "relative inline-flex shrink-0 overflow-hidden rounded-full bg-generic-medium [&>svg]:h-full [&>svg]:w-full [&>svg]:max-w-none [&>svg]:scale-[1.5]";
 
 export const countryFlagFallbackClasses = "text-[8px] leading-none";
 

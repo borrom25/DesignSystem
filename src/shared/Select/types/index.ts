@@ -1,4 +1,5 @@
 export type {
+  SelectOptionValue,
   BaseSelectOption,
   BaseTriggerProps,
   BaseValueProps,

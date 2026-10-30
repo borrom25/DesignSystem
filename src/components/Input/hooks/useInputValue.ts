@@ -5,21 +5,18 @@ type UseInputValueProps = {
   value?: InputProps["value"];
   defaultValue?: InputProps["defaultValue"];
   onChange?: InputProps["onChange"];
-  onClear?: InputProps["onClear"];
 };
 
 type UseInputValueReturn = {
   value: string | number | readonly string[] | undefined;
   hasValue: boolean;
   handleChange: NonNullable<InputProps["onChange"]>;
-  handleClear: () => void;
 };
 
 export function useInputValue({
   value: valueProp,
   defaultValue,
   onChange,
-  onClear,
 }: UseInputValueProps): UseInputValueReturn {
   const isControlled = valueProp !== undefined;
   const [uncontrolledValue, setUncontrolledValue] = useState<string>(() =>
@@ -36,12 +33,5 @@ export function useInputValue({
     onChange?.(event);
   };
 
-  const handleClear = () => {
-    if (!isControlled) {
-      setUncontrolledValue("");
-    }
-    onClear?.();
-  };
-
-  return { value, hasValue, handleChange, handleClear };
+  return { value, hasValue, handleChange };
 }

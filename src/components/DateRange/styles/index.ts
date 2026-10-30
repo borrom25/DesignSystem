@@ -30,6 +30,10 @@ export const dateRangeStyles = {
     labelCentered: dateRangeBase.dateRangeSectionLabelCenteredClasses,
     input: dateRangeBase.dateRangeSectionInputClasses,
     inputHidden: dateRangeBase.dateRangeSectionInputHiddenClasses,
+    inputPlaceholderHidden:
+      dateRangeBase.dateRangeSectionInputPlaceholderHiddenClasses,
+    inputPlaceholderVisible:
+      dateRangeBase.dateRangeSectionInputPlaceholderVisibleClasses,
     inputDefault: dateRangeBase.dateRangeSectionInputDefaultClasses,
     inputError: dateRangeBase.dateRangeSectionInputErrorClasses,
     indicator: dateRangeBase.dateRangeActiveIndicatorClasses,
@@ -38,6 +42,8 @@ export const dateRangeStyles = {
   },
   sectionLabelCenteredSize: dateRangeSizes.dateRangeLabelCenteredSizeClasses,
   sectionLabelActiveSize: dateRangeSizes.dateRangeLabelActiveSizeClasses,
+  sectionLabelActiveOffsetSize:
+    dateRangeSizes.dateRangeLabelActiveOffsetSizeClasses,
   sectionInputSize: dateRangeSizes.dateRangeSectionInputSizeClasses,
   calendarButton: {
     container: dateRangeCalendar.calendarButtonContainerClasses,

@@ -8,7 +8,10 @@ export type LabelColor = Exclude<
 >;
 export type LabelType = Extract<Type, "fill" | "outline" | "flat"> | "text";
 
-type BaseLabelProps = Omit<HTMLAttributes<HTMLSpanElement>, "color"> & {
+type BaseLabelProps = Omit<
+  HTMLAttributes<HTMLSpanElement>,
+  "color" | "prefix"
+> & {
   color?: LabelColor;
   type?: LabelType;
   size?: Size;
@@ -16,6 +19,9 @@ type BaseLabelProps = Omit<HTMLAttributes<HTMLSpanElement>, "color"> & {
   iconLeft?: LucideIcon;
   iconRight?: LucideIcon;
   disabled?: boolean;
+  prefix?: ReactNode;
+  suffix?: ReactNode;
+  onClick?: () => void;
 };
 
 type LabelWithIconOnly = BaseLabelProps & {

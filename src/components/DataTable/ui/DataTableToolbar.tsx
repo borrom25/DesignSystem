@@ -1,9 +1,11 @@
-import { SearchAutocomplete } from "@/components/SearchAutocomplete";
+import { Button } from "@/components/Button";
 import { ButtonDrop } from "@/components/ButtonDrop";
+import { SearchAutocomplete } from "@/components/SearchAutocomplete";
+import { Color, Size, Type } from "@/types";
 import { cn } from "@/utils";
-import { Size } from "@/types";
-import type { DataTableToolbarProps } from "../types";
+import { FunnelX, Settings } from "lucide-react";
 import { tableStyles } from "../styles";
+import type { DataTableToolbarProps } from "../types";
 
 export function DataTableToolbar({
   topSlot,
@@ -12,12 +14,19 @@ export function DataTableToolbar({
   onSearchChange,
   searchPlaceholder = "Поиск",
   actions,
-  actionsPlaceholder = "Действия",
+  actionsPlaceholder = "Настройки",
+  actionsIcon,
   onActionChange,
   middleSlot,
   bottomSlot,
   className,
+  maxSearchCount,
+  filters,
+  showResetFilters = true,
 }: DataTableToolbarProps) {
+  const hasFilters = filters && Object.keys(filters.values).length > 0;
+  const hasActiveFilters = filters && filters.activeCount > 0;
+
   return (
     <div className={cn(tableStyles.toolbarRoot, className)}>
       {topSlot && <div className={tableStyles.toolbarTopSlot}>{topSlot}</div>}
@@ -30,6 +39,7 @@ export function DataTableToolbar({
               onValueChange={onSearchChange}
               placeholder={searchPlaceholder}
               clearable
+              maxCount={maxSearchCount}
             />
           </div>
         )}
@@ -38,10 +48,28 @@ export function DataTableToolbar({
           <div className={tableStyles.toolbarMiddleSlot}>{middleSlot}</div>
         )}
 
+        {hasFilters && showResetFilters && (
+          <Button
+            color={Color.Secondary}
+            type={Type.Flat}
+            className={tableStyles.toolbarIconSize}
+            iconLeft={FunnelX}
+            size={Size.Sm}
+            disabled={!hasActiveFilters}
+            onClick={() => filters?.clearAll()}
+          >
+            Сбросить фильтры
+          </Button>
+        )}
+
         {actions && actions.length > 0 && (
           <div className={tableStyles.toolbarActions}>
             <ButtonDrop
+              className={tableStyles.toolbarIconSize}
               items={actions}
+              iconLeft={
+                actionsIcon === null ? undefined : (actionsIcon ?? Settings)
+              }
               placeholder={actionsPlaceholder}
               size={Size.Sm}
               onChange={onActionChange}

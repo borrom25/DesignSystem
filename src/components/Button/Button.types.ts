@@ -8,6 +8,7 @@ import type {
   AsChildTrueProps,
   AsChildFalseProps,
 } from "@/types";
+import type { CounterVariant } from "@/components/Counter";
 
 type BaseButtonProps = Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
@@ -25,6 +26,7 @@ type ButtonOnlyProps = {
   iconLeft?: LucideIcon;
   iconRight?: LucideIcon;
   count?: number;
+  counterColor?: CounterVariant;
   loading?: boolean;
   disabled?: boolean;
 };
@@ -47,6 +49,7 @@ type ButtonAsChild = AsChildTrueProps<
   | "iconRight"
   | "iconOnly"
   | "count"
+  | "counterColor"
   | "loading"
   | "disabled"
 >;

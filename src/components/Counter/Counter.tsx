@@ -11,6 +11,7 @@ export function Counter({
   size = Size.Sm,
   variant = CounterVariant.Accent,
   empty = false,
+  disabled = false,
   className,
   ...props
 }: CounterProps) {
@@ -21,12 +22,14 @@ export function Counter({
         counterStyles.size[size],
         counterStyles.variant[variant],
         empty && counterStyles.empty,
+        disabled && counterStyles.disabled,
         className
       )}
+      aria-disabled={disabled || undefined}
       {...props}
     >
       {!empty && (
-        <span className={counterStyles.contentOffset[size]}>
+        <span className={counterStyles.content[size]}>
           {formatCount(count, maxCount)}
         </span>
       )}

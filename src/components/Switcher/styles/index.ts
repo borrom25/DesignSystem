@@ -7,8 +7,15 @@ import {
   inputClasses,
   minusBaseClasses,
   minusIconClasses,
+  titleClasses,
+  containerClasses,
 } from "./base";
-import { circleSizeClasses, minusIconSizeClasses, sizeClasses } from "./sizes";
+import {
+  circleSizeClasses,
+  minusIconSizeClasses,
+  sizeClasses,
+  titleSizeClasses,
+} from "./sizes";
 
 export const switherStyles = {
   base: baseClasses,
@@ -24,4 +31,7 @@ export const switherStyles = {
     base: minusBaseClasses,
     size: minusIconSizeClasses,
   },
+  title: titleClasses,
+  titleSize: titleSizeClasses,
+  container: containerClasses,
 };

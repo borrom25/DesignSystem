@@ -3,6 +3,7 @@ import { Plus } from "lucide-react";
 import { IconButton } from "@/components/IconButton";
 import { Color, Type } from "@/types";
 import { CloseBtn } from "@/components/CloseBtn";
+import { getDropZoneStateClass } from "@/shared/DropZone";
 import type { DropZoneProps } from "../InputImg.types";
 import { inputImgStyles } from "../styles";
 
@@ -26,6 +27,7 @@ export function DropZone({
   progress = 0,
   textLoading = "Загрузка",
   onCancelUpload,
+  fill = false,
 }: DropZoneProps) {
   const styles = inputImgStyles.dropZone;
 
@@ -34,13 +36,6 @@ export function DropZone({
     const input =
       e.currentTarget.querySelector<HTMLInputElement>('input[type="file"]');
     input?.click();
-  };
-
-  const getStateClass = () => {
-    if (disabled) return styles.disabled;
-    if (isDragActive) return styles.active;
-    if (error) return styles.error;
-    return styles.state;
   };
 
   const clampedProgress = Math.min(Math.max(progress, 0), 100);
@@ -52,7 +47,12 @@ export function DropZone({
 
   return (
     <div
-      className={cn(styles.base, styles.size[size], getStateClass(), className)}
+      className={cn(
+        styles.base,
+        fill ? styles.fill : styles.size[size],
+        getDropZoneStateClass(styles, { disabled, isDragActive, error }),
+        className
+      )}
       onDragEnter={onDragEnter}
       onDragLeave={onDragLeave}
       onDragOver={onDragOver}

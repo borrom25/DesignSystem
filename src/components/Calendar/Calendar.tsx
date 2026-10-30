@@ -36,8 +36,8 @@ export function Calendar({
     view,
     isDateDisabled,
     handleDateSelect,
-    goToPrevMonth,
-    goToNextMonth,
+    goToPrev,
+    goToNext,
     handleMonthSelect,
     handleYearSelect,
     handleViewChange,
@@ -89,8 +89,8 @@ export function Calendar({
                 currentMonth={monthDate}
                 view={view}
                 onViewChange={handleViewChange}
-                onPrevMonth={goToPrevMonth}
-                onNextMonth={goToNextMonth}
+                onPrev={goToPrev}
+                onNext={goToNext}
                 showNavigation={showNavigation}
                 locale={locale}
                 pickerType={pickerType}

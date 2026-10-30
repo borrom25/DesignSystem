@@ -3,6 +3,7 @@ export {
   roundedClasses,
   iconOnlyClasses,
   iconWithTextClasses,
+  clickableClasses,
 } from "./base";
 export {
   sizeClasses,
@@ -17,6 +18,7 @@ import {
   roundedClasses,
   iconOnlyClasses,
   iconWithTextClasses,
+  clickableClasses,
 } from "./base";
 import {
   sizeClasses,
@@ -35,5 +37,6 @@ export const labelStyles = {
   iconOnlySize: iconOnlySizeClasses,
   iconSizeMap: iconSizeMap,
   gap: gapClasses,
+  clickable: clickableClasses,
   getVariant: getVariantClasses,
 } as const;

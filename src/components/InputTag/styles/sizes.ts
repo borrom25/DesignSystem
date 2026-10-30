@@ -1,8 +1,8 @@
 import type { Size } from "@/types";
 
 export const sizeClasses: Record<Size, string> = {
-  xs: "min-h-(--size-input-xs-height) [--input-height:var(--size-input-xs-height)] [--input-gap-container-content:var(--size-input-xs-gap-container-content)] px-(--size-input-xs-padding-x) gap-(--size-input-xs-gap-body) rounded-lg text-sm font-medium leading-sm tracking-sm h-auto",
-  sm: "min-h-(--size-input-sm-height) [--input-height:var(--size-input-sm-height)] [--input-gap-container-content:var(--size-input-sm-gap-container-content)] px-(--size-input-sm-padding-x) gap-(--size-input-sm-gap-body) rounded-lg text-md font-medium leading-md tracking-md h-auto",
+  xs: "min-h-(--size-input-xs-height) [--input-height:var(--size-input-xs-height)] [--input-gap-container-content:var(--size-input-xs-gap-container-content)] px-(--size-input-xs-padding-x) gap-(--size-input-xs-gap-body) rounded-sm text-sm font-medium leading-sm tracking-sm h-auto",
+  sm: "min-h-(--size-input-sm-height) [--input-height:var(--size-input-sm-height)] [--input-gap-container-content:var(--size-input-sm-gap-container-content)] px-(--size-input-sm-padding-x) gap-(--size-input-sm-gap-body) rounded-md text-md font-medium leading-md tracking-md h-auto",
   md: "min-h-(--size-input-md-height) [--input-height:var(--size-input-md-height)] [--input-gap-container-content:var(--size-input-md-gap-container-content)] px-(--size-input-md-padding-x) gap-(--size-input-md-gap-body) rounded-lg text-md font-medium leading-md tracking-md min-w-[420px] h-auto",
 } as const;
 
@@ -37,7 +37,7 @@ export const nativePlaceholderTypographySizeClasses: Record<Size, string> = {
 } as const;
 
 export const nativeActiveWithoutTagsShiftSizeClasses: Record<Size, string> = {
-  xs: "translate-y-[calc(var(--generic-spacing-6)_+_var(--input-gap-container-content,var(--generic-spacing-05)))]",
-  sm: "translate-y-[calc(var(--generic-spacing-7)_+_var(--input-gap-container-content,var(--generic-spacing-05)))]",
-  md: "translate-y-[calc(var(--generic-spacing-8)_+_var(--input-gap-container-content,var(--generic-spacing-05)))]",
+  xs: "translate-y-(--generic-spacing-05)",
+  sm: "translate-y-[calc(var(--generic-spacing-1))]",
+  md: "translate-y-[calc(var(--generic-spacing-2))]",
 } as const;

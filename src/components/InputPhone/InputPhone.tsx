@@ -1,17 +1,22 @@
-import { useCallback, useEffect, useState } from "react";
-import type { FocusEventHandler, MouseEventHandler } from "react";
-import { cn } from "@/utils";
-import { Size } from "@/types";
 import { FieldHint } from "@/components/Field";
 import { wrapperClasses } from "@/components/Field/styles";
-import { InputField } from "@/components/Input/ui/InputField";
 import { InputVariant } from "@/components/Input";
+import { InputField } from "@/components/Input/ui/InputField";
 import { useInputAnchoredPopover } from "@/shared/hooks";
+import { Size } from "@/types";
+import { cn } from "@/utils";
+import type { ClipboardEventHandler } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { InputPhoneProps } from "./InputPhone.types";
+import {
+  getPhoneInputMaxLength,
+  handleInputPhonePaste,
+  phoneDefaultInputMode,
+  phonePattern,
+} from "./InputPhone.utils";
 import { useInputPhoneState } from "./hooks";
-import { PhoneCountrySelector, PhonePrefix } from "./ui";
-import { phoneDefaultInputMode, phonePattern } from "./InputPhone.utils";
 import { inputPhoneStyles } from "./styles";
+import { PhoneCountrySelector, PhonePrefix } from "./ui";
 
 const countryTriggerSelector = "[data-input-phone-country-trigger]";
 
@@ -39,6 +44,7 @@ export function InputPhone({
   onClear,
   onFocus,
   onMouseUp,
+  onPaste,
   country,
   defaultCountry,
   countries,
@@ -68,6 +74,7 @@ export function InputPhone({
     countryOptions,
     selectedCountry,
     setSelectedCountry,
+    handleCountryChange,
     wrapperClassName,
   } = useInputPhoneState({
     size,
@@ -94,9 +101,6 @@ export function InputPhone({
     containerRef,
     open: countrySelectorOpen,
     setOpen: setCountrySelectorOpen,
-    openPopover: openCountrySelector,
-    handleRetainFieldInteraction,
-    handleFocusOutside,
   } = useInputAnchoredPopover(disabled || !showFlagIsland);
   const [countrySelectorLayout, setCountrySelectorLayout] = useState<{
     width: number;
@@ -138,20 +142,16 @@ export function InputPhone({
     return () => resizeObserver.disconnect();
   }, [containerRef, showFlagIsland]);
 
-  const handleInputFocus: FocusEventHandler<HTMLInputElement> = useCallback(
+  const handleInputPaste: ClipboardEventHandler<HTMLInputElement> = useCallback(
     (event) => {
-      openCountrySelector();
-      onFocus?.(event);
+      handleInputPhonePaste(event, {
+        countryOptions,
+        selectedCountry,
+        setSelectedCountry,
+        onPaste,
+      });
     },
-    [onFocus, openCountrySelector]
-  );
-
-  const handleInputMouseUp: MouseEventHandler<HTMLInputElement> = useCallback(
-    (event) => {
-      openCountrySelector();
-      onMouseUp?.(event);
-    },
-    [onMouseUp, openCountrySelector]
+    [countryOptions, onPaste, selectedCountry, setSelectedCountry]
   );
 
   return (
@@ -178,11 +178,7 @@ export function InputPhone({
               contentWidth={countrySelectorLayout?.width}
               contentAlignOffset={countrySelectorLayout?.alignOffset}
               onOpenChange={setCountrySelectorOpen}
-              onContentInteractOutside={(event) =>
-                handleRetainFieldInteraction(event, event.target)
-              }
-              onContentFocusOutside={handleFocusOutside}
-              onCountryChange={setSelectedCountry}
+              onCountryChange={handleCountryChange}
             />
           ) : (
             <PhonePrefix dialCode={countryOption.dialCode} />
@@ -201,13 +197,14 @@ export function InputPhone({
         inputClassName={inputClassName}
         value={inputValue}
         onChange={handleChange}
-        onFocus={handleInputFocus}
-        onMouseUp={handleInputMouseUp}
+        onFocus={onFocus}
+        onMouseUp={onMouseUp}
+        onPaste={handleInputPaste}
         id={inputId}
         type="tel"
         inputMode={inputMode}
         placeholder={placeholder}
-        maxLength={maxLength ?? maxCount}
+        maxLength={maxLength ?? getPhoneInputMaxLength(selectedCountry)}
         pattern={phonePattern}
         aria-required={required || undefined}
         aria-describedby={hintId}

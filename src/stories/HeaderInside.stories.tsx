@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { CircleUser, Settings } from "lucide-react";
-import { AccountMenu, TabsOverflow, HeaderInside } from "@/components";
+import { TabsOverflow, HeaderInside } from "@/components";
 import { Size } from "@/types";
 import { useScreenSize } from "@/providers";
 
@@ -13,6 +13,10 @@ const meta = {
   },
   tags: ["autodocs"],
   argTypes: {
+    showThemeSwitcher: {
+      control: "boolean",
+      description: "Показать переключатель темы в хедере",
+    },
     imageSrc: {
       control: "text",
       description: "URL изображения в слоте",
@@ -80,7 +84,7 @@ const HeaderInsideWithTabs = (args: Story["args"]) => {
           value={activeTab}
           onValueChange={setActiveTab}
           size={Size.Sm}
-          indicatorOffset={isMobile ? 2 : 10}
+          indicatorOffset={isMobile ? 2 : 9}
         />
       </HeaderInside>
       <div className="px-(--spacing-9) pt-[76px] pb-(--spacing-9)">
@@ -98,18 +102,16 @@ export const Playground: Story = {
     showActionButton: true,
     actionIcon: Settings,
     showNotification: true,
-    accountMenu: (
-      <AccountMenu
-        src={AVATAR_URL}
-        fullName="Константинов К.К."
-        role="Product Designer"
-        actions={[
-          { iconLeft: CircleUser, title: "Профиль" },
-          { iconLeft: Settings, title: "Настройки аккаунта" },
-        ]}
-        logoutFn={() => {}}
-      />
-    ),
+    accountMenuProps: {
+      src: AVATAR_URL,
+      fullName: "Константинов К.К.",
+      role: "Product Designer",
+      actions: [
+        { iconLeft: CircleUser, title: "Профиль" },
+        { iconLeft: Settings, title: "Настройки аккаунта" },
+      ],
+      logoutFn: () => {},
+    },
   },
   render: HeaderInsideWithTabs,
 };

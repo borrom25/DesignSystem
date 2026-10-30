@@ -22,6 +22,7 @@ export function InputField({
   onClear,
   size = Size.Md,
   label,
+  labelActive = false,
   required = false,
   disabled = false,
   isError = false,
@@ -53,11 +54,13 @@ export function InputField({
     ref,
   });
   const hasFloatingLabel = !!label;
-  const isFloatingLabelActive = hasFloatingLabel && (isFocused || hasValue);
+  const isFloatingLabelActive =
+    hasFloatingLabel && (isFocused || hasValue || labelActive);
+  const isPlaceholderVisible = !hasFloatingLabel || isFocused || labelActive;
 
   return (
     <label className={wrapperClassName} onMouseDown={handleWrapperMouseDown}>
-      {hasFloatingLabel && required && <FloatingLabelRequiredMark />}
+      {required && !disabled && <FloatingLabelRequiredMark />}
 
       {IconLeft && (
         <IconLeft
@@ -92,13 +95,13 @@ export function InputField({
               isFloatingLabelActive &&
               inputStyles.nativeWithFloatingLabel,
             hasFloatingLabel &&
-              (isFloatingLabelActive
+              (isPlaceholderVisible
                 ? inputStyles.nativePlaceholderVisible
                 : inputStyles.nativePlaceholderHidden),
             inputClassName
           )}
           style={{ ...style, ...fadeOutStyle }}
-          placeholder={placeholder}
+          placeholder={isPlaceholderVisible ? placeholder : undefined}
           autoComplete="off"
           aria-invalid={isError || undefined}
           onFocus={handleFocus}

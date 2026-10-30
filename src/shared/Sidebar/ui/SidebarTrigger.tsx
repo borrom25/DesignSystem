@@ -12,17 +12,17 @@ export const SidebarTrigger = ({
   value,
   onItemClick,
 }: SidebarTriggerProps) => {
+  if (type === "inside") {
+    return (
+      <BarMenu
+        items={items ?? []}
+        value={value}
+        onSelect={(nextValue) => onItemClick?.(nextValue)}
+      />
+    );
+  }
+
   const content = () => {
-    if (type === "inside") {
-      return (
-        <BarMenu
-          items={items ?? []}
-          value={value}
-          onMoreClick={onClick}
-          onSelect={(value) => onItemClick?.(value)}
-        />
-      );
-    }
     if (type === "process") {
       return (
         <StepBar
@@ -37,7 +37,7 @@ export const SidebarTrigger = ({
       <Button
         iconOnly={Menu}
         size={Size.Md}
-        color={Color.Inverse}
+        color={Color.Secondary}
         type={Type.Flat}
         onClick={onClick}
         className={sidebarStyles.triggerButton}

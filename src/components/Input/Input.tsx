@@ -13,6 +13,7 @@ export function Input({
   error = false,
   disabled = false,
   label,
+  labelActive,
   required,
   hint,
   hintError,
@@ -38,7 +39,6 @@ export function Input({
     adornmentClassName,
     countDisplay,
     handleChange,
-    handleClear,
     hasValue,
     hintId,
     iconSize,
@@ -60,7 +60,6 @@ export function Input({
     value: valueProp,
     defaultValue,
     onChange,
-    onClear,
   });
 
   return (
@@ -78,9 +77,10 @@ export function Input({
         countDisplay={countDisplay}
         clearable={clearable}
         hasValue={hasValue}
-        onClear={handleClear}
+        onClear={onClear}
         size={size}
         label={label}
+        labelActive={labelActive}
         required={required}
         disabled={disabled}
         isError={isError}

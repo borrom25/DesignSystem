@@ -7,6 +7,7 @@ export {
   titleClasses,
   subtitleClasses,
   legendIconClasses,
+  legendTextClasses,
   legendLabelClasses,
 } from "./base.ts";
 
@@ -19,6 +20,7 @@ import {
   titleClasses,
   subtitleClasses,
   legendIconClasses,
+  legendTextClasses,
   legendLabelClasses,
 } from "./base.ts";
 
@@ -31,5 +33,6 @@ export const pieChartStyles = {
   legend: legendClasses,
   legendItem: legendItemClasses,
   legendIcon: legendIconClasses,
+  legendText: legendTextClasses,
   legendLabel: legendLabelClasses,
 };

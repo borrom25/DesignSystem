@@ -7,9 +7,10 @@ import type {
   BaseValueProps,
   BaseContentProps,
   BaseScrollProps,
+  SelectOptionValue,
 } from "@/shared/Select";
 
-export type MultiSelectOptionValue = string | number;
+export type MultiSelectOptionValue = SelectOptionValue;
 
 export type MultiSelectOption<
   T extends MultiSelectOptionValue = MultiSelectOptionValue,

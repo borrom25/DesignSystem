@@ -40,10 +40,7 @@ export type InputMessageProps = Omit<
   maxFileSize?: number;
 };
 
-export interface MessageFilePreviewProps {
-  file: File;
-  onRemove: () => void;
-}
+export type { FileTilePreviewProps as MessageFilePreviewProps } from "@/shared/FileTilePreview";
 
 export type ActionFileChangeProps = {
   onChange?: ({ files, errorMessage }: InputMessageOnFileChangeArgs) => void;

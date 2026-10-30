@@ -13,4 +13,6 @@ export interface SliderProps extends Omit<
   alwaysShowPopover?: boolean;
   disabled?: boolean;
   "aria-label"?: string;
+  label?: string;
+  hint?: string;
 }
