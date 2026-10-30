@@ -8,7 +8,7 @@
       "publishStatus": "CURRENT",
       "component": "AppLayout",
       "template": "src/components/AppLayout/AppLayout.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -18,7 +18,7 @@
       "publishStatus": "CURRENT",
       "component": "AppLayout",
       "template": "src/components/AppLayout/AppLayoutMobile.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -38,7 +38,7 @@
       "publishStatus": "CURRENT",
       "component": "IconButton",
       "template": "src/components/IconButton/IconButton.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -48,7 +48,7 @@
       "publishStatus": "CURRENT",
       "component": "Chips",
       "template": "src/components/Chips/Chips.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -58,7 +58,7 @@
       "publishStatus": "CURRENT",
       "component": "Sidebar",
       "template": "src/components/Sidebar/Sidebar.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -68,7 +68,7 @@
       "publishStatus": "CURRENT",
       "component": "InsideSidebar",
       "template": "src/components/InsideSidebar/InsideSidebar.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -88,7 +88,7 @@
       "publishStatus": "CURRENT",
       "component": "Tab",
       "template": "src/components/Tab/Tab.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -108,7 +108,7 @@
       "publishStatus": "CURRENT",
       "component": "Tab",
       "template": "src/components/Tab/TabOverflowItem.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -118,7 +118,7 @@
       "publishStatus": "CURRENT",
       "component": "TabsOverflow",
       "template": "src/components/TabsOverflow/TabsOverflow.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -128,7 +128,7 @@
       "publishStatus": "CURRENT",
       "component": "Download",
       "template": "src/components/Download/Download.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -138,7 +138,7 @@
       "publishStatus": "CURRENT",
       "component": "InputFiles",
       "template": "src/components/InputFiles/InputFiles.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -158,7 +158,7 @@
       "publishStatus": "CURRENT",
       "component": "InputFileDrop",
       "template": "src/components/InputFileDrop/InputFileDrop.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -178,7 +178,7 @@
       "publishStatus": "CURRENT",
       "component": "CopyLink",
       "template": "src/components/CopyLink/CopyLink.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -188,7 +188,7 @@
       "publishStatus": "CURRENT",
       "component": "InputImg",
       "template": "src/components/InputImg/InputImg.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -198,7 +198,7 @@
       "publishStatus": "CURRENT",
       "component": "ListItem",
       "template": "src/components/ListItem/ListItem.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -208,7 +208,7 @@
       "publishStatus": "CURRENT",
       "component": "Header",
       "template": "src/components/Header/Header.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -228,7 +228,7 @@
       "publishStatus": "CURRENT",
       "component": "HeaderInside",
       "template": "src/components/HeaderInside/HeaderInside.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -248,7 +248,7 @@
       "publishStatus": "CHANGED",
       "component": "Pagination",
       "template": "src/components/Pagination/Pagination.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -268,7 +268,7 @@
       "publishStatus": "CURRENT",
       "component": "Separator",
       "template": "src/components/Separator/Separator.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -278,7 +278,7 @@
       "publishStatus": "CURRENT",
       "component": "SearchAutocomplete",
       "template": "src/components/Input/InputSearch.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -288,7 +288,7 @@
       "publishStatus": "CURRENT",
       "component": "Skeleton",
       "template": "src/components/Skeleton/Skeleton.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -298,7 +298,7 @@
       "publishStatus": "CURRENT",
       "component": "TimeBar",
       "template": "src/components/TimeBar/TimeBar.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -308,7 +308,7 @@
       "publishStatus": "CURRENT",
       "component": "DateRange",
       "template": "src/components/DateRange/DateRange.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -318,7 +318,7 @@
       "publishStatus": "CURRENT",
       "component": "DatePicker",
       "template": "src/components/DatePicker/DatePicker.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -328,7 +328,7 @@
       "publishStatus": "CURRENT",
       "component": "TimePicker",
       "template": "src/components/TimePicker/TimePicker.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -348,7 +348,7 @@
       "publishStatus": "CURRENT",
       "component": "InputNumber",
       "template": "src/components/InputNumber/InputNumber.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -368,7 +368,7 @@
       "publishStatus": "CURRENT",
       "component": "Input",
       "template": "src/components/Input/Input.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -378,7 +378,7 @@
       "publishStatus": "CHANGED",
       "component": "InputTag",
       "template": "src/components/InputTag/InputTag.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -388,7 +388,7 @@
       "publishStatus": "CHANGED",
       "component": "InputPhone",
       "template": "src/components/InputPhone/InputPhone.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -398,7 +398,7 @@
       "publishStatus": "CURRENT",
       "component": "TextArea",
       "template": "src/components/TextArea/TextArea.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -408,7 +408,7 @@
       "publishStatus": "CURRENT",
       "component": "Button",
       "template": "src/components/Button/Button.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -448,7 +448,7 @@
       "publishStatus": "CHANGED",
       "component": "BarMenu",
       "template": "src/components/BarMenu/BarMenu.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -458,7 +458,7 @@
       "publishStatus": "CURRENT",
       "component": "InputPassword",
       "template": "src/components/InputPassword/InputPassword.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -468,7 +468,7 @@
       "publishStatus": "CURRENT",
       "component": "Select",
       "template": "src/components/Select/Select.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -478,7 +478,7 @@
       "publishStatus": "CURRENT",
       "component": "MultiSelect",
       "template": "src/components/MultiSelect/MultiSelect.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -488,7 +488,7 @@
       "publishStatus": "CURRENT",
       "component": "MultiTag",
       "template": "src/components/MultiTag/MultiTag.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -498,7 +498,7 @@
       "publishStatus": "CURRENT",
       "component": "Switcher",
       "template": "src/components/Switcher/Switcher.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -508,7 +508,7 @@
       "publishStatus": "CURRENT",
       "component": "Radio",
       "template": "src/components/Radio/Radio.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -518,7 +518,7 @@
       "publishStatus": "CURRENT",
       "component": "CheckBox",
       "template": "src/components/CheckBox/CheckBox.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -528,7 +528,7 @@
       "publishStatus": "CURRENT",
       "component": "PinInput",
       "template": "src/components/PinInput/PinInput.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -568,7 +568,7 @@
       "publishStatus": "CURRENT",
       "component": "AccountMenu",
       "template": "src/components/AccountMenu/AccountMenu.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -578,7 +578,7 @@
       "publishStatus": "CURRENT",
       "component": "Accordion",
       "template": "src/components/Accordion/Accordion.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -588,7 +588,7 @@
       "publishStatus": "CURRENT",
       "component": "AccordionBlock",
       "template": "src/components/AccordionBlock/AccordionBlock.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -608,7 +608,7 @@
       "publishStatus": "CURRENT",
       "component": "Avatar",
       "template": "src/components/Avatar/Avatar.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -618,7 +618,7 @@
       "publishStatus": "CURRENT",
       "component": "Counter",
       "template": "src/components/Counter/Counter.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -628,7 +628,7 @@
       "publishStatus": "CURRENT",
       "component": "Calendar",
       "template": "src/components/Calendar/Calendar.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -698,7 +698,7 @@
       "publishStatus": "CURRENT",
       "component": "Card",
       "template": "src/components/Card/Card.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -718,7 +718,7 @@
       "publishStatus": "CURRENT",
       "component": "Block",
       "template": "src/components/Block/Block.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -728,7 +728,7 @@
       "publishStatus": "CHANGED",
       "component": "Popover",
       "template": "src/components/Popover/Popover.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -748,7 +748,7 @@
       "publishStatus": "CURRENT",
       "component": "Label",
       "template": "src/components/Label/Label.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -758,7 +758,7 @@
       "publishStatus": "CHANGED",
       "component": "Table",
       "template": "src/components/Table/Table.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -838,7 +838,7 @@
       "publishStatus": "CURRENT",
       "component": "Tag",
       "template": "src/components/Tag/Tag.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -848,7 +848,7 @@
       "publishStatus": "CHANGED",
       "component": "TableColumnsModal",
       "template": "src/components/TableColumnsModal/TableColumnsModal.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -868,7 +868,7 @@
       "publishStatus": "CURRENT",
       "component": "Tooltip",
       "template": "src/components/Tooltip/Tooltip.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -878,7 +878,7 @@
       "publishStatus": "CURRENT",
       "component": "Text",
       "template": "src/components/Text/Text.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -888,7 +888,7 @@
       "publishStatus": "CURRENT",
       "component": "Segmented",
       "template": "src/components/Segmented/Segmented.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -908,7 +908,7 @@
       "publishStatus": "CURRENT",
       "component": "UserItem",
       "template": "src/components/UserItem/UserItem.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -938,7 +938,7 @@
       "publishStatus": "CURRENT",
       "component": "Plug",
       "template": "src/components/Plug/Plug.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -958,7 +958,7 @@
       "publishStatus": "CURRENT",
       "component": "StepBar",
       "template": "src/components/StepBar/StepBar.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -968,7 +968,7 @@
       "publishStatus": "CURRENT",
       "component": "ProgressPie",
       "template": "src/components/ProgressPie/ProgressPie.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -978,7 +978,7 @@
       "publishStatus": "CURRENT",
       "component": "Alert",
       "template": "src/components/Alert/Alert.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -988,7 +988,7 @@
       "publishStatus": "CURRENT",
       "component": "Modal",
       "template": "src/components/Modal/Modal.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -1008,7 +1008,7 @@
       "publishStatus": "CURRENT",
       "component": "ProgressBar",
       "template": "src/components/ProgressBar/ProgressBar.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -1018,7 +1018,7 @@
       "publishStatus": "CURRENT",
       "component": "InputMessage",
       "template": "src/components/InputMessage/InputMessage.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -1038,7 +1038,7 @@
       "publishStatus": "CURRENT",
       "component": "Bubble",
       "template": "src/components/Bubble/Bubble.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -1298,7 +1298,7 @@
       "publishStatus": "CHANGED",
       "component": "Player",
       "template": "src/components/Player/Player.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -1338,7 +1338,7 @@
       "publishStatus": "CHANGED",
       "component": "LineChart",
       "template": "src/components/LineChart/LineChart.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -1348,7 +1348,7 @@
       "publishStatus": "CHANGED",
       "component": "LineChart",
       "template": "src/components/LineChart/LineChartSingle.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -1388,7 +1388,7 @@
       "publishStatus": "CHANGED",
       "component": "BarChartHorizontal",
       "template": "src/components/BarChartHorizontal/BarChartHorizontal.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {
@@ -1478,7 +1478,7 @@
       "publishStatus": "CURRENT",
       "component": "Carousel",
       "template": "src/components/Carousel/Carousel.figma.js",
-      "status": "ready-for-publication",
+      "status": "published-and-verified",
       "blocker": null
     },
     {

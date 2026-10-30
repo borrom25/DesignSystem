@@ -4,6 +4,8 @@ import path from "node:path";
 const inventory = JSON.parse(fs.readFileSync("docs/figma-current-inventory.json", "utf8"));
 const manifest = JSON.parse(fs.readFileSync(".cache/figma-snippets/manifest.json", "utf8"));
 const registry = JSON.parse(fs.readFileSync("docs/public-component-api.json", "utf8"));
+const resultsPath = "docs/figma-publication-results.json";
+const published = fs.existsSync(resultsPath) ? JSON.parse(fs.readFileSync(resultsPath, "utf8")).components : [];
 const queue = [];
 const seen = new Set();
 for (const item of manifest) {
@@ -52,7 +54,7 @@ const components = inventory.pages.flatMap((p) => p.nodes.map((n) => {
   const item = queue.find((q) => q.nodeId === n.id);
   return { nodeId: n.id, name: n.name, page: p.page, publishStatus: n.publishStatus,
     component: item?.component ?? null, template: item?.templatePath ?? null,
-    status: item ? "ready-for-publication" : "blocked",
+    status: item ? published.some((r) => r.nodeId === n.id && r.codeConnect.verified) ? "published-and-verified" : "ready-for-publication" : "blocked",
     blocker: item ? null : n.publishStatus === "UNPUBLISHED" ? "Figma component не опубликован; публикация библиотеки не входит в задачу." : specific[n.id] ?? "Нет подтверждённого отдельного соответствия публичному runtime. Это внутренний элемент, неподдерживаемый продуктовый блок или компонент с иным API; mapping по имени не создаётся.",
   };
 }));
