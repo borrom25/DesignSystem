@@ -1,0 +1,9 @@
+{
+  "codeConnect": {
+    "include": ["src/components/**/*.figma.js"],
+    "exclude": ["src/components/DataTable/DataTable.figma.js"],
+    "label": "React",
+    "language": "tsx",
+    "defaultBranch": "main"
+  }
+}
